@@ -32,9 +32,11 @@ test.beforeAll(() => {
 async function openOffline(page, path) {
   /** @type {string[]} */ const failed = [];
   /** @type {string[]} */ const offsite = [];
-  await page.route('**/*', (route) => {
+  const origin = new URL(test.info().project.use.baseURL).origin;
+  // Blob URLs are in-process bytes. WebKit exposes these to routing for video.
+  await page.route(/^https?:\/\//, (route) => {
     const url = new URL(route.request().url());
-    if (url.pathname.startsWith(`${BUNDLE}/`)) return route.continue();
+    if (url.origin === origin && url.pathname.startsWith(`${BUNDLE}/`)) return route.continue();
     offsite.push(url.href);
     return route.abort();
   });
@@ -62,6 +64,42 @@ for (const [name, path, ready] of /** @type {[string,string,string][]} */ ([
     expect(errors).toEqual([]);
   });
 }
+
+test('ASL café plays on first launch and exports through the iOS bridge @smoke', async ({ page }) => {
+  await page.addInitScript(() => {
+    const exports = {};
+    window.cafeExports = exports;
+    window.Capacitor = { isNativePlatform:() => true, getPlatform:() => 'ios', Plugins:{
+      Preferences:{ keys:async () => ({keys:[]}), get:async () => ({value:null}) },
+      CapacitorHttp:{},
+      Filesystem:{ writeFile:async ({path, data}) => {
+        exports.pdf = atob(data.substring(0,8)).slice(0,5);
+        return { uri:'file:///cache/' + path };
+      } },
+      Share:{ share:async ({url}) => { exports.url = url; } },
+      PhotoLibrary:{ savePNG:async ({data}) => { exports.png = data.substring(0,8); } },
+    } };
+  });
+  const { failed, offsite, errors } = await openOffline(page, '/signs.html');
+  await expect(page.locator('#offline-status')).toHaveText('Café available offline');
+  await page.getByRole('button', { name:'Water', exact:true }).click();
+  const video = page.getByRole('dialog').locator('video');
+  await expect.poll(async () => {
+    const state = await video.evaluate(v => ({ width:v.videoWidth, error:v.error?.message }));
+    if (state.error) throw new Error(JSON.stringify({state, failed, offsite, errors}));
+    return state.width;
+  }).toBeGreaterThan(0);
+  await page.getByRole('button', { name:'Close' }).click();
+  await page.getByRole('link', { name:'Cheat sheets' }).click();
+  await page.getByRole('button', { name:'Save Drinks as PNG' }).click();
+  await expect.poll(() => page.evaluate(() => window.cafeExports.png)).toBe('iVBORw0K');
+  await page.getByRole('button', { name:'Share or print PDF' }).click();
+  await expect.poll(() => page.evaluate(() => window.cafeExports.url)).toMatch(/wanderwart-asl-cafe\.pdf$/);
+  expect(await page.evaluate(() => window.cafeExports.pdf)).toBe('%PDF-');
+  expect(failed).toEqual([]);
+  expect(offsite).toEqual([]);
+  expect(errors).toEqual([]);
+});
 
 test('the bundle registers no service worker', async ({ page }) => {
   // `sw.js` is not in the bundle, so registering would 404 on every launch. The

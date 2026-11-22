@@ -62,8 +62,8 @@ function fixture() {
       async readdir(/** @type {{path:string,directory:string}} */ options) {
         assert.equal(options.directory, 'DATA');
         assert.equal(options.path + '/', DIRECTORY);
-        return { files: [...disk.keys()].filter((p) => p.startsWith(DIRECTORY))
-          .map((p) => ({ type: 'file', name: p.slice(DIRECTORY.length) })) };
+        return { files: [...disk].filter(([path]) => path.startsWith(DIRECTORY))
+          .map(([path, data]) => ({ type: 'file', name: path.slice(DIRECTORY.length), size: atob(data).length })) };
       },
       async deleteFile(/** @type {{path:string,directory:string}} */ options) {
         assert.equal(options.directory, 'DATA');
@@ -106,17 +106,20 @@ test('verified complete packs survive relaunch offline and retain shared fonts o
   assert.equal(f.downloads.filter((url) => url.endsWith(f.shared.path)).length, 1);
   f.dependencies.download = async () => { throw new Error('offline'); };
   const restarted = await createLanguagePacks(f.manifest, f.dependencies);
-  const stat = f.dependencies.filesystem.stat;
-  let sharedStats = 0;
-  f.dependencies.filesystem.stat = async (options) => {
-    if (options.path === DIRECTORY + f.shared.sha256) sharedStats += 1;
-    return stat(options);
+  const readdir = f.dependencies.filesystem.readdir;
+  let listings = 0;
+  f.dependencies.filesystem.readdir = async options => {
+    listings++;
+    return readdir(options);
   };
-  assert.equal((await restarted.status()).es.state, 'installed');
-  assert.equal(sharedStats, 1, 'shared blob is checked once per status call');
+  const snapshot = await restarted.snapshot();
+  assert.equal(snapshot.status.es.state, 'installed');
+  assert.equal(snapshot.downloadBytes(['es', 'fr']), 0);
+  assert.equal(snapshot.downloadBytes(['es']), 0);
+  assert.equal(listings, 1, 'all selection changes use the same directory listing');
   f.disk.delete(DIRECTORY + f.shared.sha256);
   const missingShared = await restarted.status();
-  assert.equal(sharedStats, 2, 'later status calls recheck the filesystem');
+  assert.equal(listings, 2, 'a later status call reads the directory again');
   assert.equal(missingShared.es.state, 'update');
   assert.equal(missingShared.fr.state, 'update');
   f.disk.set(DIRECTORY + f.shared.sha256, btoa('shared font'));

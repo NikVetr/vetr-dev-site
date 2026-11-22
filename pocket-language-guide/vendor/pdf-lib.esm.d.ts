@@ -21,6 +21,7 @@ export interface PDFPageDrawOptions {
 }
 
 export interface PDFPage {
+  drawImage(image: PDFImage, options: PDFPageDrawOptions): void;
   getSize(): { width: number; height: number };
   setRotation(angle: unknown): void;
   drawRectangle(options: PDFPageDrawOptions): void;
@@ -29,7 +30,14 @@ export interface PDFPage {
   pushOperators(...operators: unknown[]): void;
 }
 
+export interface PDFImage {
+  width: number;
+  height: number;
+}
+
 export interface PDFDocument {
+  getPages(): PDFPage[];
+  embedJpg(bytes: Uint8Array | ArrayBuffer): Promise<PDFImage>;
   addPage(size?: [number, number]): PDFPage;
   embedFont(bytes: Uint8Array | ArrayBuffer, options?: { subset?: boolean; customName?: string }): Promise<PDFFont>;
   registerFontkit(fontkit: unknown): void;
@@ -45,6 +53,7 @@ export interface PDFDocument {
 
 export const PDFDocument: {
   create(): Promise<PDFDocument>;
+  load(bytes: Uint8Array | ArrayBuffer): Promise<PDFDocument>;
 };
 
 export function rgb(r: number, g: number, b: number): unknown;

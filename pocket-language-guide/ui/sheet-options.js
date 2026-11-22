@@ -6,10 +6,12 @@
 import { THEME_IDS } from '../core/sheet-spec.js';
 import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
-  browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
+  prepareSheetOffline, browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy, download,
 } from './app.js';
-import { buildSheet, stacksFor } from '../core/sheet.js';
+import { buildBrowserSheet as buildSheet } from './sheet-client.js';
+import { sheetRefresh } from './sheet-refresh.js';
+import { stacksFor } from '../core/sheet.js';
 import { isElven } from '../core/elven-frame.js';
 import { defaultSelection } from '../core/pack.js';
 import {
@@ -101,15 +103,15 @@ async function main() {
 
   /** @type {import('../core/types.js').SheetSpec} */
   let spec = makeSpec(ctx, presets, choice);
+  prepareSheetOffline(ctx, spec, isElven(spec));
   let dpi = 600;
   let audience = '';
   let manifest = /** @type {any} */ (null);
   /** @type {import('../core/types.js').LayoutPlan|null} */ let plan = null;
-  /** @type {ReturnType<typeof setTimeout>|undefined} */ let pending;
+  const updates = sheetRefresh(refresh, 120, showFatal);
 
   const schedule = () => {
-    clearTimeout(pending);
-    pending = setTimeout(() => refresh().catch(showFatal), 120);
+    updates.schedule();
   };
 
   /** @param {Partial<import('../core/types.js').SheetSpec>} patch */
@@ -320,15 +322,20 @@ async function main() {
 
   // --- solving and export -------------------------------------------------
 
-  async function refresh() {
+  /** @param {()=>boolean} current */
+  async function refresh(current) {
     $('status').dataset.busy = '1';
     // Both of these follow the card, and the card is a control on this page.
     reserveField.hidden = !spec.geometry.screen;
     reserve.sync(spec.geometry);
     card.sync(spec.geometry);
     await afterPaint();
-    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
-    let built = await buildSheet(ctx, spec);
+    if (!current()) return;
+    const [nextManifest, firstBuild] = await Promise.all([
+      ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec)), buildSheet(ctx, spec),
+    ]);
+    if (!current()) return;
+    let built = firstBuild;
 
     // **A fit error that cannot be read is a fit error that cannot be fixed.** The
     // solver already works out what would make the sheet fit and hangs it on the
@@ -356,6 +363,8 @@ async function main() {
       spec = { ...spec, ...fix.patch };
       built = await buildSheet(ctx, spec);
     }
+    if (!current()) return;
+    manifest = nextManifest;
     plan = built.plan;
 
     const container = $('faces');
@@ -447,7 +456,8 @@ async function main() {
 
   const name = `${target.exonym_en.toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '')}-pocket-guide`;
 
-  const input = () => {
+  const input = async () => {
+    await updates.flush();
     if (!plan) throw new Error('nothing solved yet');
     return {
       plan, manifest, icons, name,
@@ -460,16 +470,16 @@ async function main() {
   /** Nothing-to-export is a sentence; anything else is still fatal. */
   const failed = (/** @type {unknown} */ err) => reportExportError(err, $('status'), showFatal);
 
-  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
-    input(),
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), async () => exportPdf(
+    await input(),
     { title: t('quick.heading', { language: targetName }), language: choice.source },
   )).catch(failed));
   $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
-    (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(failed));
+    async (onProgress) => exportPng({ ...await input(), onProgress }, dpi)).catch(failed));
   $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
-    () => exportSvg(input())).catch(failed));
+    async () => exportSvg(await input())).catch(failed));
 
-  await refresh();
+  await updates.flush();
 }
 
 main().catch(showFatal);

@@ -1,0 +1,53 @@
+.sign-page .site-header .container, #sign-dialog header, .sign-tools, .sign-actions {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.65rem;
+}
+.sign-workspace { max-width:56rem; margin:auto; padding:1.5rem 1.2rem 3rem; }
+.sign-heading p { margin:0; color:var(--muted); font-size:.9rem; }
+.sign-heading h1 { font-size:clamp(2rem,5vw,3.2rem); line-height:1.07; margin:.25rem 0 1rem; }
+.sign-tabs { display:flex; gap:1.25rem; border-bottom:1px solid var(--line); }
+.sign-tabs a { padding:.55rem 0; text-decoration:none; color:var(--muted); font-weight:650; }
+.sign-tabs a[aria-current="page"] { color:var(--accent); box-shadow:inset 0 -3px var(--accent); }
+.sign-tools { margin:1rem 0; }
+.sign-tools p, #quiz-count { color:var(--muted); margin:0; }
+.sign-actions { justify-content:flex-start; }
+#sign-board h2 { font-size:1.1rem; margin:1.4rem 0 .5rem; }
+.sign-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.6rem; }
+.sign-tile { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:.6rem; text-align:start;
+  padding:.35rem; overflow:hidden; font-weight:650; background:var(--raised); }
+.sign-tile img { display:block; height:4.7rem; max-width:100%; border-radius:3px; }
+#sign-dialog { padding:1.1rem; border:1px solid var(--line); border-radius:var(--radius);
+  color:var(--ink); background:var(--paper); width:min(95vw,35rem); max-height:92dvh; overflow:auto; }
+#sign-dialog::backdrop { background:#111a; }
+#sign-dialog header { margin-bottom:.7rem; }
+#sign-dialog h2 { margin:0; }
+.sign-film { display:block; height:min(42vh,24rem); max-width:100%; width:100%; object-fit:contain;
+  border-radius:var(--radius); background:#14191c; margin:.6rem 0; }
+.sign-player { max-width:33rem; }
+.sign-frames { display:flex; justify-content:center; gap:.35rem; margin:.6rem 0; }
+.sign-frames img { min-width:0; max-width:calc(50% - .2rem); max-height:min(42vh,24rem); object-fit:contain; }
+.sign-player .sign-actions { justify-content:center; }
+#quiz-actions { margin-top:1rem; }
+#quiz-prompt { margin-top:1.3rem; }
+#sign-dialog textarea { width:100%; display:block; padding:.65rem; font:inherit; margin:.4rem 0 .7rem; }
+.sign-message { white-space:pre-wrap; overflow-wrap:anywhere; font-size:clamp(1.7rem,5vw,3rem); margin:.8rem 0; }
+.sign-credits { border-top:1px solid var(--line); color:var(--muted); margin-top:1.75rem; padding-top:.8rem; font-size:.85rem; }
+.sign-credits details { margin-top:.5rem; }
+#sign-sources { display:flex; flex-wrap:wrap; gap:.3rem .8rem; }
+.sign-face { margin:1rem 0; }
+.sign-face canvas { width:100%; height:auto; display:block; border:1px solid var(--line); }
+.sign-face button { margin-top:.45rem; }
+.sign-page [hidden] { display:none !important; }
+@media(max-width:610px) {
+  .sign-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .sign-workspace { padding:1rem .85rem 2rem; }
+}
+@page { size:7in 5in; margin:0; }
+@media print {
+  html, body.sign-page { margin:0; padding:0; background:white; }
+  .sign-page .site-header, .sign-heading, .sign-tabs, .sign-credits, .sign-tools, #sign-quiz, #sign-converse,
+  #sign-dialog, #sign-error, .sign-page .skip-link, .sign-face button { display:none !important; }
+  .sign-workspace, #sign-faces { margin:0; padding:0; max-width:none; }
+  .sign-face { margin:0; width:7in; height:5in; break-inside:avoid; }
+  .sign-face + .sign-face { break-before:page; }
+  .sign-face canvas { border:0; width:7in; height:5in; }
+}

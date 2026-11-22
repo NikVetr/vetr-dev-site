@@ -1,7 +1,7 @@
 Corpus and content license
 ==========================
 
-Everything under `data/` -- the concept bank, the per-language realizations, the
+The original Wanderwart content under `data/` -- the concept bank, the per-language realizations, the
 respelling layers and the registries -- is licensed under
 Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
 
@@ -38,3 +38,11 @@ Bundled third-party assets keep their own licenses:
   allocations, U+F8D0-F8FF and U+E000-E07F.
 - Lucide icons (`data/icons.json`) -- ISC License.
 - fontkit and pdf-lib (`vendor/`) -- MIT. See `vendor/VERSIONS.md`.
+- ASL café motion animations and rendered stills (`data/signs/ase-cafe/`) are adapted
+  from PopSign ASL v2.1, Georgia Institute of Technology and Deaf Professional
+  Arts Network, under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+  https://signdata.cc.gatech.edu/view/datasets/popsign_v2_1/
+  Wanderwart measured one-handed movement from the reference footage, constrained
+  occluded finger poses, and animated an original 3D model. Both print stills
+  for each sign come from that animation. The manifest identifies the source URL,
+  reference SHA-256, active frame range at 24 fps, and two reference timestamps.

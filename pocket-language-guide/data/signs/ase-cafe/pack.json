@@ -1,0 +1,213 @@
+[
+  {
+    "title": "Drinks",
+    "entries": [
+      {
+        "id": "coffee",
+        "label": "Coffee",
+        "media": "coffee-cf2e4c60fffc",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/coffee/19d3-coffee-2023_07_18_17_06_52.119-0.mp4/",
+        "sha256": "9d52665a308fba6a8d7cc33219156bcddf9642780f56ac1d2f9ab55daeb61ee0",
+        "frames": [
+          0.92,
+          1.128
+        ],
+        "sourceFrames": [
+          17,
+          41
+        ],
+        "view": "hand",
+        "yaw": -16
+      },
+      {
+        "id": "water",
+        "label": "Water",
+        "media": "water-1a72da9782de",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/water/19d3-water-2023_01_04_14_17_50.817-0.mp4/",
+        "sha256": "0622d8918493e0daeef472d336fc01be6d51491eb4d5804d6b5796b6e3e01482",
+        "frames": [
+          0.887,
+          1.304
+        ],
+        "sourceFrames": [
+          19,
+          37
+        ],
+        "view": "upper-body",
+        "yaw": 28
+      },
+      {
+        "id": "milk",
+        "label": "Milk",
+        "media": "milk-0fe9b3687cb0",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/milk/19d3-milk-2023_01_04_14_16_57.235-0.mp4/",
+        "sha256": "c0acc7d4638167ab081ff12395a14895072ca96f876dd736d182710d7703be60",
+        "frames": [
+          0.795,
+          1.016
+        ],
+        "sourceFrames": [
+          19,
+          32
+        ],
+        "view": "hand",
+        "yaw": -12
+      },
+      {
+        "id": "juice",
+        "label": "Juice",
+        "media": "juice-36290a4d48d3",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/juice/19d3-juice-2023_07_21_18_46_04.542-0.mp4/",
+        "sha256": "824595945d3c8f14681dfecfb52345cf4fdda59680d0702c8afa41a8c1758a07",
+        "frames": [
+          0.945,
+          1.431
+        ],
+        "sourceFrames": [
+          21,
+          39
+        ],
+        "view": "upper-body"
+      }
+    ]
+  },
+  {
+    "title": "At the counter",
+    "entries": [
+      {
+        "id": "hot",
+        "label": "Hot",
+        "media": "hot-ae552a6a0b80",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/hot/19d3-hot-2023_01_04_14_17_25.321-0.mp4/",
+        "sha256": "061dca43cfee90c314bd54d7552ec7beb8e1668a6e695046d5901de42f4178e1",
+        "frames": [
+          0.889,
+          1.194
+        ],
+        "sourceFrames": [
+          18,
+          30
+        ],
+        "view": "upper-body"
+      },
+      {
+        "id": "cold",
+        "label": "Cold",
+        "media": "cold-abf803de0453",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/cold/19d3-cold-2023_08_02_22_01_40.134-0.mp4/",
+        "sha256": "13b164540a18fea9c887507a111b7c687c94bf55dadc15b560f7ea7ddea2d6ef",
+        "frames": [
+          0.727,
+          0.846
+        ],
+        "sourceFrames": [
+          17,
+          30
+        ],
+        "view": "upper-body"
+      },
+      {
+        "id": "more",
+        "label": "More",
+        "media": "more-decde244c543",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/more/19d3-more-2023_08_02_21_48_46.056-0.mp4/",
+        "sha256": "c79f9ea2d086a7322552737390b4dbcb602d341f6d7a56fb48ec10b5d516ad51",
+        "frames": [
+          0.747,
+          0.879
+        ],
+        "sourceFrames": [
+          18,
+          30
+        ],
+        "view": "hand"
+      },
+      {
+        "id": "napkin",
+        "label": "Napkin",
+        "media": "napkin-b72da7c5b727",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/napkin/19d3-napkin-2023_01_04_14_18_15.906-0.mp4/",
+        "sha256": "467d1c40fda560aa98f121982c84f414bdea18c2db61af523ee3585b2cc25644",
+        "frames": [
+          0.971,
+          1.387
+        ],
+        "sourceFrames": [
+          20,
+          40
+        ],
+        "view": "upper-body"
+      }
+    ]
+  },
+  {
+    "title": "Replies and courtesy",
+    "entries": [
+      {
+        "id": "yes",
+        "label": "Yes",
+        "media": "yes-91f0c2a0ae53",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/yes/19d3-yes-2023_01_04_14_20_18.117-0.mp4/",
+        "sha256": "5a683b722d0525e5a3ea5ef55fce5e4c084082188289c42c4071672e7d0459f6",
+        "frames": [
+          1.038,
+          1.174
+        ],
+        "sourceFrames": [
+          19,
+          37
+        ],
+        "view": "hand",
+        "yaw": -26
+      },
+      {
+        "id": "no",
+        "label": "No",
+        "media": "no-97e1434a3498",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/no/19d3-no-2023_01_04_14_06_59.191-0.mp4/",
+        "sha256": "58134349b2c813fc20b1a8639a7766ed119758608e0d31843def9221f15a1763",
+        "frames": [
+          1.056,
+          1.408
+        ],
+        "sourceFrames": [
+          22,
+          39
+        ],
+        "view": "hand"
+      },
+      {
+        "id": "please",
+        "label": "Please",
+        "media": "please-71aed0386b64",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/please/19d3-please-2023_01_04_14_06_59.191-0.mp4/",
+        "sha256": "c70d3724d86de59f1414ec654ed4c8bcf7c61fdfc45dee5a32a70016ddc90aa1",
+        "frames": [
+          0.806,
+          1.066
+        ],
+        "sourceFrames": [
+          18,
+          48
+        ],
+        "view": "upper-body"
+      },
+      {
+        "id": "thankyou",
+        "label": "Thank you",
+        "media": "thankyou-4e8d89f5ed53",
+        "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/thankyou/19d3-thankyou-2023_01_04_14_08_37.545-0.mp4/",
+        "sha256": "984721a00251b1c6a64f70666f2bf2b693ee83eeba95eab8cf8abd4aa852e337",
+        "frames": [
+          0.968,
+          1.383
+        ],
+        "sourceFrames": [
+          19,
+          38
+        ],
+        "view": "upper-body"
+      }
+    ]
+  }
+]

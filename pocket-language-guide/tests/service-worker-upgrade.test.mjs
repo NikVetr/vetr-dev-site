@@ -102,6 +102,18 @@ test('upgrade migrates an unchanged legacy pack locally and reuses it without do
   assert.ok(f.stores.has('another-app-shell'));
 });
 
+test('replaying a cached ASL clip uses no network and a new filename fetches the update', async () => {
+  const oldClip = 'data/signs/ase-cafe/coffee-123456789abc.mp4';
+  const newClip = 'data/signs/ase-cafe/coffee-123456789abd.mp4';
+  const f = await worker({});
+  await f.pack.put(oldClip, new Response('first clip'));
+  f.network.set(newClip, 'second clip');
+  assert.equal(await f.read(oldClip), 'first clip');
+  assert.equal(await f.read(newClip), 'second clip');
+  assert.equal(await f.read(newClip), 'second clip');
+  assert.deepEqual(f.reads, [newClip]);
+});
+
 test('upgrade refreshes only changed cached files and removes shell shadows', async () => {
   const changed = 'data/lang/de/core.csv';
   const same = 'data/fonts/example.woff2';

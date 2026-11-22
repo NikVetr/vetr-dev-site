@@ -38,9 +38,17 @@ if (platform === 'android') {
   await writeFile(manifest, xml);
 } else if (platform === 'ios') {
   const dir = join(root, 'ios/App/App');
-  for (const name of ['BackgroundRecitationPlugin.swift', 'RecitationViewController.swift']) {
-    await copyFile(join(root, 'native/recitation/ios', name), join(dir, name));
+  const sources = ['BackgroundRecitationPlugin.swift', 'RecitationViewController.swift', 'PhotoLibraryPlugin.swift'];
+  for (const name of sources) {
+    const source = name === 'PhotoLibraryPlugin.swift' ? 'native/ios' : 'native/recitation/ios';
+    await copyFile(join(root, source, name), join(dir, name));
   }
+  const scene = join(dir, 'SceneDelegate.swift');
+  const original = await readFile(scene, 'utf8');
+  const assignment = 'window?.rootViewController = RecitationViewController()';
+  const updated = original.replace('window?.rootViewController = CAPBridgeViewController()', assignment);
+  if (!updated.includes(assignment)) throw new Error('SceneDelegate must install the Wanderwart bridge controller');
+  if (original !== updated) await writeFile(scene, updated);
   const require = createRequire(import.meta.url);
   // xcode is the CLI's untyped build-time dependency, never application code.
   const xcodeModule = 'xcode';
@@ -49,14 +57,14 @@ if (platform === 'android') {
   const group = project.findPBXGroupKey({ path: 'App' }) ?? project.findPBXGroupKey({ name: 'App' });
   if (!group) throw new Error('Xcode App source group was not found');
   const target = project.getFirstTarget().uuid;
-  for (const name of ['BackgroundRecitationPlugin.swift', 'RecitationViewController.swift']) {
+  for (const name of sources) {
     if (!project.hasFile(name)) project.addSourceFile(name, { target }, group);
   }
   // node-xcode otherwise serializes an absent explicit type as the literal
   // `undefined`, overriding its correctly detected Swift file type in Xcode.
   for (const reference of Object.values(project.pbxFileReferenceSection())) {
     const file = /** @type {any} */ (reference);
-    if (typeof file === 'object' && ['BackgroundRecitationPlugin.swift', 'RecitationViewController.swift'].includes(String(file.path).replaceAll('"', ''))
+    if (typeof file === 'object' && sources.includes(String(file.path).replaceAll('"', ''))
       && (file.explicitFileType === undefined || file.explicitFileType === 'undefined')) delete file.explicitFileType;
   }
   await writeFile(join(root, 'ios/App/App.xcodeproj/project.pbxproj'), project.writeSync());

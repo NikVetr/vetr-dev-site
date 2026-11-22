@@ -22,6 +22,7 @@
 // -- and is a different thing entirely. Separate module, separate `drill.*` message
 // namespace, separate button.
 
+import { shuffled } from './shuffle.js';
 import { sayable } from '../core/pack.js';
 import { printedAlternatives } from '../core/alternation.js';
 import { chipToggle } from './chips.js';
@@ -262,16 +263,6 @@ function generator(seed) {
     x ^= x + Math.imul(x ^ (x >>> 7), x | 61);
     return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
   };
-}
-
-/** Fisher-Yates, on a copy. @template T @param {T[]} list @param {() => number} rand */
-function shuffled(list, rand) {
-  const out = list.slice();
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
 }
 
 /** A seed nobody has to think about, short enough to read off the screen and retype. */

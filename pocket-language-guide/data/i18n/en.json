@@ -122,6 +122,7 @@
   "export.onePage": "Your picture, to save or open.",
   "export.saveAll": "Save all",
   "export.savePage": "Save",
+  "export.savedToPhotos": "{page} saved to Photos.",
   "export.saveImage": "Save image",
   "export.saveFile": "Save as a file",
   "export.shareFailed": "The share sheet could not open this picture. Save as a file still works.",

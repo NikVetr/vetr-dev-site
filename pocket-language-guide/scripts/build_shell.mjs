@@ -32,7 +32,7 @@ const CODE_DIRS = ['core', 'render', 'ui'];
 
 /** Individual files the app cannot start without. */
 const ENTRY_FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html', 'signs.html', 'signs.css',
   'style.css', 'conversation.css', 'ui/collection-nav.css', 'ui/light-switch.css',
   'favicon.svg', 'manifest.webmanifest',
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',
@@ -48,7 +48,7 @@ const ENTRY_FILES = [
   // offline there is no such thing as "never", so it is precached. 89KB against
   // a 4.4MB shell, and it is the same file either pack downloads anyway.
   'data/fonts/latin-400.woff2',
-  'packs/index.json',
+  'packs/gallery.json', 'data/signs/ase-cafe/pack.json', 'data/signs/ase-cafe/gallery.jpg',
   'data/respell/overrides/index.json',
   // What each language needs saved to work with no connection, for the settings.
   OFFLINE_PATH,
@@ -189,12 +189,14 @@ async function offlineIndex(shellFiles) {
     };
   }
   const shared = fontsOf(common);
-  const packFiles = [...new Set([...shared.fonts,
+  const uniqueFiles = [...new Set([...shared.fonts,
     ...Object.values(languages).flatMap((language) => [...language.files, ...language.fonts])])]
-    .filter((path) => !shellFiles.has(path)).sort();
+    .sort();
+  const packFiles = uniqueFiles.filter(path => !shellFiles.has(path));
+  const sizes = Object.fromEntries(await Promise.all(uniqueFiles.map(async path => [path, (await stat(join(ROOT, path))).size])));
   /** @type {Record<string,string>} */ const hashes = {};
   for (const path of packFiles) hashes[path] = createHash('sha256').update(await readFile(join(ROOT, path))).digest('hex');
-  return `${JSON.stringify({ common: shared, languages, hashes })}\n`;
+  return `${JSON.stringify({ common: shared, languages, hashes, sizes })}\n`;
 }
 
 /** @param {string} dir @returns {Promise<string[]>} */
@@ -211,6 +213,13 @@ async function walk(dir) {
 // A Set because the generated respell index is named explicitly (it may not exist
 // yet on a fresh checkout) and is also found by the data-directory scan once it
 // does; without dedup the first run and every run after it disagreed.
+// The renderer retains fingerprints and diagnostics in its full build inventory.
+const inventory = JSON.parse(await readFile(join(ROOT, 'packs/index.json'), 'utf8'));
+const gallery = JSON.stringify(inventory.packs.map((/** @type {any} */ p) => [p.target, p.source, p.faces, p.scale])) + '\n';
+const galleryPath = join(ROOT, 'packs/gallery.json');
+if (!CHECK) await writeFile(galleryPath, gallery);
+else if (await readFile(galleryPath, 'utf8') !== gallery) throw new Error('packs/gallery.json is stale; run npm run shell');
+
 const files = [...new Set([
   ...ENTRY_FILES,
   ...(await boardCorpus()),

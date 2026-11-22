@@ -73,12 +73,29 @@ async function nativeBytes(rel) {
 }
 
 /** @param {string} rel */
-export async function loadText(rel) {
+async function readText(rel) {
   const bytes = await nativeBytes(rel);
   if (bytes) return new TextDecoder().decode(bytes);
   const res = await fetch(rel, { cache: 'no-cache' });
   if (!res.ok) throw new LoadError(rel, res.status);
   return res.text();
+}
+
+/** @type {Map<string,Promise<string>>} */
+const sharedText = new Map();
+
+/** Immutable bundled tables can be shared by independent consumers in a page.
+ * Downloadable language files retain their native installation and integrity checks.
+ * @param {string} rel */
+export function loadText(rel) {
+  if (!/^data\/(registry\/|concepts\/|i18n\/|boards\/|respell\/|native\.json$|coverage\.json$|fonts\/manifest\.json$|countries\/index\.json$)/.test(rel)) return readText(rel);
+  let pending = sharedText.get(rel);
+  if (!pending) {
+    pending = readText(rel);
+    sharedText.set(rel, pending);
+    pending.catch(() => sharedText.delete(rel));
+  }
+  return pending;
 }
 
 /** @param {string} rel */
@@ -193,10 +210,13 @@ export function setReaderLanguage(code) {
  * @param {boolean} [serifHeadings]
  */
 export async function ensureFontCss(ctx, target, source, typeface = 'sans', serifHeadings = false) {
-  const [manifest, { stacksFor }, { familyFor, fontFaceCss }] = await Promise.all([
-    fontManifest(), sheetModule(), fontsModule(),
-  ]);
-  const stacks = stacksFor(ctx.corpus, target, source, typeface, serifHeadings);
+  const { stacksFor } = await sheetModule();
+  return ensureFontStacks(stacksFor(ctx.corpus, target, source, typeface, serifHeadings));
+}
+
+/** @param {string[]} stacks */
+export async function ensureFontStacks(stacks) {
+  const [manifest, { familyFor, fontFaceCss }] = await Promise.all([fontManifest(), fontsModule()]);
   const id = `plg-fonts-${stacks.join('-')}`;
   if (!document.getElementById(id)) {
     const style = document.createElement('style');
@@ -325,6 +345,33 @@ export function registerOffline() {
   loadText('data/native.json').then((text) => {
     if (JSON.parse(text).serviceWorker !== false) registerWorker();
   }).catch(() => registerWorker());
+}
+
+/** Fill the pair's rows and selected font faces on a first, uncontrolled visit.
+ * Later visits cache reads as they happen.
+ * @param {import('../core/sheet.js').SheetContext} ctx @param {import('../core/types.js').SheetSpec} spec
+ * @param {boolean} serif */
+export function prepareSheetOffline(ctx, spec, serif) {
+  if (isNative() || !navigator.serviceWorker) return;
+  const controlled = Boolean(navigator.serviceWorker.controller);
+  registerOffline();
+  if (controlled) return;
+  loadText('data/native.json').then(async marker => {
+    if (!JSON.parse(marker).serviceWorker) return;
+    const { target, source, typeface } = spec;
+    const [{ stacksFor }, inventory] = await Promise.all([sheetModule(), loadText('data/offline.json')]);
+    const index = JSON.parse(inventory);
+    const stacks = stacksFor(ctx.corpus, target, source, typeface);
+    if (serif) stacks.push(...stacksFor(ctx.corpus, target, source, 'serif'));
+    const faces = ctx.registry.filesFor(stacks);
+    const files = new Set(faces.flatMap(face => [`data/fonts/${face}.ttf`, `data/fonts/${face}.woff2`]));
+    for (const code of [target, source]) {
+      const pack = index.languages[code];
+      for (const path of pack.files) files.add(path);
+    }
+    const result = await keepOffline([...files], true);
+    if (!result.ok) throw new Error(result.failed.join(', '));
+  }).catch(error => console.warn('[plg] could not save this card for offline use:', error));
 }
 
 /**

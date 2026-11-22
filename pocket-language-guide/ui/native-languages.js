@@ -31,14 +31,18 @@ export function nativeLanguageSection(nameOf, onSaved) {
     /** @type {Map<string,{state:HTMLElement,button:HTMLButtonElement,choice:HTMLInputElement}>} */
     const rows = new Map();
     const chosen = () => codes.filter((code) => rows.get(code)?.choice.checked);
-    const costs = async () => {
-      const [total, selection] = await Promise.all([packs.downloadBytes(codes), packs.downloadBytes(chosen())]);
+    /** @type {Awaited<ReturnType<typeof packs.snapshot>>|undefined} */ let snapshot;
+    const costs = () => {
+      if (!snapshot) return;
+      const total = snapshot.downloadBytes(codes);
+      const selection = snapshot.downloadBytes(chosen());
       all.textContent = t('offline.saveAll', { size: sizeOf(total) });
       selected.textContent = t('native.saveSelected', { size: sizeOf(selection) });
       selected.disabled = !chosen().length;
     };
     const refresh = async () => {
-      for (const [code, saved] of Object.entries(await packs.status())) {
+      snapshot = await packs.snapshot();
+      for (const [code, saved] of Object.entries(snapshot.status)) {
         const row = rows.get(code);
         if (!row) continue;
         row.state.textContent = saved.state === 'bundled' ? t('offline.builtIn')
@@ -48,7 +52,7 @@ export function nativeLanguageSection(nameOf, onSaved) {
         row.button.textContent = t(['installed', 'update'].includes(saved.state) ? 'offline.delete' : 'offline.save');
         row.button.dataset.saved = String(saved.state === 'installed' || saved.state === 'update');
       }
-      await costs();
+      costs();
     };
     /** @type {AbortController|null} */ let controller = null;
     box.addEventListener('stop-downloads', () => controller?.abort());
@@ -82,7 +86,7 @@ export function nativeLanguageSection(nameOf, onSaved) {
     for (const code of codes) {
       const state = el('span', { class: 'travel-lang-state' });
       const choice = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox', 'aria-label': nameOf(code) }));
-      choice.addEventListener('change', () => { costs().catch((error) => { status.textContent = message(error); }); });
+      choice.addEventListener('change', costs);
       const button = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'chip' }));
       button.addEventListener('click', () => { void run([code], button.dataset.saved === 'true'); });
       rows.set(code, { state, button, choice });

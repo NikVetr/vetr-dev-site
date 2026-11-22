@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>ASL café · Wanderwart</title>
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="signs.css">
+<link rel="stylesheet" href="ui/collection-nav.css">
+<script src="ui/collection-nav.js" defer></script>
+</head>
+<body class="sign-page">
+<a class="skip-link" href="#workspace">Skip to café</a>
+<header class="site-header"><div class="container">
+<a class="brand" href="./"><img class="brand-mark brand-mark-light" src="data/brand/mark.svg" alt="" width="29" height="20"><img class="brand-mark brand-mark-dark" src="data/brand/mark-dark.svg" alt="" width="29" height="20">Wanderwart</a>
+<a class="btn ghost" href="./">All languages</a>
+</div></header>
+<main id="workspace" class="sign-workspace">
+<header class="sign-heading"><p>American Sign Language · English</p><h1>At the café</h1></header>
+<nav class="sign-tabs" aria-label="Café activities">
+<a href="#converse">Converse</a><a href="#quiz">Quiz</a><a href="#cards">Cheat sheets</a>
+</nav>
+<p id="sign-error" role="alert" hidden></p>
+<section id="sign-converse" aria-label="Conversation board">
+<div class="sign-tools"><p>Tap a sign to see the one-handed ASL animation.</p><button id="write-reply">Exchange a written message</button></div>
+<div id="sign-board"></div>
+</section>
+<section id="sign-quiz" aria-label="ASL quiz" hidden>
+<div class="sign-tools"><label>Practice <select id="quiz-direction"><option value="recognize">Recognize the sign</option><option value="recall">Sign it yourself</option></select></label><span id="quiz-count"></span></div>
+<h2 id="quiz-prompt"></h2><div id="quiz-video"></div><div id="quiz-actions" class="sign-actions"></div><p id="quiz-feedback" role="status"></p>
+</section>
+<section id="sign-cards" aria-label="Pocket cheat sheets" hidden>
+<div class="sign-tools"><p>One-handed ASL · 7 × 5 in · Read the frames from left to right.</p>
+<div class="sign-actions"><button id="save-pdf" disabled>Save PDF</button><button id="print-signs" disabled>Print</button></div></div>
+<div id="sign-faces"></div>
+</section>
+<footer class="sign-credits">
+<span id="offline-status" role="status"></span> <button id="retry-offline" hidden>Retry offline save</button>
+<details><summary>Motion references and credits</summary>
+<p>Wanderwart’s 3D model follows hand movements adapted from PopSign ASL v2.1, published by Georgia Institute of Technology and Deaf Professional Arts Network. The source performances are linked below. <a href="https://signdata.cc.gatech.edu/view/datasets/popsign_v2_1/">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+<div id="sign-sources"></div></details></footer>
+</main>
+<dialog id="sign-dialog" aria-labelledby="dialog-title"><header><h2 id="dialog-title"></h2><button id="close-sign" aria-label="Close">Close</button></header><div id="dialog-body"></div></dialog>
+<script type="module" src="ui/signs.js"></script>
+</body></html>

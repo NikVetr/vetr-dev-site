@@ -205,15 +205,10 @@ distrust the column as a whole.
   rows a sheet went from an empty respelling column to a full one. Worth knowing
   when reading a blank-cell count: the number this script reports is a lower bound
   on what a reader actually sees blank.
-- **The language-name matrix is only as stable as the ICU that node was built
-  with.** `data/registry/language-names.csv` carries a `name` only where CLDR is
-  wrong for our purposes, so `language_name_ipa` asks node for the other ~200 and
-  phonemises what it gets. If an ICU update renames a language, the generated `ipa`
-  changes and `--check` fails -- which is the drift report
-  `content/LANGUAGE-SLOTS.md` asks for, and is also the reason `--check` now needs
-  `node` on PATH as well as `phonemizer`. A browser whose ICU disagrees with node's
-  would print a name this column transcribed differently; no pair in the matrix
-  does today, and filling `name` for all 289 rows is the fix if one ever does.
+- The language-name registry stores authored forms in `name`. For the remaining
+  pairs, Node's ICU supplies the written form for `cldr_name` and the input for
+  pronunciation. An ICU update that changes either generated column surfaces in
+  `--check`.
 - **espeak's `vi` voice reads a Latin-script language name with English rules**, so
   two of Vietnamese's sixteen `{source}` substitutions are English: `Indonesia` is
   `ɪndəʊniːziə̯` and `Swahili` is `swɑːhiːli` where Vietnamese would have
@@ -5704,18 +5699,10 @@ NAMES = DATA / "registry/language-names.csv"
 def cldr_names(codes):
     """`Intl.DisplayNames` for every (locale, subject) pair, asked of node.
 
-    The registry deliberately carries a `name` only where CLDR is wrong for our
-    purposes -- `content/LANGUAGE-SLOTS.md`, "Where Intl.DisplayNames is not
-    enough" -- and `languageName` in core/pack.js falls back to CLDR for the rest.
-    So the names this has to phonemise mostly are not in the repository at all, and
-    the only honest source for them is the one the renderer itself will use.
-
-    That also makes this the drift check that document asks for: if an ICU version
-    renames a language, the `ipa` generated from the new name differs from the
-    committed one and `--check` fails, which is the notification. Asked exactly the
-    way `languageName` asks -- full locale, base language for the subject, since
-    `zh-Hans` answers with the *script* ("Simplified Chinese", "chinois simplifie")
-    and nobody says `Parlez-vous chinois simplifie ?`.
+    Source for the bundled written names and their pronunciations. A sentence
+    names the subject's base language (Chinese) even when the sheet specifies a
+    script (Simplified Chinese). Only accept words returned in the requested
+    locale, since ICU can fall back to a different language.
     """
     script = """
       const codes = JSON.parse(process.argv[1]);
@@ -5743,7 +5730,7 @@ def cldr_names(codes):
     return got["names"], set(got["own"])
 
 
-def language_name_ipa(locales, subjects, rows):
+def language_name_ipa(locales, subjects, rows, names, cldr_locales):
     """{(locale, bcp47): ipa} for one language naming another, with no entry at all
     for a pair its route refuses.
 
@@ -5762,7 +5749,6 @@ def language_name_ipa(locales, subjects, rows):
     with a hole where the language should be -- which is the blank respelling these
     rows print today, so nothing regresses.
     """
-    names, cldr_locales = cldr_names(sorted(set(locales) | set(subjects)))
     written = {}
     for locale in locales:
         # What to phonemise, per subject. A pack read off a romanisation reads the
@@ -5881,7 +5867,9 @@ def load_names():
     """The registry keyed on (locale, bcp47), and its header, in file order."""
     with NAMES.open(encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
-        return reader.fieldnames, {(r["locale"], r["bcp47"]): r for r in reader}
+        if not reader.fieldnames:
+            raise ValueError(f"{NAMES} has no header")
+        return list(reader.fieldnames), {(r["locale"], r["bcp47"]): r for r in reader}
 
 
 def write_names(header, rows, ipa, locales):
@@ -7097,8 +7085,8 @@ def main():
 
     with (DATA / "registry/languages.csv").open(encoding="utf-8-sig") as fh:
         ready = [r["bcp47"] for r in csv.DictReader(fh) if r["status"] == "ready"]
-    codes = [c for c in args.only.split(",") if c in ready] if args.only else ready
-    codes = [c for c in codes if c not in AUTHORED and c not in SILENT]  # see AUTHORED, SILENT
+    selected = [c for c in args.only.split(",") if c in ready] if args.only else ready
+    codes = [c for c in selected if c not in AUTHORED and c not in SILENT]  # see AUTHORED, SILENT
 
     stale, repertoire, report = [], Counter(), []
     for code in codes:
@@ -7146,7 +7134,26 @@ def main():
     # this run rebuilt, so that `--only vi` does not blank the other sixteen and
     # does not pay for their backends; a full run therefore owns the whole column.
     header, name_rows = load_names()
-    names_ipa = language_name_ipa(codes, ready, name_rows)
+    # Bundle the same CLDR words used for pronunciation so a WebView with fewer
+    # display locales can still print the written sentence. Include packs whose
+    # pronunciation was authored, such as Khmer, and preserve editorial overrides.
+    names, cldr_locales = cldr_names(ready)
+    if "cldr_name" not in header:
+        header.append("cldr_name")
+    for (locale, _), row in name_rows.items():
+        if locale in selected:
+            if row.get("cldr_name") and locale not in cldr_locales:
+                raise ValueError(f"Node needs ICU display names for {locale} to rebuild {NAMES}")
+            row["cldr_name"] = ""
+    for locale in cldr_locales.intersection(selected):
+        for subject in ready:
+            word = names[locale][subject]
+            if subject in SILENT or word == subject.split("-")[0]:
+                continue
+            row = name_rows.setdefault((locale, subject), dict.fromkeys(header, ""))
+            if not row.get("name"):
+                row["cldr_name"] = word
+    names_ipa = language_name_ipa(codes, ready, name_rows, names, cldr_locales)
     text = write_names(header, name_rows, names_ipa, codes)
     if text != NAMES.read_text(encoding="utf-8"):
         if args.check:

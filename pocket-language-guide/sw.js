@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-9d80a40771dd';
+const VERSION = 'plg-690e565fcbd5';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -124,6 +124,22 @@ self.addEventListener('install', (event) => {
       await caches.delete(SHELL_CACHE);
       throw new Error(`shell incomplete: ${failed.length} of ${files.length} files`);
     }
+    // A reader who saved the café should be able to open it offline after the
+    // gallery updates. Its new manifest points at new, content-addressed files.
+    const pack = await caches.open(PACK_CACHE);
+    const signRoot = 'data/signs/ase-cafe/';
+    if ((await pack.keys()).some((request) => packPath(request).startsWith(signRoot))) {
+      try {
+        const groups = await (await cache.match(signRoot + 'pack.json')).json();
+        const urls = groups.flatMap(group => group.entries.flatMap(sign =>
+          ['mp4', '1.jpg', '2.jpg'].map(ext => signRoot + sign.media + '.' + ext)));
+        const missing = await Promise.all(urls.map(async url => await pack.match(url) ? null : url));
+        await pack.addAll(missing.filter(Boolean));
+      } catch (error) {
+        await caches.delete(SHELL_CACHE);
+        throw error;
+      }
+    }
     await self.skipWaiting();
   })());
 });
@@ -200,6 +216,8 @@ self.addEventListener('fetch', (event) => {
     // so this read can retry before returning the old bytes as an offline fallback.
     const pack = await caches.open(PACK_CACHE);
     const cached = request.mode === 'navigate' ? undefined : await pack.match(request, { ignoreSearch: true });
+    // A sign's clip and frames share a content hash in their filenames.
+    if (cached && /\/data\/signs\/[^/]+\/[\w-]+-[a-f0-9]{12}\.(?:mp4|[12]\.jpg)$/.test(url.pathname)) return cached;
     const languageFile = /\/data\/(?:lang|countries|emphasis|fonts)\//.test(url.pathname);
     if (languageFile) {
       const expected = (await packHashes())[packPath(request)];

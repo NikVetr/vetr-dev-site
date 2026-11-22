@@ -54,6 +54,7 @@ plutil -replace NSCameraUsageDescription -string "Wanderwart uses the camera's f
 plutil -replace NSMicrophoneUsageDescription -string "Wanderwart listens only while a hands-free quiz waits for your answer. Nothing is recorded or kept." ios/App/App/Info.plist
 plutil -replace NSSpeechRecognitionUsageDescription -string "Hands-free quizzes turn your spoken answer into text with Apple's speech recognition to check it. Wanderwart keeps nothing you say." ios/App/App/Info.plist
 # Full-auto recitation is audio playback, independent of the microphone-based quiz.
+plutil -replace NSPhotoLibraryAddUsageDescription -string "Save the phrase card you selected to Photos." ios/App/App/Info.plist
 plutil -replace UIBackgroundModes -json '["audio"]' ios/App/App/Info.plist
 # "None of these" opens the translators' own apps where the phone has them, and iOS
 # answers whether an app is installed only for the schemes an app declares up front.

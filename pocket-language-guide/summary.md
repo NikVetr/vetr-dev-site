@@ -63,7 +63,10 @@ Elven frame reserves its own measured space before fitting.
 The gallery opens a language pair in the card studio, a conversation board or a quiz.
 The studio selects content, edits individual rows, sets paper and typography, and
 exports PDF, SVG or PNG. Named saved cards carry settings, finish, resolution and
-personal row edits. CSV files support vocabulary round trips.
+personal row edits. CSV files support vocabulary round trips. The studio and quick
+export page share a worker that runs the same sheet builder as the CLI. Each edit
+gets a revision. Exports wait for that revision’s layout, and selecting another
+face reuses the thumbnails. Cached gallery sheets restore the fonts used by their SVGs.
 
 The starter questionnaire asks about interests, proficiency, print size, carry limits
 and breadth. Optional personal details generate a translation prompt that the reader
@@ -104,6 +107,24 @@ rendering. Backup restore waits for every write, including nested writes, before
 attempting rollback. A rollback failure is reported. These are application-level
 recovery guarantees, not a transaction spanning a device power loss.
 
+### ASL café
+
+The gallery’s ASL badge selects the American Sign Language card. Card, Converse
+and Quiz open the corresponding tabs in `signs.html`, an English-labelled café
+workspace available with any reader language. The café manifest in
+`data/signs/ase-cafe/pack.json` groups twelve one-handed ASL
+signs by use. Each entry includes an animation of a matte grey mannequin and two
+stills sampled from it. Five signs use a hand close-up. Seven include the blank
+head and upper body to show hand placement. The offline authoring tools in
+`scripts/sign_model/` fit hand motion to the licensed performance references.
+The website and native app play standard H.264 and use JPEGs for print. Converse and Quiz both offer video and stills. Converse
+also supports a large-type written exchange for questions and replies. The quiz
+shares Wanderwart’s recognition score store and also offers ungraded recall.
+Each group prints on one landscape 7 × 5 inch face. The preview, PDF, PNG and
+browser print views use the same 300 dpi drawing. The full media pack is saved
+when the web pilot opens and ships inside the native bundle. Source credits and
+adaptations are documented in `LICENSE-DATA` and on the cards.
+
 ## Offline and native operation
 
 `scripts/build_shell.mjs` generates `data/shell.json`, `data/offline.json` and the
@@ -115,6 +136,12 @@ refresh saved languages. Shell upgrades retain saved packs and use content hashe
 to refresh only changed cached files. Failed refreshes keep their previous bytes
 for offline use and retry when opened; unchanged files need no download. Shell
 files are never overwritten by the pack cache.
+
+Direct studio and quick-export links register the service worker and cache the
+chosen pair for offline reopening. The gallery reads a compact list of language
+pairs, face counts and scales from `packs/gallery.json`. The prerenderer retains
+the full build inventory in `packs/index.json`. Storage estimates count each missing
+file once, using a fresh inventory after downloads and deletions.
 
 Each explicit save/delete request uses its own message port and a deadline that
 includes service-worker registration. Downloads include all supported font variants.

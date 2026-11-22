@@ -45,15 +45,58 @@ async function offlineHarness(browserName, context) {
 /**
  * Whether a prerender has left `packs/` in place.
  *
- * `data/shell.json` names `packs/index.json`, and `sw.js` fails its install *whole*
+ * `data/shell.json` names `packs/gallery.json`, and `sw.js` fails its install *whole*
  * rather than half -- deliberately, so a partial shell never becomes the active one.
  * So while `npm run prerender` is mid-rebuild, no worker ever takes charge, and
  * every test here that saves a pack waits out `keepOffline`'s own 120-second
  * timeout before failing. Three minutes each, for a reason that has nothing to do
  * with the code under test. Skipped with a sentence instead.
  */
-const HAS_PACKS = existsSync('packs/index.json');
-const NEEDS_PACKS = 'packs/index.json is missing -- run `npm run prerender`; the '
+const HAS_PACKS = existsSync('packs/gallery.json');
+test('a saved ASL café gets its new 3D assets before the shell switches @smoke', async ({ page, context, browserName }) => {
+  const { base, goOffline } = await offlineHarness(browserName, context);
+  await page.goto(base + '/favicon.svg');
+  await page.evaluate(async () => {
+    const pack = await caches.open('plg-packs');
+    await pack.put('/data/signs/ase-cafe/old-pilot.mp4', new Response('previous pilot'));
+    await navigator.serviceWorker.register('/sw.js');
+  });
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  const saved = await page.evaluate(async () => {
+    const pack = await caches.open('plg-packs');
+    return (await pack.keys()).filter(request => request.url.includes('/data/signs/')).map(request => request.url);
+  });
+  expect(saved).toContainEqual(expect.stringContaining('/old-pilot.mp4'));
+  expect(saved.filter(url => url.endsWith('.mp4') && !url.endsWith('old-pilot.mp4')), saved.join('\n')).toHaveLength(12);
+  await goOffline();
+  const offline = await context.newPage();
+  await offline.goto(base + '/signs.html#converse');
+  await offline.getByRole('button', { name:'Thank you', exact:true }).click();
+  const video = offline.getByRole('dialog').locator('video');
+  await offline.getByRole('button', { name:'Replay' }).click();
+  await expect.poll(() => video.evaluate(v => [v.videoWidth, v.videoHeight])).toEqual([560,640]);
+});
+
+test('ASL café reopens and plays a previously unopened sign offline @smoke', async ({ page, context, browserName }) => {
+  const { base, goOffline } = await offlineHarness(browserName, context);
+  const url = base + '/signs.html#converse';
+  await page.goto(url);
+  await expect(page.locator('#offline-status')).toHaveText('Café available offline', { timeout:90_000 });
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  await goOffline();
+  const offline = await context.newPage();
+  await offline.goto(url);
+  await offline.getByRole('button', { name:'Napkin' }).click();
+  const video = offline.getByRole('dialog').locator('video');
+  await expect.poll(() => video.evaluate(v => v.videoWidth)).toBeGreaterThan(0);
+  await offline.getByRole('button', { name:'Replay' }).click();
+  await expect.poll(() => video.evaluate(v => v.currentTime)).toBeGreaterThan(0);
+  await offline.getByRole('button', { name:'Close' }).click();
+  await offline.getByRole('link', { name:'Cheat sheets' }).click();
+  await expect(offline.getByRole('button', { name:'Save PDF' })).toBeEnabled();
+});
+
+const NEEDS_PACKS = 'packs/gallery.json is missing -- run `npm run shell`; the '
   + 'service worker cannot install without it, so no worker takes charge here';
 import { faceCount } from './counts.js';
 import { pickReader } from './controls.js';
@@ -74,6 +117,27 @@ async function save(page, target, source) {
     return keepOffline([...index.common.fonts,
       ...codes.flatMap((/** @type {string} */ code) => [...index.languages[code].files, ...index.languages[code].fonts])]);
   }, [target, source]);
+}
+
+for (const entry of ['customize.html', 'sheet.html']) {
+  test(`a direct first visit to ${entry} keeps the Javanese card available offline @smoke`, async ({ page, context, browserName }) => {
+    test.skip(!HAS_PACKS, NEEDS_PACKS);
+    const { base, goOffline } = await offlineHarness(browserName, context);
+    const url = base + '/' + entry + '?target=jv&source=en';
+    await page.goto(url);
+    /** @param {import('@playwright/test').Page} tab */
+    const expectNames = async (tab) => {
+      const words = tab.locator('.face svg').first().locator('text');
+      await expect(words.filter({ hasText: /^Jawa$/ }).first()).toBeVisible();
+      await expect(words.filter({ hasText: /^Inggris\?$/ }).first()).toBeVisible();
+    };
+    await expectNames(page);
+    await page.waitForFunction(async () => navigator.serviceWorker.controller && await caches.match('data/lang/jv/social.csv'));
+    await goOffline();
+    const reopened = await context.newPage();
+    await reopened.goto(url);
+    await expectNames(reopened);
+  });
 }
 
 test('concurrent offline saves get distinct results', async ({ page }) => {
@@ -220,22 +284,26 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
 // A flaky connection is the same situation as no connection, only worse: the app
 // used to carry on and print a sheet quietly missing whole sections, which for a
 // safety-critical artifact is worse than refusing.
-test('a failed data or font fetch is reported, not printed around', async ({ page }) => {
-  // No guard: this one routes fetches to 503 and asserts the error surface, so it
-  // needs no service worker and runs whether `packs/` is there or not.
-  for (const pattern of ['**/data/lang/ja/social.csv', '**/data/fonts/cjk-jp-400.woff2']) {
-    await page.route(pattern, (route) => route.fulfill({ status: 503, body: 'nope' }));
+for (const path of ['data/lang/ja/social.csv', 'data/fonts/cjk-jp-400.woff2']) {
+  test(`a failed fetch of ${path} is reported and recovers`, async ({ page, context }) => {
+    // Each first visit needs an empty cache. Route both page and worker requests
+    // so a successful background download cannot bypass the simulated outage.
+    const pattern = '**/' + path;
+    let rejected = 0;
+    await context.route(pattern, route => {
+      rejected++;
+      return route.fulfill({ status: 503, body: 'nope' });
+    });
     await page.goto('/sheet.html?target=ja&source=en');
     await expect(page.locator('body')).toContainText('Something went wrong', { timeout: 60_000 });
+    expect(rejected).toBeGreaterThan(0);
     await expect(page.locator('#faces .face')).toHaveCount(0);
-    await page.unroute(pattern);
-  }
-
-  // And the same page is fine once the network is.
-  await page.goto('/sheet.html?target=ja&source=en');
-  await expect(page.locator('#faces .face').first()).toBeVisible({ timeout: 90_000 });
-  await expect(page.locator('body')).not.toContainText('Something went wrong');
-});
+    await context.unroute(pattern);
+    await page.goto('/sheet.html?target=ja&source=en');
+    await expect(page.locator('#faces .face').first()).toBeVisible({ timeout: 90_000 });
+    await expect(page.locator('body')).not.toContainText('Something went wrong');
+  });
+}
 
 test('a saved pack survives a shell change', async ({ page, context }) => {
   test.skip(!HAS_PACKS, NEEDS_PACKS);

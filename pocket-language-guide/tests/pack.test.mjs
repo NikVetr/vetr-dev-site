@@ -99,6 +99,21 @@ test('a language slot is rendered in the language of the cell it sits in', () =>
   );
 });
 
+test('Javanese phrases retain their written wording when the browser falls back to English', async (t) => {
+  const corpus = await context();
+  const rows = await loadLanguage((rel) => readFile(rel, 'utf8'), 'jv', corpus.groups);
+  const DisplayNames = Intl.DisplayNames;
+  t.mock.method(Intl, 'DisplayNames', function () {
+    return new DisplayNames('en', { type: 'language' });
+  });
+  fillLanguageSlots(rows, { locale: 'jv', target: 'jv', source: 'en', names: corpus.languageNames.jv });
+  assert.equal(rows['communication.i-do-not-speak-this-language'].text, 'Kula mboten saged basa Jawa');
+  assert.equal(rows['communication.i-speak-only-a-little-of-this'].text, 'Kula namung saged sekedhik basa Jawa');
+  assert.equal(rows[ID].text, 'Panjenengan saged basa Inggris?');
+  assert.equal(rows['phone-translation.please-write-the-place-name'].text,
+    'Nyuwun tulung, nyerat nami panggènanipun ing basa Jawa');
+});
+
 test('the gloss names the language being learned, not the reader’s own', () => {
   // This was wrong on 135 of the 240 pairs, and not vaguely wrong: the French card
   // read `Je ne parle pas français` and its German gloss read `Ich spreche kein

@@ -8,7 +8,7 @@ import { planToSvg } from '../render/svg.js';
 import { planToPdf } from '../render/pdf.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
 import { loadBytes, loadText, download } from './app.js';
-import { isNative } from './platform/shell.js';
+import { isNative, isIOS, saveToPhotos } from './platform/shell.js';
 import { dialogHead } from './dialog.js';
 import { t } from './i18n.js';
 
@@ -175,6 +175,7 @@ export function showSavedImages(box, files, name) {
   shownUrls = [];
 
   const caption = document.createElement('figcaption');
+  caption.setAttribute('aria-live', 'polite');
   caption.textContent = files.length > 1 ? t('export.pages', { count: files.length }) : t('export.onePage');
   box.replaceChildren(caption);
 
@@ -222,15 +223,21 @@ export function showSavedImages(box, files, name) {
     label.className = 'saved-page-label';
     label.textContent = name;
 
-    // **Save image, in the app, where the platform can share the picture itself**: on an
-    // iPhone that is the share sheet with the image in it, which offers Save Image to put
-    // it in Photos. The other save is then the file, and says so.
-    const asImage = isNative() && navigator.canShare?.({ files: [asFile(file)] });
+    const photos = isIOS();
+    const asImage = photos || (isNative() && navigator.canShare?.({ files: [asFile(file)] }));
     const photo = document.createElement('button');
     photo.type = 'button';
     photo.textContent = t('export.saveImage');
     photo.addEventListener('click', async () => {
-      if (!await shareFiles([file], name)) caption.textContent = t('export.shareFailed');
+      photo.disabled = true;
+      try {
+        if (photos) {
+          await saveToPhotos(file.bytes, file.name);
+          caption.textContent = t('export.savedToPhotos', { page: name });
+        } else if (!await shareFiles([file], name)) caption.textContent = t('export.shareFailed');
+      } catch (error) {
+        caption.textContent = error instanceof Error ? error.message : String(error);
+      } finally { photo.disabled = false; }
     });
 
     const save = document.createElement('button');

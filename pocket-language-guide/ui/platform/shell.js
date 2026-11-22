@@ -231,23 +231,39 @@ export async function clearExportCache() {
   }
 }
 
-/** @param {Blob} blob @param {string} name @returns {Promise<boolean>} */
-export async function deliver(blob, name) {
-  const plugins = /** @type {any} */ (globalThis).Capacitor?.Plugins;
-  if (!isNative() || !plugins?.Filesystem?.writeFile || !plugins?.Share?.share) return false;
-  const bytes = new Uint8Array(await blob.arrayBuffer());
+/** @param {Uint8Array} bytes */
+function encodeBytes(bytes) {
   let data = '';
   // Base64 in chunks: one call over the whole buffer overflows the argument list
   // on a multi-megabyte PDF.
   for (let i = 0; i < bytes.length; i += 0x8000) {
     data += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   }
+  return btoa(data);
+}
+
+export function isIOS() {
+  return isNative() && /** @type {any} */ (globalThis).Capacitor.getPlatform?.() === 'ios';
+}
+
+/** @param {Uint8Array} bytes @param {string} name */
+export async function saveToPhotos(bytes, name) {
+  const photos = /** @type {any} */ (globalThis).Capacitor?.Plugins?.PhotoLibrary;
+  if (!photos?.savePNG) throw new Error('Saving to Photos is unavailable');
+  await photos.savePNG({ data: encodeBytes(bytes), name });
+}
+
+/** @param {Blob} blob @param {string} name @returns {Promise<boolean>} */
+export async function deliver(blob, name) {
+  const plugins = /** @type {any} */ (globalThis).Capacitor?.Plugins;
+  if (!isNative() || !plugins?.Filesystem?.writeFile || !plugins?.Share?.share) return false;
+  const bytes = new Uint8Array(await blob.arrayBuffer());
   // Unique paths prevent a second export from overwriting a file another app is reading.
   const path = `${EXPORT_CACHE}/${exportId()}--${name.replace(/[/\\]/g, '_') || 'export'}`;
   sharing.add(path);
   try {
     const { uri } = await plugins.Filesystem.writeFile({
-      path, data: btoa(data), directory: 'CACHE', recursive: true,
+      path, data: encodeBytes(bytes), directory: 'CACHE', recursive: true,
     });
     await plugins.Share.share({ url: uri, title: name, dialogTitle: name });
     return true;

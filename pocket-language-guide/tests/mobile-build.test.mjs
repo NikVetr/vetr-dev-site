@@ -70,6 +70,19 @@ test('nothing that belongs only to the repository is in the bundle', () => {
   assert.deepEqual(stray, [], `these do not belong in an application bundle: ${stray.join(', ')}`);
 });
 
+test('ASL café bundles each signed clip and both matching print frames', async () => {
+  const root = join(OUT, 'data/signs/ase-cafe');
+  const groups = JSON.parse(await readFile(join(root, 'pack.json'), 'utf8'));
+  for (const group of groups) for (const sign of group.entries) {
+    const hash = createHash('sha256');
+    for (const ext of ['mp4', '1.jpg', '2.jpg']) {
+      hash.update(await readFile(join(root, sign.media + '.' + ext)));
+    }
+    assert.equal(sign.media, sign.id + '-' + hash.digest('hex').slice(0,12));
+    assert.ok(sign.frames[0] < sign.frames[1]);
+  }
+});
+
 test('no service worker, and the marker that says why', async () => {
   // A WebView serves from the application's own container, so a worker would be a
   // second cache in front of files that are already local -- and a stale-shell bug
@@ -90,17 +103,17 @@ test('the pack index lists only packs that shipped', async () => {
   // The gallery draws a card without a thumbnail whenever the index does not list
   // the pair, so trimming the index is what stops it requesting a file the bundle
   // left out. If the two ever disagree, the app 404s on a picture.
-  const index = JSON.parse(await readFile(join(OUT, 'packs/index.json'), 'utf8'));
-  assert.ok(index.packs.length > 0, 'no packs at all, so every card is a placeholder');
-  for (const pack of index.packs) {
-    assert.ok(STARTER_LANGUAGES.includes(pack.source) && STARTER_LANGUAGES.includes(pack.target));
-    const dir = `packs/${pack.target}__${pack.source}`;
+  const index = JSON.parse(await readFile(join(OUT, 'packs/gallery.json'), 'utf8'));
+  assert.ok(index.length > 0, 'no packs at all, so every card is a placeholder');
+  for (const [target, source] of index) {
+    assert.ok(STARTER_LANGUAGES.includes(source) && STARTER_LANGUAGES.includes(target));
+    const dir = `packs/${target}__${source}`;
     assert.ok(present.has(`${dir}/thumb.png`), `${dir} is in the index with no thumbnail`);
     assert.ok(present.has(`${dir}/face-1.svg.gz`), `${dir} is in the index with no face`);
   }
   // ...and the converse: nothing shipped that the index does not name.
-  const named = new Set(index.packs.map((/** @type {any} */ p) => `${p.target}__${p.source}`));
-  const orphans = files.filter((f) => f.startsWith('packs/') && f !== 'packs/index.json')
+  const named = new Set(index.map((/** @type {[string,string,number,number]} */ [target, source]) => `${target}__${source}`));
+  const orphans = files.filter((f) => f.startsWith('packs/') && f !== 'packs/gallery.json')
     .map((f) => f.split('/')[1]).filter((d) => !named.has(d));
   assert.deepEqual([...new Set(orphans)], [], 'packs shipped that the index does not list');
 });

@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+import { PDFDocument } from 'pdf-lib';
 import {
   counts, expectIncluded, expectIncludedNot, faceCount, settledCounts,
 } from './counts.js';
@@ -49,6 +51,25 @@ test.describe('studio', () => {
     await page.locator('.face-grid .face').nth(2).click();
     await expect(page.locator('.face.focused')).toHaveCount(1);
     await expect(page.locator('.face-strip .face.current')).toHaveCount(1);
+  });
+
+  test('face navigation reuses thumbnails and an immediate export includes the last edit', async ({ page }) => {
+    await page.goto('/customize.html?target=es&source=en');
+    const thumbs = page.locator('.face-strip .face');
+    await expect(thumbs.nth(1)).toBeVisible();
+    const first = await thumbs.first().elementHandle();
+    await thumbs.nth(1).click();
+    await expect(thumbs.nth(1)).toHaveAttribute('aria-current', 'true');
+    expect(await first.evaluate(node => node === document.querySelector('.face-strip .face'))).toBe(true);
+
+    const download = page.waitForEvent('download');
+    await page.evaluate(() => {
+      document.getElementById('all-off').click();
+      document.getElementById('pdf').click();
+    });
+    const pdf = await PDFDocument.load(await readFile(await (await download).path()));
+    expect(pdf.getPageCount()).toBe(1);
+    await expect(page.locator('#counts')).toContainText('0 of');
   });
 
   test('clicking a row on the page finds it in the content list', async ({ page }) => {

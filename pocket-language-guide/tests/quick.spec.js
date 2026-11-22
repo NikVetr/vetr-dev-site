@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+import { PDFDocument } from 'pdf-lib';
 import { faceCount } from './counts.js';
 
 const SHEET = '/sheet.html?target=zh-Hans&source=en';
@@ -41,6 +43,23 @@ test.describe('the quick export page', () => {
     await expect(page.locator('#status')).not.toHaveText(before ?? '');
 
     expect(failures).toEqual([]);
+  });
+
+  test('a quick export uses the paper dimensions chosen immediately before it', async ({ page }) => {
+    await page.goto(SHEET);
+    await expect(page.locator('.face').first()).toBeVisible();
+    const download = page.waitForEvent('download');
+    await page.getByRole('radio', { name: 'A6' }).evaluate(button => {
+      button.click();
+      document.getElementById('pdf').click();
+    });
+    const pdf = await PDFDocument.load(await readFile(await (await download).path()));
+    const svg = page.locator('.face svg').first();
+    const dimensions = (await svg.getAttribute('viewBox')).split(/\s+/).slice(-2).map(Number);
+    const { width, height } = pdf.getPage(0).getSize();
+    expect(width).toBeCloseTo(dimensions[0], 1);
+    expect(height).toBeCloseTo(dimensions[1], 1);
+    expect(pdf.getPageCount()).toBe(await page.locator('.face').count());
   });
 
   test('exports a PDF at the chosen resolution and links to the studio', async ({ page }) => {

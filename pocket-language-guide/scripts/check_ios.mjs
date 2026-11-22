@@ -40,7 +40,17 @@ try { run('xcrun', ['simctl', 'boot', UDID]); } catch { /* already booted */ }
 run('xcrun', ['simctl', 'bootstatus', UDID, '-b']);
 const shot = (/** @type {string} */ name) => run('xcrun', ['simctl', 'io', UDID, 'screenshot', `${OUT}/${name}.png`]);
 const idb = (/** @type {string[]} */ ...args) => run('idb', [...args, '--udid', UDID]);
-const screen = JSON.parse(idb('ui', 'describe-all', '--json'))[0].frame;
+
+// The accessibility server can briefly have no tree while a keyboard or sheet appears.
+async function accessibilityTree() {
+  for (let attempt = 0; ; attempt++) {
+    try { return JSON.parse(idb('ui', 'describe-all', '--json')); }
+    catch (error) {
+      if (attempt >= 8 || !String(error).includes('No translation object returned')) throw error;
+      await sleep(500);
+    }
+  }
+}
 
 // --- the inspector ----------------------------------------------------------
 // The newest socket: a session that ended leaves its own behind, and the first by name
@@ -67,7 +77,7 @@ async function page() {
   }
   if (!pages.length) throw new Error('no inspectable page in the app');
   const ws = new WebSocket(pages[0].webSocketDebuggerUrl);
-  await new Promise((resolve, reject) => { ws.onopen = resolve; ws.onerror = reject; });
+  const connected = new Promise((resolve, reject) => { ws.onopen = resolve; ws.onerror = reject; });
   let inner = 0;
   let outer = 1_000_000;
   /** @type {string|null} */ let target = null;
@@ -83,10 +93,13 @@ async function page() {
     else if (d.method === 'Target.dispatchMessageFromTarget') deliver(JSON.parse(d.params.message));
     else deliver(d);
   };
+  await connected;
   await sleep(600);
-  const send = (/** @type {string} */ method, params = {}) => new Promise((resolve) => {
+  const send = (/** @type {string} */ method, params = {}) => new Promise((resolve, reject) => {
     inner += 1;
-    pending.set(inner, resolve);
+    const id = inner;
+    const timer = setTimeout(() => { pending.delete(id); reject(new Error(`Inspector timed out on ${method}`)); }, 30000);
+    pending.set(id, reply => { clearTimeout(timer); resolve(reply); });
     const message = JSON.stringify({ id: inner, method, params });
     ws.send(target
       ? JSON.stringify({ id: (outer += 1), method: 'Target.sendMessageToTarget', params: { targetId: target, message } })
@@ -158,7 +171,7 @@ async function launch() {
  */
 async function sheetUp(ms = 20_000) {
   for (const end = Date.now() + ms; Date.now() < end; await sleep(500)) {
-    const scrim = JSON.parse(idb('ui', 'describe-all', '--json')).find((/** @type {any} */ e) => e.AXLabel === 'dismiss popup');
+    const scrim = (await accessibilityTree()).find((/** @type {any} */ e) => e.AXLabel === 'dismiss popup');
     if (scrim) return scrim;
   }
   return null;
@@ -184,6 +197,8 @@ async function dismissSheet(p, scrim) {
 // turned, a theme -- decides what this one sees, and the first launch is checked too.
 try { run('xcrun', ['simctl', 'uninstall', UDID, APP]); } catch { /* not installed */ }
 run('xcrun', ['simctl', 'install', UDID, BUILT]);
+// Changing a privacy grant can terminate a running app. Set it before launch.
+run('xcrun', ['simctl', 'privacy', UDID, 'grant', 'photos-add', APP]);
 let p = await launch();
 const start = JSON.parse(await p.evaluate(`JSON.stringify({
   cards: document.querySelectorAll('.card').length,
@@ -300,9 +315,9 @@ check('keyboard', typed.value === 'hello' && typed.viewport < typed.innerHeight 
 // not in the accessibility tree, but the bar is, and ✓ is its last 40 points.
 // A fresh simulator puts a one-time tip over the keyboard ("slide your finger...");
 // it belongs to the simulator's first run, not to the app, and is put away first.
-const tip = JSON.parse(idb('ui', 'describe-all', '--json')).find((/** @type {any} */ e) => e.type === 'Button' && e.AXLabel === 'Continue');
+const tip = (await accessibilityTree()).find((/** @type {any} */ e) => e.type === 'Button' && e.AXLabel === 'Continue');
 if (tip) { idb('ui', 'tap', String(Math.round(tip.frame.x + tip.frame.width / 2)), String(Math.round(tip.frame.y + tip.frame.height / 2))); await sleep(1200); }
-const bar = JSON.parse(idb('ui', 'describe-all', '--json')).find((/** @type {any} */ e) => e.AXLabel === 'Toolbar');
+const bar = (await accessibilityTree()).find((/** @type {any} */ e) => e.AXLabel === 'Toolbar');
 if (!bar) throw new Error('no keyboard accessory bar on screen');
 idb('ui', 'tap', String(Math.round(bar.frame.x + bar.frame.width - 40)), String(Math.round(bar.frame.y + bar.frame.height / 2)));
 /** @type {any} */ let settled = null;
@@ -347,6 +362,14 @@ check('export-pdf-share', pdfScrim !== null && pdf.some((/** @type {string} */ s
   { plugin: pdf, sheetOnScreen: pdfScrim !== null });
 if (pdfScrim) await dismissSheet(p, pdfScrim);
 
+// Exercise the exported page through its own Save image button. PhotoKit only
+// resolves after its change transaction has committed to the simulator library.
+await p.evaluate("document.querySelector('#dpi-control button')?.click(); document.querySelector('#png').click(); 0");
+await p.until("document.querySelector('#saved-images .saved-page img')", 120000);
+await p.touch("[...document.querySelectorAll('.saved-page button')].find(b => b.textContent === 'Save image')");
+await p.until("document.querySelector('#saved-images figcaption')?.textContent.includes('saved to Photos')");
+check('save-png-to-photos', true, await p.evaluate("document.querySelector('#saved-images figcaption').textContent"));
+
 // --- 7. the life cycle --------------------------------------------------------------
 await p.open('signal.html', '#signal-sos');
 await p.evaluate('window.__marker = 42; 0');
@@ -361,6 +384,33 @@ const after = JSON.parse(await p.evaluate(`JSON.stringify({ marker: window.__mar
   beacon: !!document.querySelector('.beacon'), path: location.pathname })`));
 check('background-stops-beacon', flashing && !after.beacon, { flashingBefore: flashing, ...after });
 check('background-keeps-page', after.marker === 42, 'the page was not reloaded by a trip to another app');
+
+// A short real speech track followed by a longer second phase makes progression
+// observable across a trip to Settings, without asking for microphone access.
+await p.evaluate(`window.__recitation = (async () => {
+  const {createRecitationPlayer} = await import('./ui/platform/recitation.js');
+  const player = await createRecitationPlayer(() => {}, {background:true});
+  window.__player = player;
+  return player.start({repeat:false, steps:[
+    {id:'first', audio:[{text:'Hello', locale:'en-US', rate:1}], delayMs:2500},
+    {id:'second', audio:[], delayMs:60000}
+  ]});
+})().then(r => window.__started=r, e => window.__started={error:String(e)}); 0`);
+await p.until('window.__started', 120000);
+const started = await p.evaluate('window.__started');
+check('recitation-start', started.status === 'playing' && started.index === 0, started);
+if (started.status === 'playing') {
+  run('xcrun', ['simctl', 'launch', UDID, 'com.apple.Preferences']);
+  await sleep(4500);
+  run('xcrun', ['simctl', 'launch', UDID, APP]);
+  await p.evaluate(`(async () => [await __player.getState(), await __player.pause(), await __player.resume(),
+    await __player.stop()])().then(s => window.__played=s); 0`);
+  await p.until('window.__played');
+  const [playing, paused, resumed, stopped] = await p.evaluate('window.__played');
+  check('recitation-background', playing.status === 'playing' && playing.index === 1, playing);
+  check('recitation-controls', paused.status === 'paused' && resumed.status === 'playing' && stopped.status === 'stopped',
+    {paused,resumed,stopped});
+}
 
 p.close();
 proxy.kill();

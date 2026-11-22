@@ -23,12 +23,13 @@ import { isElven } from './elven-frame.js';
 
 /**
  * @param {Object} io
+ * @param {SheetContext['corpus']} [io.corpus] already loaded by the page hosting a worker
  * @param {import('./pack.js').LoadText} io.loadText
  * @param {(relPath:string)=>Promise<Uint8Array>} io.loadBytes
  * @returns {Promise<SheetContext>}
  */
-export async function createSheetContext({ loadText, loadBytes }) {
-  const corpus = await loadCorpus(loadText);
+export async function createSheetContext({ loadText, loadBytes, corpus: sharedCorpus }) {
+  const corpus = sharedCorpus ?? await loadCorpus(loadText);
   const manifest = JSON.parse(await loadText('data/fonts/manifest.json'));
   const registry = createFontRegistry((file) => loadBytes(`data/fonts/${file}`), manifest);
   const measurer = createMeasurer(registry);

@@ -98,37 +98,54 @@ export async function createLanguagePacks(manifest, { filesystem: fs, preference
     await preferences.set({ key: KEY, value: JSON.stringify({ schemaVersion: 1, languages: next }) });
     installed = next;
   };
+  async function listFiles() {
+    try { return (await fs.readdir({ path: DIRECTORY, directory: 'DATA' })).files; }
+    catch (error) { if (missing(error)) return []; throw error; }
+  }
   // A failed write can leave an uncommitted blob. A later operation can reclaim it
   // without guessing at paths or touching anything outside our own directory.
   const collect = async () => {
     const keep = new Set(Object.values(installed).flatMap((pack) => pack.hashes));
-    let listing;
-    try { listing = await fs.readdir({ path: DIRECTORY, directory: 'DATA' }); }
-    catch (error) { if (missing(error)) return; throw error; }
-    for (const file of listing.files) {
+    for (const file of await listFiles()) {
       if (file.type !== 'file' || !HASH.test(file.name) || keep.has(file.name)) continue;
       try { await fs.deleteFile({ path: pathOf(file.name), directory: 'DATA' }); }
       catch (error) { if (!missing(error)) throw error; }
     }
   };
-  return {
-    manifest,
-    /** Incremental storage, counting shared blobs only once. @param {string[]} codes */
-    async downloadBytes(codes) {
-      await pending;
-      const files = new Map(codes.flatMap((code) => required(code)).map((file) => [file.sha256, file]));
-      const saved = new Set(Object.values(installed).flatMap((pack) => pack.hashes));
-      let bytes = 0;
-      for (const file of files.values()) {
-        if (!saved.has(file.sha256)) { bytes += file.bytes; continue; }
-        try {
-          const info = await fs.stat({ path: pathOf(file.sha256), directory: 'DATA' });
-          if (info.type === 'file' && info.size === file.bytes) continue;
-        } catch (error) { if (!missing(error)) throw error; }
-        bytes += file.bytes;
+  /** Price any selection from a single native directory listing. */
+  async function readSnapshot() {
+    const recorded = new Set(Object.values(installed).flatMap(pack => pack.hashes));
+    const sizes = new Map();
+    if (recorded.size) {
+      for (const file of await listFiles()) {
+        if (file.type === 'file' && recorded.has(file.name)) sizes.set(file.name, file.size);
       }
-      return bytes;
-    },
+    }
+    /** @param {File} file */
+    const present = file => sizes.get(file.sha256) === file.bytes;
+    /** @type {Record<string,{state:'bundled'|'installed'|'missing'|'update',bytes:number}>} */ const status = {};
+    for (const [code, entries] of Object.entries(packs)) {
+      const complete = current(code) && entries.every(present);
+      status[code] = { state: starter.has(code) ? 'bundled' : !installed[code] ? 'missing' : complete ? 'installed' : 'update',
+        bytes: entries.reduce((sum, file) => sum + file.bytes, 0) };
+    }
+    return {
+      status,
+      /** @param {string[]} selection */
+      downloadBytes(selection) {
+        const missing = new Map();
+        for (const code of selection) for (const file of required(code)) {
+          if (!present(file)) missing.set(file.sha256, file.bytes);
+        }
+        return [...missing.values()].reduce((sum, bytes) => sum + bytes, 0);
+      },
+    };
+  }
+  const snapshot = () => mutate(readSnapshot);
+  return {
+    manifest, snapshot,
+    /** @param {string[]} codes */
+    async downloadBytes(codes) { return (await snapshot()).downloadBytes(codes); },
     /** @param {string} rel @returns {Promise<Uint8Array|null>} */
     async readBytes(rel) {
       await pending;
@@ -149,26 +166,7 @@ export async function createLanguagePacks(manifest, { filesystem: fs, preference
       try { return await read(file); }
       catch (error) { throw needsPack(available, `Re-download the language pack for ${rel}: ${error instanceof Error ? error.message : String(error)}`); }
     },
-    async status() {
-      await pending;
-      /** @type {Map<string,Promise<{size:number,type:string}>>} */ const stats = new Map();
-      /** @type {Record<string,{state:'bundled'|'installed'|'missing'|'update',bytes:number}>} */ const result = {};
-      for (const [code, files] of Object.entries(packs)) {
-        let state = /** @type {'bundled'|'installed'|'missing'|'update'} */ (starter.has(code) ? 'bundled' : !installed[code] ? 'missing' : current(code) ? 'installed' : 'update');
-        if (state === 'installed') {
-          for (const file of files) {
-            try {
-              const metadata = stats.get(file.sha256) ?? fs.stat({ path: pathOf(file.sha256), directory: 'DATA' });
-              stats.set(file.sha256, metadata);
-              const info = await metadata;
-              if (info.size !== file.bytes || info.type !== 'file') { state = 'update'; break; }
-            } catch (error) { if (!missing(error)) throw error; state = 'update'; break; }
-          }
-        }
-        result[code] = { state, bytes: files.reduce((total, file) => total + file.bytes, 0) };
-      }
-      return result;
-    },
+    async status() { return (await snapshot()).status; },
     /** @param {string} code @param {(progress:{done:number,total:number,path:string})=>void} [onProgress] @param {AbortSignal} [signal] */
     install(code, onProgress, signal) {
       return mutate(async () => {

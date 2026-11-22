@@ -29,6 +29,9 @@ import {
   applyStatic, languageName, loadUiLanguage, regionList, setLanguageNames, t,
 } from './i18n.js';
 
+// This English-labelled visual pack is available to every reader as a target.
+const ASL_CAFE = { bcp47: 'ase', exonym_en: 'American Sign Language', badge: 'ASL' };
+
 /**
  * Publish the site header's height, so what sticks under it knows where under it is.
  *
@@ -74,28 +77,46 @@ function el(tag, attrs = {}, kids = []) {
 function card(lang, gallery) {
   const { reader, coverage, boardPairs } = gallery;
   const name = languageName(lang.bcp47, lang.exonym_en);
+  const signCafe = lang.bcp47 === ASL_CAFE.bcp47;
   const key = `${lang.bcp47}__${reader}`;
   const hasPack = gallery.solved.has(key);
   // A pair can only render what both sides have.
   const have = Math.min(coverage.languages[lang.bcp47] ?? 0, coverage.languages[reader] ?? 0);
   const query = `?target=${encodeURIComponent(lang.bcp47)}&source=${encodeURIComponent(reader)}`;
 
-  const flags = regionRow(lang.regions, {
+  const flags = signCafe ? null : regionRow(lang.regions, {
     label: t('gallery.spokenIn', { language: name, regions: regionList(lang.regions) }),
   });
   const head = el('div', { class: 'card-head' }, [
     el('span', { class: 'card-badge', 'aria-hidden': 'true', text: lang.badge }),
     el('span', { class: 'card-titles' }, [
       el('div', { class: 'card-name', text: name }),
-      el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
+      signCafe
+        ? el('div', { class: 'small muted' }, [
+          el('span', { lang: 'en', text: 'At the café' }),
+          ...(reader === 'en' ? [] : [' · ' + languageName('en', 'English')]),
+        ])
+        : el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
     ]),
     ...(flags ? [flags] : []),
   ]);
 
+  if (signCafe) {
+    const preview = el('a', { class: 'card-preview', href: 'signs.html#cards', 'aria-label': t('gallery.previewOpen', { language: name }) }, [
+      el('img', { class: 'card-thumb', src: 'data/signs/ase-cafe/gallery.jpg', alt: '', loading: 'lazy', decoding: 'async' }),
+    ]);
+    const actions = el('div', { class: 'card-actions' }, [
+      el('a', { class: 'btn primary', href: 'signs.html#cards', text: t('gallery.card') }),
+      el('a', { class: 'btn', href: 'signs.html#converse', text: t('gallery.converse') }),
+      el('a', { class: 'btn', href: 'signs.html#quiz', text: t('gallery.quiz') }),
+    ]);
+    return el('article', { class: 'card', 'data-lang': lang.bcp47 }, [head, preview, actions]);
+  }
+
   const thumb = hasPack && have
     ? el('button', {
       type: 'button',
-      class: 'card-thumb-button',
+      class: 'card-preview card-thumb-button',
       // No `data-i18n-label` here: the label is interpolated with the language's
       // name, and `applyStatic` would overwrite it with the raw template. The card
       // is rebuilt whole when the reader changes, so it needs no marker.
@@ -295,7 +316,7 @@ function renderWantGrid(shown, coverage, readerCode, onPick) {
     );
     const button = el('button', {
       type: 'button',
-      class: have ? 'want-btn' : 'want-btn thin',
+      class: have || l.bcp47 === ASL_CAFE.bcp47 ? 'want-btn' : 'want-btn thin',
       'data-lang': l.bcp47,
       'aria-pressed': 'false',
       title: t('gallery.wantPick', { language: name }),
@@ -649,6 +670,7 @@ async function openSettings(reader, nameOf) {
 async function main() {
   registerOffline();
   const { languages, coverage, names } = await loadLanguages();
+  const targets = [...languages, ASL_CAFE];
   if (resumeLaunch()) return;
   notePlace(null);
   // The top: an unhandled Back leaves the app, where Capacitor alone would do nothing.
@@ -676,7 +698,7 @@ async function main() {
   await (await import('./native-languages.js')).nativeLanguageSetup();
   /** @type {HTMLElement} */ (document.querySelector('.site-footer')).prepend(...storeLinks());
   /** @param {string} code */
-  const nameOf = (code) => languageName(code, languages.find((l) => l.bcp47 === code)?.exonym_en ?? code);
+  const nameOf = (code) => languageName(code, targets.find((l) => l.bcp47 === code)?.exonym_en ?? code);
   wireSiteMenu(() => { openSettings(readerLanguage(languages, coverage), nameOf).catch(showFatal); });
   trackHeaderHeight();
   const headerRow = document.querySelector('.site-header .container');
@@ -687,9 +709,9 @@ async function main() {
   // the lightbox pins them instead of searching for them again.
   /** @type {Map<string,{faces:number, scale:number}>} */ const solved = new Map();
   try {
-    const index = JSON.parse(await loadText('packs/index.json'));
-    for (const pack of index.packs) {
-      solved.set(`${pack.target}__${pack.source}`, { faces: pack.faces, scale: pack.scale });
+    const index = JSON.parse(await loadText('packs/gallery.json'));
+    for (const [target, source, faces, scale] of index) {
+      solved.set(`${target}__${source}`, { faces, scale });
     }
   } catch {
     // No pre-rendered packs yet; cards still work, they just have no thumbnail.
@@ -797,7 +819,7 @@ async function main() {
     const have = (/** @type {Record<string,string>} */ l) => Math.min(
       coverage.languages[l.bcp47] ?? 0, coverage.languages[readerCode] ?? 0,
     );
-    const shown = languages
+    const shown = targets
       .filter((l) => l.bcp47 !== readerCode)
       // Coverage only breaks a tie between two identical labels, so the order is
       // still total and the grid cannot reshuffle between renders.
@@ -859,8 +881,7 @@ async function main() {
     // **Folded the moment it has been used**, and first, so the card goes where the
     // cards finally are: the three things to do with it are on it, and leaving fifty
     // buttons above them means scrolling past the question to reach its answer.
-    const language = languages.find((l) => l.bcp47 === code);
-    setWantOpen(false, languageName(code, language?.exonym_en ?? code));
+    setWantOpen(false, nameOf(code));
     foldedByChoice = true;
     // On a phone the cards are one column, so turning it would reorder the whole
     // list under the reader; the card stays where it is and the page goes to it.

@@ -148,7 +148,7 @@ export function travelSection({ nameOf, loadText, checks, pair, suggestions = []
   const saved = el('div', { class: 'travel-saved' });
   box.append(saved);
   Promise.all([loadText('data/offline.json'), loadText('data/shell.json')])
-    .then(([index, shell]) => drawSaved(saved, JSON.parse(index), new Set(JSON.parse(shell).files), nameOf, pair))
+    .then(([index, shell]) => drawSaved(saved, JSON.parse(index), JSON.parse(shell), nameOf, pair))
     .catch((err) => { saved.replaceChildren(el('p', { class: 'speaker-refused', text: String(err.message) })); });
   return box;
 }
@@ -166,63 +166,78 @@ export function travelSection({ nameOf, loadText, checks, pair, suggestions = []
  * it away -- so a language whose chosen parts are all in the shell is said to be part
  * of the app, with no button, rather than offered a Delete that does nothing.
  * @param {HTMLElement} box
- * @param {{common: {fonts: string[], fontBytes: number}, languages: Record<string, Saveable>}} index
- * @param {Set<string>} builtIn  the shell's files
+ * @param {{common: {fonts: string[], fontBytes: number}, languages: Record<string, Saveable>, sizes:Record<string,number>}} index
+ * @param {{files:string[],version:string}} shell
  * @param {(code: string) => string} nameOf @param {string[]} [pair]
  */
-async function drawSaved(box, index, builtIn, nameOf, pair) {
+async function drawSaved(box, index, shell, nameOf, pair) {
+  const builtIn = new Set(shell.files);
   const codes = Object.keys(index.languages).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
   const used = el('p', { class: 'speaker-why' });
   const status = el('p', { class: 'speaker-why', role: 'status' });
   const fonts = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
   fonts.checked = true;
   const sharedCost = el('span', { class: 'travel-lang-state' });
-  /** The parts a save of `code` takes, each with what it weighs. @param {string} code */
-  const parts = (code) => [
-    { files: index.languages[code].files, bytes: index.languages[code].bytes },
-    ...(fonts.checked ? [{ files: index.languages[code].fonts, bytes: index.languages[code].fontBytes }] : []),
-  ];
-  /** What saving `code` still costs past the shared faces, nothing when it is saved. @param {string} code */
-  const missing = async (code) => {
-    const have = await Promise.all(parts(code).map((part) => allSaved(part.files)));
-    return parts(code).reduce((n, part, i) => n + (have[i] ? 0 : part.bytes), 0);
-  };
+  /** @param {string} code */
+  const parts = code => [...index.languages[code].files, ...(fonts.checked ? index.languages[code].fonts : [])];
+  /** @type {Set<string>} */ let cached = new Set();
+  /** @param {string} path */
+  const has = path => cached.has(new URL(path, document.baseURI).href);
+  /** @param {Iterable<string>} paths */
+  const owedBytes = paths => [...new Set(paths)].reduce((sum, path) => sum + (has(path) ? 0 : index.sizes[path]), 0);
   /** @type {Map<string, {row: HTMLElement, state: HTMLElement, button: HTMLButtonElement}>} */
   const rows = new Map();
   const all = el('button', { type: 'button', class: 'chip' });
-  const refresh = async () => {
-    const shared = fonts.checked && !(await allSaved(index.common.fonts)) ? index.common.fontBytes : 0;
+  const showSizes = () => {
+    const shared = fonts.checked ? owedBytes(index.common.fonts) : 0;
     sharedCost.textContent = shared ? `+${megabytes(shared)}` : '';
-    const owed = await Promise.all(codes.map(missing));
+    const owed = codes.map(code => owedBytes(parts(code)));
     for (const [i, code] of codes.entries()) {
       const { state, button } = /** @type {NonNullable<ReturnType<typeof rows.get>>} */ (rows.get(code));
-      const inApp = parts(code).every((part) => part.files.every((file) => builtIn.has(file)));
+      const inApp = parts(code).every(file => builtIn.has(file));
       state.textContent = owed[i] ? megabytes(owed[i]) : `✓ ${t(inApp ? 'offline.builtIn' : 'offline.saved')}`;
       button.textContent = t(owed[i] ? 'offline.save' : 'offline.delete');
       button.dataset.saved = String(!owed[i]);
       button.hidden = !owed[i] && inApp;
     }
-    all.textContent = t('offline.saveAll', { size: megabytes(owed.reduce((n, b) => n + b, shared)) });
+    all.textContent = t('offline.saveAll', { size: megabytes(owedBytes([...codes.flatMap(parts), ...(fonts.checked ? index.common.fonts : [])])) });
+  };
+  const readCachedPaths = async () => {
+    const names = (await caches.keys()).filter(name => name === 'plg-packs' || name === `plg-${shell.version}-shell`);
+    const requests = await Promise.all(names.map(async name => (await caches.open(name)).keys()));
+    cached = new Set(requests.flat().map(request => {
+      const url = new URL(request.url);
+      url.search = '';
+      return url.href;
+    }));
+  };
+  const refresh = async () => {
+    await readCachedPaths();
+    showSizes();
     const estimate = await navigator.storage?.estimate?.();
     used.textContent = estimate?.usage ? t('offline.used', { size: megabytes(estimate.usage) }) : '';
   };
   /** @param {string[]} chosen @param {boolean} [refreshSaved] */
   const save = async (chosen, refreshSaved = false) => {
     /** @type {string[]} */ const failed = [];
+    const sent = new Set();
     for (const [i, code] of chosen.entries()) {
       status.textContent = t('offline.saving', { done: String(i), total: String(chosen.length) });
-      const files = parts(code).flatMap((part) => part.files);
-      failed.push(...(await keepOffline(fonts.checked ? [...files, ...index.common.fonts] : files, !refreshSaved)).failed);
+      const files = [...parts(code), ...(fonts.checked ? index.common.fonts : [])].filter(path => !sent.has(path));
+      files.forEach(path => sent.add(path));
+      if (files.length) failed.push(...(await keepOffline(files, !refreshSaved)).failed);
     }
     status.textContent = failed.length ? t('offline.partly', { count: String(failed.length) }) : '';
-    await refresh();
   };
   /** Serialize this panel's actions while shared-file ownership is checked. @param {() => Promise<void>} act */
   const busy = async (act) => {
     const buttons = [...box.querySelectorAll('button')];
     buttons.forEach((b) => { b.disabled = true; });
     fonts.disabled = true;
-    try { await act(); }
+    try {
+      try { await act(); }
+      finally { await refresh(); }
+    }
     catch (error) { status.textContent = String(error instanceof Error ? error.message : error); }
     finally { buttons.forEach((b) => { b.disabled = false; }); fonts.disabled = false; }
   };
@@ -233,8 +248,8 @@ async function drawSaved(box, index, builtIn, nameOf, pair) {
     // A script's faces may belong to several saved languages.
     button.addEventListener('click', () => busy(async () => {
       if (button.dataset.saved !== 'true') { await save([code]); return; }
-      await forgetOffline(await languageFilesToForget(code, index.languages));
-      await refresh();
+      await readCachedPaths();
+      await forgetOffline(await languageFilesToForget(code, index.languages, async files => files.every(has)));
     }));
     const row = el('li', { class: 'travel-lang' }, [el('span', { class: 'travel-lang-name', text: nameOf(code) }), state, button]);
     rows.set(code, { row, state, button });
@@ -245,11 +260,10 @@ async function drawSaved(box, index, builtIn, nameOf, pair) {
     if (!globalThis.confirm(t('offline.clearAsk'))) return;
     await forgetOffline(null);
     status.textContent = t('offline.cleared');
-    await refresh();
   }));
   const update = el('button', { type: 'button', class: 'chip', text: t('offline.refreshSaved') });
   update.addEventListener('click', () => busy(async () => {
-    const saved = await Promise.all(codes.map((code) => allSaved(index.languages[code].files)));
+    const saved = codes.map(code => index.languages[code].files.every(has));
     await save(codes.filter((_, i) => saved[i]), true);
   }));
   /** @type {Element[]} */ const actions = [all, update, clear];
@@ -259,7 +273,7 @@ async function drawSaved(box, index, builtIn, nameOf, pair) {
     both.addEventListener('click', () => busy(() => save(pair)));
     actions.unshift(both);
   }
-  fonts.addEventListener('change', () => { refresh(); });
+  fonts.addEventListener('change', showSizes);
   box.replaceChildren(used, el('div', { class: 'speaker-actions' }, actions), status, el('details', { class: 'travel-langs' }, [
     el('summary', { text: t('offline.choose') }),
     el('label', { class: 'display-option' }, [fonts, el('span', { text: t('offline.fonts') }), sharedCost]),

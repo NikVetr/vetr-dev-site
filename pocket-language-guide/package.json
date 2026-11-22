@@ -17,7 +17,7 @@
     "check:android": "node scripts/check_android.mjs",
     "check:ios": "node scripts/check_ios.mjs",
     "test:webkit": "WEBKIT=1 npx playwright test --project=webkit",
-    "postprerender": "python3 scripts/optimize_thumbs.py",
+    "postprerender": "python3 scripts/optimize_thumbs.py && npm run shell",
     "test:unit": "node --test tests/*.test.mjs",
     "test": "npm run validate && npm run check && npm run test:unit && npm run test:integration && npx playwright test",
     "vendor": "node scripts/build_vendor.mjs",

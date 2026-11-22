@@ -7,10 +7,12 @@
 import { THEME_IDS } from '../core/sheet-spec.js';
 import { openAppearance, wireSiteMenu } from './site-menu.js';
 import {
-  browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
+  prepareSheetOffline, browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy, download,
 } from './app.js';
-import { buildSheet, stacksFor } from '../core/sheet.js';
+import { buildBrowserSheet as buildSheet } from './sheet-client.js';
+import { sheetRefresh } from './sheet-refresh.js';
+import { loadFontsFor, stacksFor } from '../core/sheet.js';
 import { paperSpec } from '../core/pack.js';
 import { printed } from '../core/alternation.js';
 import { contentBox } from '../core/solve/index.js';
@@ -137,6 +139,7 @@ async function main() {
       paper: paperSpec(ctx.corpus, kept && ctx.corpus.paper[kept] ? kept : spec.paper.presetId),
     };
   }
+  prepareSheetOffline(ctx, spec, isElven(spec));
   let edits = loadEdits(spec.target, spec.source);
   /** @type {number|null} */ let focused = 0;
   // Grid view is either something the reader asked for or a consequence of there
@@ -151,36 +154,12 @@ async function main() {
   let treeKey = '';
   /** @type {ReturnType<typeof createAddTerm>|null} */ let addTerm = null;
   /** @type {(()=>void)|null} */ let detachHandles = null;
-  /** @type {ReturnType<typeof setTimeout>|undefined} */ let pending;
   let pngDpi = saved?.dpi ?? 600;
 
-  let solving = false;
-  let dirty = false;
-
-  /**
-   * Re-solve soon. Only one solve runs at a time: anything that arrives while one
-   * is in flight is folded into a single follow-up, so a burst of toggles cannot
-   * pile up a queue of them.
-   */
+  const refresh = sheetRefresh(solve, SOLVE_DEBOUNCE_MS, showFatal);
   function schedule() {
     persist();
-    if (solving) {
-      dirty = true;
-      return;
-    }
-    clearTimeout(pending);
-    pending = setTimeout(() => {
-      solving = true;
-      solve()
-        .catch(showFatal)
-        .finally(() => {
-          solving = false;
-          if (dirty) {
-            dirty = false;
-            schedule();
-          }
-        });
-    }, SOLVE_DEBOUNCE_MS);
+    refresh.schedule();
   }
 
   /**
@@ -439,13 +418,20 @@ async function main() {
 
   // --- solving ------------------------------------------------------------
 
-  async function solve() {
+  /** @param {()=>boolean} current */
+  async function solve(current) {
     $('status').dataset.busy = '1';
     // Yield so the busy state paints before the solver takes the main thread.
     await afterPaint();
 
-    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
-    built = await buildSheet(ctx, spec, edits);
+    if (!current()) return;
+    const [nextManifest, nextBuilt] = await Promise.all([
+      ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec)),
+      buildSheet(ctx, spec, edits),
+    ]);
+    if (!current()) return;
+    manifest = nextManifest;
+    built = nextBuilt;
     const { theme, targetRows, sourceRows } = built;
     blocks = built.blocks;
     plan = built.plan;
@@ -764,7 +750,11 @@ async function main() {
     schedule();
   });
 
-  $('balance').addEventListener('click', () => {
+  $('balance').addEventListener('click', () => balance().catch(showFatal));
+  async function balance() {
+    await refresh.flush();
+    await loadFontsFor(ctx, spec.target, spec.source, spec.typeface);
+    if (isElven(spec)) await loadFontsFor(ctx, spec.target, spec.source, 'serif');
     if (!plan || !built) return;
     if (!plan.faces.length) {
       showDiff({
@@ -791,7 +781,7 @@ async function main() {
       colWidth: box.colWidth,
       colHeight: box.height,
     }));
-  });
+  }
 
   /**
    * What the last balance changed, until the reader touches anything else.
@@ -955,7 +945,8 @@ async function main() {
     .toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '')}-pocket-guide`;
 
   /** Exporting cards is the same plan, cut or folded and paired for duplexing. */
-  const exportInput = () => {
+  const exportInput = async () => {
+    await refresh.flush();
     if (!plan) throw new Error('nothing solved yet');
     const finish = format.finish();
     return {
@@ -976,8 +967,8 @@ async function main() {
   /** Nothing-to-export is a sentence; anything else is still fatal. */
   const failed = (/** @type {unknown} */ err) => reportExportError(err, $('status'), showFatal);
 
-  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
-    exportInput(),
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), async () => exportPdf(
+    await exportInput(),
     {
       title: t('quick.heading', {
         language: languageName(spec.target, ctx.corpus.languages[spec.target].exonym_en),
@@ -986,13 +977,13 @@ async function main() {
     },
   )).catch(failed));
   $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
-    (onProgress) => exportPng({ ...exportInput(), onProgress }, pngDpi)).catch(failed));
+    async (onProgress) => exportPng({ ...await exportInput(), onProgress }, pngDpi)).catch(failed));
   $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
-    () => exportSvg(exportInput())).catch(failed));
+    async () => exportSvg(await exportInput())).catch(failed));
 
-  $('csv-out').addEventListener('click', () => {
+  $('csv-out').addEventListener('click', () => refresh.flush().then(() => {
     exportSheetCsv({ corpus: ctx.corpus, blocks, spec, edits, name: name() });
-  });
+  }).catch(failed));
   $('csv-in').addEventListener('click', () => /** @type {HTMLInputElement} */ ($('csv-file')).click());
   $('csv-file').addEventListener('change', async (event) => {
     const file = /** @type {HTMLInputElement} */ (event.target).files?.[0];
@@ -1027,7 +1018,7 @@ async function main() {
     $('csv-in').after(reset);
   }
 
-  await solve();
+  await refresh.flush();
 }
 
 main().catch(showFatal);

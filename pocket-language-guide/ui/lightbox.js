@@ -17,7 +17,7 @@ import { languageName, t } from './i18n.js';
 // on demand, so the four helpers below arrive without it. The three heavy modules in
 // `faceSheet` stay dynamic, because a reader who never opens a card never needs them.
 import {
-  browserSheetContext, ensureFontCss, fontManifest, isSpoken, loadText, makeSpec,
+  browserSheetContext, ensureFontCss, ensureFontStacks, fontManifest, isSpoken, loadText, makeSpec,
 } from './app.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -44,7 +44,7 @@ function el(tag, attrs = {}, kids = []) {
  * The other thing pre-rendered is the expensive decision. Fitting a sheet means
  * searching for the fewest faces and the largest type that hold the content, which
  * re-measures and re-breaks the whole sheet at a dozen candidate scales.
- * `packs/index.json` already records the answer for every pair, so the lightbox pins
+ * `packs/gallery.json` already records the answer for every pair, so the lightbox pins
  * it and lays the sheet out exactly once: byte-identical output, measured 10-12x
  * faster. What is left is ~1.2s to typeset eight faces of 600 rows, and it now
  * happens behind a face the reader is already reading.
@@ -80,21 +80,22 @@ function version() {
   return stamp;
 }
 
-/** @param {string} key @returns {Promise<string[]|null>} */
+/** @param {string} key @returns {Promise<{svgs:string[],stacks:string[]}|null>} */
 async function cached(key) {
   try {
     const v = await version();
     if (!v) return null;
     const hit = await (await caches.open(SHEET_CACHE)).match(`/__sheet/${key}?v=${v}`);
-    return hit ? await hit.json() : null;
+    const value = hit && await hit.json();
+    return Array.isArray(value?.stacks) && Array.isArray(value.svgs) ? value : null;
   } catch {
     // A quota error or a private-mode restriction is not worth failing the open for.
     return null;
   }
 }
 
-/** @param {string} key @param {string[]} svgs */
-async function keep(key, svgs) {
+/** @param {string} key @param {string[]} svgs @param {string[]} stacks */
+async function keep(key, svgs, stacks) {
   try {
     const v = await version();
     if (!v) return;
@@ -106,7 +107,7 @@ async function keep(key, svgs) {
     }
     await cache.put(
       `/__sheet/${key}?v=${v}`,
-      new Response(JSON.stringify(svgs), { headers: { 'content-type': 'application/json' } }),
+      new Response(JSON.stringify({ svgs, stacks }), { headers: { 'content-type': 'application/json' } }),
     );
   } catch {
     // As above: caching is an optimisation, not a requirement.
@@ -154,9 +155,13 @@ function faceSheet(target, source, solved) {
   if (held) return held;
   const job = (async () => {
     const kept = await cached(key);
-    if (kept?.length) return kept;
-    const [{ buildSheet }, { faceSvgs, loadIcons }, { defaultSelection }] =
+    if (kept?.svgs.length) {
+      await ensureFontStacks(kept.stacks);
+      return kept.svgs;
+    }
+    const [{ buildBrowserSheet }, { stacksFor }, { faceSvgs, loadIcons }, { defaultSelection }] =
       await Promise.all([
+        import('./sheet-client.js'),
         import('../core/sheet.js'),
         import('./export.js'),
         import('../core/pack.js'),
@@ -180,7 +185,7 @@ function faceSheet(target, source, solved) {
     };
     await ensureFontCss(ctx, target, source, spec.typeface);
     const [built, manifest, icons] = await Promise.all([
-      buildSheet(ctx, spec),
+      buildBrowserSheet(ctx, spec),
       fontManifest(),
       loadIcons(),
     ]);
@@ -191,12 +196,13 @@ function faceSheet(target, source, solved) {
     // where trusting the index blindly drew an empty card.
     const plan = built.plan.faces.length || !solved
       ? built.plan
-      : (await buildSheet(ctx, { ...base, selection: spec.selection, scale: 0 })).plan;
+      : (await buildBrowserSheet(ctx, { ...base, selection: spec.selection, scale: 0 })).plan;
     const svgs = faceSvgs({ plan, manifest, icons });
-    await keep(key, svgs);
+    await keep(key, svgs, stacksFor(ctx.corpus, target, source, spec.typeface));
     return svgs;
   })();
   sheets.set(key, job);
+  job.catch(() => sheets.delete(key));
   return job;
 }
 

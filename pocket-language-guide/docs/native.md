@@ -46,7 +46,9 @@ Only what an implemented feature uses, all at Capacitor 8:
 | `@capacitor/filesystem` | `ui/platform/shell.js`, `ui/platform/language-packs.js` | temporary exports and persistent downloaded language files |
 | `@capacitor/app-launcher` | `ui/platform/shell.js` | "None of these" opening the translators' own apps (Google Translate, DeepL, Papago, and Apple's Translate on an iPhone) where the phone has them; the schemes and packages it may ask about are declared by `build_ios.sh` (`LSApplicationQueriesSchemes`) and `build_android.sh` (`<queries>`) |
 | local `BackgroundRecitation` | `ui/platform/recitation.js` | microphone-free full-auto practice with background audio and media controls |
+| local `PhotoLibrary` (iOS) | `ui/platform/shell.js` | save an exported PNG to Photos with add-only authorization |
 
+The active iOS scene installs the bridge controller that registers both local plugins.
 The built-in `CapacitorHttp` bridge downloads pack bytes; no additional HTTP plugin
 is required. Hash verification uses the bundled SHA-256 implementation on both platforms.
 
@@ -70,7 +72,7 @@ interface translations, section and emergency labels, boards, pronunciation rule
 and curated overrides, font metadata and coverage indexes. Keeping these together
 lets the app list languages and settings before a language pack is installed.
 Pre-rendered thumbnails and first faces are limited to the starter pair; their
-trimmed `packs/index.json` never advertises an unavailable preview.
+trimmed `packs/gallery.json` never advertises an unavailable preview.
 
 The current uncompressed web bundle is about **28 MiB**, of which 15.3 MiB is
 starter fonts. Store downloads, installed native code and subsequent language
@@ -232,14 +234,11 @@ holding the only copy of someone's own phrases is not acceptable. An install tha
 predates the adapter is migrated forward on first launch, never backward, and the
 source copy is not deleted.
 
-**A picture to Photos.** Every export goes through `deliver()`, a file in the cache
-handed to the share sheet as a file URL, for which iOS offers Save to Files and not Save
-Image. So in the app a PNG is shown first, even a single one, with Save image beside
-Save as a file: Save image hands the picture itself to the WebView's Web Share API from
-its own press -- the render outlasts the export button's activation -- and the sheet that
-opens is the one in which iOS offers Save Image. Shown only where the WebView can share
-a file; Android's WebView has no Web Share, so there the page keeps its one Save, whose
-chooser offers the gallery apps. Not yet seen on a phone (below).
+**Saving a picture.** Each exported PNG has its own controls. On iOS, Save image
+asks for add-only Photos access and confirms the page name after PhotoKit commits
+the image. If Photos denies access, the page reports the error. Save as a file
+opens the system file-sharing sheet. On other platforms, image sharing depends
+on the WebView’s available share targets.
 
 **Handoff.** `handOff(text)` opens the native share sheet with one sentence and
 nothing else. One way: no result is captured and nothing is promised about what the
@@ -327,6 +326,8 @@ iPhone 17 simulator:
 | backup | Save a copy writes the file and the system share sheet offers it (Copy, Save to Files) |
 | cancellation | a touch outside the sheet: the plugin reports "Share canceled", no browser download behind it |
 | PDF export | the 742 KB PDF reaches the same sheet (Preview, Markup, Print, Save to Files) |
+| PNG export | Save image wrote the selected 1050 × 750 PNG to the simulator Photos library |
+| full-auto recitation | playback advanced in the background and responded to pause, resume and stop |
 | life cycle | a trip to another app stops a running beacon and does not reload the page |
 
 **What the simulator found.** Every text field under 16px made iOS zoom the page on
@@ -395,19 +396,14 @@ start without all four of `ANDROID_KEYSTORE`, `ANDROID_KEYSTORE_PASSWORD`,
 
 ## Not done
 
-- **Save image is not device-proven.** That WKWebView's Web Share offers Save Image for a
-  shared PNG, as Safari's does, is for an iPhone to confirm.
 - **Hands-free listening is not device-proven.** The quiz reads questions through the
   same speech engine the boards use; whether WKWebView starts a recognition after a
   question has been read, rather than only inside a tap, is for a phone to say.
-- **Not yet on a real phone.** Both apps are verified on an emulator and a simulator,
-  not on a device. The lamp is the clearest case: neither has a torch to reach, so
-  whether the beacon's camera request lights one -- which it does in Safari on an
-  iPhone -- is for a phone to answer, as are the share sheet's destinations and how
-  speech actually sounds.
-- **N2 delivery is wired, not device-proven.** Every export and the backup go
-  through `deliver()` on a device; the emulator shows the chooser open and close.
-  What a real Files app or mail client does with the URI is for a phone to say.
+- The owner installed an earlier build on an iPhone. Physical checks for this
+  revision include locked-screen playback, audible speech, torch operation and
+  the available sharing destinations on a configured device.
+- File exports and backups use the system sharing sheet. Receiving a file in an
+  installed Files app or mail client remains a physical-device check.
 - **N5 and N6.** Repeatable builds are done (`npm run android`, `npm run ios`),
   signing is wired to stop at the owner's steps above, and the icons and launch
   images are the site's mark; store screenshots and text are the owner's to write.

@@ -32,11 +32,22 @@ import { nextIndex } from './keys.js';
  *   present the canvas shows the pairs superimposed instead of the faces
  */
 
+/** @type {WeakMap<HTMLElement, {svgs:string[], strip:HTMLElement, faces:HTMLElement[], input:PreviewInput}>} */
+const strips = new WeakMap();
+
 /** @param {PreviewInput} input */
 export function renderFaces(input) {
   const { root, plan, svgs, focused } = input;
   const resume = focusMark(root);
-  root.replaceChildren();
+  let cached = strips.get(root);
+  if (cached && cached.svgs === svgs && focused !== null && !input.duplex && cached.strip.parentElement === root) {
+    cached.input = input;
+    root.querySelector('.face-fit')?.remove();
+  } else {
+    strips.delete(root);
+    cached = undefined;
+    root.replaceChildren();
+  }
 
   // Which half backs which is only discovered after cutting, so show it before:
   // each card's two sides superimposed, front dark and back red, so a
@@ -72,20 +83,16 @@ export function renderFaces(input) {
   const lock = lockScreenPreview(input.plan);
   if (lock) face.prepend(lock);
   fit.append(face);
-  root.append(fit);
+  root.insertBefore(fit, cached?.strip ?? null);
 
-  if (svgs.length > 1) {
+  if (!cached && svgs.length > 1) {
     const strip = document.createElement('div');
     strip.className = 'face-strip';
-    const faces = svgs.map((svg, i) => {
-      const node = faceNode(input, svg, i, false);
-      if (i === focused) {
-        node.classList.add('current');
-        // .current is a colour-only cue, so state it for assistive tech too.
-        node.setAttribute('aria-current', 'true');
-      }
-      return node;
-    });
+    const entry = { svgs, strip, input, faces: /** @type {HTMLElement[]} */ ([]) };
+    const faces = svgs.map((svg, i) => faceNode({
+      ...input, onFocus: index => entry.input.onFocus(index),
+    }, svg, i, false));
+    entry.faces = faces;
     // "All faces" leads the strip, which is where the other faces already are. It
     // used to sit in a toolbar row above the card, and that row -- one button and a
     // sentence of hint text -- was costing a viewport-height canvas 57px of the card
@@ -96,11 +103,20 @@ export function renderFaces(input) {
     all.className = 'face-all';
     all.textContent = t('studio.allFaces');
     all.title = t('studio.allFaces');
-    all.addEventListener('click', () => input.onGrid?.());
+    all.addEventListener('click', () => entry.input.onGrid?.());
     strip.append(all, ...faces);
     faceChooser(strip, faces, focused);
     root.append(strip);
+    strips.set(root, entry);
+    cached = entry;
   }
+  cached?.faces.forEach((node, i) => {
+    const active = i === focused;
+    node.classList.toggle('current', active);
+    if (active) node.setAttribute('aria-current', 'true');
+    else node.removeAttribute('aria-current');
+    node.tabIndex = active ? 0 : -1;
+  });
   refocus(root, resume);
 }
 

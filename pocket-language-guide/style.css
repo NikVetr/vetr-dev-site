@@ -294,9 +294,9 @@ label { display: block; }
    set of 2,809 files; a second set for the dark would double the largest thing in
    the repository for a picture the studio re-typesets anyway. The lightbox's own
    face is live SVG and takes the dark theme properly. */
-:root[data-theme="dark"] img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
+:root[data-theme="dark"] .card-thumb-button img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
+  :root:not([data-theme="light"]) .card-thumb-button img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
 }
 
 /* --- site header --------------------------------------------------------- */
@@ -478,7 +478,7 @@ body.page-gallery { padding-block-end: 0; }
 .card-thumb-button {
   display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
 }
-.card-thumb-button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.card-preview:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .card-thumb-button:hover .card-thumb { filter: brightness(0.97); }
 .card-thumb {
   display: block; width: 100%; aspect-ratio: 7 / 5; object-fit: cover; object-position: top left;

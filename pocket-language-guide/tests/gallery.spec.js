@@ -70,7 +70,7 @@ test.describe('gallery', () => {
     await expect(page.locator('.skip-link')).toHaveText('Zu den Sprachen springen');
     // The thumbnail's name rather than the Card link's: that word is new and has not
     // reached the German catalogue yet, so it is English there by design.
-    await expect(page.locator('.card').first().locator('.card-thumb-button'))
+    await expect(page.locator('.card').first().locator('.card-preview'))
       .toHaveAttribute('aria-label', /genauer ansehen/);
     await expect(page.locator('.lang-picker-button'))
       .toHaveAttribute('aria-label', /wählen Sie die Sprache/);
@@ -364,6 +364,14 @@ test('a sheet the reader has looked at is kept across visits', async ({ page }) 
   await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 90_000 });
   const took = Date.now() - t0;
   expect(took, `a kept sheet should open without solving, took ${took}ms`).toBeLessThan(1500);
+
+  const usedFonts = await dialog.locator('.lightbox-face svg').evaluate(svg => {
+    const families = new Set([...svg.querySelectorAll('text[font-family]')].map(node => node.getAttribute('font-family')));
+    return [...families].map(name => [name, [...document.fonts].some(face =>
+      face.family.replace(/"/g, '') === name && face.status === 'loaded')]);
+  });
+  expect(usedFonts.length).toBeGreaterThan(0);
+  expect(usedFonts.every(([, loaded]) => loaded)).toBe(true);
 
   // And the key carries the shell's content hash, so an engine change invalidates.
   const keys = await page.evaluate(async () => {

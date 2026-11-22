@@ -34,6 +34,11 @@ or tengwar form. Write the romanised cell, run `npm run native`, and leave `text
 alone; `npm run check` fails if the two disagree. `data/registry/language-names.csv`
 works the same way for rows whose *locale* is one of those two.
 
+For phrases that contain `{target}` or `{source}`, enter an override in the
+registry’s `name` column when the sentence requires a particular grammatical
+form. Otherwise, `scripts/build_ipa.py` fills `cldr_name` from Node’s language
+data so the phrase also works on devices with limited language support.
+
 ## Safety-critical content
 
 `emergency-medical`, `lost-rescue` and `dietary-needs` require
@@ -229,6 +234,41 @@ every other reader the obligations are faithfulness to the key, zero gaps, and
 reading the output -- not a number.
 
 ## Reviewing
+
+### ASL café model
+
+The asset manifest in `data/signs/ase-cafe/pack.json` lists each licensed
+reference URL and SHA-256. Keep reference footage in scratch as `<sign ID>.mp4`.
+The renderer uses the inclusive `sourceFrames` interval on a 24 fps timeline.
+`frames` contains the two print poses in seconds on that same timeline. `view`
+selects hand or upper-body framing and optional `yaw` sets the camera angle in
+degrees. The camera stays fixed during each demonstration.
+
+Build the media on Linux with Python 3.10, FFmpeg and OpenGL 3.3 through EGL.
+The following commands run from the app directory with scratch paths supplied
+in `$references`, `$tracks`, and `$output`. The app ships only the rendered media.
+
+```sh
+uv venv --python 3.10 "$tracks/venv"
+uv pip install --python "$tracks/venv/bin/python" -r scripts/sign_model/requirements.txt
+"$tracks/venv/bin/python" scripts/sign_model/capture.py "$references" "$tracks"
+"$tracks/venv/bin/python" scripts/sign_model/render.py "$tracks" "$output"
+```
+
+Capture verifies each source hash and measures the signing hand, face and arm.
+The model preserves the motion between the selected frames, with short endpoint
+holds. It interpolates gaps of up to three samples and rejects longer gaps.
+Explicit handshape constraints reconstruct hidden fingers and pad contacts.
+Review the animation against its reference and inspect the two stills at print
+size. Have a fluent Deaf ASL signer review the handshape, placement, orientation
+and motion before endorsing a new demonstration for instruction.
+
+Each media stem contains the first twelve hex digits of the SHA-256 over the
+MP4 followed by both JPEGs. After replacing the clips, stills and manifest,
+export the Drinks PNG from Cheat sheets and resize it to a 560 × 400 JPEG for
+`data/signs/ase-cafe/gallery.jpg`. Run `npm run shell` to update the offline shell.
+
+### Language rows
 
 `confidence` is a claim about who checked a row, so only raise it if you are that
 person. Lowering it is always fine. Note what you checked in `provenance`.

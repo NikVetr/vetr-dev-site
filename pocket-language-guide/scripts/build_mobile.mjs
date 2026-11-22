@@ -30,12 +30,12 @@ const QUIET = process.argv.includes('--quiet');
 const DIRS = [
   'core', 'render', 'ui', 'vendor',
   'data/concepts', 'data/registry', 'data/themes', 'data/i18n',
-  'data/respell', 'data/boards', 'data/flags',
+  'data/respell', 'data/boards', 'data/flags', 'data/signs',
 ];
 
 /** Individual files, each of which some page names directly. */
 const FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html', 'drill.html', 'signs.html', 'signs.css',
   'style.css', 'conversation.css', 'favicon.svg', 'manifest.webmanifest',
   'data/presets.json', 'data/icons.json', 'data/coverage.json', 'data/offline.json',
   'data/fonts/manifest.json', 'data/countries/index.json',
@@ -77,14 +77,14 @@ async function manifest() {
 
   // The packs, trimmed to the sources that ride along, and the index trimmed with
   // them so the gallery never asks for one that did not.
-  const index = JSON.parse(await readFile(join(ROOT, 'packs/index.json'), 'utf8'));
-  const kept = index.packs.filter((/** @type {any} */ p) => STARTER_LANGUAGES.includes(p.source)
-    && STARTER_LANGUAGES.includes(p.target));
-  for (const pack of kept) {
-    files.push(`packs/${pack.target}__${pack.source}/thumb.png`);
-    files.push(`packs/${pack.target}__${pack.source}/face-1.svg.gz`);
+  const index = JSON.parse(await readFile(join(ROOT, 'packs/gallery.json'), 'utf8'));
+  const kept = index.filter((/** @type {[string,string,number,number]} */ [target, source]) => STARTER_LANGUAGES.includes(source)
+    && STARTER_LANGUAGES.includes(target));
+  for (const [target, source] of kept) {
+    files.push(`packs/${target}__${source}/thumb.png`);
+    files.push(`packs/${target}__${source}/face-1.svg.gz`);
   }
-  return { files: [...new Set(files.filter((f) => !SKIP.has(f)))], index: { ...index, packs: kept }, languagePacks };
+  return { files: [...new Set(files.filter((f) => !SKIP.has(f)))], index: kept, languagePacks };
 }
 
 /** @param {string[]} files */
@@ -123,8 +123,8 @@ for (const file of files) {
 }
 
 // The trimmed index, written rather than copied.
-await writeFile(join(OUT, 'packs/index.json'), `${JSON.stringify(index, null, 1)}\n`);
-files.push('packs/index.json');
+await writeFile(join(OUT, 'packs/gallery.json'), `${JSON.stringify(index, null, 1)}\n`);
+files.push('packs/gallery.json');
 await writeFile(join(OUT, 'data/native-packs.json'), `${JSON.stringify(languagePacks)}\n`);
 files.push('data/native-packs.json');
 

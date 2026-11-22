@@ -47,88 +47,41 @@ function redundancyTable(rows) {
 export async function loadCorpus(loadText) {
   const read = async (/** @type {string} */ rel) => parseTable(await loadText(rel), rel);
 
-  const scripts = index(await read('data/registry/scripts.csv'), 'iso15924');
-  const languages = index(await read('data/registry/languages.csv'), 'bcp47');
-  const paper = index(await read('data/registry/paper.csv'), 'preset_id');
-  const regions = index(await read('data/registry/regions.csv'), 'iso3166');
-  // Which languages inflect the traveller's own speech for something about the
-  // traveller, and what the settings screen may therefore ask. Empty for 31 of the
-  // 53, which is the point of keeping it in a registry rather than in code: a reader
-  // whose languages have no first-person gender agreement is never asked their
-  // gender. See `core/speaker.js` and `data/registry/NOTES.md`.
-  const speakerAxes = readAxes(await read('data/registry/speaker-axes.csv'));
-  // Who the reader is speaking to, where a language words a request differently for
-  // a man and a woman: a switch on the board, never a question in the settings.
-  const listenerAxes = readAxes(await read('data/registry/listener-axes.csv'));
-  // The key word of a sentence may carry a colour as well as a weight -- colder in a
-  // cold blue, stop in red -- and the colour is the concept's, whatever the language.
-  const keyTones = Object.fromEntries((await read('data/registry/key-tones.csv'))
-    .map((row) => [row.concept_id, row.tone]));
-  // The genders a template's alternatives are written for, in their order, and the
-  // colour each prints in (`core/alternation.js`).
+  const [scriptRows, languageRows, paperRows, regionRows, speakerRows, listenerRows, toneRows,
+    genderRows, nameLetters, sectionRows, roleRows, nameRows, legendRows, redundancyRows,
+    coverageText, overridesText, rulesText, countriesText] = await Promise.all([
+    read('data/registry/scripts.csv'), read('data/registry/languages.csv'),
+    read('data/registry/paper.csv'), read('data/registry/regions.csv'),
+    read('data/registry/speaker-axes.csv'), read('data/registry/listener-axes.csv'),
+    read('data/registry/key-tones.csv'), read('data/registry/genders.csv'),
+    read('data/registry/name-letters.csv'), read('data/registry/sections.csv'),
+    read('data/registry/roles.csv'), read('data/registry/language-names.csv'),
+    read('data/registry/romanizations.csv'), read('data/registry/redundancy.csv'),
+    loadText('data/coverage.json'), loadText('data/respell/overrides/index.json'),
+    loadText('data/respell/rules/index.json'), loadText('data/countries/index.json'),
+  ]);
+  const scripts = index(scriptRows, 'iso15924');
+  const languages = index(languageRows, 'bcp47');
+  const paper = index(paperRows, 'preset_id');
+  const regions = index(regionRows, 'iso3166');
+  const speakerAxes = readAxes(speakerRows);
+  const listenerAxes = readAxes(listenerRows);
+  const keyTones = Object.fromEntries(toneRows.map((row) => [row.concept_id, row.tone]));
   /** @type {Record<string, {gender:string, color:string}[]>} */ const genders = {};
-  for (const row of await read('data/registry/genders.csv')) {
-    (genders[row.language] ??= []).push({ gender: row.gender, color: row.color });
-  }
-  // How letters are read in a typed name, for the first guess at its sounds.
-  const nameLetters = await read('data/registry/name-letters.csv');
-  const sectionRows = await read('data/registry/sections.csv');
-  // The five colour roles' own names, for a super-section label: a face's sections
-  // are all of a theme far more often than not, and the role is already the colour
-  // that says so. Registry rather than `data/i18n/`, for the reason the section
-  // headings are: `core/` renders the sheet and must not reach into the interface's
-  // catalogues. English only for now, which is the documented fallback for a
-  // section title whose locale file is incomplete.
-  const roleTitles = Object.fromEntries(
-    (await read('data/registry/roles.csv')).map((r) => [r.color_role, r.title_en]),
-  );
-  // How many concepts each language actually has rows for. `status` in the
-  // registry is an editorial intent ("we mean to do Spanish"); this is the fact,
-  // and it is what decides whether a language can be offered as a target or a
-  // gloss. The two used to be conflated, so the studio offered Spanish glosses
-  // and then 404ed on every data/lang/es file and rendered a blank sheet.
-  const coverage = JSON.parse(await loadText('data/coverage.json'));
-  // Which (target, source, accent) triples someone has hand-curated respellings
-  // for. Most have none, so knowing the list up front avoids asking for files that
-  // were never written.
-  const respellOverrides = new Set(
-    /** @type {string[]} */ (JSON.parse(await loadText('data/respell/overrides/index.json'))),
-  );
-  // What one language calls another, where `Intl.DisplayNames` will not do. One
-  // table rather than a file per language, because it is the only O(N^2) data in
-  // the project and a directory of mostly-absent files would mean either an index
-  // to generate or a 404 on every pair that does not need one.
-  const languageNames = languageNameTable(await read('data/registry/language-names.csv'));
-  // Which reading languages have a respelling rule table. Most do not yet, so a
-  // pair whose reader has none gets no generated respelling -- which is the same
-  // shape as the override index above, and for the same reason.
-  const respellRules = new Set(
-    /** @type {string[]} */ (JSON.parse(await loadText('data/respell/rules/index.json'))),
-  );
-  // Which languages can name every country, for the "I am from" detail: every one CLDR
-  // speaks, which leaves out the two constructed languages and Morse.
-  const countries = new Set(
-    /** @type {string[]} */ (JSON.parse(await loadText('data/countries/index.json'))),
-  );
-  // The key to the *romanisation* column, one line per (target, system), for the
-  // `legend` head slot. Keyed on the pair rather than on the system alone because
-  // `bgn` names two different systems in `languages.csv`: Russian's ʼ ˮ ë
-  // and Hebrew's ẖ ‘ ’ share no mark, exactly as `romanization_bgn` means two
-  // different things in `data/lang/ru` and `data/lang/he`. A system with no row here
-  // has no mark worth explaining, which is most of them -- Korean's `rr`, Thai's
-  // `rtgs` and Klingon's `okrand` carry no diacritic at all.
-  const romanLegends = Object.fromEntries(
-    (await read('data/registry/romanizations.csv'))
-      .map((r) => [`${r.target}__${r.system}`, r.legend]),
-  );
+  for (const row of genderRows) (genders[row.language] ??= []).push({ gender: row.gender, color: row.color });
+  const roleTitles = Object.fromEntries(roleRows.map((r) => [r.color_role, r.title_en]));
+  const coverage = JSON.parse(coverageText);
+  const respellOverrides = new Set(/** @type {string[]} */ (JSON.parse(overridesText)));
+  const languageNames = languageNameTable(nameRows);
+  const respellRules = new Set(/** @type {string[]} */ (JSON.parse(rulesText)));
+  const countries = new Set(/** @type {string[]} */ (JSON.parse(countriesText)));
+  const romanLegends = Object.fromEntries(legendRows.map((r) => [`${r.target}__${r.system}`, r.legend]));
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
-
   const groups = [...new Set(sectionRows.map((s) => s.group))];
+  const groupRows = await Promise.all(groups.map(group => read(`data/concepts/${group}.csv`)));
   /** @type {Record<string,Record<string,string>[]>} */ const conceptsByGroup = {};
-  for (const group of groups) {
-    const rows = await read(`data/concepts/${group}.csv`);
-    rows.sort((a, b) => Number(a.rank) - Number(b.rank));
-    conceptsByGroup[group] = rows;
+  for (const [i, group] of groups.entries()) {
+    conceptsByGroup[group] = groupRows[i].sort((a, b) => Number(a.rank) - Number(b.rank));
   }
   const allConcepts = Object.values(conceptsByGroup).flat();
 
@@ -138,7 +91,7 @@ export async function loadCorpus(loadText) {
   // is filed under two sections. This table is the *delta* from it -- only the
   // pairs a rated judgement puts somewhere `cluster_id` alone would not -- so
   // `solve/weights.js` reads the two together. See scripts/build_redundancy.py.
-  const redundancy = redundancyTable(await read('data/registry/redundancy.csv'));
+  const redundancy = redundancyTable(redundancyRows);
   /** @type {Record<string,string[]>} */ const conceptsByCluster = {};
   for (const c of allConcepts) (conceptsByCluster[c.cluster_id] ??= []).push(c.concept_id);
 
@@ -511,7 +464,7 @@ function languageNameTable(rows) {
   const out = {};
   for (const row of rows) {
     (out[row.locale] ??= {})[row.bcp47] = {
-      name: row.name, roman: row.romanization, ipa: row.ipa ?? '',
+      name: row.name || row.cldr_name || '', roman: row.romanization, ipa: row.ipa ?? '',
     };
   }
   return out;

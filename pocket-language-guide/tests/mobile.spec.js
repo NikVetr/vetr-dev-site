@@ -136,8 +136,7 @@ test('in the app, Open shows the page over the app, which has no tabs to open it
 });
 
 test('in the app, one picture is shown with Save image, which hands the image itself to the share sheet', async ({ page }) => {
-  // A file handed to the share sheet is a file, which iOS offers Save to Files for and
-  // not Save Image -- so the picture itself is shared, from a press of its own.
+  // An Android WebView with file sharing can send the image from its own button.
   await page.setViewportSize(PHONE);
   await nativeFixture(page);
   await page.addInitScript(() => {
