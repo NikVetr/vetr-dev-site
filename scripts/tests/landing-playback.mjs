@@ -359,7 +359,7 @@ test('Matrix card renders the shared title impacts, last letters and reflection 
       await art.evaluate((el, [w, h]) => { el.style.cssText = `width:${w}px;height:${h}px;min-height:0;flex:none;aspect-ratio:auto`; }, [width, height]);
       await art.hover();
       const shots = await art.evaluate(async (el) => {
-        const { frame, makeScene, paint } = await import(new URL('matrix-rain/core.mjs', location.href).href);
+        const { duration, frame, makeScene, paint } = await import(new URL('matrix-rain/core.mjs', location.href).href);
         const clock = el.querySelector('canvas').getAnimations()[0];
         const preview = el.querySelector('canvas');
         const image = new Image(); image.src = 'matrix-rain/nik-reflection.webp'; await image.decode();
@@ -367,12 +367,13 @@ test('Matrix card renders the shared title impacts, last letters and reflection 
         const next = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         clock.pause(); await clock.ready;
         const samples = [];
-        for (const t of [4, 4.032, 8.65, 11.1, 12.42, 13.6, 15.99]) {
-          clock.currentTime = t * 625;
+        const period = Number(el.querySelector('svg').dataset.period) * 1000;
+        for (const t of [4, 4.032, 8.65, 11.1, 12.42, 13.6, duration - .01]) {
+          clock.currentTime = t / duration * period;
           await next();
           const ref = document.createElement('canvas');
           ref.width = preview.width; ref.height = preview.height;
-          paint(ref.getContext('2d'), frame(scene, Number(clock.currentTime) / 625, ref.width / ref.height), image);
+          paint(ref.getContext('2d'), frame(scene, Number(clock.currentTime) / period * duration, ref.width / ref.height), image);
           const actual = preview.toDataURL();
           samples.push({ matches: actual === ref.toDataURL(), size: actual.length });
         }
