@@ -1,11 +1,17 @@
 {
-  "model": "latentClass",
+  "model": "preferenceTransfer",
   "metric": "user-mean category log loss",
   "folds": 3,
   "validationUsers": 949,
   "testUsers": 230,
   "testRatings": 656,
   "cv": [
+    {
+      "label": "both × 0.5",
+      "logLoss": 0.8420841233229436,
+      "rmse": 0.7433373180027396,
+      "brier": 0.08055532098918236
+    },
     {
       "label": "Latent class, K=4",
       "logLoss": 0.87397536678953,
@@ -49,6 +55,12 @@
       "logLoss": 0.8479435296055213,
       "rmse": 0.8101589158145837,
       "brier": 0.08740203001364723
+    },
+    {
+      "label": "both × 0.5",
+      "logLoss": 0.8080807774927071,
+      "rmse": 0.760738938019317,
+      "brier": 0.08056217731996075
     }
   ],
   "selectedK": 4,
@@ -71,5 +83,6 @@
     "Stacking Games": 49
   },
   "validationSampling": "All development respondents with five or more catalog ratings",
-  "eligibleItems": 14656
+  "eligibleItems": 14656,
+  "transferStudy": "validation/metadata-transfer.json"
 }

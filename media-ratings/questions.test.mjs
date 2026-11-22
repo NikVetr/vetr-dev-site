@@ -124,3 +124,18 @@ test('an absent action supplies no familiarity clue in activity-only catalogs', 
   const positive = familiarityRanks(catalog, { a: 1 });
   assert.ok(positive.get('near') > positive.get('far'));
 });
+
+test('a shared rating-tendency intercept leaves item-specific familiarity intact', () => {
+  const items = [
+    { itemId: 'rated', annotations: { ratingCount: 100, genres: ['Drama'] } },
+    { itemId: 'related', annotations: { ratingCount: 50, genres: ['Drama'] } },
+    { itemId: 'popular', annotations: { ratingCount: 80 } },
+  ];
+  for (const features of [[[1], [1], [1]], [[0.7, 0], [0.7, 0], [0.7, 0.7]]]) {
+    const catalog = { items, scale: [1, 5], defaultModel: 'personal', models: {
+      personal: { kind: 'class-similarity', features, ratingStyleIntercept: true },
+    } };
+    const warm = familiarityRanks(catalog, { rated: 3 });
+    assert.ok(warm.get('related') > warm.get('popular'));
+  }
+});

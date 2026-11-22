@@ -76,7 +76,12 @@ function makeIndex(catalog) {
     shared?.kind === 'class-similarity' && shared.features
       ? shared
       : fits.find((f) => f.kind === 'class-similarity' && f.features);
+  /** @type {number[][] | null | undefined} */
   let vectors = direct?.features;
+  // The intercept transfers rating tendency equally to every item. Only the
+  // remaining item-varying features carry evidence about prior familiarity.
+  if (direct?.ratingStyleIntercept === true && vectors)
+    vectors = vectors[0].length === 1 ? null : vectors.map(row => row.slice(1));
   if (!vectors && catalog.activityCountLabel && catalog.scale.length === 2) {
     // On action catalogs, the two outcomes explicitly model occurrence in this cohort.
     // Compare which fitted respondent classes have above-average activity on each item.
