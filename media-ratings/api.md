@@ -56,6 +56,19 @@ The CSV readers and writers are exported from `exchange.mjs`. In `ratingsCSV(cat
 `rankChanges(predictions)` from `core.mjs` or `window.RatingPrediction` returns a map keyed by item ID with unconditional rank (`from`), conditional rank (`to`), and their signed difference (`change`). Pass the same visible unrated entries shown in the rankings. `tasteProfile` also returns `weightedInformation`, a map of information gain multiplied by each item’s response count divided by the number of respondents. This field is null unless every item supplies a valid `annotations.ratingCount` and `fit.users` is positive. For the bundled films, merge each entry from [film context](film-context.json) into the corresponding item annotations. For activity catalogs the count measures positive actions. For destinations, the response count is the sum of the item’s marginal counts in [Stravl evidence](destinations-evidence.json).
 
 
+## Group predictions
+
+Send `catalog` and a `profiles` array of at least two people to the same CLI or `window.RatingPrediction.submit`. Each entry has a `name`, a nonempty `ratings` map, and optional `volunteered` IDs and `ratedOn` dates in the individual request format. Each forecast uses the same catalog and model. The optional `threshold` uses the catalog scale. Select `order: "joint"` (default) or `"mean"`.
+
+```sh
+jq '{catalog: ., threshold: 4, profiles: [
+  {name:"Alex", ratings:{"2571":5,"260":4}},
+  {name:"Sam", ratings:{"356":3,"260":2}}]}' media-ratings/expanded.json |
+  node media-ratings/cli.mjs
+```
+
+The output lists titles unrated by all members, with each person's expected rating and threshold probability, the group mean, and the product of the probabilities under independent answers. The fingerprint reports positions and ranges in population standard deviations on the same axes for everyone. Cross-profile surprises compare a recorded rating with the mean forecast from the other members who have not rated that title. Shared ratings are listed with their observed range.
+
 ## Choosing the next rating
 
 Pass a fitted categorical `tasteProfile` result to `questionScores(profile, familiarityWeight = 0.5)` in `taste.mjs` or `window.RatingPrediction`. It returns a map of unrated item IDs to scores between 0 and 1. Higher scores come first. For each item the score is `(1 − weight) × information percentile + weight × familiarity percentile`. Zero orders by raw information gain and one by estimated familiarity. The midpoint gives each ordering equal weight. Percentiles compare all remaining unrated entries, tied values share their average rank and a singleton has percentile 0.5. The raw information in bits remains in `profile.information`.

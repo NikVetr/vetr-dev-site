@@ -2,12 +2,12 @@ import { rankingWeightControl } from './question-control.mjs';
 import { node, shortAnnotations } from './detail.mjs';
 import { recognitionLink as link, showRecognition } from './recognition.mjs';
 
-function shortcuts(scale, stars) {
-  if (stars) return scale.map((v) => ({ digit: Math.ceil(v), shift: !Number.isInteger(v) }));
-  if (scale.length === 11 && scale.every((v, i) => v === i))
-    return scale.map(v => ({ digit: v % 10, shift: v === 10 }));
-  const sameValue = scale.every((v) => Number.isInteger(v) && v >= 0 && v <= 9);
-  return scale.map((v, i) => ({ digit: sameValue ? v : i < 10 ? (i + 1) % 10 : null, shift: false }));
+function shortcuts(scale) {
+  const nativeDigits = scale.every(v => Number.isInteger(v) && v >= 0 && v <= 10);
+  return scale.map((v, i) => {
+    if (nativeDigits) return v === 10 ? (scale.includes(0) ? 'T' : '0') : String(v);
+    return i < 10 ? String(i) : null;
+  });
 }
 
 export function openRapidRating({ catalog, stars, ids, titles, links, criteria, rank, familiarity, save }) {
@@ -21,7 +21,7 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     back = /** @type {HTMLButtonElement} */ (el('rapid-back')),
     skip = /** @type {HTMLButtonElement} */ (el('rapid-skip'));
   const items = new Map(catalog.items.map((it) => [it.itemId, it]));
-  const keys = shortcuts(scale, stars);
+  const keys = shortcuts(scale);
   const answers = new Map(),
     skipped = new Set(),
     history = [];
@@ -39,16 +39,12 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
   }));
   const focusCard = () => stage.focus({ preventScroll: true });
   const labelAt = (i) => String(catalog.scaleLabels?.[i] ?? scale[i]) + (stars ? ' ★' : '');
-  el('rapid-instructions').textContent = stars
-    ? '1–5 rate whole stars. ' +
-      (scale.some((v) => !Number.isInteger(v)) ? 'Hold Shift for the half-star below. ' : '') +
-      'Or choose with ← → and press Enter.'
-    : 'Use the keys shown, or choose with ← → and press Enter.';
+  el('rapid-instructions').textContent = 'Press a shortcut and release to rate, or choose with ← → and press Enter.';
   const controls = scale.map((_, i) => {
     const b = node('button');
     b.type = 'button';
     b.append(node('span', labelAt(i)));
-    if (keys[i].digit !== null) b.append(node('kbd', (keys[i].shift ? '⇧' : '') + keys[i].digit));
+    if (keys[i] !== null) b.append(node('kbd', keys[i]));
     b.ariaLabel = 'Rate ' + labelAt(i);
     b.onclick = () => accept(i);
     return b;
@@ -133,46 +129,49 @@ export function openRapidRating({ catalog, stars, ids, titles, links, criteria, 
     advance();
     focusCard();
   };
+  let pressed = null;
+  function release() {
+    pressed?.button.classList.remove('key-held');
+    pressed = null;
+  }
+  function shortcutKey(e) {
+    return /^(Digit|Numpad)\d$/.test(e.code) ? e.code.slice(-1) : e.key.toUpperCase();
+  }
   dialog.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.metaKey || e.isComposing || e.target === picker || (e.target instanceof Node && balance.contains(e.target))) return;
-    if (
-      e.repeat &&
-      (e.key === 'Enter' ||
-        /^(Digit|Numpad)\d$/.test(e.code) ||
-        ['s', 'b', 'backspace'].includes(e.key.toLowerCase()))
-    ) {
+    if (e.ctrlKey || e.altKey || e.metaKey || e.shiftKey || e.isComposing || e.target === picker || (e.target instanceof Node && balance.contains(e.target))) return;
+    const key = shortcutKey(e);
+    const index = keys.indexOf(key);
+    const button = index >= 0 && current ? controls[index]
+      : key === 'S' ? skip : ['B','BACKSPACE'].includes(key) ? back
+      : key === 'ENTER' && e.target === stage && current ? controls[selectedIndex] : null;
+    if (button) {
       e.preventDefault();
-      return;
-    }
-    const direct = keys.findIndex(
-      (k) =>
-        k.digit !== null &&
-        k.shift === e.shiftKey &&
-        (e.key === String(k.digit) || ['Digit' + k.digit, 'Numpad' + k.digit].includes(e.code)),
-    );
-    const action = e.key.toLowerCase();
-    if (direct >= 0) {
-      e.preventDefault();
-      accept(direct);
-    } else if (action === 'b' || action === 'backspace') {
-      e.preventDefault();
-      previous();
-    } else if (action === 's') {
-      e.preventDefault();
-      pass();
-    } else if (current && ['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp'].includes(e.key)) {
+      if (!pressed && !e.repeat && !button.disabled) {
+        pressed = {key, button, item: current};
+        button.classList.add('key-held');
+      }
+    } else if (!pressed && current && ['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp'].includes(e.key)) {
       e.preventDefault();
       const forward = e.key === 'ArrowRight' || e.key === 'ArrowUp';
       highlight(Math.min(scale.length - 1, Math.max(0, selectedIndex + (forward ? 1 : -1))));
       focusCard();
-    } else if (e.key === 'Enter' && e.target === stage && selectedIndex !== null) {
-      e.preventDefault();
-      accept(selectedIndex);
     }
   };
+  dialog.onkeyup = (e) => {
+    if (!pressed || shortcutKey(e) !== pressed.key) return;
+    e.preventDefault();
+    const {button, item} = pressed;
+    release();
+    if (item === current) button.click();
+  };
+  dialog.addEventListener('focusout', release);
+  window.addEventListener('blur', release);
   dialog.onclose = () => {
+    release();
+    window.removeEventListener('blur', release);
     showRecognition(el('rapid-image'), null, '');
-    dialog.onkeydown = null;
+    dialog.removeEventListener('focusout', release);
+    dialog.onkeydown = dialog.onkeyup = null;
     dialog.onclose = null;
     save(answers);
   };

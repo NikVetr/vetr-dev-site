@@ -29,8 +29,9 @@
           <button type="button" data-key="webfiction"><i aria-hidden="true">&#xe45f;</i>Web fiction</button>
           <button type="button" data-key="destinations"><i aria-hidden="true">&#xe111;</i>Destinations</button>
           <button type="button" data-key="food"><i aria-hidden="true">&#xe584;</i>Recipes</button>
-          <button type="button" data-key="cocktails"><i aria-hidden="true">&#xe2e3;</i>Cocktails</button>
-          <button type="button" data-key="subreddits"><i aria-hidden="true">&#xe40d;</i>Subreddits</button>
+          <button type="button" id="explore-catalogs" aria-expanded="false" aria-controls="domain-cocktails domain-subreddits">Exploratory ▸</button>
+          <button type="button" data-key="cocktails" id="domain-cocktails" hidden><i aria-hidden="true">&#xe2e3;</i>Cocktails</button>
+          <button type="button" data-key="subreddits" id="domain-subreddits" hidden><i aria-hidden="true">&#xe40d;</i>Subreddits</button>
           <button type="button" data-key="custom" id="custom-domain" hidden><i aria-hidden="true">&#xe247;</i>Imported</button>
         </nav>
         <div class="tool-header-actions">
@@ -44,7 +45,7 @@
         <div class="library-tools">
           <div class="section-line">
             <h2>Your ratings</h2>
-            <button id="quick-session" disabled>Quick rate</button>
+            <div class="rating-actions"><button id="group-open" aria-haspopup="dialog" disabled>Group picks</button><button id="quick-session" disabled>Quick rate</button></div>
           </div>
           <div id="source-choices" hidden></div>
           <p id="scale-help"></p>
@@ -109,6 +110,7 @@
           </div>
         </div>
         <p id="status" role="status"></p>
+        <p id="catalog-limit" class="evidence-note" hidden></p>
         <p id="pending" role="status" hidden></p>
         <div id="boards" aria-label="Ranked recommendations"></div>
         <section class="inspector" aria-labelledby="detail-title" hidden id="detail">
@@ -221,7 +223,9 @@
       <h3>Dataset</h3><p id="context">Loading catalog…</p><div id="dataset-source"></div>
       <h3>Prediction model</h3><p id="about-model"></p><p id="choice-note" hidden></p>
       <h3>Rating and ranking</h3><p>Rate entries in the catalog or use Quick rate with the keyboard. Choose Filters to narrow the recommendations. With Auto-update off, choose Update predictions to apply your edits.</p>
-      <p>Familiarity weight sets the order in Most informative to rate and Quick rate. Choose 0% for the most informative questions or 100% for entries you are most likely to recognize. Each score in the panel shows the expected information gained about your taste class, in bits.</p>
+      <p>Familiarity weight sets the order in Most informative to rate and Quick rate. Choose 0% for the most informative questions or 100% for entries you are most likely to recognize. Each score estimates how much one answer would narrow down your taste class, in bits. A fractional bit is common. Similarity-based predictions can also change within a class. Compare validation scores to see whether ratings predict a different entry for a held-out person.</p>
+      <p><a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/information-audit.md">First-question information and held-out results by catalog ↗</a></p>
+      <p id="about-utility" hidden></p>
       <p id="about-discovery" hidden></p>
       <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md" target="_blank" rel="noopener noreferrer">Dataset sources and model evaluations ↗</a>
     </dialog>
@@ -230,6 +234,34 @@
       <div id="filter-fields"></div>
       <label class="filter-scope"><input id="filter-rating-items" type="checkbox" /> Also filter items to rate</label>
       <footer><button type="button" id="filter-reset">Reset</button><span id="filter-matches" role="status"></span><button type="button" id="filter-apply" class="primary">Apply</button></footer>
+    </dialog>
+    <dialog id="group-dialog" aria-labelledby="group-heading">
+      <header class="rapid-head"><div><h2 id="group-heading">Group picks</h2><small id="group-source"></small></div><form method="dialog"><button>Done</button></form></header>
+      <div class="group-body">
+        <div class="group-tools">
+          <label class="import">Add ratings CSVs<input id="group-files" type="file" accept=".csv,text/csv" multiple /></label>
+          <label><input type="checkbox" id="group-mine" /> Include my applied ratings <span id="group-my-count"></span></label>
+        </div>
+        <div id="group-members" aria-label="Profiles"></div>
+        <p id="group-message" role="status"></p>
+        <div id="group-results" hidden>
+          <div class="group-tools">
+            <label>Rank by <select id="group-sort"><option value="joint">Chance everyone reaches the cutoff</option><option value="mean">Highest average rating</option></select></label>
+            <div class="group-threshold"><span id="group-cutoff-label"></span><span id="group-cutoff"></span></div>
+          </div>
+          <p id="group-count"></p>
+          <div class="group-table-scroll"><table><thead><tr id="group-table-head"></tr></thead><tbody id="group-table-body"></tbody></table></div>
+          <button id="group-more" type="button" hidden>Show more</button>
+          <p class="evidence-note">The joint estimate multiplies each person’s forecast, assuming independent answers. The group mean gives each person equal weight.</p>
+          <section><div class="group-tools"><h3>Group fingerprint</h3><label>Sort axes <select id="group-axis-order"><option value="far">Most separated</option><option value="near">Closest together</option></select></label></div>
+            <p class="evidence-note">Profiles share the same axes, in population standard deviations. Zero is the catalog average. With few answers, two profiles can both sit near zero. For class-based models, these axes summarize taste-class positions.</p><div id="group-axes"></div>
+          </section>
+          <div class="group-differences">
+            <section><h3>Cross-profile surprises</h3><p class="evidence-note">Largest gaps between a supplied answer and the average forecast for people who haven’t rated that entry.</p><ol id="group-surprises"></ol></section>
+            <section><h3>Ratings in common</h3><p class="evidence-note">Shared answers, with the largest differences first.</p><ol id="group-shared"></ol></section>
+          </div>
+        </div>
+      </div>
     </dialog>
     <dialog id="rapid-rating" aria-labelledby="rapid-heading">
       <header class="rapid-head">

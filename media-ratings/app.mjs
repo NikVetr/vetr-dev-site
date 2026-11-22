@@ -1,3 +1,5 @@
+import { openGroupDialog } from './group-dialog.mjs';
+import { submitRatingRequest } from './group-profiles.mjs';
 import { recommendationPlot } from './recommendation-plot.mjs';
 import { surprisePanel } from './rating-surprises.mjs';
 import { recommendationFilters } from './filters.mjs';
@@ -19,13 +21,13 @@ import {
   importForecasts,
   saveCSV,
 } from './exchange.mjs';
-import { validateCatalog, predict, submit, defaultCutoff, gaussianProjection, rankChanges, heldOutRatings } from './core.mjs';
+import { validateCatalog, predict, defaultCutoff, gaussianProjection, rankChanges, heldOutRatings } from './core.mjs';
 import { node, percent, signed, scoreText, showDetail } from './detail.mjs';
 
 const el = (id) => document.getElementById(id);
 const input = (id) => /** @type {HTMLInputElement} */ (el(id));
 const select = (id) => /** @type {HTMLSelectElement} */ (el(id));
-const api = { submit, heldOutRatings, tasteProfile, questionScores, discoveryRanking, rankChanges, preferenceFingerprint, gaussianProjection,
+const api = { submit:submitRatingRequest, heldOutRatings, tasteProfile, questionScores, discoveryRanking, rankChanges, preferenceFingerprint, gaussianProjection,
   importRatings, importRatingEntries, importForecasts, ratingsCSV, forecastsCSV };
 Object.assign(window, { RatingPrediction: api, MediaRatings: api });
 const states = new Map();
@@ -120,6 +122,14 @@ function useState(data, key) {
     evidenceMessage: 'Loading observed ratings…',
   };
 }
+el('group-open').onclick = () => {
+  if (result) openGroupDialog({catalog, state, titles, matches:id=>filters.matches(id), scaleLabel,
+    scaleChoices, markChoices, inspect:id=>{
+      inspectItem(id,true);
+      el('detail-title').focus({preventScroll:true});
+      el('detail').scrollIntoView({block:'nearest'});
+    }});
+};
 function titleOf(it) {
   if (!isFilm(active)) return it.title;
   return it.title.replace(/^(.+), (The|An|A) (\(\d{4}\))$/, '$2 $1 $3');
@@ -135,6 +145,17 @@ function revealCatalogButton() {
   else if (button.right > bounds.right) nav.scrollLeft += button.right - bounds.right;
 }
 new ResizeObserver(revealCatalogButton).observe(el('domains'));
+const limitedEvidence = {
+  cocktails: 'Exploratory · Four ratings gave almost the same predictions as an empty profile for 66 held-out cocktail reviewers.',
+  recipes: 'Exploratory · Four ratings gave almost the same predictions as an empty profile for 38 held-out Taste of Home reviewers.',
+  subreddits: 'Exploratory · Four random answers did little to predict replies in this 2014 archive. With one known reply, top-ten recovery rose from 29.3% to 30.2%.',
+};
+function showExploratory(open) {
+  for (const id of ['domain-cocktails','domain-subreddits']) el(id).hidden = !open;
+  el('explore-catalogs').setAttribute('aria-expanded',String(open));
+  el('explore-catalogs').textContent = open ? 'Exploratory ▾' : 'Exploratory ▸';
+}
+el('explore-catalogs').onclick = () => showExploratory(el('explore-catalogs').getAttribute('aria-expanded') !== 'true');
 function install(key, next) {
   for (const dialog of document.querySelectorAll('dialog[open]'))
     /** @type {HTMLDialogElement} */ (dialog).close();
@@ -145,8 +166,11 @@ function install(key, next) {
   titles = new Map(catalog.items.map((it) => [it.itemId, titleOf(it)]));
   const domain = sourceDomains.get(key) ?? key;
   showSources(el('source-choices'), key, openCatalog);
-  for (const btn of el('domains').querySelectorAll('button'))
-    btn.setAttribute('aria-pressed', String(btn.dataset.key === domain));
+  if (domain === 'cocktails' || domain === 'subreddits') showExploratory(true);
+  el('catalog-limit').textContent = limitedEvidence[key] ?? '';
+  el('catalog-limit').hidden = !limitedEvidence[key];
+  for (const btn of el('domains').querySelectorAll('button[data-key]'))
+    btn.setAttribute('aria-pressed', String(btn.getAttribute('data-key') === domain));
   const domainButton = el('domains').querySelector('button[aria-pressed=true]');
   domainButton.setAttribute('title', catalog.items.length.toLocaleString() + ' entries');
   el('recommendation-icon').textContent = domainButton.querySelector('i').textContent;
@@ -245,7 +269,28 @@ function install(key, next) {
   rebuildBaseline();
   update(input('auto').checked);
 }
-el('about-open').onclick = () => /** @type {HTMLDialogElement} */ (el('about-recommendations')).showModal();
+let utilityReport;
+el('about-open').onclick = async () => {
+  const key = active, note = el('about-utility');
+  note.hidden = true;
+  /** @type {HTMLDialogElement} */ (el('about-recommendations')).showModal();
+  if (key === 'custom') return;
+  try {
+    utilityReport ??= readJSON('validation/information-audit.json');
+    const audit = (await utilityReport)[key];
+    if (active !== key || !audit) return;
+    const hasEmpty = Number.isFinite(audit.sameModelNoHintsLoss);
+    const before = hasEmpty ? audit.sameModelNoHintsLoss : audit.baselineLoss;
+    note.textContent = 'Catalog default · The strongest first question gives ' + scoreText(audit.maxBits, 3) +
+      ' bits about taste class. Across ' + audit.testPeople.toLocaleString() + ' held-out people, log loss was ' +
+      before.toFixed(4) + (hasEmpty ? ' with answers hidden' : ' for the item-only baseline') +
+      ' and ' + audit.personalizedLoss.toFixed(4) + ' with supplied answers. Lower is better.';
+    note.hidden = false;
+  } catch {
+    utilityReport = null;
+    if (active === key) { note.textContent = 'The catalog evaluation could not be loaded.'; note.hidden = false; }
+  }
+};
 function showValidation(selection) {
   const details = el('validation');
   const validRows = (rows) =>
@@ -869,10 +914,10 @@ function update(applyDraft = true) {
       ' unrated' +
       (state.contextError ? ' · ' + state.contextError : '');
     el('about-model').textContent = state.modelChoices.find(option => option.value === state.model).description + '. ' +
-      (model.kind === 'class-similarity' ? 'Your responses update learned taste classes. Similar items also influence each forecast.' + (isFilm(active) && state.model === 'personalized' ? ' Film similarity uses ratings, tags and shared cast, directors and studios.' : '')
+      (model.description ?? (model.kind === 'class-similarity' ? 'Your responses update learned taste classes. Similar items also influence each forecast.' + (isFilm(active) && state.model === 'personalized' ? ' Film similarity uses ratings, tags and shared cast, directors and studios.' : '')
       : model.kind === 'latent-class' ? 'Your answers update the probability of each learned taste class. Their rating distributions combine into each forecast.'
       : model.kind === 'logit-point' ? 'The model conditions a multivariate Gaussian on your transformed ratings.'
-      : 'The model conditions on the latent intervals corresponding to your ratings and combines the component forecasts.');
+      : 'The model conditions on the latent intervals corresponding to your ratings and combines the component forecasts.'));
     const choiceNote = el('choice-note');
     const notes = catalog.activityNote ? [catalog.activityNote] : [];
     choiceNote.hidden = !notes.length && !model.titleChoice && !model.ratingYear;
@@ -893,7 +938,7 @@ function update(applyDraft = true) {
     }
     choiceNote.textContent = notes.join(' ');
     el('weights').textContent =
-      model.kind === 'class-similarity'
+      model.description ?? (model.kind === 'class-similarity'
         ? 'Your ratings update the taste-class probabilities. Ratings above or below what those classes predict also shift forecasts for similar ' +
           (isFilm(active) ? (state.model === 'personalized' ? 'films, using rating patterns, MovieLens tags and shared credits.' : 'films, using rating patterns and MovieLens tags.') : 'entries.')
         : model.kind === 'latent-class'
@@ -903,7 +948,7 @@ function update(applyDraft = true) {
               result.weights
                 .map((w, i) => i + 1 + '. ' + percent(w.prior) + ' → ' + percent(w.posterior))
                 .join('   ·   ')
-            : '';
+            : '');
     if (
       result.weights.some((w) => w.posterior > 0.01 && w.effectiveSamples !== null && w.effectiveSamples < 20)
     )
@@ -942,6 +987,7 @@ function update(applyDraft = true) {
     el('context').textContent = catalog.name;
     el('status').textContent = error.message;
   }
+  input('group-open').disabled = !result;
   syncDraft();
 }
 function renderFingerprint() {

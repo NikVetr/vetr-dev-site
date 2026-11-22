@@ -466,7 +466,7 @@ export function showDetail({
   };
   el('formula').textContent = catalog.activityNote
     ? 'Your answers update the probabilities of the learned activity classes. The forecast averages the chance of the recorded action across those classes.'
-    : (Object.keys(ratings).length ? conditioning[kind] + ' ' : '') +
+    : (Object.keys(ratings).length ? (model.description ?? conditioning[kind]) + ' ' : '') +
       (model.titleChoice ? 'Films you picked help identify your taste class. ' : '') +
       (model.ratingYear ? 'Both means use the same forecast year. ' : '') +
       'Each mean weights the possible ratings by their probabilities.';

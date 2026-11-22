@@ -15,7 +15,7 @@ const sources = {
   ],
   food: [
     { value: 'food', label: 'Food.com', note: '1–5 stars' },
-    { value: 'recipes', label: 'Taste of Home', note: '1–5 stars' },
+    { value: 'recipes', label: 'Taste of Home', note: 'Exploratory · 1–5' },
   ],
   webfiction: [
     { value: 'royalroad-kindle', label: 'Royal Road', note: 'Kindle · 1–5 stars' },

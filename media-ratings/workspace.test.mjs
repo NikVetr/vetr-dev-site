@@ -756,7 +756,10 @@ test('quick rating uses the full catalog, supports undo and attributes prompted 
     assert.equal(await card.getAttribute('data-id'), first);
     assert.equal(await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'), 'Rate 3 ★');
     assert.match(await p.locator('#rapid-progress').innerText(), /500 remaining/);
-    await p.keyboard.press('Shift+Digit4');
+    await p.keyboard.down('6');
+    assert.equal(await p.locator('#rapid-values .key-held').getAttribute('aria-label'), 'Rate 3.5 ★');
+    assert.equal(await card.getAttribute('data-id'), first);
+    await p.keyboard.up('6');
     const second = await card.getAttribute('data-id');
     assert.notEqual(first, second);
     await p.keyboard.press('s');
@@ -847,6 +850,7 @@ test('new catalogs use their native scales, source links, observed pairs and ind
       ['cocktails', 'Cocktail', '3 ★', 'Food.com'],
     ]) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
+      if (key === 'cocktails' && await p.locator('#domain-cocktails').isHidden()) await p.locator('#explore-catalogs').click();
       if (key === 'book-crossing') await p.locator('#domains [data-key=books]').click();
       else if (['recipes', 'books'].includes(key)) await choose(p, 'catalog-source', key);
       else await p.locator('#domains [data-key="' + key + '"]').click();
@@ -889,6 +893,7 @@ test('binary catalogs predict explicit recommendations or recorded actions and d
   try {
     for (const key of ['subreddits', 'fanfiction', 'webfiction', 'games']) {
       const data = JSON.parse(readFileSync(new URL(key + '.json', import.meta.url), 'utf8'));
+      if (key === 'subreddits' && await p.locator('#domain-subreddits').isHidden()) await p.locator('#explore-catalogs').click();
       await p.locator('header #domains button[data-key="' + key + '"]').click();
       if (['games', 'webfiction', 'fanfiction'].includes(key)) {
         await p.locator('#domains [data-key="' + key + '"][aria-pressed=true]').waitFor();
@@ -973,7 +978,7 @@ test('Steam votes, Metacritic endpoint scores and Amazon edition stars keep sepa
     assert.equal(await p.locator('#rapid-values button').count(), 11);
     assert.equal(await p.locator('#rapid-values [aria-pressed=true]').getAttribute('aria-label'), 'Rate 5');
     await p.keyboard.press('0');
-    await p.keyboard.press('Shift+Digit0');
+    await p.keyboard.press('t');
     await p.locator('#rapid-rating form button').click();
     const values = () => p.locator('#rated-list input:checked').evaluateAll(inputs => inputs.map(input => input.value).sort());
     assert.deepEqual(await values(), ['0', '10']);
