@@ -82,9 +82,9 @@ export function build() {
   return art({
     name: 'travel-prompt', responsive: true, period,
     body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="tp-demo">${frames.join('')}</div></foreignObject>`,
-    css: `& {container:travel-brief / size;background:#f6f5ef}
-& .tp-demo {--tp-ink:#21372e;--tp-muted:#506557;--tp-accent:#195e49;--tp-paper:#fffef9;--tp-tint:#eaf0e5;--tp-line:#b9cbbb;--tp-picked:#d8e9d9;--tp-gold:#d9ae67;position:absolute;inset:0;color:var(--tp-ink);font:550 14px/1.15 system-ui,sans-serif}
-:root[data-theme="dark"] & .tp-demo {--tp-ink:#edf1e9;--tp-muted:#b1c2b8;--tp-accent:#a4d9b6;--tp-paper:#202d28;--tp-tint:#283c31;--tp-line:#4e6555;--tp-picked:#324e3d;--tp-gold:#dcaf6b}
+    css: `& {container:travel-brief / size}
+& .tp-demo {--tp-ink:#182c49;--tp-muted:#435775;--tp-accent:#224e85;--tp-paper:#f2f6fc;--tp-tint:#243f66;--tp-line:#798ba5;--tp-picked:#d5e5f8;--tp-gold:#ffd092;--tp-output-ink:#f7f9ff;--tp-output-muted:#d2deee;position:absolute;inset:0;color:var(--tp-ink);font:550 14px/1.15 system-ui,sans-serif}
+:root[data-theme="dark"] & .tp-demo {--tp-ink:#ebf2ff;--tp-muted:#b5c4dd;--tp-accent:#accaef;--tp-paper:#172338;--tp-tint:#23446f;--tp-line:#8199b9;--tp-picked:#304967}
 & .tp-demo * {box-sizing:border-box}
 & .tp-frame {position:absolute;inset:0;display:grid;grid-template-rows:55% minmax(0,1fr);background:var(--tp-paper);visibility:hidden}
 & .tp-first {visibility:visible}
@@ -105,8 +105,8 @@ export function build() {
 & .tp-track {position:relative;flex:1;height:clamp(4px,.8cqh,7px);border-radius:6px;background:var(--tp-line)}
 & .tp-fill {position:absolute;inset:0 auto 0 0;width:var(--point);background:var(--tp-accent);border-radius:inherit}
 & .tp-thumb {position:absolute;left:var(--point);top:50%;width:clamp(9px,4.3cqh,18px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:var(--tp-accent)}
-& .tp-output {background:var(--tp-tint);border-top:2px solid var(--tp-gold)}
-& .tp-heading {color:var(--tp-accent);font-size:clamp(10px,min(3.9cqw,6.4cqh),19px)}
+& .tp-output {background:var(--tp-tint);color:var(--tp-output-ink);border-top:2px solid var(--tp-gold)}
+& .tp-heading {color:var(--tp-gold);font-size:clamp(10px,min(3.9cqw,6.4cqh),19px)}
 & .tp-text {font:500 clamp(15px,min(6cqw,10.5cqh),31px)/1.14 Georgia,serif;letter-spacing:-.015em}
 & .tp-excerpt {display:block}
 @container travel-brief (min-aspect-ratio:1.85/1) {
@@ -116,11 +116,11 @@ export function build() {
 }
 @container travel-brief (min-height:222px) {
  & .tp-extra-field {display:grid}
- & .tp-goal {display:block;color:var(--tp-muted);font-size:.8em;margin-bottom:.4em}
+ & .tp-goal {display:block;color:var(--tp-output-muted);font-size:.8em;margin-bottom:.4em}
 }
 @container travel-brief (min-aspect-ratio:1.85/1) and (min-height:135px) {
  & .tp-extra-field {display:grid}
- & .tp-goal {display:block;color:var(--tp-muted);font-size:.8em;margin-bottom:.4em}
+ & .tp-goal {display:block;color:var(--tp-output-muted);font-size:.8em;margin-bottom:.4em}
 }
 @container travel-brief (max-width:265px) and (max-height:110px) {
  & .tp-mode {max-width:100%;white-space:normal;font-size:11px;padding:.22em .33em}
