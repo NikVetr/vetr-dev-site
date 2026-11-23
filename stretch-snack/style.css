@@ -405,13 +405,26 @@ details[open] > summary {
 .preview-copy a {
   font-weight: 600;
 }
-#steps {
+#steps, .place-segment ol {
   display: grid;
   gap: 0.45rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+.place-segment {min-width: 0;}
+.place-segment h3 {font-size: .93rem; margin: .55rem 0 .35rem;}
+.place-segment h3 small {font-weight: 500; white-space: nowrap;}
+#available {display: grid; gap: .3rem;}
+.place-option > .check {display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .45rem;}
+.place-option > .check small {font-size: .75rem; white-space: nowrap;}
+.place-equipment {display: grid; padding: .2rem 0 .25rem 1.6rem; gap: .2rem;}
+.place-equipment .check {font-size: .8rem;}
+#places > .hint {margin: .4rem 0 0;}
+.easier-option {display: flex; gap: .5rem; padding: .55rem .7rem; margin: .4rem 0; border-radius: .55rem; background: var(--tint);}
+.easier-option p {margin: 0 0 .2rem; font-size: .85rem;}
+.easier-option button {padding: .32rem .55rem; font-size: .8rem;}
+.swap-icon {color: var(--green); font-weight: 700;}
 .step {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -463,8 +476,7 @@ details[open] > summary {
   text-underline-offset: 0.2em;
   background: transparent;
 }
-.note,
-#alternatives {
+.note {
   margin-top: 1rem;
   padding: 0.7rem 0.9rem;
   background: var(--page);
@@ -472,10 +484,6 @@ details[open] > summary {
 }
 .note p + p {
   margin-top: 0.4rem;
-}
-#alternatives button {
-  margin: 0.4rem 0.35rem 0 0;
-  font-size: 0.86rem;
 }
 .library-link {
   gap: 1rem;
@@ -747,7 +755,7 @@ body:has(dialog[open]) {
   .illustration canvas {
     height: clamp(12rem, 26vw, 18rem);
   }
-  #steps {
+  .place-segment ol {
     grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   }
 }
@@ -950,7 +958,7 @@ body:has(dialog[open]) {
   border-radius: 0.7rem;
 }
 .review-step strong,
-.review-step .error {
+.review-step .error, .review-place {
   grid-column: 1/-1;
 }
 .review-step strong {

@@ -30,6 +30,7 @@ test('guided framing keeps the working joints of every exercise visible on tall 
         joints = pose.legs.flatMap(leg => [leg.knee, leg.ankle, leg.toe]);
       else if (region === 'pelvis') joints = pose.legs.map(leg => leg.hip);
       else joints = [pose.centre, ...pose.arms.map(arm => arm.shoulder)];
+      if (move.id === 'standing-toe-lift') joints.push(pose.arms.find(arm => arm.s === 1).wrist);
 
       for (const rotation of [true, false]) {
         const camera = movementCamera(move, {rotation});

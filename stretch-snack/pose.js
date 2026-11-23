@@ -321,7 +321,9 @@ export function movementPose(move, seconds) {
     const support = !seated && !supine && s === 1 &&
       ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'toe-lift', 'weight-shift', 'step-up'].includes(motion);
     if (support) {
-      wrist = [0.32, 1.075, 0.27];
+      // Approach from inside the rail, with the palm above it and the fingers
+      // flexing across its diameter. The rail runs along Z at X .32, Y 1.055.
+      wrist = [0.275, 1.084, 0.27];
       elbow = middleJoint(shoulder, wrist, upper, lower, [0.8, -0.65, -0.6]);
     }
     if (motion === 'trunk-turn') {
@@ -380,7 +382,7 @@ export function movementPose(move, seconds) {
     }
     let handAxis;
     if (supine) handAxis = scaledTo([s * 0.05, -1, -0.13], 1);
-    else if (support) handAxis = [0, -0.6, 0.8];
+    else if (support) handAxis = scaledTo([1, 0, 0.30], 1);
     else if (handAim) handAxis = handAim;
     else if (motion === 'self-hug') handAxis = scaledTo(mixPoint([s * 0.02, 0.76, 0.66], [-s * 0.9, 0.24, -0.15], hug), 1);
     else if (motion === 'back-arch') handAxis = scaledTo([s * 0.08, -0.91, 0.32], 1);
@@ -399,11 +401,13 @@ export function movementPose(move, seconds) {
       wrist,
       handAxis.map((v) => v * 0.045),
     );
-    const close = motion === 'hand-open' ? 1 - a : motion === 'towel-grip' ? 0.24 + (active(s) ? 0.7 * a : 0) : 0;
+    const close = support ? 0.71 : motion === 'hand-open' ? 1 - a : motion === 'towel-grip' ? 0.24 + (active(s) ? 0.7 * a : 0) : 0;
     const spread = motion === 'hand-open' ? 0.025 + 0.115 * a : 0.045;
     const roll = motion === 'palm-turn' ? (a * 2.8 - 1.35) * s
       : motion === 'palm-forward' ? -s * (1.50 + 1.35 * a) : restingOnLap ? -0.30 * s : supine ? 0 : 0.12 * s;
-    return {s, shoulder, elbow, wrist, palm, ...handGeometry(palm, handAxis, s, roll, close, spread)};
+    const hand = handGeometry(palm, handAxis, s, roll, close, spread);
+    if (support) hand.thumb = [0.299, 1.050, 0.314]; // Opposes the fingers on the inner side of the rail.
+    return {s, shoulder, elbow, wrist, palm, holdingRail:support, ...hand};
   });
   let centre = trunk([0, 0.24, 0]);
   let face = head([0, 0.14, 0.076]);

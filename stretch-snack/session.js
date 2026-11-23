@@ -1,9 +1,10 @@
 import { get, formatTime, readLocal, writeLocal } from './dom.js';
-import { postureChangeSeconds } from './core/plan.js';
+import { postureChangeSeconds, transferSeconds } from './core/plan.js';
+import { locations } from './core/catalog.js';
 import { renderMovement } from './demo.js';
 import { movementCamera, blendCamera } from './camera.js';
 import { speakerWithClips, stopClips } from './audio/voice.js';
-import { changePosition } from './audio/cues.js';
+import { changePosition, travelCues } from './audio/cues.js';
 
 const player = get('player', 'dialog');
 const stage = get('player-stage', 'div');
@@ -14,6 +15,8 @@ const shorter = get('shorten', 'button');
 const longer = get('extend', 'button');
 const back = get('previous', 'button');
 const audioStatus = get('audio-status', 'output');
+const travelControls = get('travel-controls', 'div');
+const travelClock = get('travel-clock', 'span');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const cameraDialog = get('camera-settings', 'dialog');
 const guided = get('camera-guided', 'input');
@@ -28,9 +31,10 @@ rotation.checked = storedCamera?.rotation !== false;
 get('camera-movement', 'fieldset').disabled = fixed.checked;
 const cameraTravelSeconds = 1.2;
 /** @typedef {import('./camera.js').Camera} Camera */
-/** @typedef {{move:(typeof import('./core/catalog.js').moves)[number], seconds:number, transition:number, reps?:number}} Step */
-/** @typedef {{steps:Step[], location:string, onFinish:(ids:string[],location:string)=>void, total:number,
+/** @typedef {{move:(typeof import('./core/catalog.js').moves)[number], location:string, seconds:number, transition:number, reps?:number}} Step */
+/** @typedef {{steps:Step[], location:string, onFinish:(ids:string[],location:string,usedLocations:string[])=>void, total:number,
  * index:number, elapsed:number, previous:number, transition:number, transferring:boolean, paused:boolean,
+ * travelFrom:string|null, visited:Set<string>,
  * attempted:Set<string>, screenLock:WakeLockSentinel|null, lastDraw:number, lastDisplay:number,
  * cameraTarget:Camera, cameraFrom:Camera|null, cameraSince:number, displayCamera:Camera}} Session */
 /** @type {Session|null} */
@@ -124,7 +128,8 @@ function speak(text) {
 function currentInstruction() {
   if (!session) return '';
   const current = session.steps[session.index];
-  return session.transferring ? changePosition : current.move.name + '. ' + current.move.cue;
+  if (session.transferring) return session.travelFrom ? travelCues[current.location] : changePosition;
+  return current.move.name + '. ' + current.move.cue;
 }
 
 function prepareAudio() {
@@ -146,15 +151,20 @@ function showStep(s) {
   const current = s.steps[s.index];
   get('player-progress', 'span').textContent = 'Movement ' + (s.index + 1) + ' of ' + s.steps.length;
   get('player-name', 'h2').textContent = current.move.name;
+  const place = get('player-place', 'p');
+  place.hidden = s.steps.every(step => step.location === s.location);
+  place.textContent = locations[current.location];
   s.transferring = Boolean(s.transition);
   aimCamera(s);
   back.disabled = s.index === 0;
   const cue =
     current.move.cue + (current.reps ? ' A comfortable target is ' + current.reps + ' repetitions.' : '');
-  const message = s.transferring ? changePosition : cue;
-  get('player-cue', 'p').textContent = message;
+  travelControls.hidden = !s.travelFrom;
+  get('player-cue', 'p').textContent = s.transferring ? currentInstruction() : cue;
   const next = s.steps[s.index + 1];
-  get('player-next', 'p').textContent = next ? 'Up next · ' + next.move.name : 'Final movement';
+  get('player-next', 'p').textContent = next
+    ? 'Up next · ' + next.move.name + (next.location !== current.location ? ' · ' + locations[next.location] : '')
+    : 'Final movement';
   get('skip', 'button').textContent = next ? 'Next' : 'Finish';
   if (!s.paused && audio.value !== 'silent' && !speak(currentInstruction())) playTone(660, 0.2);
   spoken = -1;
@@ -183,6 +193,8 @@ function draw() {
   }
   if (s.transferring && s.elapsed >= s.transition) {
     s.transferring = false;
+    s.travelFrom = null;
+    travelControls.hidden = true;
     aimCamera(s);
     const cue = step.move.cue + (step.reps ? ' A comfortable target is ' + step.reps + ' repetitions.' : '');
     get('player-cue', 'p').textContent = cue;
@@ -190,6 +202,7 @@ function draw() {
   }
   const remain = Math.max(0, Math.ceil(duration - s.elapsed));
   if (remain !== s.lastDisplay) {
+    if (s.travelFrom) travelClock.textContent = formatTime(Math.ceil(s.transition - s.elapsed)) + ' to change places';
     shorter.disabled = remain <= 10 || duration - s.transition - 10 < 5;
     longer.disabled = Math.max(duration, step.seconds) + 10 > 180;
     get('step-clock', 'strong').textContent = formatTime(remain);
@@ -208,7 +221,7 @@ function draw() {
       scene,
       step.move,
       s.transferring ? 0 : motion.matches ? 2 : Math.max(0, s.elapsed - s.transition),
-      { location: s.location, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
+      { location: step.location, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
     );
     s.lastDraw = now;
   }
@@ -229,7 +242,11 @@ function pause() {
   draw();
 }
 function recordAttempt(s) {
-  if (s.elapsed >= s.transition + 1) s.attempted.add(s.steps[s.index].move.id);
+  if (s.elapsed >= s.transition + 1) {
+    const step = s.steps[s.index];
+    s.attempted.add(step.move.id);
+    s.visited.add(step.location);
+  }
 }
 function navigate(offset) {
   const s = session;
@@ -244,8 +261,19 @@ function navigate(offset) {
   const from = s.steps[s.index];
   s.index += offset;
   const next = s.steps[s.index];
-  // A skip during a transfer can leave the traveler between postures.
-  s.transition = from.move.pose !== next.move.pose || s.transferring ? postureChangeSeconds : 0;
+  if (s.travelFrom && next.location === s.travelFrom) {
+    // Turning back just after departure shouldn't cost a second full trip.
+    s.transition = Math.min(s.transition, Math.ceil(s.elapsed));
+    s.travelFrom = s.transition ? from.location : null;
+  } else if (s.travelFrom && from.location === next.location) {
+    // Skipping an exercise en route doesn't put the traveler at the destination.
+    s.transition = Math.max(0, Math.ceil(s.transition - s.elapsed));
+    if (!s.transition) s.travelFrom = null;
+  } else {
+    const transfer = transferSeconds(s.location, from.location, next.location, from.move.pose, next.move.pose);
+    s.transition = s.transferring ? Math.max(transfer, postureChangeSeconds) : transfer;
+    s.travelFrom = from.location !== next.location ? from.location : null;
+  }
   s.elapsed = 0;
   s.previous = performance.now();
   s.lastDraw = 0;
@@ -263,18 +291,20 @@ function finish() {
   releaseScreen(s);
   player.close();
   session = null;
-  s.onFinish([...s.attempted], s.location);
+  s.onFinish([...s.attempted], s.location, [...s.visited]);
 }
 
-/** @param {Step[]} steps @param {string} location @param {Session['onFinish']} onFinish */
+/** @param {(Omit<Step,'location'> & {location?:string})[]} steps @param {string} location @param {Session['onFinish']} onFinish */
 export function startSession(steps, location, onFinish) {
   if (!steps.length || session) return;
   audio.value = readLocal('audio', 'silent');
   const total = steps.reduce((sum, item) => sum + item.seconds, 0);
   const overview = movementCamera(steps[0].move, {zoom:false, rotation:false});
   session = {
-    steps: steps.map(step => ({...step})),
-    transition: 0,
+    steps: steps.map(step => ({...step, location:step.location ?? location})),
+    transition: steps[0].transition,
+    travelFrom: steps[0].location && steps[0].location !== location ? location : null,
+    visited: new Set(),
     location,
     onFinish,
     total,
@@ -314,6 +344,13 @@ function resume() {
   draw();
 }
 pausedButton.addEventListener('click', () => session?.paused ? resume() : pause());
+get('arrived', 'button').addEventListener('click', () => {
+  if (!session?.travelFrom) return;
+  session.elapsed = session.transition;
+  session.previous = performance.now();
+  draw();
+  pausedButton.focus();
+});
 function adjustTime(seconds) {
   const s = session;
   if (!s) return;

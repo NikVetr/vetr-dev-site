@@ -4,10 +4,11 @@ import {
   targets,
   limitations,
   equipment,
+  fixedEquipment,
   reachableLocations,
   sources,
 } from './core/catalog.js';
-import { submit, reviewRoutine } from './core/plan.js';
+import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor } from './core/plan.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
 import { sessionCamera, startSession } from './session.js';
@@ -26,15 +27,15 @@ const profileFields = [
 ];
 const blankProfile = { limitations: [], equipment: [], discretion: 'quiet', avoidIds: [], favoriteIds: [] };
 let profile = readLocal('profile', null);
-const withoutBackrest = (items) => items.filter(id => id !== 'firm-back');
-// A previous profile can include the backrest from a different seat.
-if (profile?.equipment) profile.equipment = withoutBackrest(profile.equipment);
+const portableOnly = (items) => items.filter(id => !fixedEquipment.includes(id));
+if (profile?.equipment) profile.equipment = portableOnly(profile.equipment);
 const feedback = readLocal('movement-feedback', {});
 const prefs = {
   location: 'plane-seat',
   seconds: 120,
   targets: [],
   availableLocations: [],
+  equipmentByLocation: {},
   allowFloor: false,
   ...blankProfile,
   ...(profile || {}),
@@ -45,6 +46,7 @@ const visibilityOptions = get('discretion', 'div').querySelectorAll('input');
 const library = get('library', 'dialog');
 const editor = get('edit', 'dialog');
 const editMove = get('edit-move', 'select');
+const editPlace = get('edit-place', 'select');
 const editSeconds = get('edit-seconds', 'input');
 const editReps = get('edit-reps', 'input');
 const previewCanvas = get('preview-canvas', 'canvas');
@@ -59,6 +61,7 @@ let previewPlaying = !delayMotion.matches,
 let plan,
   customSteps = null,
   selectedId = '',
+  selectedPlace = '',
   editing = -1;
 /** @type {import('./camera.js').Camera | undefined} */
 let previewCamera;
@@ -82,6 +85,7 @@ function showSetup() {
   summary.hidden = !collapsed;
   summary.textContent = [
     locations[prefs.location],
+    prefs.availableLocations.length ? '+' + prefs.availableLocations.length + (prefs.availableLocations.length === 1 ? ' place' : ' places') : '',
     Number.isFinite(prefs.seconds) ? formatTime(prefs.seconds) : '',
     ...prefs.targets.map((t) => targets[t]),
   ]
@@ -114,7 +118,7 @@ function drawPreview(now = performance.now()) {
     if (previous && previewPlaying) previewTime += Math.min(now - previous, 160) / 1000;
     previous = now;
     renderMovement(previewCanvas, move, previewTime, {
-      location: prefs.location,
+      location: selectedPlace,
       dark: document.documentElement.dataset.theme === 'dark',
       camera: previewCamera,
     });
@@ -157,7 +161,7 @@ function watchPreview() {
   });
   syncAnimation();
 }
-function showMovement(id) {
+function showMovement(id, location, pickedRow = null) {
   const move = moveById.get(id);
   preview.hidden = !move;
   if (!move) {
@@ -170,6 +174,7 @@ function showMovement(id) {
     get('evidence', 'details').open = false;
   }
   selectedId = id;
+  selectedPlace = location;
   previewCamera = sessionCamera(move);
   get('preview-name', 'h3').textContent = move.name;
   get('preview-cue', 'p').textContent = move.cue;
@@ -177,7 +182,8 @@ function showMovement(id) {
   const links = sourceLinks(move);
   info.replaceChildren(make('p', move.caution), make('p', move.evidence), links);
   for (const row of document.querySelectorAll('#steps .step')) {
-    const active = row.getAttribute('data-move') === id;
+    if (!pickedRow && row.getAttribute('data-move') === id && row.getAttribute('data-location') === location) pickedRow = row;
+    const active = row === pickedRow;
     row.classList.toggle('selected', active);
     setPressed(row.querySelector('button'), active);
   }
@@ -196,30 +202,44 @@ function sourceLinks(move) {
   });
   return links;
 }
+function visitLabel(location) {
+  const seconds = plan.places.find(p => p.location === location).visitSeconds;
+  return seconds >= 60 && seconds % 60 === 0 ? 'about ' + seconds / 60 + ' min away' : 'about ' + seconds + ' s away';
+}
+function movementRow(i) {
+  const step = plan.steps[i], move = moveById.get(step.id);
+  const row = make('li', '', 'step');
+  row.dataset.move = move.id;
+  row.dataset.location = step.location;
+  const pick = button('', () => showMovement(move.id, step.location, row), 'step-picker');
+  pick.setAttribute('aria-label', 'Preview ' + move.name);
+  const text = make('span');
+  const timing = (step.seconds - plan.transitionSeconds[i]) + ' s moving';
+  const reps = step.reps ? ' · ' + step.reps + ' reps' : '';
+  text.append(make('strong', move.name), make('small', timing + reps + ' · ' + poseName(move)));
+  pick.append(make('span', String(i + 1).padStart(2, '0'), 'step-num'), text);
+  const edit = button('Edit', () => openEditor(i), 'edit-step');
+  edit.setAttribute('aria-label', 'Edit ' + move.name);
+  row.append(pick, edit);
+  return row;
+}
 function renderPlan() {
   showSetup();
   const steps = plan?.steps || [];
-  const list = get('steps', 'ol');
+  const list = get('steps', 'div');
   list.replaceChildren(
-    ...steps.map((step, i) => {
-      const move = moveById.get(step.id);
-      const row = make('li', '', 'step');
-      row.dataset.move = move.id;
-      const pick = button('', () => showMovement(move.id), 'step-picker'),
-        text = make('span');
-      pick.setAttribute('aria-label', 'Preview ' + move.name);
-      text.append(
-        make('strong', move.name),
-        make(
-          'small',
-          step.seconds + ' s' + (step.reps ? ' · ' + step.reps + ' reps' : '') + ' · ' + poseName(move),
-        ),
-      );
-      pick.append(make('span', String(i + 1).padStart(2, '0'), 'step-num'), text);
-      const edit = button('Edit', () => openEditor(i), 'edit-step');
-      edit.setAttribute('aria-label', 'Edit ' + move.name);
-      row.append(pick, edit);
-      return row;
+    ...(plan?.segments || []).map(segment => {
+      const group = make('section', '', 'place-segment');
+      if (prefs.availableLocations.length) {
+        const header = make('h3', locations[segment.location]);
+        if (segment.location !== prefs.location) header.append(make('small', ' · ' + visitLabel(segment.location)));
+        group.append(header);
+      }
+      const rows = make('ol');
+      rows.start = segment.steps[0] + 1;
+      rows.append(...segment.steps.map(movementRow));
+      group.append(rows);
+      return group;
     }),
   );
   get('routine-summary', 'p').textContent = steps.length
@@ -229,12 +249,13 @@ function renderPlan() {
       ' movement' +
       (steps.length === 1 ? '' : 's') +
       ' · ' +
-      locations[prefs.location]
+      (plan.segments.length > 1 ? plan.segments.length + ' places' : locations[steps[0].location])
     : 'No routine for the current settings';
   start.disabled = !steps.length;
   const available = prefs.seconds - (plan?.totalSeconds || 0);
   get('add-step', 'button').hidden = !plan?.eligibleIds.length || available < 5;
-  showMovement(steps.some((s) => s.id === selectedId) ? selectedId : steps[0]?.id);
+  const selected = steps.find(s => s.id === selectedId && s.location === selectedPlace) || steps[0];
+  showMovement(selected?.id, selected?.location);
   const messages = [];
   if (plan && !steps.length)
     messages.push(
@@ -248,22 +269,10 @@ function renderPlan() {
         plan.unmetFavorites.map((id) => moveById.get(id).name).join(', ') +
         '.',
     );
+  if (plan?.returnToLocation) messages.push('After the timer, return to your seat.');
   const note = get('plan-note', 'div');
   note.replaceChildren(...messages.map((t) => make('p', t)));
   note.hidden = !messages.length;
-  const alt = get('alternatives', 'div');
-  alt.replaceChildren();
-  alt.hidden = !plan?.alternatives.length;
-  if (!alt.hidden) {
-    alt.append(make('strong', 'More options when you can move'));
-    for (const { location, additionalIds } of plan.alternatives) {
-      const b = button('Use ' + locations[location] + ' (' + additionalIds.length + ' more)', () => {
-        place.value = location;
-        place.dispatchEvent(new Event('change'));
-      });
-      alt.append(b);
-    }
-  }
 }
 function buildPlan(reset = true) {
   if (reset) customSteps = null;
@@ -299,9 +308,55 @@ function checks(id, choices, field) {
   );
 }
 function showPlaces() {
-  const options = Object.fromEntries(reachableLocations[prefs.location].map((id) => [id, locations[id]]));
-  prefs.availableLocations = prefs.availableLocations.filter((id) => id in options);
-  checks('available', options, 'availableLocations');
+  const options = placeOptions(prefs.location, reachableLocations[prefs.location]);
+  const panel = get('available','div');
+  panel.replaceChildren(...options.map(({location, visitSeconds}) => {
+    const wrap = make('div', '', 'place-option');
+    const label = make('label', '', 'check');
+    const here = location === prefs.location;
+    const input = make('input');
+    input.type = 'checkbox';
+    input.value = location;
+    input.checked = here || prefs.availableLocations.includes(location);
+    input.disabled = here;
+    const cost = visitSeconds % 60 === 0 ? visitSeconds / 60 + ' min' : visitSeconds + ' s';
+    label.append(input, make('span', locations[location]), make('small', here ? 'Here' : '~' + cost));
+    wrap.append(label);
+    if (!here) {
+      const extras = make('div', '', 'place-equipment');
+      const seated = location.endsWith('seat');
+      const fixtures = fixedEquipment.filter(key => key === 'firm-back' ? seated : !seated && (key !== 'step' || location === 'open-area'));
+      for (const key of fixtures) {
+        const check = make('input');
+        check.type = 'checkbox';
+        check.setAttribute('aria-label', equipment[key] + ' at ' + locations[location]);
+        check.checked = (prefs.equipmentByLocation[location] || []).includes(key);
+        check.addEventListener('change', () => {
+          const picked = prefs.equipmentByLocation[location] || [];
+          prefs.equipmentByLocation[location] = check.checked ? [...picked, key] : picked.filter(k => k !== key);
+          buildPlan();
+        });
+        const item = make('label', '', 'check');
+        item.append(check, document.createTextNode(equipment[key]));
+        extras.append(item);
+      }
+      extras.setAttribute('role', 'group');
+      extras.setAttribute('aria-label', 'Equipment at ' + locations[location]);
+      extras.hidden = !input.checked;
+      wrap.append(extras);
+      input.addEventListener('change', () => {
+        prefs.availableLocations = options.map(p => p.location).filter(id => id !== prefs.location &&
+          (id === location ? input.checked : prefs.availableLocations.includes(id)));
+        if (!input.checked) {
+          delete prefs.equipmentByLocation[location];
+          extras.querySelectorAll('input').forEach(box => { box.checked = false; });
+        }
+        extras.hidden = !input.checked;
+        buildPlan();
+      });
+    }
+    return wrap;
+  }));
 }
 function showFields() {
   place.value = prefs.location;
@@ -360,9 +415,10 @@ function bindSettings() {
   for (const [id, label] of Object.entries(locations)) place.add(new Option(label, id));
   place.addEventListener('change', () => {
     prefs.location = place.value;
-    prefs.equipment = withoutBackrest(prefs.equipment);
+    prefs.equipment = portableOnly(prefs.equipment);
     checks('equipment', equipment, 'equipment');
     prefs.availableLocations = [];
+    prefs.equipmentByLocation = {};
     prefs.allowFloor = false;
     get('allow-floor', 'input').checked = false;
     for (const key of ['sideCm', 'forwardCm']) {
@@ -401,7 +457,7 @@ function bindSettings() {
     const saved = Object.fromEntries(
       profileFields.filter((k) => prefs[k] !== undefined).map((k) => [k, prefs[k]]),
     );
-    saved.equipment = withoutBackrest(prefs.equipment);
+    saved.equipment = portableOnly(prefs.equipment);
     const ok = writeLocal('profile', saved);
     if (ok) {
       profile = JSON.parse(JSON.stringify(saved));
@@ -413,10 +469,10 @@ function bindSettings() {
   });
   get('load-profile', 'button').addEventListener('click', () => {
     if (!profile) return;
-    const hasFirmBack = prefs.equipment.includes('firm-back');
+    const fixtures = prefs.equipment.filter(id => fixedEquipment.includes(id));
     profileFields.forEach((k) => delete prefs[k]);
     Object.assign(prefs, blankProfile, JSON.parse(JSON.stringify(profile)));
-    if (hasFirmBack) prefs.equipment = [...prefs.equipment, 'firm-back'];
+    prefs.equipment = [...prefs.equipment, ...fixtures];
     showFields();
     buildPlan();
     get('profile-status', 'output').textContent = 'Restored your saved preferences.';
@@ -432,6 +488,15 @@ function showCatalog() {
   const items = visibleMoves.map((move) => {
     const detail = make('details', '', 'library-entry'),
       summary = make('summary', move.name);
+    detail.dataset.move = move.id;
+    function reopen(id) {
+      showCatalog();
+      const entry = get('library-items','div').querySelector('details[data-move="' + id + '"]');
+      if (entry instanceof HTMLDetailsElement) {
+        entry.open = true;
+        entry.querySelector('summary').focus();
+      }
+    }
     summary.append(make('small', poseName(move)));
     const select = make('select');
     select.setAttribute('aria-label', 'Preference for ' + move.name + ' (' + poseName(move) + ')');
@@ -452,6 +517,7 @@ function showCatalog() {
       if (select.value === 'avoid') prefs.avoidIds.push(move.id);
       if (select.value === 'favorite') prefs.favoriteIds.push(move.id);
       buildPlan();
+      reopen(move.id);
     });
     detail.append(
       summary,
@@ -461,12 +527,48 @@ function showCatalog() {
       sourceLinks(move),
       select,
     );
+    const used = plan?.steps.find(s => s.id === move.id);
+    const where = used?.location || plan?.eligibleLocations[move.id]?.[0];
+    const easier = where && easierVariant(plan, move.id, where);
+    if (easier) {
+      const hint = make('div', '', 'easier-option');
+      const swap = () => {
+        if (used) {
+          try {
+            const index = plan.steps.indexOf(used);
+            const replacement = {...used, ...easier, seconds: used.seconds - plan.transitionSeconds[index]};
+            const updated = submit({...prefs, steps: editedRoute(index, replacement).steps});
+            plan = updated;
+            customSteps = updated.steps;
+            selectedId = easier.id;
+            selectedPlace = easier.location;
+            library.close();
+            renderPlan();
+          } catch (err) {
+            libraryNotice.textContent = errorText(err);
+          }
+        } else {
+          if (prefs.favoriteIds.includes(move.id)) {
+            prefs.favoriteIds = [...new Set(prefs.favoriteIds.map(id => id === move.id ? easier.id : id))];
+            buildPlan();
+          }
+          librarySelect.value = moveById.get(easier.id).name;
+          reopen(easier.id);
+        }
+      };
+      const action = used ? 'Swap this step' : prefs.favoriteIds.includes(move.id) ? 'Switch favorite' : 'View this option';
+      showEasier(hint, easier, action, swap);
+      const libraryNotice = make('p', '', 'error');
+      libraryNotice.setAttribute('role', 'status');
+      detail.append(hint, libraryNotice);
+    }
     if (feedback[move.id]) {
       const clear = button('Clear earlier movement feedback', () => {
         delete feedback[move.id];
         writeLocal('movement-feedback', feedback);
         clear.remove();
         buildPlan();
+        reopen(move.id);
       });
       detail.append(clear);
     }
@@ -476,11 +578,57 @@ function showCatalog() {
     ...(items.length ? items : [make('p', 'No movements match your search.', 'hint')]),
   );
 }
+function showEasier(panel, easier, label, swap) {
+  panel.replaceChildren();
+  panel.hidden = !easier;
+  if (!easier) return;
+  const move = moveById.get(easier.id);
+  const icon = make('span', '↳', 'swap-icon');
+  icon.setAttribute('aria-hidden', 'true');
+  const content = make('div');
+  const where = easier.location === prefs.location && move.pose === 'seated' ? 'your seat' : locations[easier.location];
+  content.append(make('p', 'Also works in ' + where + ' · ' + move.name), button(label, swap));
+  panel.append(icon, content);
+}
+function editedRoute(index, replacement) {
+  const rows = plan.steps.map((s, i) => ({...s, seconds: s.seconds - plan.transitionSeconds[i]}));
+  if (index < 0) rows.push(replacement);
+  else if (replacement) rows[index] = replacement;
+  else rows.splice(index, 1);
+  const places = plan.places.map(p => p.location);
+  rows.sort((a, b) => places.indexOf(a.location) - places.indexOf(b.location));
+  // Changing the first step of a visit also changes which step carries its travel time.
+  const transfers = transfersFor(rows, prefs.location);
+  return {
+    steps: rows.map((row, i) => ({...row, seconds: row.seconds + transfers[i]})),
+    transfer: transfers[rows.indexOf(replacement)] ?? 0,
+  };
+}
+function showEditorChoice(location) {
+  const id = editMove.value;
+  const places = plan.eligibleLocations[id];
+  editPlace.replaceChildren(...places.map(p => new Option(locations[p], p)));
+  editPlace.value = places.includes(location) ? location : places[0];
+  editPlace.disabled = places.length <= 1;
+  get('edit-place-field','label').hidden = plan.places.length <= 1;
+  get('edit-cue', 'p').textContent = moveById.get(id).cue;
+  const route = editedRoute(editing, {id, location: editPlace.value, seconds: 0});
+  const budget = prefs.seconds - route.steps.reduce((total, row) => total + row.seconds, 0);
+  const max = Math.min(180 - route.transfer, budget);
+  editSeconds.max = String(Math.max(0, max));
+  get('edit-max','p').textContent = (route.transfer ? 'About ' + formatTime(route.transfer) + ' for the transfer. ' : '') +
+    (max >= 5 ? 'Up to ' + max + ' seconds of movement fit.' : 'Free up ' + (5 - max) + ' more seconds to fit this movement.');
+  const easier = easierVariant(plan, id, editPlace.value);
+  showEasier(get('edit-easier','div'), easier, 'Use this option', () => {
+    editMove.value = easier.id;
+    showEditorChoice(easier.location);
+    editMove.focus();
+  });
+}
 function openEditor(index) {
   if (!plan) return;
   editing = index;
-  const row = plan.steps[index],
-    available = prefs.seconds - plan.totalSeconds + (row?.seconds ?? 0);
+  const row = plan.steps[index];
   editMove.replaceChildren(
     ...plan.eligibleIds.map((id) => {
       const m = moveById.get(id);
@@ -490,24 +638,20 @@ function openEditor(index) {
   const firstUnused = plan.eligibleIds.find((id) => !plan.steps.some((s) => s.id === id));
   editMove.value = row?.id || firstUnused || plan.eligibleIds[0];
   get('edit-title', 'h2').textContent = row ? 'Edit movement' : 'Add movement';
-  get('edit-cue', 'p').textContent = moveById.get(editMove.value).cue;
-  editSeconds.value = String(row?.seconds ?? Math.min(30, available));
-  editSeconds.max = String(Math.min(180, available));
+  showEditorChoice(row?.location);
+  editSeconds.value = String(row ? row.seconds - plan.transitionSeconds[index] : Math.max(5, Math.min(30, Number(editSeconds.max))));
   editReps.value = row?.reps ?? '';
-  get('edit-max', 'p').textContent =
-    'Up to ' +
-    editSeconds.max +
-    ' seconds available. Shorten another movement or increase your time budget for more.';
   get('edit-error', 'p').textContent = '';
   get('remove-step', 'button').hidden = !row;
   editor.showModal();
 }
-function applySteps(rows) {
+function applyEdit(replacement) {
   try {
-    const updated = submit({ ...prefs, steps: rows });
+    const updated = submit({ ...prefs, steps: editedRoute(editing, replacement).steps });
     customSteps = updated.steps;
     plan = updated;
     selectedId = editMove.value;
+    selectedPlace = editPlace.value;
     editor.close();
     renderPlan();
   } catch (error) {
@@ -531,24 +675,19 @@ get('open-library', 'button').addEventListener('click', () => {
 });
 librarySelect.addEventListener('input', showCatalog);
 get('add-step', 'button').addEventListener('click', () => openEditor(-1));
-editMove.addEventListener('change', () => {
-  get('edit-cue', 'p').textContent = moveById.get(editMove.value).cue;
-});
+editMove.addEventListener('change', () => showEditorChoice(editPlace.value));
+editPlace.addEventListener('change', () => showEditorChoice(editPlace.value));
 get('edit-form', 'form').addEventListener('submit', (e) => {
   e.preventDefault();
-  const rows = plan.steps.slice(),
-    row = {
-      id: editMove.value,
-      seconds: editSeconds.valueAsNumber,
-      ...(editReps.value ? { reps: editReps.valueAsNumber } : {}),
-    };
-  if (editing < 0) rows.push(row);
-  else rows[editing] = row;
-  applySteps(rows);
+  const row = {
+    id: editMove.value,
+    location: editPlace.value,
+    seconds: editSeconds.valueAsNumber,
+    ...(editReps.value ? { reps: editReps.valueAsNumber } : {}),
+  };
+  applyEdit(row);
 });
-get('remove-step', 'button').addEventListener('click', () =>
-  applySteps(plan.steps.filter((s, i) => i !== editing)),
-);
+get('remove-step', 'button').addEventListener('click', () => applyEdit(null));
 for (const node of document.querySelectorAll('button[data-close]'))
   node.addEventListener('click', () => get(node.getAttribute('data-close'), 'dialog').close());
 setupCheckIn(feedback, () => buildPlan());
@@ -559,10 +698,10 @@ start.addEventListener('click', () => {
     move: moveById.get(s.id),
     transition: plan.transitionSeconds[i],
   }));
-  startSession(steps, prefs.location, (ids, location) =>
+  startSession(steps, prefs.location, (ids, location, usedLocations) =>
     showFeedback(
       ids.map((id) => moveById.get(id)),
-      locations[location],
+      usedLocations.map(id => locations[id]).join(' → ') || locations[location],
     ),
   );
 });

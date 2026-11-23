@@ -39,7 +39,12 @@
           </button>
         </div>
         <form id="settings">
-          <label class="field">Where are you?<select id="location"></select></label>
+          <label class="field">Where are you now?<select id="location"></select></label>
+          <fieldset id="places">
+            <legend>Where can you move?</legend>
+            <div id="available"></div>
+            <p class="hint">Start here. Add places you can reach safely now. Follow crew instructions and the seat-belt sign.</p>
+          </fieldset>
           <fieldset>
             <legend>Time available</legend>
             <div class="time-row" id="time-options"></div>
@@ -70,7 +75,7 @@
                 <legend>Equipment within reach</legend>
                 <div class="check-list" id="equipment"></div>
               </fieldset>
-              <label class="check"><input type="checkbox" id="allow-floor" /> I can use the floor here</label>
+              <label class="check"><input type="checkbox" id="allow-floor" /> I can use the floor in an open, stationary space</label>
               <fieldset>
                 <legend>Measurements <small>optional · cm</small></legend>
                 <div class="measurements">
@@ -82,16 +87,6 @@
                   /></label>
                 </div>
               </fieldset>
-            </div>
-          </details>
-          <details id="places">
-            <summary>Other available locations</summary>
-            <div class="details-body">
-              <p class="hint">
-                Select only places you can safely reach and use now. Follow crew instructions and the
-                seat-belt sign.
-              </p>
-              <div id="available" class="check-list"></div>
             </div>
           </details>
           <p id="form-error" class="error" role="alert" hidden></p>
@@ -119,7 +114,7 @@
           </div>
           <div class="plan-body">
             <div>
-              <ol id="steps"></ol>
+              <div id="steps"></div>
               <button type="button" id="add-step" hidden>+ Add movement</button>
             </div>
             <section class="preview" id="preview" aria-labelledby="preview-name">
@@ -140,7 +135,6 @@
             </section>
           </div>
           <div id="plan-note" class="note" hidden></div>
-          <div id="alternatives" hidden></div>
         </section>
         <div class="library-link panel">
           <div>
@@ -203,9 +197,11 @@
       </div>
       <form id="edit-form">
         <label class="field">Movement<select id="edit-move"></select></label>
+        <label class="field" id="edit-place-field">Place<select id="edit-place"></select></label>
+        <div id="edit-easier" class="easier-option" hidden></div>
         <p id="edit-cue" class="hint"></p>
         <label class="field"
-          >Seconds<input id="edit-seconds" type="number" min="5" max="180" step="1" required /></label
+          >Movement seconds<input id="edit-seconds" type="number" min="5" max="180" step="1" required /></label
         ><label class="field"
           >Repetitions <small>Optional target at a comfortable pace</small
           ><input id="edit-reps" type="number" min="1" max="100" step="1"
@@ -235,6 +231,7 @@
           <canvas id="player-canvas" width="720" height="430" aria-hidden="true"></canvas>
         </div>
         <section class="player-reading">
+          <p class="hint" id="player-place" hidden></p>
           <div class="player-heading">
             <h2 id="player-name" aria-live="polite"></h2>
             <div class="clock">
@@ -246,6 +243,10 @@
             </div>
           </div>
           <p id="player-cue"></p>
+          <div class="actions" id="travel-controls" hidden>
+            <span id="travel-clock"></span>
+            <button type="button" id="arrived">Ready to start</button>
+          </div>
           <p id="player-next"></p>
           <div class="player-controls">
             <button id="previous" type="button">Previous</button>

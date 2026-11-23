@@ -94,6 +94,8 @@ export function movementCamera({motion, pose}, {zoom = true, rotation = true} = 
     return frame(motion === 'hamstring-lean' ? 0.61 : 0.40, 0.36, 1.40, motion === 'hamstring-lean' ? 1.38 : 0.99);
   if (motion === 'glute-squeeze' || motion === 'seated-pelvic-tilt') return frame(0.63 + lift, 0.07, 1.16, 0.96);
   if (motion === 'step-up' || motion === 'calf-stretch' || motion === 'weight-shift') return full;
+  // Keep both planted heels and the hand on the fixed rail in the standing demonstration.
+  if (motion === 'toe-lift' && !seated) return frame(0.57, 0.15, 1.10, 1.36);
   switch (regions[motion]) {
     case 'head': return frame(1.04 + lift, 0.04, 0.82, 0.76);
     case 'shoulders':

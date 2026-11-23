@@ -16,6 +16,12 @@ A 90-second request for hips, knees and lower back fits the default airplane sea
 echo '{"seconds":90,"targets":["hips","knees","lower-back"]}' | node stretch-snack/cli.mjs
 ```
 
+For a two-place example, this request includes a supported weight shift in the lavatory and neck work in the seat. The 125-second budget includes the 60-second estimate to change places.
+
+```sh
+echo '{"location":"plane-seat","availableLocations":["plane-lavatory"],"equipmentByLocation":{"plane-lavatory":["support"]},"seconds":125,"targets":["neck","hips"],"favoriteIds":["standing-weight-shift"]}' | node stretch-snack/cli.mjs
+```
+
 ## Request
 
 All fields are optional. Unknown fields and invalid IDs produce errors.
@@ -23,10 +29,11 @@ All fields are optional. Unknown fields and invalid IDs produce errors.
 | Field | Accepted values or units |
 | --- | --- |
 | `location` | `plane-seat` (default), `train-seat`, `roomy-seat`, `plane-lavatory`, `stall`, `open-area`. The `roomy-seat` and `open-area` presets assume a stationary surface. |
-| `seconds` | Integer 15–900, default 120, including planned changes of posture. |
+| `seconds` | Integer 15–900, default 120, including planned travel and changes of posture. |
 | `targets` | List drawn from `neck`, `shoulders`, `upper-back`, `chest`, `hands` (and forearms), `hips`, `knees` (and thighs), `calves` (and feet), `lower-back`. Empty requests a mixed routine. |
 | `discretion` | `quiet` (default), `moderate`, `any`. A ceiling on how conspicuous a movement may be. |
-| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. Upper-back ball release requires both a massage ball and a firm backrest at the current seat. Changing location clears the backrest confirmation. The app saves the ball with your equipment defaults. |
+| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. Portable items travel with you. A fixed handhold, firm seat back or low fixed step listed here applies at the current place. |
+| `equipmentByLocation` | Optional map from selected place IDs to fixed equipment available there, for example `{"plane-lavatory":["support"]}`. Standing toe lifts can fit a moving-vehicle location with a confirmed fixed handhold. The usual balance, grip and mobility checks apply. |
 | `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. A mat is optional. |
 | `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements compatible with those preferences. |
 | `heightCm`, `armspanCm` | Optional measurements in cm, 50–280 and 40–300, both default 170. Used to scale estimated movement clearance. |
@@ -34,26 +41,27 @@ All fields are optional. Unknown fields and invalid IDs produce errors.
 | `availableLocations` | Locations the traveler considers reachable **now**. The planner checks compatible locations on that route, e.g. a lavatory from an airplane seat. Empty by default. |
 | `avoidIds`, `favoriteIds` | Movement ID lists. An avoided movement is ineligible. Favorites take priority among eligible movements. |
 | `feedback` | Map of movement ID to `helped`, `poor-fit`, or `uncomfortable`. The first two influence ranking. Uncomfortable excludes the movement until the feedback is changed. |
-| `steps` | Optional ordered list of `{id, seconds, reps?}` to validate a custom routine. Step seconds are integers 5–180. Optional target repetitions are integers 1–100. A posture change reserves 15 seconds within the destination step, which needs at least 20 seconds. Repeated movements are allowed. An empty list explicitly empties the routine. |
+| `steps` | Optional ordered list of `{id, location?, seconds, reps?}`. An omitted location resolves to the easiest selected place where that movement fits. Step times are integers 5–180, including any transfer, with at least five seconds left to move. Optional target repetitions are integers 1–100. Keep each location’s steps together in effort order. Repeated movements are allowed. An empty list empties the routine. |
 
 ## Result
 
-- `steps` and `totalSeconds` give the sequence and its duration. Short routines aim to cover requested areas. Each automatic step lasts at most 45 seconds. A restrictive setting or a long budget can return a shorter routine. If all requested movements are ineligible, it returns an empty sequence.
-- `transitionSeconds` gives the portion of each step reserved for a posture change. Setup before the first step is untimed. The player can be paused if a transfer needs longer.
-- `eligibleIds` lists every movement that fits the current space, equipment, limits and exclusions. It can include movements outside the target areas for manual swaps.
+- `steps` includes the location for each movement. The planner groups movements in the easiest suitable space, prioritizing requested areas and named favorites. `totalSeconds` includes all planned transfers. Automatic steps contain up to 45 seconds of exercise. A routine can be shorter than the time available.
+- `places` gives the selected reachable places in effort order as `{location, rank, visitSeconds}`. The starting place costs zero. Moving to another seat is estimated at 30 seconds, a lavatory or stall at 60, and an open space at 90. Getting to another place and setting up there can take longer in practice.
+- `segments` groups the route as `{location, steps}`, where `steps` lists zero-based indices into the plan. Use it in place of the former `alternatives` field.
+- `transitionSeconds[i]` gives the part of step `i` reserved for travel or changing posture. Subtract it from `steps[i].seconds` to get exercise time. It includes travel when the first movement is elsewhere. A posture change within the same place takes 15 seconds. A trip into or out of a floor exercise includes floor-transfer time. When `returnToLocation` names the starting seat, the return trip follows the timed routine and is outside its duration.
+- `eligibleIds` lists eligible movements across the selected places, including choices outside requested target areas for manual swaps. `eligibleLocations[id]` lists the places that accommodate that movement, easiest first.
 - `unmetTargets` and `unmetFavorites` identify requests the routine could not include.
-- `alternatives` lists `{location, additionalIds}` for confirmed reachable locations with additional movements or equipment variants. A posture-only alternative appears when explicitly favorited. Selecting an available location leaves the current routine in place until the traveler chooses to move. Permission and actual clearance must still be checked on site.
 - Invalid requests throw `invalid_request` with `issues: [{code, path, message}]`. The CLI prints JSON errors to stderr and exits 1 for invalid requests and 2 for usage or I/O errors.
 
 ## During a session
 
-Use **Previous** or **Next** to revisit or skip a movement. Returning to an earlier movement restarts its timer. Changes of posture get transfer time in either direction. You can pause first to browse through the sequence at your own pace.
+When a movement is in another place, the player shows the destination and the time reserved to get there. **Ready to start** begins the full movement early once you are in position. Pause if you need longer. Spoken guidance includes destinations offline. **Previous** and **Next** revisit or skip movements. Skipping to another exercise at the same destination while traveling carries the remaining travel allowance forward.
 
 Use **−10 s** or **+10 s** under the clock to adjust the current movement for this session. Both clocks update immediately. The player preserves at least five seconds of movement time after a transfer. The feedback screen lists movements whose active timer ran for at least one second.
 
 ## Saved routines
 
-In **Your routine → Saved routines**, save an ordered sequence with a name, step times and repetition targets on this device. Reopen it to compare each movement with your current space, mobility settings, equipment, feedback and time. You can choose a compatible substitute, omit a step, or edit its time before selecting **Use routine**. Substituting clears that step’s original repetition target. To keep the adaptation permanently, save it under a new name or explicitly replace the saved copy. Profile defaults and session check-ins are stored separately.
+In **Your routine → Saved routines**, save an ordered sequence with its locations, step times and repetition targets on this device. Reopen it to check each movement against its saved place, your current mobility settings, confirmed equipment and available time. A routine saved before per-step places were introduced uses the easiest currently available fit for each movement. You can choose a compatible substitute, omit a step, or edit its time before selecting **Use routine**. Substituting clears that step’s original repetition target. To keep the adaptation permanently, save it under a new name or explicitly replace the saved copy. Profile defaults and session check-ins are stored separately.
 
 To inspect a proposed sequence programmatically, pass the planner request including `steps` to `window.StretchSnack.reviewRoutine(request)`, the named export from `core/plan.js`, or the CLI:
 
@@ -61,7 +69,7 @@ To inspect a proposed sequence programmatically, pass the planner request includ
 echo '{"location":"plane-seat","seconds":30,"limitations":["no-leg-movement"],"steps":[{"id":"seated-heel-lift","seconds":40}]}' | node stretch-snack/cli.mjs --review
 ```
 
-The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `eligibleIds`, and ordered `rows` with each step’s `issues` and `needsTransferTime`. Retired movement IDs are reported as unavailable. Malformed inputs still produce structured request errors. Use the standard planner to validate a revised sequence before starting it.
+The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `places`, `eligibleIds` and `eligibleLocations`. Each entry in `rows` gives the resolved location, `issues`, `transitionSeconds` and `needsTransferTime`. Retired movement IDs are reported as unavailable. Malformed inputs still produce structured request errors. Use the standard planner to validate a revised sequence before starting it.
 
 ## Interpretation and sources
 

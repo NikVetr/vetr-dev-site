@@ -38,7 +38,7 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     if (saving) {
       const plan = getPlan();
       get('save-routine-summary', 'p').textContent = plan?.steps.length
-        ? plan.steps.length + ' movements · ' + formatTime(plan.totalSeconds) + '. Saves their order, times and repetitions.'
+        ? plan.steps.length + ' movements · ' + formatTime(plan.totalSeconds) + '. Saves their places, order, times and repetitions.'
         : 'Add a movement to your routine before saving.';
       updateSaveButton();
     } else {
@@ -46,10 +46,10 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     }
   }
   function draft() {
-    return rows.flatMap(({ original, movement, duration }) => {
+    return rows.flatMap(({ original, movement, place, duration }) => {
       const id = movement.value;
       if (!id) return [];
-      const row = { id, seconds: duration.valueAsNumber };
+      const row = { id, location: place.value, seconds: duration.valueAsNumber };
       if (id === original.id && original.reps !== undefined) return [{...row, reps: original.reps}];
       return [row];
     });
@@ -68,9 +68,11 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     for (const row of rows) {
       const step = row.movement.value ? report.rows[included++] : null;
       const reasons = step?.issues.slice() ?? [];
-      if (step?.needsTransferTime) reasons.push('Allow at least 20 seconds when changing posture.');
+      if (step?.needsTransferTime) reasons.push('Allow at least ' + (step.transitionSeconds + 5) + ' seconds for the transfer and movement.');
       row.issue.textContent = reasons.join(' ');
       row.issue.hidden = !reasons.length;
+      row.timingNote.hidden = !step?.transitionSeconds;
+      row.timingNote.textContent = step?.transitionSeconds ? 'Includes ' + step.transitionSeconds + ' s to reach the movement.' : '';
     }
     const problems = report.rows.filter(row => row.issues.length || row.needsTransferTime).length;
     const messages = [formatTime(report.totalSeconds) + ' of ' + formatTime(prefs.seconds) + ' available.'];
@@ -80,24 +82,28 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     fit.textContent = messages.join(' ');
     use.disabled = !steps.length || !report.fits;
   }
-  function editRow(original, i, eligible) {
+  function editRow(original, i, report) {
+    const eligible = report.eligibleIds;
     const entry = make('li', '', 'review-step');
-    const movement = make('select'), duration = make('input');
+    const movement = make('select'), duration = make('input'), place = make('select');
     const move = byId.get(original.id);
     const title = make('strong', (i + 1) + '. ' + (move?.name ?? original.id));
     if (original.reps) title.append(make('small', ' · ' + original.reps + ' saved reps'));
     const movementLabel = make('label', 'Movement', 'field');
-    const timeLabel = make('label', 'Seconds', 'field');
+    const placeLabel = make('label', 'Place', 'field review-place');
+    const timeLabel = make('label', 'Step seconds', 'field');
+    const timingNote = make('small');
     const issue = make('p', '', 'error');
     issue.id = 'step-issue-' + i;
     movement.setAttribute('aria-describedby', issue.id);
+    place.setAttribute('aria-describedby', issue.id);
     duration.setAttribute('aria-describedby', issue.id);
     const keep = new Option(eligible.includes(original.id) ? 'Keep movement' : 'Choose a substitute', original.id);
     keep.disabled = !eligible.includes(original.id);
     movement.add(keep);
     movement.add(new Option('Omit this step', ''));
     const swaps = make('optgroup');
-    swaps.label = 'Substitutes that fit here';
+    swaps.label = 'Substitutes in your available places';
     for (const id of eligible) {
       if (id === original.id) continue;
       const other = byId.get(id);
@@ -105,6 +111,21 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     }
     movement.append(swaps);
     movement.value = original.id;
+    const selectedPlaces = report.places.map(p => p.location);
+    function placeChoices(preferred) {
+      const valid = report.eligibleLocations[movement.value] || [];
+      // Retain an unavailable saved place until the reader explicitly chooses a substitute.
+      const options = [...new Set([preferred, ...valid])];
+      place.replaceChildren(...options.map(key => {
+        const option = new Option(locations[key] + (selectedPlaces.includes(key) ? '' : ' (not selected)'), key);
+        option.disabled = !valid.includes(key);
+        return option;
+      }));
+      place.value = preferred;
+      placeLabel.hidden = !movement.value || (selectedPlaces.length === 1 && selectedPlaces[0] === preferred);
+      place.disabled = valid.length === 0 || (valid.length === 1 && valid[0] === preferred);
+    }
+    placeChoices(original.location ?? prefs.location);
     duration.type = 'number';
     duration.min = '5';
     duration.max = '180';
@@ -113,14 +134,22 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     duration.value = String(original.seconds);
     movement.addEventListener('change', () => {
       duration.disabled = !movement.value;
+      const valid = report.eligibleLocations[movement.value] || [];
+      placeChoices(valid.includes(place.value) ? place.value : valid[0] ?? original.location ?? prefs.location);
       checkDraft();
     });
+    place.addEventListener('change', checkDraft);
     duration.addEventListener('input', checkDraft);
     movementLabel.append(movement);
-    timeLabel.append(duration);
+    timeLabel.append(duration, timingNote);
     entry.append(title, movementLabel, timeLabel, issue);
+    placeLabel.append(place);
+    // Single-place routines keep the original two-field editing layout.
+    if (selectedPlaces.length > 1 || !selectedPlaces.includes(original.location ?? prefs.location)) {
+      entry.insertBefore(placeLabel, issue);
+    }
     list.append(entry);
-    return {original, movement, duration, issue};
+    return {original, movement, place, duration, issue, timingNote};
   }
   function showRoutine() {
     const selected = stored().find(entry => entry.name === choice.value);
@@ -131,8 +160,8 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     if (!selected) { fit.textContent = 'Select a saved routine.'; return; }
     try {
       const report = reviewRoutine({...prefs, steps: selected.steps});
-      get('review-context', 'p').textContent = locations[prefs.location] + ' · ' + formatTime(prefs.seconds) + ' available';
-      rows = report.rows.map((step, i) => editRow(step, i, report.eligibleIds));
+      get('review-context', 'p').textContent = report.places.map(p => locations[p.location]).join(' · ') + ' · ' + formatTime(prefs.seconds) + ' available';
+      rows = report.rows.map((step, i) => editRow(step, i, report));
       checkDraft();
     } catch (error) {
       fit.textContent = error.message;

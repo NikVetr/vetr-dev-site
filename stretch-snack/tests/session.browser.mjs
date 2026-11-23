@@ -1,6 +1,52 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { openPage } from '../../scripts/landing-art/browser.mjs';
+import { submit } from '../core/plan.js';
+
+test('an away-first session budgets travel, carries it over a skip, and records the exercised location', async () => {
+  const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
+  const {page, close, errors} = await openPage('stretch-snack/', {engine, width:390, height:844});
+  try {
+    const request = {
+      location:'plane-seat', availableLocations:['plane-lavatory'], seconds:120,
+      equipmentByLocation:{'plane-lavatory':['support']},
+      steps:[
+        {id:'standing-toe-lift', location:'plane-lavatory', seconds:80},
+        {id:'standing-neck-turn', location:'plane-lavatory', seconds:20},
+      ],
+    };
+    const plan = submit(request);
+    assert.deepEqual(plan.transitionSeconds, [60,0]);
+    await page.clock.install({time:new Date('2030-01-01T00:00:00Z')});
+    await page.clock.pauseAt(new Date('2030-01-01T00:00:02Z'));
+    await page.evaluate(async plan => {
+      const {moves} = await import('./core/catalog.js');
+      const {startSession} = await import('./session.js');
+      const steps = plan.steps.map((step,i) => ({
+        ...step, move:moves.find(m=>m.id === step.id), transition:plan.transitionSeconds[i],
+      }));
+      startSession(steps,'plane-seat',(ids,origin,places) => {
+        document.body.dataset.completed = JSON.stringify({ids,origin,places});
+      });
+    },plan);
+    const press = id => page.locator('#'+id).evaluate(button=>button.click());
+    assert.equal(await page.locator('#player-cue').innerText(), 'Go to the airplane lavatory.');
+    assert.match(await page.locator('#travel-clock').innerText(), /^1:00/);
+    await page.clock.fastForward(12000);
+    await press('skip');
+    assert.match(await page.locator('#travel-clock').innerText(), /^0:48/);
+    assert.equal(await page.locator('#step-clock').innerText(),'1:08');
+    await press('arrived');
+    assert.ok(await page.locator('#travel-controls').isHidden());
+    assert.equal(await page.locator('#step-clock').innerText(),'0:20');
+    assert.equal(await page.locator('#player-place').innerText(),'Airplane lavatory');
+    await page.clock.fastForward(1100);
+    await press('finish');
+    const actual = JSON.parse(await page.locator('body').getAttribute('data-completed'));
+    assert.deepEqual(actual,{ids:['standing-neck-turn'],origin:'plane-seat',places:['plane-lavatory']});
+    assert.deepEqual(errors,[]);
+  } finally { await close(); }
+});
 
 test('an edited session fills the phone viewport, accepts input, and records feedback', async () => {
   const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');

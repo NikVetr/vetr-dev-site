@@ -182,9 +182,9 @@ export function createRetarget(rig) {
       const handAcross = axes(fore,palmAcross)[0];
       const axis = bendFrame[1];
       const principal = Math.atan2(dot(axis,cross(naturalAcross,handAcross)), dot(naturalAcross,handAcross));
-      // Crossed arms can pass through the atan2 seam. Pick a winding close
-      // to the neutral forearm, so seeking to a frame works without history.
-      const guide = side.sign * Math.PI / 2;
+      // Pick the twist closest to the neutral forearm for this hold. A palm
+      // across a rail needs a different reference as the elbow bends.
+      const guide = arm.holdingRail ? 0 : side.sign * Math.PI / 2;
       const twist = principal + 2 * Math.PI * Math.round((guide - principal) / (2 * Math.PI));
       const halfAcross = add(mul(naturalAcross,Math.cos(twist/2)),mul(cross(axis,naturalAcross),Math.sin(twist/2)));
       side.forearm(arm.elbow,arm.wrist,halfAcross);

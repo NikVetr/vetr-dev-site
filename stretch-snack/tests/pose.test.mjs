@@ -81,6 +81,9 @@ test('gripping hands and loaded feet retain their points of contact', () => {
       const hand = pose.arms[1];
       assert.deepEqual(hand.palm,rest.arms[1].palm,move.id);
       assert.deepEqual(hand.fingers,rest.arms[1].fingers,move.id);
+      assert.ok(hand.palm[1] > 1.075 && hand.thumb[0] < 0.32, 'the palm is above the rail with the thumb inside');
+      assert.ok(hand.fingerJoints[1][1][0] > 0.34 && hand.fingerJoints[1][3][1] < 1.035,
+        'the middle finger curls around the outside and underneath the rail');
       const stanceLeg = pose.side < 0 ? 1 : 0;
       if (['hip-side','calf-stretch','knee-bend'].includes(move.motion)) {
         assert.deepEqual(pose.legs[stanceLeg].toe,rest.legs[stanceLeg].toe,move.id);
