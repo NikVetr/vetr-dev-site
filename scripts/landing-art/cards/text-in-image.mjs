@@ -23,13 +23,49 @@ const PICTURE_PX = 2;   // the picture embedded at this many pixels per display 
 const PARAGRAPHS = 10;   // of the default text
 const { width: W, height: H } = WIDE;
 
+/** Fit the chapter excerpt at the resolution of the printed illustration.
+ * @param {ReturnType<typeof decodePng>} image @param {string} text
+ * @param {string} background @param {number|boolean} glow */
+export function fitIllustration(image, text, background, glow) {
+  const {width, height, data} = image;
+  const softened = new Uint8Array(data);
+  // A letter covers roughly five source pixels. Average the fine hatching
+  // over that footprint so one line of black ink cannot colour an entire row
+  // of letters. Weight by opacity and keep the original silhouette.
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const pixel = 4 * (y * width + x);
+    if (!data[pixel + 3]) continue;
+    let r = 0, g = 0, b = 0, weight = 0;
+    for (let j = Math.max(0, y - 2); j <= Math.min(height - 1, y + 2); j++) {
+      for (let i = Math.max(0, x - 2); i <= Math.min(width - 1, x + 2); i++) {
+        const p = 4 * (j * width + i), a = data[p + 3];
+        r += a * data[p];
+        g += a * data[p + 1];
+        b += a * data[p + 2];
+        weight += a;
+      }
+    }
+    softened[pixel] = Math.round(r / weight);
+    softened[pixel + 1] = Math.round(g / weight);
+    softened[pixel + 2] = Math.round(b / weight);
+  }
+  return submit({
+    image: {width, height, data: softened}, text,
+    // The PNG has partly opaque pixels inside the apron and sleeves. Taking
+    // the silhouette at each baseline keeps those regions open to whole words.
+    quantize: {transparency_thresh: 0.5},
+    layout: {wrap: 'word', line_widths: 'row', line_height: 1.16, n_rounds: 12, preserve_line_breaks: false},
+    color: {background}, render: {contrast_adjust: true, glow},
+  });
+}
+
 /** @param {{background?:string,glow?:number|boolean}} [options] */
 export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
   const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
   const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
-  const result = submit({ image, text, layout: { wrap: 'word', n_rounds: 12, preserve_line_breaks: false }, color: { background }, render: { contrast_adjust: true, glow } });
+  const result = fitIllustration(image, text, background, glow);
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
   // Alice's lower legs occupy two separated runs below y=.12 in the image's unit square.
