@@ -4,6 +4,7 @@ import { submit } from '../../stretch-snack/core/plan.js';
 import { formatTime } from '../../stretch-snack/dom.js';
 import { renderMovement } from '../../stretch-snack/demo.js';
 import { repetitionSeconds } from '../../stretch-snack/pose.js';
+import { blendCamera, movementCamera } from '../../stretch-snack/camera.js';
 
 export const heldSeconds = 2.5;
 const location = 'roomy-seat';
@@ -19,7 +20,22 @@ export function prepare() {
     start += step.seconds;
     return entry;
   });
-  return {steps, total: plan.totalSeconds};
+  const views = steps.map(step => movementCamera(step.move));
+  const boundaries = steps.map((step, i) => {
+    const prev = (i + steps.length - 1) % steps.length;
+    if (step.move.motion === 'knee-extend' || steps[prev].move.motion === 'knee-extend') {
+      // Pull back as the working region changes, so both the settling hands
+      // and the feet of the next neutral pose are visible during the turn.
+      return blendCamera(movementCamera(steps[prev].move, {zoom:false}), movementCamera(step.move, {zoom:false}), .5);
+    }
+    return blendCamera(views[prev], views[i], .5);
+  });
+  return {
+    steps: steps.map((step, index) => ({
+      ...step, camera: views[index], entryCamera: boundaries[index], exitCamera: boundaries[(index + 1) % steps.length],
+    })),
+    total: plan.totalSeconds,
+  };
 }
 
 /** @param {ReturnType<typeof prepare>} plan @param {number} seconds */
@@ -38,15 +54,22 @@ export function sessionReading(plan, seconds) {
   };
 }
 
-/** Play one whole repetition per step. The chair stays in the same place
- * while the trainer settles into the shared seated pose between exercises.
+/** Ease to and from the view shared at the neutral pose on each boundary.
+ * @param {ReturnType<typeof prepare>['steps'][number]} step @param {number} seconds */
+export function stepCamera(step, seconds) {
+  const transition = .95;
+  if (seconds < transition) return blendCamera(step.entryCamera, step.camera, seconds / transition);
+  return blendCamera(step.camera, step.exitCamera, (seconds - step.seconds + transition) / transition);
+}
+
+/** Play one full repetition per step.
  * @param {HTMLCanvasElement} canvas @param {ReturnType<typeof prepare>['steps'][number]} step
  * @param {number} seconds @param {boolean} dark */
 export function paintStep(canvas, step, seconds, dark) {
   const phase = Math.max(0, Math.min(1, seconds / step.seconds));
   const fade = Math.min(1, Math.min(phase, 1 - phase) * step.seconds / 0.45);
   renderMovement(canvas, step.move, repetitionSeconds * phase, {
-    location, dark, seatedSequence: true, cueOpacity: fade * fade * (3 - 2 * fade),
+    location, dark, camera: stepCamera(step, seconds), cueOpacity: fade * fade * (3 - 2 * fade),
   });
 }
 

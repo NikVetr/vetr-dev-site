@@ -10,7 +10,7 @@ import {
 import { submit, reviewRoutine } from './core/plan.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
-import { startSession } from './session.js';
+import { sessionCamera, startSession } from './session.js';
 import { setupCheckIn, showFeedback } from './check-in.js';
 import { get, make, button, setPressed, formatTime, readLocal, writeLocal } from './dom.js';
 
@@ -60,6 +60,8 @@ let plan,
   customSteps = null,
   selectedId = '',
   editing = -1;
+/** @type {import('./camera.js').Camera | undefined} */
+let previewCamera;
 const formError = get('form-error', 'p');
 const poseLabel = { seated: 'Seated', standing: 'Standing', supine: 'Reclined' };
 const poseName = (move) => poseLabel[move.pose] || move.pose;
@@ -114,6 +116,7 @@ function drawPreview(now = performance.now()) {
     renderMovement(previewCanvas, move, previewTime, {
       location: prefs.location,
       dark: document.documentElement.dataset.theme === 'dark',
+      camera: previewCamera,
     });
   }
   if (previewPlaying) frame = requestAnimationFrame(drawPreview);
@@ -138,6 +141,11 @@ function watchPreview() {
   for (const dialog of document.querySelectorAll('dialog')) dialog.addEventListener('close', restartPreview);
   document.addEventListener('visibilitychange', restartPreview);
   document.addEventListener('themechange', restartPreview);
+  document.addEventListener('stretchcamerachange', () => {
+    const move = moveById.get(selectedId);
+    if (move) previewCamera = sessionCamera(move);
+    restartPreview();
+  });
   delayMotion.addEventListener('change', () => {
     previewPlaying = !delayMotion.matches;
     if (delayMotion.matches) previewTime = 2;
@@ -162,6 +170,7 @@ function showMovement(id) {
     get('evidence', 'details').open = false;
   }
   selectedId = id;
+  previewCamera = sessionCamera(move);
   get('preview-name', 'h3').textContent = move.name;
   get('preview-cue', 'p').textContent = move.cue;
   const info = get('source-info', 'div');

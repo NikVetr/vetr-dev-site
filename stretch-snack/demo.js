@@ -1,66 +1,15 @@
-// The camera is fixed throughout a repetition, including a change of working side.
-// All three views use the same posed mesh and depth-tested studio renderer.
+// The editor, player and directory supply their camera and share a posed mesh.
+import { movementCamera, cameraProjection, regions } from './camera.js';
 import { movementPose, mixPoint } from './pose.js';
 import { drawTrainer, drawHandDetail } from './trainer.js';
 import { backBallCenter, backBallRadius, drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
 
-/** @type {Record<string,string>} */
-const regions = {
-  'neck-turn': 'head',
-  'neck-tilt': 'head',
-  'shoulder-roll': 'shoulders',
-  'shoulder-squeeze': 'shoulders',
-  'chest-open': 'shoulders',
-  'elbow-bend': 'arms',
-  'band-open': 'arms',
-  'overhead-reach': 'arms',
-  'palm-turn': 'hands',
-  'hand-open': 'hands',
-  'towel-grip': 'hands',
-  'wrist-bend': 'hands',
-  'wrist-stretch': 'hands',
-  'side-bend': 'body',
-  'trunk-turn': 'body',
-  'pelvic-tilt': 'pelvis',
-  'seated-march': 'thighs',
-  'hip-side': 'thighs',
-  'knee-extend': 'shins',
-  'knee-bend': 'thighs',
-  'step-up': 'thighs',
-  'heel-slide': 'shins',
-  'knee-roll': 'thighs',
-  'heel-lift': 'feet',
-  'toe-lift': 'feet',
-  'calf-stretch': 'shins',
-  'foot-roll': 'feet',
-  'chin-tuck': 'head',
-  'self-hug': 'wrists',
-  'glute-squeeze': 'pelvis',
-  'knee-squeeze': 'thighs',
-  'quad-set': 'thighs',
-  'foot-slide': 'shins',
-  'ankle-circle': 'feet',
-  'seated-pelvic-tilt': 'pelvis',
-  'back-round': 'body',
-  'back-arch': 'body',
-  'weight-shift': 'pelvis',
-  'palm-forward': 'wrists',
-  'ball-back': 'body',
-  'hamstring-lean': 'body',
-};
-
-// Profile views expose the fore/aft glide, trunk hinge and the actual contact
-// between the ball, the upper back and the chair. View the glutes from behind.
-const sideViews = {
-  'ball-back': 1.55, 'chin-tuck': 1.12, 'back-round': 1.08, 'back-arch': 1.06,
-  'seated-pelvic-tilt': 1.08, 'hamstring-lean': 1.04, 'glute-squeeze': 2.05,
-};
 const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
 /** @param {HTMLCanvasElement} canvas
  * @param {{motion:string,pose:string,equipment?:string[],name?:string}} move
- * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean,seatedSequence?:boolean,cueOpacity?:number}} [options] */
+ * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
   const width = canvas.clientWidth,
     height = canvas.clientHeight;
@@ -79,34 +28,8 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   const seated = move.pose === 'seated',
     floor = move.pose === 'supine';
   const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
-  const reach = options.seatedSequence || move.motion === 'overhead-reach';
-  const frontSeat = move.motion === 'hamstring-lean' || move.motion === 'quad-set';
-  const sideLabel = !options.preview && (isometric.has(move.motion) || move.motion === 'ball-back');
-  // Reserve some space beside the trainer for the annotation in a small well.
-  const labelRoom = sideLabel && width < 300 && width < height * 2 ? Math.min(30, width * 0.15) : 0;
-  // The sequence needs one view that shows both hands and the extending lower leg.
-  const yaw = options.seatedSequence ? 0.93 : sideViews[move.motion] ?? (floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58);
-  const pitch = floor ? 0.32 : 0.095;
-  const cosYaw = Math.cos(yaw),
-    sinYaw = Math.sin(yaw),
-    cosPitch = Math.cos(pitch),
-    sinPitch = Math.sin(pitch);
-  const standingLift = move.motion === 'step-up' ? 0.16 : move.motion === 'heel-lift' ? 0.08 : 0;
-  const stageHeight = floor ? 0.94 : seated ? (reach ? 1.81 : 1.49) : 1.88 + standingLift;
-  const stageWidth = floor ? 2.36 : handDetail ? 1.85 : frontSeat ? 1.52 : options.preview ? 0.96 : 1.34;
-  const scale = Math.min(height / stageHeight, (width - labelRoom) / stageWidth);
-  const centerY = floor ? 0.22 : seated ? (reach ? 0.82 : 0.675) : 0.86 + standingLift / 2;
-  const centerZ = floor ? 0.012 : frontSeat ? 0.41 : seated ? 0.2 : 0.06;
-  const originX = width * (handDetail ? 0.37 : 0.5) + labelRoom - sinYaw * centerZ * scale;
-  const originY = height * 0.5 + (centerY * cosPitch - centerZ * cosYaw * sinPitch) * scale;
-  const project = ([x, y, z]) => {
-    const depth = -x * sinYaw + z * cosYaw;
-    return [
-      originX + (x * cosYaw + z * sinYaw) * scale,
-      originY + (-y * cosPitch + depth * sinPitch) * scale,
-      depth * cosPitch + y * sinPitch,
-    ];
-  };
+  const camera = options.camera ?? movementCamera(move, {zoom: false});
+  const {scale, project} = cameraProjection(camera, width, height, width >= 230 && !options.preview);
   const pose = movementPose(move, seconds);
   const [sx, sy] = project([0, 0, floor ? 0.02 : seated ? 0.12 : 0.1]);
   ctx.save();
