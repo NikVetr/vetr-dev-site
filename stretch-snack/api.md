@@ -10,6 +10,12 @@ echo '{"location":"plane-seat","seconds":30,"targets":["calves"]}' | node stretc
 
 The example selects `seated-heel-lift` for 30 seconds. Its result also includes compatible swaps and any unmet requests.
 
+A 90-second request for hips, knees and lower back fits the default airplane seat with no equipment. It gives knee squeezes, seated pelvic tilts and buttock squeezes 30 seconds each.
+
+```sh
+echo '{"seconds":90,"targets":["hips","knees","lower-back"]}' | node stretch-snack/cli.mjs
+```
+
 ## Request
 
 All fields are optional. Unknown fields and invalid IDs produce errors.
@@ -20,7 +26,7 @@ All fields are optional. Unknown fields and invalid IDs produce errors.
 | `seconds` | Integer 15–900, default 120, including planned changes of posture. |
 | `targets` | List drawn from `neck`, `shoulders`, `upper-back`, `chest`, `hands` (and forearms), `hips`, `knees` (and thighs), `calves` (and feet), `lower-back`. Empty requests a mixed routine. |
 | `discretion` | `quiet` (default), `moderate`, `any`. A ceiling on how conspicuous a movement may be. |
-| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. |
+| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. Upper-back ball release requires both a massage ball and a chair with a firm back in a stationary location. |
 | `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. A mat is optional. |
 | `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements. |
 | `heightCm`, `armspanCm` | Optional measurements in cm, 50–280 and 40–300, both default 170. Used to scale estimated movement clearance. |
@@ -59,7 +65,7 @@ The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `eligibleIds`, 
 
 ## Interpretation and sources
 
-Each of the 39 posture/equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
+Each of the 58 posture and equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
 
 A small crossover trial found less immediate discomfort when seated office workers interrupted four hours of sitting with hourly standing or pedaling. The study did not test individual in-seat stretches or these short routines. Feedback records personal preference and experience. [Benzo et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29608539/)
 

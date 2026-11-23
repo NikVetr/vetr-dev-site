@@ -130,6 +130,8 @@ export function createRetarget(rig) {
   const restHips = mid(sides[0].thigh.head,sides[1].thigh.head);
   const restChest = mid(sides[0].arm.head,sides[1].arm.head);
   const restBody = axes(sub(restChest,restHips),sub(sides[1].arm.head,sides[0].arm.head));
+  const lumbarFraction = 0.24 / 0.47;
+  const restLumbar = mix(restHips, restChest, lumbarFraction);
   const nativeAxes = axes(Y,X);
   const spineLinks = spine.map(name => ({b: bone(name), aim: segment(bone(name),X)}));
   const neck = bone('Neck'), head = bone('Head'), aimNeck = segment(neck,X);
@@ -139,15 +141,21 @@ export function createRetarget(rig) {
   return (pose, move) => {
     const hip = mid(pose.legs[0].hip, pose.legs[1].hip);
     // Shoulder rolls move the clavicles independently of the sternum and neck.
-    const chest = add(hip, mul(unit(sub(pose.centre, hip)), 0.47));
-    const hipAxes = axes(move.pose === 'supine' ? BACK : Y, sub(pose.legs[1].hip,pose.legs[0].hip));
-    const chestAxes = axes(sub(chest,hip),sub(pose.arms[1].shoulder,pose.arms[0].shoulder));
+    const chest = pose.spine?.chest ?? add(hip, mul(unit(sub(pose.centre, hip)), 0.47));
+    const hipAxes = axes(pose.spine?.pelvicUp ?? (move.pose === 'supine' ? BACK : Y), sub(pose.legs[1].hip,pose.legs[0].hip));
+    const chestAxes = axes(pose.spine?.chestUp ?? sub(chest,hip),sub(pose.arms[1].shoulder,pose.arms[0].shoulder));
     const hipMat = betweenFrames(nativeAxes, hipAxes, restHips, hip);
     const chestMat = betweenFrames(restBody, chestAxes, restChest, chest);
+    const lumbarMat = pose.spine && betweenFrames(restBody, axes(sub(chest,hip), chestAxes[0]), restLumbar, pose.centre);
     /** @param {Vec} p */
     const blendAt = p => Math.max(0,Math.min(1,(p[1]-restHips[1])/(restChest[1]-restHips[1])));
     /** @param {Vec} p */
-    const torso = p => mix(transform(hipMat,p),transform(chestMat,p),blendAt(p));
+    const torso = p => {
+      const t = blendAt(p);
+      if (!lumbarMat) return mix(transform(hipMat,p), transform(chestMat,p), t);
+      if (t < lumbarFraction) return mix(transform(hipMat,p), transform(lumbarMat,p), t / lumbarFraction);
+      return mix(transform(lumbarMat,p), transform(chestMat,p), (t - lumbarFraction) / (1 - lumbarFraction));
+    };
     for (const {b, aim} of spineLinks) {
       aim(torso(b.head), torso(b.tail), mix(hipAxes[0],chestAxes[0],blendAt(b.head)));
     }

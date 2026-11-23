@@ -3,14 +3,20 @@ import test from 'node:test';
 import { moves } from '../core/catalog.js';
 import { movementPose } from '../pose.js';
 
-test('all catalog variants move at least one joint and keep coordinates finite', () => {
+test('each demonstration has finite joints and shows its movement or muscle contraction', () => {
   for (const move of moves) {
     const neutral = movementPose(move,0);
     for (const time of [1,2,4,6]) {
-      const {arms,legs,face,crown} = movementPose(move,time);
+      const {arms,legs,face,crown,activation} = movementPose(move,time);
       const geometry = [arms,legs,face,crown];
       assert.doesNotMatch(JSON.stringify(geometry), /null/, move.id);
-      if (time === 2) assert.notDeepEqual(geometry,[neutral.arms,neutral.legs,neutral.face,neutral.crown],move.id);
+      if (time !== 2) continue;
+      if (['glute-squeeze','knee-squeeze','quad-set'].includes(move.motion)) {
+        assert.equal(neutral.activation, 0, move.id);
+        assert.equal(activation, 1, move.id);
+      } else {
+        assert.notDeepEqual(geometry,[neutral.arms,neutral.legs,neutral.face,neutral.crown],move.id);
+      }
     }
   }
 });

@@ -12,6 +12,18 @@ const lean = ([x, y, z], angle) => [
   y * Math.cos(angle) - x * Math.sin(angle),
   z,
 ];
+/** Rotate about the left–right axis. Positive pitch brings the top of the trunk forward.
+ * @param {number[]} point @param {number} angle */
+const pitchPoint = ([x, y, z], angle) =>
+  [x, y * Math.cos(angle) - z * Math.sin(angle), y * Math.sin(angle) + z * Math.cos(angle)];
+// Native heel pad to ankle, in the planted-foot frame. Rotating about this
+// contact keeps the back of the sole on the ground when the toes rise.
+const heelToAnkle = [0, 0.075, 0.026];
+/** @param {number[]} ankle @param {number} angle */
+function raiseToes(ankle, angle) {
+  const rotated = pitchPoint(heelToAnkle, angle);
+  return ankle.map((v, i) => v + rotated[i] - heelToAnkle[i]);
+}
 
 /** @param {number[]} vector @param {number} length */
 function scaledTo(vector, length) {
@@ -90,7 +102,8 @@ export function movementPose(move, seconds) {
   const supine = pose === 'supine';
   const cycle = Math.floor(seconds / 4);
   const a = (1 - Math.cos((seconds * Math.PI) / 2)) / 2;
-  const side = cycle % 2 ? 1 : -1;
+  const sideCycle = motion === 'ankle-circle' ? Math.floor(cycle / 2) : cycle;
+  const side = sideCycle % 2 ? 1 : -1;
   /** @param {number} s */
   const active = (s) => bilateral.includes(motion) || s === side;
   /** @param {string} name */
@@ -100,6 +113,11 @@ export function movementPose(move, seconds) {
   const phase = seconds / 4 - cycle;
   const ramp = Math.min(1, Math.min(phase, 1 - phase) / 0.31);
   const heldStretch = ramp ** 3 * (ramp * (6 * ramp - 15) + 10);
+  const glutes = motion === 'glute-squeeze' ? heldStretch : 0;
+  const kneesIn = motion === 'knee-squeeze' ? eased(heldStretch / 0.75) : 0;
+  const seatedExtension = motion === 'hamstring-lean' || motion === 'quad-set';
+  const straighten = seatedExtension ? eased(heldStretch / 0.76) : 0;
+  const activation = glutes || (motion === 'knee-squeeze' || motion === 'quad-set' ? eased((heldStretch - 0.75) / 0.25) : 0);
   const calf = motion === 'calf-stretch' ? heldStretch : 0;
   const backStep = eased(calf / 0.52);
   const calfLoad = eased((calf - 0.26) / 0.74);
@@ -109,17 +127,49 @@ export function movementPose(move, seconds) {
   const footDrop = footLength * Math.sin(footAngle);
   const footReach = footLength * Math.cos(footAngle);
   const rise = motion === 'heel-lift' ? footDrop - 0.054 : 0;
+  const standingToeLift = motion === 'toe-lift' && !seated;
+  const soleHeight = standingToeLift ? -0.006 : 0;
   const stepTravel = motionAmount('step-up');
   const stepHeight = 0.14;
+  const shift = side * motionAmount('weight-shift');
   const pelvis = [
-    0,
-    (seated ? 0.51 : 0.91 + rise) - 0.095 * squat - (0.025 * backStep + 0.033 * calfLoad) + eased((stepTravel - 0.45) / 0.55) * stepHeight,
-    -0.09 * squat + 0.04 * calfLoad + stepTravel * 0.24,
+    0.04 * shift,
+    (seated ? 0.51 : 0.91 + rise + soleHeight) - 0.095 * squat - (0.025 * backStep + 0.033 * calfLoad) + eased((stepTravel - 0.45) / 0.55) * stepHeight,
+    // Sit nearer the chair's front so the straight thigh can slope down past the cushion.
+    (seatedExtension ? 0.20 : 0) - 0.09 * squat + 0.04 * calfLoad + stepTravel * 0.24 - (standingToeLift ? 0.022 * a : 0),
   ];
   const yaw = side * 0.43 * motionAmount('trunk-turn');
-  const bend = side * 0.19 * motionAmount('side-bend');
+  const bend = side * (0.19 * motionAmount('side-bend') + 0.035 * motionAmount('ball-back'));
+  // The seated tilts, rounding and hip hinge have distinct pelvic and thoracic
+  // motion. Split the centreline at the lumbar spine instead of bending the
+  // neck and shoulders around the hip as a single rigid board.
+  let pelvicPitch = 0, lumbarPitch = 0, chestPitch = 0;
+  if (motion === 'seated-pelvic-tilt') {
+    pelvicPitch = 0.14 - 0.29 * a;
+    lumbarPitch = 0.12 - 0.23 * a;
+    chestPitch = -0.10 + 0.20 * a;
+  } else if (motion === 'back-round' || motion === 'self-hug') {
+    const round = motion === 'back-round' ? a : 0.45 * a;
+    pelvicPitch = -0.14 * round;
+    lumbarPitch = -0.07 * round;
+    chestPitch = -0.035 + 0.50 * round;
+  } else if (motion === 'back-arch') {
+    lumbarPitch = -0.13 * a;
+    chestPitch = -0.22 * a;
+  } else if (motion === 'hamstring-lean') {
+    pelvicPitch = lumbarPitch = chestPitch = 0.29 * eased((heldStretch - 0.50) / 0.50);
+  } else if (motion === 'ball-back') {
+    lumbarPitch = -0.07 * a;
+    chestPitch = -0.12 * a;
+  }
   /** @param {number[]} offset */
-  const trunk = (offset) => add(pelvis, turn(lean(offset, bend), yaw));
+  const trunk = (offset) => {
+    if (!lumbarPitch && !chestPitch) return add(pelvis, turn(lean(offset, bend), yaw));
+    const lower = Math.min(0.24, offset[1]);
+    const joint = add(pitchPoint([0, lower, 0], lumbarPitch),
+      pitchPoint([offset[0], offset[1] - lower, offset[2]], chestPitch));
+    return add(pelvis, turn(lean(joint, bend), yaw));
+  };
   const rollAngle = 2 * Math.PI * eased(seconds / 4 - cycle);
   const shrug = motion === 'shoulder-roll' ? (1 - Math.cos(rollAngle)) / 2 : 0;
   const squeeze = motionAmount('shoulder-squeeze');
@@ -128,17 +178,18 @@ export function movementPose(move, seconds) {
   const tilt = motion === 'neck-tilt' ? heldStretch : 0;
   const headYaw = yaw + side * (0.66 * motionAmount('neck-turn') - 0.025 * tilt);
   const headTilt = bend - side * (0.15 + 0.19 * 0.85) * tilt;
-  const pitch = 0.02 * tilt;
-  const neck = trunk([0, 0.535, 0]);
+  const chin = motion === 'chin-tuck' ? heldStretch : 0;
+  const pitch = 0.02 * tilt + chestPitch + 0.035 * chin;
+  const neck = trunk([0, 0.535 + 0.002 * chin, -0.034 * chin]);
   /** @param {number[]} offset */
-  const head = ([x, y, z]) => add(neck, turn(lean([
-    x, y * Math.cos(pitch) - z * Math.sin(pitch), y * Math.sin(pitch) + z * Math.cos(pitch),
-  ], headTilt), headYaw));
+  const head = (offset) => add(neck, turn(lean(pitchPoint(offset, pitch), headTilt), headYaw));
   const arms = [-1, 1].map((s) => {
+    const chestOpener = motionAmount('palm-forward');
+    const hug = motionAmount('self-hug');
     const shoulder = trunk([
-      s * (0.182 - 0.014 * squeeze),
-      0.47 + 0.032 * shrug - (s === side ? 0.006 : 0.014) * tilt,
-      -0.033 * squeeze - (motion === 'shoulder-roll' ? 0.026 * side * Math.sin(rollAngle) : 0),
+      s * (0.182 - 0.014 * squeeze - 0.012 * hug),
+      0.47 + 0.032 * shrug - 0.010 * chestOpener - (s === side ? 0.006 : 0.014) * tilt,
+      -0.033 * squeeze - 0.018 * chestOpener + 0.026 * hug - (motion === 'shoulder-roll' ? 0.026 * side * Math.sin(rollAngle) : 0),
     ]);
     const handWork = ['palm-turn', 'wrist-bend', 'hand-open', 'towel-grip', 'band-open', 'wrist-stretch'].includes(
       motion,
@@ -154,7 +205,7 @@ export function movementPose(move, seconds) {
       -lower * Math.cos(elbowAngle), lower * Math.sin(elbowAngle) * Math.cos(outward),
     ], yaw));
     const support = !seated && !supine && s === 1 &&
-      ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'step-up'].includes(motion);
+      ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'toe-lift', 'weight-shift', 'step-up'].includes(motion);
     if (support) {
       wrist = [0.32, 1.075, 0.27];
       elbow = middleJoint(shoulder, wrist, upper, lower, [0.8, -0.65, -0.6]);
@@ -174,6 +225,21 @@ export function movementPose(move, seconds) {
       wrist = trunk([-s * 0.075, 0.31, 0.145 + s * 0.016]);
       elbow = middleJoint(shoulder, wrist, upper, lower, turn([s * 0.58, -1, 0.3], yaw));
     }
+    if (motion === 'self-hug') {
+      wrist = trunk(mixPoint([s * 0.082, 0.24, 0.16], [-s * 0.095, 0.41 + 0.026 * s, 0.143], hug));
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.72, -0.85, 0.75]);
+    } else if (motion === 'back-arch') {
+      wrist = add(pelvis, [s * 0.183, 0.092, 0.053]);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.9]);
+    } else if (motion === 'palm-forward') {
+      elbow = add(shoulder, scaledTo([s * 0.11, -1, 0.18], upper));
+      wrist = add(elbow, scaledTo([s * 0.21, -1, 0.40], lower));
+    } else if (motion === 'hamstring-lean') {
+      // Both hands slide across to rest on the bent thigh as the leg extends.
+      wrist = add(pelvis, mixPoint([s * 0.115, 0.096, 0.205],
+        [-side * 0.11 + s * 0.045, 0.096, 0.205 + s * 0.012], straighten));
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.95, -0.4, 0.10 + 0.75 * straighten]);
+    }
     if (motion === 'wrist-stretch') {
       const target = trunk(s === side ? [s * 0.04, 0.39, 0.415] : [side * 0.012, 0.425, 0.36]);
       wrist = mixPoint(wrist, target, a);
@@ -192,6 +258,9 @@ export function movementPose(move, seconds) {
     let handAxis;
     if (supine) handAxis = scaledTo([s * 0.05, -1, -0.13], 1);
     else if (support) handAxis = [0, -0.6, 0.8];
+    else if (motion === 'hamstring-lean') handAxis = scaledTo([0, -0.08, 1], 1);
+    else if (motion === 'self-hug') handAxis = scaledTo(mixPoint([-s * 0.3, 0.45, 0.7], [-s * 0.9, 0.24, -0.56], hug), 1);
+    else if (motion === 'back-arch') handAxis = scaledTo([s * 0.08, -0.91, 0.32], 1);
     else handAxis = scaledTo(wrist.map((v, i) => v - elbow[i]), 1);
     if (motion === 'wrist-bend' || (motion === 'wrist-stretch' && s === side)) {
       const angle = motion === 'wrist-stretch' ? 1.05 * a : a * 0.58 * side;
@@ -209,7 +278,8 @@ export function movementPose(move, seconds) {
     );
     const close = motion === 'hand-open' ? 1 - a : motion === 'towel-grip' ? 0.24 + (active(s) ? 0.7 * a : 0) : 0;
     const spread = motion === 'hand-open' ? 0.025 + 0.115 * a : 0.045;
-    const roll = motion === 'palm-turn' ? (a * 2.8 - 1.35) * s : supine ? 0 : 0.12 * s;
+    const roll = motion === 'palm-turn' ? (a * 2.8 - 1.35) * s
+      : motion === 'palm-forward' ? -s * (1.50 + 1.35 * a) : supine ? 0 : 0.12 * s;
     return {s, shoulder, elbow, wrist, palm, ...handGeometry(palm, handAxis, s, roll, close, spread)};
   });
   const legs = [-1, 1].map((s) => {
@@ -224,6 +294,7 @@ export function movementPose(move, seconds) {
     const hip = add(pelvis, [s * 0.11, 0, 0]);
     const working = active(s);
     let knee, ankle;
+    let toeOffset = [0, -footDrop, footReach];
     if (seated) {
       const lift = working ? motionAmount('seated-march') : 0;
       const extend = working ? motionAmount('knee-extend') : 0;
@@ -235,19 +306,42 @@ export function movementPose(move, seconds) {
         ankle = add(ankle, [0, rise + 0.055 * roll, (rise ? 0.136 - footReach : 0) + 0.13 * roll]);
         knee = middleJoint(hip, ankle, Math.hypot(0.39, 0.015), 0.402, [0, 0, 1]);
       }
+      if (['foot-slide', 'knee-squeeze', 'ankle-circle', 'hamstring-lean', 'quad-set'].includes(motion)) {
+        const slideBack = working ? 0.165 * motionAmount('foot-slide') : 0;
+        const slideOut = working ? 0.307 * straighten : 0;
+        const circlePhase = cycle % 2 + phase;
+        const circleLift = working && motion === 'ankle-circle' ? eased(Math.min(circlePhase, 2 - circlePhase) / 0.16) : 0;
+        ankle = add(ankle, [0, 0.044 * circleLift, slideOut - slideBack]);
+        knee = middleJoint(hip, ankle, Math.hypot(0.39, 0.015), 0.402, [-s * 0.21 * kneesIn, 0, 1]);
+        if (circleLift) {
+          // Each foot traces a slow circle in each direction before changing.
+          const theta = 2 * Math.PI * eased((phase - 0.15) / 0.70);
+          const sense = s * (cycle % 2 === 0 ? 1 : -1);
+          toeOffset = turn(pitchPoint(toeOffset, -0.28 * (1 - Math.cos(theta))), sense * 0.34 * Math.sin(theta));
+        } else if (slideOut > 0) {
+          // Dorsiflex about the planted heel as the leg straightens.
+          const liftAngle = -0.40 * straighten;
+          ankle = raiseToes(ankle, liftAngle);
+          knee = middleJoint(hip, ankle, Math.hypot(0.39, 0.015), 0.402, [0, 0, 1]);
+          toeOffset = pitchPoint(toeOffset, liftAngle);
+        }
+      }
     } else {
       const abduction = working ? motionAmount('hip-side') : 0;
       const stride = working ? backStep : 0;
       const step = motion === 'step-up' ? eased(working ? stepTravel / 0.45 : (stepTravel - 0.45) / 0.55) : 0;
       ankle = [
-        s * (0.128 + 0.235 * abduction),
-        0.084 + 0.046 * abduction + rise + 0.042 * Math.sin(Math.PI * stride)
+        s * (0.128 + (motion === 'weight-shift' ? 0.04 : 0) + 0.235 * abduction),
+        0.084 + soleHeight + 0.046 * abduction + rise + 0.042 * Math.sin(Math.PI * stride)
           + stepHeight * step + 0.11 * Math.sin(Math.PI * step),
         -0.22 * stride + step * 0.32 + (rise ? 0.136 - footReach : 0),
       ];
+      if (motion === 'toe-lift') {
+        ankle = raiseToes(ankle, -0.5 * a);
+      }
       knee = middleJoint(hip, ankle, 0.423, 0.414, [0, 0, 1]);
     }
-    const toe = add(ankle, [0, -footDrop, footReach]);
+    const toe = add(ankle, toeOffset);
     return { s, hip, knee, ankle, toe };
   });
   let centre = trunk([0, 0.24, 0]);
@@ -280,6 +374,12 @@ export function movementPose(move, seconds) {
     crown,
     eyes,
     neck: mixPoint(arms[0].shoulder, arms[1].shoulder, 0.5),
+    spine: ['seated-pelvic-tilt', 'back-round', 'self-hug', 'back-arch', 'hamstring-lean', 'ball-back'].includes(motion) ? {
+      pelvicUp: pitchPoint([0, 1, 0], pelvicPitch),
+      chestUp: turn(lean(pitchPoint([0, 1, 0], chestPitch), bend), yaw),
+      chest: trunk([0, 0.47, 0]),
+    } : undefined,
+    activation,
     a,
     side,
   };

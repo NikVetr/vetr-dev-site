@@ -1,8 +1,8 @@
 // The camera is fixed throughout a repetition, including a change of working side.
 // All three views use the same posed mesh and depth-tested studio renderer.
-import { movementPose } from './pose.js';
+import { movementPose, mixPoint } from './pose.js';
 import { drawTrainer, drawHandDetail } from './trainer.js';
-import { drawEquipment, drawTowel } from './equipment.js';
+import { backBallCenter, backBallRadius, drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
 
 /** @type {Record<string,string>} */
@@ -34,6 +34,27 @@ const regions = {
   'toe-lift': 'feet',
   'calf-stretch': 'shins',
   'foot-roll': 'feet',
+  'chin-tuck': 'head',
+  'self-hug': 'wrists',
+  'glute-squeeze': 'pelvis',
+  'knee-squeeze': 'thighs',
+  'quad-set': 'thighs',
+  'foot-slide': 'shins',
+  'ankle-circle': 'feet',
+  'seated-pelvic-tilt': 'pelvis',
+  'back-round': 'body',
+  'back-arch': 'body',
+  'weight-shift': 'pelvis',
+  'palm-forward': 'wrists',
+  'ball-back': 'body',
+  'hamstring-lean': 'body',
+};
+
+// Profile views expose the fore/aft glide, trunk hinge and the actual contact
+// between the ball, the upper back and the chair. View the glutes from behind.
+const sideViews = {
+  'ball-back': 1.55, 'chin-tuck': 1.12, 'back-round': 1.08, 'back-arch': 1.06,
+  'seated-pelvic-tilt': 1.08, 'hamstring-lean': 1.04, 'glute-squeeze': 2.05,
 };
 
 /** @param {HTMLCanvasElement} canvas
@@ -58,7 +79,8 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     floor = move.pose === 'supine';
   const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
   const reach = move.motion === 'overhead-reach';
-  const yaw = floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58;
+  const frontSeat = move.motion === 'hamstring-lean' || move.motion === 'quad-set';
+  const yaw = sideViews[move.motion] ?? (floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58);
   const pitch = floor ? 0.32 : 0.095;
   const cosYaw = Math.cos(yaw),
     sinYaw = Math.sin(yaw),
@@ -66,10 +88,10 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     sinPitch = Math.sin(pitch);
   const standingLift = move.motion === 'step-up' ? 0.16 : move.motion === 'heel-lift' ? 0.08 : 0;
   const stageHeight = floor ? 0.94 : seated ? (reach ? 1.81 : 1.49) : 1.88 + standingLift;
-  const stageWidth = floor ? 2.36 : handDetail ? 1.85 : options.preview ? 0.96 : 1.34;
+  const stageWidth = floor ? 2.36 : handDetail ? 1.85 : frontSeat ? 1.52 : options.preview ? 0.96 : 1.34;
   const scale = Math.min(height / stageHeight, width / stageWidth);
   const centerY = floor ? 0.22 : seated ? (reach ? 0.82 : 0.675) : 0.86 + standingLift / 2;
-  const centerZ = floor ? 0.012 : seated ? 0.2 : 0.06;
+  const centerZ = floor ? 0.012 : frontSeat ? 0.41 : seated ? 0.2 : 0.06;
   const originX = width * (handDetail ? 0.37 : 0.5) - sinYaw * centerZ * scale;
   const originY = height * 0.5 + (centerY * cosPitch - centerZ * cosYaw * sinPitch) * scale;
   const project = ([x, y, z]) => {
@@ -96,11 +118,11 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     drawTrainer(mesh, pose, move);
   });
   if (!options.preview)
-    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false);
+    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false, seconds);
 }
 
-/** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark */
-function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
+/** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds */
+function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, seconds) {
   const group = regions[move.motion],
     arm = pose.arms[pose.side === 1 ? 1 : 0],
     leg = pose.legs[pose.side === 1 ? 1 : 0];
@@ -110,6 +132,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
     shoulders: arm.shoulder,
     arms: arm.elbow,
     hands: arm.palm,
+    wrists: arm.wrist,
     body: pose.centre,
     pelvis: leg.hip,
     thighs: leg.knee,
@@ -153,6 +176,47 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
         drawHandDetail(mesh, -pose.side);
     });
     ctx.restore();
+  } else if (['glute-squeeze', 'knee-squeeze', 'quad-set'].includes(move.motion)) {
+    const glutes = move.motion === 'glute-squeeze', quad = move.motion === 'quad-set';
+    const working = quad ? [leg] : pose.legs;
+    const muscles = working.map(l => {
+      if (glutes) return [l.hip[0], l.hip[1] + 0.022, l.hip[2] - 0.073];
+      const point = mixPoint(l.hip, l.knee, quad ? 0.64 : 0.55);
+      return [point[0] - (quad ? 0 : l.s * 0.045), point[1] + 0.033, point[2] + 0.014];
+    });
+    const phase = pose.activation < 0.03 ? 'Relax' : pose.activation >= 0.98 ? 'Hold' :
+      seconds % 4 < 2 ? 'Tighten' : 'Release';
+    const points = muscles.map(project);
+    for (const [i, [px, py]] of points.entries()) {
+      const hip = project(working[i].hip), knee = project(working[i].knee);
+      const angle = glutes ? 0 : Math.atan2(knee[1] - hip[1], knee[0] - hip[0]);
+      const length = glutes ? 0.058 * scale : 0.24 * Math.hypot(knee[1] - hip[1], knee[0] - hip[0]);
+      ctx.beginPath();
+      ctx.ellipse(px, py, Math.max(4, length), Math.max(2.6, scale * (glutes ? 0.048 : 0.030)), angle, 0, Math.PI * 2);
+      ctx.globalAlpha = 0.10 + 0.37 * pose.activation;
+      ctx.fill();
+      ctx.globalAlpha = 0.86;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    const target = points.length === 1 ? points[0] : mixPoint(points[0], points[1], 0.5);
+    label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase], width, height, dark);
+  } else if (move.motion === 'ball-back') {
+    const target = project(backBallCenter(pose));
+    ctx.beginPath();
+    ctx.arc(target[0], target[1], Math.max(3, backBallRadius * scale + 2), 0, Math.PI * 2);
+    ctx.stroke();
+    label(ctx, target, ['Massage ball'], width, height, dark);
+  } else if (move.motion === 'ankle-circle') {
+    ankleArrow(ctx, move, seconds, leg, project, width, height, scale);
+  } else if (move.motion === 'palm-forward') {
+    for (const hand of pose.arms) {
+      const [u, v] = project(hand.palm);
+      arrow(ctx, u - hand.s * scale * 0.035, v - scale * 0.048, u + hand.s * scale * 0.085, v - scale * 0.035, hand.s * 0.65, scale);
+    }
+  } else if (move.motion === 'seated-pelvic-tilt') {
+    const [u, v] = project(mixPoint(pose.legs[0].hip, pose.legs[1].hip, 0.5));
+    arrow(ctx, u + scale * 0.085, v - scale * 0.095, u - scale * 0.085, v - scale * 0.095, 0.5, scale, true);
   } else if (move.motion === 'pelvic-tilt') {
     const [u, v] = project(pose.centre);
     arrow(ctx, u - scale * 0.04, v - scale * 0.22, u - scale * 0.018, v - scale * 0.12, 0.18, scale);
@@ -174,11 +238,14 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
         case 'head':
           return move.motion === 'neck-turn' ? frame.face : frame.crown;
         case 'arms':
+        case 'wrists':
           return a.wrist;
         case 'shoulders':
           return move.motion === 'chest-open' ? a.elbow : a.shoulder;
         case 'body':
           return a.shoulder;
+        case 'pelvis':
+          return l.hip;
         case 'thighs':
           return l.knee;
         case 'shins':
@@ -210,8 +277,68 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
   ctx.restore();
 }
 
+// Position the annotation in the free space nearest the muscle, keeping even
+// a two-line label inside a narrow portrait demonstration.
+function label(ctx, target, lines, width, height, dark) {
+  const font = Math.max(10, Math.min(16, height * 0.044, width * 0.055));
+  ctx.font = '600 ' + font + 'px system-ui, sans-serif';
+  const pad = 5, lineHeight = font * 1.19;
+  const w = Math.ceil(Math.max(...lines.map(line => ctx.measureText(line).width))) + 2 * pad;
+  const h = Math.ceil(lines.length * lineHeight) + 2 * pad;
+  const gap = Math.min(46, Math.max(16, height * 0.12));
+  const space = w + gap + pad;
+  const left = target[0] >= space && (target[0] < width / 2 || width - target[0] < space);
+  const beside = left ? target[0] - gap - w : target[0] + gap;
+  const x = Math.max(pad, Math.min(width - w - pad, beside));
+  const y = Math.max(pad, Math.min(height - h - pad, target[1] - h - Math.min(17, height * 0.04)));
+  const lineX = left ? x + w : x, lineY = y + h * 0.67;
+  ctx.beginPath();
+  ctx.moveTo(lineX, lineY);
+  ctx.lineTo(target[0], target[1]);
+  ctx.stroke();
+  ctx.fillStyle = dark ? '#273a30' : '#fffdf6';
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, 4);
+  ctx.fill();
+  ctx.stroke();
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = dark ? '#ffdcaa' : '#653813';
+  lines.forEach((line, i) => ctx.fillText(line, x + pad, y + pad + (i + 0.5) * lineHeight));
+}
+
+// Copy the arc traced by the toes, including the reversal on the same foot.
+// Cache its world points across animation frames.
+const anklePaths = new Map();
+function ankleArrow(ctx, move, seconds, leg, project, width, height, scale) {
+  const cycle = Math.floor(seconds / 4) % 4;
+  if (!anklePaths.has(cycle)) {
+    const points = [];
+    for (let i = 0; i <= 18; i++) {
+      const frame = movementPose(move, 4 * cycle + 0.65 + (2.35 * i) / 18);
+      points.push(frame.legs[leg.s === -1 ? 0 : 1].toe);
+    }
+    anklePaths.set(cycle, points);
+  }
+  const points = anklePaths.get(cycle).map(project);
+  const xs = points.map(p => p[0]), ys = points.map(p => p[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const radius = Math.max(5, scale * 0.075);
+  const factor = 2 * radius / Math.max(0.001, maxX - minX, maxY - minY);
+  const [tx, ty] = project(leg.toe);
+  const cx = Math.max(radius + 3, Math.min(width - radius - 3, tx + (tx < width/2 ? -1 : 1) * radius * 1.9));
+  const cy = Math.max(radius + 3, Math.min(height - radius - 3, ty - radius));
+  const path = points.map(([u,v]) => [cx + (u - (minX + maxX)/2) * factor, cy + (v - (minY + maxY)/2) * factor]);
+  ctx.beginPath();
+  ctx.moveTo(path[0][0], path[0][1]);
+  for (const [u,v] of path.slice(1)) ctx.lineTo(u, v);
+  ctx.stroke();
+  const [x,y] = path.at(-1), [px,py] = path.at(-2);
+  arrowhead(ctx, x, y, Math.atan2(y - py, x - px), radius * 0.5);
+}
+
 /** @param {CanvasRenderingContext2D} ctx @param {number} x1 @param {number} y1 @param {number} x2 @param {number} y2 @param {number} bend @param {number} scale */
-function arrow(ctx, x1, y1, x2, y2, bend, scale) {
+function arrow(ctx, x1, y1, x2, y2, bend, scale, bothEnds = false) {
   const dx = x2 - x1,
     dy = y2 - y1,
     r = Math.hypot(dx, dy);
@@ -223,6 +350,10 @@ function arrow(ctx, x1, y1, x2, y2, bend, scale) {
   ctx.stroke();
   const angle = Math.atan2(y2 - cy, x2 - cx);
   const tip = Math.min(r * 0.48, Math.max(3.8, scale * 0.038));
+  arrowhead(ctx, x2, y2, angle, tip);
+  if (bothEnds) arrowhead(ctx, x1, y1, Math.atan2(y1 - cy, x1 - cx), tip);
+}
+function arrowhead(ctx, x2, y2, angle, tip) {
   ctx.beginPath();
   ctx.moveTo(x2 - tip * Math.cos(angle - 0.54), y2 - tip * Math.sin(angle - 0.54));
   ctx.lineTo(x2, y2);

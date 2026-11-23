@@ -83,7 +83,7 @@ function normalize(request) {
 /** @type {Record<string, string>} */
 const conflicts = {
   'back-support': 'unsupported-back', 'no-twisting': 'twist', 'limited-grip': 'grip',
-  'no-leg-movement': 'legs', 'no-arm-movement': 'arms',
+  'no-leg-movement': 'legs', 'no-arm-movement': 'arms', 'poor-balance': 'balance',
 };
 
 /** @param {Movement} move @param {Preferences} prefs @param {string} location */
@@ -116,7 +116,7 @@ function fitIssues(move, prefs, location) {
   const side = location === prefs.location ? prefs.sideCm ?? space.side : space.side;
   // A leg extension or stride scales with height, an arm reach with span.
   const forwardScale = (move.uses.includes('legs') ? prefs.heightCm : prefs.armspanCm) / 170;
-  const sideScale = (move.motion === 'hip-side' || move.pose === 'supine' ? prefs.heightCm : prefs.armspanCm) / 170;
+  const sideScale = (move.motion === 'hip-side' || move.motion === 'weight-shift' || move.pose === 'supine' ? prefs.heightCm : prefs.armspanCm) / 170;
   if (move.forward * forwardScale > forward) issues.push('Needs about ' + Math.ceil(move.forward * forwardScale) + ' cm ahead of your knees.');
   if (move.side * sideScale > side) issues.push('Needs about ' + Math.ceil(move.side * sideScale) + ' cm beside each shoulder.');
   return issues;

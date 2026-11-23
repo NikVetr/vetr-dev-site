@@ -88,6 +88,12 @@ function pad(mesh, center, w, d, h, r, color) {
     color,
   );
 }
+// A firm chair back contacts the ball just to one side of the spine. It rolls
+// a short distance along that same track as the upper body shifts.
+export const backBallRadius = 0.029;
+export function backBallCenter(pose) {
+  return [-0.082, 0.83 + 0.01 * pose.a, -0.16];
+}
 export function drawEquipment(mesh, p, move, location, seconds) {
   const metal = '#9aaead',
     cushion = '#adbfba',
@@ -111,6 +117,8 @@ export function drawEquipment(mesh, p, move, location, seconds) {
       ].map(([y, w, d]) => ring([0, y, -0.174 - (y - 0.51) * 0.12], X, Z, w, d, bodyRound)),
       cushion,
     );
+    if (move.motion === 'ball-back')
+      ellipsoid(mesh, backBallCenter(p), X, Y, Z, backBallRadius, backBallRadius, backBallRadius, accent);
     if (['plane-seat', 'train-seat'].includes(location))
       for (const s of [-1, 1]) {
         rod(mesh, [s * 0.266, 0.427, 0.16], [s * 0.266, 0.605, 0.16], 0.012, metal);

@@ -35,7 +35,11 @@ test('a quiet middle-seat plan is deterministic, local, under budget, and covers
 test('favorites never defeat an exclusion, discomfort, unavailable equipment, or selected location', () => {
   const req = {...quiet, targets: ['calves'], seconds: 30, avoidIds: ['seated-heel-lift'],
     favoriteIds: ['standing-step-up', 'seated-heel-lift', 'seated-toe-lift', 'seated-towel-grip']};
-  const result = submit({...req, feedback: {'seated-toe-lift': 'uncomfortable'}});
+  const feedback = {'seated-toe-lift': 'uncomfortable'};
+  const fallback = submit({...req, feedback});
+  assert.deepEqual(fallback.steps, [{id: 'seated-ankle-circle', seconds: 30}]);
+  assert.deepEqual(fallback.unmetFavorites, req.favoriteIds);
+  const result = submit({...req, feedback, avoidIds: [...req.avoidIds, 'seated-ankle-circle']});
   assert.deepEqual(result.steps, []);
   assert.deepEqual(result.unmetTargets, ['calves']);
   assert.deepEqual(result.unmetFavorites, req.favoriteIds);
