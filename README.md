@@ -52,6 +52,8 @@ Section interiors use a subtle light or dark tint of their outline colour. Previ
 
 The pictures are drawn from the tools themselves, from their default or explicitly selected examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
+Travel Prompt traces routes across a stylized map alongside four example requests set near Kyoto Station. Stretch Snack plays one repetition from each movement in a one-minute seated routine, condensed into a 12-second preview. Its still shows all three poses.
+
 Table Seating follows a real five-round plan for 300 guests at 50 tables, zooming from coloured participants at one table to the irregularly spaced full room. The first zoom finishes before guests move; a single round label identifies the destination round, and whole circles fade before crossing the frame edges. Its offline route builder reserves space and time, then checks guest/table clearance continuously, including between decoded keyframes. The routed animation illustrates movement; the optimizer scores straight-line table-center travel. Regressions live in `scripts/landing-art/tests/`.
 
 Stan Studio shows the beta–binomial example graph with cumulative seeded Monte Carlo draws. The alphabet preview moves and resizes original letter pieces before painting the logo.

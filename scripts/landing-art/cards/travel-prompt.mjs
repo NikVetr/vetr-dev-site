@@ -1,70 +1,143 @@
-import { readFileSync } from 'node:fs';
-import { modes } from '../../../travel-prompt/core/catalog.mjs';
 import { submit } from '../../../travel-prompt/core/prompt.mjs';
-import { art } from '../svg.mjs';
+import { art, esc } from '../svg.mjs';
+
+// Each route leads from the station to the landmark used in that sample brief.
+// Reading a menu stays at the table reached by the restaurant request.
+const stops = [
+  { mode: 'lodging', note: 'Quiet at night', route: 'M37 108L57 96Q61 94 61 90V59Q61 55 56 53L48 49', end: [48, 49] },
+  { mode: 'restaurant', note: 'Regional specialties', route: 'M37 108L57 96Q61 94 66 95L92 99Q98 100 104 97L132 83Q138 80 143 83L167 96', end: [167, 96] },
+  { mode: 'menu', note: 'Two menu photos', route: 'M167 96Q173 100 179 96L188 90Q192 87 188 85L181 82', end: [181, 82] },
+  { mode: 'outing', note: 'Gardens and galleries', route: 'M37 108L57 96Q61 94 61 90V74Q61 69 66 67L98 52Q103 49 109 51L122 55Q127 57 132 54L161 39', end: [161, 39] },
+];
+const period = 16;
+
+const mapDefs = `
+<pattern id="travel-prompt-blocks" width="38" height="27" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)">
+  <path fill="#ced7bb" d="M2 2h12v8H2zM16 2h18v8H16zM2 13h21v10H2zM25 13h9v10h-9z"/>
+  <path fill="none" stroke="#edead5" stroke-width="1" d="M0 25h38M36 0v27"/>
+</pattern>
+<g id="travel-prompt-pine" stroke="#284f47" stroke-linecap="round" stroke-linejoin="round">
+  <path fill="#719477" d="m0-14-5 9h3l-4 6H6L2-5h3z"/>
+  <path fill="none" d="M0-4v8"/>
+</g>
+<g id="travel-prompt-trees">
+  <use href="#travel-prompt-pine" x="-6" y="-2"/><use href="#travel-prompt-pine" x="2" y="1"/>
+</g>`;
+
+const map = `
+<rect x="-300" y="-200" width="820" height="540" fill="#e5e7ca"/>
+<rect x="-300" y="-200" width="820" height="540" fill="url(#travel-prompt-blocks)"/>
+<path fill="#bbcea9" d="M117 14Q145 14 153-9L224-30 243 18Q215 26 203 49Q188 59 168 52Q143 42 122 42Z"/>
+<path d="M162-70Q171-5 123 27T125 86Q159 106 134 150T136 220" fill="none" stroke="#a9bda6" stroke-width="21"/>
+<path d="M162-70Q171-5 123 27T125 86Q159 106 134 150T136 220" fill="none" stroke="#91bdbc" stroke-width="17"/>
+<path d="M159-35Q158-2 140 14M116 36Q92 59 119 78M130 90Q152 109 141 132" fill="none" stroke="#d1e2ce" stroke-width="1.4" stroke-linecap="round"/>
+<g fill="none" stroke-linejoin="round" stroke-linecap="round">
+ <path d="m-86 166 150-72 33 6 40-20 64 32 97-45M-69 134 61 70l42-20 23 8L250-4M-26-4 61 40v53M-47 89l76-35L89 24l18-59" stroke="#bbc1a6" stroke-width="5.7"/>
+ <path d="m-86 166 150-72 33 6 40-20 64 32 97-45M-69 134 61 70l42-20 23 8L250-4M-26-4 61 40v53M-47 89l76-35L89 24l18-59" stroke="#f7f0d9" stroke-width="4"/>
+ <path d="m-35 147 75-35 58 16 105 50" stroke="#839580" stroke-width="3"/>
+ <path d="m-35 147 75-35 58 16 105 50" stroke="#f5eed6" stroke-width="1.3" stroke-dasharray="3 2"/>
+</g>
+<!-- The inn, station, food stall and garden are drawn on the same folded street map. -->
+<g stroke="#34584c" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
+ <g transform="translate(47 45)">
+  <path fill="#b5c3a2" stroke="none" d="m-24-1 18 8 29-14-17-6z"/>
+  <path fill="#f5e6bf" d="m-16-14 15 7 17-9v13L-1 5l-15-7z"/><path fill="#d6d3ac" d="m-1-7 17-9v13L-1 5z"/>
+  <path fill="#c96947" d="m-20-15 8-12 16 7-5 14z"/><path fill="#a95942" d="m-1-6 5-14 17 1-5 4z"/>
+  <path fill="#f6eacc" d="m-12-26 14-7 18 7-16 7z"/><path fill="#c7764e" d="m4-19 16-7 3 7-18 9z"/>
+  <path fill="#41665a" d="m-12-10 3 1v5l-3-1zm5 3 3 1v4l-3-1zm10 1 3-2v6L3 0zm6-3 3-1v4l-3 1z"/>
+ </g>
+ <g transform="translate(165 36)">
+  <path fill="#b1c398" stroke="none" d="M-23-4q21 16 45 0l-15-5z"/>
+  <use href="#travel-prompt-trees" x="-13" y="-6"/><use href="#travel-prompt-pine" x="18" y="-4"/>
+  <path fill="#c76947" d="M-6-15h3l1 15h-3zm12 0h3l-1 15H5z"/>
+  <path fill="#d9865a" d="M-11-21q12 4 24 0l-1 3q-11 3-22 0zm2 8v-2h21v2z"/>
+ </g>
+ <g transform="translate(170 83)">
+  <path fill="#bfcaac" stroke="none" d="m-20 6 16 8L22 2 6-6z"/>
+  <path fill="#f3dfb0" d="m-13-5 13 6 17-8V4L0 12l-13-6z"/><path fill="#719385" d="m0 1 17-8V4L0 12z"/>
+  <path fill="#284f47" d="m-10-3 7 3v4l-7-3z"/>
+  <path fill="#f5dcad" d="m-15-9 17 7 19-9-16-6z"/>
+  <path fill="#c46d4c" d="m-12-10 4-2 16 7-4 2zm8-4 4-2 16 7-4 2z"/>
+  <path fill="#e0ab72" d="m-15-9 17 7v3l-17-7z"/><path fill="#a35e46" d="m2-2 19-9v3L2 1z"/>
+ </g>
+ <g transform="translate(32 97)">
+  <path fill="#bbc6a9" stroke="none" d="m-19 0 12 7L22-6 8-12z"/>
+  <path fill="#f7e7c4" d="m-15-6 6-6 20-9 6 3v8L-6 2q-9 2-9-3z"/>
+  <path fill="#799e96" d="m-12-6 5-4 3 1v4l-8 3zM0-10l13-6v4L0-6z"/>
+  <path fill="none" stroke="#a95d42" d="m-12 0 6-1 21-10"/>
+ </g>
+ <use href="#travel-prompt-trees" x="15" y="53"/><use href="#travel-prompt-trees" x="90" y="23"/>
+ <use href="#travel-prompt-trees" x="200" y="59"/><use href="#travel-prompt-pine" x="95" y="124"/>
+</g>`;
 
 export function build() {
-  const html = readFileSync(new URL('../../../travel-prompt/index.html', import.meta.url), 'utf8');
-  const cases = [
-    { mode: 'lodging', symbol: 'bed', fields: { place: 'Kyoto Station', preferences: 'Quiet at night' } },
-    {
-      mode: 'restaurant',
-      symbol: 'dining',
-      fields: { place: 'Kyoto Station', preferences: 'Regional specialties' },
-    },
-    { mode: 'outing', symbol: 'sights', fields: { place: 'Kyoto Station', preferences: 'Gardens and galleries' } },
-    { mode: 'menu', symbol: 'menu', fields: { place: 'Menu photos', preferences: 'Food and drinks' } },
-  ];
-  const slides = cases.map(({ mode, symbol, fields }, index) => {
-    const icon = html.match(new RegExp('<symbol id="' + symbol + '-icon"[^>]*>(.*?)</symbol>', 's'))?.[1];
-    if (!icon) throw new Error('Missing travel mode icon ' + symbol);
-    const prompt = submit({
-      mode,
-      place: fields.place,
-      photoCount: mode === 'menu' ? 2 : 0,
-      notes: fields.preferences,
-    }).prompt;
-    const verb = prompt.split(' ')[0];
-    return `<div class="brief brief-${index}">
-      <div class="stamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></div>
-      <div class="request"><b>${modes[mode].label}</b><span>${fields.place}</span><span>${fields.preferences}</span></div>
-      <div class="outcome">${verb} 3 options →</div></div>`;
-  });
+  const trails = [];
+  const briefs = [];
+  for (const [index, stop] of stops.entries()) {
+    const { mode, route, end, note } = stop;
+    const place = 'Kyoto Station';
+    const { prompt } = submit({ mode, place, notes: note, photoCount: mode === 'menu' ? 2 : 0 });
+    const instruction = prompt.split('.')[0].replace(/ (that fit this request|from this menu)$/, '');
+    const delay = -period + index * period / stops.length;
+    const phase = `class="stop stop-${index}" style="--phase:${delay}s"`;
+    trails.push(`<g ${phase} fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="${route}" stroke="#f8f0d9" stroke-width="4.3"/>
+      <path class="trail" d="${route}" pathLength="100" stroke="#ac4933" stroke-width="2.7"/>
+      <path class="traveler" d="${route}" pathLength="100" stroke="#753e31" stroke-width="4.6" stroke-dasharray=".01 210"/>
+      <circle class="ripple" cx="${end[0]}" cy="${end[1]}" r="7.5" stroke="#ae5336" stroke-width=".9"/>
+      <circle class="arrival" cx="${end[0]}" cy="${end[1]}" r="4" fill="#ffedc9" stroke="#aa4933" stroke-width="2"/>
+    </g>`);
+    briefs.push(`<div ${phase}><div class="entry">
+      <span class="place"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 16s5.5-5.8 5.5-9A5.5 5.5 0 0 0 2.5 7c0 3.2 5.5 9 5.5 9Z"/><circle cx="8" cy="7" r="1.8"/></svg>${place}</span>
+      <strong>${esc(instruction)}</strong><span class="note">${esc(note)}</span>
+    </div></div>`);
+  }
   return art({
-    name: 'travel-prompt',
-    responsive: true,
-    period: 16,
-    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="ticket">${slides.join('')}</div></foreignObject>`,
-    css: `& {--surround:#c5d4b9;--ticket:#f1edda;--stamp:#285646;--ink:#173f37;background:var(--surround);container:trip-brief / size}
-:root[data-theme="dark"] & {--surround:#22362e;--ticket:#e0dfcc;--stamp:#214e41}
-& .ticket {position:absolute;inset:7% 5%;overflow:hidden;background:var(--ticket);border-radius:4px;color:var(--ink);font:normal 1em/1.18 system-ui,sans-serif}
-& .ticket::after {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at left center,var(--surround) 0 1.65cqw,transparent 1.8cqw),radial-gradient(circle at right center,var(--surround) 0 1.65cqw,transparent 1.8cqw)}
-& .brief {position:absolute;inset:0;display:grid;grid-template:"stamp request" minmax(0,1fr) "stamp outcome" auto / 28% minmax(0,1fr)}
-& .brief:not(.brief-0) {opacity:0}
-& .stamp {grid-area:stamp;display:grid;place-items:center;background:var(--stamp);color:#f1d295}
-& .stamp svg {width:min(70%,35cqh);height:auto;max-height:85%}
-& .request {grid-area:request;display:flex;justify-content:center;flex-direction:column;gap:1cqh;margin:0 6cqw;font-size:clamp(10px,min(5cqw,9cqh),26px);line-height:1.2}
-& .request b {font-size:clamp(14px,min(7.5cqw,14cqh),40px);line-height:1.08;letter-spacing:-.035em;margin-bottom:1cqh}
-& .outcome {grid-area:outcome;margin:0 6cqw;padding:2.8cqh 0 4cqh;border-top:1px dashed #82977f;font-size:clamp(10px,min(4.3cqw,8.5cqh),23px);font-weight:650}
-@container trip-brief (min-aspect-ratio:3/1) {
- & .brief {grid-template:"stamp request outcome" minmax(0,1fr) / 19% minmax(0,1fr) 29%}
- & .request {margin:0 3cqw;gap:1cqh;font-size:clamp(9px,13cqh,24px)}
- & .request b {font-size:clamp(12px,21cqh,32px)}
- & .outcome {align-self:stretch;display:grid;align-content:center;border:0;border-left:1px dashed #82977f;padding:0 1.6cqw;margin:7cqh 0;font-size:clamp(9px,min(12cqh,3.1cqw),18px)}
-}
-@container trip-brief (max-aspect-ratio:1.12/1) {
- & .brief {grid-template:"stamp" minmax(0,.78fr) "request" minmax(0,1fr) "outcome" auto / minmax(0,1fr)}
- & .stamp svg {height:68%;width:auto}
- & .request {margin:0 8cqw;font-size:clamp(11px,6cqw,24px)}
- & .request b {font-size:clamp(15px,8.5cqw,35px)}
- & .outcome {margin:0 8cqw}
+    name: 'travel-prompt', responsive: true, period,
+    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="atlas">
+      <div class="map-window"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 127">
+       <defs>${mapDefs}</defs><g class="map-sheet">${map}${trails.join('')}</g></svg></div>
+      <div class="paper">${briefs.join('')}</div>
+    </div></foreignObject>`,
+    css: `& {container:trip-atlas / size;background:#e5e7ca}
+& .atlas {position:absolute;inset:0;display:grid;grid-template-rows:minmax(0,1fr) 40%;background:#eee8d5;color:#254f45}
+& .map-window {position:relative;overflow:hidden;background:#e5e7ca}
+& .map-window svg {display:block;width:100%;height:100%;overflow:visible}
+& .paper {position:relative;min-width:0;background:#faf1da;border-top:1px dashed #aeaa8c}
+& .paper .stop {position:absolute;inset:0}
+& .entry {height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:clamp(2px,1cqh,6px);padding:1.2cqh 6cqw}
+& .place {display:flex;align-items:center;gap:.42em;font:700 clamp(9px,min(3.6cqw,6.5cqh),17px)/1.05 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#85523e}
+& .place svg {width:.95em;height:1.05em;flex:none}
+& .entry strong {font:600 clamp(15px,min(6.2cqw,12cqh),38px)/1.03 Georgia,serif;letter-spacing:-.035em;text-wrap:balance}
+& .note {font:500 clamp(10px,min(4.1cqw,7cqh),22px)/1.12 system-ui,sans-serif}
+& .stop:not(.stop-0) {opacity:0}
+& .trail {stroke-dasharray:100 110;stroke-dashoffset:68}
+& .traveler {stroke-dashoffset:-32}
+& .arrival, & .ripple {opacity:0}
+& .ripple {transform-box:fill-box;transform-origin:center}
+:root[data-theme="dark"] & .map-window {filter:brightness(.84) saturate(.89)}
+:root[data-theme="dark"] & .paper {background:#e6e3cb}
+@container trip-atlas (min-aspect-ratio:1.85/1) {
+ & .atlas {grid-template-rows:100%;grid-template-columns:54% minmax(0,1fr)}
+ & .paper {border-top:0;border-left:1px dashed #aeaa8c}
+ & .entry {padding:2cqh 3.1cqw;gap:clamp(3px,3cqh,12px)}
+ & .entry strong {font-size:clamp(14px,min(4.7cqw,18cqh),38px)}
+ & .note {font-size:clamp(10px,min(3.3cqw,12cqh),22px)}
+ & .place {font-size:clamp(8px,min(2.6cqw,10cqh),16px)}
 }`,
-    loop:
-      cases
-        .map(
-          (_, index) =>
-            '& .brief-' + index + '{animation:travel-prompt-slide 16s ' + (-16 + 4 * index) + 's infinite}',
-        )
-        .join('\n') + '\n@keyframes travel-prompt-slide{0%,21%{opacity:1}25%,96%{opacity:0}100%{opacity:1}}',
+    loop: `& .map-sheet {animation:trip-pan ${period}s ease-in-out infinite}
+& .stop {animation:trip-stop ${period}s var(--phase) infinite both}
+& .trail {animation:trip-trail ${period}s var(--phase) infinite both}
+& .traveler {animation:trip-traveler ${period}s var(--phase) infinite both}
+& .arrival {animation:trip-arrival ${period}s var(--phase) infinite both}
+& .ripple {animation:trip-ripple ${period}s var(--phase) infinite both}
+& .entry {animation:trip-entry ${period}s var(--phase) infinite both}
+@keyframes trip-pan {0%,100%{transform:translate(0,0)}12%{transform:translate(3px,2px)}37%,59%{transform:translate(-4px,-2px)}82%,91%{transform:translate(-3px,3px)}}
+@keyframes trip-stop {0%,19%,100%{opacity:1}21%,94%{opacity:0}97%{opacity:1}}
+@keyframes trip-trail {0%,100%{stroke-dashoffset:68}7%,21%{stroke-dashoffset:0}94%,97%{stroke-dashoffset:100}}
+@keyframes trip-traveler {0%,100%{stroke-dashoffset:-32}7%,21%{stroke-dashoffset:-100}94%,97%{stroke-dashoffset:0}}
+@keyframes trip-arrival {0%,6%,22%,100%{opacity:0}7%,20%{opacity:1}}
+@keyframes trip-ripple {0%,6%{opacity:0;transform:scale(.6)}7%{opacity:.9;transform:scale(.6)}15%,100%{opacity:0;transform:scale(1.9)}}
+@keyframes trip-entry {0%,17.5%,100%{opacity:1;transform:translateY(0)}19.5%{opacity:0;transform:translateY(-6%)}95%{opacity:0;transform:translateY(10%)}99%{opacity:1;transform:translateY(0)}}`,
   });
 }
