@@ -1,6 +1,8 @@
-// Orthographic figure with articulated limbs. World-space props, body and
-// annotations share the same camera in the editor and during playback.
-import { movementPose, mixPoint } from './pose.js';
+// The camera is fixed throughout a repetition, including a change of working side.
+// All three views use the same posed mesh and depth-tested studio renderer.
+import { movementPose } from './pose.js';
+import { drawTrainer, drawEquipment, drawHandDetail } from './trainer.js';
+import { drawSurface } from './surface.js';
 
 /** @type {Record<string,string>} */
 const regions = {
@@ -33,18 +35,9 @@ const regions = {
   'foot-roll': 'feet',
 };
 
-/** @param {number[]} point */
-const offset = (point, x = 0, y = 0, z = 0) => [point[0] + x, point[1] + y, point[2] + z];
-const skin = ['#c5ab90', '#e4bd9b', '#a9816d'];
-const shirt = ['#307975', '#68a59c', '#265956'];
-const trousers = ['#45616b', '#6f8c8e', '#30474f'];
-const amber = ['#cb763c', '#f2b55f', '#a2572d'];
-const boot = ['#395157', '#627a77', '#243e41'];
-const chair = ['#9bb6a6', '#b5cbb7', '#7f9d8d'];
-
 /** @param {HTMLCanvasElement} canvas
- * @param {{motion:string, pose:string, equipment?:string[], name?:string}} move
- * @param {number} seconds @param {{location?:string,dark?:boolean}} [options] */
+ * @param {{motion:string,pose:string,equipment?:string[],name?:string}} move
+ * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
   const width = canvas.clientWidth,
     height = canvas.clientHeight;
@@ -56,241 +49,53 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     canvas.width = pixels;
     canvas.height = rows;
   }
-  const context = canvas.getContext('2d');
-  if (!context) return;
-  const ctx = context;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
   ctx.clearRect(0, 0, width, height);
-  const dark = options.dark ?? false,
-    seated = move.pose === 'seated',
+  const seated = move.pose === 'seated',
     floor = move.pose === 'supine';
-  const group = regions[move.motion];
-  const handDetail = group === 'hands' && width >= 230;
-  // A three-quarter view preserves clearance and reveals the lower legs in a seat.
-  const yaw = floor ? 1.1 : group === 'head' ? -0.34 : -0.6;
-  const pitch = floor ? 0.4 : 0.15;
-  const scale = Math.min(
-    height / (floor ? 0.98 : seated ? 1.84 : 2.15),
-    width / (floor ? 2.32 : handDetail ? 2.35 : 1.67),
-  );
-  const originX = width * (handDetail ? 0.39 : 0.5) + (floor ? 0.04 : 0.08) * scale;
-  const originY = height / 2 + scale * (floor ? 0.28 : seated ? 0.68 : 0.875);
-  /** @param {number[]} point */
+  const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
+  const reach = move.motion === 'overhead-reach';
+  const yaw = floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58;
+  const pitch = floor ? 0.32 : 0.095;
+  const cosYaw = Math.cos(yaw),
+    sinYaw = Math.sin(yaw),
+    cosPitch = Math.cos(pitch),
+    sinPitch = Math.sin(pitch);
+  const stepHeight = move.motion === 'step-up' ? 0.16 : 0;
+  const stageHeight = floor ? 0.94 : seated ? (reach ? 1.72 : 1.49) : 1.88 + stepHeight;
+  const stageWidth = floor ? 2.36 : handDetail ? 1.85 : options.preview ? 0.96 : 1.34;
+  const scale = Math.min(height / stageHeight, width / stageWidth);
+  const centerY = floor ? 0.22 : seated ? (reach ? 0.79 : 0.675) : 0.86 + stepHeight / 2;
+  const centerZ = floor ? 0.012 : seated ? 0.2 : 0.06;
+  const originX = width * (handDetail ? 0.37 : 0.5) - sinYaw * centerZ * scale;
+  const originY = height * 0.5 + (centerY * cosPitch - centerZ * cosYaw * sinPitch) * scale;
   const project = ([x, y, z]) => {
-    const depth = -x * Math.sin(yaw) + z * Math.cos(yaw);
+    const depth = -x * sinYaw + z * cosYaw;
     return [
-      originX + (x * Math.cos(yaw) + z * Math.sin(yaw)) * scale,
-      originY + (-y * Math.cos(pitch) + depth * Math.sin(pitch)) * scale,
-      depth * Math.cos(pitch) + y * Math.sin(pitch),
+      originX + (x * cosYaw + z * sinYaw) * scale,
+      originY + (-y * cosPitch + depth * sinPitch) * scale,
+      depth * cosPitch + y * sinPitch,
     ];
   };
-  // Render separately ordered primitives, so a raised wrist or knee can pass
-  // in front of the trunk while the far limbs remain behind it.
-  /** @type {{depth:number, paint:()=>void}[]} */
-  const queue = [];
-  /** @param {number[]} a @param {number[]} b @param {number} r1 @param {number} r2 @param {string[]} material */
-  function line(a, b, r1, r2, material, layer = 0) {
-    const p = project(a),
-      q = project(b);
-    queue.push({
-      depth: (p[2] + q[2]) / 2 + layer,
-      paint: () => {
-        const angle = Math.atan2(q[1] - p[1], q[0] - p[0]);
-        const nx = -Math.sin(angle),
-          ny = Math.cos(angle),
-          r = r1 * scale,
-          end = r2 * scale;
-        const grad = ctx.createLinearGradient(p[0] - nx * r, p[1] - ny * r, p[0] + nx * r, p[1] + ny * r);
-        const lit = nx + ny >= 0;
-        grad.addColorStop(0, material[lit ? 1 : 2]);
-        grad.addColorStop(0.55, material[0]);
-        grad.addColorStop(1, material[lit ? 2 : 1]);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(p[0], p[1], r, angle + Math.PI / 2, angle + (3 * Math.PI) / 2);
-        ctx.arc(q[0], q[1], end, angle - Math.PI / 2, angle + Math.PI / 2);
-        ctx.closePath();
-        ctx.fill();
-      },
-    });
-  }
-  /** @param {number[]} at @param {number} rx @param {number} ry @param {string[]} material */
-  function oval(at, rx, ry, material, angle = 0, layer = 0) {
-    const [x, y, z] = project(at),
-      r = rx * scale,
-      h = ry * scale;
-    queue.push({
-      depth: z + layer,
-      paint: () => {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-        ctx.scale(r, h);
-        const grad = ctx.createRadialGradient(-0.32, -0.4, 0.07, 0.08, 0.08, 1.23);
-        grad.addColorStop(0, material[1]);
-        grad.addColorStop(0.63, material[0]);
-        grad.addColorStop(1, material[2]);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(0, 0, 1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      },
-    });
-  }
-  /** @param {number[][]} points @param {string} color */
-  function face(points, color, layer = 0) {
-    const projected = points.map(project);
-    queue.push({
-      depth: projected.reduce((sum, p) => sum + p[2], 0) / points.length + layer,
-      paint: () => {
-        ctx.beginPath();
-        projected.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 0.55;
-        ctx.stroke();
-      },
-    });
-  }
-  /** @param {number} x @param {number} y @param {number} z @param {number} dx @param {number} dy @param {number} dz @param {string[]} material */
-  function block(x, y, z, dx, dy, dz, material, layer = 0) {
-    const top = [
-      [x, y + dy, z],
-      [x + dx, y + dy, z],
-      [x + dx, y + dy, z + dz],
-      [x, y + dy, z + dz],
-    ];
-    face(top, material[1], layer);
-    face([top[3], top[2], [x + dx, y, z + dz], [x, y, z + dz]], material[0], layer);
-    const edge = yaw < 0 ? x + dx : x;
-    face(
-      [
-        [edge, y + dy, z],
-        [edge, y + dy, z + dz],
-        [edge, y, z + dz],
-        [edge, y, z],
-      ],
-      material[2],
-      layer,
-    );
-  }
-  const p = movementPose(move, seconds);
-  /** @param {string} region @param {string[]} fallback */
-  const shade = (region, fallback) => (group === region ? amber : fallback);
-  const shadow = project([0, 0.01, floor ? 0.05 : 0.1]);
-  ctx.beginPath();
-  ctx.ellipse(
-    shadow[0],
-    shadow[1],
-    scale * (floor ? 0.9 : 0.44),
-    scale * (floor ? 0.105 : 0.08),
-    floor ? -0.06 : 0,
-    0,
-    Math.PI * 2,
-  );
-  ctx.fillStyle = dark ? 'rgba(0,0,0,.23)' : 'rgba(52,83,68,.13)';
-  ctx.fill();
-  if (seated) {
-    block(-0.27, 0.395, -0.18, 0.54, 0.065, 0.55, chair, -0.12);
-    block(-0.256, 0.46, -0.195, 0.512, 0.48, 0.05, chair, -0.24);
-    for (const s of [-1, 1])
-      for (const z of [-0.12, 0.29]) line([s * 0.205, 0.4, z], [s * 0.205, 0.025, z], 0.019, 0.014, chair, -0.18);
-    if (['plane-seat', 'train-seat'].includes(options.location || ''))
-      for (const s of [-1, 1]) {
-        line([s * 0.27, 0.61, -0.14], [s * 0.27, 0.61, 0.24], 0.018, 0.021, chair);
-        line([s * 0.27, 0.42, 0.18], [s * 0.27, 0.61, 0.18], 0.012, 0.012, chair);
-      }
-  }
-  if (floor) block(-0.37, -0.022, -0.95, 0.74, 0.025, 2.03, chair, -1.1);
-  if (move.motion === 'step-up') block(-0.28, 0, 0.24, 0.56, 0.14, 0.38, chair);
-  if (
-    move.pose === 'standing' &&
-    ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'step-up'].includes(move.motion)
-  ) {
-    const x = 0.32;
-    line([x, 0.02, 0.27], [x, 1.055, 0.27], 0.016, 0.018, chair, -0.14);
-    line([x, 1.055, 0.03], [x, 1.055, 0.55], 0.019, 0.019, chair, -0.11);
-  }
-  const hips = mixPoint(p.legs[0].hip, p.legs[1].hip, 0.5);
-  for (const leg of p.legs) {
-    line(leg.hip, leg.knee, 0.087, 0.063, shade('thighs', trousers));
-    line(leg.knee, leg.ankle, 0.056, 0.032, shade('shins', trousers));
-    line(leg.ankle, leg.toe, 0.037, 0.042, shade('feet', boot), 0.013);
-  }
-  if (move.motion === 'foot-roll') {
-    const leg = p.legs[p.side === 1 ? 1 : 0];
-    const pivot = offset(leg.ankle, 0, -0.072, 0.09 - 0.08 * p.a);
-    if (move.equipment?.includes('roller'))
-      line(offset(pivot, -0.095), offset(pivot, 0.095), 0.041, 0.041, amber, -0.022);
-    else oval(pivot, 0.04, 0.04, amber, 0, -0.02);
-  }
-  // Rounded torso silhouette narrows at the waist; the shoulders follow each
-  // other through a twist. Paint belts of facets from hip to collar.
-  const torso = shade('body', shirt);
-  const rings = [
-    [0, 0.133, 0.098],
-    [0.16, 0.15, 0.104],
-    [0.5, 0.145, 0.099],
-    [0.79, 0.169, 0.12],
-    [0.93, 0.187, 0.109],
-    [1, 0.097, 0.075],
-  ];
-  const shoulderLine = p.arms[1].shoulder.map((x, i) => x - p.arms[0].shoulder[i]);
-  const len = Math.hypot(...shoulderLine);
-  const horizontal = shoulderLine.map((v) => v / len);
-  /** @param {number[]} ring @param {number} angle */
-  const ringPoint = ([t, w, d], angle) => {
-    const mid = mixPoint(hips, p.neck, t),
-      dx = Math.cos(angle) * w,
-      dz = Math.sin(angle) * d;
-    if (floor && move.motion === 'pelvic-tilt' && t < 0.66) {
-      // In the relaxed pose there is a small space under the lower back.
-      // The tilt closes that space while the sacrum stays on the mat.
-      mid[1] += Math.sin((t / 0.66) * Math.PI) * 0.034 * (1 - p.a);
-    }
-    return offset(
-      mid,
-      horizontal[0] * dx - horizontal[2] * dz,
-      horizontal[1] * dx + (floor ? dz : 0),
-      horizontal[2] * dx + (floor ? 0 : horizontal[0] * dz),
-    );
-  };
-  for (let j = 1; j < rings.length; j++)
-    for (let k = 0; k < 16; k++) {
-      const t = (k * Math.PI) / 8,
-        u = ((k + 1) * Math.PI) / 8;
-      const material = j === 1 ? shade('pelvis', trousers) : torso;
-      face(
-        [ringPoint(rings[j - 1], t), ringPoint(rings[j - 1], u), ringPoint(rings[j], u), ringPoint(rings[j], t)],
-        material[Math.cos(t + 0.64) > 0.53 ? 1 : Math.cos(t + 0.64) < -0.52 ? 2 : 0],
-      );
-    }
-  line(p.neck, mixPoint(p.neck, p.skull, 0.75), 0.045, 0.046, skin);
-  const headAngle = floor
-    ? 1.32
-    : Math.atan2(project(p.crown)[0] - project(p.skull)[0], project(p.skull)[1] - project(p.crown)[1]);
-  oval(p.skull, 0.088, 0.116, shade('head', skin), headAngle);
-  // Nose and ears make a left/right head turn visible on a featureless figure.
-  oval(p.face, 0.018, 0.021, shade('head', skin), 0, 0.037);
-  for (const eye of p.eyes) oval(eye, 0.006, 0.007, boot, 0, 0.015);
-  for (const arm of p.arms) {
-    line(arm.shoulder, mixPoint(arm.shoulder, arm.elbow, 0.48), 0.066, 0.055, shade('shoulders', shirt));
-    line(mixPoint(arm.shoulder, arm.elbow, 0.52), arm.elbow, 0.047, 0.04, shade('arms', skin));
-    line(arm.elbow, arm.wrist, 0.041, 0.027, shade('arms', skin));
-    line(arm.wrist, arm.palm, 0.025, 0.031, shade('hands', skin), 0.01);
-    for (const [base, tip] of arm.fingers) line(base, tip, 0.009, 0.006, shade('hands', skin), 0.012);
-    line(arm.palm, arm.thumb, 0.014, 0.009, shade('hands', skin), 0.015);
-  }
-  if (move.motion === 'band-open') line(p.arms[0].palm, p.arms[1].palm, 0.008, 0.008, amber, 0.055);
-  if (move.motion === 'towel-grip') {
-    const grip = p.arms[p.side === 1 ? 1 : 0].palm;
-    line(offset(grip, -0.043, -0.018, 0), offset(grip, 0.043, -0.018, 0), 0.018, 0.022, chair, 0.022);
-  }
-  for (const { paint } of queue.sort((a, b) => a.depth - b.depth)) paint();
-  drawCue(ctx, move, p, project, scale, width, height, handDetail, dark);
+  const pose = movementPose(move, seconds);
+  const [sx, sy] = project([0, 0, floor ? 0.02 : seated ? 0.12 : 0.1]);
+  ctx.save();
+  ctx.translate(sx, sy);
+  ctx.scale(scale * (floor ? 1.02 : seated ? 0.48 : 0.43), scale * (floor ? 0.12 : 0.075));
+  const shade = ctx.createRadialGradient(0, 0, 0.12, 0, 0, 1);
+  shade.addColorStop(0, options.dark ? 'rgba(0,0,0,.29)' : 'rgba(57,79,77,.20)');
+  shade.addColorStop(1, 'rgba(57,79,77,0)');
+  ctx.fillStyle = shade;
+  ctx.fillRect(-1, -1, 2, 2);
+  ctx.restore();
+  drawSurface(ctx, width, height, project, (mesh) => {
+    drawEquipment(mesh, pose, move, options.location, seconds);
+    drawTrainer(mesh, pose, move);
+  });
+  if (!options.preview)
+    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false);
 }
 
 /** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark */
@@ -313,7 +118,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
   const [x, y] = project(anchors[group] ?? pose.centre);
   const ink = dark ? '#ffcd84' : '#8b4e22';
   ctx.save();
-  ctx.lineWidth = Math.max(1.45, scale * 0.009);
+  ctx.lineWidth = Math.max(1.25, scale * 0.006);
   ctx.strokeStyle = ink;
   ctx.fillStyle = ink;
   ctx.lineCap = 'round';
@@ -335,29 +140,16 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
     ctx.stroke();
     ctx.save();
     ctx.clip();
-    const exaggeration = radius / (scale * 0.118);
-    /** @param {number[]} point */
-    const handPoint = (point) => {
-      const [u, v] = project(point);
-      return [cx + (u - x) * exaggeration, cy + (v - y) * exaggeration];
+    const detailScale = radius / (scale * 0.138);
+    const zoom = (point) => {
+      const [u, v, z] = project(point);
+      return [cx + (u - x) * detailScale, cy + (v - y) * detailScale, z];
     };
-    /** @param {number[]} from @param {number[]} to @param {number} thickness @param {string} color */
-    const segment = (from, to, thickness, color) => {
-      const [u, v] = handPoint(from),
-        [q, r] = handPoint(to);
-      ctx.beginPath();
-      ctx.moveTo(u, v);
-      ctx.lineTo(q, r);
-      ctx.lineWidth = thickness * radius;
-      ctx.strokeStyle = color;
-      ctx.stroke();
-    };
-    segment(arm.elbow, arm.wrist, 0.4, '#a88c71');
-    segment(arm.wrist, arm.palm, 0.48, '#c48652');
-    for (const [base, tip] of arm.fingers) segment(base, tip, 0.14, '#d49b62');
-    segment(arm.palm, arm.thumb, 0.19, '#ad724b');
-    if (move.motion === 'towel-grip')
-      segment(offset(arm.palm, 0, -0.016, -0.005), offset(arm.palm, -arm.s * 0.12, -0.016, -0.005), 0.22, '#7c9c8f');
+    drawSurface(ctx, width, height, zoom, (mesh) => {
+      drawHandDetail(mesh, arm, move.motion);
+      if (move.motion === 'wrist-stretch')
+        drawHandDetail(mesh, pose.arms[pose.side === 1 ? 0 : 1], move.motion);
+    });
     ctx.restore();
   } else if (move.motion === 'pelvic-tilt') {
     const [u, v] = project(pose.centre);

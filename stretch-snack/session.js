@@ -119,6 +119,7 @@ function visitSeconds(s) {
 }
 
 function draw() {
+  cancelAnimationFrame(frame);
   frame = 0;
   const s = session;
   if (!s) return;
@@ -133,6 +134,7 @@ function draw() {
   }
   if (s.transferring && s.elapsed >= s.transition) {
     s.transferring = false;
+    s.lastDraw = 0;
     const cue = step.move.cue + (step.reps ? ' A comfortable target is ' + step.reps + ' repetitions.' : '');
     get('player-cue', 'p').textContent = cue;
     if (!s.paused && audio.value === 'voice') speak(currentInstruction());
@@ -152,11 +154,11 @@ function draw() {
       if (audio.value !== 'silent' && !speak(String(remain))) playTone(420, 0.1);
     }
   }
-  if (!s.lastDraw || (!motion.matches && !s.transferring && now - s.lastDraw >= 46) || s.paused) {
+  if (!s.lastDraw || (!motion.matches && !s.transferring && now - s.lastDraw >= 1000 / 30 - 1) || s.paused) {
     renderMovement(
       scene,
       step.move,
-      motion.matches || s.transferring ? 1 : Math.max(0, s.elapsed - s.transition),
+      s.transferring ? 0 : motion.matches ? 2 : Math.max(0, s.elapsed - s.transition),
       { location: s.location, dark: document.documentElement.dataset.theme === 'dark' },
     );
     s.lastDraw = now;
@@ -283,12 +285,15 @@ player.addEventListener('cancel', (e) => {
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) pause();
 });
-window.addEventListener('resize', () => {
+function refreshScene() {
   if (session) {
     session.lastDraw = 0;
     if (session.paused) draw();
   }
-});
+}
+window.addEventListener('resize', refreshScene);
+motion.addEventListener('change', refreshScene);
+document.addEventListener('themechange', refreshScene);
 audio.addEventListener('change', () => {
   writeLocal('audio', audio.value);
   stopSpeech();

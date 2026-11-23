@@ -49,7 +49,7 @@ const preview = get('preview', 'section');
 const start = get('start', 'button');
 const delayMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let previewPlaying = !delayMotion.matches,
-  previewTime = 1.25,
+  previewTime = delayMotion.matches ? 2 : 0,
   previous = 0,
   frame = 0,
   visible = true;
@@ -104,7 +104,7 @@ function drawPreview(now = performance.now()) {
     previous = 0;
     return;
   }
-  const repaint = !previous || now - previous >= 55;
+  const repaint = !previous || now - previous >= 1000 / 30 - 1;
   if (repaint) {
     if (previous && previewPlaying) previewTime += Math.min(now - previous, 160) / 1000;
     previous = now;
@@ -137,6 +137,7 @@ function watchPreview() {
   document.addEventListener('themechange', restartPreview);
   delayMotion.addEventListener('change', () => {
     previewPlaying = !delayMotion.matches;
+    if (delayMotion.matches) previewTime = 2;
     syncAnimation();
   });
   get('animate', 'button').addEventListener('click', () => {
@@ -154,7 +155,7 @@ function showMovement(id) {
     return;
   }
   if (selectedId !== id) {
-    previewTime = 1.25;
+    previewTime = previewPlaying ? 0 : 2;
     get('evidence', 'details').open = false;
   }
   selectedId = id;
