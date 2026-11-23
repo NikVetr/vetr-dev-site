@@ -78,6 +78,7 @@ test('Stretch Snack previews the actual session, its 15-second clock and its tra
     await art.locator('canvas').waitFor();
     const proof = await art.evaluate(async el => {
       const {renderMovement} = await import(new URL('stretch-snack/demo.js',location.href).href);
+      const {repetitionSeconds} = await import(new URL('stretch-snack/pose.js',location.href).href);
       const {prepare} = await import(new URL('assets/players/stretch-snack.js',location.href).href);
       const clock = el.querySelector('.progress').getAnimations()[0];
       clock.pause(); await clock.ready;
@@ -91,12 +92,16 @@ test('Stretch Snack previews the actual session, its 15-second clock and its tra
         clock.currentTime = step.start * 1000 + 240;
         await next();
         const labels = fields.map(key => el.querySelector('[data-reading="'+key+'"]').textContent);
+        // Each directory step plays a complete repetition. Its midpoint is
+        // the trainer's actual full reach, in the fixed camera used for the loop.
+        clock.currentTime = (step.start + step.seconds / 2) * 1000;
+        await next();
         const live = el.querySelector('canvas');
         const ref = document.createElement('canvas');
         ref.style.cssText = 'position:fixed;width:'+live.clientWidth+'px;height:'+live.clientHeight+'px';
         document.body.append(ref);
-        renderMovement(ref, step.move, Number(clock.currentTime)/1000 - step.start, {
-          location:'roomy-seat', dark:document.documentElement.dataset.theme === 'dark',
+        renderMovement(ref, step.move, repetitionSeconds / 2, {
+          location:'roomy-seat', dark:document.documentElement.dataset.theme === 'dark', seatedSequence:true,
         });
         readings.push({same:ref.toDataURL() === live.toDataURL(),labels});
         ref.remove();
@@ -129,5 +134,48 @@ test('Stretch Snack previews the actual session, its 15-second clock and its tra
     assert.equal(await art.locator('.dark-pose:visible').count(), 1);
     assert.equal(await art.locator('.light-pose:visible').count(), 0);
     assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('the seated trainer returns through one neutral pose at all three step changes', async () => {
+  const {page, close} = await openPage('#stretch-snack-title', {engine});
+  try {
+    for (const [width,height] of [[1440,900],[390,844],[320,568],[1920,1080]]) {
+      await page.setViewportSize({width,height});
+      const art = page.locator('[data-art="stretch-snack"]');
+      await art.hover();
+      await art.locator('canvas').waitFor();
+      const seams = await art.evaluate(async el => {
+        const canvas = el.querySelector('canvas');
+        const clock = el.querySelector('.progress').getAnimations()[0];
+        clock.pause(); await clock.ready;
+        const ctx = canvas.getContext('2d', {willReadFrequently:true});
+        async function sample(seconds) {
+          clock.currentTime = 1000 * seconds;
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          const box = canvas.getBoundingClientRect();
+          return {box:[box.x,box.y,box.width,box.height], pixels:ctx.getImageData(0,0,canvas.width,canvas.height).data};
+        }
+        const results = [];
+        for (const end of [5,10,15]) {
+          const before = await sample(end - 1/30), after = await sample(end);
+          let delta = 0, channels = 0;
+          if (before.pixels.length === after.pixels.length) {
+            for (let i = 0; i < after.pixels.length; i += 4) {
+              const a = before.pixels[i+3] / 255, b = after.pixels[i+3] / 255;
+              if (!a && !b) continue;
+              for (let k = 0; k < 3; k++) delta += Math.abs(a*before.pixels[i+k] - b*after.pixels[i+k]);
+              channels += 3;
+            }
+          }
+          results.push({end, before:before.box, after:after.box, error:channels ? delta/channels : Infinity});
+        }
+        return results;
+      });
+      for (const {end,before,after,error} of seams) {
+        assert.deepEqual(before, after, 'the camera box moved at '+end+' s ('+width+' px)');
+        assert.ok(error < 2, 'the trainer jumped by '+error.toFixed(2)+' channel levels at '+end+' s ('+width+' px)');
+      }
+    }
   } finally { await close(); }
 });

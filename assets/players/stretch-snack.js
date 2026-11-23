@@ -3,8 +3,9 @@ import { moves } from '../../stretch-snack/core/catalog.js';
 import { submit } from '../../stretch-snack/core/plan.js';
 import { formatTime } from '../../stretch-snack/dom.js';
 import { renderMovement } from '../../stretch-snack/demo.js';
+import { repetitionSeconds } from '../../stretch-snack/pose.js';
 
-export const heldSeconds = 2;
+export const heldSeconds = 2.5;
 const location = 'roomy-seat';
 const ids = ['seated-overhead-reach', 'seated-knee-extend', 'seated-elbow-bend'];
 
@@ -37,11 +38,16 @@ export function sessionReading(plan, seconds) {
   };
 }
 
-/** Same camera, direction arrows and equipment as the full-screen session.
+/** Play one whole repetition per step. The chair stays in the same place
+ * while the trainer settles into the shared seated pose between exercises.
  * @param {HTMLCanvasElement} canvas @param {ReturnType<typeof prepare>['steps'][number]} step
  * @param {number} seconds @param {boolean} dark */
 export function paintStep(canvas, step, seconds, dark) {
-  renderMovement(canvas, step.move, seconds, {location, dark});
+  const phase = Math.max(0, Math.min(1, seconds / step.seconds));
+  const fade = Math.min(1, Math.min(phase, 1 - phase) * step.seconds / 0.45);
+  renderMovement(canvas, step.move, repetitionSeconds * phase, {
+    location, dark, seatedSequence: true, cueOpacity: fade * fade * (3 - 2 * fade),
+  });
 }
 
 /** @param {HTMLElement} art @param {ReturnType<typeof prepare>} plan */

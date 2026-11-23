@@ -45,7 +45,7 @@ export async function build() {
 & .bar {grid-area:bar;display:flex;align-items:center;justify-content:space-between;font-size:clamp(10px,min(3.9cqw,8.4cqh),17px);font-weight:650}
 & .end,& .controls span {border:1px solid var(--sn-line);border-radius:.4em;padding:.23em .5em;background:var(--sn-paper);font-size:.86em}
 & .track {grid-area:track;border-radius:4px;background:var(--sn-line);overflow:hidden}
-& .progress {display:block;height:100%;width:100%;transform:scaleX(${heldSeconds / total});transform-origin:left;background:var(--sn-green)}
+& .progress {display:block;height:100%;width:100%;transform:scaleX(${Math.floor(heldSeconds) / total});transform-origin:left;background:var(--sn-green)}
 & .scene {grid-area:scene;min-height:0;min-width:0;display:grid;place-items:center;container:stretch-stage/size;background:var(--sn-stage);border-radius:clamp(4px,2cqw,12px)}
 & .pose {position:relative;width:min(100cqw,100cqh);aspect-ratio:1}
 & .pose img,& .pose canvas {position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -54,6 +54,7 @@ export async function build() {
 & .pose:has(canvas) img {visibility:hidden}
 & .reading {grid-area:reading;min-width:0;align-self:center;display:grid;align-content:center;gap:.33em;font-size:clamp(12px,min(5.7cqw,13cqh),28px)}
 & .heading {display:grid;gap:.24em;font-weight:710;letter-spacing:-.035em;line-height:1.06}
+& [data-reading="name"] {min-block-size:2lh}
 & .time {display:flex;align-items:baseline;gap:.45em;font-variant-numeric:tabular-nums}
 & [data-reading="clock"] {font-size:1.1em;font-weight:720}
 & [data-reading="remaining"],& .next {font-weight:480;letter-spacing:0;color:var(--sn-muted);font-size:clamp(10px,.65em,16px)}

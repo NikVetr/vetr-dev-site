@@ -94,14 +94,16 @@ function eased(t) {
 }
 const bilateral = ['palm-turn', 'hand-open', 'wrist-bend', 'heel-lift', 'toe-lift',
   'shoulder-roll', 'shoulder-squeeze', 'chest-open', 'band-open', 'elbow-bend'];
+export const repetitionSeconds = 4;
 
 /** @param {{motion:string, pose:string}} move @param {number} seconds */
 export function movementPose(move, seconds) {
   const { motion, pose } = move;
   const seated = pose === 'seated';
   const supine = pose === 'supine';
-  const cycle = Math.floor(seconds / 4);
-  const a = (1 - Math.cos((seconds * Math.PI) / 2)) / 2;
+  const cycles = seconds / repetitionSeconds;
+  const cycle = Math.floor(cycles);
+  const a = (1 - Math.cos(2 * Math.PI * cycles)) / 2;
   const sideCycle = motion === 'ankle-circle' ? Math.floor(cycle / 2) : cycle;
   const side = sideCycle % 2 ? 1 : -1;
   /** @param {number} s */
@@ -110,7 +112,7 @@ export function movementPose(move, seconds) {
   const motionAmount = (name) => (motion === name ? a : 0);
   const squat = motionAmount('knee-bend');
   // Form / Motion gives held stretches distinct entry, hold and release phases.
-  const phase = seconds / 4 - cycle;
+  const phase = cycles - cycle;
   const ramp = Math.min(1, Math.min(phase, 1 - phase) / 0.31);
   const heldStretch = ramp ** 3 * (ramp * (6 * ramp - 15) + 10);
   const glutes = motion === 'glute-squeeze' ? heldStretch : 0;
@@ -170,7 +172,7 @@ export function movementPose(move, seconds) {
       pitchPoint([offset[0], offset[1] - lower, offset[2]], chestPitch));
     return add(pelvis, turn(lean(joint, bend), yaw));
   };
-  const rollAngle = 2 * Math.PI * eased(seconds / 4 - cycle);
+  const rollAngle = 2 * Math.PI * eased(phase);
   const shrug = motion === 'shoulder-roll' ? (1 - Math.cos(rollAngle)) / 2 : 0;
   const squeeze = motionAmount('shoulder-squeeze');
   // Form / Motion's neck release: ease into the tilt, hold through the
@@ -183,105 +185,6 @@ export function movementPose(move, seconds) {
   const neck = trunk([0, 0.535 + 0.002 * chin, -0.034 * chin]);
   /** @param {number[]} offset */
   const head = (offset) => add(neck, turn(lean(pitchPoint(offset, pitch), headTilt), headYaw));
-  const arms = [-1, 1].map((s) => {
-    const chestOpener = motionAmount('palm-forward');
-    const hug = motionAmount('self-hug');
-    const shoulder = trunk([
-      s * (0.182 - 0.014 * squeeze - 0.012 * hug),
-      0.47 + 0.032 * shrug - 0.010 * chestOpener - (s === side ? 0.006 : 0.014) * tilt,
-      -0.033 * squeeze - 0.018 * chestOpener + 0.026 * hug - (motion === 'shoulder-roll' ? 0.026 * side * Math.sin(rollAngle) : 0),
-    ]);
-    const handWork = ['palm-turn', 'wrist-bend', 'hand-open', 'towel-grip', 'band-open', 'wrist-stretch'].includes(
-      motion,
-    );
-    const chest = motionAmount('chest-open');
-    const band = motionAmount('band-open');
-    const upper = 0.26, lower = 0.245;
-    const elbowAngle = motion === 'elbow-bend' ? 0.27 + 2.1 * a : handWork ? 1.45 : seated ? 1.1 : 0.24;
-    const outward = 0.58 * band + 0.83 * chest;
-    let elbow = add(shoulder, turn(scaledTo([s * (0.031 + 0.14 * chest), -0.25, -0.06 * chest], upper), yaw));
-    let wrist = add(elbow, turn([
-      s * lower * Math.sin(elbowAngle) * Math.sin(outward),
-      -lower * Math.cos(elbowAngle), lower * Math.sin(elbowAngle) * Math.cos(outward),
-    ], yaw));
-    const support = !seated && !supine && s === 1 &&
-      ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'toe-lift', 'weight-shift', 'step-up'].includes(motion);
-    if (support) {
-      wrist = [0.32, 1.075, 0.27];
-      elbow = middleJoint(shoulder, wrist, upper, lower, [0.8, -0.65, -0.6]);
-    }
-    if (motion === 'overhead-reach') {
-      // Both arms share the same resting pose. The working arm rises in a
-      // plane slightly forward of the shoulder while its bent elbow unfolds.
-      const reach = active(s) ? a : 0;
-      const angle = 0.1 + 2.75 * reach;
-      const flex = 1.0 - 0.82 * reach;
-      const armAxis = [s * Math.sin(angle) * 0.87, -Math.cos(angle), Math.sin(angle) * Math.sqrt(1 - 0.87 ** 2)];
-      const forwardAxis = [-s * Math.sqrt(1 - 0.87 ** 2), 0, 0.87];
-      elbow = add(shoulder, armAxis.map(v => v * upper));
-      wrist = add(elbow, armAxis.map((v, i) => lower * (Math.cos(flex) * v + Math.sin(flex) * forwardAxis[i])));
-    }
-    if (motion === 'trunk-turn') {
-      wrist = trunk([-s * 0.075, 0.31, 0.145 + s * 0.016]);
-      elbow = middleJoint(shoulder, wrist, upper, lower, turn([s * 0.58, -1, 0.3], yaw));
-    }
-    if (motion === 'self-hug') {
-      wrist = trunk(mixPoint([s * 0.082, 0.24, 0.16], [-s * 0.095, 0.41 + 0.026 * s, 0.143], hug));
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.72, -0.85, 0.75]);
-    } else if (motion === 'back-arch') {
-      wrist = add(pelvis, [s * 0.183, 0.092, 0.053]);
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.9]);
-    } else if (motion === 'palm-forward') {
-      elbow = add(shoulder, scaledTo([s * 0.11, -1, 0.18], upper));
-      wrist = add(elbow, scaledTo([s * 0.21, -1, 0.40], lower));
-    } else if (motion === 'hamstring-lean') {
-      // Both hands slide across to rest on the bent thigh as the leg extends.
-      wrist = add(pelvis, mixPoint([s * 0.115, 0.096, 0.205],
-        [-side * 0.11 + s * 0.045, 0.096, 0.205 + s * 0.012], straighten));
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.95, -0.4, 0.10 + 0.75 * straighten]);
-    }
-    if (motion === 'wrist-stretch') {
-      const target = trunk(s === side ? [s * 0.04, 0.39, 0.415] : [side * 0.012, 0.425, 0.36]);
-      wrist = mixPoint(wrist, target, a);
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.45, -1, -0.05]);
-    }
-    if (motion === 'towel-grip') {
-      wrist = trunk([s * 0.16, 0.21, 0.2]);
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.3, -1, 0]);
-    }
-    if (supine) {
-      // Before the final rotation onto the mat, negative Z moves toward it.
-      // Keep relaxed elbows a little wider than the wrists and clear of the hips.
-      wrist = add(shoulder, [s * 0.10, -0.47, -0.088]);
-      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.55]);
-    }
-    let handAxis;
-    if (supine) handAxis = scaledTo([s * 0.05, -1, -0.13], 1);
-    else if (support) handAxis = [0, -0.6, 0.8];
-    else if (motion === 'hamstring-lean') handAxis = scaledTo([0, -0.08, 1], 1);
-    else if (motion === 'self-hug') handAxis = scaledTo(mixPoint([-s * 0.3, 0.45, 0.7], [-s * 0.9, 0.24, -0.56], hug), 1);
-    else if (motion === 'back-arch') handAxis = scaledTo([s * 0.08, -0.91, 0.32], 1);
-    else handAxis = scaledTo(wrist.map((v, i) => v - elbow[i]), 1);
-    if (motion === 'wrist-bend' || (motion === 'wrist-stretch' && s === side)) {
-      const angle = motion === 'wrist-stretch' ? 1.05 * a : a * 0.58 * side;
-      handAxis = [
-        handAxis[0],
-        handAxis[1] * Math.cos(angle) + handAxis[2] * Math.sin(angle),
-        handAxis[2] * Math.cos(angle) - handAxis[1] * Math.sin(angle),
-      ];
-    } else if (motion === 'wrist-stretch') {
-      handAxis = scaledTo(mixPoint(handAxis, [side * 0.4, 0.5, 0.77], a), 1);
-    }
-    const palm = add(
-      wrist,
-      handAxis.map((v) => v * 0.045),
-    );
-    const close = motion === 'hand-open' ? 1 - a : motion === 'towel-grip' ? 0.24 + (active(s) ? 0.7 * a : 0) : 0;
-    const spread = motion === 'hand-open' ? 0.025 + 0.115 * a : 0.045;
-    const roll = motion === 'palm-turn' ? (a * 2.8 - 1.35) * s
-      : motion === 'palm-forward' ? -s * (1.50 + 1.35 * a) : supine ? 0 : 0.12 * s;
-    return {s, shoulder, elbow, wrist, palm, ...handGeometry(palm, handAxis, s, roll, close, spread)};
-  });
   const legs = [-1, 1].map((s) => {
     if (supine) {
       const slide = active(s) ? motionAmount('heel-slide') : 0;
@@ -343,6 +246,164 @@ export function movementPose(move, seconds) {
     }
     const toe = add(ankle, toeOffset);
     return { s, hip, knee, ankle, toe };
+  });
+  // The fitted hands extend about 18 cm beyond the wrist. Rest them along
+  // the thighs and carry them with a rising knee, leaving the chair arms free.
+  const lap = seated ? legs.map(leg => {
+    const along = leg.knee.map((v,i) => v - leg.hip[i]);
+    return {
+      wrist: add(mixPoint(leg.hip, leg.knee, 0.35), [leg.s * 0.008, 0.152, 0.008 - 0.24 * along[1]]),
+      axis: scaledTo([0.25 * along[0], along[1] - 0.018, along[2]], 1),
+    };
+  }) : [];
+  const arms = [-1, 1].map((s, i) => {
+    const chestOpener = motionAmount('palm-forward');
+    const hug = motionAmount('self-hug');
+    const shoulder = trunk([
+      s * (0.182 - 0.014 * squeeze - 0.012 * hug),
+      0.47 + 0.032 * shrug - 0.010 * chestOpener - (s === side ? 0.006 : 0.014) * tilt,
+      -0.033 * squeeze - 0.018 * chestOpener + 0.026 * hug - (motion === 'shoulder-roll' ? 0.026 * side * Math.sin(rollAngle) : 0),
+    ]);
+    const handWork = ['palm-turn', 'wrist-bend', 'hand-open', 'towel-grip', 'band-open', 'wrist-stretch'].includes(
+      motion,
+    );
+    const chest = motionAmount('chest-open');
+    const band = motionAmount('band-open');
+    const upper = 0.26, lower = 0.245;
+    const elbowAngle = motion === 'elbow-bend' ? 0.27 + 2.1 * a : handWork ? 1.45 : seated ? 1.1 : 0.24;
+    const outward = 0.58 * band + 0.83 * chest;
+    let elbow = add(shoulder, turn(scaledTo([s * (0.031 + 0.14 * chest), -0.25, -0.06 * chest], upper), yaw));
+    let wrist = add(elbow, turn([
+      s * lower * Math.sin(elbowAngle) * Math.sin(outward),
+      -lower * Math.cos(elbowAngle), lower * Math.sin(elbowAngle) * Math.cos(outward),
+    ], yaw));
+    /** @type {number[] | undefined} */
+    let handAim;
+    const restingOnLap = seated && !handWork && !['self-hug', 'trunk-turn', 'palm-forward'].includes(motion);
+    if (restingOnLap) {
+      const rest = lap[i];
+      wrist = rest.wrist;
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.5, -0.6, -0.9]);
+      handAim = rest.axis;
+      if (motion === 'elbow-bend' && a > 0) {
+        const fore = pitchPoint(wrist.map((v,k) => v - elbow[k]), -1.40 * a);
+        fore[0] *= 1 - 0.65 * a;
+        const from = scaledTo(elbow.map((v,k) => v - shoulder[k]), 1);
+        elbow = add(shoulder, scaledTo(mixPoint(from,[s * 0.10,-1,0.17],a),upper));
+        wrist = add(elbow, scaledTo(fore,lower));
+        handAim = pitchPoint(rest.axis, -1.38 * a);
+      }
+      if (motion === 'overhead-reach' || motion === 'chest-open') {
+        // Start each reach at the same physical rest pose. Blend the upper
+        // and lower *directions* so neither segment shortens on departure.
+        const overhead = motion === 'overhead-reach';
+        const reach = overhead && !active(s) ? 0 : a;
+        if (reach > 0) {
+          const amount = eased(reach / 0.55);
+          const angle = 0.1 + 2.75 * reach;
+          const flex = 1.34 - 1.16 * reach;
+          const armAxis = overhead
+            ? [s * Math.sin(angle) * 0.87, -Math.cos(angle), Math.sin(angle) * Math.sqrt(1 - 0.87 ** 2)]
+            : scaledTo([s * (0.031 + 0.14 * reach), -0.25, -0.06 * reach], 1);
+          const forwardAxis = [-s * Math.sqrt(1 - 0.87 ** 2), 0, 0.87];
+          const foreAxis = overhead
+            ? armAxis.map((v, k) => Math.cos(flex) * v + Math.sin(flex) * forwardAxis[k])
+            : [s * Math.sin(1.4) * Math.sin(outward), -Math.cos(1.4), Math.sin(1.4) * Math.cos(outward)];
+          const from = scaledTo(elbow.map((v,k) => v - shoulder[k]), 1);
+          const fore = scaledTo(wrist.map((v,k) => v - elbow[k]), 1);
+          elbow = add(shoulder, scaledTo(mixPoint(from,armAxis,amount),upper));
+          wrist = add(elbow, scaledTo(mixPoint(fore,foreAxis,amount),lower));
+          const handTravel = overhead ? eased((reach - 0.28) / 0.42) : amount;
+          handAim = scaledTo(mixPoint(rest.axis,foreAxis,handTravel),1);
+        }
+      }
+    }
+    const support = !seated && !supine && s === 1 &&
+      ['hip-side', 'calf-stretch', 'knee-bend', 'heel-lift', 'toe-lift', 'weight-shift', 'step-up'].includes(motion);
+    if (support) {
+      wrist = [0.32, 1.075, 0.27];
+      elbow = middleJoint(shoulder, wrist, upper, lower, [0.8, -0.65, -0.6]);
+    }
+    if (motion === 'trunk-turn') {
+      wrist = trunk([-s * 0.075, 0.33, 0.19 + s * 0.013]);
+      elbow = middleJoint(shoulder, wrist, upper, lower, turn([s * 0.32, -1, 0.12], yaw));
+      handAim = turn(scaledTo([-s * 0.92, 0.38, 0.06], 1), yaw);
+    }
+    if (motion === 'self-hug') {
+      // The lower hand travels around the near side of the other forearm
+      // before settling against the upper arm.
+      const crossing = Math.sin(Math.PI * hug);
+      const approach = eased((hug - 0.94) / 0.06);
+      const pass = s < 0 ? 0.040 * eased(hug / 0.5) * (1 - approach) : 0;
+      wrist = trunk(add(mixPoint([s * 0.15, 0.275, 0.19], [-s * 0.095, 0.455 + 0.025 * s, 0.232 - 0.022 * s], hug),
+        [0, (0.070 + s * 0.025) * crossing, ((s < 0 ? 0.13 * hug : 0) - s * 0.026) * crossing
+          + pass - (s < 0 ? 0.014 : 0.030) * approach]));
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.72, -0.85, 0.75]);
+    } else if (motion === 'back-arch') {
+      wrist = add(pelvis, [s * 0.183, 0.092, 0.053]);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.9]);
+    } else if (motion === 'palm-forward') {
+      if (seated) {
+        wrist = add(pelvis, [s * 0.211, 0.083, 0.213 - 0.012 * chestOpener]);
+        elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.28, -1, -0.62]);
+        handAim = scaledTo([s * 0.08, -0.58, 0.80], 1);
+      } else {
+        elbow = add(shoulder, scaledTo([s * 0.11, -1, 0.18], upper));
+        wrist = add(elbow, scaledTo([s * 0.21, -1, 0.40], lower));
+      }
+    } else if (motion === 'hamstring-lean') {
+      // Both hands slide across to rest on the bent thigh as the leg extends.
+      const bent = lap[side < 0 ? 1 : 0];
+      // The crossing hand settles over its partner instead of sharing space
+      // with its knuckles. Lift a little while passing across the lap.
+      const crossing = s === side;
+      wrist = mixPoint(lap[i].wrist, add(bent.wrist, [s * 0.015, crossing ? 0.044 : -0.008, crossing ? 0.045 : 0.028]), straighten);
+      if (crossing) wrist[1] += 0.030 * Math.sin(Math.PI * straighten);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.95, -0.4, 0.10 + 0.75 * straighten]);
+      handAim = scaledTo(mixPoint(lap[i].axis, bent.axis, straighten), 1);
+    }
+    if (motion === 'wrist-stretch') {
+      const target = trunk(s === side ? [s * 0.04, 0.39, 0.415] : [s * 0.14, 0.51, 0.490]);
+      wrist = mixPoint(wrist, target, a);
+      if (s !== side) wrist[2] += 0.032 * Math.sin(Math.PI * a);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.45, -1, -0.05]);
+    }
+    if (motion === 'towel-grip') {
+      wrist = trunk([s * 0.16, 0.21, 0.2]);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.3, -1, 0]);
+    }
+    if (supine) {
+      // Before the final rotation onto the mat, negative Z moves toward it.
+      // Keep relaxed elbows a little wider than the wrists and clear of the hips.
+      wrist = add(shoulder, [s * 0.10, -0.47, -0.088]);
+      elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.55]);
+    }
+    let handAxis;
+    if (supine) handAxis = scaledTo([s * 0.05, -1, -0.13], 1);
+    else if (support) handAxis = [0, -0.6, 0.8];
+    else if (handAim) handAxis = handAim;
+    else if (motion === 'self-hug') handAxis = scaledTo(mixPoint([s * 0.02, 0.76, 0.66], [-s * 0.9, 0.24, -0.15], hug), 1);
+    else if (motion === 'back-arch') handAxis = scaledTo([s * 0.08, -0.91, 0.32], 1);
+    else handAxis = scaledTo(wrist.map((v, i) => v - elbow[i]), 1);
+    if (motion === 'wrist-bend' || (motion === 'wrist-stretch' && s === side)) {
+      const angle = motion === 'wrist-stretch' ? 1.05 * a : a * 0.58 * side;
+      handAxis = [
+        handAxis[0],
+        handAxis[1] * Math.cos(angle) + handAxis[2] * Math.sin(angle),
+        handAxis[2] * Math.cos(angle) - handAxis[1] * Math.sin(angle),
+      ];
+    } else if (motion === 'wrist-stretch') {
+      handAxis = scaledTo(mixPoint(handAxis, [side * 0.88, 0.28, -0.22], a), 1);
+    }
+    const palm = add(
+      wrist,
+      handAxis.map((v) => v * 0.045),
+    );
+    const close = motion === 'hand-open' ? 1 - a : motion === 'towel-grip' ? 0.24 + (active(s) ? 0.7 * a : 0) : 0;
+    const spread = motion === 'hand-open' ? 0.025 + 0.115 * a : 0.045;
+    const roll = motion === 'palm-turn' ? (a * 2.8 - 1.35) * s
+      : motion === 'palm-forward' ? -s * (1.50 + 1.35 * a) : restingOnLap ? -0.30 * s : supine ? 0 : 0.12 * s;
+    return {s, shoulder, elbow, wrist, palm, ...handGeometry(palm, handAxis, s, roll, close, spread)};
   });
   let centre = trunk([0, 0.24, 0]);
   let face = head([0, 0.14, 0.076]);

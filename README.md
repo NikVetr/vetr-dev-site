@@ -54,7 +54,7 @@ Section interiors use a subtle light or dark tint of their outline colour. Previ
 
 The pictures are drawn from the tools themselves, from their default or explicitly selected examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
-Travel Prompt shows how changing a preference changes the generated brief for a restaurant, menu, lodging or outing. Stretch Snack plays a short seated session with the same trainer, movement names and countdown as the app.
+Travel Prompt shows how changing a preference changes the generated brief for a restaurant, menu, lodging or outing. Stretch Snack shows a continuous 15-second seated routine with the same trainer, movement names and countdown as a guided session.
 
 Table Seating follows a real five-round plan for 300 guests at 50 tables, zooming from coloured participants at one table to the irregularly spaced full room. The first zoom finishes before guests move; a single round label identifies the destination round, and whole circles fade before crossing the frame edges. Its offline route builder reserves space and time, then checks guest/table clearance continuously, including between decoded keyframes. The routed animation illustrates movement; the optimizer scores straight-line table-center travel. Regressions live in `scripts/landing-art/tests/`.
 

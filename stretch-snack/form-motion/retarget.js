@@ -174,21 +174,7 @@ export function createRetarget(rig) {
       side.upperArm(arm.shoulder,arm.elbow,hinge);
       const chains = side.i === 1 ? arm.fingerJoints : [...arm.fingerJoints].reverse();
       const palmAcross = mul(sub(chains[3][0],chains[0][0]),side.sign);
-      const guidePalm = axes(sub(arm.palm, arm.wrist), palmAcross);
-      let palmAxes = guidePalm;
-      /** @type {Basis | undefined} */
-      let knuckleRotation;
-      if (move.motion === 'overhead-reach') {
-        // The source's wrist-to-knuckle distance is about twice the guide's.
-        // Rest the long hand across the lap until it clears the thigh on ascent.
-        const height = arm.wrist[1] - leg.hip[1];
-        const t = Math.min(1, Math.max(0, (0.20 - height) / 0.13));
-        const weight = t * t * (3 - 2 * t);
-        if (weight > 0) {
-          palmAxes = axes(mix(guidePalm[1], unit([0, 0.13, 1]), weight), palmAcross);
-          knuckleRotation = orient(guidePalm, palmAxes);
-        }
-      }
+      const palmAxes = axes(sub(arm.palm, arm.wrist), palmAcross);
       // The rig has just one forearm bone. Share pronation between its two
       // ends; assigning the entire wrist roll to the elbow pinches the sleeve.
       const bendFrame = axes(fore,hinge);
@@ -212,14 +198,14 @@ export function createRetarget(rig) {
         let base = transform(handMat,finger[0].base);
         finger.forEach((joint, j) => {
           const direction = unit(sub(joints[j+1], joints[j]));
-          const tip = add(base, mul(knuckleRotation ? rotate(knuckleRotation, direction) : direction, joint.length));
+          const tip = add(base, mul(direction, joint.length));
           joint.aim(base,tip,palmAcross);
           base = tip;
         });
       });
       let thumbBase = transform(handMat, side.thumbBase);
       const targetThumb = sub(arm.thumb, mix(arm.wrist, arm.palm, 0.55));
-      const thumbAxes = axes(knuckleRotation ? rotate(knuckleRotation,targetThumb) : targetThumb, palmAxes[2]);
+      const thumbAxes = axes(targetThumb, palmAxes[2]);
       const thumbRotation = orient(side.thumbAxes, thumbAxes);
       const flex = move.motion === 'hand-open' ? 1 - pose.a
         : move.motion === 'towel-grip' && pose.side === side.sign ? pose.a : 0;

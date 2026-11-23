@@ -60,7 +60,7 @@ const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
 /** @param {HTMLCanvasElement} canvas
  * @param {{motion:string,pose:string,equipment?:string[],name?:string}} move
- * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean}} [options] */
+ * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean,seatedSequence?:boolean,cueOpacity?:number}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
   const width = canvas.clientWidth,
     height = canvas.clientHeight;
@@ -79,12 +79,13 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   const seated = move.pose === 'seated',
     floor = move.pose === 'supine';
   const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
-  const reach = move.motion === 'overhead-reach';
+  const reach = options.seatedSequence || move.motion === 'overhead-reach';
   const frontSeat = move.motion === 'hamstring-lean' || move.motion === 'quad-set';
   const sideLabel = !options.preview && (isometric.has(move.motion) || move.motion === 'ball-back');
   // Reserve some space beside the trainer for the annotation in a small well.
   const labelRoom = sideLabel && width < 300 && width < height * 2 ? Math.min(30, width * 0.15) : 0;
-  const yaw = sideViews[move.motion] ?? (floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58);
+  // The sequence needs one view that shows both hands and the extending lower leg.
+  const yaw = options.seatedSequence ? 0.93 : sideViews[move.motion] ?? (floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58);
   const pitch = floor ? 0.32 : 0.095;
   const cosYaw = Math.cos(yaw),
     sinYaw = Math.sin(yaw),
@@ -121,12 +122,13 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     drawEquipment(mesh, pose, move, options.location, seconds);
     drawTrainer(mesh, pose, move);
   });
-  if (!options.preview)
-    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false, seconds);
+  const opacity = options.cueOpacity ?? 1;
+  if (!options.preview && opacity > 0)
+    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false, seconds, opacity);
 }
 
-/** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds */
-function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, seconds) {
+/** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
+function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, seconds, opacity) {
   const group = regions[move.motion],
     arm = pose.arms[pose.side === 1 ? 1 : 0],
     leg = pose.legs[pose.side === 1 ? 1 : 0];
@@ -146,6 +148,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
   const [x, y] = project(anchors[group] ?? pose.centre);
   const ink = dark ? '#ffcd84' : '#8b4e22';
   ctx.save();
+  ctx.globalAlpha = opacity;
   ctx.lineWidth = Math.max(1.25, scale * 0.006);
   ctx.strokeStyle = ink;
   ctx.fillStyle = ink;
@@ -158,9 +161,9 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     ctx.beginPath();
     ctx.moveTo(x + 3, y);
     ctx.lineTo(cx - radius, cy);
-    ctx.globalAlpha = 0.55;
+    ctx.globalAlpha = 0.55 * opacity;
     ctx.stroke();
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = opacity;
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.fillStyle = dark ? '#213731' : '#edf2e7';
@@ -197,12 +200,12 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
       const length = glutes ? 0.058 * scale : 0.24 * Math.hypot(knee[1] - hip[1], knee[0] - hip[0]);
       ctx.beginPath();
       ctx.ellipse(px, py, Math.max(4, length), Math.max(2.6, scale * (glutes ? 0.048 : 0.030)), angle, 0, Math.PI * 2);
-      ctx.globalAlpha = 0.10 + 0.37 * pose.activation;
+      ctx.globalAlpha = (0.10 + 0.37 * pose.activation) * opacity;
       ctx.fill();
-      ctx.globalAlpha = 0.86;
+      ctx.globalAlpha = 0.86 * opacity;
       ctx.stroke();
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = opacity;
     const target = points.length === 1 ? points[0] : mixPoint(points[0], points[1], 0.5);
     label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase],
       width, height, dark, pose, project, scale);
