@@ -2,11 +2,10 @@ import {
   modes,
   tastes,
   preferenceLevels,
-  venueOptions,
-  substitutionOptions,
   traveler
 } from './core/catalog.mjs';
 import { readTraveler } from './core/prompt.mjs';
+import { radioChoices } from './controls.mjs';
 
 const storeKey = 'vetr:travel-prompt:profiles:1';
 const personalFields = {
@@ -59,18 +58,18 @@ function textField(label, person, key, placeholder, update) {
   wrap.append(input);
   return wrap;
 }
-function selectField(label, person, key, options, update) {
-  const wrap = document.createElement('label');
-  wrap.textContent = label;
-  const select = document.createElement('select');
-  for (const [value, name] of Object.entries(options)) select.add(new Option(String(name), value));
-  select.value = person[key];
-  select.addEventListener('change', () => {
-    person[key] = select.value;
+function dietChoices(label, person, index, key, options, update) {
+  const group = document.createElement('fieldset');
+  const legend = document.createElement('legend');
+  legend.textContent = label;
+  const buttons = document.createElement('div');
+  buttons.className = 'choices';
+  radioChoices(buttons, key + '-' + index, options, person[key], value => {
+    person[key] = value;
     update();
   });
-  wrap.append(select);
-  return wrap;
+  group.append(legend, buttons);
+  return group;
 }
 function details(title) {
   const section = document.createElement('details');
@@ -83,44 +82,42 @@ function details(title) {
 }
 function preferences(person, domain, update) {
   const { section, content } = details(personalFields[domain].preferences);
-  const help = document.createElement('p');
-  help.className = 'micro';
-  help.textContent =
-    '−− Strongly avoid · − Prefer less · ○ Neutral · + Prefer · ++ Strongly prefer';
   const grid = document.createElement('div');
   for (const [key, taste] of Object.entries(tastes)) {
     if (taste.group !== domain) continue;
-    const row = document.createElement('div');
+    const row = document.createElement('label');
     row.className = 'preference-row';
     const title = document.createElement('span');
     title.textContent = taste.label;
     title.className = 'taste-name';
-    const levels = document.createElement('div');
-    levels.className = 'levels';
-    levels.setAttribute('role', 'group');
-    levels.setAttribute('aria-label', taste.label);
-    for (let level = -2; level <= 2; level++) {
-      const desc = preferenceLevels[level + 2] + ' · ' + taste.label;
-      const b = btn(
-        ['−−', '−', '○', '+', '++'][level + 2],
-        () => {
-          if (level) person.preferences[key] = level;
-          else delete person.preferences[key];
-          for (const x of levels.querySelectorAll('button'))
-            x.setAttribute('aria-pressed', String(x === b));
-          update();
-        },
-        desc
-      );
-      b.title = desc;
-      b.dataset.value = String(level);
-      b.setAttribute('aria-pressed', String((person.preferences[key] || 0) === level));
-      levels.append(b);
+    const rating = document.createElement('span');
+    rating.className = 'preference-value';
+    rating.setAttribute('aria-hidden', 'true');
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.min = '-2';
+    slider.max = '2';
+    slider.step = '1';
+    slider.setAttribute('list', 'preference-steps');
+    slider.setAttribute('aria-label', taste.label);
+    slider.value = String(person.preferences[key] || 0);
+    function showLevel() {
+      const description = preferenceLevels[slider.valueAsNumber + 2];
+      rating.textContent = description;
+      slider.setAttribute('aria-valuetext', description);
     }
-    row.append(title, levels);
+    slider.addEventListener('input', () => {
+      if (slider.valueAsNumber) person.preferences[key] = slider.valueAsNumber;
+      else delete person.preferences[key];
+      showLevel();
+      update();
+    });
+    showLevel();
+    title.append(rating);
+    row.append(title, slider);
     grid.append(row);
   }
-  content.append(help, grid);
+  content.append(grid);
   return section;
 }
 
@@ -131,6 +128,7 @@ export function setupPeople(update) {
     profileDialog = /** @type {HTMLDialogElement} */ (byId('profiles'));
   const nameInput = /** @type {HTMLInputElement} */ (byId('profile-name')),
     status = byId('profile-status');
+  const shareDishes = /** @type {HTMLInputElement} */ (byId('share-dishes'));
   let storage = { active: '', entries: [] };
   let storageIssue = '';
   try {
@@ -175,11 +173,7 @@ export function setupPeople(update) {
       .forEach((b) =>
         b.setAttribute('aria-pressed', String(b.getAttribute('data-party') === current.party))
       );
-    document
-      .querySelectorAll('[data-order]')
-      .forEach((b) =>
-        b.setAttribute('aria-pressed', String(b.getAttribute('data-order') === current.ordering))
-      );
+    shareDishes.checked = current.ordering === 'shared';
     byId('ordering-field').hidden = !group || domain !== 'food';
     byId('add-person').hidden = !group;
     list.replaceChildren();
@@ -228,10 +222,18 @@ export function setupPeople(update) {
         );
         fields.append(pair);
         const venue = document.createElement('div');
-        venue.className = 'pair';
+        venue.className = 'person-fields';
         venue.append(
-          selectField('Venue preference', p, 'venue', venueOptions, update),
-          selectField('Dish modifications', p, 'substitutions', substitutionOptions, update)
+          dietChoices('Venue for this diet', p, index, 'venue', [
+            { value: 'any', label: 'Any suitable venue' },
+            { value: 'prefer', label: 'Prefer dedicated' },
+            { value: 'required', label: 'Require dedicated' }
+          ], update),
+          dietChoices('Dish modifications', p, index, 'substitutions', [
+            { value: 'ask', label: 'Confirm with staff' },
+            { value: 'fine', label: 'Allow substitutions' },
+            { value: 'listed', label: 'As listed only' }
+          ], update)
         );
         const syncVenue = () => {
           venue.hidden = !p.diet.trim();
@@ -344,13 +346,10 @@ export function setupPeople(update) {
       update();
     })
   );
-  document.querySelectorAll('[data-order]').forEach((b) =>
-    b.addEventListener('click', () => {
-      current.ordering = b.getAttribute('data-order');
-      render();
-      update();
-    })
-  );
+  shareDishes.addEventListener('change', () => {
+    current.ordering = shareDishes.checked ? 'shared' : 'separate';
+    update();
+  });
   byId('add-person').addEventListener('click', () => {
     current.people.push(traveler('Guest ' + (current.people.length + 1)));
     render();

@@ -2,6 +2,7 @@ import { modes, newRequest, waysToTravel } from './core/catalog.mjs';
 import { submit } from './core/prompt.mjs';
 import { setupPeople } from './people.mjs';
 import { setupPhotos, supportsShare } from './photos.mjs';
+import { radioChoices } from './controls.mjs';
 
 const byId = (id) => document.getElementById(id);
 const field = (id) =>
@@ -23,7 +24,6 @@ const ids = [
   'place',
   'shortlist',
   'budget',
-  'flexibility',
   'hunger',
   'notes',
   'travelTime',
@@ -32,13 +32,35 @@ const ids = [
   'checkOut',
   'property',
   'room',
-  'budgetBasis',
   'visitDate',
   'visitLength',
-  'focus',
   'menuText'
 ];
 const bookingCounts = ['adults', 'children', 'roomCount'];
+const choiceOptions = {
+  budgetBasis: [
+    { value: 'night', label: 'Per night', symbol: 'night' },
+    { value: 'stay', label: 'Whole stay', symbol: 'calendar' }
+  ],
+  flexibility: [
+    { value: '', label: 'No preference' },
+    { value: 'Firm limit', label: 'Firm limit' },
+    { value: 'Flexible for a good fit', label: 'Flexible for a good fit' },
+    { value: 'Happy to splurge', label: 'Happy to splurge' }
+  ],
+  focus: [
+    { value: 'Food and drinks', label: 'Both', symbol: 'menu' },
+    { value: 'Food', label: 'Food', symbol: 'dining' },
+    { value: 'Drinks', label: 'Drinks', symbol: 'glass' }
+  ]
+};
+const setChoices = Object.entries(choiceOptions).map(([key, options]) => {
+  const select = radioChoices(byId(key), key, options, drafts[mode][key], value => {
+    drafts[mode][key] = value;
+    refresh();
+  });
+  return { key, select };
+});
 const geoAttempts = new Map();
 const geoMessages = new Map();
 let current = null;
@@ -55,6 +77,7 @@ function readDraft() {
   }
   d.timing = mode === 'menu' ? '' : field(mode + '-time').value;
   d.results = Number(field('results').value);
+  byId('result-count').textContent = String(d.results);
 }
 function refresh() {
   const d = drafts[mode];
@@ -119,6 +142,7 @@ function displayMode() {
         : 'e.g. No pizza tonight, I had it yesterday'
   );
   for (const id of ids) field(id).value = d[id];
+  for (const { key, select } of setChoices) select(d[key]);
   if (mode !== 'menu') field(mode + '-time').value = d.timing;
   field('results').value = String(d.results);
   document
@@ -130,8 +154,6 @@ function displayMode() {
   gps();
   refresh();
 }
-for (let n = 1; n <= 10; n++)
-  /** @type {HTMLSelectElement} */ (byId('results')).add(new Option(String(n), String(n)));
 for (const transport of waysToTravel) {
   const b = document.createElement('button');
   b.type = 'button';

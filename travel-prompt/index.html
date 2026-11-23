@@ -41,6 +41,16 @@
       <symbol id="note-icon" viewBox="0 0 24 24">
         <path d="M5 3h9l5 5v13H5zM14 3v6h5M8 13h8m-8 4h6" />
       </symbol>
+      <symbol id="glass-icon" viewBox="0 0 24 24">
+        <path d="M7 3h10l1 6a6 6 0 0 1-12 0l1-6Zm-1 5h12m-6 7v6m-4 0h8" />
+      </symbol>
+      <symbol id="night-icon" viewBox="0 0 24 24">
+        <path d="M19 15a8 8 0 0 1-10-11 8.8 8.8 0 1 0 10 11Z" />
+      </symbol>
+      <symbol id="calendar-icon" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M7 3v4m10-4v4M3 10h18m-13 5h8" />
+      </symbol>
     </svg>
     <header class="mast">
       <div class="mast-inner">
@@ -202,41 +212,29 @@
                   <span id="budget-label">Budget per person</span>
                   <input id="budget" placeholder="Amount and currency" />
                 </label>
-                <label data-modes="lodging" hidden>
-                  Budget period
-                  <select id="budgetBasis">
-                    <option value="night">Per night</option>
-                    <option value="stay">Whole stay</option>
-                  </select>
-                </label>
-                <label>
-                  Price flexibility
-                  <select id="flexibility">
-                    <option value="">No preference</option>
-                    <option>Firm limit</option>
-                    <option>Flexible for a good fit</option>
-                    <option>Happy to splurge</option>
-                  </select>
-                </label>
+                <fieldset data-modes="lodging" hidden>
+                  <legend>Budget period</legend>
+                  <div id="budgetBasis" class="choices"></div>
+                </fieldset>
               </div>
+              <fieldset>
+                <legend>Price flexibility</legend>
+                <div id="flexibility" class="choices"></div>
+              </fieldset>
               <div class="pair" data-modes="restaurant menu">
                 <label>
                   Appetite or occasion
                   <input id="hunger" placeholder="e.g. Light lunch, drinks only" />
-                </label>
-                <label data-modes="menu">
-                  Recommend
-                  <select id="focus">
-                    <option>Food and drinks</option>
-                    <option>Food</option>
-                    <option>Drinks</option>
-                  </select>
                 </label>
                 <label data-modes="restaurant">
                   When?
                   <input id="restaurant-time" placeholder="e.g. Tonight, arrive by 7" />
                 </label>
               </div>
+              <fieldset data-modes="menu" hidden>
+                <legend>Recommend from the menu</legend>
+                <div id="focus" class="choices"></div>
+              </fieldset>
               <details data-modes="restaurant lodging outing">
                 <summary>Transport, access and other requirements</summary>
                 <div class="extra">
@@ -285,14 +283,11 @@
                 </fieldset>
                 <fieldset id="ordering-field" hidden>
                   <legend>At the table</legend>
-                  <div class="seg" id="ordering">
-                    <button type="button" data-order="separate" aria-pressed="true">
-                      Order separately
-                    </button>
-                    <button type="button" data-order="shared" aria-pressed="false">
-                      Share dishes
-                    </button>
-                  </div>
+                  <label class="sharing-switch">
+                    <input type="checkbox" id="share-dishes" role="switch" />
+                    <span class="switch-track" aria-hidden="true"></span>
+                    Share dishes
+                  </label>
                 </fieldset>
               </div>
               <div id="travelers"></div>
@@ -306,10 +301,10 @@
           <div class="section-head">
             <svg aria-hidden="true"><use href="#note-icon" /></svg>
             <h2 id="preview-title">Your prompt</h2>
-            <label class="count-label">
-              Results
-              <select id="results" aria-label="Number of recommendations"></select>
-            </label>
+            <div class="count-label">
+              <label for="results">Results <span id="result-count" aria-hidden="true">3</span></label>
+              <input id="results" type="range" min="1" max="10" step="1" value="3" aria-label="Number of recommendations" />
+            </div>
           </div>
           <div class="preview-body">
             <p class="hint" id="share-hint">Preview what you’ll send to your assistant.</p>
@@ -380,6 +375,10 @@
       <option value="Halal"></option>
       <option value="Kosher"></option>
       <option value="Gluten-free"></option>
+    </datalist>
+    <datalist id="preference-steps">
+      <option value="-2"></option><option value="-1"></option><option value="0"></option>
+      <option value="1"></option><option value="2"></option>
     </datalist>
     <noscript>This app needs JavaScript to generate a prompt on your device.</noscript>
   </body>

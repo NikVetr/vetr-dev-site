@@ -133,7 +133,10 @@ export function setupPhotos(update, getPrompt) {
       save.download = file.name;
       save.textContent = 'Save';
       save.setAttribute('aria-label', 'Save a copy of page ' + (i + 1));
-      row.append(inspect, caption, save);
+      const actions = document.createElement('div');
+      actions.className = 'photo-actions';
+      actions.append(save);
+      row.append(inspect, caption, actions);
       for (const [action, label] of [
         ['up', '↑'],
         ['down', '↓'],
@@ -161,7 +164,7 @@ export function setupPhotos(update, getPrompt) {
           if (next) next.querySelector('button').focus();
           else byId('photos').focus();
         });
-        row.append(b);
+        actions.append(b);
       }
       list.append(row);
     });

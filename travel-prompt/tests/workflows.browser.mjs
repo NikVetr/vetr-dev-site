@@ -6,6 +6,50 @@ import { openPage } from '../../scripts/landing-art/browser.mjs';
 const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE || 'chromium');
 const open = () => openPage('travel-prompt/', { width: 390, height: 844, engine, touch: true });
 const tile = (id) => '[data-mode="' + id + '"]';
+test('keyboard choices and sliders preserve independent prompts and leave long profile names readable', async () => {
+  const { page, close, errors } = await open();
+  try {
+    await page.locator(tile('menu')).click();
+    await page.getByRole('radio', { name: 'Food', exact: true }).check();
+    await page.getByRole('radio', { name: 'Food', exact: true }).press('ArrowRight');
+    assert.ok(await page.getByRole('radio', { name: 'Drinks', exact: true }).isChecked());
+    await page.getByRole('radio', { name: 'Firm limit' }).check();
+    const count = page.getByRole('slider', { name: 'Number of recommendations' });
+    await count.press('End');
+    assert.match(await page.locator('#prompt').inputValue(), /10 orders from this menu. Focus on drinks/);
+    assert.match(await page.locator('#prompt').inputValue(), /Price preference: Firm limit/);
+    assert.equal(await page.locator('#result-count').innerText(), '10');
+    await page.locator(tile('restaurant')).click();
+    assert.equal(await count.inputValue(), '3');
+    assert.ok(await page.getByRole('radio', { name: 'No preference' }).isChecked());
+    await page.locator(tile('menu')).click();
+    assert.equal(await count.inputValue(), '10');
+    assert.ok(await page.getByRole('radio', { name: 'Drinks', exact: true }).isChecked());
+    await page.getByText('Food and drink preferences', { exact: true }).click();
+    const spice = page.getByRole('slider', { name: 'Spicy food' });
+    await spice.press('Home');
+    assert.equal(await spice.getAttribute('aria-valuetext'), 'Strongly avoid');
+    assert.match(await page.locator('#prompt').inputValue(), /Strongly avoid: spicy food/);
+    await spice.press('ArrowRight');
+    await spice.press('ArrowRight');
+    assert.equal(await spice.getAttribute('aria-valuetext'), 'Neutral');
+    assert.doesNotMatch(await page.locator('#prompt').inputValue(), /spicy food/);
+    await page.locator('#open-profiles').click();
+    await page.locator('#profile-name').fill('Kyoto family trip · vegetarian and sesame allergy');
+    await page.locator('#save-profile').click();
+    for (const width of [320, 390, 820, 1280]) {
+      await page.setViewportSize({ width, height: 840 });
+      const row = page.locator('.profile-row').first();
+      const name = await row.locator('span').boundingBox();
+      const actions = await row.getByRole('button').first().boundingBox();
+      assert.ok(name.width > 160 && name.y + name.height <= actions.y + 1, 'profile at ' + width);
+    }
+    assert.deepEqual(errors, []);
+  } finally {
+    await close();
+  }
+});
+
 test('lodging guest counts, child ages and budget period stay in the current lodging draft', async () => {
   const app = await open();
   const { page } = app;
@@ -20,7 +64,7 @@ test('lodging guest counts, child ages and budget period stay in the current lod
     assert.ok(await page.locator('#copy').isDisabled());
     await page.locator('#childAges').fill('4');
     await page.getByLabel('Budget for all rooms').fill('EUR 800');
-    await page.getByLabel('Budget period').selectOption('stay');
+    await page.getByRole('radio', { name: 'Whole stay' }).check();
     const prompt = page.locator('#prompt');
     assert.match(await prompt.inputValue(), /1 room, 2 adults, 1 child/);
     assert.match(await prompt.inputValue(), /Child ages supplied \(years at check-in\): 4/);
@@ -43,7 +87,7 @@ test('lodging guest counts, child ages and budget period stay in the current lod
     await page.reload();
     await page.locator(tile('lodging')).click();
     assert.doesNotMatch(await prompt.inputValue(), /Booking:|Child ages supplied|EUR 800/);
-    assert.equal(await page.locator('#budgetBasis').inputValue(), 'night');
+    assert.ok(await page.getByRole('radio', { name: 'Per night' }).isChecked());
     assert.deepEqual(app.errors, []);
   } finally {
     await app.close();
@@ -72,7 +116,7 @@ test('outing uses an existing group profile, saves new interests and keeps trip 
     await page.getByLabel('Time window').fill('10 am to noon');
     await page.getByLabel('Time available, including travel').fill('90 minutes');
     await page.getByText('Outing interests', { exact: true }).last().click();
-    await page.getByRole('button', { name: 'Prefer · Museums and galleries', exact: true }).last().click();
+    await page.getByRole('slider', { name: 'Museums and galleries' }).last().press('ArrowRight');
     assert.match(await prompt.inputValue(), /Lee: Prefer: museums and galleries/);
     await page.locator('#open-profiles').click();
     await page.getByRole('button', { name: 'Update profile Train trip' }).click();
@@ -107,15 +151,15 @@ test('phone group profile survives reload while trip data and location do not', 
     const prompt = page.locator('#prompt');
     await page.locator('#place').fill('Union Square station');
     await page.getByRole('button', { name: 'Group', exact: true }).click();
-    await page.getByRole('button', { name: 'Share dishes' }).click();
+    await page.getByRole('switch', { name: 'Share dishes' }).press('Space');
     await page.getByLabel('Dietary requirements', { exact: true }).first().fill('vegan');
     await page.getByLabel('Allergies & cross-contact').last().fill('sesame');
-    await page.getByLabel('Venue preference').first().selectOption('prefer');
+    await page.getByRole('radio', { name: 'Prefer dedicated' }).first().check();
     await page.getByText('Food and drink preferences', { exact: true }).first().click();
     await page
-      .getByRole('button', { name: 'Prefer · Regional specialties', exact: true })
+      .getByRole('slider', { name: 'Regional specialties' })
       .first()
-      .click();
+      .press('ArrowRight');
     assert.match(await prompt.inputValue(), /Group of 2.*sharing dishes/);
     assert.match(await prompt.inputValue(), /Prefer: regional specialties/);
     await page.locator('#open-profiles').click();
