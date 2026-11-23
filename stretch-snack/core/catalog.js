@@ -23,6 +23,9 @@ export const equipment = {
   support: 'Secure fixed handhold', 'firm-back': 'Chair with a firm back', step: 'Low fixed step', mat: 'Exercise mat',
 };
 
+// These fixtures must be confirmed at the place where the movement is done.
+export const fixedEquipment = ['support', 'firm-back', 'step'];
+
 export const limitations = {
   'stay-seated': 'Stay seated', 'stay-standing': 'Stay standing', 'back-support': 'Keep my back supported',
   'poor-balance': 'Avoid balance challenges', 'no-floor': 'Stay off the ground',
@@ -155,7 +158,7 @@ export const moves = [
   ...movement('toe-lift', 'Standing toe lifts', ['calves'],
     'Hold a fixed support. Keep both heels planted and lift the fronts of your feet. Lower your toes slowly.',
     'Stay upright and keep hold throughout.', 'kingston',
-    {poses: upright, uses: ['legs', 'arms', 'grip', 'balance'], equipment: ['support'], forward: 12, stationary: true}),
+    {poses: upright, uses: ['legs', 'arms', 'grip', 'balance'], equipment: ['support'], forward: 12}),
   ...movement('palm-forward', 'Palms-forward chest opener', ['chest', 'shoulders'],
     'Let your arms hang at your sides. Turn your palms forward as you draw your shoulder blades gently back and down. Pause, then release.',
     'Keep your shoulders away from your ears.', 'palms', {poses: both, uses: ['arms']}),

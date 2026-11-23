@@ -11,7 +11,7 @@ function checkFit(id, request, expected) {
   assert.equal(result.steps.some(step => step.id === id), expected, id + ' planning');
   const edit = {...prefs, steps: [{id, seconds: 30}]};
   assert.equal(reviewRoutine(edit).fits, expected, id + ' saved routine review');
-  if (expected) assert.deepEqual(submit(edit).steps, edit.steps);
+  if (expected) assert.deepEqual(submit(edit).steps, [{id, seconds:30, location:request.location}]);
   else assert.throws(() => submit(edit), /steps\[0\].id|Mobility setting|Needs|Equipment needed|discretion/);
 }
 
@@ -40,7 +40,10 @@ test('the chair, ball, and ability to position it all matter for upper-back mass
     checkFit(id, {...req, location, discretion: 'quiet', limitations: ['no-leg-movement', 'poor-balance']}, true);
   }
   const otherChair = submit({...req, location: 'stall', availableLocations: ['roomy-seat'], favoriteIds: [id]});
-  assert.ok(otherChair.alternatives.every(place => !place.additionalIds.includes(id)));
+  assert.ok(!otherChair.eligibleIds.includes(id));
+  const confirmed = submit({...req, location: 'stall', availableLocations: ['roomy-seat'], equipmentByLocation: {'roomy-seat': ['firm-back']}, favoriteIds: [id]});
+  assert.deepEqual(confirmed.eligibleLocations[id], ['roomy-seat']);
+  assert.deepEqual(confirmed.unmetFavorites, []);
 });
 
 test('rail-supported weight shifts and heel-planted toe lifts have distinct balance demands', () => {
@@ -54,7 +57,9 @@ test('rail-supported weight shifts and heel-planted toe lifts have distinct bala
   }
   checkFit('standing-weight-shift', {...req, location: 'plane-lavatory'}, true);
   checkFit('standing-weight-shift', {...req, sideCm: 4, heightCm: 195}, false);
-  checkFit('standing-toe-lift', {...req, location: 'plane-lavatory'}, false);
+  checkFit('standing-toe-lift', {...req, location: 'plane-lavatory'}, true);
+  checkFit('standing-toe-lift', {location: 'plane-lavatory', equipment: []}, false);
+  assert.ok(!submit({...req, location: 'plane-seat', availableLocations: ['plane-lavatory']}).eligibleIds.includes('standing-toe-lift'));
   checkFit('seated-toe-lift', {location: 'plane-seat', limitations: ['limited-grip', 'poor-balance']}, true);
   checkFit('standing-back-arch', {...req, discretion: 'moderate', limitations: ['no-arm-movement']}, false);
 });

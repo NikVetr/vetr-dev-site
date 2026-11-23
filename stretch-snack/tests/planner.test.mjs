@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { reviewRoutine, submit } from '../core/plan.js';
+import { easierVariant, placeOptions, reviewRoutine, submit, transferSeconds } from '../core/plan.js';
 import { equipment, locations, moves, sources, targets } from '../core/catalog.js';
 
 const byId = new Map(moves.map(move => [move.id, move]));
@@ -26,7 +26,8 @@ test('a quiet middle-seat plan is deterministic, local, under budget, and covers
   assert.deepEqual(result, submit(req));
   assert.equal(result.totalSeconds, 90);
   assert.deepEqual(result.unmetTargets, []);
-  assert.deepEqual(result.alternatives, []);
+  assert.deepEqual(result.segments, [{location: 'plane-seat', steps: [0, 1, 2]}]);
+  assert.equal(result.returnToLocation, null);
   assert.ok(result.steps.every(s => byId.get(s.id).pose === 'seated' && byId.get(s.id).discretion === 'quiet'));
   assert.ok(!result.eligibleIds.includes('seated-chest-open'));
   assert.ok(!result.eligibleIds.includes('seated-knee-extend'));
@@ -37,7 +38,7 @@ test('favorites never defeat an exclusion, discomfort, unavailable equipment, or
     favoriteIds: ['standing-step-up', 'seated-heel-lift', 'seated-toe-lift', 'seated-towel-grip']};
   const feedback = {'seated-toe-lift': 'uncomfortable'};
   const fallback = submit({...req, feedback});
-  assert.deepEqual(fallback.steps, [{id: 'seated-ankle-circle', seconds: 30}]);
+  assert.deepEqual(fallback.steps, [{id: 'seated-ankle-circle', seconds: 30, location: quiet.location}]);
   assert.deepEqual(fallback.unmetFavorites, req.favoriteIds);
   const result = submit({...req, feedback, avoidIds: [...req.avoidIds, 'seated-ankle-circle']});
   assert.deepEqual(result.steps, []);
@@ -48,9 +49,10 @@ test('favorites never defeat an exclusion, discomfort, unavailable equipment, or
 test('physical constraints survive a custom edit and apply in suggested locations too', () => {
   const prefs = {...open, limitations: ['stay-seated', 'no-leg-movement', 'back-support'], availableLocations: ['roomy-seat']};
   const result = submit(prefs);
-  assert.deepEqual(result.steps, []);
-  assert.ok(result.alternatives.length);
-  for (const id of result.alternatives[0].additionalIds) {
+  assert.ok(result.steps.length && result.steps.every(step => step.location === 'roomy-seat'));
+  assert.ok(result.eligibleIds.length);
+  for (const id of result.eligibleIds) {
+    assert.deepEqual(result.eligibleLocations[id], ['roomy-seat']);
     const move = byId.get(id);
     assert.equal(move.pose, 'seated');
     assert.ok(!move.uses.includes('legs') && !move.uses.includes('unsupported-back'));
@@ -60,17 +62,98 @@ test('physical constraints survive a custom edit and apply in suggested location
   assert.deepEqual(submit({...open, limitations: ['stay-seated', 'stay-standing']}).eligibleIds, []);
 });
 
-test('only explicitly available locations on the route can add suggestions', () => {
-  const request = {...quiet, discretion: 'any', targets: ['lower-back']};
-  const here = submit(request);
-  const other = submit({...request, availableLocations: ['open-area', 'plane-lavatory', 'train-seat']});
-  assert.deepEqual(other.steps, here.steps);
-  assert.deepEqual(other.alternatives.map(o => o.location), ['plane-lavatory']);
-  assert.deepEqual(other.alternatives[0].additionalIds, ['standing-side-bend']);
-  assert.deepEqual(submit({...request, limitations: ['stay-seated'], availableLocations: ['plane-lavatory']}).alternatives, []);
-  assert.deepEqual(submit({...quiet, targets: ['neck'], availableLocations: ['plane-lavatory']}).alternatives, []);
-  assert.deepEqual(submit({...quiet, targets: ['neck'], favoriteIds: ['standing-neck-turn'],
-    availableLocations: ['plane-lavatory']}).alternatives[0].additionalIds, ['standing-neck-turn']);
+test('a trip adds a requested target only when easier places cannot provide it', () => {
+  const req = {...quiet, discretion: 'any', availableLocations: ['open-area', 'plane-lavatory', 'train-seat'], targets: ['lower-back']};
+  const local = submit(req);
+  assert.deepEqual(local.places, [{location: 'plane-seat', rank: 0, visitSeconds: 0}, {location: 'plane-lavatory', rank: 2, visitSeconds: 60}]);
+  assert.ok(local.steps.every(step => step.location === 'plane-seat'));
+  const away = {...req, avoidIds: ['seated-back-round', 'seated-pelvic-tilt']};
+  const result = submit(away);
+  assert.deepEqual(result.steps, [{id: 'standing-side-bend', location: 'plane-lavatory', seconds: 105}]);
+  assert.deepEqual(result.transitionSeconds, [60]);
+  assert.deepEqual(result.unmetTargets, []);
+  assert.equal(result.returnToLocation, 'plane-seat');
+  for (const blocked of [{...away, seconds: 64}, {...away, limitations: ['back-support']}, {...away, availableLocations: []}]) {
+    assert.deepEqual(submit(blocked).unmetTargets, ['lower-back']);
+    assert.deepEqual(submit(blocked).segments, []);
+  }
+  assert.equal(submit({...away, seconds: 65}).steps[0].seconds, 65);
+});
+
+test('a named movement can justify a single visit; equivalent seated motions avoid it', () => {
+  const req = {...quiet, availableLocations: ['plane-lavatory'], targets: ['calves'],
+    equipmentByLocation: {'plane-lavatory': ['support']}};
+  const here = submit(req);
+  assert.ok(here.steps.length && here.steps.every(step => step.location === 'plane-seat'));
+  assert.deepEqual(here.unmetFavorites, []);
+  assert.deepEqual(easierVariant(here, 'standing-toe-lift', 'plane-lavatory'), {id: 'seated-toe-lift', location: 'plane-seat'});
+  assert.equal(easierVariant(here, 'seated-toe-lift', 'plane-seat'), null);
+  const named = submit({...req, favoriteIds: ['standing-toe-lift']});
+  assert.deepEqual(named.unmetFavorites, []);
+  assert.ok(named.steps.some(step => step.id === 'standing-toe-lift' && step.location === 'plane-lavatory'));
+  const noSeatedVariant = submit({...req, favoriteIds: ['standing-toe-lift'], avoidIds: ['seated-toe-lift']});
+  assert.deepEqual(noSeatedVariant.unmetFavorites, []);
+  assert.ok(noSeatedVariant.steps.some(step => step.id === 'standing-toe-lift' && step.location === 'plane-lavatory'));
+  assert.equal(easierVariant(noSeatedVariant, 'standing-toe-lift', 'plane-lavatory'), null);
+});
+
+test('plan visits each selected place once in effort order and accounts for all travel', () => {
+  const req = {location: 'train-seat', availableLocations: ['stall','roomy-seat'], discretion: 'any',
+    favoriteIds: ['seated-chest-open','standing-side-bend'], targets: ['neck'], seconds: 220};
+  const result = submit(req);
+  assert.deepEqual(result, submit({...req, availableLocations: ['roomy-seat', 'stall']}));
+  assert.deepEqual(result, submit({...req, steps: result.steps}));
+  assert.deepEqual(result.segments.map(segment => segment.location), ['train-seat','roomy-seat','stall']);
+  assert.deepEqual(result.segments.flatMap(segment => segment.steps), result.steps.map((_,i) => i));
+  assert.deepEqual(result.transitionSeconds.filter(Boolean), [30,60]);
+  assert.equal(result.totalSeconds, 220);
+  assert.ok(result.steps.every((step,i) => step.seconds >= result.transitionSeconds[i] + 5));
+  assert.deepEqual(result.unmetFavorites, []);
+  assert.deepEqual(easierVariant(result, 'seated-neck-turn', 'roomy-seat'), {id: 'seated-neck-turn', location: 'train-seat'});
+});
+
+test('a mixed request can visit the nearest feasible site when the current site offers no movement', () => {
+  const req = {...quiet, availableLocations: ['plane-lavatory'], limitations: ['stay-standing']};
+  const result = submit(req);
+  assert.deepEqual(result.segments.map(segment => segment.location), ['plane-lavatory']);
+  assert.equal(result.transitionSeconds[0], 60);
+  assert.equal(result.returnToLocation, 'plane-seat');
+  assert.deepEqual(submit({...req, seconds: 64}).steps, []);
+});
+
+test('long transfers between remote places leave replayable steps even with ample time', () => {
+  const req = {location:'stall', availableLocations:['train-seat','open-area'], allowFloor:true, discretion:'any',
+    targets:['lower-back'], favoriteIds:['seated-heel-lift','supine-pelvic-tilt'], seconds:900,
+    avoidIds:['standing-side-bend','standing-back-arch','seated-back-round','seated-pelvic-tilt']};
+  const result = submit(req);
+  assert.deepEqual(result.segments.map(segment => segment.location), ['train-seat','open-area']);
+  assert.deepEqual(result.transitionSeconds, [30,135]);
+  assert.equal(result.steps[1].seconds,180);
+  assert.deepEqual(submit({...req, steps: result.steps}), result);
+});
+
+test('custom and saved plans preserve chosen places, review their fit and reject infeasible transfers', () => {
+  const req = {...quiet, seconds: 150, availableLocations: ['plane-lavatory']};
+  const here = {id: 'seated-toe-lift', location: 'plane-seat', seconds: 20};
+  const away = {id: 'standing-neck-turn', location: 'plane-lavatory', seconds: 65};
+  const plan = submit({...req, steps: [here, away]});
+  assert.deepEqual(plan.steps, [here,away]);
+  assert.deepEqual(plan.transitionSeconds, [0,60]);
+  const report = reviewRoutine({...req, steps: [here, {...away,seconds:60}]});
+  assert.equal(report.rows[1].transitionSeconds, 60);
+  assert.equal(report.rows[1].needsTransferTime, true);
+  rejects({...req, steps: [here, {...away,seconds:60}]}, 'steps[1].seconds');
+  rejects({...req, steps: [here, away, here]}, 'steps[2].location');
+  rejects({...req, steps: [away, here]}, 'steps[1].location');
+  const changed = reviewRoutine({...req, availableLocations: [], steps: [away]});
+  assert.equal(changed.fits, false);
+  assert.match(changed.rows[0].issues[0], /selected, reachable/);
+  rejects({...req, availableLocations: [], steps: [away]}, 'steps[0].location');
+  assert.deepEqual(submit({...req, steps: [{id: away.id, seconds: 70}]}).steps, [{...away, seconds: 70}]);
+  assert.deepEqual(placeOptions('train-seat',['roomy-seat','open-area','stall']).map(p => p.location), ['train-seat','roomy-seat','stall']);
+  assert.equal(transferSeconds('plane-seat','plane-lavatory','plane-seat','standing','seated'), 60);
+  assert.equal(transferSeconds('stall','train-seat','open-area','seated','supine'), 135);
+  assert.equal(transferSeconds('open-area','open-area','open-area','supine','standing'), 15);
 });
 
 test('direct clearance measurements, reach, and height affect fit and never travel to another location', () => {
@@ -80,7 +163,7 @@ test('direct clearance measurements, reach, and height affect fit and never trav
   assert.ok(submit(req).eligibleIds.includes('seated-chest-open'));
   assert.ok(!submit({...req, armspanCm: 180}).eligibleIds.includes('seated-chest-open'));
   const inSeat = submit({...quiet, discretion: 'any', sideCm: 0, availableLocations: ['plane-lavatory']});
-  assert.ok(inSeat.alternatives[0].additionalIds.includes('standing-side-bend'));
+  assert.deepEqual(inSeat.eligibleLocations['standing-side-bend'], ['plane-lavatory']);
 });
 
 test('floor access is opt-in and compatible with the current location, preference and mobility rules', () => {
@@ -114,7 +197,7 @@ test('explicit choices outrank learned preferences, and recent feedback can chan
 test('edits keep order, target repetitions and the time allowance for a floor transfer', () => {
   const steps = [{id: 'standing-shoulder-roll', seconds: 15, reps: 3}, {id: 'supine-pelvic-tilt', seconds: 25}];
   const result = submit({...open, seconds: 40, steps});
-  assert.deepEqual(result.steps, steps);
+  assert.deepEqual(result.steps, steps.map(step => ({...step, location: open.location})));
   assert.deepEqual(result.transitionSeconds, [0, 15]);
   assert.equal(result.totalSeconds, 40);
   rejects({...open, seconds: 39, steps}, 'steps');
@@ -125,7 +208,9 @@ test('edits keep order, target repetitions and the time allowance for a floor tr
 test('invalid public requests fail with structured errors', () => {
   for (const [req, path] of [[null, '$'], [{extra: 1}, 'extra'], [{seconds: null}, 'seconds'],
     [{location: 'constructor'}, 'location'], [{targets: 'neck'}, 'targets'], [{targets: ['neck','neck']}, 'targets'],
-    [{allowFloor: 'y'}, 'allowFloor'], [{steps: [{id: 'fake', seconds: 30}]}, 'steps[0].id'],
+    [{allowFloor: 'y'}, 'allowFloor'], [{equipmentByLocation:null}, 'equipmentByLocation'],
+    [{equipmentByLocation: {bogus: []}}, 'equipmentByLocation.bogus'],
+    [{equipmentByLocation: {stall:['towel']}}, 'equipmentByLocation.stall[0]'], [{steps: [{id: 'fake', seconds: 30}]}, 'steps[0].id'],
     [{feedback: {'wat': 'helped'}}, 'feedback.wat'], [{feedback: {'seated-neck-turn': 'fine'}}, 'feedback.seated-neck-turn']]) {
     rejects(req, path);
   }
@@ -158,5 +243,5 @@ test('saved routine review reports hard exclusions, missing movements, transfers
   for (const id of ['standing-shoulder-roll', 'retired-movement']) assert.ok(!report.eligibleIds.includes(id));
   const revised = {...req, steps: [{id: 'standing-hand-open', seconds: 25, reps: 3}, {id: 'supine-pelvic-tilt', seconds: 20}]};
   assert.equal(reviewRoutine(revised).fits, true);
-  assert.deepEqual(submit(revised).steps, revised.steps);
+  assert.deepEqual(submit(revised).steps, revised.steps.map(step => ({...step, location: open.location})));
 });

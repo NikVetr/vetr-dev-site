@@ -1,5 +1,5 @@
 import { checkRequestKeys, invalidRequest } from '../../shared/request.js';
-import { equipment, limitations, locations, moves, reachableLocations, targets } from './catalog.js';
+import { equipment, fixedEquipment, limitations, locations, moves, reachableLocations, targets } from './catalog.js';
 
 /** @typedef {(typeof moves)[number]} Movement */
 /** @typedef {ReturnType<typeof normalize>} Preferences */
@@ -20,6 +20,32 @@ const spaces = {
   stall:            {seated: false, stationary: false, forward: 30, side: 18},
   'open-area':      {seated: false, stationary: true,  forward: 250, side: 180},
 };
+
+/** @param {string} current @param {string} location */
+function placeRank(current, location) {
+  return location === current ? 0 : spaces[location].seated ? 1 : location === 'open-area' ? 3 : 2;
+}
+
+/** @param {keyof typeof locations} current @param {string[]} available */
+export function placeOptions(current, available) {
+  return [current, ...reachableLocations[current].filter(location => available.includes(location))]
+    .map(location => {
+      const rank = placeRank(current, location);
+      return {location, rank, visitSeconds: 30 * rank};
+    }).sort((a, b) => a.rank - b.rank);
+}
+
+/** Estimate time from an actual origin, including manual navigation in either direction.
+ * @param {string} current @param {string} from @param {string} to @param {string} [fromPose] @param {string} [toPose] */
+export function transferSeconds(current, from, to, fromPose, toPose) {
+  if (from === to) return fromPose && toPose && fromPose !== toPose ? postureChangeSeconds : 0;
+  const fromCost = 30 * placeRank(current, from);
+  const toCost = 30 * placeRank(current, to);
+  // Two choices reachable from our starting place may require going back through it.
+  const direct = reachableLocations[/** @type {keyof typeof locations} */ (from)].includes(to);
+  const travel = direct ? Math.max(fromCost, toCost) : fromCost + toCost;
+  return travel + postureChangeSeconds * (Number(fromPose === 'supine') + Number(toPose === 'supine'));
+}
 
 /** @param {unknown} value @param {string[]} choices @param {string} path */
 function option(value, choices, path) {
@@ -48,7 +74,7 @@ function numberInRange(value, min, max, path, whole = false) {
 function normalize(request) {
   checkRequestKeys(request, [
     'location', 'seconds', 'targets', 'limitations', 'equipment', 'discretion', 'avoidIds', 'favoriteIds',
-    'feedback', 'heightCm', 'armspanCm', 'forwardCm', 'sideCm', 'allowFloor', 'availableLocations', 'steps',
+    'feedback', 'heightCm', 'armspanCm', 'forwardCm', 'sideCm', 'allowFloor', 'availableLocations', 'equipmentByLocation', 'steps',
   ]);
   const {
     location = 'plane-seat', seconds = 120, discretion = 'quiet', feedback = {}, allowFloor = false,
@@ -69,11 +95,23 @@ function normalize(request) {
     option(id, movementIds, 'feedback.' + id);
     option(rating, ['helped', 'uncomfortable', 'poor-fit'], 'feedback.' + id);
   }
+  const settings = request.equipmentByLocation === undefined ? {} : request.equipmentByLocation;
+  if (settings === null || typeof settings !== 'object' || Array.isArray(settings)) {
+    throw invalidRequest('equipmentByLocation', 'Expected fixed equipment mapped by place.');
+  }
+  /** @type {Record<string,string[]>} */
+  const equipmentByLocation = {};
+  for (const [place, fixtures] of Object.entries(settings)) {
+    const path = 'equipmentByLocation.' + place;
+    option(place, Object.keys(locations), path);
+    equipmentByLocation[place] = choices(fixtures, fixedEquipment, path);
+  }
   return {
     location: /** @type {keyof typeof locations} */ (location), seconds, discretion, feedback, heightCm, armspanCm, forwardCm, sideCm, allowFloor,
     limitations: choices(request.limitations, Object.keys(limitations), 'limitations'),
     targets: choices(request.targets, Object.keys(targets), 'targets'),
     equipment: choices(request.equipment, Object.keys(equipment), 'equipment'),
+    equipmentByLocation,
     avoidIds: choices(request.avoidIds, movementIds, 'avoidIds'),
     favoriteIds: choices(request.favoriteIds, movementIds, 'favoriteIds'),
     availableLocations: choices(request.availableLocations, Object.keys(locations), 'availableLocations'),
@@ -98,7 +136,7 @@ function fitIssues(move, prefs, location) {
     (move.pose !== 'standing' && rule === 'stay-standing') ||
     (move.pose === 'supine' && rule === 'no-floor') ||
     (move.overhead && rule === 'no-overhead'));
-  if (blockedBy.length) issues.push('Mobility setting · ' + blockedBy.map(rule => limitations[rule]).join(', ') + '.');
+  if (blockedBy.length) issues.push('Mobility setting · ' + blockedBy.map(rule => limitations[/** @type {keyof typeof limitations} */ (rule)]).join(', ') + '.');
 
   if ((move.pose === 'seated') !== space.seated) {
     issues.push(move.pose === 'seated' ? 'Needs a seat.' : 'Needs space outside your seat.');
@@ -108,9 +146,10 @@ function fitIssues(move, prefs, location) {
     if (!prefs.allowFloor) issues.push('Floor use is off.');
   }
   if (move.stationary && !space.stationary) issues.push('Needs a stationary surface.');
-  const missingEquipment = move.equipment.filter(key =>
-    !prefs.equipment.includes(key) || (key === 'firm-back' && location !== prefs.location));
-  if (missingEquipment.length) issues.push('Equipment needed · ' + missingEquipment.map(key => equipment[key]).join(', ') + '.');
+  const missingEquipment = move.equipment.filter(key => fixedEquipment.includes(key)
+    ? !prefs.equipmentByLocation[location]?.includes(key) && !(location === prefs.location && prefs.equipment.includes(key))
+    : !prefs.equipment.includes(key));
+  if (missingEquipment.length) issues.push('Equipment needed · ' + missingEquipment.map(key => equipment[/** @type {keyof typeof equipment} */ (key)]).join(', ') + '.');
   if (visibility.indexOf(move.discretion) > visibility.indexOf(prefs.discretion)) issues.push('Exceeds your discretion setting.');
 
   const forward = location === prefs.location ? prefs.forwardCm ?? space.forward : space.forward;
@@ -141,35 +180,102 @@ function rank(move, prefs, seenTargets, seenMotions, lastPose) {
     + Number(lastPose === move.pose) * 2;
 }
 
-/** @param {Movement[]} eligible @param {Preferences} prefs */
-function autoSteps(eligible, prefs) {
-  let pool = eligible.filter(move => desired(move, prefs));
-  const selected = [];
+/** @param {Preferences} prefs */
+function availableMovements(prefs) {
+  const places = placeOptions(prefs.location, prefs.availableLocations);
+  /** @type {Record<string,string[]>} */
+  const eligibleLocations = {};
+  for (const move of moves) {
+    const fits = places.filter(place => !fitIssues(move, prefs, place.location).length);
+    if (fits.length) eligibleLocations[move.id] = fits.map(place => place.location);
+  }
+  return {places, eligibleLocations, eligibleIds: Object.keys(eligibleLocations)};
+}
+
+/** Return a same-motion option in a strictly easier selected place, preferring the same variant there.
+ * @param {ReturnType<typeof availableMovements>} plan @param {string} id @param {string} location */
+export function easierVariant(plan, id, location) {
+  if (!Object.hasOwn(byId, id) || !Object.hasOwn(spaces, location)) return null;
+  const rank = placeRank(plan.places[0].location, location);
+  for (const place of plan.places) {
+    if (place.rank >= rank) break;
+    if (plan.eligibleLocations[id]?.includes(place.location)) return {id, location: place.location};
+    const variant = moves.find(move => move.motion === byId[id].motion && plan.eligibleLocations[move.id]?.includes(place.location));
+    if (variant) return {id: variant.id, location: place.location};
+  }
+  return null;
+}
+
+/** @typedef {{id:string, location:string}} PlacedMove */
+/** @param {PlacedMove[]} steps @param {string} current */
+export function transfersFor(steps, current) {
+  return steps.map((step, i) => {
+    const previous = steps[i - 1];
+    return transferSeconds(current, previous?.location ?? current, step.location,
+      previous && byId[previous.id]?.pose, byId[step.id]?.pose);
+  });
+}
+
+/** @param {PlacedMove[]} selected @param {ReturnType<typeof placeOptions>} places */
+function groupedSteps(selected, places) {
+  return places.flatMap(place => {
+    const segment = selected.filter(step => step.location === place.location);
+    // Arrive standing in a new open space. Otherwise keep the first chosen posture.
+    const firstPose = place.rank > 0 && !spaces[place.location].seated ? 'standing' : byId[segment[0]?.id]?.pose;
+    return [...segment.filter(step => byId[step.id].pose === firstPose), ...segment.filter(step => byId[step.id].pose !== firstPose)];
+  });
+}
+
+/** @param {ReturnType<typeof availableMovements>} options @param {Preferences} prefs */
+function autoSteps(options, prefs) {
+  const {places, eligibleLocations, eligibleIds} = options;
+  const pool = places.flatMap(place => {
+    const easierTargets = new Set(eligibleIds.filter(other => placeRank(prefs.location, eligibleLocations[other][0]) < place.rank)
+      .flatMap(other => byId[other].targets));
+    return eligibleIds.filter(id => eligibleLocations[id][0] === place.location && desired(byId[id], prefs))
+      .filter(id => prefs.favoriteIds.includes(id) || !easierVariant(options, id, place.location))
+      .map(id => ({id, location: place.location, place, newTargets: byId[id].targets.filter(t => prefs.targets.includes(t) && !easierTargets.has(t))}));
+  });
+  // A mixed routine requests any feasible movement. If none fits here, use the
+  // nearest selected place that leaves time for movement after the journey.
+  const mixedPlace = !prefs.targets.length && places.find(place =>
+    pool.some(candidate => candidate.location === place.location &&
+      transferSeconds(prefs.location, prefs.location, place.location, undefined, byId[candidate.id].pose) + 5 <= prefs.seconds));
+  /** @type {PlacedMove[]} */
+  let selected = [];
   const seenTargets = new Set();
   const seenMotions = new Set();
   const slots = Math.max(1, Math.floor(prefs.seconds / 24));
-  // Select the first best-ranked item on ties so identical requests reproduce exactly.
   while (pool.length && selected.length < slots) {
-    const lastPose = selected.at(-1)?.pose;
-    let best = pool[0];
+    let best = -1;
     let bestScore = -Infinity;
-    for (const candidate of pool) {
-      const score = rank(candidate, prefs, seenTargets, seenMotions, lastPose);
-      if (score > bestScore) { best = candidate; bestScore = score; }
+    const lastPose = selected.length ? byId[selected[selected.length - 1].id].pose : undefined;
+    for (const [i, candidate] of pool.entries()) {
+      const {id, location, place, newTargets} = candidate;
+      const move = byId[id];
+      const named = prefs.favoriteIds.includes(id);
+      const uniqueTarget = newTargets.some(target => !seenTargets.has(target));
+      if (place.rank && !uniqueTarget && !named && (!mixedPlace || location !== mixedPlace.location)) continue;
+      const attempt = groupedSteps([...selected, candidate], places);
+      const active = prefs.seconds - transfersFor(attempt, prefs.location).reduce((a, b) => a + b, 0);
+      // An explicitly requested target or favorite can use a shorter remaining slot.
+      if (active < attempt.length * 5 || (attempt.length > Math.max(1, Math.floor(active / 24)) && !uniqueTarget && !named)) continue;
+      const newVisit = place.rank && !selected.some(step => step.location === location);
+      const score = rank(move, prefs, seenTargets, seenMotions, lastPose) - (newVisit ? place.visitSeconds / 10 : 0);
+      if (score > bestScore) { best = i; bestScore = score; }
     }
-    selected.push(best);
-    best.targets.forEach(target => seenTargets.add(target));
-    seenMotions.add(best.motion);
-    pool = pool.filter(move => move.id !== best.id);
+    if (best < 0) break;
+    const [{id, location}] = pool.splice(best, 1);
+    selected.push({id, location});
+    byId[id].targets.forEach(target => seenTargets.add(target));
+    seenMotions.add(byId[id].motion);
   }
   if (!selected.length) return [];
-  const firstPose = selected[0].pose;
-  // Group floor work together so there is at most one transfer.
-  const ordered = [...selected.filter(move => move.pose === firstPose), ...selected.filter(move => move.pose !== firstPose)];
-  const time = Math.min(prefs.seconds, ordered.length * 45);
-  const base = Math.floor(time / ordered.length);
-  const extraSeconds = time % ordered.length;
-  return ordered.map((move, i) => ({id: move.id, seconds: base + Number(i < extraSeconds)}));
+  selected = groupedSteps(selected, places);
+  const transfers = transfersFor(selected, prefs.location);
+  const time = Math.min(prefs.seconds - transfers.reduce((a, b) => a + b, 0), selected.length * 45);
+  const base = Math.floor(time / selected.length);
+  return selected.map((step, i) => ({...step, seconds: transfers[i] + base + Number(i < time % selected.length)}));
 }
 
 /** @param {unknown} steps */
@@ -179,23 +285,35 @@ function readSteps(steps) {
     const path = 'steps[' + i + ']';
     if (step === null || typeof step !== 'object' || Array.isArray(step)) throw invalidRequest(path, 'Expected a timed movement.');
     for (const key of Object.keys(step)) {
-      if (!['id', 'seconds', 'reps'].includes(key)) throw invalidRequest(path + '.' + key, 'Unknown step field.');
+      if (!['id', 'seconds', 'reps', 'location'].includes(key)) throw invalidRequest(path + '.' + key, 'Unknown step field.');
     }
     if (typeof step.id !== 'string' || !step.id) throw invalidRequest(path + '.id', 'Expected a movement ID.');
     const seconds = numberInRange(step.seconds, 5, 180, path + '.seconds', true);
-    if (step.reps === undefined) return {id: step.id, seconds};
-    return {id: step.id, seconds, reps: numberInRange(step.reps, 1, 100, path + '.reps', true)};
+    const location = step.location === undefined ? undefined : option(step.location, Object.keys(locations), path + '.location');
+    return {id: /** @type {string} */ (step.id), seconds, location,
+      ...(step.reps === undefined ? {} : {reps: numberInRange(step.reps, 1, 100, path + '.reps', true)})};
   });
 }
 
-/** @param {ReturnType<typeof readSteps>} steps @param {Preferences} prefs */
-function checkSteps(steps, prefs) {
+/** @param {ReturnType<typeof readSteps>} input @param {Preferences} prefs @param {ReturnType<typeof availableMovements>} options */
+function checkSteps(input, prefs, options) {
+  const steps = input.map(step => ({...step, location: step.location ?? options.eligibleLocations[step.id]?.[0] ?? prefs.location}));
+  const transfers = transfersFor(steps, prefs.location);
+  const seenPlaces = new Set();
+  let highestRank = 0;
   const rows = steps.map((step, i) => {
-    const known = Object.hasOwn(byId, step.id);
-    const issues = known ? fitIssues(byId[step.id], prefs, prefs.location) : ['This movement is no longer in the library.'];
-    const previous = steps[i - 1];
-    const transfer = known && previous && Object.hasOwn(byId, previous.id) && byId[previous.id].pose !== byId[step.id].pose;
-    return {...step, issues, needsTransferTime: Boolean(transfer && step.seconds < postureChangeSeconds + 5)};
+    let locationIssue = '';
+    const place = options.places.find(p => p.location === step.location);
+    if (!place) locationIssue = 'This place is outside your selected, reachable places.';
+    else if (i && step.location !== steps[i - 1].location && (place.rank < highestRank || seenPlaces.has(step.location))) {
+      locationIssue = 'Keep each place together and visit easier places first.';
+    }
+    if (place) highestRank = Math.max(highestRank, place.rank);
+    seenPlaces.add(step.location);
+    const issues = Object.hasOwn(byId, step.id) ? fitIssues(byId[step.id], prefs, step.location) : ['This movement is no longer in the library.'];
+    if (locationIssue) issues.unshift(locationIssue);
+    const transitionSeconds = transfers[i];
+    return {...step, issues, locationIssue, transitionSeconds, needsTransferTime: step.seconds < transitionSeconds + 5};
   });
   const totalSeconds = steps.reduce((sum, step) => sum + step.seconds, 0);
   const overBudgetSeconds = Math.max(0, totalSeconds - prefs.seconds);
@@ -205,42 +323,39 @@ function checkSteps(steps, prefs) {
 /** Review explicit steps against the current preferences, without changing the plan. @param {any} request */
 export function reviewRoutine(request) {
   const prefs = normalize(request);
-  const report = checkSteps(readSteps(request.steps), prefs);
-  return {...report, eligibleIds: moves.filter(move => !fitIssues(move, prefs, prefs.location).length).map(move => move.id)};
+  const options = availableMovements(prefs);
+  return {...options, ...checkSteps(readSteps(request.steps), prefs, options)};
 }
 
 /** Plan or validate a routine. All fields are optional. See ../api.md. @param {any} [request] */
 export function submit(request = {}) {
   const prefs = normalize(request);
-  const eligible = moves.filter(move => !fitIssues(move, prefs, prefs.location).length);
-  const steps = request.steps === undefined ? autoSteps(eligible, prefs) : readSteps(request.steps);
-  if (request.steps !== undefined) {
-    const report = checkSteps(steps, prefs);
-    report.rows.forEach((row, i) => {
-      if (row.issues.length) throw invalidRequest('steps[' + i + '].id', row.issues.join(' '));
-      if (row.needsTransferTime) throw invalidRequest('steps[' + i + '].seconds', 'Allow at least 20 seconds when changing posture.');
+  const options = availableMovements(prefs);
+  let steps;
+  if (request.steps === undefined) steps = autoSteps(options, prefs);
+  else {
+    const report = checkSteps(readSteps(request.steps), prefs, options);
+    steps = report.rows.map(({issues, locationIssue, needsTransferTime, transitionSeconds, ...step}, i) => {
+      if (locationIssue) throw invalidRequest('steps[' + i + '].location', locationIssue);
+      if (issues.length) throw invalidRequest('steps[' + i + '].id', issues.join(' '));
+      if (needsTransferTime) throw invalidRequest('steps[' + i + '].seconds', 'Allow at least ' + (transitionSeconds + 5) + ' seconds for the transfer and movement.');
+      return step;
     });
     if (report.overBudgetSeconds) throw invalidRequest('steps', 'The routine exceeds your time budget.');
   }
-  const eligibleIds = eligible.map(move => move.id);
   const usedIds = steps.map(step => step.id);
   const served = new Set(steps.flatMap(step => byId[step.id].targets));
-  const alternatives = [];
-  for (const location of prefs.availableLocations) {
-    if (!reachableLocations[prefs.location].includes(location)) continue;
-    // Standing up to do the same neck turn adds no choice. Keep genuinely
-    // different movements, equipment variants, and specifically named favorites.
-    const additionalIds = moves.filter(move => {
-      if (eligibleIds.includes(move.id) || fitIssues(move, prefs, location).length || !desired(move, prefs)) return false;
-      return prefs.favoriteIds.includes(move.id) || !eligible.some(local =>
-        local.motion === move.motion && local.equipment.join(',') === move.equipment.join(','));
-    }).map(move => move.id);
-    if (additionalIds.length) alternatives.push({location, additionalIds});
-  }
+  /** @type {{location:string, steps:number[]}[]} */
+  const segments = [];
+  steps.forEach((step, index) => {
+    const last = segments.at(-1);
+    if (last?.location === step.location) last.steps.push(index);
+    else segments.push({location: step.location, steps: [index]});
+  });
   return {
-    steps, eligibleIds, alternatives,
-    transitionSeconds: steps.map((step, i) => i > 0 && byId[step.id].pose !== byId[steps[i - 1].id].pose ? postureChangeSeconds : 0),
+    ...options, steps, segments, transitionSeconds: transfersFor(steps, prefs.location),
     totalSeconds: steps.reduce((sum, step) => sum + step.seconds, 0),
+    returnToLocation: steps.length && spaces[prefs.location].seated && steps[steps.length - 1].location !== prefs.location ? prefs.location : null,
     unmetTargets: prefs.targets.filter(target => !served.has(target)),
     unmetFavorites: prefs.favoriteIds.filter(id => !usedIds.includes(id)),
   };
