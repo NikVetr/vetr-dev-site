@@ -3,7 +3,7 @@ import test from 'node:test';
 import { moves } from '../core/catalog.js';
 import { rig } from '../form-motion/model.js';
 import { createRetarget } from '../form-motion/retarget.js';
-import { movementPose } from '../pose.js';
+import { movementPose, movementCycleSeconds } from '../pose.js';
 
 const index = name => rig.boneNames.indexOf('mixamorig:' + name);
 function apply(matrices, i, p) {
@@ -77,7 +77,7 @@ test('all 52 bone frames keep their volume and turn continuously through both si
   const animate = createRetarget(rig);
   for (const move of moves) {
     let previous;
-    for (let frame = 0; frame <= 80; frame++) {
+    for (let frame = 0; frame <= 20 * movementCycleSeconds(move); frame++) {
       const mat = animate(movementPose(move,frame / 10), move);
       assert.equal(mat.length, 52*16);
       for (let b = 0; b < 52; b++) {

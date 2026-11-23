@@ -210,6 +210,13 @@ export function createRetarget(rig) {
       const flex = move.motion === 'hand-open' ? 1 - pose.a
         : move.motion === 'towel-grip' && pose.side === side.sign ? pose.a : 0;
       side.thumb.forEach((joint, j) => {
+        if ('thumbJoints' in arm && Array.isArray(arm.thumbJoints)) {
+          const ray = sub(arm.thumbJoints[j+1], arm.thumbJoints[j]);
+          const tip = add(thumbBase, mul(unit(ray), norm(joint.direction)));
+          joint.aim(thumbBase, tip, thumbAxes[0]);
+          thumbBase = tip;
+          return;
+        }
         const native = rotate(thumbRotation, joint.direction);
         const along = unit(native);
         const towardPalm = axes(along, palmAxes[2])[0];
@@ -223,7 +230,7 @@ export function createRetarget(rig) {
       const kneeHinge = cross(sub(leg.knee,leg.hip),sub(leg.ankle,leg.knee));
       side.upperLeg(leg.hip,leg.knee,kneeHinge);
       side.lowerLeg(leg.knee,leg.ankle,kneeHinge);
-      const shoeMat = side.shoe(leg.ankle,leg.toe,X);
+      const shoeMat = side.shoe(leg.ankle,leg.toe,leg.across ?? X);
       if (move.motion === 'heel-lift') {
         // The ball is the pivot; keep the front sole planted as the heel rises.
         write(side.toe,betweenFrames(nativeAxes,nativeAxes,side.toe.head,leg.toe));

@@ -1,5 +1,8 @@
+import {drawHandNeckProps} from './movements/hand-neck-props.js';
+import {drawUpperProps} from './movements/upper-props.js';
+import {drawLowerProps} from './movements/lower-props.js';
 // Props share the trainer's depth buffer and world coordinates in metres.
-import { mixPoint } from './pose.js';
+import { mixPoint } from './movements/geometry.js';
 
 const X = [1, 0, 0],
   Y = [0, 1, 0],
@@ -39,7 +42,7 @@ function sweep(mesh, points, radii, color, reference = X, samples = round, color
   });
   mesh.surface(rings, color, colors);
 }
-function rod(mesh, a, b, r, color) {
+export function rod(mesh, a, b, r, color) {
   sweep(
     mesh,
     [a, b],
@@ -50,7 +53,7 @@ function rod(mesh, a, b, r, color) {
     color,
   );
 }
-function ellipsoid(mesh, at, x, y, z, rx, ry, rz, color) {
+export function ellipsoid(mesh, at, x, y, z, rx, ry, rz, color) {
   const latitudes = [-0.999, -0.82, -0.48, 0, 0.48, 0.82, 0.999];
   mesh.surface(
     latitudes.map((h) => {
@@ -62,7 +65,7 @@ function ellipsoid(mesh, at, x, y, z, rx, ry, rz, color) {
 }
 
 // Rounded seat pads and exercise equipment share the trainer's depth buffer.
-function pad(mesh, center, w, d, h, r, color) {
+export function pad(mesh, center, w, d, h, r, color) {
   const outline = [];
   for (const [cx, cz, start] of [
     [w - r, d - r, 0],
@@ -117,7 +120,7 @@ export function drawEquipment(mesh, p, move, location, seconds) {
       ].map(([y, w, d]) => ring([0, y, -0.174 - (y - 0.51) * 0.12], X, Z, w, d, bodyRound)),
       cushion,
     );
-    if (move.motion === 'ball-back')
+    if (!move.family && move.motion === 'ball-back')
       ellipsoid(mesh, backBallCenter(p), X, Y, Z, backBallRadius, backBallRadius, backBallRadius, accent);
     if (['plane-seat', 'train-seat'].includes(location))
       for (const s of [-1, 1]) {
@@ -127,10 +130,13 @@ export function drawEquipment(mesh, p, move, location, seconds) {
   }
   if (move.pose === 'supine') pad(mesh, [0, -0.017, 0.012], 0.385, 1.035, 0.017, 0.054, '#a3c4bc');
   if (move.motion === 'step-up') pad(mesh, [0, 0.07, 0.426], 0.282, 0.203, 0.07, 0.018, cushion);
-  if (move.equipment?.includes('support')) {
+  if (move.equipment?.includes('support') && move.animation !== 'pendulum') {
     rod(mesh, [0.32, 0.009, 0.4], [0.32, 1.055, 0.4], 0.015, metal);
     rod(mesh, [0.32, 1.055, 0.015], [0.32, 1.055, 0.55], 0.02, metal);
   }
+  if (move.family === 'hand-neck') return drawHandNeckProps(mesh, p, move, seconds);
+  if (move.family === 'upper') return drawUpperProps(mesh, p, move, seconds);
+  if (move.family === 'lower') return drawLowerProps(mesh, p, move, seconds);
   if (move.motion === 'band-open') rod(mesh, p.arms[0].palm, p.arms[1].palm, 0.007, accent);
   if (move.motion === 'foot-roll' || move.motion === 'towel-grip') {
     // The prop travels between the releasing and receiving sides at rest.

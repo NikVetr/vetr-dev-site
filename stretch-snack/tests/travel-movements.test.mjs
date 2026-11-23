@@ -95,3 +95,13 @@ test('a seated starting position, a nearby support and a towel each affect eligi
   checkFit('standing-heel-walk', floor, false);
   checkFit('standing-heel-walk', {...floor, equipment:['support']}, true);
 });
+
+test('two-foot movements can use an unassisted stance on land and a confirmed rail in transit', () => {
+  for (const id of ['standing-toe-curl','standing-pelvic-tilt']) {
+    const transit = {location:'plane-lavatory', discretion:'any'};
+    checkFit(id, {location:'open-area', discretion:'any'}, true);
+    checkFit(id, transit, false);
+    checkFit(id, {...transit, equipment:['support']}, true);
+    checkFit(id, {...transit, equipment:['support'], limitations:['limited-grip']}, false);
+  }
+});

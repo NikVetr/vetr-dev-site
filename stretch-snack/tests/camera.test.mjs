@@ -1,15 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {movementCamera, cameraProjection, regions} from '../camera.js';
+import {movementCamera, cameraProjection, workingRegion} from '../camera.js';
 import {moves} from '../core/catalog.js';
-import {movementPose} from '../pose.js';
+import {movementPose, movementCycleSeconds} from '../pose.js';
 
 test('the fixed view is common to a posture and angle and zoom can be selected independently', () => {
   const postures = new Map();
   for (const move of moves) {
     const fixed = movementCamera(move, {rotation:false, zoom:false});
-    if (postures.has(move.pose)) assert.deepEqual(fixed, postures.get(move.pose));
-    postures.set(move.pose, fixed);
+    const posture = move.animation === 'sit-to-stand' ? 'sit-to-stand' : move.pose;
+    if (postures.has(posture)) assert.deepEqual(fixed, postures.get(posture));
+    postures.set(posture, fixed);
     const guided = movementCamera(move);
     assert.deepEqual(movementCamera(move, {zoom:false}), {...fixed, yaw:guided.yaw, pitch:guided.pitch});
     assert.deepEqual(movementCamera(move, {rotation:false}), {...guided, yaw:fixed.yaw, pitch:fixed.pitch});
@@ -18,9 +19,10 @@ test('the fixed view is common to a posture and angle and zoom can be selected i
 
 test('guided framing keeps the working joints of every exercise visible on tall and wide screens', () => {
   for (const move of moves) {
-    const region = regions[move.motion];
+    const region = workingRegion(move);
     assert.ok(region, move.id);
-    for (const seconds of [0, 1, 2, 3, 4, 5, 6, 7]) {
+    for (const phase of [0, .25, .5, .75, 1, 1.25, 1.5, 1.75]) {
+      const seconds = phase * movementCycleSeconds(move);
       const pose = movementPose(move, seconds);
       let joints;
       if (region === 'head') joints = [pose.neck, pose.face, pose.crown];

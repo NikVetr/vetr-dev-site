@@ -1,6 +1,10 @@
+import {movementAtLocation} from './core/plan.js';
+import {drawHandNeckProps} from './movements/hand-neck-props.js';
+import {upperBackBallCenter} from './movements/upper-props.js';
+import {drawToeDetail,lowerBackBallCenter} from './movements/lower-props.js';
 // The editor, player and directory supply their camera and share a posed mesh.
-import { movementCamera, cameraProjection, regions } from './camera.js';
-import { movementPose, mixPoint } from './pose.js';
+import { movementCamera, cameraProjection, workingRegion } from './camera.js';
+import { movementPose, movementActivation, movementCycleSeconds, mixPoint } from './pose.js';
 import { drawTrainer, drawHandDetail } from './trainer.js';
 import { backBallCenter, backBallRadius, drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
@@ -8,9 +12,10 @@ import { drawSurface } from './surface.js';
 const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
 /** @param {HTMLCanvasElement} canvas
- * @param {{motion:string,pose:string,equipment?:string[],name?:string}} move
+ * @param {import('./pose.js').Movement} move
  * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
+  move = movementAtLocation(move, options.location);
   const width = canvas.clientWidth,
     height = canvas.clientHeight;
   if (!width || !height) return;
@@ -27,7 +32,7 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   ctx.clearRect(0, 0, width, height);
   const seated = move.pose === 'seated',
     floor = move.pose === 'supine';
-  const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
+  const handDetail = !options.preview && workingRegion(move) === 'hands' && width >= 230;
   const camera = options.camera ?? movementCamera(move, {zoom: false});
   const {scale, project} = cameraProjection(camera, width, height, width >= 230 && !options.preview);
   const pose = movementPose(move, seconds);
@@ -50,9 +55,9 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false, seconds, opacity);
 }
 
-/** @param {CanvasRenderingContext2D} ctx @param {{motion:string, pose:string}} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
+/** @param {CanvasRenderingContext2D} ctx @param {import('./pose.js').Movement} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
 function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, seconds, opacity) {
-  const group = regions[move.motion],
+  const group = workingRegion(move),
     arm = pose.arms[pose.side === 1 ? 1 : 0],
     leg = pose.legs[pose.side === 1 ? 1 : 0];
   /** @type {Record<string,number[]>} */
@@ -102,11 +107,32 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     drawSurface(ctx, width, height, zoom, (mesh) => {
       drawHandDetail(mesh, pose.side);
       if (move.motion === 'towel-grip') drawTowel(mesh, arm.palm);
-      if (move.motion === 'wrist-stretch')
+      if (move.family === 'hand-neck') drawHandNeckProps(mesh, pose, move, seconds);
+      if (move.motion === 'wrist-stretch' || ['prayer-stretch','wrist-extensor-stretch','finger-block','wrist-press'].includes(move.animation))
         drawHandDetail(mesh, -pose.side);
     });
     ctx.restore();
-  } else if (isometric.has(move.motion)) {
+  }
+  const effort = movementActivation(pose, move);
+  if (effort) {
+    const points = effort.points.map(project);
+    for (const [px,py] of points) {
+      ctx.beginPath();
+      ctx.arc(px,py,Math.max(4,scale*0.044),0,2*Math.PI);
+      ctx.fillStyle = ink;
+      ctx.globalAlpha = opacity*(0.10+0.40*pose.activation);
+      ctx.fill();
+      ctx.globalAlpha = opacity;
+      ctx.stroke();
+    }
+    const cycle = movementCycleSeconds(move);
+    const phase = pose.activation < 0.03 ? 'Relax' : pose.activation >= 0.98 ? 'Hold' :
+      (seconds % cycle < cycle / 2 ? 'Tighten' : 'Release');
+    label(ctx,points[0],[effort.label,phase],
+      width,height,dark,pose,project,scale);
+  } else if (detail || (move.family === 'lower' && drawToeDetail(ctx,move,pose,project,width,height,dark,opacity))) {
+    // The magnified hand or foot illustrates the action.
+  } else if (!move.family && isometric.has(move.motion)) {
     const glutes = move.motion === 'glute-squeeze', quad = move.motion === 'quad-set';
     const working = quad ? [leg] : pose.legs;
     const muscles = working.map(l => {
@@ -133,7 +159,9 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase],
       width, height, dark, pose, project, scale);
   } else if (move.motion === 'ball-back') {
-    const target = project(backBallCenter(pose));
+    const center = move.family === 'upper' ? upperBackBallCenter(pose)
+      : move.family === 'lower' ? lowerBackBallCenter(pose,move) : backBallCenter(pose);
+    const target = project(center);
     ctx.beginPath();
     ctx.arc(target[0], target[1], Math.max(3, backBallRadius * scale + 2), 0, Math.PI * 2);
     ctx.stroke();
@@ -148,7 +176,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
   } else if (move.motion === 'seated-pelvic-tilt') {
     const [u, v] = project(mixPoint(pose.legs[0].hip, pose.legs[1].hip, 0.5));
     arrow(ctx, u + scale * 0.085, v - scale * 0.095, u - scale * 0.085, v - scale * 0.095, 0.5, scale, true);
-  } else if (move.motion === 'pelvic-tilt') {
+  } else if (!move.family && move.motion === 'pelvic-tilt') {
     const [u, v] = project(pose.centre);
     arrow(ctx, u - scale * 0.04, v - scale * 0.22, u - scale * 0.018, v - scale * 0.12, 0.18, scale);
   } else if (move.motion === 'shoulder-squeeze') {
@@ -159,8 +187,10 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
   } else {
     // Direction of the highlighted joint relative to its relaxed pose,
     // independent of the sampled display frame.
-    const start = movementPose(move, pose.side === -1 ? 0 : 4);
-    const peak = movementPose(move, pose.side === -1 ? 2 : 6);
+    const cycle = movementCycleSeconds(move);
+    const startTime = pose.side === -1 ? 0 : cycle;
+    const start = movementPose(move, startTime);
+    const peak = movementPose(move, startTime + cycle / 2);
     /** @param {ReturnType<typeof movementPose>} frame */
     const pointAt = (frame) => {
       const a = frame.arms[pose.side === 1 ? 1 : 0],

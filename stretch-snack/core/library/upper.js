@@ -36,7 +36,7 @@ export function upperLibrary(movement) {
       "Bend one elbow at your side and make a loose fist. Cup the outside of that forearm with your other hand and press outward into it without moving. Hold, relax, and switch.",
       "Use about half effort and keep the elbow close to your side.", "griShoulder", {
         family: "upper",
-        region: "hands",
+        region: "wrists",
         poses: ["seated", "standing"],
         uses: ["arms"],
       }),

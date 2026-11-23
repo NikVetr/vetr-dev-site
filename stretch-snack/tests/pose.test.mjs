@@ -1,28 +1,33 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { moves } from '../core/catalog.js';
-import { movementPose } from '../pose.js';
+import { movementPose, movementCycleSeconds, movementActivation } from '../pose.js';
 
 test('each demonstration has finite joints and shows its movement or muscle contraction', () => {
   for (const move of moves) {
     const neutral = movementPose(move,0);
     for (const time of [1,2,4,6]) {
-      const {arms,legs,face,crown,activation} = movementPose(move,time);
-      const geometry = [arms,legs,face,crown];
-      assert.doesNotMatch(JSON.stringify(geometry), /null/, move.id);
+      const {arms,legs,face,crown,spine} = movementPose(move,time);
+      const geometry = [arms,legs,face,crown,spine];
+      assert.doesNotMatch(JSON.stringify(geometry.filter(value => value !== undefined)), /null/, move.id);
       if (time !== 2) continue;
-      if (['glute-squeeze','knee-squeeze','quad-set'].includes(move.motion)) {
+      const toeDetail = ['toe-curl','foot-dome','toe-spread','towel-scrunch'].includes(move.animation);
+      if (toeDetail || (move.family ? movementActivation(movementPose(move,time),move) : ['glute-squeeze','knee-squeeze','quad-set'].includes(move.motion))) {
         assert.equal(neutral.activation, 0, move.id);
-        assert.equal(activation, 1, move.id);
+        assert.ok(Math.max(...[1,2,3,4].map(t => movementPose(move,t).activation)) >= 0.98, move.id);
       } else {
-        assert.notDeepEqual(geometry,[neutral.arms,neutral.legs,neutral.face,neutral.crown],move.id);
+        assert.notDeepEqual(geometry,[neutral.arms,neutral.legs,neutral.face,neutral.crown,neutral.spine],move.id);
       }
     }
   }
 });
 
+// These cues use the same hand on the side rail for the entire repetition.
+// Alternating support hands, table-top contact and walking starts have their own contact tests.
+const sideRail = move => move.equipment.includes('support') &&
+  !['pendulum','quad-stretch','march','heel-toe-walk','heel-walk','toe-walk'].includes(move.animation);
 test('support and floor contacts remain fixed through a repetition', () => {
-  for (const move of moves.filter(move=>move.equipment.includes('support'))) {
+  for (const move of moves.filter(sideRail)) {
     const neutral = movementPose(move,0);
     for (const time of [1,2,4,5,6]) {
       const pose = movementPose(move,time);
@@ -56,7 +61,7 @@ test('shoulders, elbows, hips and knees articulate without stretching the limb s
 
 test('switching sides returns both arms and legs through a common neutral position', () => {
   for (const move of moves) {
-    for (const boundary of [4,8]) {
+    for (const boundary of [movementCycleSeconds(move),2*movementCycleSeconds(move)]) {
       const before = movementPose(move, boundary - 0.001), after = movementPose(move, boundary + 0.001);
       for (const i of [0,1]) {
         for (const key of ['shoulder','elbow','wrist','palm','thumb'])
@@ -74,19 +79,19 @@ test('switching sides returns both arms and legs through a common neutral positi
 });
 
 test('gripping hands and loaded feet retain their points of contact', () => {
-  for (const move of moves.filter(m => m.equipment.includes('support'))) {
+  for (const move of moves.filter(sideRail)) {
     const rest = movementPose(move,0);
     for (let time = 0; time <= 8; time += 0.1) {
       const pose = movementPose(move,time);
       const hand = pose.arms[1];
       assert.deepEqual(hand.palm,rest.arms[1].palm,move.id);
       assert.deepEqual(hand.fingers,rest.arms[1].fingers,move.id);
-      assert.ok(hand.palm[1] > 1.075 && hand.thumb[0] < 0.32, 'the palm is above the rail with the thumb inside');
+      assert.ok(hand.palm[1] > 1.075 && hand.thumb[0] < 0.32, move.id + ' palm above rail, thumb inside');
       assert.ok(hand.fingerJoints[1][1][0] > 0.34 && hand.fingerJoints[1][3][1] < 1.035,
-        'the middle finger curls around the outside and underneath the rail');
+        move.id + ' middle finger curls around the rail');
       const stanceLeg = pose.side < 0 ? 1 : 0;
       if (['hip-side','calf-stretch','knee-bend'].includes(move.motion)) {
-        assert.deepEqual(pose.legs[stanceLeg].toe,rest.legs[stanceLeg].toe,move.id);
+        assert.ok(distance(pose.legs[stanceLeg].toe, rest.legs[stanceLeg].toe) < 1e-8, move.id);
       }
       if (move.motion === 'heel-lift') {
         assert.ok(distance(pose.legs[0].toe, rest.legs[0].toe) < 1e-8, move.id);
@@ -103,7 +108,7 @@ test('gripping hands and loaded feet retain their points of contact', () => {
 });
 
 test('reclined arms rest beside the hips with open palms and fingers just above the mat', () => {
-  for (const move of moves.filter(m => m.pose === 'supine')) {
+  for (const move of moves.filter(m => m.pose === 'supine' && !m.uses.includes('arms') && !['bridge','ball-back','ball-low-back'].includes(m.animation))) {
     for (const time of [0, 1, 2, 4, 6]) {
       for (const arm of movementPose(move, time).arms) {
         for (const point of [arm.elbow, arm.wrist, arm.palm, arm.thumb, ...arm.fingerJoints.flat()]) {

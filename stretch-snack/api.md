@@ -73,7 +73,7 @@ The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `places`, `elig
 
 ## Interpretation and sources
 
-Each of the 58 posture and equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
+Each of the 191 posture and equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
 
 A small crossover trial found less immediate discomfort when seated office workers interrupted four hours of sitting with hourly standing or pedaling. The study did not test individual in-seat stretches or these short routines. Feedback records personal preference and experience. [Benzo et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29608539/)
 

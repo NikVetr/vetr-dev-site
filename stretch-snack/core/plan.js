@@ -124,8 +124,16 @@ const conflicts = {
   'stay-seated': 'stand-up', 'no-leg-movement': 'legs', 'no-arm-movement': 'arms', 'poor-balance': 'balance',
 };
 
+/** Some two-foot standing exercises need a handhold only on a moving floor.
+ * @template {{uses?:string[],equipment?:string[]}} T @param {T} move @param {string} [location] */
+export function movementAtLocation(move, location) {
+  if (!move.uses?.includes('moving-handhold') || !spaces[location] || spaces[location].stationary) return move;
+  return {...move, equipment:[...(move.equipment ?? []), 'support'], uses:[...move.uses, 'arms','grip']};
+}
+
 /** @param {Movement} move @param {Preferences} prefs @param {string} location */
 function fitIssues(move, prefs, location) {
+  move = movementAtLocation(move, location);
   const issues = [];
   const space = spaces[location];
   if (prefs.avoidIds.includes(move.id)) issues.push('You marked this movement “Leave out”.');

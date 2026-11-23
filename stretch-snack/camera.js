@@ -1,3 +1,4 @@
+import {movementPose, movementCycleSeconds} from './pose.js';
 /** @type {Record<string,string>} */
 export const regions = {
   'neck-turn': 'head',
@@ -46,7 +47,9 @@ export const regions = {
 // Orthographic views in metres. A shot stays put throughout the repetition,
 // so the moving joint can be followed against stationary surroundings.
 /** @typedef {{yaw:number, pitch:number, centerY:number, overviewY:number, centerZ:number, width:number, height:number, offsetX:number}} Camera */
-/** @typedef {{motion:string, pose:string}} Movement */
+/** @typedef {import('./pose.js').Movement} Movement */
+/** @param {Movement} move */
+export function workingRegion(move) { return move.region ?? regions[move.motion]; }
 
 // Front views separate the two limbs for sideways motion. Profile views show
 // travel towards or away from the viewer and the contact point on a support.
@@ -66,21 +69,75 @@ const angles = {
   'heel-slide': 1.28, 'pelvic-tilt': 1.48, 'knee-roll': 0.70,
 };
 
+
+// The working joints set the shot once per exercise. A shared envelope for both
+// sides and camera angles avoids following the limb or zooming during a hold.
+const shots = new Map();
+const viewAngles = {
+  'neck-press-back': 2.45, 'neck-nod': 1.1, 'head-nod': 1.05, 'neck-press-front': 0.92,
+  'tendon-glide': 0.40, 'thumb-touch': 0.35, 'wrist-wave': 1.02, 'finger-lift': 0.91, 'hand-ball-roll': 0.96, 'shoulder-knead': 0.38,
+  'elbow-back-press': 1.30, 'pendulum': 0.76, 'chair-back-extension': 1.32,
+  'towel-extension': 1.33, 'roller-extension': 1.33, 'ball-low-back': 1.43,
+  'seated-forward-bend': 1.09, 'sit-to-stand': 1.10, 'bridge': 1.22, 'hip-hinge': 1.19,
+  'figure-four': 0.45, 'knee-open': 0.31, 'knee-open-band': 0.31, 'towel-up-back': 2.75,
+  'hands-back-stretch': 2.60, 'band-ankle-in': 0.26, 'band-ankle-out': 0.26,
+};
+/** @param {Movement} move */
+function workingFrame(move) {
+  const key = move.pose + '-' + move.animation;
+  if (shots.has(key)) return shots.get(key);
+  const points = [];
+  const group = workingRegion(move);
+  const cycle = movementCycleSeconds(move);
+  for (let i = 0; i < 16; i++) {
+    const p = movementPose(move, i * cycle / 8);
+    if (group === 'head') points.push(p.neck, p.crown, p.face, ...p.arms.map(a => a.shoulder));
+    else if (['shoulders','arms','wrists','hands'].includes(group))
+      for (const a of p.arms) points.push(a.shoulder, a.elbow, a.wrist, a.palm, a.thumb, ...a.fingers.map(f => f[1]));
+    else if (['thighs','shins','feet'].includes(group))
+      for (const l of p.legs) points.push(l.knee,l.ankle,l.toe);
+    else points.push(p.centre, p.crown, ...p.arms.map(a=>a.shoulder), ...p.legs.map(l=>l.hip));
+    if (move.animation === 'anchored-neck-stretch') points.push(...p.arms.map(a => a.palm), ...p.legs.map(l => l.hip));
+    if (move.animation === 'neck-press-back') points.push(...p.arms.map(a => a.elbow));
+    if (move.uses?.includes('moving-handhold')) points.push([0.32, 1.08, 0.19]);
+    if (move.equipment?.includes('support')) points.push(...p.arms.map(a => a.wrist));
+    if (move.animation === 'sit-to-stand') points.push(...p.legs.map(l=>l.ankle));
+  }
+  const bounds = [0,1,2].map(i => [Math.min(...points.map(p => p[i])), Math.max(...points.map(p => p[i]))]);
+  const [[xmin,xmax],[ymin,ymax],[zmin,zmax]] = bounds;
+  const depth = Math.hypot(2 * Math.max(Math.abs(xmin), Math.abs(xmax)), zmax-zmin);
+  const hand = group === 'hands';
+  const shot = {
+    centerY:(ymax+ymin)/2, centerZ:(zmax+zmin)/2,
+    width:Math.max(0.79, depth + 0.22) * (hand ? 1.24 : 1),
+    height:Math.max(0.67, ymax-ymin + depth*(move.pose === 'supine' ? 0.34 : 0.23) + 0.21),
+    offsetX:hand ? -0.08 : 0,
+  };
+  shots.set(key,shot);
+  return shot;
+}
+
 /** @param {Movement} move @param {{zoom?:boolean,rotation?:boolean}} [options] @returns {Camera} */
-export function movementCamera({motion, pose}, {zoom = true, rotation = true} = {}) {
+export function movementCamera(move, {zoom = true, rotation = true} = {}) {
+  const {motion, pose} = move;
+  const region = workingRegion(move);
   const seated = pose === 'seated', floor = pose === 'supine';
-  const yaw = rotation ? angles[motion] ?? 0.58 : floor ? 1.18 : 0.58;
+  const seatedRear = seated && ['hands-back-stretch','towel-up-back'].includes(move.animation);
+  const yaw = rotation ? (seatedRear ? 1.97 : viewAngles[move.animation] ?? angles[motion] ?? (floor ? 1.05 : 0.58)) : floor ? 1.18 : 0.58;
   const pitch = floor ? (rotation && motion === 'knee-roll' ? 0.82 : 0.34)
-    : rotation && ['hands', 'feet'].includes(regions[motion]) ? 0.23 : 0.11;
+    : rotation && ['hands', 'feet'].includes(region) ? 0.23 : 0.11;
   // Within each posture the overview fits even the farthest reach or step.
-  const overviewY = floor ? 0.09 : seated ? 0.81 : 0.91;
+  // Sit-to-stand starts in a chair and ends at standing height.
+  const sittingThroughout = seated && move.animation !== 'sit-to-stand';
+  const overviewY = floor ? 0.20 : sittingThroughout ? 0.81 : 0.91;
   const full = {
     yaw, pitch, overviewY, centerY: overviewY,
     centerZ: floor ? 0.012 : seated ? 0.29 : 0.09,
     width: floor ? 2.36 : seated ? 1.63 : 1.70,
-    height: floor ? 1.80 : seated ? 1.82 : 2.06, offsetX: 0,
+    height: floor ? 1.92 : sittingThroughout ? 1.82 : 2.06, offsetX: 0,
   };
   if (!zoom) return full;
+  if (move.family) return {...full, ...workingFrame(move)};
   // Seated and standing upper-body poses share the same rig above the pelvis.
   const lift = seated ? 0 : 0.40;
   /** @param {number} centerY @param {number} centerZ @param {number} width @param {number} height */
@@ -96,7 +153,7 @@ export function movementCamera({motion, pose}, {zoom = true, rotation = true} = 
   if (motion === 'step-up' || motion === 'calf-stretch' || motion === 'weight-shift') return full;
   // Keep both planted heels and the hand on the fixed rail in the standing demonstration.
   if (motion === 'toe-lift' && !seated) return frame(0.57, 0.15, 1.10, 1.36);
-  switch (regions[motion]) {
+  switch (region) {
     case 'head': return frame(1.04 + lift, 0.04, 0.82, 0.76);
     case 'shoulders':
     case 'arms':
