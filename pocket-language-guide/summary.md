@@ -113,9 +113,10 @@ The gallery’s ASL badge selects the American Sign Language card. Card, Convers
 and Quiz open the corresponding tabs in `signs.html`, an English-labelled café
 workspace available with any reader language. The café manifest in
 `data/signs/ase-cafe/pack.json` groups twelve one-handed ASL
-signs by use. Each entry includes an animation of a matte grey mannequin and two
-stills sampled from it. Five signs use a hand close-up. Seven include the blank
-head and upper body to show hand placement. The offline authoring tools in
+signs by use. Each entry includes an animated grey 3D hand and two stills
+sampled from it. Five signs use a hand close-up. Seven frame the moving hand
+against a pale outline of the chin and shoulders to show where the sign is made.
+The offline authoring tools in
 `scripts/sign_model/` fit hand motion to the licensed performance references.
 The website and native app play standard H.264 and use JPEGs for print. Converse and Quiz both offer video and stills. Converse
 also supports a large-type written exchange for questions and replies. The quiz

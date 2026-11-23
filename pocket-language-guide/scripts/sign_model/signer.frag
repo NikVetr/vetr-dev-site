@@ -68,34 +68,35 @@ vec3 headPoint(vec3 p) {
     return vec3(c*relative.x+s*relative.y,-s*relative.x+c*relative.y-.47,p.z);
 }
 
-float mannequin(vec3 p) {
-    vec3 other = vec3(.90,-1.13,-.14);
-    float torso = oval(p-vec3(0.,-1.92,-.16),vec3(.71,1.05,.43));
-    float yoke = oval(p-vec3(0.,-1.20,-.16),vec3(.98,.29,.37));
+float torsoGuide(vec3 p) {
+    float torso = oval(p-vec3(0.,-1.98,-.19),vec3(.85,1.13,.43));
+    float yoke = oval(p-vec3(0.,-1.22,-.17),vec3(1.01,.30,.37));
     torso = blend(torso,yoke,.24);
-    torso = blend(torso,limb(p,vec3(0.,-2.25,-.16),vec3(0.,-3.92,-.17),.62,.70),.14);
-    float upper = limb(p,shoulder,elbow,.19,.14);
-    vec3 otherElbow=vec3(1.09,-2.38,-.10);
-    float resting = limb(p,other,otherElbow,.19,.14);
-    resting = blend(resting,limb(p,otherElbow,vec3(1.08,-3.75,-.06),.14,.095),.035);
-    float shoulderBlend=.14*smoothstep(-1.58,-1.28,p.y)+.001;
-    float body = blend(blend(torso,upper,shoulderBlend),resting,shoulderBlend);
-    float neck = limb(p,vec3(0.,-1.05,-.095),vec3(0.,-.49,-.05),.260,.224);
-    body = blend(body,neck,.16);
-    // The chin locates signs that touch the face. The head is a single smooth form.
-    vec3 h = headPoint(p)-vec3(0.,.025,-.015);
-    float jaw = 1.-.16*smoothstep(.00,.56,-h.y);
-    float head = oval(h,vec3(.622*jaw,.804,.502*jaw));
-    return blend(body,head,.08);
+    torso = blend(torso,limb(p,vec3(0.,-2.25,-.16),vec3(0.,-4.6,-.17),.71,.74),.18);
+    float sleeve = limb(p,vec3(.87,-1.19,-.16),vec3(1.05,-1.79,-.13),.24,.20);
+    float farArm = limb(p,vec3(1.04,-1.75,-.15),vec3(1.14,-4.3,-.12),.157,.112);
+    sleeve = min(sleeve,farArm);
+    float neck = limb(p,vec3(0.,-1.11,-.13),vec3(0.,-.46,-.14),.295,.26);
+    torso = blend(blend(torso,sleeve,.18),neck,.17);
+    // The near sleeve joins the shoulder and ends partway down the upper arm.
+    return blend(torso,limb(p,shoulder,mix(shoulder,elbow,.34),.205,.19),.13);
 }
-
-float scene(vec3 p) {
+float jawGuide(vec3 p) {
+    // Only the underside is in frame. The forward chin overlaps the neck.
+    vec3 h = headPoint(p)-vec3(0.,.052,.033);
+    float taper = 1.-.08*smoothstep(.04,.67,-h.y);
+    return oval(h,vec3(.60*taper,.81,.49*taper));
+}
+float signingArm(vec3 p) {
     vec3 end = bust ? elbow : joints[0]+normalize(elbow-joints[0])*handSize*2.2;
     float forearm = limb(p,joints[0],end,handSize*.248,bust ? .167 : handSize*.32);
     float arm = blend(hand(p),forearm,handSize*.16);
     if (!bust) return arm;
-    float body = mannequin(p);
-    return length(p-elbow)<.40 ? blend(arm,body,.08) : min(arm,body);
+    return blend(arm,limb(p,shoulder,elbow,.19,.14),.06);
+}
+float scene(vec3 p) {
+    float arm=signingArm(p);
+    return bust ? min(arm,min(jawGuide(p),torsoGuide(p))) : arm;
 }
 vec3 normalAt(vec3 p, float e) {
     vec2 d=vec2(e,-e);
@@ -105,7 +106,7 @@ vec3 normalAt(vec3 p, float e) {
 
 void main() {
     vec2 xy = camera.xy+screen*camera.zw;
-    float background = .96-.024*dot(screen,screen);
+    float background = bust ? .985 : .96-.024*dot(screen,screen);
     vec3 view = vec3(sin(yaw),0.,cos(yaw));
     vec3 origin = vec3(0.,0.,.38) + vec3(view.z*xy.x,xy.y,-view.x*xy.x);
     vec3 p = origin+view*4.;
@@ -119,6 +120,27 @@ void main() {
     if(dist>=eps || p.z < -1.2) { pixel=vec4(vec3(background),1.); return; }
     vec3 n=normalAt(p,eps*1.4);
     vec3 light=normalize(vec3(-.60,.78,1.));
+    if (bust) {
+        float jaw=jawGuide(p), torso=torsoGuide(p);
+        if (min(jaw,torso)<signingArm(p)) {
+            // The placement diagram is pale and flat even where the hand casts
+            // a shadow. Its outer edges and the collar stay legible on paper.
+            float edge=1.-smoothstep(.09,.39,dot(n,view));
+            // A crew neck separates the chin and chest landmarks. Let it run
+            // to the shoulder silhouette so it reads even at pocket-card size.
+            float neckline=(p.y+1.18-1.25*p.x*p.x)/length(vec2(1.,2.5*p.x));
+            float paper=jaw<torso || neckline>0. ? .978 : .938;
+            if (torso<=jaw && p.z>-.10)
+                paper=mix(paper,.68,1.-smoothstep(.004,.014,abs(neckline)));
+            float guide=mix(paper,.65,edge);
+            // Fade the open ends of the jaw line. It indicates the chin even
+            // when a wide sweep of the hand needs space above the shoulders.
+            if (jaw<torso)
+                guide=mix(guide,background,smoothstep(-.58,-.23,headPoint(p).y));
+            pixel=vec4(vec3(guide),1.);
+            return;
+        }
+    }
     float diffuse=.48+.29*max(dot(n,light),0.)+.032*n.y;
     float ao=0.;
     for(int i=1;i<=3;i++) {

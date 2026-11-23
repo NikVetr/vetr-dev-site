@@ -183,8 +183,8 @@ def motion(entry, track):
     lo, hi = projected.min(axis=(0, 1)), projected.max(axis=(0, 1))
     if entry["view"] == "upper-body":
         elbow_x = elbows[:, 0] * np.cos(yaw) - (elbows[:, 2] - 0.38) * np.sin(yaw)
-        lo = np.minimum(lo, [min(-1.1, elbow_x.min() - 0.15), elbows[:, 1].min() - 0.15])
-        hi = np.maximum(hi, [1.20, 0.89])
+        lo = np.minimum(lo, [elbow_x.min() - 0.15, elbows[:, 1].min() - 0.15])
+        hi[0] = max(hi[0], 0.78)
         pad = 0.16
     else:
         pad = 0.17
@@ -193,6 +193,10 @@ def motion(entry, track):
         (hi[1] - lo[1]) * 0.5 + pad, ((hi[0] - lo[0]) * 0.5 + pad) * SIZE[1] / SIZE[0]
     )
     center = (lo + hi) * 0.5
+    if entry["view"] == "upper-body":
+        # Keep the highest fingertip in frame. Extra room for a wide gesture
+        # goes below the elbow, so the top edge crops the face at the contact.
+        center[1] = hi[1] + pad - half
     camera = (*center, half * SIZE[0] / SIZE[1], half)
     return hands, elbows, shoulders, head_roll, camera
 

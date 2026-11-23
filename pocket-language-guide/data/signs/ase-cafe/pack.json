@@ -22,7 +22,7 @@
       {
         "id": "water",
         "label": "Water",
-        "media": "water-1a72da9782de",
+        "media": "water-7b3707c104df",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/water/19d3-water-2023_01_04_14_17_50.817-0.mp4/",
         "sha256": "0622d8918493e0daeef472d336fc01be6d51491eb4d5804d6b5796b6e3e01482",
         "frames": [
@@ -56,7 +56,7 @@
       {
         "id": "juice",
         "label": "Juice",
-        "media": "juice-36290a4d48d3",
+        "media": "juice-a1bd3a9a14c7",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/juice/19d3-juice-2023_07_21_18_46_04.542-0.mp4/",
         "sha256": "824595945d3c8f14681dfecfb52345cf4fdda59680d0702c8afa41a8c1758a07",
         "frames": [
@@ -77,7 +77,7 @@
       {
         "id": "hot",
         "label": "Hot",
-        "media": "hot-ae552a6a0b80",
+        "media": "hot-e002c00e3b7e",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/hot/19d3-hot-2023_01_04_14_17_25.321-0.mp4/",
         "sha256": "061dca43cfee90c314bd54d7552ec7beb8e1668a6e695046d5901de42f4178e1",
         "frames": [
@@ -93,7 +93,7 @@
       {
         "id": "cold",
         "label": "Cold",
-        "media": "cold-abf803de0453",
+        "media": "cold-98d6f4955acf",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/cold/19d3-cold-2023_08_02_22_01_40.134-0.mp4/",
         "sha256": "13b164540a18fea9c887507a111b7c687c94bf55dadc15b560f7ea7ddea2d6ef",
         "frames": [
@@ -125,7 +125,7 @@
       {
         "id": "napkin",
         "label": "Napkin",
-        "media": "napkin-b72da7c5b727",
+        "media": "napkin-2ffe6338729e",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/napkin/19d3-napkin-2023_01_04_14_18_15.906-0.mp4/",
         "sha256": "467d1c40fda560aa98f121982c84f414bdea18c2db61af523ee3585b2cc25644",
         "frames": [
@@ -179,7 +179,7 @@
       {
         "id": "please",
         "label": "Please",
-        "media": "please-71aed0386b64",
+        "media": "please-ef4b9edb6a9a",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/please/19d3-please-2023_01_04_14_06_59.191-0.mp4/",
         "sha256": "c70d3724d86de59f1414ec654ed4c8bcf7c61fdfc45dee5a32a70016ddc90aa1",
         "frames": [
@@ -195,7 +195,7 @@
       {
         "id": "thankyou",
         "label": "Thank you",
-        "media": "thankyou-4e8d89f5ed53",
+        "media": "thankyou-dd907277a188",
         "source": "https://signdata.cc.gatech.edu/data/popsign_v2_1/game/train/thankyou/19d3-thankyou-2023_01_04_14_08_37.545-0.mp4/",
         "sha256": "984721a00251b1c6a64f70666f2bf2b693ee83eeba95eab8cf8abd4aa852e337",
         "frames": [
