@@ -101,7 +101,9 @@ test('backtracking and live timing preserve transfer time, the paused state and 
     });
     await page.locator('#toggle-settings').tap();
     await page.locator('#location').selectOption('open-area');
-    await page.locator('#discretion').selectOption('any');
+    await page.getByRole('radio', {name: 'Moderate', exact: true}).check();
+    await page.keyboard.press('ArrowRight');
+    assert.equal(await page.getByRole('radio', {name: 'Any', exact: true}).isChecked(), true);
     await page.locator('#fit summary').tap();
     await page.locator('#allow-floor').check();
     await page.locator('#open-routines').tap();

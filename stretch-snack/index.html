@@ -47,12 +47,12 @@
             <div id="targets" class="chips"></div>
           </fieldset>
           <fieldset>
-            <legend>How discreet?</legend>
-            <select id="discretion" aria-label="How discreet?">
-              <option value="quiet">Quiet · small movements</option>
-              <option value="moderate">Moderately noticeable</option>
-              <option value="any">Any visibility</option>
-            </select>
+            <legend>Movement visibility</legend>
+            <div class="visibility-choices" id="discretion">
+              <label><input type="radio" name="discretion" value="quiet" checked /><span>Discreet</span></label>
+              <label><input type="radio" name="discretion" value="moderate" /><span>Moderate</span></label>
+              <label><input type="radio" name="discretion" value="any" /><span>Any</span></label>
+            </div>
           </fieldset>
           <details id="fit">
             <summary>Space, equipment &amp; mobility</summary>

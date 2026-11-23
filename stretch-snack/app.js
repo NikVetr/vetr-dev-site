@@ -38,6 +38,7 @@ const prefs = {
   feedback,
 };
 const place = get('location', 'select');
+const visibilityOptions = get('discretion', 'div').querySelectorAll('input');
 const library = get('library', 'dialog');
 const editor = get('edit', 'dialog');
 const editMove = get('edit-move', 'select');
@@ -291,7 +292,7 @@ function showPlaces() {
 }
 function showFields() {
   place.value = prefs.location;
-  get('discretion', 'select').value = prefs.discretion;
+  for (const option of visibilityOptions) option.checked = option.value === prefs.discretion;
   const targetNodes = Object.entries(targets).map(([id, label]) => {
     const item = button(label, () => {
       prefs.targets = prefs.targets.includes(id)
@@ -356,11 +357,12 @@ function bindSettings() {
     showPlaces();
     buildPlan();
   });
-  const d = get('discretion', 'select');
-  d.addEventListener('change', () => {
-    prefs.discretion = d.value;
-    buildPlan();
-  });
+  for (const option of visibilityOptions) {
+    option.addEventListener('change', () => {
+      prefs.discretion = option.value;
+      buildPlan();
+    });
+  }
   const floor = get('allow-floor', 'input');
   floor.addEventListener('change', () => {
     prefs.allowFloor = floor.checked;
