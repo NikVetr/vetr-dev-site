@@ -1,90 +1,91 @@
-// One repetition from each movement in a one-minute seated routine.
+// The directory plays a real, short seated session at its normal pace.
 import { moves } from '../../stretch-snack/core/catalog.js';
 import { submit } from '../../stretch-snack/core/plan.js';
+import { formatTime } from '../../stretch-snack/dom.js';
 import { renderMovement } from '../../stretch-snack/demo.js';
 
-const steps = [
-  { id: 'seated-overhead-reach', label: 'Arm reach' },
-  { id: 'seated-knee-extend', label: 'Knee extension' },
-  { id: 'seated-elbow-bend', label: 'Elbow bend' },
-];
-export const secondsPerSample = 4;
-export const heldPose = 2;
-/** @typedef {{move: (typeof moves)[number], label: string, seconds: number}} RoutineStep */
-/** @type {RoutineStep[] | undefined} */
-let routine;
+export const heldSeconds = 2;
+const location = 'roomy-seat';
+const ids = ['seated-overhead-reach', 'seated-knee-extend', 'seated-elbow-bend'];
+
 export function prepare() {
-  if (routine) return routine;
-  const plan = submit({
-    location: 'roomy-seat', seconds: 60, discretion: 'any',
-    steps: steps.map(({ id }) => ({ id, seconds: 20 })),
-  });
-  routine = plan.steps.map((step, i) => {
+  const plan = submit({location, seconds: 15, discretion: 'any', steps: ids.map(id => ({id, seconds: 5}))});
+  let start = 0;
+  const steps = plan.steps.map(step => {
     const move = moves.find(move => move.id === step.id);
     if (!move) throw new Error('Missing Stretch Snack preview movement: ' + step.id);
-    return {...step, label: steps[i].label, move};
+    const entry = {...step, move, start};
+    start += step.seconds;
+    return entry;
   });
-  return routine;
+  return {steps, total: plan.totalSeconds};
 }
 
-/** Paint a storyboard frame with the trainer's centered, transparent preview camera.
- * @param {HTMLCanvasElement} canvas @param {RoutineStep} step @param {number} seconds @param {boolean} dark */
+/** @param {ReturnType<typeof prepare>} plan @param {number} seconds */
+export function sessionReading(plan, seconds) {
+  const index = plan.steps.findIndex(step => seconds < step.start + step.seconds);
+  const step = plan.steps[index];
+  const next = plan.steps[index + 1];
+  return {
+    name: step.move.name,
+    counter: 'Movement ' + (index + 1) + ' of ' + plan.steps.length,
+    clock: formatTime(Math.ceil(step.seconds - (seconds - step.start))),
+    remaining: formatTime(Math.ceil(plan.total - seconds)) + ' total left',
+    next: next ? 'Up next · ' + next.move.name : 'Final movement',
+    skip: next ? 'Next' : 'Finish',
+    step,
+  };
+}
+
+/** Same camera, direction arrows and equipment as the full-screen session.
+ * @param {HTMLCanvasElement} canvas @param {ReturnType<typeof prepare>['steps'][number]} step
+ * @param {number} seconds @param {boolean} dark */
 export function paintStep(canvas, step, seconds, dark) {
-  const options = { location: 'roomy-seat', dark, preview: true };
-  renderMovement(canvas, step.move, seconds, options);
+  renderMovement(canvas, step.move, seconds, {location, dark});
 }
 
 /** @param {HTMLElement} art @param {ReturnType<typeof prepare>} plan */
 export function create(art, plan) {
-  const panels = [...art.querySelectorAll('.movement')];
-  const stages = panels.map(panel => {
-    const stage = panel.querySelector('.pose');
-    if (!stage) throw new Error('Missing Stretch Snack preview figure.');
-    return stage;
-  });
-  const digits = art.querySelector('.routine-time');
+  const stage = art.querySelector('.pose');
   const progress = art.querySelector('.progress');
-  if (!digits || !(progress instanceof HTMLElement) || panels.length !== plan.length)
-    throw new Error('Incomplete Stretch Snack storyboard.');
-  const timer = digits;
-  const stillTime = timer.textContent;
+  if (!stage || !(progress instanceof HTMLElement)) throw new Error('Incomplete Stretch Snack session preview.');
+  const fields = [...art.querySelectorAll('[data-reading]')].map(node => ({
+    node, key: node.getAttribute('data-reading'), stillText: node.textContent,
+  }));
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
-  const period = plan.length * secondsPerSample;
-  // The progress bar can animate on its own layer without invalidating the card.
+  stage.append(canvas);
+  // The real session updates its progress as each whole second elapses.
   const clock = progress.animate(
-    [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
-    { duration: period * 1000, iterations: Infinity },
+    [{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}],
+    {duration: plan.total * 1000, iterations: Infinity, easing: 'steps(' + plan.total + ', end)'},
   );
   clock.pause();
-  const after = plan.map((_, i) => plan.slice(i + 1).reduce((sum, step) => sum + step.seconds, 0));
-  let request = 0, lastSample = -1, active = 0;
+  clock.currentTime = heldSeconds * 1000;
+  let request = 0, lastSample = -1, lastSecond = -1;
+  let step = plan.steps[0];
   function draw(force = false) {
-    const t = Number(clock.currentTime ?? 0) / 1000 % period;
+    const t = Number(clock.currentTime ?? 0) / 1000 % plan.total;
     const sample = Math.floor(t * 30);
     if (!force && sample === lastSample) return;
     lastSample = sample;
-    const index = Math.floor(t / secondsPerSample);
-    const local = t % secondsPerSample;
-    if (canvas.parentElement !== stages[index]) {
-      panels[active].removeAttribute('data-current');
-      panels[index].setAttribute('data-current', '');
-      stages[index].append(canvas);
-      active = index;
+    if (lastSecond !== Math.floor(t)) {
+      const reading = sessionReading(plan, t);
+      step = reading.step;
+      for (const {node, key} of fields) {
+        if (node.textContent !== reading[key]) node.textContent = reading[key];
+      }
+      lastSecond = Math.floor(t);
     }
-    paintStep(canvas, plan[index], (local + heldPose) % secondsPerSample, document.documentElement.dataset.theme === 'dark');
-    const progressInStep = local / secondsPerSample;
-    const left = after[index] + Math.ceil(plan[index].seconds * (1 - progressInStep));
-    const display = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0');
-    if (timer.textContent !== display) timer.textContent = display;
+    paintStep(canvas, step, t - step.start, document.documentElement.dataset.theme === 'dark');
   }
   function tick() {
     draw();
     request = requestAnimationFrame(tick);
   }
   const repaint = () => draw(true);
-  const resize = new ResizeObserver(repaint);
-  resize.observe(art);
+  const size = new ResizeObserver(repaint);
+  size.observe(stage);
   document.addEventListener('themechange', repaint);
   function pause() {
     clock.pause();
@@ -100,13 +101,11 @@ export function create(art, plan) {
     pause,
     destroy() {
       pause();
-      resize.disconnect();
+      size.disconnect();
       document.removeEventListener('themechange', repaint);
       clock.cancel();
       canvas.remove();
-      panels[active].removeAttribute('data-current');
-      panels[0].setAttribute('data-current', '');
-      timer.textContent = stillTime;
+      for (const {node, stillText} of fields) node.textContent = stillText;
     },
   };
 }

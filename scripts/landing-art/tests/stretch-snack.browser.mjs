@@ -4,66 +4,112 @@ import { openPage } from '../browser.mjs';
 
 const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
 
-test('Stretch Snack holds all three trainers and animates the selected movement with the app renderer', async () => {
-  const { page, close, errors } = await openPage('#stretch-snack-title', { engine });
+test('Stretch Snack previews the actual session, its 15-second clock and its trainer', async () => {
+  const {page, close, errors} = await openPage('#stretch-snack-title', {engine});
   try {
     const art = page.locator('[data-art="stretch-snack"]');
-    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.emulateMedia({reducedMotion:'reduce'});
     await art.locator('img').first().waitFor();
-    for (const [width, height] of [[1440, 900], [390, 844], [844, 390]]) {
-      await page.setViewportSize({ width, height });
+    for (const [width, height] of [[1440,900], [390,844], [320,568], [844,390], [1920,1080]]) {
+      await page.setViewportSize({width,height});
       await art.scrollIntoViewIfNeeded();
-      const panels = await art.evaluate(async el => {
-        const all = [...el.querySelectorAll('.pose img')];
-        await Promise.all(all.map(img => img.decode()));
-        return [...el.querySelectorAll('.movement')].map(panel => {
-          const pose = panel.querySelector('.pose').getBoundingClientRect();
-          const bounds = panel.getBoundingClientRect();
-          const pictures = [...panel.querySelectorAll('img')].filter(img => getComputedStyle(img).display !== 'none');
-          return pictures.length === 1 && pose.height > 18 && pose.width > 15 &&
-            pose.top >= bounds.top - 1 && pose.bottom <= bounds.bottom + 1 && pose.right <= bounds.right + 1;
-        });
+      const fit = await art.evaluate(async el => {
+        const images = [...el.querySelectorAll('.pose img')];
+        await Promise.all(images.map(img => img.decode()));
+        const box = el.getBoundingClientRect(), pose = el.querySelector('.pose').getBoundingClientRect();
+        return images.filter(img => getComputedStyle(img).display !== 'none').length === 1 &&
+          pose.height > 48 && pose.width > 48 &&
+          [...el.querySelectorAll('[data-reading], .pose, .end, .pause')].filter(node => node.getClientRects().length)
+            .every(node => {
+              const r = node.getBoundingClientRect();
+              return r.top >= box.top-1 && r.bottom <= box.bottom+1 && r.left >= box.left-1 && r.right <= box.right+1;
+            });
       });
-      assert.deepEqual(panels, [true, true, true], `all three held poses fit at ${width}×${height}`);
+      assert.equal(fit, true, 'trainer, movement and timer fit at ' + width + '×' + height);
       assert.equal(await art.locator('canvas').count(), 0);
     }
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    const stillErrors = await art.evaluate(async el => {
+      const {prepare, heldSeconds, paintStep} = await import(new URL('assets/players/stretch-snack.js',location.href).href);
+      const step = prepare().steps[0];
+      return [...el.querySelectorAll('.pose img')].map(img => {
+        const canvas = document.createElement('canvas');
+        const width = img.naturalWidth, height = img.naturalHeight;
+        canvas.style.cssText = 'position:fixed;width:'+width+'px;height:'+height+'px';
+        document.body.append(canvas);
+        paintStep(canvas, step, heldSeconds, img.classList.contains('dark-pose'));
+        const ctx = canvas.getContext('2d', {willReadFrequently:true});
+        const reference = ctx.getImageData(0,0,width,height).data;
+        ctx.clearRect(0,0,width,height);
+        ctx.drawImage(img,0,0);
+        const stored = ctx.getImageData(0,0,width,height).data;
+        let error = 0, channels = 0;
+        for (let offset=0; offset<stored.length; offset+=4) {
+          if (!stored[offset+3] && !reference[offset+3]) continue;
+          for (let c=0; c<4; c++) error += Math.abs(stored[offset+c] - reference[offset+c]);
+          channels += 4;
+        }
+        canvas.remove();
+        return error/channels;
+      });
+    });
+    // The committed first poses use WebP. Compare only pixels occupied in either rendering.
+    for (const error of stillErrors) assert.ok(error < 4, 'held pose differs from the trainer by ' + error);
+
+    // Read the real session dialog for the same three steps, including its final action.
+    const studio = await page.context().newPage();
+    await studio.goto(new URL('stretch-snack/', page.url()).href);
+    const expected = await studio.evaluate(async () => {
+      const {prepare} = await import(new URL('../assets/players/stretch-snack.js', location.href).href);
+      const {startSession} = await import(new URL('session.js',location.href).href);
+      const plan = prepare();
+      startSession(plan.steps.map(step => ({...step, transition: 0})), 'roomy-seat', () => {});
+      const fields = ['player-name','player-progress','step-clock','total-clock','player-next','skip'];
+      const readings = plan.steps.map(() => {
+        const values = fields.map(id => document.getElementById(id).textContent);
+        document.getElementById('skip').click();
+        return values;
+      });
+      return readings;
+    });
+    await studio.close();
+    await page.setViewportSize({width:1440,height:900});
+    await page.emulateMedia({reducedMotion:'no-preference'});
     await art.hover();
     await art.locator('canvas').waitFor();
     const proof = await art.evaluate(async el => {
-      const { renderMovement } = await import(new URL('stretch-snack/demo.js', location.href).href);
-      const { prepare, heldPose, secondsPerSample } = await import(new URL('assets/players/stretch-snack.js', location.href).href);
+      const {renderMovement} = await import(new URL('stretch-snack/demo.js',location.href).href);
+      const {prepare} = await import(new URL('assets/players/stretch-snack.js',location.href).href);
       const clock = el.querySelector('.progress').getAnimations()[0];
       clock.pause(); await clock.ready;
       const next = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-      const steps = prepare();
-      const results = [];
-      for (const [i, time] of [700, 5400, 9200].entries()) {
+      const {steps} = prepare();
+      const fields = ['name','counter','clock','remaining','next','skip'];
+      const readings = [];
+      for (const [i, step] of steps.entries()) {
         document.documentElement.dataset.theme = i === 1 ? 'dark' : 'light';
         document.dispatchEvent(new Event('themechange'));
-        clock.currentTime = time;
+        clock.currentTime = step.start * 1000 + 240;
         await next();
-        const panel = el.querySelector('.movement[data-current]');
-        const live = panel.querySelector('canvas');
+        const labels = fields.map(key => el.querySelector('[data-reading="'+key+'"]').textContent);
+        const live = el.querySelector('canvas');
         const ref = document.createElement('canvas');
-        ref.style.cssText = `position:fixed;width:${live.clientWidth}px;height:${live.clientHeight}px`;
+        ref.style.cssText = 'position:fixed;width:'+live.clientWidth+'px;height:'+live.clientHeight+'px';
         document.body.append(ref);
-        const local = (time / 1000) % secondsPerSample;
-        renderMovement(ref, steps[i].move, (local + heldPose) % secondsPerSample, {
-          location: 'roomy-seat', dark: document.documentElement.dataset.theme === 'dark', preview: true,
+        renderMovement(ref, step.move, Number(clock.currentTime)/1000 - step.start, {
+          location:'roomy-seat', dark:document.documentElement.dataset.theme === 'dark',
         });
-        results.push({ same: ref.toDataURL() === live.toDataURL(), label: panel.querySelector('.caption').textContent });
+        readings.push({same:ref.toDataURL() === live.toDataURL(),labels});
         ref.remove();
       }
+      const duration = clock.effect.getTiming().duration;
       clock.play();
-      return results;
+      return {readings,duration};
     });
-    assert.deepEqual(proof, ['Arm reach', 'Knee extension', 'Elbow bend'].map(label => ({ same: true, label })));
-    // Move both pointer and keyboard focus away. A focused card keeps playing.
+    assert.equal(proof.duration, 15000);
+    assert.deepEqual(proof.readings, expected.map(labels => ({same:true,labels})));
+
     const header = page.locator('#preview-motion');
-    await header.focus();
-    await header.hover();
+    await header.focus(); await header.hover();
     await page.waitForFunction(() => !document.querySelector('[data-art="stretch-snack"][data-playing]'));
     const paused = await art.evaluate(async el => {
       const clock = el.querySelector('.progress').getAnimations()[0];
@@ -72,14 +118,15 @@ test('Stretch Snack holds all three trainers and animates the selected movement 
     });
     await page.waitForTimeout(125);
     assert.equal(await art.evaluate(el => Number(el.querySelector('.progress').getAnimations()[0].currentTime)), paused);
-    await art.hover();
-    await page.waitForFunction(t => Number(document.querySelector('[data-art="stretch-snack"] .progress').getAnimations()[0].currentTime) > t + 60, paused);
-    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await art.locator('..').focus();
+    await page.waitForFunction(t => Number(document.querySelector('[data-art="stretch-snack"] .progress').getAnimations()[0].currentTime) > t+60, paused);
+    await page.emulateMedia({reducedMotion:'reduce'});
     await page.waitForFunction(() => !document.querySelector('[data-art="stretch-snack"] canvas'));
-    assert.equal(await art.locator('.routine-time').textContent(), '1:00');
-    assert.equal(await art.locator('[data-current] .caption').textContent(), 'Arm reach');
+    assert.equal(await art.locator('[data-reading="name"]').textContent(), expected[0][0]);
+    assert.equal(await art.locator('[data-reading="clock"]').textContent(), '0:03');
+    assert.equal(await art.locator('[data-reading="remaining"]').textContent(), '0:13 total left');
     await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
-    assert.equal(await art.locator('.dark-pose:visible').count(), 3);
+    assert.equal(await art.locator('.dark-pose:visible').count(), 1);
     assert.equal(await art.locator('.light-pose:visible').count(), 0);
     assert.deepEqual(errors, []);
   } finally { await close(); }

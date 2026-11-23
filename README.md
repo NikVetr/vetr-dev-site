@@ -2,6 +2,8 @@
 
 The static site at https://vetr.dev, served by GitHub Pages with no build step. `index.html`, `style.css` and `assets/` are the landing page. Every tool or project lives in its own top-level folder with its own HTML, CSS, JavaScript and any tests, and the landing page links the public ones.
 
+Use the [shared app design requirements](docs/shared-app-design.md) when building a tool, updating a workspace or designing its directory preview.
+
 ## The landing page
 
 A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Academic tools**, and **Art**. Everyday tools includes Stretch Snack, Travel Prompt, Rating Prediction and Sankey Diagrams. Academic tools includes Palette Town and Multipanel Figure Editor. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
@@ -52,7 +54,7 @@ Section interiors use a subtle light or dark tint of their outline colour. Previ
 
 The pictures are drawn from the tools themselves, from their default or explicitly selected examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
-Travel Prompt traces routes across a stylized map alongside four example requests set near Kyoto Station. Stretch Snack plays one repetition from each movement in a one-minute seated routine, condensed into a 12-second preview. Its still shows all three poses.
+Travel Prompt shows how changing a preference changes the generated brief for a restaurant, menu, lodging or outing. Stretch Snack plays a short seated session with the same trainer, movement names and countdown as the app.
 
 Table Seating follows a real five-round plan for 300 guests at 50 tables, zooming from coloured participants at one table to the irregularly spaced full room. The first zoom finishes before guests move; a single round label identifies the destination round, and whole circles fade before crossing the frame edges. Its offline route builder reserves space and time, then checks guest/table clearance continuously, including between decoded keyframes. The routed animation illustrates movement; the optimizer scores straight-line table-center travel. Regressions live in `scripts/landing-art/tests/`.
 
@@ -92,7 +94,7 @@ Name Tags offers **Customize helix or braid** inside its existing decoration con
 
 ## Finding your way around
 
-[Complimentary Stretch Snack](stretch-snack/) plans a short movement break for your current space, time and mobility preferences. Edit or swap a movement and save a named routine to adapt on your next trip. During a guided session, you can adjust the time for a movement or return to the previous one. A softly lit 3D trainer demonstrates the movements, with close-ups for hand exercises. The trainer and audio cues work offline. Open it once with a connection and wait for the offline indicator before traveling. Its movement library links the source guidance for each variant. [Planner API and CLI](stretch-snack/api.md)
+[Complimentary Stretch Snack](stretch-snack/) plans a short movement break for your current space, time and mobility preferences. Edit or swap a movement and save a named routine to adapt on your next trip. During a guided session, you can adjust the time for a movement or return to the previous one. The [Form / Motion mannequin](stretch-snack/form-motion/CREDITS.md) demonstrates the movements, with close-ups of the same articulated hands for wrist and grip exercises. The trainer and audio cues work offline. Open it once with a connection and wait for the offline indicator before traveling. Its movement library links the source guidance for each variant. [Planner API and CLI](stretch-snack/api.md)
 
 [Travel Prompt](travel-prompt/) prepares restaurant, menu, lodging and sightseeing requests for a chat assistant. Set requirements for yourself or a group, inspect and arrange menu photos, and share them individually or as one PDF. Lodging prompts use room and guest counts to compare nightly or whole-stay costs. Outing prompts account for travel time, access needs and the group’s interests. Named traveler profiles stay in your browser. Copy the prompt or choose a compatible share target. [Prompt API and CLI](travel-prompt/api.md)
 

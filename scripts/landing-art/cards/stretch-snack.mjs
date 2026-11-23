@@ -1,80 +1,78 @@
-import { art } from '../svg.mjs';
+import { art, esc } from '../svg.mjs';
 import { openPage } from '../browser.mjs';
 
-const poseWidth = 192, poseHeight = 224;
-
 export async function build() {
-  const { page, errors, close } = await openPage('stretch-snack/');
-  let result;
+  const {page, errors, close} = await openPage('stretch-snack/');
+  let snapshot;
   try {
-    result = await page.evaluate(async ([width, height]) => {
-      const { prepare, heldPose, paintStep, secondsPerSample } =
+    snapshot = await page.evaluate(async () => {
+      const {prepare, heldSeconds, sessionReading, paintStep} =
         await import(new URL('../assets/players/stretch-snack.js', location.href).href);
+      const plan = prepare(), reading = sessionReading(plan, heldSeconds);
       const canvas = document.createElement('canvas');
-      canvas.style.cssText = `position:absolute;width:${width}px;height:${height}px`;
+      canvas.style.cssText = 'position:absolute;width:240px;height:240px';
       document.body.append(canvas);
-      const routine = prepare().map(step => {
-        const images = [false, true].map(dark => {
-          paintStep(canvas, step, heldPose, dark);
-          return canvas.toDataURL('image/webp', .94);
-        });
-        return { label: step.label, seconds: step.seconds, light: images[0], dark: images[1] };
+      const samples = [false, true].map(dark => {
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        paintStep(canvas, reading.step, heldSeconds, dark);
+        const styles = getComputedStyle(document.documentElement);
+        const palette = ['page', 'paper', 'ink', 'stage', 'muted', 'line', 'green', 'on-green'].map(
+          key => '--sn-' + key + ':' + styles.getPropertyValue('--' + key).trim(),
+        ).join(';');
+        return {palette, pose: canvas.toDataURL('image/webp', .94)};
       });
-      return { routine, secondsPerSample };
-    }, [poseWidth, poseHeight]);
+      const text = id => document.getElementById(id).textContent;
+      return {reading, samples, total: plan.total, heldSeconds, end: text('finish'), pause: text('pause')};
+    });
     if (errors.length) throw new Error('Stretch Snack preview: ' + errors.join('; '));
   } finally { await close(); }
-  const { routine, secondsPerSample } = result;
-  const total = routine.reduce((sum, step) => sum + step.seconds, 0);
-  const time = Math.floor(total / 60) + ':' + String(total % 60).padStart(2, '0');
-  const panels = routine.map((step, i) => `
-    <div class="movement"${i === 0 ? ' data-current=""' : ''}>
-      <div class="figure"><div class="pose"><img alt="" class="light-pose" src="${step.light}"/><img alt="" class="dark-pose" src="${step.dark}"/></div></div>
-      <span class="caption">${step.label}</span>
-    </div>`).join('');
+  const {reading, samples: [light, dark], heldSeconds, total} = snapshot;
+  const field = key => `<span data-reading="${key}">${esc(reading[key])}</span>`;
   return art({
-    name: 'stretch-snack', player: 'stretch-snack', responsive: true,
-    period: routine.length * secondsPerSample,
-    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="routine">
-      <div class="routine-bar"><b>Seated routine</b><span class="timer">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"><path d="M8 2h4m-2 0v2m5.2 1.7 1.6-1.6"/><circle cx="10" cy="11.5" r="6.5"/><path d="M10 7.5v4l2 1.5"/></svg><span class="routine-time">${time}</span></span></div>
-      <div class="storyboard">${panels}</div>
-      <div class="ruler"><i class="progress"></i></div>
+    name: 'stretch-snack', player: 'stretch-snack', responsive: true, period: total,
+    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="session">
+      <div class="bar">${field('counter')}<span class="end">${esc(snapshot.end)}</span></div>
+      <div class="track"><i class="progress"></i></div>
+      <div class="scene"><div class="pose"><img alt="" class="light-pose" src="${light.pose}"/><img alt="" class="dark-pose" src="${dark.pose}"/></div></div>
+      <div class="reading">
+        <div class="heading">${field('name')}<span class="time">${field('clock')}${field('remaining')}</span></div>
+        <div class="next">${field('next')}</div><div class="controls"><span class="pause">${esc(snapshot.pause)}</span>${field('skip')}</div>
+      </div>
     </div></foreignObject>`,
-    css: `& {container:stretch-card/size;--banner:#193f34;--bar-ink:#f5f5d8;--paper:#e9ecd9;--stage:#bed19b;--letter:#284e3f;--marker:#bd582d;--rail:#849880;--line:#aebaa2}
-:root[data-theme="dark"] & {--banner:#233f34;--bar-ink:#f0f4dc;--paper:#2c4138;--stage:#48604e;--letter:#e1ebd6;--marker:#ffb16e;--rail:#677e6a;--line:#526a58}
-& .routine {display:grid;grid-template-rows:minmax(16px,18%) minmax(0,1fr) 3px;width:100%;height:100%;background:var(--paper);color:var(--letter);font-family:system-ui,sans-serif}
-& .routine-bar {display:flex;align-items:center;justify-content:space-between;gap:.4em;padding:0 4%;background:var(--banner);color:var(--bar-ink);font-size:clamp(10px,min(5.7cqw,9cqh),22px);line-height:1}
-& .routine-bar b {font-weight:660;letter-spacing:-.03em}
-& .timer {display:inline-flex;align-items:center;gap:.3em;font:600 .84em/1 ui-monospace,monospace;font-variant-numeric:tabular-nums}
-& .timer svg {width:1.2em;height:1.2em}
-& .storyboard {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));min-height:0}
-& .movement {display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;min-height:0;border-inline-end:1px solid var(--line);padding:1cqh 0 3cqh}
-& .movement:last-child {border:0}
-& .movement[data-current] {background:var(--stage)}
-& .figure {display:grid;place-items:center;container:trainer-frame/size;width:100%;height:100%;min-width:0;min-height:0}
-& .pose {position:relative;width:min(100cqw,${100 * poseWidth / poseHeight}cqh);aspect-ratio:${poseWidth}/${poseHeight}}
-& .pose img,& .pose canvas {position:absolute;inset:0;display:block;width:100%;height:100%}
+    css: `& {container:stretch-card/size;${light.palette}}
+:root[data-theme="dark"] & {${dark.palette}}
+& .session {box-sizing:border-box;display:grid;width:100%;height:100%;padding:clamp(4px,min(2.5cqw,4cqh),14px);gap:clamp(3px,min(1.4cqw,2.5cqh),8px);grid-template:"bar bar" auto "track track" 3px "scene reading" minmax(0,1fr) / minmax(0,.9fr) minmax(0,1.05fr);background:var(--sn-page);color:var(--sn-ink);font-family:"DM Sans","Avenir Next",system-ui,sans-serif;line-height:1.12}
+& .bar {grid-area:bar;display:flex;align-items:center;justify-content:space-between;font-size:clamp(10px,min(3.9cqw,8.4cqh),17px);font-weight:650}
+& .end,& .controls span {border:1px solid var(--sn-line);border-radius:.4em;padding:.23em .5em;background:var(--sn-paper);font-size:.86em}
+& .track {grid-area:track;border-radius:4px;background:var(--sn-line);overflow:hidden}
+& .progress {display:block;height:100%;width:100%;transform:scaleX(${heldSeconds / total});transform-origin:left;background:var(--sn-green)}
+& .scene {grid-area:scene;min-height:0;min-width:0;display:grid;place-items:center;container:stretch-stage/size;background:var(--sn-stage);border-radius:clamp(4px,2cqw,12px)}
+& .pose {position:relative;width:min(100cqw,100cqh);aspect-ratio:1}
+& .pose img,& .pose canvas {position:absolute;inset:0;width:100%;height:100%;display:block}
 & .pose .dark-pose,:root[data-theme="dark"] & .light-pose {display:none}
 :root[data-theme="dark"] & .dark-pose {display:block}
 & .pose:has(canvas) img {visibility:hidden}
-& .caption {text-align:center;font-size:clamp(9px,min(5cqw,8.4cqh),23px);font-weight:650;line-height:1.1;letter-spacing:-.025em}
-& .ruler {background:var(--rail)}
-& .progress {display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--marker)}
-@container stretch-card (max-aspect-ratio:1.1/1) {
-  & .routine {grid-template-rows:auto minmax(0,1fr) 3px}
-  & .routine-bar {padding:4% 6%}
-  & .storyboard {grid-template:repeat(3,minmax(0,1fr)) / minmax(0,1fr)}
-  & .movement {grid-template:minmax(0,1fr) / minmax(0,1fr) minmax(0,.8fr);align-items:center;padding:0 4% 0 0;border-inline-end:0;border-bottom:1px solid var(--line)}
-  & .movement:last-child {border-bottom:0}
-  & .caption {text-align:start;font-size:clamp(11px,7cqw,21px)}
+& .reading {grid-area:reading;min-width:0;align-self:center;display:grid;align-content:center;gap:.33em;font-size:clamp(12px,min(5.7cqw,13cqh),28px)}
+& .heading {display:grid;gap:.24em;font-weight:710;letter-spacing:-.035em;line-height:1.06}
+& .time {display:flex;align-items:baseline;gap:.45em;font-variant-numeric:tabular-nums}
+& [data-reading="clock"] {font-size:1.1em;font-weight:720}
+& [data-reading="remaining"],& .next {font-weight:480;letter-spacing:0;color:var(--sn-muted);font-size:clamp(10px,.65em,16px)}
+& .controls {display:flex;gap:.3em;align-items:center;font-size:clamp(10px,.72em,16px);font-weight:650}
+& .controls .pause {background:var(--sn-green);border-color:var(--sn-green);color:var(--sn-on-green)}
+@container stretch-card (max-aspect-ratio:1.45/1) {
+  & .session {grid-template:"bar" auto "track" 3px "scene" minmax(0,1fr) "reading" auto / minmax(0,1fr)}
+  & .heading {display:flex;align-items:start;justify-content:space-between;gap:.6em}
+  & .time {flex-direction:column;align-items:end;gap:.05em;white-space:nowrap}
+  & .reading {display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+  & .heading {grid-column:1/-1}
 }
-@container stretch-card (min-aspect-ratio:3.6/1) {
-  & .routine {grid-template: minmax(0,1fr) 3px / minmax(0,.56fr) minmax(0,2fr)}
-  & .routine-bar {flex-direction:column;align-items:start;justify-content:center;gap:.55em;padding:0 12%;font-size:clamp(11px,min(3.9cqw,16cqh),25px)}
-  & .ruler {grid-column:1/-1}
-  & .movement {grid-template:minmax(0,1fr) / minmax(0,1fr) minmax(0,.85fr);align-items:center;padding:0 4% 0 0}
-  & .caption {text-align:start;font-size:clamp(10px,min(2.6cqw,16cqh),21px)}
-}`,
+@container stretch-card (max-height:135px) {& .controls {display:none}}
+@container stretch-card (max-height:100px) and (min-aspect-ratio:1.5/1) {
+  & .session {grid-template:"scene bar" auto "scene track" 2px "scene reading" minmax(0,1fr) / minmax(0,.82fr) minmax(0,1.18fr)}
+  & .next,& .end {display:none}
+}
+@container stretch-card (max-width:190px) {& .end,& .controls {display:none}}
+@container stretch-card (max-width:150px) {& [data-reading="remaining"],& .next {display:none} & .reading {font-size:12px}}
+`,
   });
 }

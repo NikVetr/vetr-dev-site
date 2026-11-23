@@ -1,143 +1,141 @@
+import { readFileSync } from 'node:fs';
+import { modes, preferenceLevels, tastes } from '../../../travel-prompt/core/catalog.mjs';
 import { submit } from '../../../travel-prompt/core/prompt.mjs';
 import { art, esc } from '../svg.mjs';
 
-// Each route leads from the station to the landmark used in that sample brief.
-// Reading a menu stays at the table reached by the restaurant request.
-const stops = [
-  { mode: 'lodging', note: 'Quiet at night', route: 'M37 108L57 96Q61 94 61 90V59Q61 55 56 53L48 49', end: [48, 49] },
-  { mode: 'restaurant', note: 'Regional specialties', route: 'M37 108L57 96Q61 94 66 95L92 99Q98 100 104 97L132 83Q138 80 143 83L167 96', end: [167, 96] },
-  { mode: 'menu', note: 'Two menu photos', route: 'M167 96Q173 100 179 96L188 90Q192 87 188 85L181 82', end: [181, 82] },
-  { mode: 'outing', note: 'Gardens and galleries', route: 'M37 108L57 96Q61 94 61 90V74Q61 69 66 67L98 52Q103 49 109 51L122 55Q127 57 132 54L161 39', end: [161, 39] },
+const period = 24;
+const place = 'Kyoto Station';
+const budget = '¥18,000';
+const menuText = 'Yuzu soda · ¥600';
+const app = readFileSync(new URL('../../../travel-prompt/index.html', import.meta.url), 'utf8');
+
+function icon(id) {
+  const paths = app.match(new RegExp('<symbol id="' + id + '-icon"[^>]*>([\\s\\S]*?)</symbol>'))?.[1];
+  if (!paths) throw new Error('Missing Travel Prompt icon ' + id);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>`;
+}
+
+// Each pair edits one real control and passes its new value through the app's prompt builder.
+const examples = [
+  {
+    mode: 'lodging', label: 'Budget period', values: ['night', 'stay'],
+    choices: [['night', 'Per night'], ['stay', 'Whole stay']],
+    request: value => ({ place, budget, budgetBasis: value }),
+    detail: ['Budget for all rooms', budget], excerpt: /^Budget (?:per night|for the whole stay): .+$/m
+  },
+  {
+    mode: 'restaurant', label: tastes.spice.label, values: [1, -2],
+    request: value => ({ place, people: [{ preferences: { spice: value } }] }),
+    detail: ['Where?', place], excerpt: /^Me: (.+)$/m
+  },
+  {
+    mode: 'menu', label: 'Recommend from the menu', values: ['Food', 'Drinks'],
+    choices: [['Food and drinks', 'Both'], ['Food', 'Food'], ['Drinks', 'Drinks']],
+    request: value => ({ menuText, focus: value }),
+    detail: ['Menu text', menuText], excerpt: /Focus on [^.]+\./
+  },
+  {
+    mode: 'outing', label: tastes.museums.label, values: [-1, 2],
+    request: value => ({ place, people: [{ preferences: { museums: value } }] }),
+    detail: ['Where?', place], excerpt: /^Me: (.+)$/m
+  }
 ];
-const period = 16;
 
-const mapDefs = `
-<pattern id="travel-prompt-blocks" width="38" height="27" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)">
-  <path fill="#ced7bb" d="M2 2h12v8H2zM16 2h18v8H16zM2 13h21v10H2zM25 13h9v10h-9z"/>
-  <path fill="none" stroke="#edead5" stroke-width="1" d="M0 25h38M36 0v27"/>
-</pattern>
-<g id="travel-prompt-pine" stroke="#284f47" stroke-linecap="round" stroke-linejoin="round">
-  <path fill="#719477" d="m0-14-5 9h3l-4 6H6L2-5h3z"/>
-  <path fill="none" d="M0-4v8"/>
-</g>
-<g id="travel-prompt-trees">
-  <use href="#travel-prompt-pine" x="-6" y="-2"/><use href="#travel-prompt-pine" x="2" y="1"/>
-</g>`;
+function choiceControl(options, selected) {
+  return `<div class="tp-choices">${options.map(([value, label]) =>
+    `<span class="tp-option${value === selected ? ' tp-selected' : ''}">${esc(label)}</span>`).join('')}</div>`;
+}
 
-const map = `
-<rect x="-300" y="-200" width="820" height="540" fill="#e5e7ca"/>
-<rect x="-300" y="-200" width="820" height="540" fill="url(#travel-prompt-blocks)"/>
-<path fill="#bbcea9" d="M117 14Q145 14 153-9L224-30 243 18Q215 26 203 49Q188 59 168 52Q143 42 122 42Z"/>
-<path d="M162-70Q171-5 123 27T125 86Q159 106 134 150T136 220" fill="none" stroke="#a9bda6" stroke-width="21"/>
-<path d="M162-70Q171-5 123 27T125 86Q159 106 134 150T136 220" fill="none" stroke="#91bdbc" stroke-width="17"/>
-<path d="M159-35Q158-2 140 14M116 36Q92 59 119 78M130 90Q152 109 141 132" fill="none" stroke="#d1e2ce" stroke-width="1.4" stroke-linecap="round"/>
-<g fill="none" stroke-linejoin="round" stroke-linecap="round">
- <path d="m-86 166 150-72 33 6 40-20 64 32 97-45M-69 134 61 70l42-20 23 8L250-4M-26-4 61 40v53M-47 89l76-35L89 24l18-59" stroke="#bbc1a6" stroke-width="5.7"/>
- <path d="m-86 166 150-72 33 6 40-20 64 32 97-45M-69 134 61 70l42-20 23 8L250-4M-26-4 61 40v53M-47 89l76-35L89 24l18-59" stroke="#f7f0d9" stroke-width="4"/>
- <path d="m-35 147 75-35 58 16 105 50" stroke="#839580" stroke-width="3"/>
- <path d="m-35 147 75-35 58 16 105 50" stroke="#f5eed6" stroke-width="1.3" stroke-dasharray="3 2"/>
-</g>
-<!-- The inn, station, food stall and garden are drawn on the same folded street map. -->
-<g stroke="#34584c" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
- <g transform="translate(47 45)">
-  <path fill="#b5c3a2" stroke="none" d="m-24-1 18 8 29-14-17-6z"/>
-  <path fill="#f5e6bf" d="m-16-14 15 7 17-9v13L-1 5l-15-7z"/><path fill="#d6d3ac" d="m-1-7 17-9v13L-1 5z"/>
-  <path fill="#c96947" d="m-20-15 8-12 16 7-5 14z"/><path fill="#a95942" d="m-1-6 5-14 17 1-5 4z"/>
-  <path fill="#f6eacc" d="m-12-26 14-7 18 7-16 7z"/><path fill="#c7764e" d="m4-19 16-7 3 7-18 9z"/>
-  <path fill="#41665a" d="m-12-10 3 1v5l-3-1zm5 3 3 1v4l-3-1zm10 1 3-2v6L3 0zm6-3 3-1v4l-3 1z"/>
- </g>
- <g transform="translate(165 36)">
-  <path fill="#b1c398" stroke="none" d="M-23-4q21 16 45 0l-15-5z"/>
-  <use href="#travel-prompt-trees" x="-13" y="-6"/><use href="#travel-prompt-pine" x="18" y="-4"/>
-  <path fill="#c76947" d="M-6-15h3l1 15h-3zm12 0h3l-1 15H5z"/>
-  <path fill="#d9865a" d="M-11-21q12 4 24 0l-1 3q-11 3-22 0zm2 8v-2h21v2z"/>
- </g>
- <g transform="translate(170 83)">
-  <path fill="#bfcaac" stroke="none" d="m-20 6 16 8L22 2 6-6z"/>
-  <path fill="#f3dfb0" d="m-13-5 13 6 17-8V4L0 12l-13-6z"/><path fill="#719385" d="m0 1 17-8V4L0 12z"/>
-  <path fill="#284f47" d="m-10-3 7 3v4l-7-3z"/>
-  <path fill="#f5dcad" d="m-15-9 17 7 19-9-16-6z"/>
-  <path fill="#c46d4c" d="m-12-10 4-2 16 7-4 2zm8-4 4-2 16 7-4 2z"/>
-  <path fill="#e0ab72" d="m-15-9 17 7v3l-17-7z"/><path fill="#a35e46" d="m2-2 19-9v3L2 1z"/>
- </g>
- <g transform="translate(32 97)">
-  <path fill="#bbc6a9" stroke="none" d="m-19 0 12 7L22-6 8-12z"/>
-  <path fill="#f7e7c4" d="m-15-6 6-6 20-9 6 3v8L-6 2q-9 2-9-3z"/>
-  <path fill="#799e96" d="m-12-6 5-4 3 1v4l-8 3zM0-10l13-6v4L0-6z"/>
-  <path fill="none" stroke="#a95d42" d="m-12 0 6-1 21-10"/>
- </g>
- <use href="#travel-prompt-trees" x="15" y="53"/><use href="#travel-prompt-trees" x="90" y="23"/>
- <use href="#travel-prompt-trees" x="200" y="59"/><use href="#travel-prompt-pine" x="95" y="124"/>
-</g>`;
+function preferenceControl(value, previous) {
+  const point = level => 5 + (level + 2) * 22.5;
+  return `<div class="tp-slider" style="--point:${point(value)}%;--from:${point(previous)}%">
+    <span class="tp-value">${esc(preferenceLevels[value + 2])}</span>
+    <span class="tp-track"><span class="tp-fill"></span><span class="tp-thumb"></span></span>
+  </div>`;
+}
+
+function sample(example, step, index) {
+  const mode = modes[example.mode];
+  const value = example.values[step];
+  const { prompt } = submit({ mode: example.mode, ...example.request(value) });
+  const match = prompt.match(example.excerpt);
+  if (!match) throw new Error('Missing generated prompt excerpt for ' + example.mode);
+  const excerpt = match[1] ?? match[0];
+  const goal = prompt.slice(0, prompt.indexOf('.') + 1);
+  const control = example.choices
+    ? choiceControl(example.choices, value)
+    : preferenceControl(value, example.values[0]);
+  return `<div class="tp-frame${index === 0 ? ' tp-first' : ''}" data-sample="${example.mode}-${step}" style="--phase:${index * 3 - period}s">
+    <div class="tp-editor">
+      <span class="tp-mode">${icon(example.mode === 'restaurant' ? 'dining' : mode.icon)}${esc(mode.label)}</span>
+      <div class="tp-extra-field"><span class="tp-label">${esc(example.detail[0])}</span><span class="tp-input">${esc(example.detail[1])}</span></div>
+      <div class="tp-control"><span class="tp-label">${esc(example.label)}</span>${control}</div>
+    </div>
+    <div class="tp-output"><span class="tp-heading">${icon('note')}Your prompt</span>
+      <div class="tp-text"><span class="tp-goal">${esc(goal)}</span><span class="tp-excerpt">${esc(excerpt)}</span></div>
+    </div>
+  </div>`;
+}
 
 export function build() {
-  const trails = [];
-  const briefs = [];
-  for (const [index, stop] of stops.entries()) {
-    const { mode, route, end, note } = stop;
-    const place = 'Kyoto Station';
-    const { prompt } = submit({ mode, place, notes: note, photoCount: mode === 'menu' ? 2 : 0 });
-    const instruction = prompt.split('.')[0].replace(/ (that fit this request|from this menu)$/, '');
-    const delay = -period + index * period / stops.length;
-    const phase = `class="stop stop-${index}" style="--phase:${delay}s"`;
-    trails.push(`<g ${phase} fill="none" stroke-linejoin="round" stroke-linecap="round">
-      <path d="${route}" stroke="#f8f0d9" stroke-width="4.3"/>
-      <path class="trail" d="${route}" pathLength="100" stroke="#ac4933" stroke-width="2.7"/>
-      <path class="traveler" d="${route}" pathLength="100" stroke="#753e31" stroke-width="4.6" stroke-dasharray=".01 210"/>
-      <circle class="ripple" cx="${end[0]}" cy="${end[1]}" r="7.5" stroke="#ae5336" stroke-width=".9"/>
-      <circle class="arrival" cx="${end[0]}" cy="${end[1]}" r="4" fill="#ffedc9" stroke="#aa4933" stroke-width="2"/>
-    </g>`);
-    briefs.push(`<div ${phase}><div class="entry">
-      <span class="place"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 16s5.5-5.8 5.5-9A5.5 5.5 0 0 0 2.5 7c0 3.2 5.5 9 5.5 9Z"/><circle cx="8" cy="7" r="1.8"/></svg>${place}</span>
-      <strong>${esc(instruction)}</strong><span class="note">${esc(note)}</span>
-    </div></div>`);
-  }
+  const frames = examples.flatMap((example, i) => example.values.map((_, j) => sample(example, j, i * 2 + j)));
   return art({
     name: 'travel-prompt', responsive: true, period,
-    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="atlas">
-      <div class="map-window"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 127">
-       <defs>${mapDefs}</defs><g class="map-sheet">${map}${trails.join('')}</g></svg></div>
-      <div class="paper">${briefs.join('')}</div>
-    </div></foreignObject>`,
-    css: `& {container:trip-atlas / size;background:#e5e7ca}
-& .atlas {position:absolute;inset:0;display:grid;grid-template-rows:minmax(0,1fr) 40%;background:#eee8d5;color:#254f45}
-& .map-window {position:relative;overflow:hidden;background:#e5e7ca}
-& .map-window svg {display:block;width:100%;height:100%;overflow:visible}
-& .paper {position:relative;min-width:0;background:#faf1da;border-top:1px dashed #aeaa8c}
-& .paper .stop {position:absolute;inset:0}
-& .entry {height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:clamp(2px,1cqh,6px);padding:1.2cqh 6cqw}
-& .place {display:flex;align-items:center;gap:.42em;font:700 clamp(9px,min(3.6cqw,6.5cqh),17px)/1.05 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#85523e}
-& .place svg {width:.95em;height:1.05em;flex:none}
-& .entry strong {font:600 clamp(15px,min(6.2cqw,12cqh),38px)/1.03 Georgia,serif;letter-spacing:-.035em;text-wrap:balance}
-& .note {font:500 clamp(10px,min(4.1cqw,7cqh),22px)/1.12 system-ui,sans-serif}
-& .stop:not(.stop-0) {opacity:0}
-& .trail {stroke-dasharray:100 110;stroke-dashoffset:68}
-& .traveler {stroke-dashoffset:-32}
-& .arrival, & .ripple {opacity:0}
-& .ripple {transform-box:fill-box;transform-origin:center}
-:root[data-theme="dark"] & .map-window {filter:brightness(.84) saturate(.89)}
-:root[data-theme="dark"] & .paper {background:#e6e3cb}
-@container trip-atlas (min-aspect-ratio:1.85/1) {
- & .atlas {grid-template-rows:100%;grid-template-columns:54% minmax(0,1fr)}
- & .paper {border-top:0;border-left:1px dashed #aeaa8c}
- & .entry {padding:2cqh 3.1cqw;gap:clamp(3px,3cqh,12px)}
- & .entry strong {font-size:clamp(14px,min(4.7cqw,18cqh),38px)}
- & .note {font-size:clamp(10px,min(3.3cqw,12cqh),22px)}
- & .place {font-size:clamp(8px,min(2.6cqw,10cqh),16px)}
+    body: `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="tp-demo">${frames.join('')}</div></foreignObject>`,
+    css: `& {container:travel-brief / size;background:#f6f5ef}
+& .tp-demo {--tp-ink:#21372e;--tp-muted:#506557;--tp-accent:#195e49;--tp-paper:#fffef9;--tp-tint:#eaf0e5;--tp-line:#b9cbbb;--tp-picked:#d8e9d9;--tp-gold:#d9ae67;position:absolute;inset:0;color:var(--tp-ink);font:550 14px/1.15 system-ui,sans-serif}
+:root[data-theme="dark"] & .tp-demo {--tp-ink:#edf1e9;--tp-muted:#b1c2b8;--tp-accent:#a4d9b6;--tp-paper:#202d28;--tp-tint:#283c31;--tp-line:#4e6555;--tp-picked:#324e3d;--tp-gold:#dcaf6b}
+& .tp-demo * {box-sizing:border-box}
+& .tp-frame {position:absolute;inset:0;display:grid;grid-template-rows:55% minmax(0,1fr);background:var(--tp-paper);visibility:hidden}
+& .tp-first {visibility:visible}
+& .tp-editor,& .tp-output {display:flex;flex-direction:column;justify-content:center;align-items:stretch;min-width:0;gap:clamp(3px,min(1.1cqh,1.2cqw),10px);padding:clamp(5px,min(3cqh,4cqw),18px) clamp(7px,4cqw,24px)}
+& .tp-demo svg {width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+& .tp-mode,& .tp-heading {display:flex;align-items:center;gap:.38em;font-size:clamp(12px,min(5.3cqw,9cqh),26px);font-weight:720;line-height:1.06;letter-spacing:-.03em}
+& .tp-mode {align-self:flex-start;background:var(--tp-accent);color:var(--tp-paper);padding:.23em .48em;border-radius:.32em;white-space:nowrap}
+& .tp-control,& .tp-extra-field {display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2px,.8cqh,6px);min-width:0}
+& .tp-extra-field,& .tp-goal {display:none}
+& .tp-label,& .tp-value {font-size:clamp(10px,min(3.9cqw,6.4cqh),18px);font-weight:600;line-height:1.1}
+& .tp-value {color:var(--tp-muted);font-weight:500}
+& .tp-input,& .tp-option {color:var(--tp-ink);border:1px solid var(--tp-line);border-radius:.28em;background:var(--tp-paper);padding:.24em .48em;font-size:clamp(10px,min(4cqw,6.7cqh),20px);line-height:1.14}
+& .tp-input {font-weight:450}
+& .tp-choices {display:flex;gap:.28em}
+& .tp-option {flex:1 1 0;min-width:0;text-align:center;white-space:nowrap;font-weight:600}
+& .tp-selected {color:var(--tp-accent);border-color:var(--tp-accent);background:var(--tp-picked)}
+& .tp-slider {display:flex;align-items:center;gap:.6em;min-height:1.1em}
+& .tp-track {position:relative;flex:1;height:clamp(4px,.8cqh,7px);border-radius:6px;background:var(--tp-line)}
+& .tp-fill {position:absolute;inset:0 auto 0 0;width:var(--point);background:var(--tp-accent);border-radius:inherit}
+& .tp-thumb {position:absolute;left:var(--point);top:50%;width:clamp(9px,4.3cqh,18px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:var(--tp-accent)}
+& .tp-output {background:var(--tp-tint);border-top:2px solid var(--tp-gold)}
+& .tp-heading {color:var(--tp-accent);font-size:clamp(10px,min(3.9cqw,6.4cqh),19px)}
+& .tp-text {font:500 clamp(15px,min(6cqw,10.5cqh),31px)/1.14 Georgia,serif;letter-spacing:-.015em}
+& .tp-excerpt {display:block}
+@container travel-brief (min-aspect-ratio:1.85/1) {
+ & .tp-frame {grid-template-columns:49% minmax(0,1fr);grid-template-rows:100%}
+ & .tp-editor,& .tp-output {padding-inline:clamp(6px,2.5cqw,20px)}
+ & .tp-output {border-top:0;border-left:2px solid var(--tp-gold)}
+}
+@container travel-brief (min-height:222px) {
+ & .tp-extra-field {display:grid}
+ & .tp-goal {display:block;color:var(--tp-muted);font-size:.8em;margin-bottom:.4em}
+}
+@container travel-brief (min-aspect-ratio:1.85/1) and (min-height:135px) {
+ & .tp-extra-field {display:grid}
+ & .tp-goal {display:block;color:var(--tp-muted);font-size:.8em;margin-bottom:.4em}
+}
+@container travel-brief (max-width:265px) and (max-height:110px) {
+ & .tp-mode {max-width:100%;white-space:normal;font-size:11px;padding:.22em .33em}
+ & .tp-option:not(.tp-selected) {display:none}
+ & .tp-slider {flex-direction:column;align-items:stretch;gap:.3em}
+ & .tp-track {flex:none}
 }`,
-    loop: `& .map-sheet {animation:trip-pan ${period}s ease-in-out infinite}
-& .stop {animation:trip-stop ${period}s var(--phase) infinite both}
-& .trail {animation:trip-trail ${period}s var(--phase) infinite both}
-& .traveler {animation:trip-traveler ${period}s var(--phase) infinite both}
-& .arrival {animation:trip-arrival ${period}s var(--phase) infinite both}
-& .ripple {animation:trip-ripple ${period}s var(--phase) infinite both}
-& .entry {animation:trip-entry ${period}s var(--phase) infinite both}
-@keyframes trip-pan {0%,100%{transform:translate(0,0)}12%{transform:translate(3px,2px)}37%,59%{transform:translate(-4px,-2px)}82%,91%{transform:translate(-3px,3px)}}
-@keyframes trip-stop {0%,19%,100%{opacity:1}21%,94%{opacity:0}97%{opacity:1}}
-@keyframes trip-trail {0%,100%{stroke-dashoffset:68}7%,21%{stroke-dashoffset:0}94%,97%{stroke-dashoffset:100}}
-@keyframes trip-traveler {0%,100%{stroke-dashoffset:-32}7%,21%{stroke-dashoffset:-100}94%,97%{stroke-dashoffset:0}}
-@keyframes trip-arrival {0%,6%,22%,100%{opacity:0}7%,20%{opacity:1}}
-@keyframes trip-ripple {0%,6%{opacity:0;transform:scale(.6)}7%{opacity:.9;transform:scale(.6)}15%,100%{opacity:0;transform:scale(1.9)}}
-@keyframes trip-entry {0%,17.5%,100%{opacity:1;transform:translateY(0)}19.5%{opacity:0;transform:translateY(-6%)}95%{opacity:0;transform:translateY(10%)}99%{opacity:1;transform:translateY(0)}}`,
+    // Keep whole frames readable on transition. Only the edited control and its resulting line move.
+    loop: `& .tp-frame {animation:travel-show ${period}s step-end var(--phase) infinite both}
+& .tp-excerpt {animation:travel-write ${period}s ease-out var(--phase) infinite both}
+& .tp-thumb {animation:travel-position ${period}s ease-out var(--phase) infinite both}
+& .tp-fill {animation:travel-fill ${period}s ease-out var(--phase) infinite both}
+@keyframes travel-show {0%,100%{visibility:visible}12.5%{visibility:hidden}}
+@keyframes travel-write {0%{opacity:.72;transform:translateY(.09em)}1.6%,100%{opacity:1;transform:translateY(0)}}
+@keyframes travel-position {0%{left:var(--from)}1.6%,100%{left:var(--point)}}
+@keyframes travel-fill {0%{width:var(--from)}1.6%,100%{width:var(--point)}}`,
   });
 }
