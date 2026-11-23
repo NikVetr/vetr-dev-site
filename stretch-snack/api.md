@@ -26,9 +26,9 @@ All fields are optional. Unknown fields and invalid IDs produce errors.
 | `seconds` | Integer 15–900, default 120, including planned changes of posture. |
 | `targets` | List drawn from `neck`, `shoulders`, `upper-back`, `chest`, `hands` (and forearms), `hips`, `knees` (and thighs), `calves` (and feet), `lower-back`. Empty requests a mixed routine. |
 | `discretion` | `quiet` (default), `moderate`, `any`. A ceiling on how conspicuous a movement may be. |
-| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. Upper-back ball release requires both a massage ball and a chair with a firm back in a stationary location. |
+| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. A support is a secure fixed handhold. A step must be fixed and low. Upper-back ball release requires both a massage ball and a firm backrest at the current seat. Changing location clears the backrest confirmation. The app saves the ball with your equipment defaults. |
 | `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. A mat is optional. |
-| `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements. |
+| `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements compatible with those preferences. |
 | `heightCm`, `armspanCm` | Optional measurements in cm, 50–280 and 40–300, both default 170. Used to scale estimated movement clearance. |
 | `forwardCm`, `sideCm` | Optional measurements in cm, 0–1,000. Free space in front of the knees and on each side beyond the shoulder. Overrides the preset at the current location. Use the smaller of unequal clearances. |
 | `availableLocations` | Locations the traveler considers reachable **now**. The planner checks compatible locations on that route, e.g. a lavatory from an airplane seat. Empty by default. |

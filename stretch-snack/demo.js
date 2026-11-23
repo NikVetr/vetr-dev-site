@@ -56,6 +56,7 @@ const sideViews = {
   'ball-back': 1.55, 'chin-tuck': 1.12, 'back-round': 1.08, 'back-arch': 1.06,
   'seated-pelvic-tilt': 1.08, 'hamstring-lean': 1.04, 'glute-squeeze': 2.05,
 };
+const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
 /** @param {HTMLCanvasElement} canvas
  * @param {{motion:string,pose:string,equipment?:string[],name?:string}} move
@@ -80,6 +81,9 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   const handDetail = !options.preview && regions[move.motion] === 'hands' && width >= 230;
   const reach = move.motion === 'overhead-reach';
   const frontSeat = move.motion === 'hamstring-lean' || move.motion === 'quad-set';
+  const sideLabel = !options.preview && (isometric.has(move.motion) || move.motion === 'ball-back');
+  // Reserve some space beside the trainer for the annotation in a small well.
+  const labelRoom = sideLabel && width < 300 && width < height * 2 ? Math.min(30, width * 0.15) : 0;
   const yaw = sideViews[move.motion] ?? (floor ? 1.22 : regions[move.motion] === 'head' ? 0.32 : 0.58);
   const pitch = floor ? 0.32 : 0.095;
   const cosYaw = Math.cos(yaw),
@@ -89,10 +93,10 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   const standingLift = move.motion === 'step-up' ? 0.16 : move.motion === 'heel-lift' ? 0.08 : 0;
   const stageHeight = floor ? 0.94 : seated ? (reach ? 1.81 : 1.49) : 1.88 + standingLift;
   const stageWidth = floor ? 2.36 : handDetail ? 1.85 : frontSeat ? 1.52 : options.preview ? 0.96 : 1.34;
-  const scale = Math.min(height / stageHeight, width / stageWidth);
+  const scale = Math.min(height / stageHeight, (width - labelRoom) / stageWidth);
   const centerY = floor ? 0.22 : seated ? (reach ? 0.82 : 0.675) : 0.86 + standingLift / 2;
   const centerZ = floor ? 0.012 : frontSeat ? 0.41 : seated ? 0.2 : 0.06;
-  const originX = width * (handDetail ? 0.37 : 0.5) - sinYaw * centerZ * scale;
+  const originX = width * (handDetail ? 0.37 : 0.5) + labelRoom - sinYaw * centerZ * scale;
   const originY = height * 0.5 + (centerY * cosPitch - centerZ * cosYaw * sinPitch) * scale;
   const project = ([x, y, z]) => {
     const depth = -x * sinYaw + z * cosYaw;
@@ -176,7 +180,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
         drawHandDetail(mesh, -pose.side);
     });
     ctx.restore();
-  } else if (['glute-squeeze', 'knee-squeeze', 'quad-set'].includes(move.motion)) {
+  } else if (isometric.has(move.motion)) {
     const glutes = move.motion === 'glute-squeeze', quad = move.motion === 'quad-set';
     const working = quad ? [leg] : pose.legs;
     const muscles = working.map(l => {
@@ -200,13 +204,14 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     }
     ctx.globalAlpha = 1;
     const target = points.length === 1 ? points[0] : mixPoint(points[0], points[1], 0.5);
-    label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase], width, height, dark);
+    label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase],
+      width, height, dark, pose, project, scale);
   } else if (move.motion === 'ball-back') {
     const target = project(backBallCenter(pose));
     ctx.beginPath();
     ctx.arc(target[0], target[1], Math.max(3, backBallRadius * scale + 2), 0, Math.PI * 2);
     ctx.stroke();
-    label(ctx, target, ['Massage ball'], width, height, dark);
+    label(ctx, target, [width < 220 ? 'Ball' : 'Massage ball'], width, height, dark, pose, project, scale);
   } else if (move.motion === 'ankle-circle') {
     ankleArrow(ctx, move, seconds, leg, project, width, height, scale);
   } else if (move.motion === 'palm-forward') {
@@ -277,21 +282,47 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
   ctx.restore();
 }
 
-// Position the annotation in the free space nearest the muscle, keeping even
-// a two-line label inside a narrow portrait demonstration.
-function label(ctx, target, lines, width, height, dark) {
+// Reserve space around the posed limbs at the height of each proposed label.
+// This avoids reading pixels back from the drawing surface on every frame.
+function labelSegments(pose, project, scale) {
+  const pelvis = mixPoint(pose.legs[0].hip, pose.legs[1].hip, 0.5);
+  const parts = [[pose.crown, pose.neck, 0.083], [pose.neck, pelvis, 0.15]];
+  for (const arm of pose.arms)
+    parts.push([arm.shoulder, arm.elbow, 0.064], [arm.elbow, arm.palm, 0.053]);
+  for (const leg of pose.legs)
+    parts.push([leg.hip, leg.knee, 0.079], [leg.knee, leg.ankle, 0.056], [leg.ankle, leg.toe, 0.044]);
+  return parts.map(([from, to, r]) => ({a: project(from), b: project(to), radius: r * scale}));
+}
+function label(ctx, target, lines, width, height, dark, pose, project, scale) {
   const font = Math.max(10, Math.min(16, height * 0.044, width * 0.055));
   ctx.font = '600 ' + font + 'px system-ui, sans-serif';
   const pad = 5, lineHeight = font * 1.19;
   const w = Math.ceil(Math.max(...lines.map(line => ctx.measureText(line).width))) + 2 * pad;
   const h = Math.ceil(lines.length * lineHeight) + 2 * pad;
   const gap = Math.min(46, Math.max(16, height * 0.12));
-  const space = w + gap + pad;
-  const left = target[0] >= space && (target[0] < width / 2 || width - target[0] < space);
-  const beside = left ? target[0] - gap - w : target[0] + gap;
-  const x = Math.max(pad, Math.min(width - w - pad, beside));
-  const y = Math.max(pad, Math.min(height - h - pad, target[1] - h - Math.min(17, height * 0.04)));
-  const lineX = left ? x + w : x, lineY = y + h * 0.67;
+  const parts = labelSegments(pose, project, scale);
+  let bestCost = Infinity, x = 0, y = 0, lineX = 0, lineY = 0;
+  for (const top of [target[1] - h - gap * 0.35, target[1] - h / 2, target[1] + gap * 0.35]) {
+    const ty = Math.max(pad, Math.min(height - h - pad, top));
+    let minX = target[0] - gap, maxX = target[0] + gap;
+    for (const {a,b,radius} of parts) {
+      if (Math.max(a[1],b[1]) + radius < ty || Math.min(a[1],b[1]) - radius > ty+h) continue;
+      const lo = a[1] <= b[1] ? a : b, hi = lo === a ? b : a;
+      const dy = Math.max(1e-5, hi[1] - lo[1]);
+      const start = Math.max(0, Math.min(1, (ty - radius - lo[1]) / dy));
+      const end = Math.max(0, Math.min(1, (ty + h + radius - lo[1]) / dy));
+      const ax = lo[0] + (hi[0]-lo[0]) * start, bx = lo[0] + (hi[0]-lo[0]) * end;
+      minX = Math.min(minX, ax - radius - 3, bx - radius - 3);
+      maxX = Math.max(maxX, ax + radius + 3, bx + radius + 3);
+    }
+    for (const left of [true, false]) {
+      const edge = left ? minX : maxX;
+      const tx = Math.max(pad, Math.min(width-w-pad, left ? edge-w : edge));
+      const lx = left ? tx+w : tx, ly = Math.max(ty+4, Math.min(ty+h-4, target[1]));
+      const cost = Math.hypot(lx-target[0], ly-target[1]) + 8 * Math.abs(lx-edge);
+      if (cost < bestCost) { bestCost = cost; x = tx; y = ty; lineX = lx; lineY = ly; }
+    }
+  }
   ctx.beginPath();
   ctx.moveTo(lineX, lineY);
   ctx.lineTo(target[0], target[1]);

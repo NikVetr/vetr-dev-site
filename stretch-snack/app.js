@@ -26,6 +26,9 @@ const profileFields = [
 ];
 const blankProfile = { limitations: [], equipment: [], discretion: 'quiet', avoidIds: [], favoriteIds: [] };
 let profile = readLocal('profile', null);
+const withoutBackrest = (items) => items.filter(id => id !== 'firm-back');
+// A previous profile can include the backrest from a different seat.
+if (profile?.equipment) profile.equipment = withoutBackrest(profile.equipment);
 const feedback = readLocal('movement-feedback', {});
 const prefs = {
   location: 'plane-seat',
@@ -348,6 +351,8 @@ function bindSettings() {
   for (const [id, label] of Object.entries(locations)) place.add(new Option(label, id));
   place.addEventListener('change', () => {
     prefs.location = place.value;
+    prefs.equipment = withoutBackrest(prefs.equipment);
+    checks('equipment', equipment, 'equipment');
     prefs.availableLocations = [];
     prefs.allowFloor = false;
     get('allow-floor', 'input').checked = false;
@@ -387,6 +392,7 @@ function bindSettings() {
     const saved = Object.fromEntries(
       profileFields.filter((k) => prefs[k] !== undefined).map((k) => [k, prefs[k]]),
     );
+    saved.equipment = withoutBackrest(prefs.equipment);
     const ok = writeLocal('profile', saved);
     if (ok) {
       profile = JSON.parse(JSON.stringify(saved));
@@ -398,8 +404,10 @@ function bindSettings() {
   });
   get('load-profile', 'button').addEventListener('click', () => {
     if (!profile) return;
+    const hasFirmBack = prefs.equipment.includes('firm-back');
     profileFields.forEach((k) => delete prefs[k]);
     Object.assign(prefs, blankProfile, JSON.parse(JSON.stringify(profile)));
+    if (hasFirmBack) prefs.equipment = [...prefs.equipment, 'firm-back'];
     showFields();
     buildPlan();
     get('profile-status', 'output').textContent = 'Restored your saved preferences.';

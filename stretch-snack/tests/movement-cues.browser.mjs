@@ -30,7 +30,7 @@ test('the coach marks the working area and the hold or release phase of an isome
           for (const [time,phase] of [[0,'Relax'],[1,'Tighten'],[2,'Hold'],[3,'Release']]) {
             visible.length = 0;
             renderMovement(canvas, move, time, {dark});
-            const labels = move.motion === 'ball-back' ? [regions[move.motion]] : [regions[move.motion],phase];
+            const labels = move.motion === 'ball-back' ? [width < 220 ? 'Ball' : 'Massage ball'] : [regions[move.motion],phase];
             if (visible.join('/') !== labels.join('/')) failures.push([move.id,time,visible.slice()]);
           }
         }

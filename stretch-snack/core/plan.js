@@ -108,7 +108,8 @@ function fitIssues(move, prefs, location) {
     if (!prefs.allowFloor) issues.push('Floor use is off.');
   }
   if (move.stationary && !space.stationary) issues.push('Needs a stationary surface.');
-  const missingEquipment = move.equipment.filter(key => !prefs.equipment.includes(key));
+  const missingEquipment = move.equipment.filter(key =>
+    !prefs.equipment.includes(key) || (key === 'firm-back' && location !== prefs.location));
   if (missingEquipment.length) issues.push('Equipment needed · ' + missingEquipment.map(key => equipment[key]).join(', ') + '.');
   if (visibility.indexOf(move.discretion) > visibility.indexOf(prefs.discretion)) issues.push('Exceeds your discretion setting.');
 

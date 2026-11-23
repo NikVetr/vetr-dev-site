@@ -33,11 +33,14 @@ test('the chair, ball, and ability to position it all matter for upper-back mass
   const id = 'seated-ball-back';
   checkFit(id, req, true);
   for (const equipment of [['ball'], ['firm-back'], ['ball', 'support']]) checkFit(id, {...req, equipment}, false);
-  for (const setting of ['back-support', 'no-arm-movement', 'limited-grip', 'no-leg-movement', 'poor-balance']) {
+  for (const setting of ['back-support', 'no-arm-movement', 'limited-grip']) {
     checkFit(id, {...req, limitations: [setting]}, false);
   }
-  checkFit(id, {...req, location: 'train-seat'}, false);
-  checkFit(id, {...req, discretion: 'quiet'}, false);
+  for (const location of ['plane-seat', 'train-seat']) {
+    checkFit(id, {...req, location, discretion: 'quiet', limitations: ['no-leg-movement', 'poor-balance']}, true);
+  }
+  const otherChair = submit({...req, location: 'stall', availableLocations: ['roomy-seat'], favoriteIds: [id]});
+  assert.ok(otherChair.alternatives.every(place => !place.additionalIds.includes(id)));
 });
 
 test('rail-supported weight shifts and heel-planted toe lifts have distinct balance demands', () => {
@@ -69,5 +72,9 @@ test('leg extensions need clearance; contractions and the hamstring hinge respec
     checkFit(id, {...chair, limitations: ['no-leg-movement']}, false);
   }
   checkFit('seated-pelvic-tilt', {...chair, limitations: ['back-support']}, false);
-  checkFit('seated-self-hug', {...chair, limitations: ['no-overhead']}, false);
+  const middleSeat = {location: 'plane-seat', sideCm: 0, limitations: ['no-overhead']};
+  for (const id of ['seated-self-hug','seated-palm-forward']) {
+    checkFit(id, middleSeat, true);
+    checkFit(id, {...middleSeat, limitations: ['no-arm-movement']}, false);
+  }
 });

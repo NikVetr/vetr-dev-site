@@ -134,3 +134,26 @@ test('backtracking and live timing preserve transfer time, the paused state and 
     await app.close();
   }
 });
+
+test('a backrest confirmation belongs to the current seat when a profile is saved or restored', async () => {
+  const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
+  const {page, close, errors} = await openPage('stretch-snack/', {engine});
+  try {
+    await page.locator('#fit summary').click();
+    const ball = page.getByLabel('Massage ball', {exact: true});
+    const back = page.getByLabel('Chair with a firm back', {exact: true});
+    await ball.check();
+    await back.check();
+    await page.locator('#save-profile').click();
+    await page.locator('#load-profile').click();
+    assert.ok(await back.isChecked());
+    await page.locator('#location').selectOption('train-seat');
+    await page.locator('#load-profile').click();
+    assert.ok(await ball.isChecked());
+    assert.equal(await back.isChecked(), false);
+    await page.reload();
+    assert.ok(await ball.isChecked());
+    assert.equal(await back.isChecked(), false);
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
