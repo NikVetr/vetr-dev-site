@@ -7,6 +7,7 @@ const keyLight = [-0.53, 0.64, 0.56];
 /** @typedef {string | number[]} Color */
 /** @typedef {{
  * surface(rings: number[][][], color: Color, ringColors?: Color[]): void,
+ * indexed(points: number[][], faces: Uint16Array, color: Color): void,
  * triangles(points: number[][], indices: number[][], color: Color): void
  * }} SurfaceMesh */
 
@@ -137,6 +138,14 @@ function meshBuilder(layer, project) {
         previous = start;
         wasPole = pole;
       }
+    },
+    // Fixed model topology was validated when the mesh was packed. Add its
+    // flat triangle list without allocating thousands of short arrays per frame.
+    indexed(points, faces, color) {
+      const start = layer.vertices, ink = colorCode(color);
+      for (const point of points) layer.vertex(project(point), ink);
+      for (let i = 0; i < faces.length; i += 3)
+        layer.triangle(start + faces[i], start + faces[i + 1], start + faces[i + 2]);
     },
     triangles(points, indices, color) {
       const start = layer.vertices;

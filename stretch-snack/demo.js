@@ -1,7 +1,8 @@
 // The camera is fixed throughout a repetition, including a change of working side.
 // All three views use the same posed mesh and depth-tested studio renderer.
 import { movementPose } from './pose.js';
-import { drawTrainer, drawEquipment, drawHandDetail } from './trainer.js';
+import { drawTrainer, drawHandDetail } from './trainer.js';
+import { drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
 
 /** @type {Record<string,string>} */
@@ -63,11 +64,11 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     sinYaw = Math.sin(yaw),
     cosPitch = Math.cos(pitch),
     sinPitch = Math.sin(pitch);
-  const stepHeight = move.motion === 'step-up' ? 0.16 : 0;
-  const stageHeight = floor ? 0.94 : seated ? (reach ? 1.72 : 1.49) : 1.88 + stepHeight;
+  const standingLift = move.motion === 'step-up' ? 0.16 : move.motion === 'heel-lift' ? 0.08 : 0;
+  const stageHeight = floor ? 0.94 : seated ? (reach ? 1.81 : 1.49) : 1.88 + standingLift;
   const stageWidth = floor ? 2.36 : handDetail ? 1.85 : options.preview ? 0.96 : 1.34;
   const scale = Math.min(height / stageHeight, width / stageWidth);
-  const centerY = floor ? 0.22 : seated ? (reach ? 0.79 : 0.675) : 0.86 + stepHeight / 2;
+  const centerY = floor ? 0.22 : seated ? (reach ? 0.82 : 0.675) : 0.86 + standingLift / 2;
   const centerZ = floor ? 0.012 : seated ? 0.2 : 0.06;
   const originX = width * (handDetail ? 0.37 : 0.5) - sinYaw * centerZ * scale;
   const originY = height * 0.5 + (centerY * cosPitch - centerZ * cosYaw * sinPitch) * scale;
@@ -146,9 +147,10 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark) {
       return [cx + (u - x) * detailScale, cy + (v - y) * detailScale, z];
     };
     drawSurface(ctx, width, height, zoom, (mesh) => {
-      drawHandDetail(mesh, arm, move.motion);
+      drawHandDetail(mesh, pose.side);
+      if (move.motion === 'towel-grip') drawTowel(mesh, arm.palm);
       if (move.motion === 'wrist-stretch')
-        drawHandDetail(mesh, pose.arms[pose.side === 1 ? 0 : 1], move.motion);
+        drawHandDetail(mesh, -pose.side);
     });
     ctx.restore();
   } else if (move.motion === 'pelvic-tilt') {

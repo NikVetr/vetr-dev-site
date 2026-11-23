@@ -1,6 +1,6 @@
 // Cache one complete, versioned shell. An updated worker waits until tabs using
 // the previous version close, keeping UI and catalog versions together.
-const version = 'stretch-snack-5';
+const version = 'stretch-snack-6';
 const shell = [
   './index.html',
   './style.css',
@@ -13,6 +13,9 @@ const shell = [
   './pose.js',
   './surface.js',
   './trainer.js',
+  './equipment.js',
+  './form-motion/model.js',
+  './form-motion/retarget.js',
   './core/catalog.js',
   './core/plan.js',
   './audio/cues.js',
@@ -23,6 +26,7 @@ const shell = [
   './icon-512.png',
   '../shared/request.js',
   '../shared/theme.js',
+  '../shared/tool-nav.css',
 ].map((path) => new URL(path, self.location.href).href);
 const files = new Set(shell);
 /** @type {ServiceWorkerGlobalScope} */

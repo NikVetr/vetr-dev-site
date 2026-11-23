@@ -96,7 +96,13 @@ export function movementPose(move, seconds) {
   /** @param {string} name */
   const motionAmount = (name) => (motion === name ? a : 0);
   const squat = motionAmount('knee-bend');
-  const calf = motionAmount('calf-stretch');
+  // Form / Motion gives held stretches distinct entry, hold and release phases.
+  const phase = seconds / 4 - cycle;
+  const ramp = Math.min(1, Math.min(phase, 1 - phase) / 0.31);
+  const heldStretch = ramp ** 3 * (ramp * (6 * ramp - 15) + 10);
+  const calf = motion === 'calf-stretch' ? heldStretch : 0;
+  const backStep = eased(calf / 0.52);
+  const calfLoad = eased((calf - 0.26) / 0.74);
   // Pivot the entire foot about the ball for heel raises. The toe remains planted.
   const footLength = Math.hypot(0.136, 0.054);
   const footAngle = Math.atan2(0.054, 0.136) + 0.47 * motionAmount('heel-lift') - 0.5 * motionAmount('toe-lift');
@@ -107,8 +113,8 @@ export function movementPose(move, seconds) {
   const stepHeight = 0.14;
   const pelvis = [
     0,
-    (seated ? 0.51 : 0.91 + rise) - 0.095 * squat - 0.058 * calf + eased((stepTravel - 0.45) / 0.55) * stepHeight,
-    -0.09 * squat + 0.04 * calf + stepTravel * 0.24,
+    (seated ? 0.51 : 0.91 + rise) - 0.095 * squat - (0.025 * backStep + 0.033 * calfLoad) + eased((stepTravel - 0.45) / 0.55) * stepHeight,
+    -0.09 * squat + 0.04 * calfLoad + stepTravel * 0.24,
   ];
   const yaw = side * 0.43 * motionAmount('trunk-turn');
   const bend = side * 0.19 * motionAmount('side-bend');
@@ -117,15 +123,21 @@ export function movementPose(move, seconds) {
   const rollAngle = 2 * Math.PI * eased(seconds / 4 - cycle);
   const shrug = motion === 'shoulder-roll' ? (1 - Math.cos(rollAngle)) / 2 : 0;
   const squeeze = motionAmount('shoulder-squeeze');
-  const headYaw = yaw + side * 0.66 * motionAmount('neck-turn');
-  const headTilt = bend + side * 0.26 * motionAmount('neck-tilt');
+  // Form / Motion's neck release: ease into the tilt, hold through the
+  // middle 38% of the cycle, then return before changing sides.
+  const tilt = motion === 'neck-tilt' ? heldStretch : 0;
+  const headYaw = yaw + side * (0.66 * motionAmount('neck-turn') - 0.025 * tilt);
+  const headTilt = bend - side * (0.15 + 0.19 * 0.85) * tilt;
+  const pitch = 0.02 * tilt;
   const neck = trunk([0, 0.535, 0]);
   /** @param {number[]} offset */
-  const head = (offset) => add(neck, turn(lean(offset, headTilt), headYaw));
+  const head = ([x, y, z]) => add(neck, turn(lean([
+    x, y * Math.cos(pitch) - z * Math.sin(pitch), y * Math.sin(pitch) + z * Math.cos(pitch),
+  ], headTilt), headYaw));
   const arms = [-1, 1].map((s) => {
     const shoulder = trunk([
       s * (0.182 - 0.014 * squeeze),
-      0.47 + 0.032 * shrug,
+      0.47 + 0.032 * shrug - (s === side ? 0.006 : 0.014) * tilt,
       -0.033 * squeeze - (motion === 'shoulder-roll' ? 0.026 * side * Math.sin(rollAngle) : 0),
     ]);
     const handWork = ['palm-turn', 'wrist-bend', 'hand-open', 'towel-grip', 'band-open', 'wrist-stretch'].includes(
@@ -225,11 +237,11 @@ export function movementPose(move, seconds) {
       }
     } else {
       const abduction = working ? motionAmount('hip-side') : 0;
-      const stride = working ? eased(calf / 0.64) : 0;
+      const stride = working ? backStep : 0;
       const step = motion === 'step-up' ? eased(working ? stepTravel / 0.45 : (stepTravel - 0.45) / 0.55) : 0;
       ankle = [
         s * (0.128 + 0.235 * abduction),
-        0.084 + 0.046 * abduction + rise + 0.045 * Math.sin(Math.PI * stride)
+        0.084 + 0.046 * abduction + rise + 0.042 * Math.sin(Math.PI * stride)
           + stepHeight * step + 0.11 * Math.sin(Math.PI * step),
         -0.22 * stride + step * 0.32 + (rise ? 0.136 - footReach : 0),
       ];
