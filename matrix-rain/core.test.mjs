@@ -26,9 +26,9 @@ test('invalid time, controls and unknown fields produce request errors', () => {
     assert.throws(() => submit(v), { code: 'invalid_request' });
 });
 
-test('the original portrait envelope precedes both logistic title moves', () => {
+test('the opening portrait precedes both logistic title moves', () => {
   const scene = makeScene();
-  for (const [time, alpha] of [[0,0],[.25,0],[.875,.5],[1.5,1],[1.75,1],[3.25,.5],[4.75,0],[14.75,0]]) {
+  for (const [time, alpha] of [[0,0],[.25,0],[.875,.5],[1.5,1],[1.75,1],[4.75,0],[14.75,0]]) {
     const shot = frame(scene, time);
     assert.equal(shot.imageAlpha, alpha);
     if (time > 0 && time < 5) assert.ok(Math.abs(shot.maskPitch / shot.imageZoom - 1.25/.78) < 1e-10);
@@ -43,27 +43,77 @@ test('the original portrait envelope precedes both logistic title moves', () => 
   }
   assert.equal(frame(scene, 15.5).blackout, 1);
 });
+test('rain clears the maximum portrait footprint, including during the fade', () => {
+  for (const seed of [0, 1, 777, 0xffffffff]) {
+    const scene = makeScene({ seed, title: 'The Extracellular Matrix', hiddenWords: ['MONTGOMERY'] });
+    for (const aspect of [.625, 16/9, 4.15, 32]) {
+      let firstContact = false, seenPortrait = false;
+      for (let tick = 0; tick <= 60 * 5; tick++) {
+        const shot = frame(scene, tick / 60, aspect);
+        const imageTop = shot.viewHeight * (1 - shot.imageZoom);
+        if (shot.glyphs.some(g => g.y + shot.size >= imageTop)) firstContact = true;
+        if (shot.imageAlpha > 0 || shot.outlineAlpha > 0) {
+          seenPortrait = true;
+          assert.equal(firstContact, false, 'rain reached a visible portrait');
+        }
+      }
+      assert.ok(firstContact && seenPortrait);
+    }
+  }
+});
+
+test('streams advance a whole row at a time and relight the characters in place', () => {
+  const scene = makeScene({ mode: 'rain', title: '' });
+  const stream = scene.streams[0];
+  const column = phase => frame(scene, (stream.offset + phase) / stream.speed).glyphs.filter(g => g.column === 0);
+  const first = column(4.1);
+  assert.deepEqual(column(4.9), first);
+  const next = column(5.1);
+  assert.equal(next[0].y - first[0].y, 18);
+  assert.deepEqual(next.slice(1).map(g => [g.y, g.char]), first.map(g => [g.y, g.char]));
+  assert.deepEqual(column(4.1 + 30 + stream.length), first);
+  const streamsAt = t => new Set(frame(scene, t).glyphs.map(g => g.column)).size;
+  assert.ok(streamsAt(1) > 0 && streamsAt(1) < 20);
+  assert.ok(streamsAt(3) > streamsAt(1));
+});
 test('each hidden phrase is readable top to bottom during an early drop in both modes', () => {
   for (const mode of ['opening', 'rain']) {
     const s = makeScene({ mode, alphabet: '0', title: 'ODD', hiddenWords: ['Ada Lovelace', 'PAGÉ'] });
     const planted = s.streams.flatMap((stream, i) => (stream.word.length ? [{ stream, i }] : []));
     assert.equal(planted.length, 4);
-    for (const { stream, i } of planted) {
-      const t = stream.start + (stream.word.length + 2.1) / stream.speed;
-      const f = frame(s, t);
-      const column = f.glyphs
-        .filter((g) => g.column === i)
-        .sort((a, b) => a.y - b.y);
-      assert.ok(
-        column
-          .map((g) => g.char)
-          .join('')
-          .includes(stream.word.join('')),
-      );
+    const read = new Set();
+    for (let t = 0; t < 8 && read.size < planted.length; t += 1/30) {
+      const { glyphs } = frame(s, t);
+      for (const { stream, i } of planted) {
+        const text = glyphs.filter(g => g.column === i).reverse().map(g => g.char).join('');
+        if (text.includes(stream.word.join(''))) read.add(i);
+      }
     }
+    assert.equal(read.size, planted.length);
   }
   for (const hiddenWords of ['NAME', [''], ['a'.repeat(31)], Array(85).fill('a')])
     assert.throws(() => submit({ hiddenWords }), { code: 'invalid_request' });
+});
+
+test('the opening fits a full board of maximum-length names before the zoom crops them', () => {
+  const hiddenWords = Array.from({ length: 84 }, (_, i) => 'x'.repeat(27) + String(i).padStart(3, '0'));
+  const scene = makeScene({ hiddenWords, seed: 0 });
+  for (const aspect of [16/9, 4.15, .625]) {
+    const seen = new Set();
+    for (let tick = 0; tick < 6 * 30 && seen.size < hiddenWords.length; tick++) {
+      const shot = frame(scene, tick / 30, aspect);
+      const visible = new Map();
+      const halfWidth = .45 * 960 / scene.streams.length * shot.zoom;
+      for (const g of shot.glyphs) {
+        if (g.x < halfWidth || g.x > 960 - halfWidth || g.y < shot.rainSize/2 || g.y > shot.viewHeight - shot.rainSize/2) continue;
+        visible.set(g.column, g.char + (visible.get(g.column) ?? ''));
+      }
+      for (const [i, text] of visible) {
+        if (text.includes(scene.streams[i].word.join(''))) seen.add(i);
+      }
+    }
+    assert.equal(seen.size, hiddenWords.length);
+  }
 });
 
 test('rain becomes the title at impact, clears before blinking, and the last letters stay under the camera', () => {
@@ -72,8 +122,9 @@ test('rain becomes the title at impact, clears before blinking, and the last let
     const midY = 480 / aspect;
     const titles = scene.streams.map((s, i) => ({ ...s, i })).filter(s => s.letter.trim());
     for (const { i, lock, letter } of titles) {
-      const before = frame(scene, lock - .001, aspect).glyphs.filter(g => g.column === i);
-      assert.ok(before.some(g => g.kind === 'rain' && g.y < midY && g.y > midY - 2));
+      const before = frame(scene, lock - .001, aspect);
+      const rowPitch = midY / Math.max(1, Math.round(midY / 18)) * before.zoom;
+      assert.ok(before.glyphs.some(g => g.column === i && g.kind === 'rain' && Math.abs(g.y - (midY - rowPitch)) < 1e-8));
       const at = frame(scene, lock, aspect).glyphs.filter(g => g.column === i);
       assert.ok(at.some(g => g.kind === 'title' && g.char === letter && g.y === midY));
       assert.ok(at.every(g => g.kind !== 'rain' || g.y < midY));

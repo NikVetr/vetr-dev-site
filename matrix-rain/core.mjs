@@ -30,7 +30,8 @@ const columns = 84,
   dy = 540 / rows;
 const finalZoom = 12;
 const outlineScale = 0.78;
-
+const rainLeadIn = 1.75;
+const latestPortraitEnd = 4.75;
 
 export function makeScene({
   title = 'The Correlation Matrix',
@@ -88,21 +89,21 @@ export function makeScene({
   const survivors = lastLetters(letters);
   const streams = Array.from({ length: columns }, (_, i) => {
     const word = planted.get(i) ?? [];
+    const letter = letters[i - first] || '';
+    const tailChoices = mode === 'opening' && letter ? 3 : 6;
     const lock = 8 + 3 * rand(),
       blink = 13 + 2 * rand(),
-      length = Math.max(9 + Math.floor(rand() * 16), word.length + 5);
-    const start = 0.1 + rand() * 0.9,
-      period = rows + length + 4;
-    const letter = letters[i - first] || '';
-    const speed = mode === 'opening' && letter ? (period + rows / 2) / (lock - start) : 7.5 + 7.5 * rand();
+      length = Math.max(3 * (3 + Math.floor(rand() * tailChoices)), word.length + 5);
     return {
       word,
+      wordPosition: placement(),
       lock,
       fade: blink,
       length,
-      start,
-      speed,
-      period,
+      // The original adds floor(runif(.1, 1) * 60) to the *row*, not the time.
+      // Bring planted columns into the first wave while the whole board is visible.
+      offset: Math.floor(6 + (word.length ? 15 : 54) * rand()),
+      speed: rows * (.25 + .25 * rand()),
       letter,
       bright: rand() < 0.5,
       sequence: Array.from({ length: 149 }, () => glyphs[Math.floor(rand() * glyphs.length)]),
@@ -118,6 +119,7 @@ export function makeScene({
     mode,
     crt,
     streams,
+    minimumRows: hiddenWords.length ? 2 + Math.max(...streams.map(s => s.word.length)) : 0,
     targetColumn: survivors.length ? first + .5 + (survivors[0] + survivors.at(-1)) / 2 : columns / 2,
     centerColumn: letters.length ? first + letters.length / 2 : columns / 2,
     letters: letters.filter((c) => c.trim()),
@@ -129,11 +131,18 @@ export function frame(scene, time, aspect = 16 / 9) {
     throw invalidRequest('time', 'Frame time must be between 0 and 16 seconds.');
   if (!Number.isFinite(aspect) || aspect <= 0) throw invalidRequest('aspect', 'Aspect ratio must be positive.');
   const viewHeight = 960 / aspect, midY = viewHeight / 2;
-  const middleRow = Math.max(1, Math.round(midY / dy));
+  const middleRow = Math.max(1, Math.round(midY / dy), Math.ceil(scene.minimumRows / 2));
   const rowCount = middleRow * 2, rowStep = midY / middleRow;
+  // Leave room for the glyph and the early camera move at either end.
+  const wordMargin = 1 + Math.floor(.005 * rowCount);
   const opening = scene.mode === 'opening';
   const titleZoom = Math.min(3, (columns - 4) / Math.max(1, [...scene.title].length));
-  const portrait = opening ? clamp((time - .25) / 1.25) * (1 - clamp((time - 1.75) / 3)) : 0;
+  // Bound the highest possible pixel of any fitted upload, even a full opaque
+  // rectangle. Before 4.75 s the camera is below 1.004× for every title.
+  // Include a whole glyph and its glow above the edge of the portrait.
+  const portraitTop = viewHeight * (1 - outlineScale * 1.004);
+  const contactRow = Math.max(0, Math.ceil((portraitTop - 2 * dy) / rowStep));
+  let portraitEnd = latestPortraitEnd;
   const approach = opening ? logistic(2 * (time - 8)) : 0;
   const intoTitle = opening ? logistic(4 * (time - 14.75)) : 0;
   const zoom = 1 + (titleZoom - 1) * approach + (finalZoom - titleZoom) * intoTitle;
@@ -141,32 +150,40 @@ export function frame(scene, time, aspect = 16 / 9) {
     (scene.targetColumn - scene.centerColumn) * intoTitle;
   const glyphs = [];
   for (const [i, s] of scene.streams.entries()) {
+    const period = rowCount + s.length;
+    const speed = opening && s.letter ? (s.offset + period + middleRow) / (s.lock - rainLeadIn) : s.speed;
+    const wordTop = wordMargin + Math.floor(s.wordPosition * (rowCount - 2 * wordMargin - s.word.length + 1));
+    // Give every planted phrase a full pass before the camera crops the outer
+    // columns. The second wave keeps its original clock for the title impacts.
+    const readBy = i === 0 || i === columns - 1 ? 4.1 : 5.25;
+    const firstSpeed = opening && s.word.length
+      ? Math.max(speed, (s.offset + wordTop + s.word.length) / (readBy - rainLeadIn))
+      : speed;
+    if (opening) portraitEnd = Math.min(portraitEnd, rainLeadIn + (s.offset + contactRow) / firstSpeed - 1 / 60);
     const x = 480 + (i + 0.5 - center) * dx * zoom;
     if (x < -dx * zoom || x > 960 + dx * zoom) continue;
-    const period = rowCount + s.length + 4;
-    const speed = opening && s.letter ? (period + middleRow) / (s.lock - s.start) : s.speed;
-    const phase = (time - s.start) * speed;
+    const elapsed = time - (opening ? rainLeadIn : 0);
+    let phase = Math.floor(elapsed * speed - s.offset);
+    if (phase < period && firstSpeed > speed) phase = Math.min(period - 1, Math.floor(elapsed * firstSpeed - s.offset));
     if (phase < 0 || (opening && !s.letter && phase >= 2 * period)) continue;
     const locked = opening && s.letter && time >= s.lock;
     // A title stream makes one pass, then its next head lands on the title.
     // Subsequent tail glyphs are absorbed at that cell, never restarting below it.
-    const head = locked ? middleRow + (time - s.lock) * speed : phase % period;
+    const head = locked ? middleRow + Math.floor((time - s.lock) * speed) : phase % period;
     const fade = locked ? 1 - clamp((time - s.fade) / .25) : 0;
     const rain = opening ? (1 - ease(time, 11, 12.25)) * (locked ? 1 - ease(time, s.lock, s.lock + .65) : 1) : 1;
     for (let tail = 0; rain > 0 && tail < s.length; tail++) {
       const row = head - tail;
-      if (row < 0 || row >= rowCount || (locked && row >= middleRow - .001)) continue;
+      if (row < 0 || row >= rowCount || (locked && row >= middleRow)) continue;
       const y = midY + (row - middleRow) * rowStep * zoom;
       if (y < -dy * zoom || y > viewHeight + dy * zoom) continue;
-      const index = (Math.floor(phase) - tail + Math.floor(time * 3 + i * 0.37)) % s.sequence.length;
       const glitch =
-        Math.imul((i + 1) * 101 + (Math.floor(row) + 1) * 787 + Math.floor(time * 4) * 1543, 2654435761) >>> 0;
-      const wordIndex = s.word.length - tail; // read downwards, one glyph behind the head
+        Math.imul((i + 1) * 101 + (row + 1) * 787 + Math.floor(time * 4) * 1543, 2654435761) >>> 0;
       const char =
-        s.word[wordIndex] ??
+        s.word[row - wordTop] ??
         (scene.letters.length && glitch % 100 < 2
           ? scene.letters[glitch % scene.letters.length]
-          : s.sequence[index]);
+          : s.sequence[row % s.sequence.length]);
       glyphs.push({
         x,
         y,
@@ -178,6 +195,8 @@ export function frame(scene, time, aspect = 16 / 9) {
     }
     if (locked && fade > 0) glyphs.push({ x, y: midY, char: s.letter, alpha: fade, hot: true, kind: 'title', column: i });
   }
+  const fadeStart = Math.min(rainLeadIn, portraitEnd - .25);
+  const portrait = opening ? clamp((time - .25) / 1.25) * (1 - clamp((time - fadeStart) / (portraitEnd - fadeStart))) : 0;
   return {
     time,
     viewHeight,
@@ -185,6 +204,7 @@ export function frame(scene, time, aspect = 16 / 9) {
     glyphs,
     crt: scene.crt,
     size: dy * zoom,
+    rainSize: Math.min(dy, rowStep) * .84 * zoom,
     outlineAlpha: .62 * portrait * (1 - clamp((time - .25) / 1.25)),
     imageAlpha: portrait,
     cameraProgress: 0,
@@ -248,15 +268,21 @@ export function prepareReflection(image) {
   return reflection;
 }
 function drawGlyphs(ctx, f) {
-  ctx.font = '600 ' + f.size + 'px monospace';
+  const rainFont = '500 ' + (f.rainSize ?? f.size) + 'px Futura, "Century Gothic", sans-serif';
+  const titleFont = '600 ' + f.size + 'px monospace';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
+  ctx.font = rainFont;
   for (const g of f.glyphs) {
     ctx.globalAlpha = g.alpha;
     ctx.fillStyle = g.hot ? '#d5fce7' : '#00ff41';
     ctx.shadowColor = '#43ff83';
     ctx.shadowBlur = g.hot ? 3 * f.crt : 0;
-    ctx.fillText(g.char, g.x, g.y);
+    if (g.kind === 'title') {
+      ctx.font = titleFont;
+      ctx.fillText(g.char, g.x, g.y);
+      ctx.font = rainFont;
+    } else ctx.fillText(g.char, g.x, g.y, .9 * dx * f.zoom);
   }
   ctx.shadowBlur = 0;
   ctx.globalAlpha = 1;
@@ -355,11 +381,13 @@ export function paint(ctx, f, image, focalPoint = { x: 0.557, y: 0.3 }) {
     ctx.translate(glassX, glassY);
     ctx.scale(f.maskPitch / 1.25, f.maskPitch / 1.25);
     ctx.translate(-480, -midY);
-    const tick = Math.floor(f.time * 5);
+    const tick = Math.floor(f.time * 2);
+    const bandAlpha = phase => .0625 * f.crt * (1 + Math.sin(phase));
+    ctx.fillStyle = '#001006';
     for (let i = 0; i < 24; i++) {
-      ctx.globalAlpha = f.crt * (0.02 + 0.025 * (1 + Math.sin(i * 13.4 + tick * 1.7)));
-      ctx.fillStyle = '#001006';
+      ctx.globalAlpha = bandAlpha(i * 13.4 + tick * 1.7);
       ctx.fillRect(i * 40, 0, 40, stageHeight);
+      ctx.globalAlpha = bandAlpha(i * 9.7 + tick * 4.1);
       ctx.fillRect(0, i * stageHeight / 24, 960, stageHeight / 24);
     }
     ctx.restore();

@@ -367,13 +367,12 @@ test('Matrix card renders the shared title impacts, last letters and reflection 
         const next = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         clock.pause(); await clock.ready;
         const samples = [];
-        const period = Number(el.querySelector('svg').dataset.period) * 1000;
         for (const t of [4, 4.032, 8.65, 11.1, 12.42, 13.6, duration - .01]) {
-          clock.currentTime = t / duration * period;
+          clock.currentTime = t * 1000;
           await next();
           const ref = document.createElement('canvas');
           ref.width = preview.width; ref.height = preview.height;
-          paint(ref.getContext('2d'), frame(scene, Number(clock.currentTime) / period * duration, ref.width / ref.height), image);
+          paint(ref.getContext('2d'), frame(scene, t, ref.width / ref.height), image);
           const actual = preview.toDataURL();
           samples.push({ matches: actual === ref.toDataURL(), size: actual.length });
         }
