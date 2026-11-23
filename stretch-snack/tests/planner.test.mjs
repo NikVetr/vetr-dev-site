@@ -40,7 +40,7 @@ test('favorites never defeat an exclusion, discomfort, unavailable equipment, or
   const fallback = submit({...req, feedback});
   assert.deepEqual(fallback.steps, [{id: 'seated-ankle-circle', seconds: 30, location: quiet.location}]);
   assert.deepEqual(fallback.unmetFavorites, req.favoriteIds);
-  const result = submit({...req, feedback, avoidIds: [...req.avoidIds, 'seated-ankle-circle']});
+  const result = submit({...req, feedback, avoidIds: [...req.avoidIds, ...fallback.eligibleIds.filter(id => byId.get(id).targets.includes('calves'))]});
   assert.deepEqual(result.steps, []);
   assert.deepEqual(result.unmetTargets, ['calves']);
   assert.deepEqual(result.unmetFavorites, req.favoriteIds);
@@ -67,7 +67,7 @@ test('a trip adds a requested target only when easier places cannot provide it',
   const local = submit(req);
   assert.deepEqual(local.places, [{location: 'plane-seat', rank: 0, visitSeconds: 0}, {location: 'plane-lavatory', rank: 2, visitSeconds: 60}]);
   assert.ok(local.steps.every(step => step.location === 'plane-seat'));
-  const away = {...req, avoidIds: ['seated-back-round', 'seated-pelvic-tilt']};
+  const away = {...req, avoidIds: moves.filter(m => m.targets.includes('lower-back') && m.id !== 'standing-side-bend').map(m => m.id)};
   const result = submit(away);
   assert.deepEqual(result.steps, [{id: 'standing-side-bend', location: 'plane-lavatory', seconds: 105}]);
   assert.deepEqual(result.transitionSeconds, [60]);
@@ -124,7 +124,7 @@ test('a mixed request can visit the nearest feasible site when the current site 
 test('long transfers between remote places leave replayable steps even with ample time', () => {
   const req = {location:'stall', availableLocations:['train-seat','open-area'], allowFloor:true, discretion:'any',
     targets:['lower-back'], favoriteIds:['seated-heel-lift','supine-pelvic-tilt'], seconds:900,
-    avoidIds:['standing-side-bend','standing-back-arch','seated-back-round','seated-pelvic-tilt']};
+    avoidIds:moves.filter(m => m.targets.includes('lower-back') && m.id !== 'supine-pelvic-tilt').map(m => m.id)};
   const result = submit(req);
   assert.deepEqual(result.segments.map(segment => segment.location), ['train-seat','open-area']);
   assert.deepEqual(result.transitionSeconds, [30,135]);

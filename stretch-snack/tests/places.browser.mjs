@@ -45,7 +45,8 @@ for (const [width, height] of [[390, 844], [1440, 960]]) {
       if (width < 700) {
         await page.locator('#steps [data-move="standing-toe-lift"] .edit-step').click();
         assert.equal(await page.locator('#edit-place').inputValue(), 'plane-lavatory');
-        assert.equal(await page.locator('#edit-seconds').inputValue(), '45', 'movement time excludes the visit');
+        const i = expected.steps.findIndex(s => s.id === 'standing-toe-lift');
+        assert.equal(Number(await page.locator('#edit-seconds').inputValue()), expected.steps[i].seconds - expected.transitionSeconds[i], 'movement time excludes the visit');
         await page.locator('#edit-easier button').click();
         assert.equal(await page.locator('#edit-move').inputValue(), 'seated-toe-lift');
         assert.equal(await page.locator('#edit-place').inputValue(), 'plane-seat');
@@ -58,8 +59,10 @@ for (const [width, height] of [[390, 844], [1440, 960]]) {
         assert.ok(await page.locator('#library').isHidden());
       }
       assert.equal(await segments.count(), 1);
-      assert.match(await page.locator('#routine-summary').innerText(), /^3:00/);
-      assert.equal(await page.locator('#steps .step[data-move="seated-toe-lift"]').count(), 2);
+      const activeSeconds = expected.totalSeconds - expected.transitionSeconds.reduce((a,b) => a+b, 0);
+      const clock = Math.floor(activeSeconds/60) + ':' + String(activeSeconds%60).padStart(2,'0');
+      assert.ok((await page.locator('#routine-summary').innerText()).startsWith(clock + ' ·'));
+      assert.equal(await page.locator('#steps .step[data-move="seated-toe-lift"]').count(), 1 + expected.steps.filter(s => s.id === 'seated-toe-lift').length);
       assert.equal(await page.locator('#steps .step.selected').count(), 1);
       await away.uncheck();
       await away.check();

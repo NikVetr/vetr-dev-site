@@ -83,3 +83,15 @@ test('leg extensions need clearance; contractions and the hamstring hinge respec
     checkFit(id, {...middleSeat, limitations: ['no-arm-movement']}, false);
   }
 });
+
+test('a seated starting position, a nearby support and a towel each affect eligibility', () => {
+  const chair = {location:'roomy-seat', discretion:'any'};
+  checkFit('seated-sit-to-stand', chair, true);
+  for (const limitation of ['stay-seated', 'poor-balance', 'back-support'])
+    checkFit('seated-sit-to-stand', {...chair, limitations:[limitation]}, false);
+  const floor = {location:'open-area', allowFloor:true, discretion:'any'};
+  checkFit('supine-head-nod', floor, false);
+  checkFit('supine-head-nod', {...floor, equipment:['towel']}, true);
+  checkFit('standing-heel-walk', floor, false);
+  checkFit('standing-heel-walk', {...floor, equipment:['support']}, true);
+});

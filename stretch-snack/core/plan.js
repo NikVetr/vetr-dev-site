@@ -121,7 +121,7 @@ function normalize(request) {
 /** @type {Record<string, string>} */
 const conflicts = {
   'back-support': 'unsupported-back', 'no-twisting': 'twist', 'limited-grip': 'grip',
-  'no-leg-movement': 'legs', 'no-arm-movement': 'arms', 'poor-balance': 'balance',
+  'stay-seated': 'stand-up', 'no-leg-movement': 'legs', 'no-arm-movement': 'arms', 'poor-balance': 'balance',
 };
 
 /** @param {Movement} move @param {Preferences} prefs @param {string} location */
@@ -200,7 +200,7 @@ export function easierVariant(plan, id, location) {
   for (const place of plan.places) {
     if (place.rank >= rank) break;
     if (plan.eligibleLocations[id]?.includes(place.location)) return {id, location: place.location};
-    const variant = moves.find(move => move.motion === byId[id].motion && plan.eligibleLocations[move.id]?.includes(place.location));
+    const variant = moves.find(move => move.motion === byId[id].motion && move.targets.some(target => byId[id].targets.includes(target)) && plan.eligibleLocations[move.id]?.includes(place.location));
     if (variant) return {id: variant.id, location: place.location};
   }
   return null;

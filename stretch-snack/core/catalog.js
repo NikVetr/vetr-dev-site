@@ -1,3 +1,8 @@
+import {handNeckLibrary} from './library/hand-neck.js';
+import {upperLibrary} from './library/upper.js';
+import {lowerLibrary} from './library/lower.js';
+import {librarySources} from './library/sources.js';
+
 // The movement descriptions and estimated space requirements are original travel adaptations.
 // Each source identifies a published demonstration. None evaluated this app's routine or dose.
 export const locations = {
@@ -35,6 +40,7 @@ export const limitations = {
 };
 
 export const sources = {
+  ...librarySources,
   sitting: { title: 'NHS · Sitting exercises', url: 'https://www.nhs.uk/live-well/exercise/sitting-exercises/' },
   work: { title: 'Newcastle Hospitals · One-minute body check', url: 'https://www.newcastle-hospitals.nhs.uk/services/newcastle-occupational-health-service/information-for-staff/physiotherapy/self-help-leaflets/1-minute-body-check/' },
   flex: { title: 'NHS · Flexibility exercises', url: 'https://www.nhs.uk/live-well/exercise/flexibility-exercises/' },
@@ -73,13 +79,15 @@ const adapted = 'Adapted from a clinical exercise demonstration. Its effect on e
  * @param {string} motion @param {string} name @param {string[]} targets
  * @param {string} cue @param {string} caution @param {string} source
  * @param {{poses?: string[], uses?: string[], equipment?: string[], side?: number, forward?: number,
- * discretion?: string, evidence?: string, id?: string, stationary?: boolean, overhead?: boolean}} [options]
+ * discretion?: string, evidence?: string, id?: string, stationary?: boolean, overhead?: boolean,
+ * family?:string, region?:string, evidenceSource?:string}} [options]
  */
 function movement(motion, name, targets, cue, caution, source, options = {}) {
   const poses = options.poses ?? ['seated'];
   return poses.map(pose => ({
     id: pose + '-' + (options.id ?? motion), motion, pose, name, targets, cue, caution,
-    equipment: options.equipment ?? [], uses: options.uses ?? [], sourceIds: [source],
+    equipment: options.equipment ?? [], uses: options.uses ?? [], sourceIds: options.evidenceSource ? [source, options.evidenceSource] : [source],
+    animation: options.family ? (options.id ?? motion) : undefined, family: options.family, region: options.region,
     evidence: options.evidence ?? guidance, side: options.side ?? 0, forward: options.forward ?? 0,
     discretion: options.discretion ?? 'quiet', stationary: options.stationary ?? false, overhead: options.overhead ?? false,
   }));
@@ -228,4 +236,5 @@ export const moves = [
   ...movement('knee-roll', 'Reclined knee rolls', ['lower-back', 'hips'],
     'Lie on your back with both knees bent. Let the knees travel a little to one side together. Return through center and change sides.',
     'Let your shoulders remain supported and stop before they lift.', 'back', {poses: floor, uses: ['legs', 'twist'], side: 30, discretion: 'any', evidence: adapted}),
+  ...handNeckLibrary(movement), ...upperLibrary(movement), ...lowerLibrary(movement),
 ];
