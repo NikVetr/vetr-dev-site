@@ -6,3 +6,7 @@
 .tool-help summary { cursor: pointer; font-weight: 650; }
 .tool-help p { margin: .8rem 0 0; }
 @media print { .tool-help { display: none; } }
+
+.directory-back { display: inline-grid; flex: none; place-items: center; width: 2rem; min-height: 2rem; margin-inline-start: -.35rem; border-radius: .4rem; color: inherit; }
+.directory-back:hover, .directory-back:focus-visible { background: color-mix(in srgb, currentColor 9%, transparent); }
+@media (pointer: coarse) { .directory-back { min-width: 2.75rem; min-height: 2.75rem; } }

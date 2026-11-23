@@ -72,3 +72,25 @@ test('b64 Enter on help preserves native keyboard behavior when decoded links ar
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });
+
+test('travel tools keep the directory link, title and theme on one line on a small phone', async () => {
+  const app = await openPage('stretch-snack/', {width: 320, height: 720, touch: true});
+  try {
+    const directory = new URL('/', app.page.url()).href;
+    for (const path of ['stretch-snack/', 'travel-prompt/']) {
+      await app.page.goto(new URL(path, directory).href);
+      const back = app.page.getByRole('link', {name: 'Back to vetr.dev'});
+      const fits = await app.page.locator('header').evaluate(el => {
+        const h1 = el.querySelector('h1'), title = h1.getBoundingClientRect();
+        const link = el.querySelector('.directory-back').getBoundingClientRect();
+        const theme = el.querySelector('#theme-toggle').getBoundingClientRect();
+        return title.height < 1.6 * parseFloat(getComputedStyle(h1).lineHeight)
+          && link.right <= title.left && title.right <= theme.left && theme.right <= innerWidth;
+      });
+      assert.ok(fits, path);
+      await back.focus();
+      await app.page.keyboard.press('Enter');
+      await app.page.waitForURL(directory);
+    }
+  } finally {await app.close();}
+});
