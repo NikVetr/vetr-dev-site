@@ -1,7 +1,6 @@
 // Orthographic, double-sided Gouraud shading with a per-sample depth buffer.
 // Geometry is projected in CSS pixels. The transparent layer is restricted to the visible mesh.
 const layers = new WeakMap();
-const littleEndian = new Uint8Array(new Uint32Array([1]).buffer)[0] === 1;
 const keyLight = [-0.53, 0.64, 0.56];
 
 /** @typedef {string | number[]} Color */
@@ -39,7 +38,6 @@ class Layer {
     this.indices = new Uint32Array(6 * 1024);
     this.vertices = this.count = 0;
     this.image = null;
-    this.pixels = new Uint32Array(0);
     this.depth = new Float32Array(0);
     this.usedWidth = this.usedHeight = 0;
   }
@@ -89,10 +87,9 @@ class Layer {
       this.canvas.width = keepBoth ? wide : newWidth;
       this.canvas.height = keepBoth ? tall : newHeight;
       this.image = this.ctx.createImageData(this.canvas.width, this.canvas.height);
-      this.pixels = new Uint32Array(this.image.data.buffer);
-      this.depth = new Float32Array(this.pixels.length);
+      this.depth = new Float32Array(this.canvas.width * this.canvas.height);
     } else {
-      this.pixels.fill(0, 0, this.canvas.width * h);
+      this.image.data.fill(0, 0, 4 * this.canvas.width * h);
       // Canvas filters may sample outside the drawImage source rectangle. Keep the unused
       // backing canvas transparent when a smaller pose or the hand inset follows a larger one.
       if (w < this.usedWidth) this.ctx.clearRect(w, 0, this.usedWidth - w, this.usedHeight);
@@ -218,19 +215,38 @@ function raster(layer, width, height) {
     light = layer.light;
   const stride = layer.canvas.width,
     depth = layer.depth,
-    pixels = layer.pixels;
+    rgba = layer.image.data;
   for (let f = 0; f < layer.count; f += 3) {
-    // Offsets into the packed [screen x, screen y, depth] positions.
-    let a = 3 * layer.indices[f],
-      b = 3 * layer.indices[f + 1],
-      c = 3 * layer.indices[f + 2];
-    const originalArea = (p[b] - p[a]) * (p[c + 1] - p[a + 1]) - (p[c] - p[a]) * (p[b + 1] - p[a + 1]);
+    // Keep the vertex ids as integers from the index buffer throughout sorting.
+    let i0 = layer.indices[f],
+      i1 = layer.indices[f + 1],
+      i2 = layer.indices[f + 2];
+    const ax = p[3 * i0],
+      ay = p[3 * i0 + 1];
+    const originalArea =
+      (p[3 * i1] - ax) * (p[3 * i2 + 1] - ay) - (p[3 * i2] - ax) * (p[3 * i1 + 1] - ay);
     if (Math.abs(originalArea) < 1e-8) continue;
     const side = originalArea < 0 ? 0 : 1;
-    // Sweep sample centers between the long edge and the two shorter edges.
-    if (p[a + 1] > p[b + 1]) [a, b] = [b, a];
-    if (p[b + 1] > p[c + 1]) [b, c] = [c, b];
-    if (p[a + 1] > p[b + 1]) [a, b] = [b, a];
+    // Array-destructuring swaps here produced off-palette triangles after WebKit warmed up.
+    // Swap the vertex ids explicitly so position, lighting and material travel together.
+    if (p[3 * i0 + 1] > p[3 * i1 + 1]) {
+      const previous = i0;
+      i0 = i1;
+      i1 = previous;
+    }
+    if (p[3 * i1 + 1] > p[3 * i2 + 1]) {
+      const previous = i1;
+      i1 = i2;
+      i2 = previous;
+    }
+    if (p[3 * i0 + 1] > p[3 * i1 + 1]) {
+      const previous = i0;
+      i0 = i1;
+      i1 = previous;
+    }
+    const a = 3 * i0,
+      b = 3 * i1,
+      c = 3 * i2;
     const x = p[a],
       y = p[a + 1],
       z = p[a + 2];
@@ -246,30 +262,34 @@ function raster(layer, width, height) {
     const inv = 1 / (dx1 * dy2 - dx2 * dy1);
     const zx = (dz1 * dy2 - dz2 * dy1) * inv,
       zy = (dx1 * dz2 - dx2 * dz1) * inv;
-    const i0 = a / 3,
-      i1 = b / 3,
-      i2 = c / 3;
     const l0 = light[2 * i0 + side],
       l1 = light[2 * i1 + side],
       l2 = light[2 * i2 + side];
     const c0 = colors[i0],
       c1 = colors[i1],
       c2 = colors[i2];
-    const r = Math.min(255, (c0 >> 16) * l0);
-    const g = Math.min(255, ((c0 >> 8) & 255) * l0);
-    const bl = Math.min(255, (c0 & 255) * l0);
-    const dr1 = Math.min(255, (c1 >> 16) * l1) - r,
-      dr2 = Math.min(255, (c2 >> 16) * l2) - r;
-    const dg1 = Math.min(255, ((c1 >> 8) & 255) * l1) - g,
-      dg2 = Math.min(255, ((c2 >> 8) & 255) * l2) - g;
-    const db1 = Math.min(255, (c1 & 255) * l1) - bl,
-      db2 = Math.min(255, (c2 & 255) * l2) - bl;
-    const rx = (dr1 * dy2 - dr2 * dy1) * inv,
-      ry = (dx1 * dr2 - dx2 * dr1) * inv;
-    const gx = (dg1 * dy2 - dg2 * dy1) * inv,
-      gy = (dx1 * dg2 - dx2 * dg1) * inv;
-    const bx = (db1 * dy2 - db2 * dy1) * inv,
-      by = (dx1 * db2 - dx2 * db1) * inv;
+    // Interpolate one brightness value per sample for a uniform material.
+    // The shirt, skin and individual chair surfaces can then shade without
+    // drifting away from their source hue, even on a very narrow triangle.
+    const solid = c0 === c1 && c0 === c2;
+    const red = (c0 >> 16) & 255,
+      green = (c0 >> 8) & 255,
+      blue = c0 & 255;
+    const dl1 = l1 - l0,
+      dl2 = l2 - l0;
+    const shadeX = (dl1 * dy2 - dl2 * dy1) * inv;
+    const shadeY = (dx1 * dl2 - dx2 * dl1) * inv;
+    // Ring meshes may explicitly change material between vertices. Only these
+    // faces need three color gradients, with highlights clipped at the vertices.
+    let gradient;
+    if (!solid) {
+      gradient = [16, 8, 0].map((shift) => {
+        const start = Math.min(255, ((c0 >> shift) & 255) * l0);
+        const d1 = Math.min(255, ((c1 >> shift) & 255) * l1) - start;
+        const d2 = Math.min(255, ((c2 >> shift) & 255) * l2) - start;
+        return [start, (d1 * dy2 - d2 * dy1) * inv, (dx1 * d2 - dx2 * d1) * inv];
+      });
+    }
     const longSlope = dx2 / dy2,
       upperSlope = dy1 ? dx1 / dy1 : 0;
     const lowerSlope = dy2 !== dy1 ? (dx2 - dx1) / (dy2 - dy1) : 0;
@@ -280,17 +300,36 @@ function raster(layer, width, height) {
       const first = Math.max(0, Math.ceil(Math.min(left, right) - 0.5));
       const last = Math.min(width, Math.ceil(Math.max(left, right) - 0.5));
       const xx = first + 0.5 - x;
-      let zz = z + zx * xx + zy * yy,
-        red = r + rx * xx + ry * yy;
-      let green = g + gx * xx + gy * yy,
-        blue = bl + bx * xx + by * yy;
-      const end = row * stride + last;
-      for (let i = row * stride + first; i < end; i++, zz += zx, red += rx, green += gx, blue += bx) {
-        if (zz <= depth[i]) continue;
-        depth[i] = zz;
-        pixels[i] = littleEndian
-          ? 0xff000000 | ((blue + 0.5) << 16) | ((green + 0.5) << 8) | (red + 0.5)
-          : ((red + 0.5) << 24) | ((green + 0.5) << 16) | ((blue + 0.5) << 8) | 255;
+      let zz = z + zx * xx + zy * yy;
+      const start = row * stride + first,
+        end = row * stride + last;
+      // Write the published RGBA byte view. It owns channel clamping and can
+      // cover a subrange of its backing buffer.
+      if (!gradient) {
+        let shade = l0 + shadeX * xx + shadeY * yy;
+        for (let i = start; i < end; i++, zz += zx, shade += shadeX) {
+          if (zz <= depth[i]) continue;
+          depth[i] = zz;
+          const offset = 4 * i;
+          rgba[offset] = red * shade;
+          rgba[offset + 1] = green * shade;
+          rgba[offset + 2] = blue * shade;
+          rgba[offset + 3] = 255;
+        }
+      } else {
+        const [r, g, b] = gradient;
+        let rr = r[0] + r[1] * xx + r[2] * yy;
+        let gg = g[0] + g[1] * xx + g[2] * yy;
+        let bb = b[0] + b[1] * xx + b[2] * yy;
+        for (let i = start; i < end; i++, zz += zx, rr += r[1], gg += g[1], bb += b[1]) {
+          if (zz <= depth[i]) continue;
+          depth[i] = zz;
+          const offset = 4 * i;
+          rgba[offset] = rr;
+          rgba[offset + 1] = gg;
+          rgba[offset + 2] = bb;
+          rgba[offset + 3] = 255;
+        }
       }
     }
   }
