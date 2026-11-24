@@ -50,12 +50,26 @@ test('film checks sample five distinct ranks and count only displayed offers', (
 test('film validation and randomized checks use the active ranking and preserve unanswered offers across reloads', async () => {
   const { page, errors, close } = await openPage('rating-prediction/', { width: 390, height: 844 });
   try {
-    await page.locator('#validation summary').click();
-    const table = page.locator('#film-comparison table');
-    await table.waitFor();
     const report = JSON.parse(
       readFileSync(new URL('validation/film-calibration.json', import.meta.url), 'utf8'),
     );
+    const menu = page.getByRole('combobox', {name: 'Prediction model'});
+    await menu.waitFor();
+    await page.locator('#model-scores summary').click();
+    for (const key of ['ratingsTags', 'latentClass', 'personalized']) {
+      await menu.selectOption(key);
+      const row = report.models[key];
+      const gap = row.reliability.find(r => r.cutoff === 4).meanAbsoluteGap;
+      const coverage = row.intervals.find(r => r.level === .9).tieAdjusted.mean;
+      const summary = 'Log loss ' + row.logLoss.toFixed(4) + ' · Four-star gap ' + (gap * 100).toFixed(2) + ' pp';
+      await page.locator('#score-preview').getByText(summary, {exact:true}).waitFor();
+      assert((await menu.locator('option:checked').innerText()).includes('loss ' + row.logLoss.toFixed(4) + ' · gap ' + (gap * 100).toFixed(2) + ' pp'));
+      assert.match(await page.locator('#score-details').innerText(), /172,936 later ratings/);
+      assert(await page.locator('#score-details').getByText((coverage * 100).toFixed(2) + '%', {exact:true}).isVisible());
+    }
+    await page.locator('#validation summary').click();
+    const table = page.locator('#film-comparison table');
+    await table.waitFor();
     assert.match(await table.innerText(), /Gaussian reference/);
     assert.match(await table.innerText(), new RegExp(report.models.recalibrated.logLoss.toFixed(4)));
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

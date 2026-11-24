@@ -368,7 +368,23 @@ input {
 #scatter-toggle { grid-area: plot; }
 #model-choice:not([hidden]) { display: contents; }
 #model-choice > .choice-label { grid-area: caption; }
-#model { grid-area: model; min-width: 0; }
+.model-field { grid-area: model; min-width: 0; overflow: clip; overflow-clip-margin: 3px; }
+#model-scores {
+  width: min(32.4rem, 100%);
+  margin: .35rem 0 .55rem auto;
+  font-size: .8rem;
+}
+#model-scores summary { cursor: pointer; }
+#score-preview { margin-inline-start: .4rem; color: var(--muted); font-weight: normal; }
+#score-details dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(8rem, 100%), 1fr));
+  gap: .5rem .8rem;
+  margin: .65rem 0;
+}
+#score-details dt, #score-details p { color: var(--muted); }
+#score-details dd { margin: .1rem 0 0; font-size: .95rem; font-variant-numeric: tabular-nums; }
+#score-details p { margin: .4rem 0; }
 .model-controls:has(#model-choice[hidden]) { display: flex; justify-self: end; width: auto; }
 @container (max-width: 30rem) {
   .model-controls { grid-template-areas: "filters plot ." "caption caption caption" "model model model"; }

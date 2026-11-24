@@ -19,11 +19,12 @@ The development cohort contributed 186,901 targets from 3,000 of 13,974 eligible
 | Model | Category log loss | RMSE in stars | Four-star Brier | Four-star calibration gap | 90% tie-adjusted coverage | Central range width in stars |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Published default | 1.7859 | 0.9185 | 0.2007 | 4.21 pp | 88.79% | 2.52 |
+| Ratings + tags | 1.8154 | 0.9231 | 0.2021 | 4.08 pp | 89.21% | 2.55 |
 | Historical Gaussian | 1.8864 | 0.9185 | 0.2003 | 2.08 pp | 87.21% | 2.69 |
 | Eight classes | 1.8204 | 0.9317 | 0.2038 | 3.17 pp | 89.37% | 2.62 |
 | Recalibrated default | 1.7703 | 0.9114 | 0.1990 | 2.08 pp | 89.92% | 2.68 |
 
-The correction improved log loss by 0.01562 per rating (paired respondent-level 95% interval 0.01282–0.01843). Its fitted slope was 0.772. The recalibrated 90% coverage interval across respondents was 89.57%–90.27%. The normalized ranked probability score fell from 0.10511 to 0.10423. The interface labels the fitted correction as experimental because this test covered four dated, volunteered inputs. The shipped default also serves different numbers of ratings, prompts and undated histories.
+The correction improved log loss by 0.01562 per rating (paired respondent-level 95% interval 0.01282–0.01843). Its fitted slope was 0.772. The recalibrated 90% coverage interval across respondents was 89.57%–90.27%. The normalized ranked probability score fell from 0.10511 to 0.10423. The interface labels the fitted correction as experimental because this test covered four dated, volunteered inputs. The shipped default also serves different numbers of ratings, prompts and undated histories. Ratings + tags was scored afterward on the same frozen confirmation sample to cover every model offered in the film dropdown.
 
 Each calibration gap averages absolute observed-minus-predicted differences over ten fixed probability bands using respondent weights. Coverage integrates over ties at the discrete category boundaries. The JSON also reports the actual probability mass and empirical hit rate of the inclusive whole-category range. Width is its upper endpoint minus its lower endpoint. All intervals for performance describe sampling variation over respondents, conditional on these fitted models.
 

@@ -1,25 +1,24 @@
 import { node } from './detail.mjs';
 
+export const fourStarGap = (row) =>
+  (100 * row.reliability.find((r) => r.cutoff === 4).meanAbsoluteGap).toFixed(2) + ' pp';
+
+/** @type {[string, (row: any) => string][]} */
+export const filmScoreFields = [
+  ['Category log loss', (row) => row.logLoss.toFixed(4)],
+  ['RMSE (stars)', (row) => row.rmse.toFixed(4)],
+  ['Brier (≥4 stars)', (row) => row.brier.toFixed(4)],
+  ['Ranked probability score', (row) => row.rps.toFixed(4)],
+  ['Calibration gap (≥4 stars)', fourStarGap],
+  ['90% predictive coverage', (row) => (100 * row.intervals.find((r) => r.level === 0.9).tieAdjusted.mean).toFixed(2) + '%'],
+  ['Central range width (stars)', (row) => row.intervals.find((r) => r.level === 0.9).width.toFixed(2)],
+];
+
 export function renderFilmValidation(host, report) {
   const { confirmation, models } = report;
-  /** @type {[string, (row: any) => string][]} */
-  const fields = [
-    ['Category log loss', (row) => row.logLoss.toFixed(4)],
-    ['RMSE (stars)', (row) => row.rmse.toFixed(4)],
-    ['Brier (≥4 stars)', (row) => row.brier.toFixed(4)],
-    ['Ranked probability score', (row) => row.rps.toFixed(4)],
-    [
-      'Calibration gap (≥4 stars)',
-      (row) => (100 * row.reliability.find((r) => r.cutoff === 4).meanAbsoluteGap).toFixed(2) + ' pp',
-    ],
-    [
-      '90% predictive coverage',
-      (row) => (100 * row.intervals.find((r) => r.level === 0.9).tieAdjusted.mean).toFixed(2) + '%',
-    ],
-    ['Central range width (stars)', (row) => row.intervals.find((r) => r.level === 0.9).width.toFixed(2)],
-  ];
   const columns = [
     ['personalized', 'Current default'],
+    ['ratingsTags', 'Ratings + tags'],
     ['reference', 'Gaussian reference'],
     ['latentClass', 'Eight classes'],
     ['recalibrated', 'Recalibrated (study)'],
@@ -33,7 +32,7 @@ export function renderFilmValidation(host, report) {
     head.append(th);
   }
   const body = table.createTBody();
-  for (const [label, format] of fields) {
+  for (const [label, format] of filmScoreFields) {
     const row = body.insertRow(),
       th = node('th', label);
     th.scope = 'row';

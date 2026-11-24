@@ -213,7 +213,11 @@ test('catalog edits feed all rankings, detail and co-ratings at the chosen updat
       /^https:\/\/en\.wikipedia\.org\/wiki\//,
     );
     assert.equal(await page.locator('#projection-title').innerText(), 'City preference fingerprint');
-    assert.equal(await page.locator('#model-choice').isHidden(), true); // Destinations has one fitted model.
+    assert.equal(await page.getByRole('combobox', {name: 'Prediction model'}).isDisabled(), true);
+    assert.equal(await page.locator('#score-preview').innerText(), 'Log loss 0.5799');
+    await page.locator('#model-scores summary').click();
+    assert.match(await page.locator('#score-details').innerText(), /no calibration gap or predictive interval coverage/);
+    await page.locator('#model-scores summary').click();
     await page.locator('#profile-method summary').click();
     assert.match(await page.locator('#weights').innerText(), /Taste components/);
     await page.setViewportSize({ width: 320, height: 844 });

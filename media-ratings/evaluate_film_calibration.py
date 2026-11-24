@@ -21,7 +21,7 @@ START, SPLIT = 1577836800, 1640995200
 SCALE = np.arange(1, 11) / 2
 MAX_USERS = 3000
 PENALTY = 0.0005
-MODELS = ["personalized", "reference", "latentClass"]
+MODELS = ["personalized", "reference", "latentClass", "ratingsTags"]
 
 
 def sample_key(text):
@@ -286,7 +286,7 @@ def run(archive, output):
         model: {
             k: estimate(scores[model][k] - v) for k, v in scores["personalized"].items()
         }
-        for model in ("reference", "latentClass", "recalibrated")
+        for model in scores if model != "personalized"
     }
     report = dict(
         catalogSha256=hashlib.sha256(catalog_path.read_bytes()).hexdigest(),

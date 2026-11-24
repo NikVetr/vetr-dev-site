@@ -7,6 +7,7 @@ import { catalogForDomain, renderChoice, showSources, sourceDomains } from './ca
 import { minimumAxisShare } from './axis-annotations.mjs';
 import { openRapidRating } from './rapid.mjs';
 import { renderFilmValidation } from './film-validation.mjs';
+import { catalogScores, filmScores, renderModelScores } from './model-scores.mjs';
 import { wireFilmCheck } from './film-check-dialog.mjs';
 import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
@@ -216,11 +217,18 @@ function install(key, next) {
         return { value: k, label: name, description };
       });
   state.modelChoices = modelChoices;
-  renderChoice(el('model-choice'), 'model', 'Prediction model', modelChoices, state.model, value => {
-    state.model = value;
+  const modelMenu = select('model');
+  modelMenu.replaceChildren(...modelChoices.map(({value, description}) => new Option(description, value)));
+  modelMenu.value = state.model;
+  modelMenu.disabled = modelChoices.length === 1;
+  el('model-choice').hidden = false;
+  void showModelScores();
+  modelMenu.onchange = () => {
+    state.model = modelMenu.value;
+    void showModelScores();
     rebuildBaseline();
     update(input('auto').checked);
-  });
+  };
   const attribution = el('dataset-source');
   attribution.replaceChildren();
   const source =
@@ -305,16 +313,55 @@ el('about-open').onclick = async () => {
   }
 };
 let filmValidationReport;
+function loadFilmReport() {
+  filmValidationReport ??= readJSON('validation/film-calibration.json').catch(error => {
+    filmValidationReport = null;
+    throw error;
+  });
+  return filmValidationReport;
+}
+async function showModelScores() {
+  const current = state, key = current.model;
+  const preview = el('score-preview'), details = el('score-details');
+  el('model-scores').hidden = false;
+  details.replaceChildren();
+  if (active === 'custom') {
+    preview.textContent = 'Imported catalog';
+    details.textContent = 'No published model evaluation is linked to this import.';
+  } else {
+    const films = isFilm(active);
+    if (films) preview.textContent = 'Loading film scores…';
+    try {
+      const report = films ? await loadFilmReport() : null;
+      if (state !== current || state.model !== key) return;
+      const menu = select('model');
+      for (const option of menu.options) {
+        const scores = films ? filmScores(report, option.value) : catalogScores(catalog, option.value);
+        if (menu.options.length > 1) {
+          const choice = current.modelChoices.find(c => c.value === option.value);
+          const caption = choice.description + ' · ' + scores.menuScore;
+          if (option.text !== caption) option.text = caption;
+        }
+        if (option.value === key) renderModelScores(preview, details, scores);
+      }
+    } catch {
+      if (state === current && state.model === key) {
+        preview.textContent = films ? 'Film scores unavailable' : 'Model scores unavailable';
+        const retry = node('button', 'Retry loading scores');
+        retry.onclick = showModelScores;
+        details.replaceChildren(retry);
+      }
+    }
+  }
+}
 async function showFilmComparison() {
   const host = el('film-comparison');
   if (!isFilm(active) || !/** @type {HTMLDetailsElement} */ (el('validation')).open) return;
   host.textContent = 'Loading matched film scores…';
   try {
-    filmValidationReport ??= readJSON('validation/film-calibration.json');
-    const report = await filmValidationReport;
+    const report = await loadFilmReport();
     if (isFilm(active)) renderFilmValidation(host, report);
   } catch (error) {
-    filmValidationReport = null;
     if (isFilm(active)) host.textContent = 'Could not load the matched film scores. ' + error.message;
   }
 }

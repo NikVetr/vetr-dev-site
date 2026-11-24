@@ -106,9 +106,16 @@
           <div class="model-controls">
             <button id="facet" aria-haspopup="dialog" aria-controls="recommendation-filters" disabled>Filters</button>
             <button type="button" id="scatter-toggle" aria-pressed="false" aria-controls="boards" disabled>Scatterplot</button>
-            <div id="model-choice" hidden></div>
+            <div id="model-choice" hidden>
+              <label for="model" class="choice-label">Prediction model</label>
+              <div class="model-field"><select id="model" aria-describedby="score-preview"></select></div>
+            </div>
           </div>
         </div>
+        <details id="model-scores" hidden>
+          <summary>Model scores <span id="score-preview" aria-live="polite"></span></summary>
+          <div id="score-details"></div>
+        </details>
         <p id="status" role="status"></p>
         <p id="catalog-limit" class="evidence-note" hidden></p>
         <p id="pending" role="status" hidden></p>
