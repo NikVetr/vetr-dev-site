@@ -4,7 +4,7 @@ import { easierVariant, placeOptions, reviewRoutine, submit, transferSeconds } f
 import { equipment, locations, moves, sources, targets } from '../core/catalog.js';
 
 const byId = new Map(moves.map(move => [move.id, move]));
-const open = {location: 'open-area', discretion: 'any', allowFloor: true, equipment: Object.keys(equipment)};
+const open = {location: 'open-area', discretion: 'any', allowFloor: true, equipment: Object.keys(equipment).filter(key => !['chair', 'bed'].includes(key))};
 const quiet = {location: 'plane-seat', discretion: 'quiet'};
 const rejects = (req, path) => assert.throws(() => submit(req), e =>
   e instanceof Error && 'code' in e && e.code === 'invalid_request' &&

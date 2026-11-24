@@ -1,3 +1,19 @@
+import {programSources} from './library/program-sources.js';
+import {programs} from './library/programs.js';
+import {postureLimits} from './library/constraints.js';
+import {fixturesLibrary} from './library/fixtures.js';
+import {floorLibrary} from './library/floor.js';
+import {mobilityLibrary} from './library/mobility.js';
+import {yogaLibrary} from './library/yoga.js';
+export {programs};
+export const intensityLevels = ['gentle','moderate','vigorous'];
+const programStyles = new Map();
+for (const program of programs) {
+  for (const {id} of program.steps) {
+    const styles = programStyles.get(id) ?? new Set();
+    programStyles.set(id, styles.add(program.style));
+  }
+}
 import {handNeckLibrary} from './library/hand-neck.js';
 import {upperLibrary} from './library/upper.js';
 import {lowerLibrary} from './library/lower.js';
@@ -25,11 +41,12 @@ export const targets = {
 
 export const equipment = {
   towel: 'Small towel', band: 'Light resistance band', ball: 'Massage ball', roller: 'Compact foam roller',
-  support: 'Secure fixed handhold', 'firm-back': 'Chair with a firm back', step: 'Low fixed step', mat: 'Exercise mat',
+  support: 'Secure fixed handhold', 'firm-back': 'Firm, high chair back or headrest', step: 'Low fixed step', mat: 'Exercise mat',
+  wall:'Flat wall', doorway:'Doorway or corner', table:'Stable table, desk or counter', chair:'Stable second chair', bed:'Firm bed', bottle:'Small water bottle or weight', 'band-anchor':'Exercise-rated door anchor',
 };
 
 // These fixtures must be confirmed at the place where the movement is done.
-export const fixedEquipment = ['support', 'firm-back', 'step'];
+export const fixedEquipment = ['support', 'firm-back', 'step', 'wall', 'doorway', 'table', 'chair', 'bed'];
 
 export const limitations = {
   'stay-seated': 'Stay seated', 'stay-standing': 'Stay standing', 'back-support': 'Keep my back supported',
@@ -37,10 +54,13 @@ export const limitations = {
   'no-leg-movement': 'Avoid active leg movement', 'no-arm-movement': 'Avoid active arm movement',
   'no-twisting': 'Avoid turning my neck or trunk', 'no-overhead': 'Keep arms below shoulder level',
   'limited-grip': 'Avoid gripping or pulling',
+  'hands-loaded':'Avoid weight through my hands', 'hip-precautions':'Hip replacement precautions',
+  'no-kneeling':'Avoid kneeling or deep knee bends', 'no-prone':'Avoid lying face down',
+  'no-forward-bend':'Avoid bending forward', 'no-inversion':'Avoid head-down positions',
 };
 
 export const sources = {
-  ...librarySources,
+  ...librarySources, ...programSources,
   sitting: { title: 'NHS · Sitting exercises', url: 'https://www.nhs.uk/live-well/exercise/sitting-exercises/' },
   work: { title: 'Newcastle Hospitals · One-minute body check', url: 'https://www.newcastle-hospitals.nhs.uk/services/newcastle-occupational-health-service/information-for-staff/physiotherapy/self-help-leaflets/1-minute-body-check/' },
   flex: { title: 'NHS · Flexibility exercises', url: 'https://www.nhs.uk/live-well/exercise/flexibility-exercises/' },
@@ -80,17 +100,22 @@ const adapted = 'Adapted from a clinical exercise demonstration. Its effect on e
  * @param {string} cue @param {string} caution @param {string} source
  * @param {{poses?: string[], uses?: string[], equipment?: string[], side?: number, forward?: number,
  * discretion?: string, evidence?: string, id?: string, stationary?: boolean, overhead?: boolean,
- * family?:string, region?:string, evidenceSource?:string}} [options]
+ * family?:string, region?:string, evidenceSource?:string, intensity?:string, tags?:string[], anyEquipment?:string[]}} [options]
  */
 function movement(motion, name, targets, cue, caution, source, options = {}) {
   const poses = options.poses ?? ['seated'];
-  return poses.map(pose => ({
-    id: pose + '-' + (options.id ?? motion), motion, pose, name, targets, cue, caution,
+  return poses.map(pose => {
+    const id = pose + '-' + (options.id ?? motion);
+    return {
+    id, motion, pose, name, targets, cue, caution,
+    restrictions:postureLimits(pose,motion,id), anyEquipment:options.anyEquipment ?? [],
+    intensity:options.intensity ?? 'gentle', tags:[...new Set([...(options.tags ?? []), ...(programStyles.get(id) ?? [])])],
     equipment: options.equipment ?? [], uses: options.uses ?? [], sourceIds: options.evidenceSource ? [source, options.evidenceSource] : [source],
     animation: options.family ? (options.id ?? motion) : undefined, family: options.family, region: options.region,
     evidence: options.evidence ?? guidance, side: options.side ?? 0, forward: options.forward ?? 0,
     discretion: options.discretion ?? 'quiet', stationary: options.stationary ?? false, overhead: options.overhead ?? false,
-  }));
+    };
+  });
 }
 
 const both = ['seated', 'standing'];
@@ -237,4 +262,5 @@ export const moves = [
     'Lie on your back with both knees bent. Let the knees travel a little to one side together. Return through center and change sides.',
     'Let your shoulders remain supported and stop before they lift.', 'back', {poses: floor, uses: ['legs', 'twist'], side: 30, discretion: 'any', evidence: adapted}),
   ...handNeckLibrary(movement), ...upperLibrary(movement), ...lowerLibrary(movement),
+  ...fixturesLibrary(movement), ...floorLibrary(movement), ...yogaLibrary(movement), ...mobilityLibrary(movement),
 ];
