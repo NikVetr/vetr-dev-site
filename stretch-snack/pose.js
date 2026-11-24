@@ -1,3 +1,7 @@
+import {fixturePose,fixtureActivation} from './movements/fixtures.js';
+import {floorPose,floorActivation} from './movements/floor.js';
+import {yogaPose,yogaActivation} from './movements/yoga.js';
+import {mobilityPose,mobilityCycleSeconds} from './movements/mobility.js';
 import {handNeckPose, handNeckActivation, handNeckCycleSeconds} from './movements/hand-neck.js';
 import {upperPose, upperActivation} from './movements/upper.js';
 import {lowerPose, lowerActivation} from './movements/lower.js';
@@ -381,27 +385,28 @@ export function basePose(move, seconds) {
   };
 }
 
-/** @typedef {{pose:string, motion:string, family?:string, animation?:string, region?:string, uses?:string[], equipment?:string[]}} Movement */
+/** @typedef {{pose:string, motion:string, family?:string, animation?:string, region?:string, raisedSupport?:string, uses?:string[], equipment?:string[]}} Movement */
 /** @param {Movement} move */
 export function movementCycleSeconds(move) {
+  if (move.family === 'mobility') return mobilityCycleSeconds(move);
   return move.family === 'hand-neck' ? handNeckCycleSeconds(move) : repetitionSeconds;
 }
-const animators = {'hand-neck':handNeckPose, upper:upperPose, lower:lowerPose};
+const animators = {'hand-neck':handNeckPose, upper:upperPose, lower:lowerPose, fixtures:fixturePose, floor:floorPose, yoga:yogaPose, mobility:mobilityPose};
 
 // The scapula and clavicle carry the socket up and out as the arm elevates.
 // Keep a hand planted on a rail or mat in its authored closed-chain position.
 // A free reach carries the hand with the socket. A hand placed at the head or
 // opposite shoulder retains its point of contact by flexing the elbow.
-const freeRaises = new Set(['overhead-reach', 'scaption', 'lying-arm-raise', 'low-row']);
+const freeRaises = new Set(['overhead-reach', 'scaption', 'lying-arm-raise', 'low-row', 'shoulder-backbend', 'crescent-bend', 'arms-up', 'chair-pose', 'warrior-one']);
 /** @param {ReturnType<typeof basePose>} p @param {Movement} move */
 function articulateShoulders(p, move) {
-  if (['floor-angel','lying-arm-rotation'].includes(move.animation ?? move.motion)) return p;
+  if (['floor-angel','lying-arm-rotation','counter-step-back'].includes(move.animation ?? move.motion)) return p;
   const delta = (/** @type {number[]} */ a, /** @type {number[]} */ b) => a.map((v,i)=>v-b[i]);
   const hip = mixPoint(p.legs[0].hip,p.legs[1].hip,.5);
   const up = scaledTo(p.spine?.chestUp ?? delta(p.neck,hip),1);
   const across = scaledTo(delta(p.arms[1].shoulder,p.arms[0].shoulder),1);
   for (const arm of p.arms) {
-    if (arm.holdingRail) continue;
+    if (arm.holdingRail || ('forearmPlanted' in arm && arm.forearmPlanted)) continue;
     const upper = delta(arm.elbow,arm.shoulder);
     const upperLength = Math.hypot(...upper);
     const elevation = Math.acos(Math.min(1,Math.max(-1,-upper.reduce((v,x,i)=>v+x*up[i],0)/upperLength)));
@@ -439,6 +444,9 @@ export function movementPose(move, seconds) {
 /** @param {ReturnType<typeof movementPose>} pose @param {Movement} move */
 export function movementActivation(pose, move) {
   switch (move.family) {
+    case 'fixtures': return fixtureActivation(pose,move);
+    case 'floor': return floorActivation(pose,move);
+    case 'yoga': return yogaActivation(pose,move);
     case 'hand-neck': return handNeckActivation(pose, move);
     case 'upper': return upperActivation(pose, move);
     case 'lower': return lowerActivation(pose, move);

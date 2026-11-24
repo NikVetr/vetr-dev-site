@@ -427,3 +427,5 @@ export function upperActivation(p, move) {
   if (move.animation === 'hand-press-out')
     return {label: 'Press outward', points: [p.arms[p.side === 1 ? 1 : 0].wrist]};
 }
+
+export {handAt, reach, swing, changeChest};

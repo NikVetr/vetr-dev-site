@@ -15,7 +15,7 @@ export const programs = [
       {"id": "seated-back-round", "seconds": 21, "reps": 3, "note": "Seated cat-cow: at least three slow rounds with the breath."},
       {"id": "seated-hand-twist", "seconds": 20, "sides": 2, "note": "Per side, 3-5 breaths."},
       {"id": "seated-shoulder-roll", "seconds": 20, "note": "Up, back and down, then reverse."},
-      {"id": "seated-seated-forward-bend", "seconds": 10, "note": "One breath folded. With no room ahead, use seated-forward-rest instead."},
+      {"id": "seated-seated-forward-bend", "seconds": 10, "note": "One breath folded. With no room ahead, substitute a seated forward rest."},
     ],
   },
   {
@@ -26,7 +26,7 @@ export const programs = [
     intensity: "gentle",
     sourceIds: ["ccDeskYoga"],
     attribution: "Health organization",
-    notes: ["Step 1, neck circles, is omitted: full neck circles are excluded from the library.", "Seahorse is mapped to the existing seated-hip-flexor (outer leg back off the chair edge); Cleveland Clinic adds a slight lean back holding the chair."],
+    notes: ["Step 1, neck circles, is omitted: full neck circles are excluded from the library.", "Seahorse uses the seated hip-flexor stretch, with the outer leg back off the chair edge. Cleveland Clinic adds a slight lean back while holding the chair."],
     steps: [
       {"id": "seated-heart-lift", "seconds": 20, "note": "Fan pose: 3-5 breaths."},
       {"id": "seated-back-round", "seconds": 21, "reps": 3, "note": "Cat curls and cow: at least three rounds."},
@@ -66,7 +66,7 @@ export const programs = [
     intensity: "moderate",
     sourceIds: ["yjDesk"],
     attribution: "Community routine",
-    notes: ["Step 7, framed chair pose (tiptoe chair pose with arms in the overhead frame), is omitted as a combination of steps 4 and 6.", "Step 11, energy balancing (hands resting on the body), is omitted: no movement.", "Step 14, breath of fire, is omitted: 100 rapid forced exhalations can cause light-headedness.", "Step 3 is mapped to the one-arm standing-crescent-bend; Yoga Journal holds one wrist and reaches both arms over."],
+    notes: ["Step 7, framed chair pose (tiptoe chair pose with arms in the overhead frame), is omitted as a combination of steps 4 and 6.", "Step 11, energy balancing (hands resting on the body), is omitted: no movement.", "Step 14, breath of fire, is omitted: 100 rapid forced exhalations can cause light-headedness.", "Step 3 is mapped to a one-arm standing side bend. Yoga Journal holds one wrist and reaches both arms over."],
     steps: [
       {"id": "seated-belly-breath", "seconds": 120, "note": "Seated pose: notice your breath and surroundings."},
       {"id": "seated-arms-up", "seconds": 25, "note": "Seated mountain: 5 belly breaths."},
@@ -109,7 +109,7 @@ export const programs = [
     intensity: "gentle",
     sourceIds: ["ccRestorative"],
     attribution: "Health organization",
-    notes: ["Supine twist is mapped to the existing supine-knee-roll held to one side; the catalog cue describes rolling the knees and back.", "Supported child's pose uses the wide-knee child's pose with pillows in place of a bolster."],
+    notes: ["For the lying twist, settle both knees to one side for the full hold before switching.", "Supported child's pose uses the wide-knee child's pose with pillows in place of a bolster."],
     steps: [
       {"id": "supine-legs-up-wall", "seconds": 300, "note": "5-10 minutes; come out slowly."},
       {"id": "kneeling-child-pose", "seconds": 300, "note": "Rest your chest and head on a bolster or stacked pillows."},
@@ -126,7 +126,7 @@ export const programs = [
     intensity: "moderate",
     sourceIds: ["saperProtocol", "review28631003"],
     attribution: "Research protocol",
-    notes: ["'Shoulder opener' is omitted: the article does not describe it.", "Standing chair twist is omitted (no entry); only the seated chair twist is kept.", "Downward dog can be swapped for standing-wall-dog, as the protocol allows the wall version.", "Only the opening breathing time is published. All other seconds and repetitions are our suggestions for review."],
+    notes: ["'Shoulder opener' is omitted: the article does not describe it.", "This sequence includes the seated chair twist and omits its standing variation.", "The trial protocol allows downward dog at a wall. You can substitute that variation here.", "Only the opening breathing time is published. The app estimates the remaining times and repetition counts."],
     steps: [
       {"id": "supine-belly-breath", "seconds": 240, "note": "Svasana breathing to open."},
       {"id": "supine-knee-hug", "seconds": 30, "sides": 2, "note": "Knee to chest, per side."},
@@ -159,7 +159,7 @@ export const programs = [
       {"id": "standing-overhead-shoulder-stretch", "seconds": 60, "note": "Hands on a fixed object above head height."},
       {"id": "long-sitting-underarm-shoulder-stretch", "seconds": 60},
       {"id": "standing-towel-up-back", "seconds": 60, "sides": 2, "note": "Per side. The beginner level uses a towel to join the hands."},
-      {"id": "standing-garland-squat", "seconds": 60, "note": "Griffin's full squat: heels down, elbows pressing the knees out. This entry is from t4-yoga."},
+      {"id": "standing-garland-squat", "seconds": 60, "note": "Griffin's full squat: heels down, elbows pressing the knees out."},
       {"id": "standing-pike-fold", "seconds": 60, "note": "Bend the knees and drop the hips to come up."},
       {"id": "kneeling-kneeling-lunge", "seconds": 60, "sides": 2, "note": "Per side. The beginner level rests the hands on the front leg."},
       {"id": "long-sitting-butterfly", "seconds": 60, "note": "The beginner level presses the knees down with muscle only, without leaning."},

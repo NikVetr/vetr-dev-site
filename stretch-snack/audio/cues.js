@@ -14,6 +14,10 @@ export const travelCues = {
 export const cues = new Map([['transition', changePosition]]);
 /** A cue may be requested on its own when restarting after a change of posture. */
 export const clipForText = new Map([[changePosition, 'transition']]);
+for (const [key,text] of [['gentle-pulses','Gentle pulses.'], ['hold-stretch','Hold the stretch.']]) {
+  cues.set(key,text);
+  clipForText.set(text,key);
+}
 for (const [location,text] of Object.entries(travelCues)) {
   const key = 'go-to-' + location;
   cues.set(key, text);

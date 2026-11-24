@@ -1,3 +1,4 @@
+import {isFloor} from './core/library/constraints.js';
 import {movementPose, movementCycleSeconds} from './pose.js';
 /** @type {Record<string,string>} */
 export const regions = {
@@ -74,6 +75,11 @@ const angles = {
 // sides and camera angles avoids following the limb or zooming during a hold.
 const shots = new Map();
 const viewAngles = {
+  'doorway-stretch':.15, 'knee-straighten-stretch':1.30, 'hamstring-step':1.05, 'band-row':1.85, 'wall-push-up':1.88, 'wall-slide':1.9, 'wall-press-side':-.7, 'wall-press-out':-.7,
+  'wall-press-forward':1.85, 'calf-stretch-wall':1.85, 'wall-biceps-stretch':1.9, 'corner-stretch':1.9,
+  'bed-edge-hip-stretch':1.2, 'table-slide':1.40, 'wrist-lift-bottle':.75, 'chair-squat':1.40,
+  'counter-step-back':1.40, 'rollover-straddle':1.20, 'inchworm':1.15, 'worlds-greatest-stretch':.9,
+  'warrior-one':1.05, 'pyramid':1.12, 'gate-pose':.28, 'wall-dog':1.8, 'legs-up-wall':1.35, 'side-lying-rotation':1.16, 'open-book':.9, 'sleeper-stretch':1.15,
   'neck-press-back': 2.45, 'neck-nod': 1.1, 'head-nod': 1.05, 'neck-press-front': 0.92,
   'tendon-glide': 0.40, 'thumb-touch': 0.35, 'wrist-wave': 1.02, 'finger-lift': 0.91, 'hand-ball-roll': 0.96, 'shoulder-knead': 0.38,
   'elbow-back-press': 1.30, 'pendulum': 0.76, 'chair-back-extension': 1.32,
@@ -84,7 +90,7 @@ const viewAngles = {
 };
 /** @param {Movement} move */
 function workingFrame(move) {
-  const key = move.pose + '-' + move.animation;
+  const key = move.family+'-'+move.pose+'-'+move.animation+'-'+(move.raisedSupport ?? '');
   if (shots.has(key)) return shots.get(key);
   const points = [];
   const group = workingRegion(move);
@@ -96,13 +102,20 @@ function workingFrame(move) {
       for (const a of p.arms) points.push(a.shoulder, a.elbow, a.wrist, a.palm, a.thumb, ...a.fingers.map(f => f[1]));
     else if (['thighs','shins','feet'].includes(group))
       for (const l of p.legs) points.push(l.knee,l.ankle,l.toe);
-    else points.push(p.centre, p.crown, ...p.arms.map(a=>a.shoulder), ...p.legs.map(l=>l.hip));
+    else {
+      points.push(p.centre,p.crown,...p.arms.map(a=>a.shoulder),...p.legs.map(l=>l.hip));
+      if (['yoga','floor','mobility','fixtures'].includes(move.family)) {
+        for (const a of p.arms) points.push(a.wrist,a.elbow,a.thumb,...a.fingers.map(f=>f[1]));
+        for (const l of p.legs) points.push(l.toe,l.knee,l.ankle);
+      }
+    }
     if (move.animation === 'anchored-neck-stretch') points.push(...p.arms.map(a => a.palm), ...p.legs.map(l => l.hip));
     if (move.animation === 'neck-press-back') points.push(...p.arms.map(a => a.elbow));
     if (move.uses?.includes('moving-handhold')) points.push([0.32, 1.08, 0.19]);
     if (move.equipment?.includes('support')) points.push(...p.arms.map(a => a.wrist));
     if (move.animation === 'sit-to-stand') points.push(...p.legs.map(l=>l.ankle));
   }
+  if (move.animation === 'band-row') points.push([0,1,0.62]);
   const bounds = [0,1,2].map(i => [Math.min(...points.map(p => p[i])), Math.max(...points.map(p => p[i]))]);
   const [[xmin,xmax],[ymin,ymax],[zmin,zmax]] = bounds;
   const depth = Math.hypot(2 * Math.max(Math.abs(xmin), Math.abs(xmax)), zmax-zmin);
@@ -110,7 +123,7 @@ function workingFrame(move) {
   const shot = {
     centerY:(ymax+ymin)/2, centerZ:(zmax+zmin)/2,
     width:Math.max(0.79, depth + 0.22) * (hand ? 1.24 : 1),
-    height:Math.max(0.67, ymax-ymin + depth*(move.pose === 'supine' ? 0.34 : 0.23) + 0.21),
+    height:Math.max(0.67, ymax-ymin + depth*(isFloor(move.pose) ? 0.34 : 0.23) + 0.21),
     offsetX:hand ? -0.08 : 0,
   };
   shots.set(key,shot);
@@ -121,7 +134,7 @@ function workingFrame(move) {
 export function movementCamera(move, {zoom = true, rotation = true} = {}) {
   const {motion, pose} = move;
   const region = workingRegion(move);
-  const seated = pose === 'seated', floor = pose === 'supine';
+  const seated = pose === 'seated', floor = isFloor(pose);
   const seatedRear = seated && ['hands-back-stretch','towel-up-back'].includes(move.animation);
   const yaw = rotation ? (seatedRear ? 1.97 : viewAngles[move.animation] ?? angles[motion] ?? (floor ? 1.05 : 0.58)) : floor ? 1.18 : 0.58;
   const pitch = floor ? (rotation && motion === 'knee-roll' ? 0.82 : 0.34)
@@ -130,12 +143,12 @@ export function movementCamera(move, {zoom = true, rotation = true} = {}) {
   // Sit-to-stand starts in a chair and ends at standing height.
   const sittingThroughout = seated && move.animation !== 'sit-to-stand';
   const overhead = motion === 'overhead-reach';
-  const overviewY = floor ? 0.20 : sittingThroughout ? 0.85 : 0.91;
+  const overviewY = floor ? (['long-sitting','kneeling','hands-and-knees'].includes(pose) ? 0.67 : 0.37) : sittingThroughout ? 0.85 : 1.025;
   const full = {
     yaw, pitch, overviewY, centerY: overviewY,
     centerZ: floor ? 0.012 : seated ? 0.29 : 0.09,
-    width: floor ? 2.36 : seated ? 1.63 : 1.70,
-    height: floor ? 1.92 : sittingThroughout ? 1.90 : 2.06, offsetX: 0,
+    width: floor ? 2.65 : seated ? 1.63 : 2.38,
+    height: floor ? 2.22 : sittingThroughout ? 1.90 : 2.36, offsetX: 0,
   };
   if (!zoom) return full;
   if (move.family) return {...full, ...workingFrame(move)};

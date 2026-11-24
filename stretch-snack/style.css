@@ -943,7 +943,7 @@ body:has(dialog[open]) {
   margin-bottom: 1rem;
 }
 #saved-routines {
-  width: min(36rem, calc(100vw - 1.5rem));
+  width: min(42rem, calc(100vw - 1.5rem));
 }
 #routine-recall,
 #review-steps {
@@ -1000,9 +1000,12 @@ body:has(dialog[open]) {
   }
   #routine-recall {
     min-height: 0;
-    grid-template-rows: auto auto minmax(3rem, 1fr) auto auto;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
   }
   #review-steps {
+    min-height: 7rem;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 3px;
@@ -1034,4 +1037,20 @@ body:has(dialog[open]) {
   .player-controls {
     margin-top: 0.55rem;
   }
+}
+
+#program-info > p, #program-info details p { margin: .45rem 0; }
+#program-info { margin: 0; }
+#program-info summary::first-letter { text-transform: uppercase; }
+.review-step > p { grid-column: 1 / -1; }
+#program-time { margin-bottom: .65rem; }
+.library-link .actions { flex-wrap: wrap; }
+
+.routine-modes { flex-wrap: nowrap; }
+.routine-modes button { flex: 0 1 auto; min-width: 0; padding-inline: .55rem; white-space: nowrap; }
+#review-context, #review-fit { margin: 0; }
+#program-time { text-align: center; }
+@media (max-width: 28rem) {
+  #saved-routines { padding: .9rem; }
+  #routine-recall { gap: .45rem; }
 }

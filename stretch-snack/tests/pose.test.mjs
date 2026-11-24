@@ -108,7 +108,7 @@ test('gripping hands and loaded feet retain their points of contact', () => {
 });
 
 test('reclined arms rest beside the hips with open palms and fingers just above the mat', () => {
-  for (const move of moves.filter(m => m.pose === 'supine' && !m.uses.includes('arms') && !['bridge','ball-back','ball-low-back'].includes(m.animation))) {
+  for (const move of moves.filter(m => m.pose === 'supine' && !m.uses.includes('arms') && !['bridge','ball-back','ball-low-back','bed-edge-hip-stretch','belly-breath','legs-up-wall','reclined-butterfly','iron-cross'].includes(m.animation))) {
     for (const time of [0, 1, 2, 4, 6]) {
       for (const arm of movementPose(move, time).arms) {
         for (const point of [arm.elbow, arm.wrist, arm.palm, arm.thumb, ...arm.fingerJoints.flat()]) {

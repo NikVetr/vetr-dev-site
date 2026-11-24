@@ -150,7 +150,7 @@ test('backtracking and live timing preserve transfer time, the paused state and 
     });
     await page.locator('#toggle-settings').tap();
     await page.locator('#location').selectOption('open-area');
-    await page.getByRole('radio', {name: 'Moderate', exact: true}).check();
+    await page.getByRole('group', {name:'Movement visibility'}).getByRole('radio', {name:'Moderate', exact:true}).check();
     await page.keyboard.press('ArrowRight');
     assert.equal(await page.getByRole('radio', {name: 'Any', exact: true}).isChecked(), true);
     await page.locator('#fit summary').tap();
@@ -190,7 +190,7 @@ test('a backrest confirmation belongs to the current seat when a profile is save
   try {
     await page.locator('#fit summary').click();
     const ball = page.getByLabel('Massage ball', {exact: true});
-    const back = page.getByLabel('Chair with a firm back', {exact: true});
+    const back = page.getByLabel('Firm, high chair back or headrest', {exact: true});
     await ball.check();
     await back.check();
     await page.locator('#save-profile').click();

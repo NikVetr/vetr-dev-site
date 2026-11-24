@@ -1,3 +1,6 @@
+import {prescriptionFor} from './core/plan.js';
+import {doseReading} from './core/program-dose.js';
+import {movementCycleSeconds} from './pose.js';
 import { get, formatTime, readLocal, writeLocal } from './dom.js';
 import { postureChangeSeconds, transferSeconds } from './core/plan.js';
 import { locations } from './core/catalog.js';
@@ -31,7 +34,7 @@ rotation.checked = storedCamera?.rotation !== false;
 get('camera-movement', 'fieldset').disabled = fixed.checked;
 const cameraTravelSeconds = 1.2;
 /** @typedef {import('./camera.js').Camera} Camera */
-/** @typedef {{move:(typeof import('./core/catalog.js').moves)[number], location:string, seconds:number, transition:number, reps?:number}} Step */
+/** @typedef {{move:(typeof import('./core/catalog.js').moves)[number], location:string, seconds:number, transition:number, reps?:number, prescription?:string, dose?:import('./core/library/programs.js').ProgramDose, bed?:boolean}} Step */
 /** @typedef {{steps:Step[], location:string, onFinish:(ids:string[],location:string,usedLocations:string[])=>void, total:number,
  * index:number, elapsed:number, previous:number, transition:number, transferring:boolean, paused:boolean,
  * travelFrom:string|null, visited:Set<string>,
@@ -41,7 +44,7 @@ const cameraTravelSeconds = 1.2;
 let session = null;
 let frame = 0;
 let context;
-let spoken = -1;
+let spoken = -1, spokenSection = '';
 /** @type {Session|null} */
 let resumeAfterSettings = null;
 
@@ -147,6 +150,7 @@ function prepareAudio() {
 
 /** @param {Session} s */
 function showStep(s) {
+  spokenSection='';
   const current = s.steps[s.index];
   get('player-progress', 'span').textContent = 'Movement ' + (s.index + 1) + ' of ' + s.steps.length;
   get('player-name', 'h2').textContent = current.move.name;
@@ -203,11 +207,21 @@ function draw() {
     get('player-cue', 'p').textContent = cue;
     if (!s.paused && audio.value === 'voice') speak(currentInstruction());
   }
+  const dose = step.dose;
+  const activeTime = Math.max(0,s.elapsed-s.transition);
+  const guidance = s.transferring ? null : doseReading(dose,activeTime,step.seconds-step.transition,movementCycleSeconds(step.move));
   const remain = Math.max(0, Math.ceil(duration - s.elapsed));
   if (remain !== s.lastDisplay) {
     if (s.travelFrom) travelClock.textContent = formatTime(Math.ceil(s.transition - s.elapsed)) + ' to change places';
     shorter.disabled = remain <= 10 || duration - s.transition - 10 < 5;
-    longer.disabled = Math.max(duration, step.seconds) + 10 > 180;
+    longer.disabled = Math.max(duration, step.seconds) + 10 > 900;
+    if (dose && !s.transferring) {
+      get('player-cue','p').textContent = [step.move.cue,dose.note,guidance?.label].filter(Boolean).join(' ');
+      if (guidance?.cue && guidance.section !== spokenSection && !s.paused) {
+        if (audio.value === 'voice' && activeTime > .5) speak(guidance.cue);
+        spokenSection=guidance.section;
+      }
+    }
     get('step-clock', 'strong').textContent = formatTime(remain);
     const remainingTotal = remain + s.steps.slice(s.index + 1).reduce((sum, item) => sum + item.seconds, 0);
     get('total-clock', 'span').textContent = formatTime(remainingTotal) + ' total left';
@@ -223,8 +237,8 @@ function draw() {
     renderMovement(
       scene,
       step.move,
-      s.transferring ? 0 : motion.matches ? 2 : Math.max(0, s.elapsed - s.transition),
-      { location: step.location, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
+      s.transferring ? 0 : motion.matches ? 2 : (guidance?.phase ?? activeTime),
+      { location: step.location, bed:step.bed, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
     );
     s.lastDraw = now;
   }
@@ -304,7 +318,7 @@ export function startSession(steps, location, onFinish) {
   const total = steps.reduce((sum, item) => sum + item.seconds, 0);
   const overview = movementCamera(steps[0].move, {zoom:false, rotation:false});
   session = {
-    steps: steps.map(step => ({...step, location:step.location ?? location})),
+    steps: steps.map(step => ({...step, dose:prescriptionFor({...step,id:step.move.id}), location:step.location ?? location})),
     transition: steps[0].transition,
     travelFrom: steps[0].location && steps[0].location !== location ? location : null,
     visited: new Set(),

@@ -1,3 +1,6 @@
+import {drawFixtureProps} from './movements/fixtures-props.js';
+import {fixtureBallCenter} from './movements/fixtures.js';
+import {isFloor} from './core/library/constraints.js';
 import {movementAtLocation} from './core/plan.js';
 import {drawHandNeckProps} from './movements/hand-neck-props.js';
 import {upperBackBallCenter} from './movements/upper-props.js';
@@ -13,7 +16,7 @@ const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
 /** @param {HTMLCanvasElement} canvas
  * @param {import('./pose.js').Movement} move
- * @param {number} seconds @param {{location?:string,dark?:boolean,preview?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
+ * @param {number} seconds @param {{location?:string,bed?:boolean,dark?:boolean,preview?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
   move = movementAtLocation(move, options.location);
   const width = canvas.clientWidth,
@@ -31,7 +34,7 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
   ctx.clearRect(0, 0, width, height);
   const seated = move.pose === 'seated',
-    floor = move.pose === 'supine';
+    floor = isFloor(move.pose);
   const handDetail = !options.preview && workingRegion(move) === 'hands' && width >= 230;
   const camera = options.camera ?? movementCamera(move, {zoom: false});
   const {scale, project} = cameraProjection(camera, width, height, width >= 230 && !options.preview);
@@ -47,7 +50,7 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   ctx.fillRect(-1, -1, 2, 2);
   ctx.restore();
   drawSurface(ctx, width, height, project, (mesh) => {
-    drawEquipment(mesh, pose, move, options.location, seconds);
+    drawEquipment(mesh, pose, move, options.location, seconds, options.bed, camera.yaw);
     drawTrainer(mesh, pose, move);
   });
   const opacity = options.cueOpacity ?? 1;
@@ -107,6 +110,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     drawSurface(ctx, width, height, zoom, (mesh) => {
       drawHandDetail(mesh, pose.side);
       if (move.motion === 'towel-grip') drawTowel(mesh, arm.palm);
+      if (move.animation === 'wrist-lift-bottle') drawFixtureProps(mesh,pose,move,seconds);
       if (move.family === 'hand-neck') drawHandNeckProps(mesh, pose, move, seconds);
       if (move.motion === 'wrist-stretch' || ['prayer-stretch','wrist-extensor-stretch','finger-block','wrist-press'].includes(move.animation))
         drawHandDetail(mesh, -pose.side);
@@ -159,7 +163,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     label(ctx, target, [glutes ? 'Buttocks' : quad ? 'Front thigh' : 'Inner thighs', phase],
       width, height, dark, pose, project, scale);
   } else if (move.motion === 'ball-back') {
-    const center = move.family === 'upper' ? upperBackBallCenter(pose)
+    const center = move.family === 'fixtures' ? fixtureBallCenter(pose,move.animation) : move.family === 'upper' ? upperBackBallCenter(pose)
       : move.family === 'lower' ? lowerBackBallCenter(pose,move) : backBallCenter(pose);
     const target = project(center);
     ctx.beginPath();

@@ -136,7 +136,7 @@ const conflicts = {
 export function movementAtLocation(move, location, prefs) {
   if (move.motion === 'hamstring-step' && prefs)
     return {...move, raisedSupport:fixtureAvailable(prefs, location, 'step') ? 'step' : 'chair'};
-  if (!move.uses?.includes('moving-handhold') || !spaces[location] || spaces[location].stationary) return move;
+  if (!move.uses?.includes('moving-handhold') || move.equipment?.includes('support') || !spaces[location] || spaces[location].stationary) return move;
   return {...move, equipment:[...(move.equipment ?? []), 'support'], uses:[...move.uses, 'arms','grip']};
 }
 

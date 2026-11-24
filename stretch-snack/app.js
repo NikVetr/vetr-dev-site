@@ -6,9 +6,9 @@ import {
   equipment,
   fixedEquipment,
   reachableLocations,
-  sources,
+  sources, programs,
 } from './core/catalog.js';
-import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor } from './core/plan.js';
+import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor, movementAtLocation, usesBed } from './core/plan.js';
 import { setTrainerBody } from './trainer.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
@@ -20,13 +20,13 @@ const moveById = new Map(moves.map((move) => [move.id, move]));
 const profileFields = [
   'limitations',
   'equipment',
-  'discretion',
+  'discretion', 'intensity', 'style',
   'heightCm',
   'armspanCm',
   'avoidIds',
   'favoriteIds',
 ];
-const blankProfile = { limitations: [], equipment: [], discretion: 'quiet', avoidIds: [], favoriteIds: [] };
+const blankProfile = { limitations: [], equipment: [], discretion: 'quiet', intensity:'gentle', style:'any', avoidIds: [], favoriteIds: [] };
 let profile = readLocal('profile', null);
 const portableOnly = (items) => items.filter(id => !fixedEquipment.includes(id));
 if (profile?.equipment) profile.equipment = portableOnly(profile.equipment);
@@ -67,7 +67,7 @@ let plan,
 /** @type {import('./camera.js').Camera | undefined} */
 let previewCamera;
 const formError = get('form-error', 'p');
-const poseLabel = { seated: 'Seated', standing: 'Standing', supine: 'Reclined' };
+const poseLabel = { seated: 'Seated', standing: 'Standing', supine: 'Reclined', prone:'Face down', 'side-lying':'Side lying', 'hands-and-knees':'Hands and knees', kneeling:'Kneeling', 'long-sitting':'Legs extended' };
 const poseName = (move) => poseLabel[move.pose] || move.pose;
 const librarySelect = get('library-query', 'input');
 const meas = ['heightCm', 'armspanCm', 'forwardCm', 'sideCm'];
@@ -118,8 +118,8 @@ function drawPreview(now = performance.now()) {
   if (repaint) {
     if (previous && previewPlaying) previewTime += Math.min(now - previous, 160) / 1000;
     previous = now;
-    renderMovement(previewCanvas, move, previewTime, {
-      location: selectedPlace,
+    renderMovement(previewCanvas, movementAtLocation(move,selectedPlace,prefs), previewTime, {
+      location: selectedPlace, bed:usesBed(move,prefs,selectedPlace),
       dark: document.documentElement.dataset.theme === 'dark',
       camera: previewCamera,
     });
@@ -326,7 +326,7 @@ function showPlaces() {
     if (!here) {
       const extras = make('div', '', 'place-equipment');
       const seated = location.endsWith('seat');
-      const fixtures = fixedEquipment.filter(key => key === 'firm-back' ? seated : !seated && (key !== 'step' || location === 'open-area'));
+      const fixtures = fixedEquipment.filter(key => key === 'table' || (key === 'firm-back' ? seated : ['wall','doorway','support'].includes(key) ? !seated : location === 'open-area'));
       for (const key of fixtures) {
         const check = make('input');
         check.type = 'checkbox';
@@ -361,6 +361,8 @@ function showPlaces() {
 }
 function showFields() {
   place.value = prefs.location;
+  for (const radio of get('intensity','div').querySelectorAll('input')) radio.checked = radio.value === prefs.intensity;
+  get('movement-style','select').value = prefs.style;
   for (const option of visibilityOptions) option.checked = option.value === prefs.discretion;
   const targetNodes = Object.entries(targets).map(([id, label]) => {
     const item = button(label, () => {
@@ -413,6 +415,11 @@ function showTimes(custom = false) {
   get('time-options', 'div').replaceChildren(...items);
 }
 function bindSettings() {
+  for (const radio of get('intensity','div').querySelectorAll('input')) radio.addEventListener('change',()=>{
+    prefs.intensity=radio.value; buildPlan();
+  });
+  const style=get('movement-style','select');
+  style.addEventListener('change',()=>{prefs.style=style.value; buildPlan();});
   for (const [id, label] of Object.entries(locations)) place.add(new Option(label, id));
   place.addEventListener('change', () => {
     prefs.location = place.value;
@@ -594,7 +601,12 @@ function showEasier(panel, easier, label, swap) {
 function editedRoute(index, replacement) {
   const rows = plan.steps.map((s, i) => ({...s, seconds: s.seconds - plan.transitionSeconds[i]}));
   if (index < 0) rows.push(replacement);
-  else if (replacement) rows[index] = replacement;
+  else if (replacement) {
+    const original = rows[index];
+    if (original.prescription && original.id === replacement.id && original.seconds === replacement.seconds && original.reps === replacement.reps)
+      replacement.prescription = original.prescription;
+    rows[index] = replacement;
+  }
   else rows.splice(index, 1);
   const places = plan.places.map(p => p.location);
   rows.sort((a, b) => places.indexOf(a.location) - places.indexOf(b.location));
@@ -615,7 +627,7 @@ function showEditorChoice(location) {
   get('edit-cue', 'p').textContent = moveById.get(id).cue;
   const route = editedRoute(editing, {id, location: editPlace.value, seconds: 0});
   const budget = prefs.seconds - route.steps.reduce((total, row) => total + row.seconds, 0);
-  const max = Math.min(180 - route.transfer, budget);
+  const max = Math.min(900 - route.transfer, budget);
   editSeconds.max = String(Math.max(0, max));
   get('edit-max','p').textContent = (route.transfer ? 'About ' + formatTime(route.transfer) + ' for the transfer. ' : '') +
     (max >= 5 ? 'Up to ' + max + ' seconds of movement fit.' : 'Free up ' + (5 - max) + ' more seconds to fit this movement.');
@@ -663,7 +675,10 @@ bindSettings();
 setupSavedRoutines({
   prefs,
   getPlan: () => plan,
-  apply: (updated) => {
+  apply: (updated, budget) => {
+    if (budget !== prefs.seconds) {
+      prefs.seconds=budget; get('custom-time','input').value=String(budget); showTimes(true);
+    }
     customSteps = updated.steps;
     plan = updated;
     renderPlan();
@@ -696,8 +711,9 @@ start.addEventListener('click', () => {
   if (!plan?.steps.length) return;
   const steps = plan.steps.map((s, i) => ({
     ...s,
-    move: moveById.get(s.id),
+    move: movementAtLocation(moveById.get(s.id),s.location,prefs),
     transition: plan.transitionSeconds[i],
+    bed:usesBed(moveById.get(s.id),prefs,s.location),
   }));
   startSession(steps, prefs.location, (ids, location, usedLocations) =>
     showFeedback(
@@ -723,7 +739,7 @@ for (const choice of bodyChoices) {
 }
 buildPlan();
 watchPreview();
-Object.assign(window, { StretchSnack: { submit, reviewRoutine } });
+Object.assign(window, { StretchSnack: { submit, reviewRoutine, programs } });
 async function prepareOffline() {
   const status = get('offline-status', 'output');
   if (!('serviceWorker' in navigator)) {

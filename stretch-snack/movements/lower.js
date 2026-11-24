@@ -776,3 +776,5 @@ export function lowerPose(move, seconds, basePose) {
   if (move.pose === 'supine') floor(p, id, t);
   return p;
 }
+
+export {moveUpper, torso, placeLeg, orientFoot};

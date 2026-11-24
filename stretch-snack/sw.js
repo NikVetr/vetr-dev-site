@@ -1,6 +1,6 @@
 // Cache one complete, versioned shell. An updated worker waits until tabs using
 // the previous version close, keeping UI and catalog versions together.
-const version = 'stretch-snack-13';
+const version = 'stretch-snack-14';
 const shell = [
   './index.html',
   './style.css',
@@ -17,6 +17,21 @@ const shell = [
   './equipment.js',
   './form-motion/model.js',
   './form-motion/retarget.js',
+  './core/library/constraints.js',
+  './core/library/programs.js',
+  './core/library/program-sources.js',
+  './core/library/fixtures.js',
+  './core/library/floor.js',
+  './core/library/yoga.js',
+  './core/library/mobility.js',
+  './core/program-dose.js',
+  './movements/floor-rig.js',
+  './movements/fixtures.js',
+  './movements/fixtures-props.js',
+  './movements/floor.js',
+  './movements/yoga.js',
+  './movements/mobility.js',
+  './movements/mobility-props.js',
   './core/library/hand-neck.js',
   './core/library/lower.js',
   './core/library/sources.js',

@@ -1,3 +1,8 @@
+import {isFloor} from './core/library/constraints.js';
+import {drawFixtureProps} from './movements/fixtures-props.js';
+import {drawFloorProps} from './movements/floor.js';
+import {drawYogaProps} from './movements/yoga.js';
+import {drawMobilityProps} from './movements/mobility-props.js';
 import {drawHandNeckProps} from './movements/hand-neck-props.js';
 import {drawUpperProps} from './movements/upper-props.js';
 import {drawLowerProps} from './movements/lower-props.js';
@@ -97,11 +102,11 @@ export const backBallRadius = 0.029;
 export function backBallCenter(pose) {
   return [-0.082, 0.83 + 0.01 * pose.a, -0.16];
 }
-export function drawEquipment(mesh, p, move, location, seconds) {
+export function drawEquipment(mesh, p, move, location, seconds, bed=false, yaw=undefined) {
   const metal = '#9aaead',
     cushion = '#adbfba',
     accent = '#c98a48';
-  if (move.pose === 'seated') {
+  if (move.pose === 'seated' && move.animation !== 'seated-hip-flexor') {
     pad(mesh, [0, 0.419, 0.071], 0.245, 0.241, 0.03, 0.046, cushion);
     for (const s of [-1, 1]) {
       for (const z of [-0.13, 0.235])
@@ -128,12 +133,18 @@ export function drawEquipment(mesh, p, move, location, seconds) {
         rod(mesh, [s * 0.266, 0.615, -0.145], [s * 0.266, 0.615, 0.19], 0.016, cushion);
       }
   }
-  if (move.pose === 'supine') pad(mesh, [0, -0.017, 0.012], 0.385, 1.035, 0.017, 0.054, '#a3c4bc');
+  if (bed && move.animation !== 'bed-edge-hip-stretch') pad(mesh,[0,-.065,0],.47,1.035,.065,.06,'#c3ccc8');
+  else if ((isFloor(move.pose) || move.uses?.includes('floor-contact')) && move.animation !== 'bed-edge-hip-stretch')
+    pad(mesh,[0,-.017,.012],.385,1.035,.017,.054,'#a3c4bc');
   if (move.motion === 'step-up') pad(mesh, [0, 0.07, 0.426], 0.282, 0.203, 0.07, 0.018, cushion);
   if (move.equipment?.includes('support') && move.animation !== 'pendulum') {
     rod(mesh, [0.32, 0.009, 0.4], [0.32, 1.055, 0.4], 0.015, metal);
     rod(mesh, [0.32, 1.055, 0.015], [0.32, 1.055, 0.55], 0.02, metal);
   }
+  if (move.family === 'fixtures') return drawFixtureProps(mesh,p,move,seconds,yaw);
+  if (move.family === 'floor') return drawFloorProps(mesh,p,move,seconds);
+  if (move.family === 'yoga') return drawYogaProps(mesh,p,move,seconds);
+  if (move.family === 'mobility') return drawMobilityProps(mesh,p,move,seconds,yaw);
   if (move.family === 'hand-neck') return drawHandNeckProps(mesh, p, move, seconds);
   if (move.family === 'upper') return drawUpperProps(mesh, p, move, seconds);
   if (move.family === 'lower') return drawLowerProps(mesh, p, move, seconds);

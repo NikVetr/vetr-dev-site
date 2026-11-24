@@ -1,5 +1,5 @@
-import { locations, moves } from './core/catalog.js';
-import { reviewRoutine, submit } from './core/plan.js';
+import { locations, moves, programs, sources } from './core/catalog.js';
+import { reviewRoutine, submit, prescriptionFor } from './core/plan.js';
 import { formatTime, get, make, readLocal, setPressed, writeLocal } from './dom.js';
 
 const byId = new Map(moves.map(move => [move.id, move]));
@@ -7,7 +7,7 @@ const key = 'saved-routines';
 const sameName = (a, b) => a.trim().toLowerCase() === b.trim().toLowerCase();
 const stored = () => readLocal(key, []);
 
-/** @param {{prefs: {location: string, seconds: number}, getPlan: () => ReturnType<typeof submit> | null, apply: (plan: ReturnType<typeof submit>) => void}} options */
+/** @param {{prefs: {location: string, seconds: number}, getPlan: () => ReturnType<typeof submit> | null, apply: (plan: ReturnType<typeof submit>, budget:number) => void}} options */
 export function setupSavedRoutines({ prefs, getPlan, apply }) {
   const dialog = get('saved-routines', 'dialog');
   const name = get('routine-name', 'input');
@@ -21,6 +21,9 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
   const browse = get('browse-routines', 'button');
   const saveMode = get('name-routine', 'button');
   const recall = get('routine-recall', 'section');
+  const programTab = get('browse-programs','button'), programTime = get('program-time','button');
+  const programInfo = get('program-info','div');
+  let choosingProgram = false, budget = prefs.seconds, draftSeconds = 0;
   let rows = [];
 
   function updateSaveButton() {
@@ -34,7 +37,10 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     form.hidden = !saving;
     recall.hidden = saving;
     setPressed(saveMode, saving);
-    setPressed(browse, !saving);
+    setPressed(browse, !saving && !choosingProgram);
+    setPressed(programTab,!saving && choosingProgram);
+    programInfo.hidden = !choosingProgram || saving;
+    get('delete-routine','button').hidden = choosingProgram;
     if (saving) {
       const plan = getPlan();
       get('save-routine-summary', 'p').textContent = plan?.steps.length
@@ -50,7 +56,9 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
       const id = movement.value;
       if (!id) return [];
       const row = { id, location: place.value, seconds: duration.valueAsNumber };
-      if (id === original.id && original.reps !== undefined) return [{...row, reps: original.reps}];
+      if (id === original.id) return [{...row,
+        ...(original.reps ? {reps:original.reps} : {}),
+        ...(original.prescription && row.seconds === original.seconds ? {prescription:original.prescription} : {})}];
       return [row];
     });
   }
@@ -59,11 +67,12 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     use.disabled = true;
     let report;
     try {
-      report = reviewRoutine({...prefs, steps});
+      report = reviewRoutine({...prefs, seconds:budget, steps});
     } catch (error) {
       fit.textContent = error.message;
       return;
     }
+    get('review-context', 'p').textContent = report.places.map(p => locations[p.location]).join(' · ');
     let included = 0;
     for (const row of rows) {
       const step = row.movement.value ? report.rows[included++] : null;
@@ -75,11 +84,14 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
       row.timingNote.textContent = step?.transitionSeconds ? 'Includes ' + step.transitionSeconds + ' s to reach the movement.' : '';
     }
     const problems = report.rows.filter(row => row.issues.length || row.needsTransferTime).length;
-    const messages = [formatTime(report.totalSeconds) + ' of ' + formatTime(prefs.seconds) + ' available.'];
+    const messages = [formatTime(report.totalSeconds) + ' of ' + formatTime(budget) + ' available.'];
     if (problems) messages.push('Edit or omit ' + problems + (problems === 1 ? ' marked step.' : ' marked steps.'));
-    if (report.overBudgetSeconds) messages.push('Shorten by ' + report.overBudgetSeconds + ' seconds or omit a step.');
+    if (report.overBudgetSeconds && !choosingProgram) messages.push('Shorten by ' + report.overBudgetSeconds + ' seconds or omit a step.');
     if (!steps.length) messages.push('Choose at least one movement.');
     fit.textContent = messages.join(' ');
+    draftSeconds=report.totalSeconds;
+    programTime.hidden = !choosingProgram || !report.overBudgetSeconds;
+    programTime.textContent = 'Use '+formatTime(draftSeconds)+' for this routine';
     use.disabled = !steps.length || !report.fits;
   }
   function editRow(original, i, report) {
@@ -88,7 +100,13 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     const movement = make('select'), duration = make('input'), place = make('select');
     const move = byId.get(original.id);
     const title = make('strong', (i + 1) + '. ' + (move?.name ?? original.id));
-    if (original.reps) title.append(make('small', ' · ' + original.reps + ' saved reps'));
+    if (original.reps) title.append(make('small', ' · ' + original.reps + ' reps'));
+    const dose=prescriptionFor(original);
+    if (dose) {
+      const detail = [dose.sides === 2 ? formatTime(dose.seconds)+' per side.' : '', dose.protocol ? '10 gentle pulses before each hold of 10, 20 and 30 seconds.' : '',dose.note].filter(Boolean).join(' ');
+      if (detail) entry.append(make('p',detail,'hint'));
+      if (move?.intensity === 'vigorous') entry.append(make('p',move.caution,'hint'));
+    }
     const movementLabel = make('label', 'Movement', 'field');
     const placeLabel = make('label', 'Place', 'field review-place');
     const timeLabel = make('label', 'Step seconds', 'field');
@@ -128,7 +146,7 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     placeChoices(original.location ?? prefs.location);
     duration.type = 'number';
     duration.min = '5';
-    duration.max = '180';
+    duration.max = '900';
     duration.step = '1';
     duration.required = true;
     duration.value = String(original.seconds);
@@ -142,7 +160,8 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     duration.addEventListener('input', checkDraft);
     movementLabel.append(movement);
     timeLabel.append(duration, timingNote);
-    entry.append(title, movementLabel, timeLabel, issue);
+    entry.prepend(title);
+    entry.append(movementLabel, timeLabel, issue);
     placeLabel.append(place);
     // Single-place routines keep the original two-field editing layout.
     if (selectedPlaces.length > 1 || !selectedPlaces.includes(original.location ?? prefs.location)) {
@@ -152,15 +171,32 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     return {original, movement, place, duration, issue, timingNote};
   }
   function showRoutine() {
-    const selected = stored().find(entry => entry.name === choice.value);
+    const program = choosingProgram && programs.find(p=>p.id===choice.value);
+    const selected = program || stored().find(entry => entry.name === choice.value);
+    programInfo.replaceChildren();
+    programTime.hidden = true;
+    if (program) {
+      const links=make('p');
+      for (const key of program.sourceIds) {
+        const a=make('a',sources[key].title); a.href=sources[key].url; a.target='_blank'; a.rel='noopener';
+        if (links.childNodes.length) links.append(' · ');
+        links.append(a);
+      }
+      programInfo.append(make('p',program.summary));
+      const details=make('details');
+      const summary=make('summary',program.intensity+' · '+program.attribution+' · Sources');
+      details.append(summary,links);
+      for (const note of program.notes) details.append(make('p',note));
+      if (program.estimated) details.append(make('p','Repetition-only drills use an estimated four seconds per repetition. You can edit the timer.'));
+      programInfo.append(details);
+    }
     list.replaceChildren();
     rows = [];
     use.disabled = true;
     get('review-context', 'p').textContent = '';
     if (!selected) { fit.textContent = 'Select a saved routine.'; return; }
     try {
-      const report = reviewRoutine({...prefs, steps: selected.steps});
-      get('review-context', 'p').textContent = report.places.map(p => locations[p.location]).join(' · ') + ' · ' + formatTime(prefs.seconds) + ' available';
+      const report = reviewRoutine({...prefs, seconds:budget, ...(program ? {programId:program.id} : {steps:selected.steps})});
       rows = report.rows.map((step, i) => editRow(step, i, report));
       checkDraft();
     } catch (error) {
@@ -168,6 +204,7 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     }
   }
   function refresh(preferred = '') {
+    choosingProgram=false; budget=prefs.seconds;
     const entries = stored();
     choice.replaceChildren(...entries.map(entry => new Option(entry.name, entry.name)));
     if (entries.some(entry => entry.name === preferred)) choice.value = preferred;
@@ -179,9 +216,19 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     refresh(choice.value);
     dialog.showModal();
   });
-  browse.addEventListener('click', () => showMode(false));
+  function showPrograms() {
+    choosingProgram=true; budget=prefs.seconds;
+    choice.replaceChildren(...programs.map(p=>new Option(p.name,p.id)));
+    showMode(false);
+  }
+  programTab.addEventListener('click',showPrograms);
+  get('open-programs','button').addEventListener('click',()=>{
+    name.value=''; browse.disabled=!stored().length; showPrograms(); dialog.showModal();
+  });
+  programTime.addEventListener('click',()=>{budget=draftSeconds; checkDraft();});
+  browse.addEventListener('click', () => refresh());
   saveMode.addEventListener('click', () => showMode(true));
-  choice.addEventListener('change', () => { notice.textContent = ''; showRoutine(); });
+  choice.addEventListener('change', () => { budget=prefs.seconds; notice.textContent = ''; showRoutine(); });
   name.addEventListener('input', updateSaveButton);
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -212,7 +259,7 @@ export function setupSavedRoutines({ prefs, getPlan, apply }) {
     try {
       const steps = draft();
       if (!steps.length) return;
-      apply(submit({...prefs, steps}));
+      apply(submit({...prefs, seconds:budget, steps}),budget);
       dialog.close();
     } catch (error) {
       fit.textContent = error.message;

@@ -49,7 +49,7 @@
             <legend>Time available</legend>
             <div class="time-row" id="time-options"></div>
             <label class="custom-time" hidden
-              >Seconds <input id="custom-time" type="number" min="15" max="900" step="1" value="120"
+              >Seconds <input id="custom-time" type="number" min="15" max="7200" step="1" value="120"
             /></label>
           </fieldset>
           <fieldset>
@@ -64,9 +64,18 @@
               <label><input type="radio" name="discretion" value="any" /><span>Any</span></label>
             </div>
           </fieldset>
+          <fieldset>
+            <legend>How demanding?</legend>
+            <div class="visibility-choices" id="intensity">
+              <label><input type="radio" name="intensity" value="gentle" checked /> Gentle</label>
+              <label><input type="radio" name="intensity" value="moderate" /> Moderate</label>
+              <label><input type="radio" name="intensity" value="vigorous" /> Vigorous</label>
+            </div>
+          </fieldset>
           <details id="fit">
             <summary>Space, equipment &amp; mobility</summary>
             <div class="details-body">
+              <label class="field">Movement style<select id="movement-style"><option value="any">Any style</option><option value="yoga">Yoga</option><option value="mobility">Mobility drills</option></select></label>
               <fieldset>
                 <legend>Mobility preferences</legend>
                 <div class="check-list" id="limitations"></div>
@@ -141,7 +150,8 @@
             <h2>Movement library</h2>
             <p id="library-description">Choose favorites or leave movements out of your routines.</p>
           </div>
-          <button id="open-library" type="button">Browse movements <span aria-hidden="true">↗</span></button>
+          <div class="actions"><button id="open-programs" type="button">Browse programs</button>
+          <button id="open-library" type="button">Browse movements <span aria-hidden="true">↗</span></button></div>
         </div>
         <section class="panel" id="later" hidden aria-labelledby="later-title">
           <h2 id="later-title">How are you feeling now?</h2>
@@ -166,10 +176,11 @@
     </dialog>
     <dialog id="saved-routines" aria-labelledby="saved-title">
       <div class="dialog-head">
-        <h2 id="saved-title">Saved routines</h2>
+        <h2 id="saved-title">Routines</h2>
         <button type="button" data-close="saved-routines" aria-label="Close saved routines">✕</button>
       </div>
       <div class="time-row routine-modes" aria-label="Saved routine actions" role="group">
+        <button type="button" id="browse-programs">Programs</button>
         <button type="button" id="browse-routines">Use saved</button>
         <button type="button" id="name-routine">Save current</button>
       </div>
@@ -180,9 +191,11 @@
       </form>
       <section id="routine-recall">
         <label class="field">Choose a routine<select id="routine-choice"></select></label>
+        <div id="program-info" hidden></div>
         <p class="hint" id="review-context"></p>
         <ol id="review-steps"></ol>
         <p class="hint" id="review-fit" role="status"></p>
+        <button type="button" id="program-time" hidden></button>
         <div class="recall-actions">
           <button type="button" id="delete-routine" aria-label="Delete saved routine">Delete</button>
           <button type="button" class="primary" id="use-routine">Use routine</button>
@@ -201,7 +214,7 @@
         <div id="edit-easier" class="easier-option" hidden></div>
         <p id="edit-cue" class="hint"></p>
         <label class="field"
-          >Movement seconds<input id="edit-seconds" type="number" min="5" max="180" step="1" required /></label
+          >Movement seconds<input id="edit-seconds" type="number" min="5" max="900" step="1" required /></label
         ><label class="field"
           >Repetitions <small>Optional target at a comfortable pace</small
           ><input id="edit-reps" type="number" min="1" max="100" step="1"

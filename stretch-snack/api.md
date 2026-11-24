@@ -29,19 +29,22 @@ All fields are optional. Unknown fields and invalid IDs produce errors.
 | Field | Accepted values or units |
 | --- | --- |
 | `location` | `plane-seat` (default), `train-seat`, `roomy-seat`, `plane-lavatory`, `stall`, `open-area`. The `roomy-seat` and `open-area` presets assume a stationary surface. |
-| `seconds` | Integer 15–900, default 120, including planned travel and changes of posture. |
+| `seconds` | Integer 15–7,200, default 120, including planned travel and changes of posture. |
+| `intensity` | Maximum demand: `gentle` (default), `moderate`, or `vigorous`. |
+| `style` | Style for automatic choices: `any` (default), `yoga`, or `mobility`. |
+| `programId` | Named program ID from `window.StretchSnack.programs` or the catalog export. Select this or supply `steps`. |
 | `targets` | List drawn from `neck`, `shoulders`, `upper-back`, `chest`, `hands` (and forearms), `hips`, `knees` (and thighs), `calves` (and feet), `lower-back`. Empty requests a mixed routine. |
 | `discretion` | `quiet` (default), `moderate`, `any`. A ceiling on how conspicuous a movement may be. |
-| `equipment` | List drawn from `band`, `towel`, `ball`, `roller`, `support`, `firm-back`, `step`, `mat`. Portable items travel with you. A fixed handhold, firm seat back or low fixed step listed here applies at the current place. |
+| `equipment` | Portable items include `band`, `band-anchor`, `towel`, `ball`, `roller`, `mat` and `bottle`. Fixed items include `support`, `firm-back`, `step`, `wall`, `doorway`, `table`, `chair` and `bed`. Fixed items listed here apply at the current place. |
 | `equipmentByLocation` | Optional map from selected place IDs to fixed equipment available there, for example `{"plane-lavatory":["support"]}`. Standing toe lifts can fit a moving-vehicle location with a confirmed fixed handhold. The usual balance, grip and mobility checks apply. |
-| `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. A mat is optional. |
-| `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`. The balance and supported-back settings select seated movements compatible with those preferences. |
+| `allowFloor` | Boolean, default false. Floor routines need an open, stationary space and explicit opt-in. Individual moves can require a mat. A confirmed firm bed in an open, stationary space also allows compatible gentle lying or long-sitting movements while staying off the ground. |
+| `limitations` | List drawn from `stay-seated`, `stay-standing`, `back-support`, `poor-balance`, `no-floor`, `no-leg-movement`, `no-arm-movement`, `no-twisting`, `no-overhead`, `limited-grip`, `hands-loaded`, `hip-precautions`, `no-kneeling`, `no-prone`, `no-forward-bend`, `no-inversion`. The balance and supported-back settings select seated movements compatible with those preferences. |
 | `heightCm`, `armspanCm` | Optional measurements in cm, 50–280 and 40–300, both default 170. Used to scale estimated movement clearance. |
 | `forwardCm`, `sideCm` | Optional measurements in cm, 0–1,000. Free space in front of the knees and on each side beyond the shoulder. Overrides the preset at the current location. Use the smaller of unequal clearances. |
 | `availableLocations` | Locations the traveler considers reachable **now**. The planner checks compatible locations on that route, e.g. a lavatory from an airplane seat. Empty by default. |
 | `avoidIds`, `favoriteIds` | Movement ID lists. An avoided movement is ineligible. Favorites take priority among eligible movements. |
 | `feedback` | Map of movement ID to `helped`, `poor-fit`, or `uncomfortable`. The first two influence ranking. Uncomfortable excludes the movement until the feedback is changed. |
-| `steps` | Optional ordered list of `{id, location?, seconds, reps?}`. An omitted location resolves to the easiest selected place where that movement fits. Step times are integers 5–180, including any transfer, with at least five seconds left to move. Optional target repetitions are integers 1–100. Keep each location’s steps together in effort order. Repeated movements are allowed. An empty list empties the routine. |
+| `steps` | Optional ordered list of `{id, location?, seconds, reps?}`. An omitted location resolves to the easiest selected place where that movement fits. Step times are integers 5–900, including any transfer, with at least five seconds left to move. Optional target repetitions are integers 1–100. Keep each location’s steps together in effort order. Repeated movements are allowed. An empty list empties the routine. |
 
 ## Result
 
@@ -59,6 +62,16 @@ When a movement is in another place, the player shows the destination and the ti
 
 Use **−10 s** or **+10 s** under the clock to adjust the current movement for this session. Both clocks update immediately. The player preserves at least five seconds of movement time after a transfer. The feedback screen lists movements whose active timer ran for at least one second.
 
+## Programs
+
+**Browse programs** opens 12 ordered yoga and mobility routines. Each gives the source, adaptations, movement order and any per-side or repetition instructions. The review checks every step against your settings. You can substitute or omit movements and explicitly accept a longer session. Changing a step’s duration or movement removes its original timed protocol. *Starting To Stretch* cues ten gentle pulses followed by a 10-, 20- and then 30-second hold in successive rounds. Repetition-only drills with estimated times are identified in the program notes.
+
+For example, check a chair routine with the same JSON used by the browser. The result gives the active dose plus setup time for each step. A saved `prescription` such as `travel-seat-yoga/1` identifies the source step and restores its cues when the duration matches.
+
+```sh
+echo '{"programId":"travel-seat-yoga","location":"roomy-seat","discretion":"any","seconds":120}' | node stretch-snack/cli.mjs --review
+```
+
 ## Saved routines
 
 In **Your routine → Saved routines**, save an ordered sequence with its locations, step times and repetition targets on this device. Reopen it to check each movement against its saved place, your current mobility settings, confirmed equipment and available time. A routine saved before per-step places were introduced uses the easiest currently available fit for each movement. You can choose a compatible substitute, omit a step, or edit its time before selecting **Use routine**. Substituting clears that step’s original repetition target. To keep the adaptation permanently, save it under a new name or explicitly replace the saved copy. Profile defaults and session check-ins are stored separately.
@@ -73,7 +86,7 @@ The report includes `fits`, `totalSeconds`, `overBudgetSeconds`, `places`, `elig
 
 ## Interpretation and sources
 
-Each of the 191 posture and equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
+Each of the 327 posture and equipment variants carries its own instruction, precaution, source and evidence note. The app's sequences, time budgets and clearance multipliers are design estimates. They target a comfortable, gentle break during travel. Named sources describe how the movements are performed. They have not reviewed this app or established comparative benefits among these variants.
 
 A small crossover trial found less immediate discomfort when seated office workers interrupted four hours of sitting with hourly standing or pedaling. The study did not test individual in-seat stretches or these short routines. Feedback records personal preference and experience. [Benzo et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29608539/)
 
