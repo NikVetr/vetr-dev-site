@@ -9,6 +9,7 @@ import {
   sources,
 } from './core/catalog.js';
 import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor } from './core/plan.js';
+import { setTrainerBody } from './trainer.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
 import { sessionCamera, startSession } from './session.js';
@@ -705,6 +706,21 @@ start.addEventListener('click', () => {
     ),
   );
 });
+const bodyChoices = get('trainer-body', 'fieldset').querySelectorAll('input');
+const savedBody = readLocal('trainer-body', 'female');
+for (const choice of bodyChoices) {
+  if (choice.value === savedBody) {
+    choice.checked = true;
+    setTrainerBody(choice.value);
+  }
+  choice.addEventListener('change', () => {
+    if (!choice.checked) return;
+    setTrainerBody(choice.value);
+    writeLocal('trainer-body', choice.value);
+    restartPreview();
+    document.dispatchEvent(new Event('stretchbodychange'));
+  });
+}
 buildPlan();
 watchPreview();
 Object.assign(window, { StretchSnack: { submit, reviewRoutine } });

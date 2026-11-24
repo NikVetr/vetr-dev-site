@@ -129,12 +129,13 @@ export function movementCamera(move, {zoom = true, rotation = true} = {}) {
   // Within each posture the overview fits even the farthest reach or step.
   // Sit-to-stand starts in a chair and ends at standing height.
   const sittingThroughout = seated && move.animation !== 'sit-to-stand';
-  const overviewY = floor ? 0.20 : sittingThroughout ? 0.81 : 0.91;
+  const overhead = motion === 'overhead-reach';
+  const overviewY = floor ? 0.20 : sittingThroughout ? 0.85 : 0.91;
   const full = {
     yaw, pitch, overviewY, centerY: overviewY,
     centerZ: floor ? 0.012 : seated ? 0.29 : 0.09,
     width: floor ? 2.36 : seated ? 1.63 : 1.70,
-    height: floor ? 1.92 : sittingThroughout ? 1.82 : 2.06, offsetX: 0,
+    height: floor ? 1.92 : sittingThroughout ? 1.90 : 2.06, offsetX: 0,
   };
   if (!zoom) return full;
   if (move.family) return {...full, ...workingFrame(move)};
@@ -146,7 +147,7 @@ export function movementCamera(move, {zoom = true, rotation = true} = {}) {
   if (floor) return motion === 'knee-roll'
     ? frame(0.16, 0.14, 1.72, 1.40)
     : frame(0.20, motion === 'pelvic-tilt' ? 0.10 : 0.32, 1.45, 0.85);
-  if (motion === 'overhead-reach') return frame(1.00, 0.10, 1.34, 1.37);
+  if (overhead) return frame(1.04, 0.10, 1.34, 1.45);
   if (motion === 'knee-extend' || motion === 'quad-set' || motion === 'hamstring-lean')
     return frame(motion === 'hamstring-lean' ? 0.61 : 0.40, 0.36, 1.40, motion === 'hamstring-lean' ? 1.38 : 0.99);
   if (motion === 'glute-squeeze' || motion === 'seated-pelvic-tilt') return frame(0.63 + lift, 0.07, 1.16, 0.96);

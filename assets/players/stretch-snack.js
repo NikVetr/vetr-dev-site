@@ -25,7 +25,7 @@ export function prepare() {
     const next = steps[(i + 1) % steps.length];
     // Reach the feet early and leave them late enough to show the whole knee
     // extension. This shifts the timing of one continuous pan across the seam.
-    const atBoundary = step.move.motion === 'knee-extend' ? 1/6 : next.move.motion === 'knee-extend' ? 2/3 : 1/2;
+    const atBoundary = step.move.motion === 'knee-extend' ? 1/6 : next.move.motion === 'knee-extend' ? 4/5 : 1/2;
     return {from:step.camera, to:next.camera, atBoundary};
   });
   return {

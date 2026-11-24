@@ -200,6 +200,8 @@ function seatedFoot(p, id, t) {
     if (angle && id !== 'ankle-alphabet' && id !== 'heel-toe-tap') ankle = heelPivot(ankle, angle, yaw, roll);
     placeLeg(leg, ankle, Z, 0.39, 0.402);
     orientFoot(leg, angle, yaw, roll);
+    if (['toe-curl','ankle-tilt','band-ankle-in','band-ankle-out','foot-dome','toe-spread','towel-scrunch'].includes(id))
+      leg.heelHeight = 0;
   }
   p.activation = id === 'leg-cross-press' || id === 'foot-press-up' ? load : hold;
 }
@@ -289,9 +291,18 @@ function seated(p, id, t) {
     for (const leg of p.legs) {
       const work = leg === working ? hold : 0;
       const end = [leg.s * 0.124, 0.078 + (band ? 0.275 : 0) * work, 0.49 + (band ? 0.46 : 0.35) * work];
-      const angle = -(band ? 0.22 : 0.44) * work;
+      let angle = -0.44 * work;
       placeLeg(leg, band ? end : heelPivot(end, angle), Z, 0.39, 0.402);
+      if (band) {
+        // Once the shin swings forward, the heel leads the press and the
+        // sole faces the band. The resting foot stays flat.
+        angle = -Math.max(0, Math.atan2(leg.ankle[2] - leg.knee[2], leg.knee[1] - leg.ankle[1]));
+      }
       orientFoot(leg, angle);
+      if (!band) leg.heelHeight = 0;
+      if (band && leg === working) {
+        p.bandFootLoop = p.arms.map(arm => add(leg.toe, pitch([arm.s * 0.045, -0.016, -0.008], angle)));
+      }
     }
     if (band) for (const arm of p.arms) palmAt(arm, [arm.s * 0.194, 0.63, 0.27], [arm.s * 0.05, -0.2, 0.92], 1, 0.77);
     else chairHands(p);
@@ -463,7 +474,8 @@ function standing(p, id, t, move) {
   if (id === 'side-lunge-stretch') shift = [side * 0.188 * hold, -0.07 - 0.081 * hold, 0];
   if (id === 'calf-stretch-step') shift = [0, 0.103 - 0.05 * hold, 0];
   if (id === 'leg-swing') shift = [-side * 0.072 * setup, 0.089 - 0.011 * setup, 0];
-  if (['hip-back', 'leg-curl', 'march', 'one-leg-stand', 'clock-tap', 'quad-stretch', 'side-step'].includes(id))
+  if (id === 'hip-back') shift = [-side * 0.047 * setup, 0, 0];
+  if (['leg-curl', 'march', 'one-leg-stand', 'clock-tap', 'quad-stretch', 'side-step'].includes(id))
     shift = [-side * 0.047 * setup, -0.016 * setup, 0];
   if (id === 'tandem-stand') shift = [0, -0.02 * setup, 0.015 * setup];
   torso(p, shift, hinge, 0, 0, pelvic);
@@ -505,11 +517,16 @@ function standing(p, id, t, move) {
           yaw = side * 0.13 * Math.sin(2 * Math.PI * phase) * setup;
           roll = side * 0.34 * Math.sin(2 * Math.PI * phase) * setup;
           ankle = heelPivot(add(ankle, [0, 0.035 * arch(setup), 0.12 * setup]), angle, yaw, roll);
+          leg.heelHeight = 0.035 * arch(setup);
           break;
-        case 'hip-back':
-          ankle = add(ankle, [0, 0.081 * hold, -0.28 * hold]);
-          angle = 0.16 * hold;
+        case 'hip-back': {
+          // Trace a long arc from the hip. A little clearance on departure
+          // keeps the toes off the floor while the heel travels backwards.
+          const swing = 0.43 * hold;
+          ankle = add(leg.hip, [side * 0.018, -0.828 * Math.cos(swing) + 0.004 * arch(hold), -0.828 * Math.sin(swing)]);
+          angle = 0.30 * hold ** 2;
           break;
+        }
         case 'leg-curl':
         case 'quad-stretch': {
           const flex = (id === 'quad-stretch' ? 2.52 : 1.47) * hold;

@@ -49,8 +49,8 @@ export function drawLowerProps(mesh, p, move, seconds) {
     other = p.legs.find(l => l.s !== p.side);
   switch (id) {
     case 'band-leg-press':
-      for (const arm of p.arms) band(mesh, arm.palm, add(active.toe, [arm.s * 0.045, -0.016, -0.008]));
-      band(mesh, add(active.toe, [-0.045, -0.016, -0.008]), add(active.toe, [0.045, -0.016, -0.008]));
+      p.arms.forEach((arm, index) => band(mesh, arm.palm, p.bandFootLoop[index]));
+      band(mesh, p.bandFootLoop[0], p.bandFootLoop[1]);
       break;
     case 'knee-open-band':
       thighBand(mesh, p);

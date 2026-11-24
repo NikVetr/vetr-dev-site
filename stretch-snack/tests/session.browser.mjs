@@ -20,8 +20,8 @@ test('an away-first session budgets travel, carries it over a skip, and records 
     await page.clock.install({time:new Date('2030-01-01T00:00:00Z')});
     await page.clock.pauseAt(new Date('2030-01-01T00:00:02Z'));
     await page.evaluate(async plan => {
-      const {moves} = await import('./core/catalog.js');
-      const {startSession} = await import('./session.js');
+      const {moves} = await import(new URL('./core/catalog.js', document.baseURI).href);
+      const {startSession} = await import(new URL('./session.js', document.baseURI).href);
       const steps = plan.steps.map((step,i) => ({
         ...step, move:moves.find(m=>m.id === step.id), transition:plan.transitionSeconds[i],
       }));
@@ -211,9 +211,9 @@ test('a backrest confirmation belongs to the current seat when a profile is save
 // the actual planner or session canvas, including on the browser's top layer.
 async function frameDifference(page, selector, id, time, options, previous, progress = 1, location = 'plane-seat') {
   return page.evaluate(async ({selector,id,time,options,previous,progress,location}) => {
-    const {moves} = await import('./core/catalog.js');
-    const {renderMovement} = await import('./demo.js');
-    const {movementCamera,blendCamera} = await import('./camera.js');
+    const {moves} = await import(new URL('./core/catalog.js', document.baseURI).href);
+    const {renderMovement} = await import(new URL('./demo.js', document.baseURI).href);
+    const {movementCamera,blendCamera} = await import(new URL('./camera.js', document.baseURI).href);
     const move = moves.find(m => m.id === id);
     function cameraFor({id,options,previous,progress}) {
       const target = movementCamera(moves.find(m => m.id === id),options);
@@ -285,8 +285,8 @@ test('the live camera freezes, retargets a partial pan, and reaches a floor move
     await page.clock.pauseAt(new Date('2030-01-01T00:00:02Z'));
     const first = 'seated-neck-turn', second = 'seated-knee-extend', third = 'supine-knee-roll';
     await page.evaluate(async ids => {
-      const {moves} = await import('./core/catalog.js');
-      const {startSession} = await import('./session.js');
+      const {moves} = await import(new URL('./core/catalog.js', document.baseURI).href);
+      const {startSession} = await import(new URL('./session.js', document.baseURI).href);
       const steps = ids.map((id,i) => ({id,move:moves.find(m=>m.id === id),seconds:i===2 ? 20 : 5,transition:i===2 ? 15 : 0}));
       startSession(steps,'plane-seat',()=>{});
     },[first,second,third]);

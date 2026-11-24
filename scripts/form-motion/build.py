@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-from scipy.spatial import KDTree
+from shoulders import soften_shoulder_weights, split_tank
 
 OUTPUT = Path(__file__).resolve().parents[2] / "stretch-snack" / "form-motion"
 
@@ -22,51 +22,30 @@ def smooth_attributes(compiler, attributes, faces):
     return (stencil @ attributes)[:len(attributes)]
 
 
-def compact_mesh(compiler, smooth, triangles):
-    used, remapped = np.unique(triangles, return_inverse=True)
-    joints, weights = compiler.top_four_weights(smooth[used, 6:])
+def packed_weights(compiler, influences):
+    joints, weights = compiler.top_four_weights(influences)
     weights = np.rint(weights * 255).astype(int)
     dominant = np.argmax(weights, axis=1)
-    weights[np.arange(len(used)), dominant] += 255 - weights.sum(axis=1)
-    fields = {
-        "positions": np.rint(smooth[used, :3] * 10000).astype("<i2"),
-        "joints": joints.astype("u1"),
-        "weights": weights.astype("u1"),
-        "faces": remapped.astype("<u2"),
-    }
-    assert len(used) < 65536 and np.all((weights >= 0) & (weights <= 255))
+    weights[np.arange(len(weights)), dominant] += 255 - weights.sum(axis=1)
+    assert np.all((weights >= 0) & (weights <= 255))
+    return {"joints": joints.astype("u1"), "weights": weights.astype("u1")}
+
+
+def encode_buffers(fields):
     return {key: base64.b64encode(a.tobytes()).decode() for key, a in fields.items()}
 
 
-def vertex_normals(points, faces):
-    triangles = points[faces]
-    areas = np.cross(triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0])
-    normals = np.zeros_like(points)
-    for column in faces.T:
-        np.add.at(normals, column, areas)
-    return normals / np.maximum(np.linalg.norm(normals, axis=1, keepdims=True), 1e-12)
-
-
-def fit_armholes(tank, tank_faces, body, body_faces, bones):
-    """Bind the tank near the moving upper arms to the fitted anatomical surface."""
-    arm_ids = [bones.index(f"mixamorig:{side}Arm") for side in ("Left", "Right")]
-    arm_influence = np.clip(tank[:, 6 + np.asarray(arm_ids)].sum(axis=1) / 0.20, 0, 1)
-    region = np.flatnonzero(arm_influence)
-    body_points = body[:, :3]
-    # Search the full body before clothing masks are applied. Around the armpit,
-    # two adjacent skin surfaces can face away from each other.
-    skin_normals = vertex_normals(body_points, body_faces)
-    cloth_normals = vertex_normals(tank[:, :3], tank_faces)[region]
-    distance, adjacent = KDTree(body_points, leafsize=16).query(tank[region, :3], k=6)
-    facing = np.einsum("ijk,ik->ij", skin_normals[adjacent], cloth_normals)
-    sample = (np.maximum(0, facing) / (0.003 + distance)) ** 2
-    totals = sample.sum(axis=1, keepdims=True)
-    sample /= np.maximum(totals, 1e-12)
-    weights = np.einsum("ij,ijk->ik", sample, body[adjacent, 6:])
-    # Fade back to authored weights away from the tight-fitting armhole rim.
-    mix = arm_influence[region] * np.clip((0.04 - distance[:, 0]) / 0.016, 0, 1)
-    mix *= totals[:, 0] > 0
-    tank[region, 6:] += mix[:, None] * (weights - tank[region, 6:])
+def compact_mesh(compiler, smooth, triangles):
+    used, remapped = np.unique(triangles, return_inverse=True)
+    female = np.rint(smooth[used, :3] * 10000).astype("<i2")
+    male = np.rint(smooth[used, 3:6] * 10000).astype("<i2")
+    assert len(used) < 65536
+    return encode_buffers({
+        "positions": female,
+        "shapeDelta": (male - female).astype("<i2"),
+        **packed_weights(compiler, smooth[used, 6:]),
+        "faces": remapped.astype("<u2"),
+    })
 
 
 def build(source):
@@ -76,7 +55,7 @@ def build(source):
     compiler = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(compiler)
     # The supplied compiler adds its own anatomy-assets directory to sys.path.
-    build_clothes = importlib.import_module("clothing_import").build_clothes
+    clothing = importlib.import_module("clothing_import")
     refine_body = importlib.import_module("morphology_refine").refine_body
     minimal_body = importlib.import_module("minimal_surface").minimal_body
 
@@ -89,28 +68,31 @@ def build(source):
     original = np.asarray(obj["face_groups"]["body"])
     shapes = [refine_body(world[s][ids], rigs[s], weights[ids]) for s in ("female", "male")]
     attrs, faces, parents = minimal_body(np.column_stack((*shapes, weights[ids])), inverse[original])
-    garments = build_clothes(obj, raw, weights)
-    covered = set(garments["tank"]["delete_verts"]) | set(garments["leggings"]["delete_verts"])
-    hidden = np.r_[[all(int(i) in covered for i in f) for f in original], False]
+    garments = clothing.build_clothes(obj, raw, weights)
     body = smooth_attributes(compiler, attrs, faces)
-    body_faces = compiler.triangulate(faces)
-    visible = [f for f, hide in zip(faces, hidden[parents]) if not hide]
-    meshes = {"body": compact_mesh(compiler, body, compiler.triangulate(visible))}
-    for name in ("tank", "leggings"):
-        g = garments[name]
-        endpoints = [g[s] * transforms[s]["scale"] + transforms[s]["offset"] for s in ("female", "male")]
-        attr = np.column_stack((*endpoints, g["weights"]))
-        fitted = smooth_attributes(compiler, attr, g["faces"])
-        triangles = compiler.triangulate(g["faces"])
-        if name == "tank":
-            fit_armholes(fitted, triangles, body, body_faces, rig["boneNames"])
-        meshes[name] = compact_mesh(compiler, fitted, triangles)
+    soften_shoulder_weights(body, compiler.triangulate(faces), rig)
+    skin, skin_faces, tank, tank_faces = split_tank(
+        compiler, obj["vertices"], original, faces, parents, body, garments["tank"], transforms,
+        garments["leggings"]["delete_verts"], clothing._module,
+    )
+    leggings = garments["leggings"]
+    endpoints = [leggings[s] * transforms[s]["scale"] + transforms[s]["offset"] for s in ("female", "male")]
+    fitted = smooth_attributes(compiler, np.column_stack((*endpoints, leggings["weights"])), leggings["faces"])
+    meshes = {
+        "body": compact_mesh(compiler, skin, skin_faces),
+        "tank": compact_mesh(compiler, tank, tank_faces),
+        "leggings": compact_mesh(compiler, fitted, compiler.triangulate(leggings["faces"])),
+    }
     fields = ("boneNames", "restHeads", "restTails")
     data = {key: rig[key] for key in fields}
+    if rig["boneNames"] != rigs["male"]["boneNames"]:
+        raise ValueError("The two body shapes need the same joint order")
+    male_bind = {key: rigs["male"][key] for key in ("restHeads", "restTails")}
     def encode(value):
         return json.dumps(value, separators=(",", ":"), allow_nan=False)
     (OUTPUT / "model.js").write_text("// Generated by scripts/form-motion/build.py from Form / Motion.\n"
                                       f"export const rig = {encode(data)};\n"
+                                      f"export const maleBind = {encode(male_bind)};\n"
                                       f"export const meshes = {encode(meshes)};\n")
 
 

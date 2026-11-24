@@ -64,10 +64,43 @@ const transform = (mat, p) => add(mat.shift, rotate(mat.rotation, p));
 const digits = ['Index', 'Middle', 'Ring', 'Pinky'];
 const spine = ['Hips', 'Spine', 'Spine1', 'Spine2'];
 
+/** Lowest surface height after posing the shoe. @param {Transform} matrix @param {Vec[]} points */
+function lowestY(matrix, points) {
+  const [x, y, z] = matrix.rotation;
+  let low = Infinity;
+  for (const point of points) low = Math.min(low, x[1]*point[0] + y[1]*point[1] + z[1]*point[2]);
+  return low + matrix.shift[1];
+}
+
+/** Measure the heel pad and the angle at which the forefoot meets the same floor,
+ * using this body's actual fitted skin. Only recalculated when the body changes.
+ * @param {Bone} foot @param {Bone} toe @param {{rest:Float32Array,joints:Uint8Array}} skin */
+function groundContact(foot, toe, skin) {
+  const heel = [], front = [];
+  for (let i = 0; i < skin.rest.length; i += 3) {
+    const bone = skin.joints[4*i/3];
+    if (bone !== foot.i && bone !== toe.i || skin.rest[i+1] > foot.head[1]) continue;
+    const region = skin.rest[i+2] < foot.head[2] + 0.012 ? heel : front;
+    region.push([skin.rest[i],skin.rest[i+1],skin.rest[i+2]]);
+  }
+  if (!heel.length || !front.length) throw new Error('Trainer foot is missing its sole surface.');
+  const rest = axes(foot.direction, X);
+  let low = -0.7, high = 0.1;
+  const axialScale = Math.hypot(0.054,0.136) / norm(foot.direction);
+  for (let i = 0; i < 14; i++) {
+    const pitch = (low + high) / 2;
+    const mat = betweenFrames(rest, axes([0,Math.sin(pitch),Math.cos(pitch)],X),foot.head,[0,0,0],axialScale);
+    if (lowestY(mat,front) < lowestY(mat,heel)) low = pitch;
+    else high = pitch;
+  }
+  return {heel, flatPitch:high};
+}
+
 /** Create a retargeter for the fitted MakeHuman/Mixamo rig. The returned
  * column-major 4x4 palette is reused on each call. See movementPose in ../pose.js.
- * @param {{boneNames:string[], restHeads:number[][], restTails:number[][]}} rig */
-export function createRetarget(rig) {
+ * @param {{boneNames:string[], restHeads:number[][], restTails:number[][]}} rig
+ * @param {{rest:Float32Array,joints:Uint8Array}} [skin] */
+export function createRetarget(rig, skin) {
   const bones = new Map(rig.boneNames.map((name, i) => [name.split(':').pop(), {
     i, head: rig.restHeads[i], tail: rig.restTails[i],
     direction: sub(rig.restTails[i], rig.restHeads[i]),
@@ -114,7 +147,8 @@ export function createRetarget(rig) {
     const collar = bone(prefix+'Shoulder'), foot = bone(prefix+'Foot'), toe = bone(prefix+'ToeBase');
     const thumbAxes = axes(sub(thumb[2].tail, thumb[0].head), sourcePalm[2]);
     return {
-      i, sign, arm, hand, thigh, collar, toe, sourcePalm, elbowHinge,
+      i, sign, arm, hand, thigh, collar, foot, toe, sourcePalm, elbowHinge,
+      ground:skin ? groundContact(foot,toe,skin) : undefined,
       forearmBendFrame: axes(fore.direction, elbowHinge),
       forearmAcross: axes(fore.direction, across)[0],
       clavicle: segment(collar, [0,0,1]), upperArm: segment(arm, elbowHinge), forearm: segment(fore, across),
@@ -227,10 +261,27 @@ export function createRetarget(rig) {
         thumbBase = tip;
       });
 
-      const kneeHinge = cross(sub(leg.knee,leg.hip),sub(leg.ankle,leg.knee));
+      let ankle = leg.ankle, toe = leg.toe;
+      const ground = leg.heelHeight !== undefined && side.ground;
+      if (ground) {
+        // A level sole uses a slightly different ankle angle on each fitted
+        // body. Apply that limit only when the heel is carrying the movement.
+        const axis = sub(toe,ankle), horizontal = Math.hypot(axis[0],axis[2]);
+        if (Math.atan2(axis[1],horizontal) < ground.flatPitch) {
+          const length = norm(axis), reach = length*Math.cos(ground.flatPitch);
+          toe = add(ankle, [reach*axis[0]/horizontal,length*Math.sin(ground.flatPitch),reach*axis[2]/horizontal]);
+        }
+      }
+      const shoeMat = side.shoe(ankle,toe,leg.across ?? X);
+      if (ground) {
+        const dy = leg.heelHeight - lowestY(shoeMat,ground.heel);
+        ankle = add(ankle,[0,dy,0]);
+        shoeMat.shift[1] += dy;
+        write(side.foot,shoeMat);
+      }
+      const kneeHinge = cross(sub(leg.knee,leg.hip),sub(ankle,leg.knee));
       side.upperLeg(leg.hip,leg.knee,kneeHinge);
-      side.lowerLeg(leg.knee,leg.ankle,kneeHinge);
-      const shoeMat = side.shoe(leg.ankle,leg.toe,leg.across ?? X);
+      side.lowerLeg(leg.knee,ankle,kneeHinge);
       if (move.motion === 'heel-lift') {
         // The ball is the pivot; keep the front sole planted as the heel rises.
         write(side.toe,betweenFrames(nativeAxes,nativeAxes,side.toe.head,leg.toe));

@@ -106,14 +106,19 @@ export function basePose(move, seconds) {
   const neck = trunk([0, 0.535 + 0.002 * chin, -0.034 * chin]);
   /** @param {number[]} offset */
   const head = (offset) => add(neck, turn(lean(pitchPoint(offset, pitch), headTilt), headYaw));
+  /** @type {{s:number, hip:number[], knee:number[], ankle:number[], toe:number[], across?:number[], heelHeight?:number}[]} */
   const legs = [-1, 1].map((s) => {
     if (supine) {
       const slide = active(s) ? motionAmount('heel-slide') : 0;
       const roll = side * motionAmount('knee-roll');
       const hip = [s * 0.11, 0.115, 0.01 - motionAmount('pelvic-tilt') * 0.014];
-      const ankle = [s * 0.12, 0.071, 0.64 + 0.16 * slide];
+      const liftAngle = -0.40 * slide;
+      const rest = [s * 0.12, 0.071, 0.64 + 0.16 * slide];
+      const ankle = slide ? raiseToes(rest, liftAngle) : rest;
       const knee = middleJoint(hip, ankle, 0.42, 0.41, [0.76 * roll, 1, 0]);
-      return { s, hip, knee, ankle, toe: add(ankle, [0, -0.037, 0.14]) };
+      const foot = [0, -0.037, 0.14];
+      return {s, hip, knee, ankle, toe:add(ankle, slide ? pitchPoint(foot,liftAngle) : foot),
+        heelHeight:motion === 'heel-slide' ? 0 : undefined};
     }
     const hip = add(pelvis, [s * 0.11, 0, 0]);
     const working = active(s);
@@ -124,7 +129,11 @@ export function basePose(move, seconds) {
       const extend = working ? motionAmount('knee-extend') : 0;
       const thighAngle = -0.076 + lift * 0.25;
       knee = add(hip, [s * 0.015, 0.39 * Math.sin(thighAngle), 0.39 * Math.cos(thighAngle)]);
-      ankle = add(knee, [0, -0.402 * Math.cos(extend * 1.24), 0.402 * Math.sin(extend * 1.24)]);
+      // The unsupported foot swings with the shin about the knee, keeping
+      // the resting ankle angle through the lift and the return to the floor.
+      const shinAngle = -1.24 * extend;
+      ankle = add(knee, pitchPoint([0, -0.402, 0], shinAngle));
+      toeOffset = pitchPoint(toeOffset, shinAngle);
       if (motion === 'foot-roll' || motion === 'heel-lift') {
         const roll = working ? motionAmount('foot-roll') : 0;
         ankle = add(ankle, [0, rise + 0.055 * roll, (rise ? 0.136 - footReach : 0) + 0.13 * roll]);
@@ -132,7 +141,7 @@ export function basePose(move, seconds) {
       }
       if (['foot-slide', 'knee-squeeze', 'ankle-circle', 'hamstring-lean', 'quad-set'].includes(motion)) {
         const slideBack = working ? 0.165 * motionAmount('foot-slide') : 0;
-        const slideOut = working ? 0.307 * straighten : 0;
+        const slideOut = working ? 0.324 * straighten : 0;
         const circlePhase = cycle % 2 + phase;
         const circleLift = working && motion === 'ankle-circle' ? eased(Math.min(circlePhase, 2 - circlePhase) / 0.16) : 0;
         ankle = add(ankle, [0, 0.044 * circleLift, slideOut - slideBack]);
@@ -144,7 +153,7 @@ export function basePose(move, seconds) {
           toeOffset = turn(pitchPoint(toeOffset, -0.28 * (1 - Math.cos(theta))), sense * 0.34 * Math.sin(theta));
         } else if (slideOut > 0) {
           // Dorsiflex about the planted heel as the leg straightens.
-          const liftAngle = -0.40 * straighten;
+          const liftAngle = -0.69 * straighten;
           ankle = raiseToes(ankle, liftAngle);
           knee = middleJoint(hip, ankle, Math.hypot(0.39, 0.015), 0.402, [0, 0, 1]);
           toeOffset = pitchPoint(toeOffset, liftAngle);
@@ -166,7 +175,7 @@ export function basePose(move, seconds) {
       knee = middleJoint(hip, ankle, 0.423, 0.414, [0, 0, 1]);
     }
     const toe = add(ankle, toeOffset);
-    return { s, hip, knee, ankle, toe };
+    return {s, hip, knee, ankle, toe, heelHeight:motion === 'toe-lift' || seatedExtension ? 0 : undefined};
   });
   // The fitted hands extend about 18 cm beyond the wrist. Rest them along
   // the thighs and carry them with a rising knee, leaving the chair arms free.
@@ -267,7 +276,8 @@ export function basePose(move, seconds) {
       elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.85, 0, -0.9]);
     } else if (motion === 'palm-forward') {
       if (seated) {
-        wrist = add(pelvis, [s * 0.211, 0.083, 0.213 - 0.012 * chestOpener]);
+        // Leave the turning knuckles room between the thigh and the armrest.
+        wrist = add(pelvis, [s * 0.211, 0.106 + 0.010 * chestOpener, 0.213 - 0.012 * chestOpener]);
         elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.28, -1, -0.62]);
         handAim = scaledTo([s * 0.08, -0.58, 0.80], 1);
       } else {
@@ -378,13 +388,52 @@ export function movementCycleSeconds(move) {
 }
 const animators = {'hand-neck':handNeckPose, upper:upperPose, lower:lowerPose};
 
+// The scapula and clavicle carry the socket up and out as the arm elevates.
+// Keep a hand planted on a rail or mat in its authored closed-chain position.
+// A free reach carries the hand with the socket. A hand placed at the head or
+// opposite shoulder retains its point of contact by flexing the elbow.
+const freeRaises = new Set(['overhead-reach', 'scaption', 'lying-arm-raise', 'low-row']);
+/** @param {ReturnType<typeof basePose>} p @param {Movement} move */
+function articulateShoulders(p, move) {
+  if (['floor-angel','lying-arm-rotation'].includes(move.animation ?? move.motion)) return p;
+  const delta = (/** @type {number[]} */ a, /** @type {number[]} */ b) => a.map((v,i)=>v-b[i]);
+  const hip = mixPoint(p.legs[0].hip,p.legs[1].hip,.5);
+  const up = scaledTo(p.spine?.chestUp ?? delta(p.neck,hip),1);
+  const across = scaledTo(delta(p.arms[1].shoulder,p.arms[0].shoulder),1);
+  for (const arm of p.arms) {
+    if (arm.holdingRail) continue;
+    const upper = delta(arm.elbow,arm.shoulder);
+    const upperLength = Math.hypot(...upper);
+    const elevation = Math.acos(Math.min(1,Math.max(-1,-upper.reduce((v,x,i)=>v+x*up[i],0)/upperLength)));
+    const amount = eased((elevation-.52)/2.37);
+    if (amount === 0) continue;
+    const lateral = move.animation === 'lying-arm-raise' ? 0 : .014; // the hands stay joined overhead
+    const shift = up.map((v,i)=>amount*(.056*v+lateral*arm.s*across[i]));
+    const next = add(arm.shoulder,shift);
+    if (freeRaises.has(move.animation ?? move.motion)) {
+      arm.shoulder = next;
+      for (const key of /** @type {const} */ (['elbow','wrist','palm','thumb'])) arm[key] = add(arm[key],shift);
+      arm.fingerJoints = arm.fingerJoints.map(chain=>chain.map(v=>add(v,shift)));
+      arm.fingers = arm.fingerJoints.map(chain=>[chain[0],chain[3]]);
+    } else {
+      const foreLength = Math.hypot(...delta(arm.wrist,arm.elbow));
+      const initialReach = Math.hypot(...delta(arm.wrist, arm.shoulder));
+      const extraReach = Math.hypot(...delta(arm.wrist, next)) - initialReach;
+      const slack = Math.max(0, upperLength + foreLength - initialReach);
+      const fraction = extraReach > 0 ? Math.min(1, .75 * slack / extraReach) : 1;
+      if (fraction === 0) continue;
+      arm.shoulder = mixPoint(arm.shoulder, next, fraction);
+      arm.elbow = middleJoint(arm.shoulder, arm.wrist, upperLength, foreLength, upper);
+    }
+  }
+  return p;
+}
+
 /** @param {Movement} move @param {number} seconds */
 export function movementPose(move, seconds) {
-  if (!move.family) return basePose(move, seconds);
-  const animate = animators[move.family];
-  const posed = animate?.(move, seconds, basePose);
+  const posed = move.family ? animators[move.family]?.(move, seconds, basePose) : basePose(move, seconds);
   if (!posed) throw new Error('Missing demonstration for ' + move.pose + '-' + move.animation);
-  return posed;
+  return articulateShoulders(posed,move);
 }
 
 /** @param {ReturnType<typeof movementPose>} pose @param {Movement} move */

@@ -111,7 +111,7 @@ function pressSeat(p, a) {
     reach(
       arm,
       upright,
-      subtract([s * 0.205, 0.485, 0.033], arm.shoulder),
+      subtract([s * 0.205, 0.488, 0.033], arm.shoulder),
       elbowPole,
       [s * 0.08, -0.045, 1],
       s * 0.12
@@ -350,7 +350,7 @@ export function upperPose(move, seconds, basePose) {
           arm,
           frame,
           [s * Math.cos(angle), Math.sin(angle), -0.205],
-          [s * 0.06, 0.99, -0.09],
+          [s * 0.06, 0.99, -0.08],
           [s * 0.04, 0.99, -0.015],
           (s * Math.PI) / 2
         );

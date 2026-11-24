@@ -1,19 +1,40 @@
 // The same skinned Form / Motion figure supplies the full view and hand inset.
-import { meshes, rig } from './form-motion/model.js';
+import { meshes, rig, maleBind } from './form-motion/model.js';
 import { createRetarget } from './form-motion/retarget.js';
 
-const retarget = createRetarget(rig);
 const bytes = (base64) => Uint8Array.from(atob(base64), ch => ch.charCodeAt(0));
 function unpack(data, color) {
-  const rest = Float32Array.from(new Int16Array(bytes(data.positions).buffer), n => n / 10000);
+  const base = new Int16Array(bytes(data.positions).buffer);
+  const delta = new Int16Array(bytes(data.shapeDelta).buffer);
+  const rest = Float32Array.from(base, n => n / 10000);
   return {
-    rest, color, faces: new Uint16Array(bytes(data.faces).buffer),
-    joints: bytes(data.joints), weights: bytes(data.weights),
+    rest, base, delta, color, faces: new Uint16Array(bytes(data.faces).buffer),
+    joints:bytes(data.joints), weights:bytes(data.weights),
     points: Array.from({ length: rest.length / 3 }, () => [0, 0, 0]),
   };
 }
 const body = unpack(meshes.body, '#e3e0d9');
+let retarget = createRetarget(rig, body);
 const garments = [unpack(meshes.tank, '#64788a'), unpack(meshes.leggings, '#39424c')];
+const parts = [body, ...garments];
+const shapes = {female: 0, androgynous: 0.5, male: 1};
+let selectedBody = 'female';
+
+/** Change the fitted skin, clothing and rest skeleton together, once per selection.
+ * @param {string} name */
+export function setTrainerBody(name) {
+  if (!Object.hasOwn(shapes, name)) throw new RangeError('Unknown trainer body: ' + name);
+  if (name === selectedBody) return;
+  const t = shapes[name];
+  for (const part of parts) {
+    const {rest, base, delta} = part;
+    for (let i = 0; i < rest.length; i++) rest[i] = (base[i] + t * delta[i]) / 10000;
+  }
+  const bindPoints = key => rig[key].map((point, i) =>
+    point.map((v, axis) => v + t * (maleBind[key][i][axis] - v)));
+  retarget = createRetarget({boneNames:rig.boneNames, restHeads:bindPoints('restHeads'), restTails:bindPoints('restTails')}, body);
+  selectedBody = name;
+}
 
 // Collect local hand geometry once. Point references stay live as the skin moves.
 function handSurface(side) {
@@ -60,7 +81,7 @@ function skin(part, matrices) {
 
 export function drawTrainer(mesh, pose, move) {
   const transforms = retarget(pose, move);
-  for (const part of [body, ...garments]) {
+  for (const part of parts) {
     skin(part, transforms);
     mesh.indexed(part.points, part.faces, part.color);
   }
