@@ -91,8 +91,11 @@ export function forecastsCSV(catalog, result, model) {
   return lines.join('\r\n') + '\r\n';
 }
 export function saveCSV(name, text) {
+  saveDownload(name, text, 'text/csv;charset=utf-8');
+}
+export function saveDownload(name, text, type) {
   const a = document.createElement('a'),
-    url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    url = URL.createObjectURL(new Blob([text], { type }));
   a.href = url;
   a.download = name;
   a.click();

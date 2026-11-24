@@ -6,6 +6,8 @@ import { recommendationFilters } from './filters.mjs';
 import { catalogForDomain, renderChoice, showSources, sourceDomains } from './catalog-choices.mjs';
 import { minimumAxisShare } from './axis-annotations.mjs';
 import { openRapidRating } from './rapid.mjs';
+import { renderFilmValidation } from './film-validation.mjs';
+import { wireFilmCheck } from './film-check-dialog.mjs';
 import { modelEvidence, prepareCounts } from './evidence.mjs';
 import { calibrationYear, latestRatingDate, populationModel } from './calendar.mjs';
 import { rankingWeightControl } from './question-control.mjs';
@@ -43,6 +45,17 @@ let active,
   taste,
   revision = 0;
 const isFilm = (k) => k === 'expanded';
+wireFilmCheck(() => {
+  if (!isFilm(active) || !result) throw new Error('Open the film catalog and update predictions.');
+  if (!sameRatings(state.draft, state.applied) || !sameRatings(state.draftDates, state.appliedDates) ||
+      !sameRatings(state.draftSources, state.appliedSources)) throw new Error('Apply your rating edits first.');
+  const matched = reviewView?.mode === 'context';
+  const rows = matched ? reviewView.rows : result.predictions;
+  return {catalog, titles, rankedIds:rows.filter(p => filters.matches(p.itemId)).map(p => p.itemId),
+    reviewWeight:state.reviewWeight, ranking:matched ? 'reviewContext' : 'expected',
+    request:{model:state.model, ratings:state.applied, ratedOn:state.appliedDates,
+      volunteered:Object.keys(state.applied).filter(id => state.appliedSources[id] === 'volunteered')}};
+});
 const halfStars = () =>
   !catalog.scaleLabels && catalog.scale.join(',') === '0.5,1,1.5,2,2.5,3,3.5,4,4.5,5';
 const wholeStars = () => !catalog.scaleLabels && catalog.scale.join(',') === '1,2,3,4,5';
@@ -291,8 +304,25 @@ el('about-open').onclick = async () => {
     if (active === key) { note.textContent = 'The catalog evaluation could not be loaded.'; note.hidden = false; }
   }
 };
+let filmValidationReport;
+async function showFilmComparison() {
+  const host = el('film-comparison');
+  if (!isFilm(active) || !/** @type {HTMLDetailsElement} */ (el('validation')).open) return;
+  host.textContent = 'Loading matched film scores…';
+  try {
+    filmValidationReport ??= readJSON('validation/film-calibration.json');
+    const report = await filmValidationReport;
+    if (isFilm(active)) renderFilmValidation(host, report);
+  } catch (error) {
+    filmValidationReport = null;
+    if (isFilm(active)) host.textContent = 'Could not load the matched film scores. ' + error.message;
+  }
+}
+el('validation').addEventListener('toggle', showFilmComparison);
 function showValidation(selection) {
   const details = el('validation');
+  el('film-comparison').hidden = el('film-check').hidden = !isFilm(active);
+  if (isFilm(active)) void showFilmComparison();
   const validRows = (rows) =>
     Array.isArray(rows) &&
     rows.length &&

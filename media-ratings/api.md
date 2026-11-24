@@ -84,3 +84,16 @@ The built-in Goodreads fanfiction catalog ships fitted probabilities and an `obs
 For catalogs with observed tables, the `<catalog>-evidence.json` manifest lists the item IDs, scale and per-item marginal counts. For zero-based item indices `lo < hi`, pair `hi * (hi - 1) / 2 + lo` stores rows for the lower index and columns for the higher index. Dense grids use little-endian unsigned 16-bit counts. Large catalogs split them across `packedFiles` at `pairsPerFile` pair boundaries. The browser fetches the blocks for the selected comparisons on demand. Small catalogs use one `packedFile` or inline `pairs`.
 
 Complete binary cohorts can specify `packedLayout: "binary-overlap"` and `cohortSize`. Each pair then stores only the count of people positive on both entries. The two one-sided positive counts follow by subtracting the overlap from each positive marginal. Subtracting the positive union from the cohort size gives the double-negative count, which can exceed 65,535. This encoding applies to the complete AO3 activity cohort. Missing explicit reviews on Steam remain unobserved.
+
+## Randomized film recommendation checks
+
+Open **Check my film recommendations** under the film boards. Start a check after applying any draft edits. The app freezes the current filtered recommendation order, including the active review-context weight, samples up to five of its top twenty without replacement, and stores the published default and Gaussian probabilities before seeing each answer. The prompt hides the forecast. A check has its own responses and leaves the rating profile available for further checks.
+
+**Export checks** downloads the displayed offers saved on this browser. Each session records its ID, starting time, ranking model, number and source count of applied ratings, ranking mode, weight and pool size. Each offer records its item ID, initial rank, category probabilities, outcome and any rating. Closing the dialog or leaving the page retains the displayed unanswered offer. Undisplayed draws never enter the response denominator.
+
+```sh
+node media-ratings/film-check-cli.mjs film-recommendation-checks.json
+jq -s '.' check-a.json check-b.json | node media-ratings/film-check-cli.mjs
+```
+
+The callable API is `summarizeFilmChecks(exportOrArray)` in `film-check.mjs`. The JSON schema identifier is `film-recommendation-check/v1`. The CLI combines compatible repeated exports of the same session, rejects conflicting records, and reports counts of rated, unseen, skipped and unanswered offers. Rating coverage divides ratings by displayed offers. Forecast diagnostics compare four-star probabilities to observed rates among rated offers and report Brier error, RMSE and ten fixed reliability bins. The summary weights each displayed offer equally. Sessions can include repeated participants, so these are descriptive rates for participants and their sampled lists. Responses stay in origin-local browser storage until exported or site data is cleared.

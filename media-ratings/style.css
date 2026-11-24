@@ -1622,7 +1622,7 @@ body {
   }
 }
 
-#rapid-rating {
+#rapid-rating, #film-check-dialog {
   width: min(42rem, calc(100% - 1.4rem));
   max-height: calc(100dvh - 1.4rem);
   overflow-y: auto;
@@ -1633,9 +1633,18 @@ body {
   color: var(--text);
   box-shadow: 0 1rem 4rem #0005;
 }
-#rapid-rating::backdrop {
+#rapid-rating::backdrop, #film-check-dialog::backdrop {
   background: #070b12a8;
 }
+.film-comparison-scroll { max-width:100%; overflow-x:auto; }
+#film-comparison th:first-child { text-align:left; }
+#film-comparison th[scope=row] { font-weight:500; }
+#film-comparison thead th { vertical-align:bottom; }
+#film-check { font-size:.85rem; margin:.65rem 0; }
+#film-check-stars, .film-check-actions { display:flex; gap:.4rem; flex-wrap:wrap; margin:.8rem 0; }
+#film-check-stars button, .film-check-actions button { min-height:2.5rem; }
+@media (max-width:32rem) { #film-check-stars { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); } }
+#film-check-error:empty, #film-check-summary:empty { display:none; }
 .rapid-head,
 .rapid-nav,
 .rapid-order {

@@ -192,13 +192,15 @@
         </details>
         <details id="validation" hidden>
           <summary>Compare validation scores</summary>
+          <div id="film-comparison" hidden aria-live="polite"></div>
           <p id="evaluation"></p>
           <p>
-            Lower scores are better. Log loss measures the full distribution, RMSE measures expected-rating
-            error, and Brier scores use the catalog’s default cutoff.
+            Lower log loss, RMSE and Brier scores indicate better forecasts. Log loss scores the full
+            distribution, RMSE scores expected ratings, and Brier scores use the catalog’s default cutoff.
           </p>
           <div id="scores"></div>
           <p id="selection-study" hidden>
+            <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/film-calibration.md">2022–23 calibration study</a> ·
             <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/predictor-comparison.md"
               >Default film predictor and matched comparisons</a
             >
@@ -212,6 +214,13 @@
               >Film release years and rating dates</a
             >
           </p>
+        </details>
+        <details id="film-check" hidden>
+          <summary>Check my film recommendations</summary>
+          <p>Rate up to five films sampled at random from your top 20 filtered recommendations. You can mark a film unseen or skip it. This check saves responses in this browser for export.</p>
+          <button id="film-check-start" type="button">Start film check</button>
+          <button id="film-check-export" type="button" disabled>Export checks</button>
+          <p id="film-check-summary" role="status"></p>
         </details>
         <footer>
           <a href="https://github.com/NikVetr/vetr-dev-site/blob/main/media-ratings/README.md">Methods and datasets</a>
@@ -262,6 +271,15 @@
           </div>
         </div>
       </div>
+    </dialog>
+    <dialog id="film-check-dialog" aria-labelledby="film-check-title">
+      <header class="rapid-head"><h2>Film recommendation check</h2><form method="dialog"><button>Finish</button></form></header>
+      <p id="film-check-progress"></p>
+      <h3 id="film-check-title" tabindex="-1" aria-live="polite"></h3>
+      <p>What rating would you give this film?</p>
+      <div id="film-check-stars" role="group" aria-label="Film rating"></div>
+      <div class="film-check-actions"><button id="film-check-unseen" type="button">Haven’t seen it</button><button id="film-check-skip" type="button">Skip</button></div>
+      <p id="film-check-error" role="alert"></p>
     </dialog>
     <dialog id="rapid-rating" aria-labelledby="rapid-heading">
       <header class="rapid-head">
