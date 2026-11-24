@@ -36,10 +36,13 @@ test('an away-first session budgets travel, carries it over a skip, and records 
     await press('skip');
     assert.match(await page.locator('#travel-clock').innerText(), /^0:48/);
     assert.equal(await page.locator('#step-clock').innerText(),'1:08');
+    await page.clock.fastForward(300);
     await press('arrived');
     assert.ok(await page.locator('#travel-controls').isHidden());
     assert.equal(await page.locator('#step-clock').innerText(),'0:20');
     assert.equal(await page.locator('#player-place').innerText(),'Airplane lavatory');
+    assert.ok(await frameDifference(page,'#player-canvas','standing-neck-turn',0,{},
+      {id:'standing-toe-lift',options:{}},.25,'plane-lavatory') < .005, 'confirming arrival preserves the in-flight camera');
     await page.clock.fastForward(1100);
     await press('finish');
     const actual = JSON.parse(await page.locator('body').getAttribute('data-completed'));
@@ -206,19 +209,22 @@ test('a backrest confirmation belongs to the current seat when a profile is save
 
 // Render a reference frame with the public renderer and compare the pixels of
 // the actual planner or session canvas, including on the browser's top layer.
-async function frameDifference(page, selector, id, time, options, previous, progress = 1) {
-  return page.evaluate(async ({selector,id,time,options,previous,progress}) => {
+async function frameDifference(page, selector, id, time, options, previous, progress = 1, location = 'plane-seat') {
+  return page.evaluate(async ({selector,id,time,options,previous,progress,location}) => {
     const {moves} = await import('./core/catalog.js');
     const {renderMovement} = await import('./demo.js');
     const {movementCamera,blendCamera} = await import('./camera.js');
     const move = moves.find(m => m.id === id);
-    const target = movementCamera(move,options);
-    const camera = previous ? blendCamera(movementCamera(moves.find(m => m.id === previous.id),previous.options),target,progress) : target;
+    function cameraFor({id,options,previous,progress}) {
+      const target = movementCamera(moves.find(m => m.id === id),options);
+      return previous ? blendCamera(cameraFor(previous),target,progress) : target;
+    }
+    const camera = cameraFor({id,options,previous,progress});
     const scene = document.querySelector(selector), reference = document.createElement('canvas');
     reference.style.cssText = 'position:fixed;visibility:hidden;width:'+scene.clientWidth+'px;height:'+scene.clientHeight+'px';
     document.body.append(reference);
     try {
-      renderMovement(reference, move, time, {camera,location:'plane-seat',dark:document.documentElement.dataset.theme === 'dark'});
+      renderMovement(reference, move, time, {camera,location,dark:document.documentElement.dataset.theme === 'dark'});
       const pixels = canvas => canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
       const actual = pixels(scene), expected = pixels(reference);
       if (actual.length !== expected.length) return 1;
@@ -228,7 +234,7 @@ async function frameDifference(page, selector, id, time, options, previous, prog
       }
       return different / (actual.length/4);
     } finally { reference.remove(); }
-  }, {selector,id,time,options,previous,progress});
+  }, {selector,id,time,options,previous,progress,location});
 }
 
 test('camera controls apply in the planner and session, retain independent settings and honor reduced motion', async () => {
@@ -271,7 +277,7 @@ test('camera controls apply in the planner and session, retain independent setti
   } finally {await close();}
 });
 
-test('the live camera freezes mid-blend, eases directly between seated moves and opens wide for a floor transfer', async () => {
+test('the live camera freezes, retargets a partial pan, and reaches a floor movement directly during its transfer', async () => {
   const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
   const {page,close,errors} = await openPage('stretch-snack/',{engine,width:390,height:740});
   try {
@@ -292,21 +298,33 @@ test('the live camera freezes mid-blend, eases directly between seated moves and
     const frozen = await page.locator('#player-canvas').evaluate(c=>c.toDataURL());
     await page.clock.fastForward(1700);
     assert.equal(await page.locator('#player-canvas').evaluate(c=>c.toDataURL()),frozen);
-    await press('pause');
-    await page.clock.fastForward(1000);
     await press('skip');
+    const halfwayOpen = {id:first,options:{},previous:{id:first,options:fixed},progress:.5};
+    assert.ok(await frameDifference(page,'#player-canvas',second,0,{},halfwayOpen,0) < .005, 'a paused skip retains its source view');
     await press('pause');
-    assert.ok(await frameDifference(page,'#player-canvas',second,0,{}, {id:first,options:{}},0) < 0.005);
+    await page.clock.fastForward(300);
+    await press('pause');
+    const partial = {id:second,options:{},previous:halfwayOpen,progress:.25};
+    assert.ok(await frameDifference(page,'#player-canvas',second,.3,{},halfwayOpen,.25) < .005);
+    await press('previous');
+    assert.ok(await frameDifference(page,'#player-canvas',first,0,{},partial,0) < .005, 'backtracking retains the partially rendered pan');
+    await press('skip');
+    assert.ok(await frameDifference(page,'#player-canvas',second,0,{},partial,0) < .005, 'another tap keeps that camera');
     await press('pause');
     await page.clock.fastForward(1300);
     await press('pause');
     assert.ok(await frameDifference(page,'#player-canvas',second,1.3,{}) < 0.005);
     await press('pause');
-    await page.clock.fastForward(4000);
+    await page.clock.fastForward(4300); // .6 seconds into the floor transition
     assert.match(await page.locator('#player-cue').innerText(),/Change position/);
-    assert.ok(await frameDifference(page,'#player-canvas',third,0,fixed) < 0.005);
+    assert.ok(await frameDifference(page,'#player-canvas',third,0,{}, {id:second,options:{}}, .5) < .005);
+    await page.clock.fastForward(1000);
+    assert.ok(await frameDifference(page,'#player-canvas',third,0,{}) < .005);
+    await page.clock.fastForward(14000);
+    await press('pause');
+    assert.ok(await frameDifference(page,'#player-canvas',third,.6,{}) < .005, 'starting the movement holds the destination view');
     await press('previous');
-    assert.ok(await frameDifference(page,'#player-canvas',second,0,fixed) < 0.005);
+    assert.ok(await frameDifference(page,'#player-canvas',second,0,{}, {id:third,options:{}}, 0) < .005);
     assert.deepEqual(errors,[]);
   } finally {await close();}
 });

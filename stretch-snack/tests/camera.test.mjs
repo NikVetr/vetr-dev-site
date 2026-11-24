@@ -1,8 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {movementCamera, cameraProjection, workingRegion} from '../camera.js';
+import {blendCamera, movementCamera, cameraProjection, workingRegion} from '../camera.js';
 import {moves} from '../core/catalog.js';
 import {movementPose, movementCycleSeconds} from '../pose.js';
+
+test('one sinusoidal pan and zoom follows the short turn between movement views', () => {
+  const from = {...movementCamera(moves[0]), yaw:3.05};
+  const to = {...movementCamera(moves.find(m => m.pose === 'supine')), yaw:-3.05};
+  assert.equal(blendCamera(from,to,-.1),from);
+  assert.equal(blendCamera(from,to,1.1),to);
+  for (const fraction of [.1,.25,.5,.75,.9]) {
+    const camera = blendCamera(from,to,fraction);
+    const weight = (1 - Math.cos(fraction * Math.PI)) / 2;
+    for (const key of ['pitch','centerY','overviewY','centerZ','width','height','offsetX']) {
+      assert.ok(Math.abs(camera[key] - (from[key] + weight * (to[key] - from[key]))) < 1e-10);
+    }
+    assert.ok(Math.abs(camera.yaw - (from.yaw + weight * (2*Math.PI + to.yaw - from.yaw))) < 1e-10);
+  }
+});
 
 test('the fixed view is common to a posture and angle and zoom can be selected independently', () => {
   const postures = new Map();

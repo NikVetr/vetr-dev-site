@@ -36,7 +36,7 @@ const cameraTravelSeconds = 1.2;
  * index:number, elapsed:number, previous:number, transition:number, transferring:boolean, paused:boolean,
  * travelFrom:string|null, visited:Set<string>,
  * attempted:Set<string>, screenLock:WakeLockSentinel|null, lastDraw:number, lastDisplay:number,
- * cameraTarget:Camera, cameraFrom:Camera|null, cameraSince:number, displayCamera:Camera}} Session */
+ * cameraTarget:Camera, cameraFrom:Camera|null, cameraElapsed:number, displayCamera:Camera}} Session */
 /** @type {Session|null} */
 let session = null;
 let frame = 0;
@@ -50,21 +50,20 @@ export function sessionCamera(move) {
   return movementCamera(move, {zoom: guided.checked && zoom.checked, rotation: guided.checked && rotation.checked});
 }
 
-// Capture a source and a destination once per change. Only session time
-// advances the blend, so pausing halfway through a camera move freezes it.
-/** @param {Session} s */
-function aimCamera(s) {
-  const move = s.steps[s.index].move;
-  s.cameraTarget = s.transferring ? movementCamera(move, {zoom:false, rotation:false}) : sessionCamera(move);
-  s.cameraFrom = !s.transferring && !s.paused && !motion.matches && guided.checked && (zoom.checked || rotation.checked)
+// A skip, including one partway through a pan, departs from the last rendered
+// view. The transfer timer and the camera can finish at different times.
+/** @param {Session} s @param {boolean} [animate] */
+function aimCamera(s, animate = true) {
+  s.cameraTarget = sessionCamera(s.steps[s.index].move);
+  s.cameraFrom = animate && !motion.matches && guided.checked && (zoom.checked || rotation.checked)
     ? s.displayCamera : null;
-  s.cameraSince = s.elapsed;
+  s.cameraElapsed = 0;
   s.lastDraw = 0;
 }
 
 /** @param {Session} s */
 function drawCamera(s) {
-  const progress = (s.elapsed - s.cameraSince) / cameraTravelSeconds;
+  const progress = s.cameraElapsed / cameraTravelSeconds;
   if (progress >= 1) s.cameraFrom = null;
   s.displayCamera = s.cameraFrom ? blendCamera(s.cameraFrom, s.cameraTarget, progress) : s.cameraTarget;
   return s.displayCamera;
@@ -183,19 +182,23 @@ function draw() {
   const s = session;
   if (!s) return;
   const now = performance.now();
-  if (!s.paused) s.elapsed += (now - s.previous) / 1000;
+  if (!s.paused) {
+    const delta = (now - s.previous) / 1000;
+    s.elapsed += delta;
+    if (s.cameraFrom) s.cameraElapsed += delta;
+  }
   s.previous = now;
   const step = s.steps[s.index];
   const duration = visitSeconds(s);
   if (s.elapsed >= duration && !s.paused) {
-    navigate(1);
+    navigate(1, s.elapsed - duration);
     return;
   }
   if (s.transferring && s.elapsed >= s.transition) {
     s.transferring = false;
     s.travelFrom = null;
     travelControls.hidden = true;
-    aimCamera(s);
+    s.lastDraw = 0;
     const cue = step.move.cue + (step.reps ? ' A comfortable target is ' + step.reps + ' repetitions.' : '');
     get('player-cue', 'p').textContent = cue;
     if (!s.paused && audio.value === 'voice') speak(currentInstruction());
@@ -216,7 +219,7 @@ function draw() {
       if (audio.value !== 'silent' && !speak(String(remain))) playTone(420, 0.1);
     }
   }
-  if (!s.lastDraw || (!motion.matches && !s.transferring && now - s.lastDraw >= 1000 / 30 - 1) || s.paused) {
+  if (!s.lastDraw || (!motion.matches && (!s.transferring || s.cameraFrom) && now - s.lastDraw >= 1000 / 30 - 1) || s.paused) {
     renderMovement(
       scene,
       step.move,
@@ -230,10 +233,9 @@ function draw() {
 
 function pause() {
   if (!session || session.paused) return;
-  session.elapsed = Math.min(
-    visitSeconds(session),
-    session.elapsed + (performance.now() - session.previous) / 1000,
-  );
+  const delta = (performance.now() - session.previous) / 1000;
+  session.elapsed = Math.min(visitSeconds(session), session.elapsed + delta);
+  if (session.cameraFrom) session.cameraElapsed += delta;
   session.paused = true;
   releaseScreen(session);
   pausedButton.textContent = 'Resume';
@@ -248,7 +250,7 @@ function recordAttempt(s) {
     s.visited.add(step.location);
   }
 }
-function navigate(offset) {
+function navigate(offset, carrySeconds = 0) {
   const s = session;
   if (!s || s.index + offset < 0) return;
   if (s.index + offset === s.steps.length) {
@@ -274,10 +276,11 @@ function navigate(offset) {
     s.transition = s.transferring ? Math.max(transfer, postureChangeSeconds) : transfer;
     s.travelFrom = from.location !== next.location ? from.location : null;
   }
-  s.elapsed = 0;
+  s.elapsed = carrySeconds;
   s.previous = performance.now();
   s.lastDraw = 0;
   showStep(s);
+  s.cameraElapsed = carrySeconds;
   draw();
 }
 function finish() {
@@ -317,7 +320,7 @@ export function startSession(steps, location, onFinish) {
     displayCamera: overview,
     cameraTarget: overview,
     cameraFrom: null,
-    cameraSince: 0,
+    cameraElapsed: 0,
     attempted: new Set(),
     lastDraw: 0,
     lastDisplay: -1,
@@ -389,10 +392,11 @@ function refreshScene() {
 window.addEventListener('resize', refreshScene);
 motion.addEventListener('change', () => {
   get('camera-hint', 'p').hidden = !motion.matches;
-  if (session) aimCamera(session);
+  if (session) aimCamera(session, !session.paused);
   refreshScene();
 });
 document.addEventListener('themechange', refreshScene);
+document.addEventListener('stretchbodychange', refreshScene);
 
 for (const trigger of document.querySelectorAll('[data-camera-settings]')) {
   trigger.addEventListener('click', () => {
@@ -404,11 +408,12 @@ for (const trigger of document.querySelectorAll('[data-camera-settings]')) {
     cameraDialog.showModal();
   });
 }
-cameraDialog.addEventListener('change', () => {
+cameraDialog.addEventListener('change', event => {
+  if (event.target instanceof HTMLInputElement && event.target.name === 'trainer-body') return;
   get('camera-movement', 'fieldset').disabled = fixed.checked;
   writeLocal('camera', {mode: fixed.checked ? 'fixed' : 'guided', zoom: zoom.checked, rotation: rotation.checked});
   if (session) {
-    aimCamera(session);
+    aimCamera(session, !session.paused);
     refreshScene();
   }
   document.dispatchEvent(new Event('stretchcamerachange'));

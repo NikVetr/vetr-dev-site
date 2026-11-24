@@ -7,6 +7,23 @@ import { movementPose, repetitionSeconds } from '../../../stretch-snack/pose.js'
 
 const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
 
+test('one uninterrupted camera path spans each gallery boundary, including the loop', () => {
+  const {steps} = prepare();
+  for (const [i, leaving] of steps.entries()) {
+    const entering = steps[(i + 1) % steps.length];
+    const from = leaving.camera, to = entering.camera;
+    const cameraAt = delta => delta < 0 ? stepCamera(leaving, leaving.seconds + delta) : stepCamera(entering, delta);
+    const fraction = delta => (cameraAt(delta).centerY - from.centerY) / (to.centerY - from.centerY);
+    const epsilon = .001;
+    const arrived = fraction(0), leftSpeed = (arrived-fraction(-epsilon))/epsilon, rightSpeed = (fraction(epsilon)-arrived)/epsilon;
+    assert.ok(arrived > 0 && arrived < 1 && leftSpeed > .2 && Math.abs(leftSpeed - rightSpeed) < .002);
+    for (const delta of [-.6,-.1,0,.1,.6]) {
+      const actual = cameraAt(delta), distance = fraction(delta);
+      for (const k of Object.keys(from)) assert.ok(Math.abs(actual[k] - (from[k] + distance * (to[k] - from[k]))) < 1e-9);
+    }
+  }
+});
+
 test('the working fingertips and feet stay in frame throughout the three moves and their camera transitions', () => {
   const {steps} = prepare();
   const width = 100, height = 125; // The compact desktop pose has the same 4:5 aspect as the larger views.
@@ -182,12 +199,18 @@ test('the seated trainer returns through one neutral pose at all three step chan
       await art.hover();
       await art.locator('canvas').waitFor();
       const seams = await art.evaluate(async el => {
+        const {prepare,paintStep} = await import(new URL('assets/players/stretch-snack.js',location.href).href);
+        const plan = prepare();
         const canvas = el.querySelector('canvas');
+        const reference = document.createElement('canvas');
+        reference.style.cssText = 'position:fixed;visibility:hidden;width:'+canvas.clientWidth+'px;height:'+canvas.clientHeight+'px';
+        document.body.append(reference);
         const clock = el.querySelector('.progress').getAnimations()[0];
         clock.pause(); await clock.ready;
         const ctx = canvas.getContext('2d', {willReadFrequently:true});
         async function sample(seconds) {
           clock.currentTime = 1000 * seconds;
+          document.dispatchEvent(new Event('themechange'));
           await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
           const box = canvas.getBoundingClientRect();
           return {box:[box.x,box.y,box.width,box.height], pixels:ctx.getImageData(0,0,canvas.width,canvas.height).data};
@@ -204,17 +227,28 @@ test('the seated trainer returns through one neutral pose at all three step chan
           }
           return channels ? delta/channels : Infinity;
         }
+        const rendered = (step,seconds) => {
+          paintStep(reference,step,seconds,document.documentElement.dataset.theme === 'dark');
+          return {pixels:reference.getContext('2d').getImageData(0,0,reference.width,reference.height).data};
+        };
         const results = [];
-        for (const end of [5,10,15]) {
-          const before = await sample(end - 1/30), at = await sample(end), after = await sample(end + 1/30);
-          results.push({end, before:before.box, at:at.box, after:after.box, error:Math.max(error(before,at), error(at,after))});
+        // Clear one complete 30 Hz sampling bucket on either side, also after modulo at the wrap.
+        const interval = 1.25 / 30;
+        for (const [i,end] of [5,10,15].entries()) {
+          const before = await sample(end - interval), at = await sample(end), after = await sample(end + interval);
+          const outgoing = plan.steps[i], incoming = plan.steps[(i+1)%plan.steps.length];
+          const errors = [
+            error(before,rendered(outgoing,outgoing.seconds-interval)),error(at,rendered(outgoing,outgoing.seconds)),
+            error(at,rendered(incoming,0)),error(after,rendered(incoming,interval))];
+          results.push({end,before:before.box,at:at.box,after:after.box,errors});
         }
+        reference.remove();
         return results;
       });
-      for (const {end,before,at,after,error} of seams) {
+      for (const {end,before,at,after,errors} of seams) {
         assert.deepEqual(before, at, 'the camera box moved entering '+end+' s ('+width+' px)');
         assert.deepEqual(before, after, 'the camera box moved at '+end+' s ('+width+' px)');
-        assert.ok(error < 2, 'the trainer jumped by '+error.toFixed(2)+' channel levels at '+end+' s ('+width+' px)');
+        assert.ok(errors.every(e => e < 2), 'frame errors '+errors.map(n=>n.toFixed(2)).join(', ')+' at '+end+' s ('+width+' px)');
       }
     }
   } finally { await close(); }

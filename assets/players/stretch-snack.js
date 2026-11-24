@@ -9,6 +9,7 @@ import { blendCamera, movementCamera } from '../../stretch-snack/camera.js';
 export const heldSeconds = 2.5;
 const location = 'roomy-seat';
 const ids = ['seated-overhead-reach', 'seated-knee-extend', 'seated-elbow-bend'];
+const cameraTravelSeconds = 1.9;
 
 export function prepare() {
   const plan = submit({location, seconds: 15, discretion: 'any', steps: ids.map(id => ({id, seconds: 5}))});
@@ -16,23 +17,20 @@ export function prepare() {
   const steps = plan.steps.map(step => {
     const move = moves.find(move => move.id === step.id);
     if (!move) throw new Error('Missing Stretch Snack preview movement: ' + step.id);
-    const entry = {...step, move, start};
+    const entry = {...step, move, start, camera: movementCamera(move)};
     start += step.seconds;
     return entry;
   });
-  const views = steps.map(step => movementCamera(step.move));
-  const boundaries = steps.map((step, i) => {
-    const prev = (i + steps.length - 1) % steps.length;
-    if (step.move.motion === 'knee-extend' || steps[prev].move.motion === 'knee-extend') {
-      // Pull back as the working region changes, so both the settling hands
-      // and the feet of the next neutral pose are visible during the turn.
-      return blendCamera(movementCamera(steps[prev].move, {zoom:false}), movementCamera(step.move, {zoom:false}), .5);
-    }
-    return blendCamera(views[prev], views[i], .5);
+  const transitions = steps.map((step, i) => {
+    const next = steps[(i + 1) % steps.length];
+    // Reach the feet early and leave them late enough to show the whole knee
+    // extension. This shifts the timing of one continuous pan across the seam.
+    const atBoundary = step.move.motion === 'knee-extend' ? 1/6 : next.move.motion === 'knee-extend' ? 2/3 : 1/2;
+    return {from:step.camera, to:next.camera, atBoundary};
   });
   return {
     steps: steps.map((step, index) => ({
-      ...step, camera: views[index], entryCamera: boundaries[index], exitCamera: boundaries[(index + 1) % steps.length],
+      ...step, entry:transitions[(index + steps.length - 1) % steps.length], exit:transitions[index],
     })),
     total: plan.totalSeconds,
   };
@@ -54,12 +52,13 @@ export function sessionReading(plan, seconds) {
   };
 }
 
-/** Ease to and from the view shared at the neutral pose on each boundary.
+/** The outgoing and incoming poses share one camera path through their neutral boundary.
  * @param {ReturnType<typeof prepare>['steps'][number]} step @param {number} seconds */
 export function stepCamera(step, seconds) {
-  const transition = .95;
-  if (seconds < transition) return blendCamera(step.entryCamera, step.camera, seconds / transition);
-  return blendCamera(step.camera, step.exitCamera, (seconds - step.seconds + transition) / transition);
+  const entryProgress = step.entry.atBoundary + seconds / cameraTravelSeconds;
+  if (entryProgress < 1) return blendCamera(step.entry.from, step.entry.to, entryProgress);
+  const exitProgress = step.exit.atBoundary + (seconds - step.seconds) / cameraTravelSeconds;
+  return blendCamera(step.exit.from, step.exit.to, exitProgress);
 }
 
 /** Play one full repetition per step.

@@ -166,15 +166,17 @@ export function movementCamera(move, {zoom = true, rotation = true} = {}) {
   }
 }
 
-/** Ease the camera to rest at each endpoint. @param {Camera} from @param {Camera} to @param {number} progress @returns {Camera} */
+/** A single pan and zoom with sinusoidal speed and zero velocity at both ends.
+ * @param {Camera} from @param {Camera} to @param {number} progress @returns {Camera} */
 export function blendCamera(from, to, progress) {
   if (progress <= 0) return from;
   if (progress >= 1) return to;
-  const t = progress * progress * (3 - 2 * progress);
+  const t = (1 - Math.cos(Math.PI * progress)) / 2;
   /** @param {number} a @param {number} b */
   const mix = (a, b) => a + (b - a) * t;
+  const angle = to.yaw - from.yaw;
   return {
-    yaw: mix(from.yaw, to.yaw), pitch: mix(from.pitch, to.pitch),
+    yaw: from.yaw + Math.atan2(Math.sin(angle), Math.cos(angle)) * t, pitch: mix(from.pitch, to.pitch),
     overviewY: mix(from.overviewY, to.overviewY), centerY: mix(from.centerY, to.centerY), centerZ: mix(from.centerZ, to.centerZ),
     width: mix(from.width, to.width), height: mix(from.height, to.height),
     offsetX: mix(from.offsetX, to.offsetX),
