@@ -49,7 +49,7 @@ function handSurface(side) {
   const hand = rig.boneNames.indexOf('mixamorig:' + side + 'Hand');
   const finger = new Set(rig.boneNames.map((name, i) => name.startsWith('mixamorig:' + side + 'Hand') ? i : -1));
   const remap = new Int32Array(body.points.length).fill(-1);
-  const points = [], faces = [];
+  const points = [], faces = [], detailPoints = [];
   const elbow = rig.restHeads[forearm], wrist = rig.restHeads[hand];
   const axis = wrist.map((v, j) => v - elbow[j]);
   const length2 = axis.reduce((sum, v) => sum + v * v, 0);
@@ -59,12 +59,15 @@ function handSurface(side) {
     if (!finger.has(bone) && !(bone === forearm && t > 0.5)) continue;
     remap[i] = points.length;
     points.push(body.points[i]);
+    // Fit the fingers, wrist and a short cuff. The rest of the forearm may
+    // run naturally out of the close-up. References follow each body shape.
+    if (finger.has(bone) || t > .90) detailPoints.push(body.points[i]);
   }
   for (let f = 0; f < body.faces.length; f += 3) {
     const a = remap[body.faces[f]], b = remap[body.faces[f + 1]], c = remap[body.faces[f + 2]];
     if (a >= 0 && b >= 0 && c >= 0) faces.push(a, b, c);
   }
-  return {points, faces: Uint16Array.from(faces)};
+  return {points, detailPoints, faces: Uint16Array.from(faces)};
 }
 const hands = [handSurface('Right'), handSurface('Left')];
 
@@ -98,4 +101,8 @@ export function drawTrainer(mesh, pose, move) {
 export function drawHandDetail(mesh, side) {
   const hand = hands[side === 1 ? 1 : 0];
   mesh.indexed(hand.points, hand.faces, body.color);
+}
+
+export function handDetailPoints(side) {
+  return hands[side === 1 ? 1 : 0].detailPoints;
 }

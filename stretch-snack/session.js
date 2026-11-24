@@ -1,7 +1,7 @@
 import {prescriptionFor} from './core/plan.js';
 import {doseReading} from './core/program-dose.js';
 import {movementCycleSeconds} from './pose.js';
-import { get, formatTime, readLocal, writeLocal } from './dom.js';
+import { get, formatTime, localKey, readLocal, writeLocal } from './dom.js';
 import { postureChangeSeconds, transferSeconds } from './core/plan.js';
 import { locations } from './core/catalog.js';
 import { renderMovement } from './demo.js';
@@ -21,6 +21,11 @@ const audioStatus = get('audio-status', 'output');
 const travelControls = get('travel-controls', 'div');
 const travelClock = get('travel-clock', 'span');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
+const playbackChoices = get('demonstration-playback', 'fieldset').querySelectorAll('input');
+const playerAnimation = get('player-animate', 'button');
+const playbackButtons = [get('animate', 'button'), playerAnimation];
+let playbackMode = readLocal('demonstration-motion', 'device');
+export let demonstrationsPlay = false;
 const cameraDialog = get('camera-settings', 'dialog');
 const guided = get('camera-guided', 'input');
 const fixed = get('camera-fixed', 'input');
@@ -38,7 +43,7 @@ const cameraTravelSeconds = 1.2;
 /** @typedef {{steps:Step[], location:string, onFinish:(ids:string[],location:string,usedLocations:string[])=>void, total:number,
  * index:number, elapsed:number, previous:number, transition:number, transferring:boolean, paused:boolean,
  * travelFrom:string|null, visited:Set<string>,
- * attempted:Set<string>, screenLock:WakeLockSentinel|null, lastDraw:number, lastDisplay:number,
+ * attempted:Set<string>, screenLock:WakeLockSentinel|null, lastDraw:number, lastDisplay:number, poseTime:number,
  * cameraTarget:Camera, cameraFrom:Camera|null, cameraElapsed:number, displayCamera:Camera}} Session */
 /** @type {Session|null} */
 let session = null;
@@ -58,7 +63,7 @@ export function sessionCamera(move) {
 /** @param {Session} s @param {boolean} [animate] */
 function aimCamera(s, animate = true) {
   s.cameraTarget = sessionCamera(s.steps[s.index].move);
-  s.cameraFrom = animate && !motion.matches && guided.checked && (zoom.checked || rotation.checked)
+  s.cameraFrom = animate && demonstrationsPlay && !motion.matches && guided.checked && (zoom.checked || rotation.checked)
     ? s.displayCamera : null;
   s.cameraElapsed = 0;
   s.lastDraw = 0;
@@ -151,6 +156,7 @@ function prepareAudio() {
 /** @param {Session} s */
 function showStep(s) {
   spokenSection='';
+  s.poseTime = 2;
   const current = s.steps[s.index];
   get('player-progress', 'span').textContent = 'Movement ' + (s.index + 1) + ' of ' + s.steps.length;
   get('player-name', 'h2').textContent = current.move.name;
@@ -233,11 +239,12 @@ function draw() {
       if (audio.value !== 'silent' && !speak(String(remain))) playTone(420, 0.1);
     }
   }
-  if (!s.lastDraw || (!motion.matches && (!s.transferring || s.cameraFrom) && now - s.lastDraw >= 1000 / 30 - 1) || s.paused) {
+  if (!s.lastDraw || (demonstrationsPlay && (!s.transferring || s.cameraFrom) && now - s.lastDraw >= 1000 / 30 - 1) || s.paused) {
+    if (demonstrationsPlay && !s.transferring) s.poseTime = guidance?.phase ?? activeTime;
     renderMovement(
       scene,
       step.move,
-      s.transferring ? 0 : motion.matches ? 2 : (guidance?.phase ?? activeTime),
+      s.transferring ? 0 : s.poseTime,
       { location: step.location, bed:step.bed, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
     );
     s.lastDraw = now;
@@ -251,6 +258,7 @@ function pause() {
   session.elapsed = Math.min(visitSeconds(session), session.elapsed + delta);
   if (session.cameraFrom) session.cameraElapsed += delta;
   session.paused = true;
+  playerAnimation.disabled = true;
   releaseScreen(session);
   pausedButton.textContent = 'Resume';
   stopSpeech();
@@ -338,7 +346,9 @@ export function startSession(steps, location, onFinish) {
     attempted: new Set(),
     lastDraw: 0,
     lastDisplay: -1,
+    poseTime: 2,
   };
+  playerAnimation.disabled = false;
   pausedButton.textContent = 'Pause';
   player.showModal();
   // Fullscreen the session content. Promoting the root above a modal can paint the planner over it.
@@ -353,6 +363,7 @@ export function startSession(steps, location, onFinish) {
 function resume() {
   if (!session?.paused) return;
   session.paused = false;
+  playerAnimation.disabled = false;
   session.previous = performance.now();
   pausedButton.textContent = 'Pause';
   keepAwake();
@@ -403,11 +414,50 @@ function refreshScene() {
     if (session.paused) draw();
   }
 }
+function syncPlayback(refreshCamera = false) {
+  if (playbackMode !== 'play' && playbackMode !== 'still') playbackMode = 'device';
+  const playing = playbackMode === 'play' || (playbackMode === 'device' && !motion.matches);
+  for (const input of playbackChoices) input.checked = input.value === playbackMode;
+  for (const button of playbackButtons) {
+    button.textContent = playing ? 'Ⅱ' : '▶';
+    button.title = playing ? 'Pause demonstration' : 'Play demonstration';
+    button.setAttribute('aria-label', button.title);
+  }
+  const changed = demonstrationsPlay !== playing;
+  if (!changed && !refreshCamera) return;
+  demonstrationsPlay = playing;
+  if (session) {
+    if (changed && playbackMode === 'still') {
+      session.cameraFrom = null;
+      session.cameraTarget = session.displayCamera;
+    } else {
+      aimCamera(session, !session.paused);
+    }
+    refreshScene();
+  }
+  if (changed) document.dispatchEvent(new CustomEvent('stretchmotionchange', {
+    detail: {deviceStill: playbackMode === 'device' && !playing},
+  }));
+}
+/** @param {string} mode */
+function setPlayback(mode) {
+  playbackMode = mode;
+  writeLocal('demonstration-motion', mode);
+  syncPlayback();
+}
+for (const button of playbackButtons)
+  button.addEventListener('click', () => setPlayback(demonstrationsPlay ? 'still' : 'play'));
+syncPlayback();
+window.addEventListener('storage', event => {
+  if (event.key === null || event.key === localKey('demonstration-motion')) {
+    playbackMode = readLocal('demonstration-motion', 'device');
+    syncPlayback();
+  }
+});
 window.addEventListener('resize', refreshScene);
 motion.addEventListener('change', () => {
   get('camera-hint', 'p').hidden = !motion.matches;
-  if (session) aimCamera(session, !session.paused);
-  refreshScene();
+  syncPlayback(true);
 });
 document.addEventListener('themechange', refreshScene);
 document.addEventListener('stretchbodychange', refreshScene);
@@ -423,7 +473,12 @@ for (const trigger of document.querySelectorAll('[data-camera-settings]')) {
   });
 }
 cameraDialog.addEventListener('change', event => {
-  if (event.target instanceof HTMLInputElement && event.target.name === 'trainer-body') return;
+  if (!(event.target instanceof HTMLInputElement)) return;
+  if (event.target.name === 'trainer-body') return;
+  if (event.target.name === 'demonstration-motion') {
+    setPlayback(event.target.value);
+    return;
+  }
   get('camera-movement', 'fieldset').disabled = fixed.checked;
   writeLocal('camera', {mode: fixed.checked ? 'fixed' : 'guided', zoom: zoom.checked, rotation: rotation.checked});
   if (session) {

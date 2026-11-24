@@ -143,8 +143,8 @@ export function drawToeDetail(ctx, move, p, project, width, height, dark, opacit
   const cx = x > width * 0.57 ? radius + 9 : width - radius - 9,
     cy = Math.max(radius + 7, Math.min(height - radius - 14, height * 0.51));
   const ink = dark ? '#f2c88c' : '#854921',
-    fill = dark ? '#34463f' : '#dce9db',
-    bone = dark ? '#dedac4' : '#54655b',
+    fill = dark ? '#39485d' : '#e0e6ef',
+    bone = dark ? '#d6dfe9' : '#526071',
     working = dark ? '#dfa465' : '#bb7e4e';
   ctx.save();
   ctx.globalAlpha = opacity;
@@ -158,7 +158,7 @@ export function drawToeDetail(ctx, move, p, project, width, height, dark, opacit
   ctx.stroke();
   ctx.beginPath();
   ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-  ctx.fillStyle = dark ? '#1e2b27' : '#f5f6eb';
+  ctx.fillStyle = dark ? '#1d2635' : '#f8fafd';
   ctx.fill();
   ctx.stroke();
   ctx.translate(cx, cy);

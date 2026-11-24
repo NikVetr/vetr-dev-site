@@ -12,7 +12,7 @@ import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor, movem
 import { restoreTrainerBody, setTrainerBody } from './trainer.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
-import { sessionCamera, startSession } from './session.js';
+import { demonstrationsPlay, sessionCamera, startSession } from './session.js';
 import { setupCheckIn, showFeedback } from './check-in.js';
 import { get, make, button, setPressed, formatTime, localKey, readLocal, writeLocal } from './dom.js';
 
@@ -53,9 +53,7 @@ const editReps = get('edit-reps', 'input');
 const previewCanvas = get('preview-canvas', 'canvas');
 const preview = get('preview', 'section');
 const start = get('start', 'button');
-const delayMotion = matchMedia('(prefers-reduced-motion: reduce)');
-let previewPlaying = !delayMotion.matches,
-  previewTime = delayMotion.matches ? 2 : 0,
+let previewTime = demonstrationsPlay ? 0 : 2,
   previous = 0,
   frame = 0,
   visible = true;
@@ -116,7 +114,7 @@ function drawPreview(now = performance.now(), still = false) {
   }
   const repaint = !previous || now - previous >= 1000 / 30 - 1;
   if (repaint) {
-    if (previous && previewPlaying) previewTime += Math.min(now - previous, 160) / 1000;
+    if (previous && demonstrationsPlay) previewTime += Math.min(now - previous, 160) / 1000;
     previous = now;
     renderMovement(previewCanvas, movementAtLocation(move,selectedPlace,prefs), previewTime, {
       location: selectedPlace, bed:usesBed(move,prefs,selectedPlace),
@@ -124,17 +122,11 @@ function drawPreview(now = performance.now(), still = false) {
       camera: previewCamera,
     });
   }
-  if (previewPlaying && !still) frame = requestAnimationFrame(drawPreview);
+  if (demonstrationsPlay && !still) frame = requestAnimationFrame(drawPreview);
 }
 function restartPreview() {
   previous = 0;
   drawPreview();
-}
-function syncAnimation() {
-  const animate = get('animate', 'button');
-  animate.textContent = previewPlaying ? 'Ⅱ' : '▶';
-  animate.setAttribute('aria-label', previewPlaying ? 'Pause demonstration' : 'Play demonstration');
-  restartPreview();
 }
 function watchPreview() {
   const watch = new IntersectionObserver((entries) => {
@@ -151,16 +143,11 @@ function watchPreview() {
     if (move) previewCamera = sessionCamera(move);
     restartPreview();
   });
-  delayMotion.addEventListener('change', () => {
-    previewPlaying = !delayMotion.matches;
-    if (delayMotion.matches) previewTime = 2;
-    syncAnimation();
+  document.addEventListener('stretchmotionchange', event => {
+    if (event instanceof CustomEvent && event.detail.deviceStill) previewTime = 2;
+    restartPreview();
   });
-  get('animate', 'button').addEventListener('click', () => {
-    previewPlaying = !previewPlaying;
-    syncAnimation();
-  });
-  syncAnimation();
+  restartPreview();
 }
 function showMovement(id, location, pickedRow = null) {
   const move = moveById.get(id);
@@ -171,7 +158,7 @@ function showMovement(id, location, pickedRow = null) {
     return;
   }
   if (selectedId !== id) {
-    previewTime = previewPlaying ? 0 : 2;
+    previewTime = demonstrationsPlay ? 0 : 2;
     get('evidence', 'details').open = false;
   }
   selectedId = id;
@@ -762,6 +749,13 @@ restoreBodyChoice();
 buildPlan();
 watchPreview();
 Object.assign(window, { StretchSnack: { submit, reviewRoutine, programs } });
+function syncBrowserChrome() {
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (themeColor instanceof HTMLMetaElement)
+    themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--paper').trim();
+}
+syncBrowserChrome();
+document.addEventListener('themechange', syncBrowserChrome);
 async function prepareOffline() {
   const status = get('offline-status', 'output');
   if (!('serviceWorker' in navigator)) {

@@ -17,7 +17,7 @@ export async function build() {
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
         paintStep(canvas, reading.step, heldSeconds, dark);
         const styles = getComputedStyle(document.documentElement);
-        const palette = ['page', 'paper', 'ink', 'stage', 'muted', 'line', 'green', 'on-green'].map(
+        const palette = ['page', 'paper', 'ink', 'stage', 'muted', 'line', 'accent', 'on-accent'].map(
           key => '--sn-' + key + ':' + styles.getPropertyValue('--' + key).trim(),
         ).join(';');
         return {palette, pose: canvas.toDataURL('image/webp', .94)};
@@ -46,7 +46,7 @@ export async function build() {
 & .bar {display:flex;align-items:center;justify-content:space-between;gap:.4em;white-space:nowrap;font-size:clamp(10px,min(3.2cqw,6cqh),16px);font-weight:650}
 & .end,& .controls span {border:1px solid var(--sn-line);border-radius:.4em;padding:.23em .5em;background:var(--sn-paper);font-size:.86em}
 & .track {flex:none;height:3px;border-radius:4px;background:var(--sn-line);overflow:hidden}
-& .progress {display:block;height:100%;width:100%;transform:scaleX(${Math.floor(heldSeconds) / total});transform-origin:left;background:var(--sn-green)}
+& .progress {display:block;height:100%;width:100%;transform:scaleX(${Math.floor(heldSeconds) / total});transform-origin:left;background:var(--sn-accent)}
 & .scene {min-height:0;min-width:0;display:grid;place-items:end center;container:stretch-stage/size;background:var(--sn-stage)}
 & .pose {position:relative;width:min(100cqw,80cqh);aspect-ratio:4/5}
 & .pose img,& .pose canvas {position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -60,7 +60,7 @@ export async function build() {
 & [data-reading="clock"] {font-size:1.1em;font-weight:720}
 & [data-reading="remaining"],& .next {font-weight:480;letter-spacing:0;color:var(--sn-muted);font-size:clamp(10px,.65em,16px)}
 & .controls {display:flex;gap:.3em;align-items:center;font-size:clamp(10px,.72em,16px);font-weight:650}
-& .controls .pause {background:var(--sn-green);border-color:var(--sn-green);color:var(--sn-on-green)}
+& .controls .pause {background:var(--sn-accent);border-color:var(--sn-accent);color:var(--sn-on-accent)}
 @container stretch-card (min-aspect-ratio:1.1/1) and (max-aspect-ratio:1.55/1) {
   & .session {grid-template-columns:min(80cqh,64cqw) minmax(0,1fr)}
 }

@@ -1,4 +1,4 @@
-import {drawFixtureProps} from './movements/fixtures-props.js';
+import {drawBottle} from './movements/fixtures-props.js';
 import {fixtureBallCenter} from './movements/fixtures.js';
 import {isFloor} from './core/library/constraints.js';
 import {movementAtLocation} from './core/plan.js';
@@ -8,9 +8,77 @@ import {drawToeDetail,lowerBackBallCenter} from './movements/lower-props.js';
 // The editor, player and directory supply their camera and share a posed mesh.
 import { movementCamera, cameraProjection, workingRegion } from './camera.js';
 import { movementPose, movementActivation, movementCycleSeconds, mixPoint } from './pose.js';
-import { drawTrainer, drawHandDetail } from './trainer.js';
+import { drawTrainer, drawHandDetail, handDetailPoints } from './trainer.js';
 import { backBallCenter, backBallRadius, drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
+
+/** @typedef {{cx:number,cy:number,radius:number}} HandLens */
+const handEnvelopes = new Map();
+const lastLens = new WeakMap();
+const bothHands = new Set(['prayer-stretch','wrist-extensor-stretch','finger-block','wrist-press']);
+
+// Pick the largest clear circle in the upper right. Sample both sides together
+// so the inset stays in place as the hands travel through the repetition.
+function handLens(canvas, move, camera, project, scale, width, height) {
+  const motion = [move.pose, move.family, move.animation ?? move.motion, move.raisedSupport].join('/');
+  const key = [motion,width,height,camera.yaw,camera.pitch,camera.centerY,camera.centerZ,
+    camera.overviewY,camera.width,camera.height,camera.offsetX].join('/');
+  const previous = lastLens.get(canvas);
+  if (previous?.key === key) return previous.lens;
+  if (!handEnvelopes.has(motion)) {
+    const parts = [], period = movementCycleSeconds(move);
+    for (let i = 0; i < 12; i++) {
+      const pose = movementPose(move, i * period / 6);
+      parts.push(...figureSegments(pose), [pose.arms[0].shoulder,pose.arms[1].shoulder,.066]);
+      for (const arm of pose.arms) {
+        const tip = mixPoint(arm.fingers[1][1],arm.fingers[2][1],.5);
+        parts.push([arm.wrist, tip, .043]);
+      }
+    }
+    handEnvelopes.set(motion,parts);
+  }
+  const segments = handEnvelopes.get(motion).map(([a,b,r]) => ({
+    a:project(a), b:project(b), radius:r*scale + 4,
+  }));
+  const fits = ({cx,cy,radius}) => segments.every(({a,b,radius:thickness}) => {
+    const dx = b[0]-a[0], dy = b[1]-a[1];
+    const along = Math.max(0,Math.min(1,((cx-a[0])*dx+(cy-a[1])*dy)/(dx*dx+dy*dy || 1)));
+    return (cx-a[0]-along*dx)**2+(cy-a[1]-along*dy)**2 >= (radius+thickness)**2;
+  });
+  const margin = Math.max(5,Math.min(12,.023*Math.min(width,height)));
+  const desired = Math.min(.25*width,.39*height);
+  const corner = (r,right,top) => ({
+    cx:right ? width-margin-r : margin+r, cy:top ? margin+r : height-margin-r, radius:r,
+  });
+  let lens;
+  const corners = isFloor(move.pose) ? [[true,true],[false,true]] :
+    [[true,true],[true,false],[false,true],[false,false]];
+  for (const [right,top] of corners) {
+    let r = desired;
+    while (r > 8 && !fits(corner(r,right,top))) r *= .96;
+    if (!lens || r > lens.radius*1.22) lens = corner(r,right,top);
+    if (lens.radius >= .80*desired) break;
+  }
+  lastLens.set(canvas,{key,lens});
+  return lens;
+}
+
+// Frame the fitted skin and props in the main camera's orientation. A fixed
+// minimum span preserves the change of size between an open hand and a fist.
+function handZoom(project,scale,lens,pointGroups) {
+  let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;
+  for (const points of pointGroups) for (const point of points) {
+    const [x,y]=project(point);
+    left=Math.min(left,x); right=Math.max(right,x); top=Math.min(top,y); bottom=Math.max(bottom,y);
+  }
+  const x=(left+right)/2, y=(top+bottom)/2;
+  const reach = Math.max(.102*scale, .535*Math.hypot(right-left,bottom-top));
+  const zoom=lens.radius/reach;
+  return point => {
+    const [u,v,z]=project(point);
+    return [lens.cx+(u-x)*zoom,lens.cy+(v-y)*zoom,z];
+  };
+}
 
 const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
 
@@ -44,8 +112,8 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   ctx.translate(sx, sy);
   ctx.scale(scale * (floor ? 1.02 : seated ? 0.48 : 0.43), scale * (floor ? 0.12 : 0.075));
   const shade = ctx.createRadialGradient(0, 0, 0.12, 0, 0, 1);
-  shade.addColorStop(0, options.dark ? 'rgba(0,0,0,.29)' : 'rgba(57,79,77,.20)');
-  shade.addColorStop(1, 'rgba(57,79,77,0)');
+  shade.addColorStop(0, options.dark ? 'rgba(0,0,0,.29)' : 'rgba(51,62,82,.20)');
+  shade.addColorStop(1, 'rgba(51,62,82,0)');
   ctx.fillStyle = shade;
   ctx.fillRect(-1, -1, 2, 2);
   ctx.restore();
@@ -54,11 +122,13 @@ export function renderMovement(canvas, move, seconds, options = {}) {
     drawTrainer(mesh, pose, move);
   });
   const opacity = options.cueOpacity ?? 1;
-  if (!options.preview && opacity > 0)
-    drawCue(ctx, move, pose, project, scale, width, height, handDetail, options.dark ?? false, seconds, opacity);
+  if (!options.preview && opacity > 0) {
+    const lens = handDetail ? handLens(canvas,move,camera,project,scale,width,height) : null;
+    drawCue(ctx, move, pose, project, scale, width, height, lens, options.dark ?? false, seconds, opacity);
+  }
 }
 
-/** @param {CanvasRenderingContext2D} ctx @param {import('./pose.js').Movement} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {boolean} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
+/** @param {CanvasRenderingContext2D} ctx @param {import('./pose.js').Movement} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {HandLens | null} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
 function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, seconds, opacity) {
   const group = workingRegion(move),
     arm = pose.arms[pose.side === 1 ? 1 : 0],
@@ -86,34 +156,37 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   if (detail) {
-    const radius = Math.min(height * 0.19, width * 0.112),
-      cx = width * 0.77,
-      cy = height * 0.53;
+    const {radius,cx,cy} = detail;
+    const distance = Math.hypot(x-cx,y-cy) || 1;
     ctx.beginPath();
-    ctx.moveTo(x + 3, y);
-    ctx.lineTo(cx - radius, cy);
+    ctx.moveTo(x, y);
+    ctx.lineTo(cx+(x-cx)*radius/distance,cy+(y-cy)*radius/distance);
     ctx.globalAlpha = 0.55 * opacity;
     ctx.stroke();
     ctx.globalAlpha = opacity;
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.fillStyle = dark ? '#213731' : '#edf2e7';
+    ctx.fillStyle = dark ? '#1d2635' : '#f8fafd';
     ctx.fill();
     ctx.stroke();
     ctx.save();
     ctx.clip();
-    const detailScale = radius / (scale * 0.138);
-    const zoom = (point) => {
-      const [u, v, z] = project(point);
-      return [cx + (u - x) * detailScale, cy + (v - y) * detailScale, z];
-    };
-    drawSurface(ctx, width, height, zoom, (mesh) => {
-      drawHandDetail(mesh, pose.side);
-      if (move.motion === 'towel-grip') drawTowel(mesh, arm.palm);
-      if (move.animation === 'wrist-lift-bottle') drawFixtureProps(mesh,pose,move,seconds);
-      if (move.family === 'hand-neck') drawHandNeckProps(mesh, pose, move, seconds);
-      if (move.motion === 'wrist-stretch' || ['prayer-stretch','wrist-extensor-stretch','finger-block','wrist-press'].includes(move.animation))
-        drawHandDetail(mesh, -pose.side);
+    const paired = move.motion === 'wrist-stretch' || bothHands.has(move.animation);
+    const points = [handDetailPoints(pose.side)];
+    if (paired) points.push(handDetailPoints(-pose.side));
+    const surfaces = [];
+    // The same generated prop geometry sets the framing and is then painted.
+    const props = {surface(rings,color) {
+      points.push(...rings);
+      surfaces.push({rings,color});
+    }};
+    if (move.motion === 'towel-grip') drawTowel(props,arm.palm);
+    if (move.animation === 'wrist-lift-bottle') drawBottle(props,arm);
+    if (move.family === 'hand-neck') drawHandNeckProps(props,pose,move,seconds);
+    drawSurface(ctx,width,height,handZoom(project,scale,detail,points),mesh => {
+      drawHandDetail(mesh,pose.side);
+      if (paired) drawHandDetail(mesh,-pose.side);
+      for (const {rings,color} of surfaces) mesh.surface(rings,color);
     });
     ctx.restore();
   }
@@ -133,7 +206,7 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     const phase = pose.activation < 0.03 ? 'Relax' : pose.activation >= 0.98 ? 'Hold' :
       (seconds % cycle < cycle / 2 ? 'Tighten' : 'Release');
     label(ctx,points[0],[effort.label,phase],
-      width,height,dark,pose,project,scale);
+      width,height,dark,pose,project,scale,detail);
   } else if (detail || (move.family === 'lower' && drawToeDetail(ctx,move,pose,project,width,height,dark,opacity))) {
     // The magnified hand or foot illustrates the action.
   } else if (!move.family && isometric.has(move.motion)) {
@@ -244,23 +317,23 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
 
 // Reserve space around the posed limbs at the height of each proposed label.
 // This avoids reading pixels back from the drawing surface on every frame.
-function labelSegments(pose, project, scale) {
+function figureSegments(pose) {
   const pelvis = mixPoint(pose.legs[0].hip, pose.legs[1].hip, 0.5);
   const parts = [[pose.crown, pose.neck, 0.083], [pose.neck, pelvis, 0.15]];
   for (const arm of pose.arms)
     parts.push([arm.shoulder, arm.elbow, 0.064], [arm.elbow, arm.palm, 0.053]);
   for (const leg of pose.legs)
     parts.push([leg.hip, leg.knee, 0.079], [leg.knee, leg.ankle, 0.056], [leg.ankle, leg.toe, 0.044]);
-  return parts.map(([from, to, r]) => ({a: project(from), b: project(to), radius: r * scale}));
+  return parts;
 }
-function label(ctx, target, lines, width, height, dark, pose, project, scale) {
+function label(ctx, target, lines, width, height, dark, pose, project, scale, lens = null) {
   const font = Math.max(10, Math.min(16, height * 0.044, width * 0.055));
   ctx.font = '600 ' + font + 'px system-ui, sans-serif';
   const pad = 5, lineHeight = font * 1.19;
   const w = Math.ceil(Math.max(...lines.map(line => ctx.measureText(line).width))) + 2 * pad;
   const h = Math.ceil(lines.length * lineHeight) + 2 * pad;
   const gap = Math.min(46, Math.max(16, height * 0.12));
-  const parts = labelSegments(pose, project, scale);
+  const parts = figureSegments(pose).map(([a,b,r])=>({a:project(a), b:project(b), radius:r*scale}));
   let bestCost = Infinity, x = 0, y = 0, lineX = 0, lineY = 0;
   for (const top of [target[1] - h - gap * 0.35, target[1] - h / 2, target[1] + gap * 0.35]) {
     const ty = Math.max(pad, Math.min(height - h - pad, top));
@@ -279,7 +352,10 @@ function label(ctx, target, lines, width, height, dark, pose, project, scale) {
       const edge = left ? minX : maxX;
       const tx = Math.max(pad, Math.min(width-w-pad, left ? edge-w : edge));
       const lx = left ? tx+w : tx, ly = Math.max(ty+4, Math.min(ty+h-4, target[1]));
-      const cost = Math.hypot(lx-target[0], ly-target[1]) + 8 * Math.abs(lx-edge);
+      const dx = lens ? Math.max(tx-lens.cx,0,lens.cx-tx-w) : 0;
+      const dy = lens ? Math.max(ty-lens.cy,0,lens.cy-ty-h) : 0;
+      const overlap = lens ? Math.max(0,lens.radius+4-Math.hypot(dx,dy)) : 0;
+      const cost = Math.hypot(lx-target[0], ly-target[1]) + 8*Math.abs(lx-edge) + 100*overlap;
       if (cost < bestCost) { bestCost = cost; x = tx; y = ty; lineX = lx; lineY = ly; }
     }
   }
@@ -287,7 +363,7 @@ function label(ctx, target, lines, width, height, dark, pose, project, scale) {
   ctx.moveTo(lineX, lineY);
   ctx.lineTo(target[0], target[1]);
   ctx.stroke();
-  ctx.fillStyle = dark ? '#273a30' : '#fffdf6';
+  ctx.fillStyle = dark ? '#202b3b' : '#fbfcfe';
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, 4);
   ctx.fill();

@@ -97,7 +97,7 @@ function table(mesh, c, w, d, top) {
       rod(mesh, add(foot, [0, 0.012, 0]), add(foot, [0, top - 0.035, 0]), 0.014, frame);
     }
 }
-function drawBottle(mesh, arm) {
+export function drawBottle(mesh, arm) {
   const axis = unit(sub(arm.fingerJoints[3][0], arm.fingerJoints[0][0]));
   const reach = unit(sub(arm.palm, arm.wrist));
   const inward = unit(cross(axis, reach));
