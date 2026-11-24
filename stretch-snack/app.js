@@ -9,12 +9,12 @@ import {
   sources, programs,
 } from './core/catalog.js';
 import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor, movementAtLocation, usesBed } from './core/plan.js';
-import { setTrainerBody } from './trainer.js';
+import { restoreTrainerBody, setTrainerBody } from './trainer.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
 import { sessionCamera, startSession } from './session.js';
 import { setupCheckIn, showFeedback } from './check-in.js';
-import { get, make, button, setPressed, formatTime, readLocal, writeLocal } from './dom.js';
+import { get, make, button, setPressed, formatTime, localKey, readLocal, writeLocal } from './dom.js';
 
 const moveById = new Map(moves.map((move) => [move.id, move]));
 const profileFields = [
@@ -106,11 +106,11 @@ function errorText(error) {
   const issue = error.issues?.[0];
   return issue ? issue.path + ' · ' + issue.message : error.message;
 }
-function drawPreview(now = performance.now()) {
+function drawPreview(now = performance.now(), still = false) {
   cancelAnimationFrame(frame);
   frame = 0;
   const move = moveById.get(selectedId);
-  if (!move || preview.hidden || !visible || document.hidden || document.querySelector('dialog[open]')) {
+  if (!move || preview.hidden || !visible || document.hidden || (!still && document.querySelector('dialog[open]'))) {
     previous = 0;
     return;
   }
@@ -124,7 +124,7 @@ function drawPreview(now = performance.now()) {
       camera: previewCamera,
     });
   }
-  if (previewPlaying) frame = requestAnimationFrame(drawPreview);
+  if (previewPlaying && !still) frame = requestAnimationFrame(drawPreview);
 }
 function restartPreview() {
   previous = 0;
@@ -723,20 +723,42 @@ start.addEventListener('click', () => {
   );
 });
 const bodyChoices = get('trainer-body', 'fieldset').querySelectorAll('input');
-const savedBody = readLocal('trainer-body', 'female');
+const fitCanvas = get('trainer-fit','canvas');
+const trainerDialog = get('camera-settings','dialog');
+const fitPose = moveById.get('standing-mountain');
+// The same neutral stance and scale make the three silhouettes directly comparable.
+const fitCamera = {yaw:.18, pitch:.03, centerY:.855, overviewY:.855, centerZ:.02, width:.74, height:1.84, offsetX:0};
+function drawBodyFit() {
+  if (trainerDialog.open) renderMovement(fitCanvas,fitPose,0,{
+    preview:true, camera:fitCamera, dark:document.documentElement.dataset.theme === 'dark',
+  });
+}
+function redrawBody() {
+  drawBodyFit();
+  previous = 0;
+  drawPreview(performance.now(), trainerDialog.open);
+  document.dispatchEvent(new Event('stretchbodychange'));
+}
+function restoreBodyChoice() {
+  const name = restoreTrainerBody();
+  for (const choice of bodyChoices) choice.checked = choice.value === name;
+  redrawBody();
+}
 for (const choice of bodyChoices) {
-  if (choice.value === savedBody) {
-    choice.checked = true;
-    setTrainerBody(choice.value);
-  }
   choice.addEventListener('change', () => {
     if (!choice.checked) return;
     setTrainerBody(choice.value);
     writeLocal('trainer-body', choice.value);
-    restartPreview();
-    document.dispatchEvent(new Event('stretchbodychange'));
+    redrawBody();
   });
 }
+new ResizeObserver(drawBodyFit).observe(fitCanvas);
+document.addEventListener('themechange',drawBodyFit);
+window.addEventListener('storage', event => {
+  if (event.key === null || event.key === localKey('trainer-body')) restoreBodyChoice();
+});
+window.addEventListener('pageshow', event => { if (event.persisted) restoreBodyChoice(); });
+restoreBodyChoice();
 buildPlan();
 watchPreview();
 Object.assign(window, { StretchSnack: { submit, reviewRoutine, programs } });

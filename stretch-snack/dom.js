@@ -25,10 +25,10 @@ export function formatTime(seconds) {
   return Math.floor(seconds / 60) + ':' + String(Math.round(seconds % 60)).padStart(2, '0');
 }
 
-const prefix = 'vetr:stretch-snack:';
+export const localKey = key => 'vetr:stretch-snack:' + key;
 export function readLocal(key, fallback) {
   try {
-    const value = localStorage.getItem(prefix + key);
+    const value = localStorage.getItem(localKey(key));
     return value ? JSON.parse(value) : fallback;
   } catch {
     return fallback;
@@ -36,7 +36,7 @@ export function readLocal(key, fallback) {
 }
 export function writeLocal(key, value) {
   try {
-    localStorage.setItem(prefix + key, JSON.stringify(value));
+    localStorage.setItem(localKey(key), JSON.stringify(value));
     return true;
   } catch {
     return false;

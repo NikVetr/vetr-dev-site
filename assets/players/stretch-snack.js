@@ -1,7 +1,8 @@
 // The directory plays a real, short seated session at its normal pace.
 import { moves } from '../../stretch-snack/core/catalog.js';
 import { submit } from '../../stretch-snack/core/plan.js';
-import { formatTime } from '../../stretch-snack/dom.js';
+import { formatTime, localKey } from '../../stretch-snack/dom.js';
+import { restoreTrainerBody } from '../../stretch-snack/trainer.js';
 import { renderMovement } from '../../stretch-snack/demo.js';
 import { repetitionSeconds } from '../../stretch-snack/pose.js';
 import { blendCamera, movementCamera } from '../../stretch-snack/camera.js';
@@ -112,6 +113,13 @@ export function create(art, plan) {
     request = requestAnimationFrame(tick);
   }
   const repaint = () => draw(true);
+  restoreTrainerBody();
+  function onBodyChange(event) {
+    if (event.key !== null && event.key !== localKey('trainer-body')) return;
+    restoreTrainerBody();
+    repaint();
+  }
+  window.addEventListener('storage', onBodyChange);
   const size = new ResizeObserver(repaint);
   size.observe(stage);
   document.addEventListener('themechange', repaint);
@@ -131,6 +139,7 @@ export function create(art, plan) {
       pause();
       size.disconnect();
       document.removeEventListener('themechange', repaint);
+      window.removeEventListener('storage', onBodyChange);
       clock.cancel();
       canvas.remove();
       for (const {node, stillText} of fields) node.textContent = stillText;

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { moves } from '../core/catalog.js';
-import { rig } from '../form-motion/model.js';
+import { rig, maleBind } from '../form-motion/model.js';
 import { createRetarget } from '../form-motion/retarget.js';
 import { movementPose, movementCycleSeconds } from '../pose.js';
 
@@ -17,6 +17,28 @@ function closePoint(a, b, message) {
 const unit = v => v.map(x => x / Math.hypot(...v));
 const difference = (end, start) => end.map((v, i) => v - start[i]);
 const dot = (a, b) => a.reduce((sum, x, k) => sum + x*b[k], 0);
+
+test('the fitted trainer retains shoulder and hip breadth while the hands and feet meet the authored targets', () => {
+  const selected = {...rig,...maleBind};
+  const animate = createRetarget(selected, undefined, rig.restHeads);
+  const move = moves.find(m => m.id === 'standing-mountain');
+  const pose = movementPose(move, 0);
+  const palette = animate(pose,move);
+  for (const [segment,landmarks] of /** @type {const} */ ([
+    ['Arm',pose.arms.map(a=>a.shoulder)], ['UpLeg',pose.legs.map(l=>l.hip)],
+  ])) {
+    const [r,l] = ['Right','Left'].map(side=>index(side+segment));
+    const breadth = apply(palette,l,selected.restHeads[l])[0] - apply(palette,r,selected.restHeads[r])[0];
+    const sourceDifference = selected.restHeads[l][0] - selected.restHeads[r][0] - (rig.restHeads[l][0] - rig.restHeads[r][0]);
+    assert.ok(sourceDifference > .009);
+    assert.ok(Math.abs(breadth - (landmarks[1][0] - landmarks[0][0]) - sourceDifference) < .001);
+  }
+  for (const [i,prefix] of ['Right','Left'].entries()) {
+    const hand=index(prefix+'Hand'), foot=index(prefix+'Foot');
+    closePoint(apply(palette,hand,selected.restHeads[hand]),pose.arms[i].wrist,'wrist');
+    closePoint(apply(palette,foot,selected.restHeads[foot]),pose.legs[i].ankle,'ankle');
+  }
+});
 const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
 function palmCoordinates(forward, across) {
   const y = unit(forward);

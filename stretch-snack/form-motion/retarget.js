@@ -99,8 +99,9 @@ function groundContact(foot, toe, skin) {
 /** Create a retargeter for the fitted MakeHuman/Mixamo rig. The returned
  * column-major 4x4 palette is reused on each call. See movementPose in ../pose.js.
  * @param {{boneNames:string[], restHeads:number[][], restTails:number[][]}} rig
- * @param {{rest:Float32Array,joints:Uint8Array}} [skin] */
-export function createRetarget(rig, skin) {
+ * @param {{rest:Float32Array,joints:Uint8Array}} [skin]
+ * @param {number[][]} [referenceHeads] Joint landmarks of the body used to author the movement. */
+export function createRetarget(rig, skin, referenceHeads = rig.restHeads) {
   const bones = new Map(rig.boneNames.map((name, i) => [name.split(':').pop(), {
     i, head: rig.restHeads[i], tail: rig.restTails[i],
     direction: sub(rig.restTails[i], rig.restHeads[i]),
@@ -163,6 +164,12 @@ export function createRetarget(rig, skin) {
 
   const restHips = mid(sides[0].thigh.head,sides[1].thigh.head);
   const restChest = mid(sides[0].arm.head,sides[1].arm.head);
+  // Keep the fitted body's breadth as it turns. Elbows, hands, knees and feet
+  // retain the exercise landmarks, including their contacts with the equipment.
+  const halfBreadthChange = (right, left) =>
+    ((left.head[0] - right.head[0]) - (referenceHeads[left.i][0] - referenceHeads[right.i][0])) / 2;
+  const shoulderOffset = halfBreadthChange(sides[0].arm, sides[1].arm);
+  const hipOffset = halfBreadthChange(sides[0].thigh, sides[1].thigh);
   const restBody = axes(sub(restChest,restHips),sub(sides[1].arm.head,sides[0].arm.head));
   const lumbarFraction = 0.24 / 0.47;
   const restLumbar = mix(restHips, restChest, lumbarFraction);
@@ -201,11 +208,12 @@ export function createRetarget(rig, skin) {
 
     for (const side of sides) {
       const arm = pose.arms[side.i], leg = pose.legs[side.i];
-      side.clavicle(transform(chestMat,side.collar.head),arm.shoulder,chestAxes[2]);
+      const shoulder = shoulderOffset ? add(arm.shoulder, mul(chestAxes[0], side.sign*shoulderOffset)) : arm.shoulder;
+      side.clavicle(transform(chestMat,side.collar.head),shoulder,chestAxes[2]);
       const upper = sub(arm.elbow,arm.shoulder), fore = sub(arm.wrist,arm.elbow);
       const bendNormal = cross(upper,fore);
       const hinge = norm(bendNormal) > 1e-5 ? bendNormal : rotate(chestMat.rotation,side.elbowHinge);
-      side.upperArm(arm.shoulder,arm.elbow,hinge);
+      side.upperArm(shoulder,arm.elbow,hinge);
       const chains = side.i === 1 ? arm.fingerJoints : [...arm.fingerJoints].reverse();
       const palmAcross = mul(sub(chains[3][0],chains[0][0]),side.sign);
       const palmAxes = axes(sub(arm.palm, arm.wrist), palmAcross);
@@ -280,7 +288,8 @@ export function createRetarget(rig, skin) {
         write(side.foot,shoeMat);
       }
       const kneeHinge = cross(sub(leg.knee,leg.hip),sub(ankle,leg.knee));
-      side.upperLeg(leg.hip,leg.knee,kneeHinge);
+      const hipJoint = hipOffset ? add(leg.hip, mul(hipAxes[0], side.sign*hipOffset)) : leg.hip;
+      side.upperLeg(hipJoint,leg.knee,kneeHinge);
       side.lowerLeg(leg.knee,ankle,kneeHinge);
       if (move.motion === 'heel-lift') {
         // The ball is the pivot; keep the front sole planted as the heel rises.

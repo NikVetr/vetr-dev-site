@@ -1,6 +1,7 @@
 // The same skinned Form / Motion figure supplies the full view and hand inset.
 import { meshes, rig, maleBind } from './form-motion/model.js';
 import { createRetarget } from './form-motion/retarget.js';
+import {readLocal} from './dom.js';
 
 const bytes = (base64) => Uint8Array.from(atob(base64), ch => ch.charCodeAt(0));
 function unpack(data, color) {
@@ -20,6 +21,12 @@ const parts = [body, ...garments];
 const shapes = {female: 0, androgynous: 0.5, male: 1};
 let selectedBody = 'female';
 
+export function restoreTrainerBody() {
+  const saved = readLocal('trainer-body', 'female');
+  setTrainerBody(typeof saved === 'string' && Object.hasOwn(shapes,saved) ? saved : 'female');
+  return selectedBody;
+}
+
 /** Change the fitted skin, clothing and rest skeleton together, once per selection.
  * @param {string} name */
 export function setTrainerBody(name) {
@@ -32,7 +39,7 @@ export function setTrainerBody(name) {
   }
   const bindPoints = key => rig[key].map((point, i) =>
     point.map((v, axis) => v + t * (maleBind[key][i][axis] - v)));
-  retarget = createRetarget({boneNames:rig.boneNames, restHeads:bindPoints('restHeads'), restTails:bindPoints('restTails')}, body);
+  retarget = createRetarget({boneNames:rig.boneNames, restHeads:bindPoints('restHeads'), restTails:bindPoints('restTails')}, body, rig.restHeads);
   selectedBody = name;
 }
 

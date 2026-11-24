@@ -624,8 +624,24 @@ body:has(dialog[open]) {
 #camera-settings {
   width: min(23rem, calc(100vw - 1.5rem));
 }
+.trainer-fit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.95fr);
+  align-items: center;
+  gap: .75rem;
+}
+#trainer-fit {
+  width: 100%;
+  height: clamp(9rem, 26svh, 12rem);
+  background: var(--stage);
+  border-radius: .6rem;
+}
 #camera-settings .body-choices {
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr;
+}
+.body-choices label {
+  justify-content: flex-start;
+  padding-inline: .65rem;
 }
 #trainer-body {
   margin-bottom: 1rem;
