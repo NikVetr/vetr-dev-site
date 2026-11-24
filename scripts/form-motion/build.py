@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-from shoulders import soften_shoulder_weights, split_tank
+from outfit import fit_outfit, soften_joint_weights
 
 OUTPUT = Path(__file__).resolve().parents[2] / "stretch-snack" / "form-motion"
 
@@ -70,19 +70,11 @@ def build(source):
     attrs, faces, parents = minimal_body(np.column_stack((*shapes, weights[ids])), inverse[original])
     garments = clothing.build_clothes(obj, raw, weights)
     body = smooth_attributes(compiler, attrs, faces)
-    soften_shoulder_weights(body, compiler.triangulate(faces), rig)
-    skin, skin_faces, tank, tank_faces = split_tank(
-        compiler, obj["vertices"], original, faces, parents, body, garments["tank"], transforms,
-        garments["leggings"]["delete_verts"], clothing._module,
+    soften_joint_weights(body, compiler.triangulate(faces), rig)
+    fitted, panels = fit_outfit(
+        compiler, obj["vertices"], original, faces, parents, body, garments, transforms, clothing._module,
     )
-    leggings = garments["leggings"]
-    endpoints = [leggings[s] * transforms[s]["scale"] + transforms[s]["offset"] for s in ("female", "male")]
-    fitted = smooth_attributes(compiler, np.column_stack((*endpoints, leggings["weights"])), leggings["faces"])
-    meshes = {
-        "body": compact_mesh(compiler, skin, skin_faces),
-        "tank": compact_mesh(compiler, tank, tank_faces),
-        "leggings": compact_mesh(compiler, fitted, compiler.triangulate(leggings["faces"])),
-    }
+    meshes = {name: compact_mesh(compiler, fitted, triangles) for name, triangles in panels.items()}
     fields = ("boneNames", "restHeads", "restTails")
     data = {key: rig[key] for key in fields}
     if rig["boneNames"] != rigs["male"]["boneNames"]:
