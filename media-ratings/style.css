@@ -1643,7 +1643,10 @@ body {
 #film-check { font-size:.85rem; margin:.65rem 0; }
 #film-check-stars, .film-check-actions { display:flex; gap:.4rem; flex-wrap:wrap; margin:.8rem 0; }
 #film-check-stars button, .film-check-actions button { min-height:2.5rem; }
-@media (max-width:32rem) { #film-check-stars { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); } }
+@media (max-width:32rem) {
+  #film-check-stars { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:.25rem; }
+  #film-check-stars button { padding-inline:0; white-space:nowrap; }
+}
 #film-check-error:empty, #film-check-summary:empty { display:none; }
 .rapid-head,
 .rapid-nav,
