@@ -82,3 +82,21 @@ export function eased(t) {
   const u = Math.max(0, Math.min(1, t));
   return u * u * (3 - 2 * u);
 }
+
+// Anchor to the posed thigh after its final hip and knee have been solved.
+// The wrist sits on the thick proximal thigh; the fingers follow its slope.
+export function lapContact(leg) {
+  const along = leg.knee.map((v, i) => v - leg.hip[i]);
+  return {
+    wrist: add(mixPoint(leg.hip, leg.knee, 0.35), [leg.s * 0.008, 0.152, 0.008 - 0.24 * along[1]]),
+    axis: scaledTo([0.25 * along[0], along[1] - 0.018, along[2]], 1),
+  };
+}
+
+export function restOnThigh(arm, leg) {
+  const {wrist, axis} = lapContact(leg);
+  arm.wrist = wrist;
+  arm.elbow = middleJoint(arm.shoulder, wrist, 0.26, 0.245, [arm.s * 0.5, -0.6, -0.9]);
+  arm.palm = add(wrist, axis.map(v => v * 0.045));
+  Object.assign(arm, handGeometry(arm.palm, axis, arm.s, -0.3 * arm.s, 0, 0.045));
+}

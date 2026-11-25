@@ -1,6 +1,6 @@
 // World coordinates are metres: Y is up, Z is forward. Feet are posed about
 // the supporting heel or ball, and planted targets survive hip/trunk travel.
-import {add, mixPoint as mix, turn, pitchPoint as pitch, lean, middleJoint, handGeometry, eased} from './geometry.js';
+import {add, mixPoint as mix, turn, pitchPoint as pitch, lean, middleJoint, handGeometry, restOnThigh, eased} from './geometry.js';
 
 const names = {
   seated: new Set(
@@ -112,7 +112,7 @@ function railHand(arm, front = false, z = 0.27) {
   arm.holdingRail = true;
 }
 function chairHands(p) {
-  for (const arm of p.arms) palmAt(arm, [arm.s * 0.223, 0.478, 0.19], [arm.s * 0.3, -0.85, 0.35]);
+  for (const arm of p.arms) palmAt(arm, [arm.s * 0.272, 0.485, 0.001], [arm.s * 0.56, -0.63, 0.54]);
 }
 
 const letterPaths = [
@@ -203,6 +203,7 @@ function seatedFoot(p, id, t) {
     if (['toe-curl','ankle-tilt','band-ankle-in','band-ankle-out','foot-dome','toe-spread','towel-scrunch'].includes(id))
       leg.heelHeight = 0;
   }
+  p.arms.forEach((arm, i) => restOnThigh(arm, p.legs[i]));
   p.activation = id === 'leg-cross-press' || id === 'foot-press-up' ? load : hold;
 }
 
@@ -238,23 +239,25 @@ function seated(p, id, t) {
     }
     if (!ball)
       for (const arm of p.arms)
-        palmAt(arm, add(p.legs.find(l => l.s === arm.s).hip, [arm.s * 0.042, 0.11, 0.02]), [arm.s * 0.06, -0.92, 0.23]);
+        palmAt(arm, add(p.legs.find(l => l.s === arm.s).hip, [arm.s * 0.082, 0.18, -0.05]), [arm.s * 0.22, -0.88, -0.22]);
   } else if (id === 'seated-forward-bend') {
     torso(p, [0, 0, 0.052], 0.76 * hold);
     for (const leg of p.legs) {
       placeLeg(leg, [leg.s * 0.177, 0.079, 0.4], [leg.s * 0.26, 0, 1], 0.39, 0.402);
       orientFoot(leg);
       const arm = p.arms.find(r => r.s === leg.s);
-      palmAt(arm, add(mix(leg.knee, leg.ankle, 0.43 * hold), [leg.s * 0.03, 0.032, 0.046]), [
+      palmAt(arm, add(mix(leg.knee, leg.ankle, 0.43 * hold), [leg.s * 0.10, 0.075, 0.122]), [
         0,
         -0.33 - hold,
         0.84 * (1 - hold)
-      ]);
+      ], 1, 0.08, [leg.s, -0.22, 0.10]);
     }
   } else if (id === 'side-bend') {
     torso(p, [0, 0, 0], 0, side * 0.29 * hold);
-    const arm = p.arms.find(r => r.s === side);
-    palmAt(arm, [side * (0.3 + 0.035 * hold), 0.43 - 0.08 * hold, 0.115], [side * 0.05, -0.96, 0.13], setup);
+    for (const arm of p.arms) {
+      const reach = arm.s === side ? hold : 0;
+      palmAt(arm, [arm.s * (0.335 + 0.018 * reach), 0.49 - 0.10 * reach, 0.09], [arm.s * 0.09, -0.96, 0.13]);
+    }
   } else if (id === 'figure-four' || id === 'plantar-stretch') {
     const plantar = id === 'plantar-stretch';
     torso(p, [0, 0, 0.07], (plantar ? 0.37 : 0.32) * load);
@@ -271,20 +274,19 @@ function seated(p, id, t) {
         leg === working ? -side * 1.4 * setup : 0
       );
     }
-    const grip = plantar ? working.toe : working.knee;
+    p.arms.forEach((arm, i) => restOnThigh(arm, p.legs[i]));
     palmAt(
       p.arms.find(r => r.s === side),
-      add(working.knee, [side * 0.03, 0.06, 0]),
+      add(working.knee, [side * 0.03, 0.117, 0.013]),
       [0, -0.36, 0.85],
       setup
     );
-    palmAt(
-      p.arms.find(r => r.s !== side),
-      add(plantar ? grip : working.ankle, [0, 0.044, 0.005]),
-      [side * 0.27, -0.61, 0.57],
-      setup,
-      plantar ? 0.42 : 0.16
-    );
+    // Wait until the foot is in reach before taking hold.
+    const catchFoot = setup * setup;
+    const free = p.arms.find(r => r.s !== side);
+    const target = add(plantar ? working.toe : working.ankle, [0, plantar ? 0.045 : 0.080, plantar ? 0.018 : 0.043]);
+    target[1] = Math.max(target[1], free.wrist[1] - 0.10 * setup) + 0.07 * arch(catchFoot);
+    palmAt(free, target, [side * 0.27, -0.61, 0.57], catchFoot, plantar ? 0.42 : 0.16);
   } else if (id === 'calf-stretch' || id === 'band-leg-press') {
     const band = id === 'band-leg-press';
     torso(p, [0, 0, 0.18], 0.07);
@@ -304,7 +306,7 @@ function seated(p, id, t) {
         p.bandFootLoop = p.arms.map(arm => add(leg.toe, pitch([arm.s * 0.045, -0.016, -0.008], angle)));
       }
     }
-    if (band) for (const arm of p.arms) palmAt(arm, [arm.s * 0.194, 0.63, 0.27], [arm.s * 0.05, -0.2, 0.92], 1, 0.77);
+    if (band) for (const arm of p.arms) palmAt(arm, [arm.s * 0.244, 0.698, 0.27], [arm.s * 0.05, -0.2, 0.92], 1, 0.77);
     else chairHands(p);
   } else if (id === 'knee-open' || id === 'knee-open-band') {
     const band = id === 'knee-open-band';
@@ -327,11 +329,8 @@ function seated(p, id, t) {
       placeLeg(leg, [leg.s * 0.123, 0.08, 0.32]);
       orientFoot(leg);
       const arm = p.arms.find(r => r.s === leg.s);
-      palmAt(arm, mix(add(leg.knee, [0, 0.072, -0.08]), add(leg.hip, [leg.s * 0.09, -0.055, 0.06]), rise), [
-        0,
-        -0.31 - 0.65 * rise,
-        0.85 * (1 - rise) + 0.08
-      ]);
+      // Reach forward during the transfer so the hands clear the rising knees.
+      palmAt(arm, add(arm.shoulder, [arm.s * 0.015, -0.18 - 0.12 * rise, 0.36]), [0, -0.16, 1]);
     }
   } else if (id === 'seated-side-tap') {
     torso(p, [0, 0, 0.09]);

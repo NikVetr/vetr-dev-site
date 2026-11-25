@@ -5,7 +5,7 @@ import {mobilityPose,mobilityCycleSeconds} from './movements/mobility.js';
 import {handNeckPose, handNeckActivation, handNeckCycleSeconds} from './movements/hand-neck.js';
 import {upperPose, upperActivation} from './movements/upper.js';
 import {lowerPose, lowerActivation} from './movements/lower.js';
-import {add, mixPoint, turn, lean, pitchPoint, scaledTo, middleJoint, handGeometry, eased} from './movements/geometry.js';
+import {add, mixPoint, turn, lean, pitchPoint, scaledTo, middleJoint, handGeometry, lapContact, eased} from './movements/geometry.js';
 export {mixPoint} from './movements/geometry.js';
 
 // Native heel pad to ankle, in the planted-foot frame. Rotating about this
@@ -183,13 +183,7 @@ export function basePose(move, seconds) {
   });
   // The fitted hands extend about 18 cm beyond the wrist. Rest them along
   // the thighs and carry them with a rising knee, leaving the chair arms free.
-  const lap = seated ? legs.map(leg => {
-    const along = leg.knee.map((v,i) => v - leg.hip[i]);
-    return {
-      wrist: add(mixPoint(leg.hip, leg.knee, 0.35), [leg.s * 0.008, 0.152, 0.008 - 0.24 * along[1]]),
-      axis: scaledTo([0.25 * along[0], along[1] - 0.018, along[2]], 1),
-    };
-  }) : [];
+  const lap = seated ? legs.map(lapContact) : [];
   const arms = [-1, 1].map((s, i) => {
     const chestOpener = motionAmount('palm-forward');
     const hug = motionAmount('self-hug');
@@ -281,7 +275,7 @@ export function basePose(move, seconds) {
     } else if (motion === 'palm-forward') {
       if (seated) {
         // Leave the turning knuckles room between the thigh and the armrest.
-        wrist = add(pelvis, [s * 0.211, 0.106 + 0.010 * chestOpener, 0.213 - 0.012 * chestOpener]);
+        wrist = add(pelvis, [s * 0.211, 0.122 + 0.010 * chestOpener, 0.213 - 0.012 * chestOpener]);
         elbow = middleJoint(shoulder, wrist, upper, lower, [s * 0.28, -1, -0.62]);
         handAim = scaledTo([s * 0.08, -0.58, 0.80], 1);
       } else {

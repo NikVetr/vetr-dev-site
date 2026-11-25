@@ -1,7 +1,7 @@
 // Yoga poses use the same articulated joints, support surfaces and scale as
 // the rest of the trainer. Ground contacts are prescribed independently of
 // the pelvis so a hinge, squat or reach cannot carry a supporting foot away.
-import {add, mixPoint as mix, turn, pitchPoint, lean, cross} from './geometry.js';
+import {add, mixPoint as mix, turn, pitchPoint, lean, cross, restOnThigh, lapContact} from './geometry.js';
 import {
   floorBase,
   trunk,
@@ -124,7 +124,12 @@ function upper(p, id, pose) {
       break;
     }
     case 'arms-up':
-      p.arms.forEach((h) => reach(h, a));
+      p.arms.forEach((h) => {
+        if (pose !== 'seated') return reach(h, a);
+        const theta = 0.08 + 2.93 * a;
+        const direction = angle => [h.s * 0.30, -Math.cos(angle), Math.sin(angle)];
+        armDirections(h, direction(theta), direction(theta + 0.13), direction(theta + 0.16));
+      });
       break;
     case 'reach-cat-cow': {
       const bend = 1 - 2 * a;
@@ -135,8 +140,8 @@ function upper(p, id, pose) {
         const theta = 1.42 - 2.03 * a;
         armDirections(
           h,
-          [h.s * 0.17, -Math.cos(theta), Math.sin(theta)],
-          [h.s * 0.13, -Math.cos(theta + 0.18), Math.sin(theta + 0.18)]
+          [h.s * (pose === 'seated' ? 0.31 : 0.17), -Math.cos(theta), Math.sin(theta)],
+          [h.s * (pose === 'seated' ? 0.25 : 0.13), -Math.cos(theta + 0.18), Math.sin(theta + 0.18)]
         );
       }
       break;
@@ -166,28 +171,38 @@ function chair(p, id) {
       for (const h of p.arms) {
         const same = h.s === side,
           rest = [h.s * 0.125, 0.647, 0.155];
+        const contact = same ? [h.s * 0.277, 0.527, -0.038] : [side * 0.112, 0.673, 0.205];
         armAt(
           h,
-          mix(rest, same ? [h.s * 0.24, 0.55, 0.02] : [side * 0.095, 0.625, 0.236], a),
-          mix([0, -0.22, 1], same ? [0, -0.65, 0.44] : [side * 0.75, -0.29, 0.61], a),
+          add(mix(rest, contact, a), [0, 0.095 * Math.sin(Math.PI * a), 0]),
+          mix([0, -0.22, 1], same ? [h.s * 0.56, -0.46, 0.44] : [side * 0.28, -0.10, 0.94], a),
           [h.s * 0.85, -0.62, -0.43]
         );
       }
       break;
     }
     case 'knee-hug': {
-      const active = p.legs.find((l) => l.s === side);
+      const active = p.legs.find(l => l.s === side);
+      trunk(p, hip, upperAngle(0.19));
       for (const l of p.legs) {
-        const k = l.s === side ? a : 0;
-        legDirections(l, [l.s * 0.035, -0.075 + 0.91 * k, 1 - 0.39 * k], [0, -1, -0.1 - 0.36 * k], flat);
+        const k = l === active ? a : 0;
+        legDirections(l, [l.s * 0.38, -0.075 + 0.91 * k, 1 - 0.39 * k], [0, -1, -0.1 - 0.36 * k], flat);
       }
-      for (const h of p.arms)
-        armAt(
-          h,
-          mix([h.s * 0.124, 0.649, 0.15], add(active.knee, [h.s * 0.065, -0.065, -0.026]), a),
-          mix([0, -0.14, 1], [-h.s * 0.57, 0.51, 0.61], a),
-          [h.s * 0.8, -0.7, -0.31]
-        );
+      // Scoop from in front of the knee. As the thigh rises, its underside
+      // turns toward the chest and the supporting hands follow that surface.
+      const scoop = a * a, arc = Math.sin(Math.PI * scoop);
+      const thigh = unit(sub(active.knee, active.hip));
+      const under = unit([0, -thigh[2], thigh[1]]);
+      const contact = add(mix(active.hip, active.knee, 0.76), mul(under, 0.113));
+      for (const h of p.arms) {
+        const start = [h.s * 0.09, 0.70, 0.33];
+        const along = h.s === side ? 0.082 : -0.082;
+        const target = add(add(contact, mul(thigh, along)), [h.s * 0.103, 0, 0.046]);
+        const wrist = add(mix(start, target, scoop), [0, 0.06 * arc, 0.19 * arc]);
+        const axis = mix([0, 0.05, 1], [-h.s * 0.90, -0.32, -0.12], scoop);
+        const elbowOut = h.s === side ? 1.2 : -0.35;
+        armAt(h, wrist, axis, [h.s * (0.7 + elbowOut * scoop), -0.5, 0.70], X);
+      }
       break;
     }
     case 'forward-rest':
@@ -195,20 +210,21 @@ function chair(p, id) {
       p.arms.forEach((h, i) =>
         armAt(
           h,
-          mix([h.s * 0.125, 0.646, 0.153], i ? [h.s * 0.13, 0.588, 0.325] : add(p.face, [-0.023, 0.04, 0.022]), a),
+          mix([h.s * 0.125, 0.656, 0.153], i ? [h.s * 0.13, 0.616, 0.335] : add(p.face, [-0.023, 0.04, 0.022]), a),
           i ? [0, -0.2 + 0.2 * a, 1] : [0.18, Math.sin(2.68 * a - 0.18), Math.cos(2.68 * a - 0.18)],
-          [h.s * 0.62, -1, 0.16]
+          i ? [0.85, -1, -0.22] : [h.s * 0.62, -1, 0.16],
+          i ? [1, -0.40, -0.08] : undefined
         )
       );
       break;
     case 'wide-knee-lean':
       trunk(p, [0, 0.51, 0.085], upperAngle(0.58 * a));
       p.legs.forEach((l) => legAt(l, [l.s * 0.295, 0.083, 0.37], [l.s * 0.57, 0.1, 1], flat));
-      p.arms.forEach((h) => armAt(h, [h.s * 0.232, 0.583, 0.308], [h.s * 0.28, -0.2, 1], [h.s * 0.36, -0.44, -1]));
+      p.arms.forEach((h, i) => restOnThigh(h, p.legs[i]));
       break;
     case 'heart-lift':
       trunk(p, [0, 0.51, 0.08], upperAngle(-0.18 * a));
-      p.arms.forEach((h) => armAt(h, [h.s * 0.18, 0.52, 0.035], [0, -0.57, -0.84], [h.s * 0.46, -0.1, -1]));
+      p.arms.forEach((h) => armAt(h, [h.s * 0.278, 0.515, 0.070], [h.s * 0.13, -0.26, -0.94], [h.s * 0.46, -0.1, -1]));
       break;
     case 'warrior-two':
     case 'triangle': {
@@ -228,7 +244,13 @@ function chair(p, id) {
         head(p, Y, turn(X, side * 0.9 * a));
       } else
         for (const h of p.arms) {
-          triangleArm(h, p, [h.s * 0.52, 0.34, 0.26]);
+          const leg = p.legs.find(l => l.s === h.s);
+          const {wrist, axis} = lapContact(leg), high = h.s !== side;
+          const target = high ? add(h.shoulder, [h.s * 0.06, 0.49, 0.05]) : [h.s * 0.52, 0.36, 0.35];
+          const direction = high ? [h.s * 0.07, 1, 0.17] : [h.s * 0.44, -0.73, 0.42];
+          const arc = Math.sin(Math.PI * a);
+          armAt(h, add(mix(wrist, target, a), [0, 0.07 * arc, 0.19 * arc]),
+            mix(axis, direction, a), [h.s * 0.68, -0.4, -0.7]);
         }
       break;
     }

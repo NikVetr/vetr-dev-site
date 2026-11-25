@@ -1,4 +1,5 @@
 // Wrist, fingertip and head targets in the same metre-based frame as the fitted mannequin.
+import {torso, placeLeg} from './lower.js';
 import {rig} from '../form-motion/model.js';
 import {add, cross, eased, lean, middleJoint, mixPoint, pitchPoint, scaledTo, turn} from './geometry.js';
 
@@ -62,11 +63,11 @@ function measureHand(prefix, side) {
 }
 const dimensions = [measureHand('Right', -1), measureHand('Left', 1)];
 
-function poseHand(arm, target, forward, inward, setup = 1, bend = [arm.s * .65, -.8, -.25]) {
+function poseHand(arm, target, forward, inward, setup = 1, bend = [arm.s * .65, -.8, -.25], travelProgress = setup) {
   const oldAxis = unit(sub(arm.palm, arm.wrist));
   const oldAcross = sub(arm.fingerJoints[3][0], arm.fingerJoints[0][0]);
   const [across, axis, normal] = rotatedPalm(handBasis(oldAxis, cross(oldAcross, oldAxis)), handBasis(forward, inward), setup);
-  const travel = sub(mixPoint(arm.wrist, target, setup), arm.shoulder);
+  const travel = sub(mixPoint(arm.wrist, target, travelProgress), arm.shoulder);
   arm.wrist = add(arm.shoulder, scaledTo(travel, Math.min(norm(travel), .5049)));
   const restBend = unit(sub(arm.elbow, arm.shoulder));
   arm.elbow = middleJoint(arm.shoulder, arm.wrist, .26, .245, mixPoint(restBend, unit(bend), setup));
@@ -261,7 +262,17 @@ function rotateHead(pose, origin, rotation) {
 }
 
 function neckExercises(p, motion, phase, setup) {
-  const s = p.side, pivot = mixPoint(p.neck, p.skull, .31);
+  const s = p.side;
+  if (motion === 'anchored-neck-stretch') {
+    // Unweight the edge of the hip before sliding the palm under it.
+    torso(p, [-s * .045 * setup, .022 * setup, 0]);
+    p.legs.forEach(l => {
+      if (l.s === s) l.hip[1] += .070 * setup;
+      placeLeg(l, l.ankle, Z, .39, .402);
+    });
+    p.arms[s === 1 ? 1 : 0].shoulder[1] -= .040 * setup;
+  }
+  const pivot = mixPoint(p.neck, p.skull, .31);
   if (motion === 'head-nod' || motion === 'head-press') {
     const towel = [p.skull[0], .025, p.skull[2] + .004];
     p.headTowel = towel;
@@ -277,8 +288,13 @@ function neckExercises(p, motion, phase, setup) {
     const tilt = motion === 'neck-diagonal' ? s * .28 * eased(p.a / .63) : motion === 'anchored-neck-stretch' ? -s * .31 * p.a : 0;
     rotateHead(p, pivot, v => turn(lean(pitchPoint(v, pitch), tilt), motion === 'neck-diagonal' ? s * .12 * p.a : 0));
     if (motion === 'anchored-neck-stretch') {
-      const arm = p.arms[s === 1 ? 1 : 0], leg = p.legs[s === 1 ? 1 : 0];
-      poseHand(arm, add(leg.hip, [s * .09, -.042, .080]), [-s * .15, -.03, .99], [0, -1, 0], setup, [s, -.3, -.7]);
+      const arm = p.arms[s === 1 ? 1 : 0];
+      // Clear the outer thigh, lower the hand beside the cushion, then slide
+      // the fingers inward. A direct reach cuts diagonally through the hip.
+      const outside = mixPoint(arm.wrist, [s * .355, .66, -.06], eased(setup / .42));
+      const lowered = mixPoint(outside, [s * .34, .492, -.073], eased((setup - .20) / .56));
+      const tucked = mixPoint(lowered, [s * .223, .490, -.073], eased((setup - .67) / .33));
+      poseHand(arm, tucked, [-s * .54, .02, .84], [0, -1, 0], setup, [s, -.3, -.7], 1);
     }
     return;
   }

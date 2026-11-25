@@ -111,9 +111,9 @@ function pressSeat(p, a) {
     reach(
       arm,
       upright,
-      subtract([s * 0.205, 0.488, 0.033], arm.shoulder),
+      subtract([s * 0.278, 0.488, -0.028], arm.shoulder),
       elbowPole,
-      [s * 0.08, -0.045, 1],
+      [s * 0.16, -0.045, 1],
       s * 0.12
     );
   }

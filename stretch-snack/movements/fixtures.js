@@ -1,6 +1,6 @@
 // Fixed targets are in metres. A hand on a wall, a heel on a chair and the
 // counter edge keep their world positions as the trainer moves against them.
-import {add, mixPoint, scaledTo, eased} from './geometry.js';
+import {add, mixPoint, scaledTo, restOnThigh, eased} from './geometry.js';
 import {moveUpper, torso, placeLeg, orientFoot} from './lower.js';
 import {handAt, reach, swing, changeChest} from './upper.js';
 
@@ -200,11 +200,12 @@ function bottle(p, a) {
   // Forward lean allows the forearm to rest along the thigh with the wrist
   // beyond the patella. The wrist stays put as the bottle rotates with the hand.
   torso(p, [0, 0, 0], 0.56);
+  restOnThigh(p.arms[1], p.legs[1]);
   const arm = p.arms[0];
   reach(
     arm,
     upright,
-    sub([-0.137, 0.554, 0.401], arm.shoulder),
+    sub([-0.137, 0.563, 0.411], arm.shoulder),
     [-0.19, -0.83, -0.42],
     [-0.045, -0.22 + 0.99 * a, 1],
     -0.08,
@@ -223,6 +224,7 @@ function supportedLeg(p, id, a, raisedSupport) {
     const other = p.legs[1];
     placeLeg(other, [0.129, 0.078, 0.389], [0, 0.12, 1], 0.3903, 0.402);
     orientFoot(other);
+    p.arms.forEach((arm, i) => restOnThigh(arm, p.legs[i]));
   } else if (id === 'hamstring-step') {
     const chair = raisedSupport === 'chair';
     const surface = chair ? chairHeelHeight : stepHeight,
