@@ -37,7 +37,7 @@ fixed.checked = !guided.checked;
 zoom.checked = storedCamera?.zoom !== false;
 rotation.checked = storedCamera?.rotation !== false;
 get('camera-movement', 'fieldset').disabled = fixed.checked;
-const cameraTravelSeconds = 1.2;
+export const cameraTravelSeconds = 1.2;
 /** @typedef {import('./camera.js').Camera} Camera */
 /** @typedef {{move:(typeof import('./core/catalog.js').moves)[number], location:string, seconds:number, transition:number, reps?:number, prescription?:string, dose?:import('./core/library/programs.js').ProgramDose, bed?:boolean}} Step */
 /** @typedef {{steps:Step[], location:string, onFinish:(ids:string[],location:string,usedLocations:string[])=>void, total:number,
@@ -58,12 +58,16 @@ export function sessionCamera(move) {
   return movementCamera(move, {zoom: guided.checked && zoom.checked, rotation: guided.checked && rotation.checked});
 }
 
+export function cameraGlides() {
+  return demonstrationsPlay && guided.checked && (zoom.checked || rotation.checked);
+}
+
 // A skip, including one partway through a pan, departs from the last rendered
 // view. The transfer timer and the camera can finish at different times.
 /** @param {Session} s @param {boolean} [animate] */
 function aimCamera(s, animate = true) {
   s.cameraTarget = sessionCamera(s.steps[s.index].move);
-  s.cameraFrom = animate && demonstrationsPlay && !motion.matches && guided.checked && (zoom.checked || rotation.checked)
+  s.cameraFrom = animate && cameraGlides()
     ? s.displayCamera : null;
   s.cameraElapsed = 0;
   s.lastDraw = 0;
@@ -414,7 +418,7 @@ function refreshScene() {
     if (session.paused) draw();
   }
 }
-function syncPlayback(refreshCamera = false) {
+function syncPlayback() {
   if (playbackMode !== 'play' && playbackMode !== 'still') playbackMode = 'device';
   const playing = playbackMode === 'play' || (playbackMode === 'device' && !motion.matches);
   for (const input of playbackChoices) input.checked = input.value === playbackMode;
@@ -424,10 +428,10 @@ function syncPlayback(refreshCamera = false) {
     button.setAttribute('aria-label', button.title);
   }
   const changed = demonstrationsPlay !== playing;
-  if (!changed && !refreshCamera) return;
+  if (!changed) return;
   demonstrationsPlay = playing;
   if (session) {
-    if (changed && playbackMode === 'still') {
+    if (playbackMode === 'still') {
       session.cameraFrom = null;
       session.cameraTarget = session.displayCamera;
     } else {
@@ -435,7 +439,7 @@ function syncPlayback(refreshCamera = false) {
     }
     refreshScene();
   }
-  if (changed) document.dispatchEvent(new CustomEvent('stretchmotionchange', {
+  document.dispatchEvent(new CustomEvent('stretchmotionchange', {
     detail: {deviceStill: playbackMode === 'device' && !playing},
   }));
 }
@@ -457,7 +461,7 @@ window.addEventListener('storage', event => {
 window.addEventListener('resize', refreshScene);
 motion.addEventListener('change', () => {
   get('camera-hint', 'p').hidden = !motion.matches;
-  syncPlayback(true);
+  syncPlayback();
 });
 document.addEventListener('themechange', refreshScene);
 document.addEventListener('stretchbodychange', refreshScene);

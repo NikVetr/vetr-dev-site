@@ -12,7 +12,8 @@ import { submit, reviewRoutine, placeOptions, easierVariant, transfersFor, movem
 import { restoreTrainerBody, setTrainerBody } from './trainer.js';
 import { renderMovement } from './demo.js';
 import { setupSavedRoutines } from './saved-routines.js';
-import { demonstrationsPlay, sessionCamera, startSession } from './session.js';
+import { blendCamera } from './camera.js';
+import { cameraGlides, cameraTravelSeconds, demonstrationsPlay, sessionCamera, startSession } from './session.js';
 import { setupCheckIn, showFeedback } from './check-in.js';
 import { get, make, button, setPressed, formatTime, localKey, readLocal, writeLocal } from './dom.js';
 
@@ -63,7 +64,16 @@ let plan,
   selectedPlace = '',
   editing = -1;
 /** @type {import('./camera.js').Camera | undefined} */
-let previewCamera;
+let previewCamera, previewTarget, previewFrom;
+let panSeconds = 0;
+function aimPreview(move) {
+  const target = sessionCamera(move);
+  if (cameraGlides() && previewTarget && Object.keys(target).every(key => target[key] === previewTarget[key])) return;
+  previewFrom = cameraGlides() ? previewCamera : undefined;
+  previewTarget = target;
+  panSeconds = 0;
+  if (!previewFrom) previewCamera = previewTarget;
+}
 const formError = get('form-error', 'p');
 const poseLabel = { seated: 'Seated', standing: 'Standing', supine: 'Reclined', prone:'Face down', 'side-lying':'Side lying', 'hands-and-knees':'Hands and knees', kneeling:'Kneeling', 'long-sitting':'Legs extended' };
 const poseName = (move) => poseLabel[move.pose] || move.pose;
@@ -114,7 +124,15 @@ function drawPreview(now = performance.now(), still = false) {
   }
   const repaint = !previous || now - previous >= 1000 / 30 - 1;
   if (repaint) {
-    if (previous && demonstrationsPlay) previewTime += Math.min(now - previous, 160) / 1000;
+    if (previous && demonstrationsPlay) {
+      const delta = Math.min(now - previous, 160) / 1000;
+      previewTime += delta;
+      panSeconds += delta;
+    }
+    if (previewFrom) {
+      previewCamera = blendCamera(previewFrom, previewTarget, panSeconds / cameraTravelSeconds);
+      if (panSeconds >= cameraTravelSeconds) previewFrom = undefined;
+    }
     previous = now;
     renderMovement(previewCanvas, movementAtLocation(move,selectedPlace,prefs), previewTime, {
       location: selectedPlace, bed:usesBed(move,prefs,selectedPlace),
@@ -140,11 +158,15 @@ function watchPreview() {
   document.addEventListener('themechange', restartPreview);
   document.addEventListener('stretchcamerachange', () => {
     const move = moveById.get(selectedId);
-    if (move) previewCamera = sessionCamera(move);
+    if (move) aimPreview(move);
     restartPreview();
   });
   document.addEventListener('stretchmotionchange', event => {
-    if (event instanceof CustomEvent && event.detail.deviceStill) previewTime = 2;
+    if (event instanceof CustomEvent && event.detail.deviceStill) {
+      previewTime = 2;
+      previewFrom = undefined;
+      previewCamera = previewTarget;
+    }
     restartPreview();
   });
   restartPreview();
@@ -154,6 +176,7 @@ function showMovement(id, location, pickedRow = null) {
   preview.hidden = !move;
   if (!move) {
     selectedId = '';
+    previewFrom = previewCamera = previewTarget = undefined;
     restartPreview();
     return;
   }
@@ -161,9 +184,9 @@ function showMovement(id, location, pickedRow = null) {
     previewTime = demonstrationsPlay ? 0 : 2;
     get('evidence', 'details').open = false;
   }
+  aimPreview(move);
   selectedId = id;
   selectedPlace = location;
-  previewCamera = sessionCamera(move);
   get('preview-name', 'h3').textContent = move.name;
   get('preview-cue', 'p').textContent = move.cue;
   const info = get('source-info', 'div');

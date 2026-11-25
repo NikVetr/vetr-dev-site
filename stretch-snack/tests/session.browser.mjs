@@ -277,10 +277,14 @@ test('camera controls apply in the planner and session, retain independent setti
   } finally {await close();}
 });
 
-test('the live camera freezes, retargets a partial pan, and reaches a floor movement directly during its transfer', async () => {
+for (const override of [false,true]) test('the guided camera eases through skips, transfers and pauses with '+(override?'Play overriding reduced motion':'automatic playback'), async () => {
   const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
   const {page,close,errors} = await openPage('stretch-snack/',{engine,width:390,height:740});
   try {
+    if (override) {
+      await page.emulateMedia({reducedMotion:'reduce'});
+      await page.locator('#animate').click();
+    }
     await page.clock.install({time:new Date('2030-01-01T00:00:00Z')});
     await page.clock.pauseAt(new Date('2030-01-01T00:00:02Z'));
     const first = 'seated-neck-turn', second = 'seated-knee-extend', third = 'supine-knee-roll';
@@ -326,5 +330,27 @@ test('the live camera freezes, retargets a partial pan, and reaches a floor move
     await press('previous');
     assert.ok(await frameDifference(page,'#player-canvas',second,0,{}, {id:third,options:{}}, 0) < .005);
     assert.deepEqual(errors,[]);
+  } finally {await close();}
+});
+
+test('picking another movement on desktop glides the planner camera with explicit Play', async () => {
+  const engine = /** @type {'chromium'|'webkit'|'firefox'} */ (process.env.BROWSER_ENGINE ?? 'chromium');
+  const {page, close} = await openPage('stretch-snack/', {engine,width:1440,height:900});
+  try {
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await page.locator('#animate').click();
+    const rows = page.locator('#steps .step');
+    const from = await rows.nth(0).getAttribute('data-move');
+    const to = await rows.nth(1).getAttribute('data-move');
+    await page.clock.install();
+    await page.clock.pauseAt(new Date(await page.evaluate(()=>Date.now()+1000)));
+    await rows.nth(1).locator('.step-picker').evaluate(button=>button.click());
+    const difference = (time,progress) => frameDifference(page,'#preview-canvas',to,time,{}, {id:from,options:{}},progress);
+    assert.ok(await difference(0,0) < .005);
+    assert.ok(await difference(0,1) > .04, 'the destination has a visibly different view');
+    for (let i=0;i<6;i++) await page.clock.fastForward(100);
+    assert.ok(await difference(.6,.5) < .005, 'halfway through the camera transition');
+    for (let i=0;i<6;i++) await page.clock.fastForward(100);
+    assert.ok(await difference(1.2,1) < .005, 'the displayed view reaches its target');
   } finally {await close();}
 });
