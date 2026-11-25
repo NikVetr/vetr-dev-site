@@ -2,11 +2,11 @@
 
 The static site at https://vetr.dev, served by GitHub Pages with no build step. `index.html`, `style.css` and `assets/` are the landing page. Every tool or project lives in its own top-level folder with its own HTML, CSS, JavaScript and any tests, and the landing page links the public ones.
 
-Use the [shared app design requirements](docs/shared-app-design.md) when building a tool, updating a workspace or designing its directory preview.
+Start with [Building a vetr.dev tool](docs/shared-app-design.md) when adding a tool, updating a workspace or designing its directory preview. It holds the design requirements, the files a tool needs and the steps that add it to this page.
 
 ## The landing page
 
-A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Academic tools**, and **Art**. Everyday tools includes Stretch Snack, Travel Prompt, Rating Prediction and Sankey Diagrams. Academic tools includes Palette Town and Multipanel Figure Editor. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add a tool, copy a card in `index.html` with the tool's folder name in `data-mosaic-key` and `data-art`, choose its `data-category` and `data-size`, update the arrangements in `assets/landing-order.js`, and draw its picture on that shape's canvas.
+A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Academic tools**, and **Art**. Everyday tools includes Stretch Snack, Travel Prompt, Rating Prediction and Sankey Diagrams. Academic tools includes Palette Town and Multipanel Figure Editor. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add one, follow [Add it to the directory](docs/shared-app-design.md#add-it-to-the-directory).
 
 Short, wide desktop tiles place the preview beside the description. Rating Prediction arranges its input and two charts side by side or stacks them as the picture well changes shape. The bars interpolate between fitted forecasts. Matrix Rain fits its opening to the card. An early portrait fades before the first drops reach it. Streams advance one character row at a time before the camera closes in on the title’s final letters.
 

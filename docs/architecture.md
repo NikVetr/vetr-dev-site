@@ -12,7 +12,7 @@ Seating exposes two explicit computation paths through `runRequest`: the existin
 
 The Figure Editor reads controls into a project snapshot before calling its DOM-free code generator. autoCHAIR can calculate intervals and render an agenda from an explicit state and timestamp independently of browser persistence. Wanderwart's studio and sheet API share the defaults, loader-backed sheet context and layout solver, and b64's JSON adapter calls the same transform as its editor worker. Each tool's CLI accepts the browser request format.
 
-For workspace layout, navigation and preview behavior, see the [shared app design requirements](shared-app-design.md).
+For workspace layout, navigation, preview behavior and adding a tool, see [Building a vetr.dev tool](shared-app-design.md).
 
 ## Travel tools
 
