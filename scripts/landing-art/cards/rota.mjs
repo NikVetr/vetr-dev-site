@@ -62,42 +62,26 @@ export async function build() {
   }
   if (frames[2].active[0]?.queue !== 'B') throw new Error('rota: expected B to lead after the priority change');
 
-  const mono = "ui-monospace,'SF Mono',Menlo,Consolas,monospace";
-  const cell = (/** @type {any} */ c, x, y) => {
-    if (!c) return `<rect x="${x}" y="${y}" width="22" height="22" rx="4" fill="#151b25" stroke="#2a3344" stroke-width="1.5"/>`;
-    const col = COLORS[c.key] ?? '#7fd46b';
-    const h = Math.round(22 * c.p);
-    return `<rect x="${x}" y="${y}" width="22" height="22" rx="4" fill="${col}" fill-opacity=".2" stroke="${col}" stroke-width="1.5"/>`
-      + `<rect x="${x + 0.75}" y="${y + 22 - h}" width="20.5" height="${h}" fill="${col}" opacity=".9"/>`
-      + `<text x="${x + 11}" y="${y + 15}" class="letter">${esc(c.key.toUpperCase())}</text>`;
-  };
-  const host = (/** @type {any} */ h, x, y) => {
-    const perRow = 4;
-    const rows = Math.ceil(h.cells.length / perRow);
-    const height = 22 + rows * 26;
-    return `<rect x="${x}" y="${y}" width="150" height="${height}" rx="8" fill="#1b2230" stroke="#2a3344" stroke-width="1.5"/>`
-      + `<text x="${x + 9}" y="${y + 14}" class="host">${esc(h.id)}</text>`
-      + `<text x="${x + 141}" y="${y + 14}" class="units">${h.cells.length} CPU</text>`
-      + h.cells.map((c, i) => cell(c, x + 9 + (i % perRow) * 34, y + 20 + Math.floor(i / perRow) * 26)).join('');
-  };
-  const typed = (k) => k < 3;
+  // One HTML composition per frame, sized with container units so it fills whatever well the tile gets:
+  // the shell and the dashboard's rows beside the two hosts, or, in a short wide well, the command across
+  // the top and both hosts' CPU units in one strip.
+  const cell = (/** @type {any} */ c) => (c
+    ? `<span class="cell q-${c.key}"><i style="height:${Math.round(c.p * 100)}%"></i><b>${esc(c.key.toUpperCase())}</b></span>`
+    : '<span class="cell"></span>');
+  const host = (/** @type {any} */ h) => `<div class="host"><p><b>${esc(h.id)}</b><span>${h.cells.length} CPU</span></p><div class="cells n${h.cells.length}">${h.cells.map(cell).join('')}</div></div>`;
   const frame = (/** @type {any} */ f, k, caption) => {
-    // xml:space keeps the command's continuation indents and the table's columns.
-    const command = typed(k)
-      ? ['$ rota set-priority', '   --batch_dir "$B"', '   --schedule_priority 90']
-      : ['$ rota submit ... --run_name B', '   (priority 50 by default)', '$ ▉'];
-    const rows = f.active.slice(0, 2).map((r, i) => `<text x="12" y="${118 + i * 11}" class="row" xml:space="preserve">${esc(`${r.queue.padEnd(6)}${r.workers.padEnd(8)}${r.priority.padEnd(9)}${r.admission}`)}</text>`).join('');
-    return `<rect width="320" height="180" fill="${PAPER}"/>
-<rect x="5" y="5" width="149" height="146" rx="8" fill="#0a0d12" stroke="#2a3344" stroke-width="1.5"/>
-<circle cx="14" cy="13" r="2.6" fill="#ff5f57"/><circle cx="22" cy="13" r="2.6" fill="#febc2e"/><circle cx="30" cy="13" r="2.6" fill="#28c840"/>
-<text x="38" y="15.5" class="title">storage</text>
-${command.map((line, i) => `<text x="12" y="${33 + i * 11}" class="cmd" xml:space="preserve">${esc(line)}</text>`).join('')}
-<text x="12" y="${92}" class="title">rota monitor: QUEUE PROGRESS</text>
-<text x="12" y="${105}" class="head" xml:space="preserve">${esc(`${'Queue'.padEnd(6)}${'Workers'.padEnd(8)}${'Priority'.padEnd(9)}Admission`)}</text>
-${rows}
-${host(f.hosts[0], 164, 5)}
-${host(f.hosts[1], 164, 59)}
-<text x="160" y="172" class="caption" text-anchor="middle">${esc(caption)}</text>`;
+    const typed = k < 3;
+    const command = typed
+      ? ['$ rota set-priority', '    --batch_dir "$B"', '    --schedule_priority 90']
+      : ['$ rota submit ... --run_name B', '  (priority 50 by default)', '$ ▉'];
+    const line = typed ? '$ rota set-priority --batch_dir "$B" --schedule_priority 90' : '$ rota submit ... --run_name B   (priority 50)';
+    const table = [`${'Queue'.padEnd(6)}${'Workers'.padEnd(8)}${'Priority'.padEnd(9)}Admission`,
+      ...f.active.slice(0, 2).map((r) => `${r.queue.padEnd(6)}${r.workers.padEnd(8)}${r.priority.padEnd(9)}${r.admission}`)];
+    return `<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" class="rc"><div class="in">
+<div class="term"><p class="bar"><i></i><i></i><i></i><span>storage</span></p><pre class="cmd">${esc(command.join('\n'))}</pre><pre class="line">${esc(line)}</pre>
+<p class="mon">rota monitor: QUEUE PROGRESS</p><pre class="tbl"><span class="head">${esc(table[0])}</span>\n${esc(table.slice(1).join('\n'))}</pre></div>
+<div class="hosts">${f.hosts.map(host).join('')}</div>
+<p class="caption">${esc(caption)}</p></div></div></foreignObject>`;
   };
   const book = flipbook('rota', [
     frame(frames[0], 0, 'B at priority 90 takes each slot that frees up'),
@@ -105,18 +89,49 @@ ${host(f.hosts[1], 164, 59)}
     frame(frames[2], 2, 'As A’s jobs finish, B gets the hosts'),
     frame(frames[3], 3, 'A and B at priority 50 share the slots'),
   ], PERIOD);
+  const u = (h, w) => `min(${h}cqh, ${w}cqw)`;
   return art({
-    name: 'rota', period: PERIOD, frames: book.frames, body: book.body,
+    name: 'rota', responsive: true, period: PERIOD, frames: book.frames, body: book.body,
     css: `${book.css}
-& text { font-family: ${mono}; }
-& .title { font: 600 6.5px system-ui,sans-serif; fill: #8b95a7; }
-& .cmd { font-size: 7.4px; fill: #e6eaf2; white-space: pre; }
-& .head { font-size: 6.4px; fill: #808080; white-space: pre; }
-& .row { font-size: 6.4px; fill: #afd7ff; white-space: pre; }
-& .host { font: 700 8.5px system-ui,sans-serif; fill: #e6eaf2; }
-& .units { font: 6.5px system-ui,sans-serif; fill: #8b95a7; text-anchor: end; }
-& .letter { font-size: 9px; font-weight: 700; fill: #fff; text-anchor: middle; paint-order: stroke; stroke: #0d1117; stroke-width: 2px; }
-& .caption { font: 600 8.6px system-ui,sans-serif; fill: ${INK}; }`,
+& .rc { box-sizing: border-box; width: 100%; height: 100%; container-type: size; background: ${PAPER}; color: #e6eaf2; overflow: hidden;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; }
+& .in { box-sizing: border-box; width: 100%; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+  grid-template-rows: minmax(0, 1fr) auto; gap: ${u(3, 1.8)} ${u(3, 2)}; padding: ${u(3, 1.8)}; }
+& .rc p, & .rc pre { margin: 0; }
+& .term { background: #0a0d12; border: 1.5px solid #2a3344; border-radius: ${u(4.5, 2.5)}; padding: ${u(3.2, 1.8)} ${u(4, 2.2)}; display: flex; flex-direction: column; gap: ${u(2.4, 1.3)}; min-width: 0; }
+& .bar { display: flex; align-items: center; gap: ${u(1.6, 0.9)}; font: 600 ${u(4, 2.2)} system-ui, sans-serif; color: #8b95a7; }
+& .bar i { width: ${u(3.2, 1.8)}; height: ${u(3.2, 1.8)}; border-radius: 50%; background: #ff5f57; }
+& .bar i:nth-child(2) { background: #febc2e; } & .bar i:nth-child(3) { background: #28c840; }
+& .cmd { font-size: ${u(4.6, 2.5)}; line-height: 1.4; white-space: pre; }
+& .line { display: none; font-size: ${u(7, 1.75)}; white-space: pre; }
+& .mon { margin-top: auto !important; font: 600 ${u(3.8, 2.1)} system-ui, sans-serif; color: #8b95a7; }
+& .tbl { font-size: ${u(3.9, 2.1)}; line-height: 1.45; color: #afd7ff; white-space: pre; }
+& .tbl .head { color: #808080; }
+& .hosts { display: grid; gap: ${u(3, 1.7)}; align-content: start; min-width: 0; }
+& .host { background: #1b2230; border: 1.5px solid #2a3344; border-radius: ${u(4.5, 2.5)}; padding: ${u(2.6, 1.5)} ${u(3.2, 1.8)}; }
+& .host p { display: flex; justify-content: space-between; align-items: baseline; font: 700 ${u(5, 2.8)} system-ui, sans-serif; margin-bottom: ${u(2, 1.1)} !important; }
+& .host p span { font-weight: 400; font-size: 0.75em; color: #8b95a7; }
+& .cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: ${u(2.2, 1.2)}; }
+& .cell { position: relative; aspect-ratio: 1; max-height: ${u(14, 8)}; border-radius: 18%; border: 1.5px solid #2a3344; background: #151b25; overflow: hidden; }
+& .cell.q-a { --c: ${COLORS.a}; } & .cell.q-b { --c: ${COLORS.b}; }
+& .cell[class*="q-"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 22%, #151b25); }
+& .cell i { position: absolute; left: 0; bottom: 0; width: 100%; background: var(--c); opacity: .9; }
+& .cell b { position: absolute; inset: 0; display: grid; place-items: center; font-size: ${u(5, 2.6)}; color: #fff; text-shadow: 0 0 2px #000, 0 0 3px #000; }
+& .caption { grid-column: 1 / -1; text-align: center; font: 600 ${u(5.2, 2.9)} system-ui, sans-serif; color: ${INK}; }
+@container (min-aspect-ratio: 5 / 2) {
+  & .in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; gap: ${u(3, 0.8)}; }
+  & .term { flex-direction: row; align-items: center; padding: ${u(3, 1)} ${u(4, 1.4)}; }
+  & .cmd, & .mon, & .tbl { display: none; }
+  & .line { display: block; }
+  & .hosts { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-content: stretch; }
+  & .host { display: flex; flex-direction: column; justify-content: center; padding: ${u(2.5, 0.6)} ${u(3, 0.9)}; }
+  & .host p { margin-bottom: ${u(2, 0.4)} !important; }
+  & .cell { max-height: ${u(30, 6)}; }
+  & .cells.n8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  & .host p { font-size: ${u(9, 1.9)}; }
+  & .cell b { font-size: ${u(9, 1.6)}; }
+  & .caption { font-size: ${u(9, 1.9)}; }
+}`,
     loop: book.loop,
   });
 }

@@ -138,8 +138,8 @@ try {
   assert.ok(fills[0].every((/** @type {string} */ color, /** @type {number} */ i) => color !== fills[1][i]), 'section fills follow the theme');
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
-  assert.equal(await page.locator('.project-card').count(), 23);
-  for (const app of ['stretch-snack', 'travel-prompt', 'rating-prediction', 'sankey', 'agent-bar']) {
+  assert.equal(await page.locator('.project-card').count(), 24);
+  for (const app of ['stretch-snack', 'travel-prompt', 'rating-prediction', 'sankey', 'agent-bar', 'rota']) {
     assert.equal(await page.locator(`[data-category="everyday"] a[href="/${app}/"]`).count(), 1);
   }
   for (const app of ['color-optimization', 'layout-gui', 'intuitions', 'stan2r']) {
