@@ -85,3 +85,13 @@ test('queues finish, count in Q, and bring their project up for review', () => {
   assert.equal(sim.queueCounts().projects['rnaseq-pipeline'], undefined);
   assert.ok(sim.state.notifications.some((n) => n.body.startsWith('Queues finished')));
 });
+
+test('a scheduled message arrives as the user’s request when its time comes', () => {
+  const { sim, run, key } = world();
+  const release = sim.byKey(key('release'));
+  run(92);
+  assert.equal(release.log.find((l) => l.kind === 'scheduled')?.text, 'Check whether the step-size pull request has merged');
+  run(8);
+  assert.ok(sim.unread(release).includes('Reply finished'));
+  assert.equal(sim.state.tickets.find((t) => t.id === 6).status, 'done');
+});

@@ -228,6 +228,11 @@ export const TICKETS = [
     after: [{ kind: 'date', in: -H }] },
   { id: 5, body: 'Update the docs once the step-size PR merges', project: 'sampler-study', age: H, author: 'tune',
     after: [{ kind: 'ticket', ticket: 2, label: 'ticket #2 is done' }] },
+  // Due a minute and a half into the demo, so a quiet desktop still sees a chat start, finish and ask for review.
+  { id: 6, body: 'Check whether the step-size pull request has merged', project: 'sampler-study', age: 2 * H,
+    after: [{ kind: 'date', in: 90 }], to: 'release',
+    steps: [[2, 'tool', 'gh pr view 42 --json state,mergeable'], [2, 'output', '{"state": "OPEN", "mergeable": "MERGEABLE"}'],
+      [2, 'agent', 'Pull request #42 is approved and its checks pass, but it is not merged yet. The 0.4 tag waits for it.']] },
 ];
 
 // ROTA queues (an optional extra).

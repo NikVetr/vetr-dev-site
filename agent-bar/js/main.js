@@ -9,7 +9,7 @@ import { TABS, bare, bodyHtml, choosePicker, footerText, headingHtml, menuState,
 import { createTour } from './tour.js';
 
 const TICK_MS = 1000;
-const MIN_W = 1500, MIN_H = 780, PHONE = 760;
+const MIN_W = 1600, MIN_H = 780, PHONE = 760;
 const stage = /** @type {HTMLElement} */ (document.getElementById('stage'));
 const screen = /** @type {HTMLElement} */ (document.getElementById('screen'));
 const panel = /** @type {HTMLElement} */ (document.getElementById('panel'));
@@ -227,7 +227,8 @@ function activate(key, window, mode, byKeyboard = false) {
 
 // ------------------------------------------------------------------ clicks
 const actions = {
-  part: (el) => openMenu(el.dataset.part),
+  // From the keyboard, focus moves into the dropdown, onto its tab, as it does in GNOME's menus.
+  part: (el, keyboard) => openMenu(el.dataset.part, { focus: keyboard }),
   shortcut: (el, keyboard) => activate(el.dataset.key, sim.byKey(el.dataset.key).window, 'focus', keyboard),
   more: (el) => toggleSmall('more', el),
   nav: (el) => toggleSmall('nav', el),
@@ -332,7 +333,7 @@ function onClick(event) {
   // A click outside an open menu closes it, as on GNOME's top bar; a click on another top-bar part switches tabs.
   if (ui.open && !target.closest('.tracker-popup, .menu-holder') && !el?.closest('#panel')) closeMenus({ restore: false });
   if (!el) return;
-  if (el.dataset.part) return actions.part(el);
+  if (el.dataset.part) return actions.part(el, event.detail === 0);
   const act = el.dataset.act;
   if (act === 'tab' && el.closest('.window')) return sim.showChat(el.dataset.key);
   if (act === 'picker' || act === 'pick') event.stopPropagation();

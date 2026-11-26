@@ -146,7 +146,8 @@ export function createSim({ now = () => Date.now() / 1000 } = {}) {
       providers: Object.fromEntries(Object.keys(PROVIDERS).map((p) => [p, providerCounts(p)])),
       quick: quickGroups().map((group) => group.map((row) => views.find((v) => v.key === row.key))),
       stranded: stranded(), queues: queueCounts(),
-      readyTickets: state.tickets.filter((ticket) => ticketReady(ticket) && ticket.after.length),
+      // As Agent Bar's default count: tickets whose waits have passed (scheduled messages deliver themselves).
+      readyTickets: state.tickets.filter((ticket) => ticketReady(ticket) && ticket.after.length && !ticket.to),
     };
   }
 
@@ -235,14 +236,14 @@ export function createSim({ now = () => Date.now() / 1000 } = {}) {
   function log(row, kind, text) { row.log.push({ kind, text, at: now() }); }
 
   /** The visitor writes to a chat (or answers its question or approval): a turn starts. @param {string} key @param {string} text */
-  function prompt(key, text) {
+  function prompt(key, text, scripted = null) {
     const row = byKey(key);
     if (!row) throw new Error(`No chat ${key}`);
     if (row.state === 'working') return { ok: false, error: 'This chat is working; wait for its turn to end.' };
     const t = now();
     const index = row.prompts.indexOf(text);
     // A suggested prompt gets its scripted turn; anything else gets a canned reply that says so.
-    let steps = index === 0 && row.next ? row.next : index > 0 && row.alt?.[index] ? row.alt[index] : [[2, 'agent', cannedReply(text)]];
+    let steps = scripted ?? (index === 0 && row.next ? row.next : index > 0 && row.alt?.[index] ? row.alt[index] : [[2, 'agent', cannedReply(text)]]);
     log(row, row.pending === 'approval' ? 'answer' : 'you', text);
     row.pending = null;
     row.next = null;
@@ -415,7 +416,8 @@ export function createSim({ now = () => Date.now() / 1000 } = {}) {
     // Scheduled messages arrive as the user's own request once their time comes.
     for (const item of state.tickets) {
       if (!item.to || item.status !== 'open' || waits(item).length || byKey(item.to)?.state === 'working') continue;
-      prompt(item.to, item.body);
+      prompt(item.to, item.body, item.steps);
+      byKey(item.to).log.at(-1).kind = 'scheduled';
       if (item.repeat) item.after = [{ kind: 'date', at: item.after[0].at + { day: D, week: 7 * D, month: 30 * D }[item.repeat] }];
       else Object.assign(item, { status: 'done', statusAt: t, note: 'Sent' });
     }
