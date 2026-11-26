@@ -58,7 +58,7 @@ export function workingRegion(move) { return move.region ?? regions[move.motion]
 const angles = {
   'neck-turn': 0.23, 'neck-tilt': 0.13, 'chin-tuck': 1.12,
   'overhead-reach': 0.36, 'elbow-bend': 0.83, 'knee-extend': 1.19,
-  'shoulder-roll': 0.87, 'shoulder-squeeze': 0.34, 'chest-open': 0.34,
+  'shoulder-roll': 0.87, 'shoulder-squeeze': 0.85, 'chest-open': 0.34,
   'band-open': 0.27, 'side-bend': 0.28, 'trunk-turn': 0.49, 'self-hug': 0.40,
   'ball-back': 1.55, 'back-round': 1.08, 'back-arch': 1.06,
   'palm-forward': 0.25, 'palm-turn': 0.35, 'wrist-bend': 0.83,

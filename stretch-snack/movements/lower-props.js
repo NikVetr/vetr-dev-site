@@ -134,6 +134,8 @@ const toeShows = {
   'foot-dome': 'Lift arch',
   'towel-scrunch': 'Gather towel'
 };
+/** Whether the toe inset, rather than a motion arrow, shows this action. */
+export const showsToeDetail = (move) => move.family === 'lower' && Object.hasOwn(toeShows, move.animation);
 export function drawToeDetail(ctx, move, p, project, width, height, dark, opacity) {
   const id = move.animation,
     label = toeShows[id];

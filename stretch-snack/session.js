@@ -249,7 +249,8 @@ function draw() {
       scene,
       step.move,
       s.transferring ? 0 : s.poseTime,
-      { location: step.location, bed:step.bed, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s) },
+      { location: step.location, bed:step.bed, dark: document.documentElement.dataset.theme === 'dark', camera: drawCamera(s),
+        still: !demonstrationsPlay },
     );
     s.lastDraw = now;
   }

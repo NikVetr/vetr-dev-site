@@ -137,7 +137,7 @@ function drawPreview(now = performance.now(), still = false) {
     renderMovement(previewCanvas, movementAtLocation(move,selectedPlace,prefs), previewTime, {
       location: selectedPlace, bed:usesBed(move,prefs,selectedPlace),
       dark: document.documentElement.dataset.theme === 'dark',
-      camera: previewCamera,
+      camera: previewCamera, still: !demonstrationsPlay,
     });
   }
   if (demonstrationsPlay && !still) frame = requestAnimationFrame(drawPreview);

@@ -89,7 +89,7 @@ test('Stretch Snack previews the actual session, its 15-second clock and its tra
         const width = img.naturalWidth, height = img.naturalHeight;
         canvas.style.cssText = 'position:fixed;width:'+width+'px;height:'+height+'px';
         document.body.append(canvas);
-        paintStep(canvas, step, heldSeconds, img.classList.contains('dark-pose'));
+        paintStep(canvas, step, heldSeconds, img.classList.contains('dark-pose'), true);
         const ctx = canvas.getContext('2d', {willReadFrequently:true});
         const reference = ctx.getImageData(0,0,width,height).data;
         ctx.clearRect(0,0,width,height);

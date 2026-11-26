@@ -214,6 +214,8 @@ async function frameDifference(page, selector, id, time, options, previous, prog
     const {moves} = await import(new URL('./core/catalog.js', document.baseURI).href);
     const {renderMovement} = await import(new URL('./demo.js', document.baseURI).href);
     const {movementCamera,blendCamera} = await import(new URL('./camera.js', document.baseURI).href);
+    // The page shows unanimated arrows unless demonstrations play.
+    const {demonstrationsPlay} = await import(new URL('./session.js', document.baseURI).href);
     const move = moves.find(m => m.id === id);
     function cameraFor({id,options,previous,progress}) {
       const target = movementCamera(moves.find(m => m.id === id),options);
@@ -224,7 +226,7 @@ async function frameDifference(page, selector, id, time, options, previous, prog
     reference.style.cssText = 'position:fixed;visibility:hidden;width:'+scene.clientWidth+'px;height:'+scene.clientHeight+'px';
     document.body.append(reference);
     try {
-      renderMovement(reference, move, time, {camera,location,dark:document.documentElement.dataset.theme === 'dark'});
+      renderMovement(reference, move, time, {camera,location,still:!demonstrationsPlay,dark:document.documentElement.dataset.theme === 'dark'});
       const pixels = canvas => canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
       const actual = pixels(scene), expected = pixels(reference);
       if (actual.length !== expected.length) return 1;

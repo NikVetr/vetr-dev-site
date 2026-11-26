@@ -15,7 +15,7 @@ export async function build() {
       document.body.append(canvas);
       const samples = [false, true].map(dark => {
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        paintStep(canvas, reading.step, heldSeconds, dark);
+        paintStep(canvas, reading.step, heldSeconds, dark, true);
         const styles = getComputedStyle(document.documentElement);
         const palette = ['page', 'paper', 'ink', 'stage', 'muted', 'line', 'accent', 'on-accent'].map(
           key => '--sn-' + key + ':' + styles.getPropertyValue('--' + key).trim(),

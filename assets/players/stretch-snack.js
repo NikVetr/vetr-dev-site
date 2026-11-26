@@ -62,14 +62,14 @@ export function stepCamera(step, seconds) {
   return blendCamera(step.exit.from, step.exit.to, exitProgress);
 }
 
-/** Play one full repetition per step.
+/** Play one full repetition per step. A still (the motion-off picture) shows its arrow unanimated.
  * @param {HTMLCanvasElement} canvas @param {ReturnType<typeof prepare>['steps'][number]} step
- * @param {number} seconds @param {boolean} dark */
-export function paintStep(canvas, step, seconds, dark) {
+ * @param {number} seconds @param {boolean} dark @param {boolean} [still] */
+export function paintStep(canvas, step, seconds, dark, still = false) {
   const phase = Math.max(0, Math.min(1, seconds / step.seconds));
   const fade = Math.min(1, Math.min(phase, 1 - phase) * step.seconds / 0.45);
   renderMovement(canvas, step.move, repetitionSeconds * phase, {
-    location, dark, camera: stepCamera(step, seconds), cueOpacity: fade * fade * (3 - 2 * fade),
+    location, dark, still, camera: stepCamera(step, seconds), cueOpacity: fade * fade * (3 - 2 * fade),
   });
 }
 

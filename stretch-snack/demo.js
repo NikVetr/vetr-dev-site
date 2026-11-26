@@ -4,13 +4,14 @@ import {isFloor} from './core/library/constraints.js';
 import {movementAtLocation} from './core/plan.js';
 import {drawHandNeckProps} from './movements/hand-neck-props.js';
 import {upperBackBallCenter} from './movements/upper-props.js';
-import {drawToeDetail,lowerBackBallCenter} from './movements/lower-props.js';
+import {drawToeDetail,lowerBackBallCenter,showsToeDetail} from './movements/lower-props.js';
 // The editor, player and directory supply their camera and share a posed mesh.
 import { movementCamera, cameraProjection, workingRegion } from './camera.js';
 import { movementPose, movementActivation, movementCycleSeconds, mixPoint } from './pose.js';
 import { drawTrainer, drawHandDetail, handDetailPoints } from './trainer.js';
 import { backBallCenter, backBallRadius, drawEquipment, drawTowel } from './equipment.js';
 import { drawSurface } from './surface.js';
+import { motionArrows, drawArrow } from './motion-arrows.js';
 
 /** @typedef {{cx:number,cy:number,radius:number}} HandLens */
 const handEnvelopes = new Map();
@@ -81,10 +82,21 @@ function handZoom(project,scale,lens,pointGroups) {
 }
 
 const isometric = new Set(['glute-squeeze', 'knee-squeeze', 'quad-set']);
+/** @type {WeakMap<HTMLCanvasElement, import('./motion-arrows.js').ArrowClock>} */
+const arrowClocks = new WeakMap();
 
-/** @param {HTMLCanvasElement} canvas
+// Holds, massage-ball work and the inset close-ups have cues of their own.
+// Every other movement is shown by arrows in the scene.
+/** @param {import('./pose.js').Movement} move @param {ReturnType<typeof movementPose>} pose @param {HandLens|null} lens */
+function showsArrows(move, pose, lens) {
+  return !lens && !movementActivation(pose, move) && !showsToeDetail(move)
+    && !(!move.family && isometric.has(move.motion)) && move.motion !== 'ball-back';
+}
+
+/** `still` shows the arrows whole and unanimated, for motion-off views.
+ * @param {HTMLCanvasElement} canvas
  * @param {import('./pose.js').Movement} move
- * @param {number} seconds @param {{location?:string,bed?:boolean,dark?:boolean,preview?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
+ * @param {number} seconds @param {{location?:string,bed?:boolean,dark?:boolean,preview?:boolean,still?:boolean,camera?:import('./camera.js').Camera,cueOpacity?:number}} [options] */
 export function renderMovement(canvas, move, seconds, options = {}) {
   move = movementAtLocation(move, options.location);
   const width = canvas.clientWidth,
@@ -117,15 +129,21 @@ export function renderMovement(canvas, move, seconds, options = {}) {
   ctx.fillStyle = shade;
   ctx.fillRect(-1, -1, 2, 2);
   ctx.restore();
+  const opacity = options.cueOpacity ?? 1, dark = options.dark ?? false;
+  const cues = !options.preview && opacity > 0;
+  const lens = cues && handDetail ? handLens(canvas,move,camera,project,scale,width,height) : null;
+  let arrows = [];
+  if (cues && showsArrows(move, pose, lens)) {
+    const shown = motionArrows(move, seconds, {still: options.still, previous: arrowClocks.get(canvas)});
+    arrowClocks.set(canvas, shown.clock);
+    arrows = shown.arrows;
+  }
   drawSurface(ctx, width, height, project, (mesh) => {
     drawEquipment(mesh, pose, move, options.location, seconds, options.bed, camera.yaw);
     drawTrainer(mesh, pose, move);
+    for (const arrow of arrows) drawArrow(mesh, arrow, {project, scale, size: Math.min(width, height), dark, opacity});
   });
-  const opacity = options.cueOpacity ?? 1;
-  if (!options.preview && opacity > 0) {
-    const lens = handDetail ? handLens(canvas,move,camera,project,scale,width,height) : null;
-    drawCue(ctx, move, pose, project, scale, width, height, lens, options.dark ?? false, seconds, opacity);
-  }
+  if (cues) drawCue(ctx, move, pose, project, scale, width, height, lens, dark, seconds, opacity);
 }
 
 /** @param {CanvasRenderingContext2D} ctx @param {import('./pose.js').Movement} move @param {ReturnType<typeof movementPose>} pose @param {(p:number[])=>number[]} project @param {number} scale @param {number} width @param {number} height @param {HandLens | null} detail @param {boolean} dark @param {number} seconds @param {number} opacity */
@@ -243,74 +261,6 @@ function drawCue(ctx, move, pose, project, scale, width, height, detail, dark, s
     ctx.arc(target[0], target[1], Math.max(3, backBallRadius * scale + 2), 0, Math.PI * 2);
     ctx.stroke();
     label(ctx, target, [width < 220 ? 'Ball' : 'Massage ball'], width, height, dark, pose, project, scale);
-  } else if (move.motion === 'ankle-circle') {
-    ankleArrow(ctx, move, seconds, leg, project, width, height, scale);
-  } else if (move.motion === 'palm-forward') {
-    for (const hand of pose.arms) {
-      const [u, v] = project(hand.palm);
-      arrow(ctx, u - hand.s * scale * 0.035, v - scale * 0.048, u + hand.s * scale * 0.085, v - scale * 0.035, hand.s * 0.65, scale);
-    }
-  } else if (move.motion === 'seated-pelvic-tilt') {
-    const [u, v] = project(mixPoint(pose.legs[0].hip, pose.legs[1].hip, 0.5));
-    arrow(ctx, u + scale * 0.085, v - scale * 0.095, u - scale * 0.085, v - scale * 0.095, 0.5, scale, true);
-  } else if (!move.family && move.motion === 'pelvic-tilt') {
-    const [u, v] = project(pose.centre);
-    arrow(ctx, u - scale * 0.04, v - scale * 0.22, u - scale * 0.018, v - scale * 0.12, 0.18, scale);
-  } else if (move.motion === 'shoulder-squeeze') {
-    for (const s of [-1, 1]) {
-      const [u, v] = project(pose.arms[s === 1 ? 1 : 0].shoulder);
-      arrow(ctx, u + s * scale * 0.15, v - scale * 0.073, u + s * scale * 0.068, v - scale * 0.041, 0, scale);
-    }
-  } else {
-    // Direction of the highlighted joint relative to its relaxed pose,
-    // independent of the sampled display frame.
-    const cycle = movementCycleSeconds(move);
-    const startTime = pose.side === -1 ? 0 : cycle;
-    const start = movementPose(move, startTime);
-    const peak = movementPose(move, startTime + cycle / 2);
-    /** @param {ReturnType<typeof movementPose>} frame */
-    const pointAt = (frame) => {
-      const a = frame.arms[pose.side === 1 ? 1 : 0],
-        l = frame.legs[pose.side === 1 ? 1 : 0];
-      switch (group) {
-        case 'head':
-          return move.motion === 'neck-turn' ? frame.face : frame.crown;
-        case 'arms':
-        case 'wrists':
-          return a.wrist;
-        case 'shoulders':
-          return move.motion === 'chest-open' ? a.elbow : a.shoulder;
-        case 'body':
-          return a.shoulder;
-        case 'pelvis':
-          return l.hip;
-        case 'thighs':
-          return l.knee;
-        case 'shins':
-          return l.ankle;
-        default:
-          return move.motion === 'heel-lift' ? l.ankle : l.toe;
-      }
-    };
-    const a = project(pointAt(start)),
-      b = project(pointAt(peak));
-    const dx = b[0] - a[0],
-      dy = b[1] - a[1],
-      distance = Math.hypot(dx, dy);
-    if (distance > scale * 0.007) {
-      const dt = Math.min(0.215 * scale, Math.max(0.107 * scale, distance));
-      const ox = x + (x > width * 0.5 ? 1 : -1) * scale * (group === 'head' ? 0.16 : 0.093);
-      const oy = y - (group === 'head' ? 0.06 : 0.048) * scale;
-      arrow(
-        ctx,
-        ox - ((dx / distance) * dt) / 2,
-        oy - ((dy / distance) * dt) / 2,
-        ox + ((dx / distance) * dt) / 2,
-        oy + ((dy / distance) * dt) / 2,
-        0.26,
-        scale,
-      );
-    }
   }
   ctx.restore();
 }
@@ -372,58 +322,4 @@ function label(ctx, target, lines, width, height, dark, pose, project, scale, le
   ctx.textBaseline = 'middle';
   ctx.fillStyle = dark ? '#ffdcaa' : '#653813';
   lines.forEach((line, i) => ctx.fillText(line, x + pad, y + pad + (i + 0.5) * lineHeight));
-}
-
-// Copy the arc traced by the toes, including the reversal on the same foot.
-// Cache its world points across animation frames.
-const anklePaths = new Map();
-function ankleArrow(ctx, move, seconds, leg, project, width, height, scale) {
-  const cycle = Math.floor(seconds / 4) % 4;
-  if (!anklePaths.has(cycle)) {
-    const points = [];
-    for (let i = 0; i <= 18; i++) {
-      const frame = movementPose(move, 4 * cycle + 0.65 + (2.35 * i) / 18);
-      points.push(frame.legs[leg.s === -1 ? 0 : 1].toe);
-    }
-    anklePaths.set(cycle, points);
-  }
-  const points = anklePaths.get(cycle).map(project);
-  const xs = points.map(p => p[0]), ys = points.map(p => p[1]);
-  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
-  const radius = Math.max(5, scale * 0.075);
-  const factor = 2 * radius / Math.max(0.001, maxX - minX, maxY - minY);
-  const [tx, ty] = project(leg.toe);
-  const cx = Math.max(radius + 3, Math.min(width - radius - 3, tx + (tx < width/2 ? -1 : 1) * radius * 1.9));
-  const cy = Math.max(radius + 3, Math.min(height - radius - 3, ty - radius));
-  const path = points.map(([u,v]) => [cx + (u - (minX + maxX)/2) * factor, cy + (v - (minY + maxY)/2) * factor]);
-  ctx.beginPath();
-  ctx.moveTo(path[0][0], path[0][1]);
-  for (const [u,v] of path.slice(1)) ctx.lineTo(u, v);
-  ctx.stroke();
-  const [x,y] = path.at(-1), [px,py] = path.at(-2);
-  arrowhead(ctx, x, y, Math.atan2(y - py, x - px), radius * 0.5);
-}
-
-/** @param {CanvasRenderingContext2D} ctx @param {number} x1 @param {number} y1 @param {number} x2 @param {number} y2 @param {number} bend @param {number} scale */
-function arrow(ctx, x1, y1, x2, y2, bend, scale, bothEnds = false) {
-  const dx = x2 - x1,
-    dy = y2 - y1,
-    r = Math.hypot(dx, dy);
-  const cx = (x1 + x2) / 2 + dy * bend,
-    cy = (y1 + y2) / 2 - dx * bend;
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.quadraticCurveTo(cx, cy, x2, y2);
-  ctx.stroke();
-  const angle = Math.atan2(y2 - cy, x2 - cx);
-  const tip = Math.min(r * 0.48, Math.max(3.8, scale * 0.038));
-  arrowhead(ctx, x2, y2, angle, tip);
-  if (bothEnds) arrowhead(ctx, x1, y1, Math.atan2(y1 - cy, x1 - cx), tip);
-}
-function arrowhead(ctx, x2, y2, angle, tip) {
-  ctx.beginPath();
-  ctx.moveTo(x2 - tip * Math.cos(angle - 0.54), y2 - tip * Math.sin(angle - 0.54));
-  ctx.lineTo(x2, y2);
-  ctx.lineTo(x2 - tip * Math.cos(angle + 0.54), y2 - tip * Math.sin(angle + 0.54));
-  ctx.stroke();
 }
