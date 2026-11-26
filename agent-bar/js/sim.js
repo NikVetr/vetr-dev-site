@@ -327,9 +327,11 @@ export function createSim({ now = () => Date.now() / 1000 } = {}) {
 
   /** An agent's `agent-bar send`, or a scheduled message from the user ('user'): the recipient sees it when its
    * next turn starts, or, with waking on, it starts a turn in an idle chat that can wake. @param {any[]|null} [steps]
-   * what the chat does about it (a scheduled message's scripted reply) */
-  function send(sender, recipient, body, steps = null) {
-    const message = { id: nextMessage++, sender, recipient, body, at: now(), readAt: null, steps };
+   * what the chat does about it (a scheduled message's scripted reply) @param {number|null} [ticketId] the ticket
+   * that scheduled it; like messages.send, a user-scheduled message stores its sender title as "You (ticket #N)" */
+  function send(sender, recipient, body, steps = null, ticketId = null) {
+    const senderTitle = sender !== 'user' ? null : ticketId === null ? 'You' : `You (ticket #${ticketId})`;
+    const message = { id: nextMessage++, sender, senderTitle, recipient, body, at: now(), readAt: null, steps };
     state.messages.push(message);
     const row = byKey(recipient);
     if (row && state.settings.wake && canWake(row) && row.state !== 'working' && !row.pending) prompt(recipient, WAKE);
@@ -439,7 +441,7 @@ export function createSim({ now = () => Date.now() / 1000 } = {}) {
     // whether that starts a turn.
     for (const item of state.tickets) {
       if (!item.to || item.status !== 'open' || waits(item).length) continue;
-      send('user', item.to, item.body, item.steps);
+      send('user', item.to, item.body, item.steps, item.id);
       if (item.repeat) item.after = [{ kind: 'date', at: item.after[0].at + { day: D, week: 7 * D, month: 30 * D }[item.repeat] }];
       else Object.assign(item, { status: 'done', statusAt: t, note: 'Sent' });
     }

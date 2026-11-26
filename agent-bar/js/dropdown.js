@@ -398,9 +398,10 @@ function gitBody(sim, m) {
 function messagesBody(sim, m, snap) {
   const q = m.otherQuery.toLowerCase();
   // A scheduled message comes from the user, not from a chat.
-  const title = (key) => (key === 'user' ? 'You (scheduled)' : sim.byKey(key)?.title ?? key);
+  /** A chat's title, or for a scheduled message its stored sender title ("You (ticket #N)"). */
+  const title = (key, msg = null) => (key === 'user' ? msg?.senderTitle ?? 'You' : sim.byKey(key)?.title ?? key);
   const projectOf = (key, other = '') => (key === 'user' ? sim.byKey(other)?.project ?? '?' : sim.byKey(key)?.project ?? '?');
-  const all = sim.state.messages.filter((msg) => `${msg.body} ${title(msg.sender)} ${title(msg.recipient)} ${projectOf(msg.sender, msg.recipient)} ${projectOf(msg.recipient)}`.toLowerCase().includes(q)
+  const all = sim.state.messages.filter((msg) => `${msg.body} ${title(msg.sender, msg)} ${title(msg.recipient)} ${projectOf(msg.sender, msg.recipient)} ${projectOf(msg.recipient)}`.toLowerCase().includes(q)
     && (m.messageFilter !== 'unread' || !msg.readAt));
   const threads = new Map();
   for (const msg of all) {
@@ -431,13 +432,13 @@ function messagesBody(sim, m, snap) {
       const stranded = waiting > 0 && snap.stranded.includes(key);
       const mail = !sent.length ? '' : waiting ? `, ${waiting} unread${stranded ? ' until you start a turn there' : ''}` : ', read its messages';
       const envelope = sent.length ? `<span class="tracker-${stranded ? 'attention' : waiting ? 'help-bright' : 'muted'}">${waiting ? icon.mail(14) : icon.mailOpen(14)}</span>` : '';
-      if (key === 'user') return `${i ? '<span class="tracker-muted" aria-hidden="true">⇄</span>' : ''}<span class="tracker-thread-agent tracker-bright">You (scheduled)</span>`;
+      if (key === 'user') return `${i ? '<span class="tracker-muted" aria-hidden="true">⇄</span>' : ''}<span class="tracker-thread-agent tracker-bright">${symbolOf(key)} ${esc(title(key, items.find((msg) => msg.sender === 'user')))}</span>`;
       return `${i ? '<span class="tracker-muted" aria-hidden="true">⇄</span>' : ''}<button type="button" class="tracker-thread-agent tracker-${key.split(':')[0]}" data-act="row" data-key="${esc(key)}" data-win="${esc(row?.window ?? '')}" data-fid="thread-${esc(key)}-${esc(first.id)}" aria-label="${esc(`Open ${title(key)}${mail}`)}"><span>${symbolOf(key)} ${esc(title(key))}</span>${envelope}</button>`;
     }).join('')}</div>`;
     const [from, to] = [projectOf(pair[0], pair[1]), projectOf(pair[1], pair[0])];
     const body = items.map((msg) => {
       const open = m.openMessages.get(msg.id) ?? (!msg.readAt || msg === items.at(-1));
-      return `<div class="tracker-conversation${msg.readAt ? '' : ' tracker-unread'}"><button type="button" class="tracker-message-button" data-act="fold-message" data-id="${msg.id}" data-fid="msg-${msg.id}" aria-expanded="${open}" aria-label="Expand or collapse message from ${esc(title(msg.sender))}"><span class="tracker-row"><span class="tracker-detail">${esc(`${symbolOf(msg.sender)} ${title(msg.sender)} → ${symbolOf(msg.recipient)} ${title(msg.recipient)} · ${age(msg.at, t)}`)}</span><span class="tracker-help-text">${esc(open ? msg.body : `${msg.body.split('\n')[0].slice(0, 90)}${msg.body.length > 90 ? '…' : ''}`)}</span></span></button><span class="tracker-chip tracker-chip-${msg.readAt ? 'muted' : 'attention'}">${msg.readAt ? 'Read' : 'Unread'}</span></div>`;
+      return `<div class="tracker-conversation${msg.readAt ? '' : ' tracker-unread'}"><button type="button" class="tracker-message-button" data-act="fold-message" data-id="${msg.id}" data-fid="msg-${msg.id}" aria-expanded="${open}" aria-label="Expand or collapse message from ${esc(title(msg.sender, msg))}"><span class="tracker-row"><span class="tracker-detail">${esc(`${symbolOf(msg.sender)} ${title(msg.sender, msg)} → ${symbolOf(msg.recipient)} ${title(msg.recipient)} · ${age(msg.at, t)}`)}</span><span class="tracker-help-text">${esc(open ? msg.body : `${msg.body.split('\n')[0].slice(0, 90)}${msg.body.length > 90 ? '…' : ''}`)}</span></span></button><span class="tracker-chip tracker-chip-${msg.readAt ? 'muted' : 'attention'}">${msg.readAt ? 'Read' : 'Unread'}</span></div>`;
     }).join('');
     html += section(m, `messages:${pair.join(' ')}`, from === to ? from : `${from} ⇄ ${to}`, '', `${plural(items.length, 'message')}${unread ? ` · ${unread} unread` : ''}`,
       { highlight: unread > 0, below: agents, body });
