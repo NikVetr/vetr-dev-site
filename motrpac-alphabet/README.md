@@ -50,12 +50,17 @@ Browser artifacts are written to ignored `tmp/output/alphabet-font/` at the
 repository root. The font writer adds no dependencies. See
 [summary.md](summary.md) for the editor’s geometry and persistence model.
 
-The starting C, F and K use recovered hand-edited shapes. B starts with two
-closed bowls and includes the July exported design as its third variant.
-The hand-tuned A and Z share one height, matching the Mattlab logo in the
-directory preview; their heads and stems keep the logo's sizes. The letters
-without hand-tuned versions start at that height from designs in the same
-style: heads at stroke ends and junctions, stems aimed at the next head, and
-curved stems for bowls. Each letter's second variant is a generated grid design.
+The M and W (the logo and its rotation) set the proportions for every other
+letter. Every piece has the logo's head and stem size, and letters are two M
+legs tall between head centres (2,453.5 units overall; the M and W are 1,474).
+The hand-tuned A, C, D, F, G, K and Z, recovered from the author's saved project,
+start with their heads moved proportionally onto that height and their stems
+re-aimed at the same heads; bowls at the editor's bend limit grow taller rather
+than wider. The other letters start from designs in the same style: heads at
+stroke ends and junctions, stems aimed at the next head, and curved stems for
+bowls. B keeps the July exported design as its third variant. Each letter's
+second variant is a generated grid design, and earlier forms, including the
+unchanged hand-tuned originals, follow as further variants. The letter strip
+draws every letter at one scale on a common baseline.
 Fresh projects and the editor’s reset-to-defaults action use these designs.
 Opening an existing project restores its saved variants and selections.

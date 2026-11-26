@@ -82,15 +82,17 @@ export async function build() {
       @keyframes ${name}-select-${k}{0%,${6+k*14}%{opacity:0}${8+k*14}%,${19+k*14}%{opacity:1}${22+k*14}%,100%{opacity:0}}`).join('\n') +
     Core.FACES.map((_,i)=>`& .paint-${i} { animation: ${name}-paint-${i} 9s linear infinite; }
     @keyframes ${name}-paint-${i} { 0%,${30+i*1.8}% {fill:var(--art-line)} ${32+i*1.8}%,94% {fill:${fill[Core.FACES[i].id]}} 100% {fill:var(--art-line)} }`).join('\n');
-  // --h is the shared glyph height: the largest that fits the well beside (or, in portrait wells, above) the labels.
+  // --h is the shared glyph height: the larger of what fits in one row and what fits with the logo
+  // below. When the second is larger the row is too wide at that height, so the logo wraps below.
   const lead = 'calc(var(--label)*1.25 + var(--label-gap))';
+  const row = `min(calc(100cqh - 2*var(--pad-y) - ${lead}),calc((100cqw - 2*var(--pad-x) - var(--gap) - var(--pair) - 2px)/${num(pairRatio + logoRatio, 4)}))`;
+  const stacked = `min(calc((100cqh - 2*var(--pad-y) - 2*${lead} - var(--row-gap))/2),calc((100cqw - 2*var(--pad-x) - var(--pair))/${num(pairRatio, 4)}),calc((100cqw - 2*var(--pad-x))/${num(logoRatio, 4)}))`;
   return art({ name, body, responsive:true, loop, period:9,
-    css:`& .logo-layout{--label:clamp(10px,min(4.8cqw,10cqh),19px);--label-gap:1.5cqh;--pad-y:4cqh;--pad-x:3cqw;--gap:6cqw;--pair:2.5cqw;box-sizing:border-box;height:100%;background:#fff;padding:var(--pad-y) var(--pad-x);display:flex;align-items:center;justify-content:center;gap:var(--gap);
-  --h:min(calc(100cqh - 2*var(--pad-y) - ${lead}),calc((100cqw - 2*var(--pad-x) - var(--gap) - var(--pair))/${num(pairRatio + logoRatio, 4)}))}
+    css:`& .logo-layout{--label:clamp(10px,min(4.8cqw,10cqh),19px);--label-gap:1.5cqh;--pad-y:4cqh;--pad-x:3cqw;--gap:6cqw;--row-gap:4cqh;--pair:2.5cqw;box-sizing:border-box;height:100%;background:#fff;padding:var(--pad-y) var(--pad-x);display:flex;flex-wrap:wrap;align-items:center;align-content:center;justify-content:center;column-gap:var(--gap);row-gap:var(--row-gap);
+  --h:max(${row},${stacked})}
 & .group{display:flex;flex-direction:column;align-items:center;gap:var(--label-gap);min-width:0}
 & .glyphs{display:flex;gap:var(--pair)}
 & .logo-layout span{text-align:center;color:#53606c;font:var(--label)/1.25 system-ui,sans-serif;overflow-wrap:break-word}
 & .logo-layout svg{display:block;height:var(--h);width:auto;overflow:visible}
-@container alphabet-preview (max-aspect-ratio:1.05/1){& .logo-layout{flex-direction:column;--gap:4cqh;--h:min(calc((100cqh - 2*var(--pad-y) - 2*${lead} - var(--gap))/2),calc((100cqw - 2*var(--pad-x) - var(--pair))/${num(pairRatio, 4)}),calc((100cqw - 2*var(--pad-x))/${num(logoRatio, 4)}))}}
 & .selection{opacity:0}` });
 }

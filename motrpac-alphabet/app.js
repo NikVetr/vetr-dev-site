@@ -11,6 +11,11 @@ const CURVE_PAIR_HANDLE_OFFSET = 360;
 const CURVE_PAIR_GUIDE_START_OFFSET = 190;
 const CURVE_PAIR_HANDLE_T = { outer: 0.5, inner: 0.5 };
 const DEFAULT_STEM_DISPLACEMENT = 104.366;
+// Letters take their proportions from the M: its vertical lollipops reach one leg between head
+// centres, its outer heads sit M_WIDTH apart, and letters are two legs tall between head centres.
+const M_LEG = 980;
+const M_WIDTH = 1354;
+const LETTER_HEAD_SPAN = 2 * M_LEG;
 const POLISH_MAX_ROTATION = 8;
 const POLISH_ROTATION_FRACTION = 0.35;
 const POLISH_POSITION_FRACTION = 0.18;
@@ -220,26 +225,25 @@ function makeLetterState(shapes = []) {
 function defaultLetters() {
   const letters = makeEmptyLetters();
   const generated = seedAlphabetVariants();
-  const designed = designedLetterShapes();
-  LETTERS.forEach((letter) => {
-    letters[letter] = {
-      activeVariant: 0,
-      variants: [designed[letter] || [], generated[letter]]
-    };
-  });
-  for (const [letter, shapes] of Object.entries(recoveredLetterShapes())) {
-    const recovered = shapes.map(makeShapeFromConfig);
-    if (letter === "B") letters.B.variants.push(recovered);
-    else letters[letter].variants[0] = recovered;
+  const designed = designedLetterShapes(designedLetterPlans());
+  const earlier = designedLetterShapes(earlierLetterPlans());
+  const recovered = Object.fromEntries(Object.entries(recoveredLetterShapes()).map(([letter, shapes]) => [letter, shapes.map(makeShapeFromConfig)]));
+  // Each letter starts on the shared height, then offers its generated grid design and its earlier forms.
+  for (const [letter, shapes] of Object.entries(designed)) {
+    letters[letter] = { activeVariant: 0, variants: [shapes, generated[letter], earlier[letter]] };
   }
-  letters.A.variants[0] = defaultAShapes();
-  letters.D.variants[0] = defaultDShapes();
-  letters.G.variants[0] = defaultGShapes();
+  const handTuned = { A: defaultAShapes(), C: recovered.C, D: defaultDShapes(), F: recovered.F, G: defaultGShapes(), K: recovered.K, Z: defaultZShapes() };
+  for (const [letter, shapes] of Object.entries(handTuned)) {
+    letters[letter] = { activeVariant: 0, variants: [fitToLetterHeight(shapes), generated[letter], shapes] };
+  }
+  letters.A.variants.splice(2, 0, earlierTallShapes(handTuned.A));
+  letters.Z.variants.splice(2, 0, earlierTallShapes(handTuned.Z));
+  letters.B.variants.splice(2, 0, fitToLetterHeight(recovered.B));
+  letters.B.variants.push(recovered.B);
   letters.M = makeLetterState(originalMShapes());
   letters.M.variants.push(originalMShapes());
-  letters.W.variants[0] = rotateShapes(originalMShapes(), 180);
-  letters.W.variants[1] = rotateShapes(originalMShapes(), 180);
-  letters.Z.variants[0] = defaultZShapes();
+  letters.W = makeLetterState(rotateShapes(originalMShapes(), 180));
+  letters.W.variants.push(rotateShapes(originalMShapes(), 180));
   const missing = LETTERS.filter((letter) => letters[letter].variants[0].length === 0);
   if (missing.length) {
     throw new Error(`No starting design for ${missing.join(", ")}.`);
@@ -257,9 +261,8 @@ function originalMShapes() {
   ];
 }
 
-// The hand-tuned A and Z share a 2,400-unit head-centre span (2,893.5 units overall), the height
-// of the Mattlab logo beside them in the directory preview. Stems reach the same targets with the
-// original logo gap; head and stem sizes are template constants.
+// Hand-tuned designs as the author made them. The starting variants move their heads onto the
+// shared letter height (see fitToLetterHeight); these originals stay available as extra variants.
 function defaultAShapes() {
   return [
     makeShapeFromConfig({
@@ -267,8 +270,8 @@ function defaultAShapes() {
       style: "purple",
       x: 2077.895,
       y: 674.175,
-      angle: 39.0178,
-      stemOffset: 383.4572,
+      angle: 37.42264142351917,
+      stemOffset: 277.23440962340476,
       stemSeedAngle: 69.17244371320714,
       lastLollipopTemplate: "lollipop-short-left"
     }),
@@ -276,7 +279,7 @@ function defaultAShapes() {
       template: "lollipop-short-left",
       style: "green",
       x: 1602.895,
-      y: 1860.3819,
+      y: 1749.175,
       angle: 325.45692699311167,
       stemOffset: -28.307495836096678,
       stemSeedAngle: 359.1128852047218,
@@ -286,7 +289,7 @@ function defaultAShapes() {
       template: "circle",
       style: "red",
       x: 1074.273,
-      y: 880.6779,
+      y: 769.471,
       angle: 320,
       stemOffset: 0,
       stemSeedAngle: 0,
@@ -296,9 +299,9 @@ function defaultAShapes() {
       template: "lollipop-long-alt",
       style: "blue",
       x: 1234.3858412265663,
-      y: 2094.936,
-      angle: 16.8757,
-      stemOffset: 285.2949,
+      y: 1869.936,
+      angle: 18.50937094290481,
+      stemOffset: 176.88626293335705,
       stemSeedAngle: 0,
       lastLollipopTemplate: "lollipop-long-alt"
     }),
@@ -306,9 +309,9 @@ function defaultAShapes() {
       template: "lollipop-long-alt",
       style: "yellow",
       x: 2828.108,
-      y: 2094.936,
-      angle: 341.7387,
-      stemOffset: 294.7366,
+      y: 1869.936,
+      angle: 339.995011571649,
+      stemOffset: 187.20280278839527,
       stemSeedAngle: 252.39951790888358,
       lastLollipopTemplate: "lollipop-long-alt"
     })
@@ -588,8 +591,8 @@ function defaultZShapes() {
       style: "blue",
       x: 1055.226,
       y: -230.65300000000002,
-      angle: 156.0744,
-      stemOffset: 579.4411,
+      angle: 164.8304421550057,
+      stemOffset: 292.22824103394385,
       stemSeedAngle: 0,
       curveOffset: 0,
       lastLollipopTemplate: "lollipop-short-right"
@@ -598,7 +601,7 @@ function defaultZShapes() {
       template: "circle",
       style: "yellow",
       x: -275.7270000000001,
-      y: 488.4245,
+      y: 144.471,
       angle: 0,
       stemOffset: 0,
       stemSeedAngle: 115.75711484172518,
@@ -609,9 +612,9 @@ function defaultZShapes() {
       template: "lollipop-short-left",
       style: "purple",
       x: 397.895,
-      y: 2654.175,
-      angle: 265.284,
-      stemOffset: 513.8451,
+      y: 1974.175,
+      angle: 274.1167352472021,
+      stemOffset: 235.22362452748757,
       stemSeedAngle: -51.334161957279264,
       curveOffset: 0,
       lastLollipopTemplate: "lollipop-short-left"
@@ -620,7 +623,7 @@ function defaultZShapes() {
       template: "lollipop-long",
       style: "red",
       x: 404.09899999999993,
-      y: 2654.465,
+      y: 1974.465,
       angle: 89.94213419201606,
       stemOffset: 378.48526673033507,
       stemSeedAngle: 178.57204369995193,
@@ -633,10 +636,146 @@ function defaultZShapes() {
 // Starting designs for the letters without hand-tuned versions, in the same idiom: heads at stroke
 // ends and junctions, lollipop stems aimed at the next head with the original logo gap, straight
 // double stems where a stroke is longer than a lollipop can reach, and curved double stems for
-// bowls. Head centres span the A/Z height. Pieces: ["lollipop", style, head, target],
-// ["circle", style, at], ["stem", style, a, b] and ["curve", style, a, b, bend].
-/** @returns {Record<string, {nodes: Record<string, number[]>, pieces: [string, string, string, string?, number?][]}>} */
+// bowls. They follow the M: rows are one M leg apart and the outer columns are as far apart as the
+// M's outer heads. Pieces: ["lollipop", style, head, target], ["circle", style, at],
+// ["stem", style, a, b] and ["curve", style, a, b, bend]. A node may only be aimed at (Q's tail).
+/** @typedef {Record<string, {nodes: Record<string, number[]>, pieces: [string, string, string, string?, number?][]}>} LetterPlans */
+/** @returns {LetterPlans} */
 function designedLetterPlans() {
+  const top = 500;
+  const mid = top + M_LEG;
+  const base = top + LETTER_HEAD_SPAN;
+  const left = 650;
+  const right = left + M_WIDTH;
+  const centre = (left + right) / 2;
+  return {
+    B: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "blue", "BL", "ML"],
+        ["curve", "purple", "TL", "ML", -950], ["curve", "yellow", "ML", "BL", -1100]
+      ]
+    },
+    E: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base], TR: [right, top], MR: [right - 200, mid], BR: [right, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "purple", "TR", "TL"], ["lollipop", "blue", "MR", "ML"],
+        ["lollipop", "purple", "BR", "BL"]
+      ]
+    },
+    H: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base], TR: [right, top], MR: [right, mid], BR: [right, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "blue", "TR", "MR"], ["lollipop", "purple", "MR", "ML"],
+        ["lollipop", "green", "BR", "MR"]
+      ]
+    },
+    I: {
+      nodes: { TL: [left, top], TC: [centre, top], TR: [right, top], MC: [centre, mid], BL: [left, base], BC: [centre, base], BR: [right, base] },
+      pieces: [
+        ["lollipop", "purple", "TC", "MC"], ["circle", "red", "MC"], ["lollipop", "green", "BC", "MC"],
+        ["lollipop", "yellow", "TL", "TC"], ["lollipop", "blue", "TR", "TC"],
+        ["lollipop", "blue", "BL", "BC"], ["lollipop", "yellow", "BR", "BC"]
+      ]
+    },
+    J: {
+      nodes: { TL: [left + 350, top], TR: [right, top], MR: [right, mid], BL: [left, mid + 400] },
+      pieces: [
+        ["lollipop", "yellow", "TL", "TR"], ["lollipop", "blue", "TR", "MR"], ["circle", "red", "MR"],
+        ["curve", "purple", "MR", "BL", -805], ["circle", "green", "BL"]
+      ]
+    },
+    L: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base], BR: [right - 150, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "purple", "BR", "BL"]
+      ]
+    },
+    N: {
+      nodes: { TL: [left, top], BL: [left, base], TR: [right, top], BR: [right, base] },
+      pieces: [
+        ["lollipop", "blue", "BL", "TL"], ["circle", "purple", "TL"], ["stem", "green", "TL", "BR"],
+        ["circle", "red", "BR"], ["lollipop", "yellow", "TR", "BR"]
+      ]
+    },
+    O: {
+      nodes: { T: [centre, top], B: [centre, base] },
+      pieces: [
+        ["circle", "purple", "T"], ["circle", "green", "B"], ["curve", "red", "T", "B", 660],
+        ["curve", "blue", "T", "B", -660]
+      ]
+    },
+    P: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["curve", "blue", "TL", "ML", -1100]
+      ]
+    },
+    Q: {
+      nodes: { T: [centre, top], B: [centre, base], tail: [centre + 747, base + 627] },
+      pieces: [
+        ["circle", "purple", "T"], ["lollipop", "green", "B", "tail"], ["curve", "red", "T", "B", 660],
+        ["curve", "blue", "T", "B", -660]
+      ]
+    },
+    R: {
+      nodes: { TL: [left, top], ML: [left, mid], BL: [left, base], BR: [right, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["curve", "blue", "TL", "ML", -1100], ["lollipop", "purple", "BR", "ML"]
+      ]
+    },
+    S: {
+      nodes: { TR: [right, top + 260], C: [centre, mid], BL: [left, base - 260] },
+      pieces: [
+        ["circle", "yellow", "TR"], ["curve", "red", "TR", "C", 820], ["circle", "blue", "C"],
+        ["curve", "purple", "C", "BL", -820], ["circle", "green", "BL"]
+      ]
+    },
+    T: {
+      nodes: { TL: [left, top], TC: [centre, top], TR: [right, top], MC: [centre, mid], BC: [centre, base] },
+      pieces: [
+        ["lollipop", "yellow", "TL", "TC"], ["lollipop", "blue", "TR", "TC"],
+        ["lollipop", "purple", "TC", "MC"], ["circle", "red", "MC"], ["lollipop", "green", "BC", "MC"]
+      ]
+    },
+    U: {
+      nodes: { TL: [left, top], ML: [left, mid], TR: [right, top], MR: [right, mid] },
+      pieces: [
+        ["lollipop", "blue", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "green", "TR", "MR"],
+        ["circle", "yellow", "MR"], ["curve", "purple", "ML", "MR", 1063]
+      ]
+    },
+    V: {
+      nodes: { TL: [left - 50, top], TR: [right + 50, top], B: [centre, base] },
+      pieces: [
+        ["lollipop", "red", "TL", "B"], ["lollipop", "green", "TR", "B"], ["circle", "yellow", "B"]
+      ]
+    },
+    X: {
+      nodes: { TL: [left, top], TR: [right, top], C: [centre, mid], BL: [left, base], BR: [right, base] },
+      pieces: [
+        ["lollipop", "blue", "TL", "C"], ["lollipop", "green", "TR", "C"], ["circle", "yellow", "C"],
+        ["lollipop", "purple", "BL", "C"], ["lollipop", "red", "BR", "C"]
+      ]
+    },
+    Y: {
+      nodes: { TL: [left, top], TR: [right, top], C: [centre, mid], B: [centre, base] },
+      pieces: [
+        ["lollipop", "purple", "TL", "C"], ["lollipop", "blue", "TR", "C"], ["circle", "red", "C"],
+        ["lollipop", "green", "B", "C"]
+      ]
+    }
+  };
+}
+
+// The first designs, drawn at the taller A/Z height of an earlier revision; kept as extra variants.
+/** @returns {LetterPlans} */
+function earlierLetterPlans() {
   const top = 500;
   const mid = 1700;
   const base = 2900;
@@ -765,12 +904,12 @@ function designedLetterPlans() {
         ["lollipop", "green", "B", "C"]
       ]
     }
-
   };
 }
 
-function designedLetterShapes() {
-  return Object.fromEntries(Object.entries(designedLetterPlans()).map(([letter, plan]) => {
+/** @param {LetterPlans} plans */
+function designedLetterShapes(plans) {
+  return Object.fromEntries(Object.entries(plans).map(([letter, plan]) => {
     const node = (/** @type {string} */ key) => {
       if (!plan.nodes[key]) {
         throw new Error(`${letter} design has no node ${key}.`);
@@ -861,17 +1000,132 @@ function explicitSeedSegment(start, end, style, stemOffset = null) {
   return shape;
 }
 
-// One generated alternative per letter from the coarse grid plans.
+/** @param {any[]} shapes */
+function headExtent(shapes) {
+  const heads = shapes.filter((shape) => !isDoubleStem(shape)).map(shapeAnchor);
+  const xs = heads.map((head) => head.x);
+  const ys = heads.map((head) => head.y);
+  return { top: Math.min(...ys), bottom: Math.max(...ys), centre: { x: (Math.min(...xs) + Math.max(...xs)) / 2, y: (Math.min(...ys) + Math.max(...ys)) / 2 } };
+}
+
+// A hand-tuned letter on the shared height: its heads scale about their centre until they span two
+// M legs, so every angle and proportion is kept and only the stems' lengths and bends change.
+/** @param {any[]} shapes */
+function fitToLetterHeight(shapes) {
+  const { top, bottom, centre } = headExtent(shapes);
+  const scale = LETTER_HEAD_SPAN / (bottom - top);
+  return refitLetterShapes(shapes, (point) => ({ x: centre.x + (point.x - centre.x) * scale, y: centre.y + (point.y - centre.y) * scale }));
+}
+
+// The A and Z of an earlier revision, stretched to a 2,400-unit head span; kept as extra variants.
+/** @param {any[]} shapes */
+function earlierTallShapes(shapes) {
+  const { top, bottom } = headExtent(shapes);
+  return refitLetterShapes(shapes, (point) => ({ x: point.x, y: top + (point.y - top) * 2400 / (bottom - top) }));
+}
+
+// Moves a letter's heads by `map` and refits its stems. An end aimed at a head keeps that head, its
+// aim and its gap; an end that meets no head follows the map. Head and stem sizes are template
+// constants, so only positions, angles, stem lengths and bends change. Bends stay within the
+// editor's ±1200 range, so a bowl already at that limit grows taller rather than wider.
+/** @param {any[]} shapes @param {(point: Point) => Point} map */
+function refitLetterShapes(shapes, map) {
+  const gap = originalStemDisplacement();
+  /** @param {Point} a @param {Point} b */
+  const subtract = (a, b) => ({ x: a.x - b.x, y: a.y - b.y });
+  const heads = shapes.map((shape) => (isDoubleStem(shape) ? null : shapeAnchor(shape)));
+  // The head an end is aimed at, with its offset from the end's arc centre in the end's frame.
+  /** @param {number} self @param {Point} arc @param {Point} axis */
+  const aimedHead = (self, arc, axis) => {
+    let best = -1;
+    heads.forEach((head, index) => {
+      if (head && index !== self && (best < 0 || distance(head, arc) < distance(heads[best], arc))) best = index;
+    });
+    const head = heads[best];
+    if (!head) return null;
+    const offset = subtract(head, arc);
+    const along = dot(offset, axis);
+    const side = axis.x * offset.y - axis.y * offset.x;
+    return Math.abs(along - gap) < 80 && Math.abs(side) < 120 ? { head, along, side } : null;
+  };
+  return shapes.map((shape, index) => {
+    if (isCurvedLollipop(shape)) {
+      throw new Error("Curved lollipops cannot be refitted.");
+    }
+    const template = templates[/** @type {keyof typeof templates} */ (shape.template)];
+    const anchor = map(shapeAnchor(shape));
+    const next = { ...shape, id: makeId(), x: anchor.x - template.pivot.x, y: anchor.y - template.pivot.y };
+    if (isLollipop(shape)) {
+      const axis = worldStemAxis(shape);
+      const aimed = aimedHead(index, worldStemArcCenter(shape), axis);
+      const goal = aimed ? map(aimed.head) : map(worldStemArcCenter(shape));
+      const aim = aimed ? shortestAngleDelta(vectorAngle(axis), pointAngle(shapeAnchor(shape), aimed.head)) : 0;
+      next.angle = normalizeAngle(pointAngle(anchor, goal) - aim - localStemAxisAngle(template));
+      next.stemOffset += dot(subtract(goal, worldStemArcCenter(next)), worldStemAxis(next)) - (aimed ? aimed.along : 0);
+    } else if (isDoubleStem(shape)) {
+      const ends = [-1, 1].map((sign) => {
+        const arc = doubleStemArcCenterPoint(shape, sign);
+        return { sign, arc, aimed: aimedHead(index, arc, doubleStemEndpointAxis(shape, sign)) };
+      });
+      if (isCurvedStem(shape)) {
+        // Map the centre-line's control polygon, then read it back in the new chord's frame.
+        const controls = curvedStemControlPoints(shape);
+        const [p0, p1, p2, p3] = [controls.p0, controls.p1, controls.p2, controls.p3].map((point) => map(transformShapePoint(point, shape)));
+        const half = distance(p0, p3) / 2;
+        const radians = -pointAngle(p0, p3) * Math.PI / 180;
+        /** @param {Point} point */
+        const local = (point) => {
+          const d = subtract(point, { x: (p0.x + p3.x) / 2, y: (p0.y + p3.y) / 2 });
+          return { x: d.x * Math.cos(radians) - d.y * Math.sin(radians), y: d.x * Math.sin(radians) + d.y * Math.cos(radians) };
+        };
+        const start = local(p1);
+        const end = local(p2);
+        next.curveStartOffset = clamp(start.y, -1200, 1200);
+        next.curveEndOffset = clamp(end.y, -1200, 1200);
+        next.curveOffset = clamp(next.curveStartOffset, -900, 900);
+        next.curveStartPull = start.x + half;
+        next.curveEndPull = half - end.x;
+      }
+      // Solve the chord so each end's arc centre lands where its head (or the map) puts it.
+      /** @param {Point[]} chord */
+      const setChord = ([a, b]) => {
+        next.x = (a.x + b.x) / 2;
+        next.y = (a.y + b.y) / 2;
+        next.angle = normalizeAngle(pointAngle(a, b));
+        next.stemOffset = distance(a, b) / 2 - doubleStemHalfLengthForOffset(next, 0);
+      };
+      setChord([-1, 1].map((sign) => map(doubleStemEndPoint(shape, sign))));
+      for (let step = 0; step < 30; step += 1) {
+        setChord(ends.map(({ sign, arc, aimed }) => {
+          const axis = doubleStemEndpointAxis(next, sign);
+          const goal = aimed
+            ? subtract(map(aimed.head), { x: axis.x * aimed.along - axis.y * aimed.side, y: axis.y * aimed.along + axis.x * aimed.side })
+            : map(arc);
+          const correction = subtract(goal, doubleStemArcCenterPoint(next, sign));
+          const point = doubleStemEndPoint(next, sign);
+          return { x: point.x + correction.x, y: point.y + correction.y };
+        }));
+      }
+    }
+    if (next.stemOffset < stemMinimumForTemplate(next.template) || next.stemOffset > STEM_MAX) {
+      throw new Error(`Refitting needs a ${next.template} stem outside the editor's range.`);
+    }
+    return next;
+  });
+}
+
+// One generated alternative per letter from the coarse grid plans, on the shared height.
+/** @returns {Record<string, any[]>} */
 function seedAlphabetVariants() {
   const plans = seedLetterPlans();
-  return LETTERS.reduce((acc, letter) => {
+  return LETTERS.reduce((/** @type {Record<string, any[]>} */ acc, letter) => {
     const plan = plans[letter];
     acc[letter] = buildSeedVariant(plan, {
       colorOffset: LETTERS.indexOf(letter) + 2,
       baseX: 720,
       baseY: 580,
-      width: plan.some((segment) => segment.includes("QT")) ? 1250 : 1360,
-      height: 1720
+      width: plan.some((segment) => segment.includes("QT")) ? 1250 : M_WIDTH,
+      height: LETTER_HEAD_SPAN
     });
     return acc;
   }, {});
@@ -1825,6 +2079,7 @@ function shapeTransform(shape) {
 
 function renderLetters() {
   els.activeLetterLabel.textContent = state.activeLetter;
+  const frame = sharedPreviewFrame();
   [...els.letterStrip.children].forEach((button) => {
     const letter = button.dataset.letter;
     const shapes = letterShapes(letter);
@@ -1832,8 +2087,20 @@ function renderLetters() {
     button.classList.toggle("has-shapes", shapes.length > 0);
     button.dataset.count = shapes.length;
     renderVariantPills(letter, button.querySelector(".variant-pills"));
-    renderLetterPreview(letter, button.querySelector(".letter-preview"));
+    renderLetterPreview(letter, button.querySelector(".letter-preview"), frame);
   });
+}
+
+// Every thumbnail uses one frame size, so all letters are drawn at the same scale on a common baseline.
+function sharedPreviewFrame() {
+  const bounds = LETTERS.map((letter) => trimmedLetterBounds(letterShapes(letter))).filter((box) => box !== null);
+  if (!bounds.length) {
+    return null;
+  }
+  const width = Math.max(...bounds.map((box) => box.width));
+  const height = Math.max(...bounds.map((box) => box.height));
+  const pad = Math.max(width, height) * 0.08;
+  return { width: width + pad * 2, height: height + pad * 2, pad };
 }
 
 function renderVariantPills(letter, container) {
@@ -1862,11 +2129,18 @@ function renderVariantPills(letter, container) {
   }
 }
 
-function renderLetterPreview(letter, svg) {
+/** @param {string} letter @param {SVGSVGElement} svg @param {{width: number, height: number, pad: number} | null} frame */
+function renderLetterPreview(letter, svg, frame) {
   const shapes = letterShapes(letter);
   svg.replaceChildren();
 
-  const bounds = letterBounds(shapes) || {
+  const trimmed = trimmedLetterBounds(shapes);
+  const bounds = trimmed && frame ? {
+    x: trimmed.x + trimmed.width / 2 - frame.width / 2,
+    y: trimmed.y + trimmed.height + frame.pad - frame.height,
+    width: frame.width,
+    height: frame.height
+  } : {
     x: 0,
     y: 0,
     width: ARTBOARD.width,
