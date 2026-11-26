@@ -252,6 +252,9 @@ function originalMShapes() {
   ];
 }
 
+// The hand-tuned A and Z share a 2,400-unit head-centre span (2,893.5 units overall), the height
+// of the Mattlab logo beside them in the directory preview. Stems reach the same targets with the
+// original logo gap; head and stem sizes are template constants.
 function defaultAShapes() {
   return [
     makeShapeFromConfig({
@@ -259,8 +262,8 @@ function defaultAShapes() {
       style: "purple",
       x: 2077.895,
       y: 674.175,
-      angle: 37.42264142351917,
-      stemOffset: 277.23440962340476,
+      angle: 39.0178,
+      stemOffset: 383.4572,
       stemSeedAngle: 69.17244371320714,
       lastLollipopTemplate: "lollipop-short-left"
     }),
@@ -268,7 +271,7 @@ function defaultAShapes() {
       template: "lollipop-short-left",
       style: "green",
       x: 1602.895,
-      y: 1749.175,
+      y: 1860.3819,
       angle: 325.45692699311167,
       stemOffset: -28.307495836096678,
       stemSeedAngle: 359.1128852047218,
@@ -278,7 +281,7 @@ function defaultAShapes() {
       template: "circle",
       style: "red",
       x: 1074.273,
-      y: 769.471,
+      y: 880.6779,
       angle: 320,
       stemOffset: 0,
       stemSeedAngle: 0,
@@ -288,9 +291,9 @@ function defaultAShapes() {
       template: "lollipop-long-alt",
       style: "blue",
       x: 1234.3858412265663,
-      y: 1869.936,
-      angle: 18.50937094290481,
-      stemOffset: 176.88626293335705,
+      y: 2094.936,
+      angle: 16.8757,
+      stemOffset: 285.2949,
       stemSeedAngle: 0,
       lastLollipopTemplate: "lollipop-long-alt"
     }),
@@ -298,9 +301,9 @@ function defaultAShapes() {
       template: "lollipop-long-alt",
       style: "yellow",
       x: 2828.108,
-      y: 1869.936,
-      angle: 339.995011571649,
-      stemOffset: 187.20280278839527,
+      y: 2094.936,
+      angle: 341.7387,
+      stemOffset: 294.7366,
       stemSeedAngle: 252.39951790888358,
       lastLollipopTemplate: "lollipop-long-alt"
     })
@@ -580,8 +583,8 @@ function defaultZShapes() {
       style: "blue",
       x: 1055.226,
       y: -230.65300000000002,
-      angle: 164.8304421550057,
-      stemOffset: 292.22824103394385,
+      angle: 156.0744,
+      stemOffset: 579.4411,
       stemSeedAngle: 0,
       curveOffset: 0,
       lastLollipopTemplate: "lollipop-short-right"
@@ -590,7 +593,7 @@ function defaultZShapes() {
       template: "circle",
       style: "yellow",
       x: -275.7270000000001,
-      y: 144.471,
+      y: 488.4245,
       angle: 0,
       stemOffset: 0,
       stemSeedAngle: 115.75711484172518,
@@ -601,9 +604,9 @@ function defaultZShapes() {
       template: "lollipop-short-left",
       style: "purple",
       x: 397.895,
-      y: 1974.175,
-      angle: 274.1167352472021,
-      stemOffset: 235.22362452748757,
+      y: 2654.175,
+      angle: 265.284,
+      stemOffset: 513.8451,
       stemSeedAngle: -51.334161957279264,
       curveOffset: 0,
       lastLollipopTemplate: "lollipop-short-left"
@@ -612,7 +615,7 @@ function defaultZShapes() {
       template: "lollipop-long",
       style: "red",
       x: 404.09899999999993,
-      y: 1974.465,
+      y: 2654.465,
       angle: 89.94213419201606,
       stemOffset: 378.48526673033507,
       stemSeedAngle: 178.57204369995193,

@@ -45,5 +45,7 @@ repository root. The font writer adds no dependencies. See
 
 The starting C, F and K use recovered hand-edited shapes. B starts with two
 closed bowls and includes the July exported design as its third variant.
+The hand-tuned A and Z share one height, matching the Mattlab logo in the
+directory preview; their heads and stems keep the logo's sizes.
 Fresh projects and the editor’s reset-to-defaults action use these designs.
 Opening an existing project restores its saved variants and selections.
