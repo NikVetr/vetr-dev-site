@@ -46,6 +46,9 @@ repository root. The font writer adds no dependencies. See
 The starting C, F and K use recovered hand-edited shapes. B starts with two
 closed bowls and includes the July exported design as its third variant.
 The hand-tuned A and Z share one height, matching the Mattlab logo in the
-directory preview; their heads and stems keep the logo's sizes.
+directory preview; their heads and stems keep the logo's sizes. The letters
+without hand-tuned versions start at that height from designs in the same
+style: heads at stroke ends and junctions, stems aimed at the next head, and
+curved stems for bowls. Each letter's second variant is a generated grid design.
 Fresh projects and the editor’s reset-to-defaults action use these designs.
 Opening an existing project restores its saved variants and selections.

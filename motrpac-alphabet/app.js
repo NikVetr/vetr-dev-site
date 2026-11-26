@@ -219,11 +219,12 @@ function makeLetterState(shapes = []) {
 
 function defaultLetters() {
   const letters = makeEmptyLetters();
-  const seeded = seedAlphabetVariants();
+  const generated = seedAlphabetVariants();
+  const designed = designedLetterShapes();
   LETTERS.forEach((letter) => {
     letters[letter] = {
       activeVariant: 0,
-      variants: seeded[letter]
+      variants: [designed[letter] || [], generated[letter]]
     };
   });
   for (const [letter, shapes] of Object.entries(recoveredLetterShapes())) {
@@ -239,6 +240,10 @@ function defaultLetters() {
   letters.W.variants[0] = rotateShapes(originalMShapes(), 180);
   letters.W.variants[1] = rotateShapes(originalMShapes(), 180);
   letters.Z.variants[0] = defaultZShapes();
+  const missing = LETTERS.filter((letter) => letters[letter].variants[0].length === 0);
+  if (missing.length) {
+    throw new Error(`No starting design for ${missing.join(", ")}.`);
+  }
   return letters;
 }
 
@@ -625,6 +630,210 @@ function defaultZShapes() {
   ];
 }
 
+// Starting designs for the letters without hand-tuned versions, in the same idiom: heads at stroke
+// ends and junctions, lollipop stems aimed at the next head with the original logo gap, straight
+// double stems where a stroke is longer than a lollipop can reach, and curved double stems for
+// bowls. Head centres span the A/Z height. Pieces: ["lollipop", style, head, target],
+// ["circle", style, at], ["stem", style, a, b] and ["curve", style, a, b, bend].
+/** @returns {Record<string, {nodes: Record<string, number[]>, pieces: [string, string, string, string?, number?][]}>} */
+function designedLetterPlans() {
+  const top = 500;
+  const mid = 1700;
+  const base = 2900;
+  return {
+    B: {
+      nodes: { TL: [650, top], ML: [650, mid], BL: [650, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "blue", "BL", "ML"],
+        ["curve", "purple", "TL", "ML", -1050], ["curve", "yellow", "ML", "BL", -1200]
+      ]
+    },
+    E: {
+      nodes: { TL: [650, top], ML: [650, mid], BL: [650, base], TR: [1950, top], MR: [1750, mid], BR: [1950, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "purple", "TR", "TL"], ["lollipop", "blue", "MR", "ML"],
+        ["lollipop", "purple", "BR", "BL"]
+      ]
+    },
+    H: {
+      nodes: { TL: [650, top], ML: [650, mid], BL: [650, base], TR: [1950, top], MR: [1950, mid], BR: [1950, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "blue", "TR", "MR"], ["lollipop", "purple", "MR", "ML"],
+        ["lollipop", "green", "BR", "MR"]
+      ]
+    },
+    I: {
+      nodes: { TL: [750, top], TC: [1400, top], TR: [2050, top], MC: [1400, mid], BL: [750, base], BC: [1400, base], BR: [2050, base] },
+      pieces: [
+        ["lollipop", "purple", "TC", "MC"], ["circle", "red", "MC"], ["lollipop", "green", "BC", "MC"],
+        ["lollipop", "yellow", "TL", "TC"], ["lollipop", "blue", "TR", "TC"],
+        ["lollipop", "blue", "BL", "BC"], ["lollipop", "yellow", "BR", "BC"]
+      ]
+    },
+    J: {
+      nodes: { TL: [950, top], TR: [1950, top], MR: [1950, 1800], BL: [650, 2250] },
+      pieces: [
+        ["lollipop", "yellow", "TL", "TR"], ["lollipop", "blue", "TR", "MR"], ["circle", "red", "MR"],
+        ["curve", "purple", "MR", "BL", -940], ["circle", "green", "BL"]
+      ]
+    },
+    L: {
+      nodes: { TL: [650, top], ML: [650, mid], BL: [650, base], BR: [1850, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["lollipop", "purple", "BR", "BL"]
+      ]
+    },
+    N: {
+      nodes: { TL: [650, top], BL: [650, base], TR: [1950, top], BR: [1950, base] },
+      pieces: [
+        ["circle", "purple", "TL"], ["circle", "green", "BL"], ["circle", "yellow", "TR"],
+        ["circle", "red", "BR"], ["stem", "blue", "BL", "TL"], ["stem", "green", "TL", "BR"],
+        ["stem", "purple", "BR", "TR"]
+      ]
+    },
+    O: {
+      nodes: { T: [1300, top], B: [1300, base] },
+      pieces: [
+        ["circle", "purple", "T"], ["circle", "green", "B"], ["curve", "red", "T", "B", 780],
+        ["curve", "blue", "T", "B", -780]
+      ]
+    },
+    P: {
+      nodes: { TL: [650, top], ML: [650, 1820], BL: [650, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["curve", "blue", "TL", "ML", -1200]
+      ]
+    },
+    Q: {
+      // The bottom head sprouts the tail, 40° below horizontal.
+      nodes: { T: [1300, top], B: [1300, base], tail: [2047, 3527] },
+      pieces: [
+        ["circle", "purple", "T"], ["lollipop", "green", "B", "tail"], ["curve", "red", "T", "B", 780],
+        ["curve", "blue", "T", "B", -780]
+      ]
+    },
+    R: {
+      nodes: { TL: [650, top], ML: [650, 1820], BL: [650, base], BR: [1950, base] },
+      pieces: [
+        ["lollipop", "green", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "yellow", "BL", "ML"],
+        ["curve", "blue", "TL", "ML", -1200], ["lollipop", "purple", "BR", "ML"]
+      ]
+    },
+    S: {
+      nodes: { TR: [1950, 720], C: [1300, mid], BL: [650, 2680] },
+      pieces: [
+        ["circle", "yellow", "TR"], ["curve", "red", "TR", "C", 1150], ["circle", "blue", "C"],
+        ["curve", "purple", "C", "BL", -1150], ["circle", "green", "BL"]
+      ]
+    },
+    T: {
+      nodes: { TL: [650, top], TC: [1400, top], TR: [2150, top], MC: [1400, mid], BC: [1400, base] },
+      pieces: [
+        ["lollipop", "yellow", "TL", "TC"], ["lollipop", "blue", "TR", "TC"],
+        ["lollipop", "purple", "TC", "MC"], ["circle", "red", "MC"], ["lollipop", "green", "BC", "MC"]
+      ]
+    },
+    U: {
+      nodes: { TL: [650, top], ML: [650, 1820], TR: [1950, top], MR: [1950, 1820] },
+      pieces: [
+        ["lollipop", "blue", "TL", "ML"], ["circle", "red", "ML"], ["lollipop", "green", "TR", "MR"],
+        ["circle", "yellow", "MR"], ["curve", "purple", "ML", "MR", 1200]
+      ]
+    },
+    V: {
+      nodes: { TL: [550, top], TR: [2250, top], B: [1400, base] },
+      pieces: [
+        ["circle", "red", "TL"], ["circle", "green", "TR"], ["circle", "yellow", "B"],
+        ["stem", "purple", "TL", "B"], ["stem", "blue", "TR", "B"]
+      ]
+    },
+    X: {
+      nodes: { TL: [650, top], TR: [1950, top], C: [1300, mid], BL: [650, base], BR: [1950, base] },
+      pieces: [
+        ["lollipop", "blue", "TL", "C"], ["lollipop", "green", "TR", "C"], ["circle", "yellow", "C"],
+        ["lollipop", "purple", "BL", "C"], ["lollipop", "red", "BR", "C"]
+      ]
+    },
+    Y: {
+      nodes: { TL: [650, top], TR: [2150, top], C: [1400, mid], B: [1400, base] },
+      pieces: [
+        ["lollipop", "purple", "TL", "C"], ["lollipop", "blue", "TR", "C"], ["circle", "red", "C"],
+        ["lollipop", "green", "B", "C"]
+      ]
+    }
+
+  };
+}
+
+function designedLetterShapes() {
+  return Object.fromEntries(Object.entries(designedLetterPlans()).map(([letter, plan]) => {
+    const node = (/** @type {string} */ key) => {
+      if (!plan.nodes[key]) {
+        throw new Error(`${letter} design has no node ${key}.`);
+      }
+      return { x: plan.nodes[key][0], y: plan.nodes[key][1] };
+    };
+    const shapes = plan.pieces.map(([kind, style, a, b, bend]) => {
+      if (kind === "circle") return seedCircleShape(node(a), style);
+      if (kind === "lollipop") return lollipopBetween(node(a), node(b || ""), style);
+      if (kind === "stem") return doubleStemBetween(node(a), node(b || ""), style);
+      if (kind === "curve") return curvedStemBetween(node(a), node(b || ""), style, Number(bend));
+      throw new Error(`${letter} design has an unknown piece ${kind}.`);
+    });
+    shapes.forEach((shape) => {
+      if (shape.stemOffset < stemMinimumForTemplate(shape.template) || shape.stemOffset > STEM_MAX) {
+        throw new Error(`${letter} design needs a ${shape.template} stem outside the editor's range.`);
+      }
+    });
+    validateSeedVariant(shapes);
+    return [letter, shapes];
+  }));
+}
+
+/** @typedef {{x: number, y: number}} Point */
+
+// A lollipop with its head on `head` and its concave stem end the original logo gap from `target`.
+/** @param {Point} head @param {Point} target @param {string} style */
+function lollipopBetween(head, target, style) {
+  const templateId = templateForSeedSegment(head, target);
+  const template = templates[templateId];
+  const shape = makeShape(templateId, style, head.x - template.pivot.x, head.y - template.pivot.y, pointAngle(head, target) - localStemAxisAngle(template));
+  const end = worldStemArcCenter(shape, 0);
+  shape.stemOffset = dot({ x: target.x - end.x, y: target.y - end.y }, worldStemAxis(shape)) - originalStemDisplacement();
+  return shape;
+}
+
+// A straight double stem whose concave ends sit the original logo gap from heads `a` and `b`.
+/** @param {Point} a @param {Point} b @param {string} style */
+function doubleStemBetween(a, b, style) {
+  const shape = makeShape("double-stem", style, (a.x + b.x) / 2, (a.y + b.y) / 2, pointAngle(a, b));
+  shape.stemOffset = distance(a, b) / 2 - doubleStemArcCenterOffset(templates["double-stem"]) - originalStemDisplacement() - doubleStemHalfLengthForOffset(shape, 0);
+  return shape;
+}
+
+// A symmetric curved double stem between heads `a` and `b`, meeting both squarely with the original
+// logo gap. A positive `bend` bows it toward a→b turned a quarter-turn clockwise on screen.
+/** @param {Point} a @param {Point} b @param {string} style @param {number} bend */
+function curvedStemBetween(a, b, style, bend) {
+  const pull = 50; // near the minimum: the ends leave their heads at right angles to the chord
+  const reach = doubleStemArcCenterOffset(templates["curved-double-stem"]) + originalStemDisplacement();
+  const radians = pointAngle(a, b) * Math.PI / 180;
+  const tangent = Math.hypot(pull, bend);
+  const shift = bend * reach / tangent;
+  const shape = makeShape("curved-double-stem", style, (a.x + b.x) / 2 - Math.sin(radians) * shift, (a.y + b.y) / 2 + Math.cos(radians) * shift, radians * 180 / Math.PI);
+  shape.stemOffset = distance(a, b) / 2 - pull * reach / tangent - doubleStemHalfLengthForOffset(shape, 0);
+  shape.curveOffset = clamp(bend, -900, 900);
+  shape.curveStartOffset = bend;
+  shape.curveEndOffset = bend;
+  shape.curveStartPull = pull;
+  shape.curveEndPull = pull;
+  return shape;
+}
+
 function makeShapeFromConfig(config) {
   const shape = makeShape(
     config.template,
@@ -652,52 +861,51 @@ function explicitSeedSegment(start, end, style, stemOffset = null) {
   return shape;
 }
 
+// One generated alternative per letter from the coarse grid plans.
 function seedAlphabetVariants() {
   const plans = seedLetterPlans();
   return LETTERS.reduce((acc, letter) => {
-    const [first, second] = plans[letter] || [[], []];
-    acc[letter] = [
-      buildSeedVariant(first, { colorOffset: LETTERS.indexOf(letter) }),
-      buildSeedVariant(second, {
-        colorOffset: LETTERS.indexOf(letter) + 2,
-        baseX: 720,
-        baseY: 580,
-        width: second.some((segment) => segment.includes("QT")) ? 1250 : 1360,
-        height: 1720
-      })
-    ];
+    const plan = plans[letter];
+    acc[letter] = buildSeedVariant(plan, {
+      colorOffset: LETTERS.indexOf(letter) + 2,
+      baseX: 720,
+      baseY: 580,
+      width: plan.some((segment) => segment.includes("QT")) ? 1250 : 1360,
+      height: 1720
+    });
     return acc;
   }, {});
 }
 
+/** @returns {Record<string, string[]>} */
 function seedLetterPlans() {
   return {
-    A: [["L4->C0", "R4->C0", "L2->R2"], ["L4->C0", "R4->C0", "C2->R2"]],
-    B: [["L4->L0", "L0->C0", "C0->R1", "R1->C2", "L2->C2", "C2->R3", "R3->C4", "C4->L4"], ["L0->L4", "R0->L0", "L2->R2", "R2->L2", "R4->L4"]],
-    C: [["R0->C0", "C0->L1", "L1->L3", "L3->C4", "C4->R4"], ["R1->C0", "C0->L0", "L0->L3", "L3->C4", "C4->R3"]],
-    D: [["L0->L4", "R1->L0", "R2->R1", "R3->L4"], ["L0->L4", "R0->L0", "R2->R0", "R3->R2", "R4->L4"]],
-    E: [["L0->L4", "R0->L0", "R2->L2", "R4->L4"], ["L0->L4", "L1->R1", "L2->R2", "L4->R4"]],
-    F: [["L0->L4", "R0->L0", "R2->L2"], ["L0->L4", "L1->R1", "L2->R2"]],
-    G: [["R0->C0", "C0->L1", "L1->L3", "L3->C4", "C4->R4", "R3->C3", "C3->R2"], ["R1->C0", "C0->L1", "L1->L3", "L3->C4", "C4->R3", "R3->R2", "R2->C2"]],
-    H: [["L0->L4", "R0->R4", "L2->R2"], ["L0->L4", "R0->R4", "C2->R2"]],
-    I: [["L0->R0", "C0->C4", "L4->R4"], ["L0->C0", "R0->C0", "C0->C4", "L4->C4", "R4->C4"]],
-    J: [["L0->R0", "R0->R3", "R3->C4", "C4->L3"], ["C0->R0", "R0->R3", "R3->C4", "C4->L4"]],
-    K: [["L0->L4", "R0->L2", "L2->R4"], ["L0->L4", "R1->L2", "L2->R3"]],
-    L: [["L0->L4", "L4->R4"], ["L0->L4", "L4->C4", "C4->R4"]],
-    M: [[], []],
-    N: [["L4->L0", "L0->R4", "R4->R0"], ["L0->L4", "C1->R4", "R4->R0"]],
-    O: [["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0"], ["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0"]],
-    P: [["L0->L4", "R0->L0", "R1->R0", "R2->L2"], ["L0->L4", "R0->L0", "R1->R2", "R2->L2"]],
-    Q: [["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0", "QT->R3"], ["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0", "QT->C4"]],
-    R: [["L0->L4", "R0->L0", "R1->R0", "R2->L2", "L2->R4"], ["L0->L4", "R0->L0", "R1->R2", "R2->L2", "L2->R4"]],
-    S: [["R0->C0", "C0->L1", "L1->C2", "C2->R3", "R3->C4", "C4->L4"], ["R1->C0", "C0->L0", "L1->L2", "L2->R2", "R2->R3", "R3->C4", "C4->L4"]],
-    T: [["L0->R0", "C0->C4"], ["L0->C0", "R0->C0", "C0->C4"]],
-    U: [["L0->L3", "L3->C4", "C4->R3", "R3->R0"], ["L0->L2", "L2->C4", "C4->R2", "R2->R0"]],
-    V: [["L0->C4", "R0->C4"], ["L1->C4", "R1->C4"]],
-    W: [[], []],
-    X: [["L0->C2", "R0->C2", "L4->C2", "R4->C2"], ["L1->C2", "R1->C2", "L3->C2", "R3->C2"]],
-    Y: [["L0->C2", "R0->C2", "C2->C4"], ["L1->C2", "R1->C2", "C2->C4"]],
-    Z: [["L0->R0", "R0->L4", "L4->R4"], ["L0->R0", "R0->C2", "C2->L4", "L4->R4"]]
+    A: ["L4->C0", "R4->C0", "C2->R2"],
+    B: ["L0->L4", "R0->L0", "L2->R2", "R2->L2", "R4->L4"],
+    C: ["R1->C0", "C0->L0", "L0->L3", "L3->C4", "C4->R3"],
+    D: ["L0->L4", "R0->L0", "R2->R0", "R3->R2", "R4->L4"],
+    E: ["L0->L4", "L1->R1", "L2->R2", "L4->R4"],
+    F: ["L0->L4", "L1->R1", "L2->R2"],
+    G: ["R1->C0", "C0->L1", "L1->L3", "L3->C4", "C4->R3", "R3->R2", "R2->C2"],
+    H: ["L0->L4", "R0->R4", "C2->R2"],
+    I: ["L0->C0", "R0->C0", "C0->C4", "L4->C4", "R4->C4"],
+    J: ["C0->R0", "R0->R3", "R3->C4", "C4->L4"],
+    K: ["L0->L4", "R1->L2", "L2->R3"],
+    L: ["L0->L4", "L4->C4", "C4->R4"],
+    M: [],
+    N: ["L0->L4", "C1->R4", "R4->R0"],
+    O: ["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0"],
+    P: ["L0->L4", "R0->L0", "R1->R2", "R2->L2"],
+    Q: ["C0->R1", "R1->R3", "R3->C4", "C4->L3", "L3->L1", "L1->C0", "QT->C4"],
+    R: ["L0->L4", "R0->L0", "R1->R2", "R2->L2", "L2->R4"],
+    S: ["R1->C0", "C0->L0", "L1->L2", "L2->R2", "R2->R3", "R3->C4", "C4->L4"],
+    T: ["L0->C0", "R0->C0", "C0->C4"],
+    U: ["L0->L2", "L2->C4", "C4->R2", "R2->R0"],
+    V: ["L1->C4", "R1->C4"],
+    W: [],
+    X: ["L1->C2", "R1->C2", "L3->C2", "R3->C2"],
+    Y: ["L1->C2", "R1->C2", "C2->C4"],
+    Z: ["L0->R0", "R0->C2", "C2->L4", "L4->R4"]
   };
 }
 
