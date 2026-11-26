@@ -1,18 +1,18 @@
-/* The tour panel and guide character of the site's demo tours (shared/tour-guide/tour-guide.js). Each demo gives the
-   panel its colours, width and positioning (absolute in a container, or fixed); this sheet gives its parts, its
-   glide between steps and its drag handle. Motion is the feature here, so the panel moves to show where the tour
-   went; under reduced motion it is placed at once. */
-.tour-panel { position: absolute; left: 0; top: 0; box-sizing: border-box; pointer-events: auto;
-  transition: transform 0.5s cubic-bezier(0.45, 0, 0.25, 1); }
-.tour-panel[hidden] { display: none; }
-.tour-panel-still, .tour-panel-dragging { transition: none; }
+/* The guide character and its panel (shared/tour-guide/tour-guide.js), which travel as one unit. Each demo gives the
+   unit's container, the character's size and the panel's colours and width; this sheet places the parts and styles
+   the panel's header, grip and buttons. The glide between steps is a Web Animation on the unit, so under reduced
+   motion nothing here moves. */
+.tour-unit { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.tour-unit[hidden] { display: none; }
+.tour-character { position: absolute; left: 0; top: 0; pointer-events: auto; }
+.tour-panel { position: absolute; left: 0; top: 0; box-sizing: border-box; pointer-events: auto; }
 .tour-panel:focus { outline: none; }
 .tour-panel:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 /* The header: drag it anywhere but its buttons; the grip takes the keyboard. */
 .tour-panel-head { display: flex; align-items: center; gap: 6px; margin: -4px -4px 6px -6px; cursor: grab; touch-action: none;
   user-select: none; -webkit-user-select: none; }
-.tour-panel-dragging .tour-panel-head { cursor: grabbing; }
+.tour-dragging .tour-panel-head { cursor: grabbing; }
 .tour-grip { flex: none; min-width: 28px; min-height: 28px; padding: 0 4px; border-color: transparent; background: none; color: inherit;
   opacity: 0.7; font-size: 16px; line-height: 1; cursor: grab; }
 .tour-grip:hover, .tour-grip:focus-visible { opacity: 1; border-color: currentColor; background: none; }
@@ -27,7 +27,3 @@
 /* The character: one image per pose, the same square canvas for every pose. */
 .tour-pose { display: block; width: 100%; height: 100%; pointer-events: none; user-select: none; -webkit-user-select: none; }
 .tour-pose[hidden] { display: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  .tour-panel { transition: none; }
-}

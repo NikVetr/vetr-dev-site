@@ -2,11 +2,12 @@
 // dock, nothing new for the first seconds), the review shortcut brings its chat's window forward maximized with that
 // chat showing, the same chat's dropdown row sends it back, each top-bar part opens its tab, History's search, Show
 // context and arrows work, a Codex chat's `agent-bar send` reaches the QC chat at its next turn, and the tour starts,
-// follows the visitor and ends; its panel steps with Back and Next, glides, drags aside (mouse, touch, keyboard) and
-// snaps back, and under reduced motion nothing moves. Run with the site served on a port:
+// follows the visitor and ends; Pipsqueak and its panel step with Back and Next, glide as one unit, drag aside (mouse,
+// touch, keyboard) and snap back, and under reduced motion nothing moves. Run with the site served on a port:
 //   PLAYWRIGHT=<path to playwright> node agent-bar/tests/demo.browser.mjs [http://127.0.0.1:8717] [chromium|webkit]
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
+import { sampleGlide } from '../../shared/tour-guide/glide-check.mjs';
 
 const require = createRequire(import.meta.url);
 const playwright = require(process.env.PLAYWRIGHT || 'playwright');
@@ -20,6 +21,7 @@ async function open(viewport, options = {}) {
   const page = await context.newPage();
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto(`${base}/agent-bar/`, { waitUntil: 'networkidle' });
+  await page.waitForFunction(() => window.AgentBarDemo);
   await page.evaluate(() => window.AgentBarDemo.pause());
   return page;
 }
@@ -137,22 +139,34 @@ try {
   const tour = () => tourPage.evaluate(() => window.AgentBarDemo.tour.state());
   const bubble = tourPage.locator('.tour-bubble');
   const where = async () => { const r = await bubble.boundingBox(); return [Math.round(r.x), Math.round(r.y)]; };
-  const settle = () => tourPage.waitForFunction(() => !document.querySelector('.tour-bubble').getAnimations().length && !document.querySelector('.tour-guide').getAnimations().length);
+  const settle = () => tourPage.waitForFunction(() => !document.querySelector('.tour-unit').getAnimations({ subtree: true }).length);
   await tourPage.evaluate(() => window.AgentBarDemo.tour.start());
   await bubble.waitFor();
   await settle();
-  assert.equal((await tour()).pose, 'wave', 'Biscuit waves hello');
+  assert.equal((await tour()).pose, 'wave', 'Pipsqueak waves hello');
   assert.equal(await tourPage.locator('[data-tour="back"]').isDisabled(), true, 'no Back on the first step');
   const first = await where();
-  await tourPage.locator('[data-tour="next"]').click();
-  await tourPage.waitForFunction(() => document.querySelector('.tour-bubble').getAnimations().length > 0);
+  const dogAt0 = await tourPage.locator('.tour-guide').boundingBox();
+  // Next: Pipsqueak and the panel glide as one unit, along one path without jumps, to the review button.
+  const glide = await sampleGlide(tourPage, '.tour-guide', '.tour-bubble', () => tourPage.locator('[data-tour="next"]').click());
+  assert.ok(glide.frames > 10 && glide.distance > 200, `a real move (${glide.frames} frames, ${Math.round(glide.distance)} px)`);
+  assert.ok(glide.spread <= 3, `the panel keeps its place beside Pipsqueak (drifts ${glide.spread.toFixed(1)} px)`);
+  assert.ok(glide.monotonic, 'one path, without doubling back');
+  assert.ok(glide.largest <= 0.1 * glide.distance + 2, `no jumps (${glide.largest.toFixed(1)} px of ${Math.round(glide.distance)} in one frame)`);
   await settle();
+  const near = (a, b) => a.x < b.x + b.width + 12 && b.x < a.x + a.width + 12 && a.y < b.y + b.height + 12 && b.y < a.y + a.height + 12;
+  const dogAt = await tourPage.locator('.tour-guide').boundingBox();
+  assert.deepEqual([Math.round(dogAt.x), Math.round(dogAt.y)], [Math.round(glide.end.x), Math.round(glide.end.y)], 'it stops where the glide ended');
+  assert.ok(near(dogAt, await tourPage.locator('.tracker-quick [data-act="shortcut"][data-key^="claude:5b1c"]').boundingBox()), 'beside the review button');
   assert.equal((await tour()).step, 1);
   assert.equal((await tour()).pose, 'point', 'a step that waits for the visitor points');
   assert.notDeepEqual(await where(), first, 'the panel moved to the next step');
+  const glideEnd = await where();
   await tourPage.locator('[data-tour="back"]').click();
   assert.equal((await tour()).step, 0);
+  await tourPage.waitForFunction(() => document.querySelector('.tour-unit').getAnimations().length > 0);
   await settle();
+  assert.deepEqual(await where(), first, 'Back returns the unit to the first step');
   // Dragged by its header, it stays where it was put for the following steps.
   const head = await tourPage.locator('.tour-panel-head').boundingBox();
   await tourPage.mouse.move(head.x + head.width / 2, head.y + head.height / 2);
@@ -161,6 +175,8 @@ try {
   await tourPage.mouse.up();
   const dropped = await where();
   assert.ok(Math.abs(dropped[0] - first[0] - 400) <= 2 && Math.abs(dropped[1] - first[1] - 250) <= 2, `dragged to ${dropped} from ${first}`);
+  const carried = await tourPage.locator('.tour-guide').boundingBox();
+  assert.ok(Math.abs(carried.x - dogAt0.x - 400) <= 2 && Math.abs(carried.y - dogAt0.y - 250) <= 2, 'Pipsqueak moves with the panel');
   assert.equal((await tour()).pinned, true);
   await tourPage.locator('[data-tour="next"]').click();
   await settle();
@@ -172,12 +188,13 @@ try {
   await tourPage.keyboard.press('Shift+ArrowUp');
   assert.deepEqual(await where(), [dropped[0] - 16, dropped[1] - 64]);
   assert.equal((await tour()).step, 1);
-  // Snap back returns it beside Biscuit.
+  // Snap back returns the whole unit to the review button, the panel where it was beside Pipsqueak.
   await tourPage.locator('.tour-snap').click();
   await settle();
   assert.equal((await tour()).pinned, false);
   assert.equal(await tourPage.locator('.tour-snap').isHidden(), true);
-  assert.notDeepEqual(await where(), [dropped[0] - 16, dropped[1] - 64]);
+  assert.deepEqual(await where(), glideEnd, 'the panel is back in its place');
+  assert.ok(near(await tourPage.locator('.tour-guide').boundingBox(), await tourPage.locator('.tracker-quick [data-act="shortcut"][data-key^="claude:5b1c"]').boundingBox()), 'Pipsqueak is back at the review button');
   // The last step: Next is off; Replay and Done take over.
   for (let i = 0; i < 12; i++) await tourPage.evaluate(() => window.AgentBarDemo.tour.next());
   await tourPage.waitForFunction(() => window.AgentBarDemo.tour.state().step === 11);
@@ -189,13 +206,17 @@ try {
   await tourPage.locator('[data-tour="end"]').click();
   await bubble.waitFor({ state: 'hidden' });
   assert.equal((await tour()).active, false);
-  // Under reduced motion the panel and Biscuit are placed at once.
+  // Under reduced motion the panel and Pipsqueak are placed at once.
   await tourPage.emulateMedia({ reducedMotion: 'reduce' });
   await tourPage.keyboard.press('t');
   await bubble.waitFor();
   await tourPage.keyboard.press('ArrowRight');
-  await tourPage.waitForTimeout(100);
   assert.equal((await tour()).step, 1);
+  // Once Pipsqueak is at the review button, nothing is still on its way there: the unit jumped.
+  await tourPage.waitForFunction(() => {
+    const d = document.querySelector('.tour-guide').getBoundingClientRect(), t = document.querySelector('.tracker-quick [data-act="shortcut"][data-key^="claude:5b1c"]').getBoundingClientRect();
+    return d.left < t.right + 12 && t.left < d.right + 12 && d.top < t.bottom + 12 && t.top < d.bottom + 12;
+  });
   assert.equal(await tourPage.evaluate(() => document.getAnimations().length), 0, 'nothing animates under reduced motion');
   await tourPage.keyboard.press('Escape');
   assert.equal(await bubble.isHidden(), true, 'ends at once under reduced motion');
@@ -215,7 +236,7 @@ try {
   await phone.evaluate(() => { window.AgentBarDemo.open(null); window.AgentBarDemo.tour.start(); });
   const panel = phone.locator('.tour-bubble');
   await panel.waitFor();
-  await phone.waitForFunction(() => !document.querySelector('.tour-bubble').getAnimations().length);
+  await phone.waitForFunction(() => !document.querySelector('.tour-unit').getAnimations({ subtree: true }).length);
   const panelAt = await panel.boundingBox();
   assert.ok(panelAt.x >= 0 && panelAt.x + panelAt.width <= 390, 'the panel fits the phone');
   if (engine === 'chromium') {

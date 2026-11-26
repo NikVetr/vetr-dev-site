@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-  <!-- Pip, sitting on what the tour is showing. the black-and-white cat in the site's footer photo: a black cap over the head and its left eye, a pale right ear and a black left one, a white face, muzzle and chest, a black back and tail; its right eye is a closed lid, as in the photo. Pose canvas: shared/tour-guide/POSES.md. -->
+  <!-- Monte, sitting on what the tour is showing. The black-and-white cat in the site's footer photo: a black cap over the head and its left eye, a pale right ear and a black left one, a white face, muzzle and chest, a black back and tail; its right eye is a closed lid, as in the photo. Pose canvas: shared/tour-guide/POSES.md. -->
   <g transform="translate(11.2 12.3) scale(3.2)">
     <defs><clipPath id="head"><circle cx="34" cy="25" r="16"/></clipPath></defs>
     <path d="M50 56c10 0 14-8 12-16-1-5-6-6-7-2 2 5 1 11-6 12z" fill="#25272c"/>

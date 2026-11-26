@@ -37,12 +37,11 @@ body { margin: 0; }
 .keys kbd { font: 0.85em ui-monospace, monospace; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 0.35em; background: var(--surface-2); }
 .muted { color: var(--muted); }
 
-/* The tour guide: Biscuit, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper), who runs to
-   the next thing to try and says what it does, and the tour panel (shared/tour-guide/tour-guide.css), which glides
-   after it. That motion shows where to look, so it is the one motion here; with reduced motion both are placed at
-   once. */
+/* The tour guide: Pipsqueak, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper), who runs to
+   the next thing to try with the tour panel beside it, as one unit (shared/tour-guide/tour-guide.css). That run
+   shows where to look, so it is the one motion here; with reduced motion the unit is placed at once. */
 .tour { position: absolute; inset: 0; pointer-events: none; z-index: 70; }
-.tour-guide { position: absolute; left: 0; top: 0; width: 96px; height: 96px; pointer-events: auto; will-change: transform; }
+.tour-guide { width: 96px; height: 96px; }
 .tour-guide .tour-pose { filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45)); }
 .tour-guide.flip .tour-pose { transform: scaleX(-1); }
 .tour-guide.cheer .tour-pose { animation: tour-hop 0.5s ease-out 2; }

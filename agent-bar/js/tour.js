@@ -1,10 +1,10 @@
-// The guided tour: Biscuit, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper photo), runs
-// to the next thing to try, says what it does and cheers when the visitor does it. The run shows where to look, and
-// the tour panel glides after it (shared/tour-guide/); with reduced motion both are placed at once. The visitor can
-// drag the panel aside, or move it with the arrow keys on its grip. Keys: ← → step, Esc ends (when no menu is open),
-// T starts or ends it. Biscuit's poses are image files listed in ../guide/manifest.js.
-import { createCharacter, createTourPanel, poseFor } from '../../shared/tour-guide/tour-guide.js';
-import BISCUIT from '../guide/manifest.js';
+// The guided tour: Pipsqueak, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper photo), runs
+// to the next thing to try with its panel beside it (one unit, shared/tour-guide/), says what it does and cheers when
+// the visitor does it. The run shows where to look; with reduced motion the unit is placed at once. The visitor can
+// drag it aside, or move it with the arrow keys on the panel's grip. Keys: ← → step, Esc ends (when no menu is open),
+// T starts or ends it. Pipsqueak's poses are image files listed in ../guide/manifest.js.
+import { createTourGuide, poseFor } from '../../shared/tour-guide/tour-guide.js';
+import PIPSQUEAK from '../guide/manifest.js';
 
 /** @param {{stage: HTMLElement, screen: HTMLElement, ui: any, sim: any, on: (fn: (kind: string, detail: any) => void) => () => void, openMenu: Function, closeMenus: Function}} deps */
 export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus }) {
@@ -15,7 +15,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
   const shortcut = (name) => q(`[data-act="shortcut"][data-key="${CSS.escape(key(name) ?? '')}"]`);
   const winOf = (name) => sim.byKey(key(name))?.window;
 
-  /** Each step: where Biscuit goes, what it says, what counts as having tried it, and what it says then. */
+  /** Each step: where Pipsqueak goes, what it says, what counts as having tried it, and what it says then. */
   const steps = [
     { target: () => q('.tracker-bar-chats'), text: 'This is a pretend Ubuntu desktop with Agent Bar in its top bar. <b>✳ 3 / 5</b> means three of the five open Claude chats need review; ⌘ is Codex. Click the counts to open the dropdown.',
       done: (k, d) => k === 'open' && d.view === 'conversations', already: () => ui.open === 'menu' && ui.view === 'conversations',
@@ -49,18 +49,18 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
       done: () => false, last: true },
   ];
 
-  let index = -1, cheered = false, guideAt = /** @type {[number, number]|null} */ (null), running = false;
+  let index = -1, cheered = false;
   const changes = new Set();
-  root.innerHTML = `<div class="tour-ring" hidden></div><div class="tour-guide" hidden role="img" aria-label="${BISCUIT.label}"></div><div class="tour-bubble"></div>`;
+  root.innerHTML = `<div class="tour-ring" hidden></div><div class="tour-unit"><div class="tour-guide" role="img" aria-label="${PIPSQUEAK.label}"></div><div class="tour-bubble"></div></div>`;
   const ring = /** @type {HTMLElement} */ (root.querySelector('.tour-ring'));
-  const guide = /** @type {HTMLElement} */ (root.querySelector('.tour-guide'));
-  const dog = createCharacter(guide, BISCUIT);
-  const panel = createTourPanel(/** @type {HTMLElement} */ (root.querySelector('.tour-bubble')), {
-    area: () => { const s = stage.getBoundingClientRect(); return { width: s.width, height: s.height }; },
+  const dog = /** @type {HTMLElement} */ (root.querySelector('.tour-guide'));
+  const guide = createTourGuide(/** @type {HTMLElement} */ (root.querySelector('.tour-unit')), {
+    character: dog, panel: /** @type {HTMLElement} */ (root.querySelector('.tour-bubble')), art: PIPSQUEAK,
+    area: () => { const s = stage.getBoundingClientRect(); return { left: 0, top: 0, width: s.width, height: s.height }; },
+    sides: ['below', 'above', 'right', 'left'],
     onBack: () => go(index - 1), onNext: () => go(index + 1), onEnd: () => stop(), onReplay: () => go(0),
   });
-  const bubble = panel.panel;
-  /** What Biscuit does between runs: waves at the start and end, points while a step waits, cheers when it is done. */
+  /** What Pipsqueak does between runs: waves at the start and end, points while a step waits, cheers when it is done. */
   const restPose = () => poseFor({ done: cheered, first: index === 0, last: !!steps[index].last, task: !steps[index].last });
 
   function show() {
@@ -68,27 +68,24 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     const step = steps[index];
     const target = step.target();
     root.hidden = false;
-    guide.hidden = false;
-    panel.update({ index, total: steps.length, ready: cheered });
-    panel.body.innerHTML = `<p>${step.text}</p>${cheered && step.cheer ? `<p class="tour-done">✓ ${step.cheer}</p>` : ''}`;
-    panel.show();
-    if (!running) dog.set(restPose());
-    place(target, true);
+    guide.update({ index, total: steps.length, ready: cheered });
+    guide.body.innerHTML = `<p>${step.text}</p>${cheered && step.cheer ? `<p class="tour-done">✓ ${step.cheer}</p>` : ''}`;
+    guide.show();
+    guide.pose(restPose());
+    place(target);
   }
-  /** Biscuit runs to the target (or, with reduced motion, appears there); the ring marks it. */
-  function place(target, move) {
+  /** Pipsqueak runs to the target with the panel beside it (or, with reduced motion, appears there); the ring marks it. */
+  function place(target, glide = true) {
     const s = stage.getBoundingClientRect();
     const r = target?.getBoundingClientRect();
     if (!r || !r.width) {
       ring.hidden = true;
-      const x = 24, y = 60;
-      jump(x, y, move);
-      layoutBubble(x, y, null);
+      guide.moveTo(24, 60, { glide });
       return;
     }
     ring.hidden = false;
     Object.assign(ring.style, { left: `${r.left - s.left - 4}px`, top: `${r.top - s.top - 4}px`, width: `${r.width + 8}px`, height: `${r.height + 8}px` });
-    const size = guide.offsetWidth || 96;
+    const size = dog.offsetWidth || 96;
     // Beside the target, nose towards it: below it when there is room, and left of it near the right edge.
     const flip = r.left - s.left > s.width * 0.6;
     let x = flip ? r.left - s.left - size + 6 : r.right - s.left - 6;
@@ -96,42 +93,8 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     if (y + size > s.height) y = r.top - s.top - size;
     x = Math.max(0, Math.min(s.width - size, x));
     y = Math.max(0, Math.min(Math.max(0, s.height - size), y));
-    guide.classList.toggle('flip', flip && BISCUIT.mirror);
-    jump(x, y, move);
-    layoutBubble(x, y, r);
-  }
-  function jump(x, y, move) {
-    const to = `translate(${x}px, ${y}px)`;
-    if (move && guideAt && !reduce.matches && (Math.abs(guideAt[0] - x) > 2 || Math.abs(guideAt[1] - y) > 2)) {
-      const [x0, y0] = guideAt;
-      const lift = Math.min(140, Math.hypot(x - x0, y - y0) * 0.35);
-      const frames = Array.from({ length: 13 }, (_, i) => {
-        const t = i / 12;
-        return { transform: `translate(${x0 + (x - x0) * t}px, ${y0 + (y - y0) * t - lift * 4 * t * (1 - t)}px) rotate(${Math.sin(t * Math.PI) * (x > x0 ? 8 : -8)}deg)` };
-      });
-      running = true;
-      dog.set('leap');
-      guide.animate(frames, { duration: Math.min(900, 380 + Math.hypot(x - x0, y - y0) * 0.6), easing: 'ease-in-out' }).finished.then(() => {
-        running = false;
-        if (index >= 0) dog.set(restPose());
-      }, () => {});
-    }
-    guide.style.transform = to;
-    guideAt = [x, y];
-  }
-  // The panel hangs under Biscuit (or above, near the bottom), and moves beside it when that would cover the target.
-  function layoutBubble(x, y, target) {
-    const s = stage.getBoundingClientRect();
-    const w = bubble.offsetWidth || 340, h = bubble.offsetHeight || 160;
-    const size = guide.offsetWidth || 96;
-    const clampX = (v) => Math.max(8, Math.min(s.width - w - 8, v)), clampY = (v) => Math.max(8, Math.min(s.height - h - 8, v));
-    const t = target && [target.left - s.left, target.top - s.top, target.right - s.left, target.bottom - s.top];
-    const covers = (l, tp) => t && l < t[2] && l + w > t[0] && tp < t[3] && tp + h > t[1];
-    const below = y + size + 2 + h <= s.height - 8 ? y + size + 2 : y - h - 2;
-    const options = [[clampX(x + size / 2 - w / 2), clampY(below)], [clampX(x + size + 6), clampY(y)], [clampX(x - w - 6), clampY(y)],
-      [clampX(t ? t[0] - w - 12 : 8), clampY(t ? t[1] : y)], [clampX(t ? t[2] + 12 : 8), clampY(t ? t[1] : y)]];
-    const [left, top] = options.find(([l, tp]) => !covers(l, tp)) ?? options[0];
-    panel.place(left, top);
+    dog.classList.toggle('flip', flip && PIPSQUEAK.mirror);
+    guide.moveTo(x, y, { avoid: new DOMRect(r.left - s.left, r.top - s.top, r.width, r.height), glide });
   }
 
   function go(next) {
@@ -148,22 +111,15 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     requestAnimationFrame(() => requestAnimationFrame(show));
     for (const fn of changes) fn(true);
     clearInterval(follow);
-    follow = window.setInterval(() => { if (index >= 0 && !document.hidden) place(steps[index].target(), false); }, 500);
+    follow = window.setInterval(() => { if (index >= 0 && !document.hidden) place(steps[index].target()); }, 500);
   }
-  function start() {
-    if (!guideAt) {
-      const s = stage.getBoundingClientRect();
-      guideAt = [s.width / 2, s.height - 100];
-    }
-    go(0);
-  }
+  function start() { go(0); }
   function stop() {
     index = -1;
     ring.hidden = true;
-    guide.hidden = true;
     clearInterval(follow);
     for (const fn of changes) fn(false);
-    panel.hide().then(() => { if (index < 0) root.hidden = true; });
+    guide.hide().then(() => { if (index < 0) root.hidden = true; });
   }
 
   on((kind, detail) => {
@@ -172,16 +128,16 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     if (!cheered && step.done(kind, detail)) {
       cheered = true;
       if (!reduce.matches) {
-        guide.classList.remove('cheer');
-        void guide.offsetWidth;
-        guide.classList.add('cheer');
+        dog.classList.remove('cheer');
+        void dog.offsetWidth;
+        dog.classList.add('cheer');
       }
       show();
       // Then on to the next thing to try, after a moment to read the remark.
       setTimeout(() => { if (steps[index] === step && cheered) go(index + 1); }, step.cheer ? 2600 : 500);
-    } else if (!cheered && ['open', 'close', 'focused', 'returned'].includes(kind)) requestAnimationFrame(() => place(step.target(), false));
+    } else if (!cheered && ['open', 'close', 'focused', 'returned'].includes(kind)) requestAnimationFrame(() => place(step.target()));
   });
-  // Targets move as the desktop changes: keep Biscuit and the ring on them, twice a second while the tour runs.
+  // Targets move as the desktop changes: keep Pipsqueak and the ring on them, twice a second while the tour runs.
   let follow = 0;
   addEventListener('resize', () => { if (index >= 0) place(steps[index].target(), false); });
   document.addEventListener('keydown', (event) => {
@@ -193,7 +149,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
 
   return {
     start, stop, next: () => go(index + 1), active: () => index >= 0,
-    state: () => ({ active: index >= 0, step: index, tried: cheered, pose: dog.pose, pinned: panel.pinned }),
+    state: () => ({ active: index >= 0, step: index, tried: cheered, pose: guide.currentPose, pinned: guide.pinned, side: guide.side }),
     onChange: (fn) => changes.add(fn),
   };
 }
