@@ -66,7 +66,7 @@ function steps(app) {
       done: (e) => ran(e, /^\s*(ps|pgrep)/, 'worker'), reaction: "A missed lease never kills a job. The coordinator keeps charging these slots, because from where it sits it can't tell whether they're still running." },
     { target: '#win-pool', side: 'left', title: 'The lease runs out', text: "Each plan carries a lease of 20 seconds. Watch worker's run out.", auto: true,
       done: () => { const h = w.sim.hosts.find((x) => x.id === 'worker'); return !h.reachable && lease(w.sim, h).expired; },
-      reaction: 'Expired. The worker now starts nothing new; storage carries on.' },
+      reaction: 'Expired. Without its share, the worker already started nothing new; the expired lease keeps it that way until the coordinator reaches it again. storage carries on.' },
     { target: '#cable-button', side: 'right', title: 'Back online', text: 'Plug the cable back in.', action: 'plug', done: (e) => e.type === 'reconnected',
       reaction: () => {
         const a = latest(w, 'A');
@@ -77,7 +77,7 @@ function steps(app) {
       } },
     { target: '#win-storage', side: 'right', title: 'Audit before retrying', text: "ROTA re-runs nothing by itself. Look at A's records, then compare its done markers with its queue.",
       commands: () => [batch('A') && `rota queue-status --batch_dir ${batch('A')} | grep -E 'share_interrupted|failure_holds|lifecycle'`, `rota reconcile --model_dir ${ANALYSIS} --queue a.txt`],
-      done: (e) => ran(e, /reconcile/), reaction: 'reconcile wrote a retry queue of the missing jobs. Clear a hold with <code>reset-failures</code>, accept checked outputs with <code>confirm-interrupted-jobs</code>, and once A finishes, <code>--rerun_missing</code> resubmits only what is missing. All are under <b>Commands</b>.' },
+      done: (e) => ran(e, /reconcile/), reaction: 'reconcile wrote a retry queue of the missing jobs. While A is still running, missing includes jobs that haven\u2019t started yet, which is why <code>--rerun_missing</code> waits until A finishes. Clear a hold with <code>reset-failures</code>, accept checked outputs with <code>confirm-interrupted-jobs</code>, and once A finishes, <code>--rerun_missing</code> resubmits only what is missing. All are under <b>Commands</b>.' },
     { target: '#win-monitor', side: 'below', title: 'When will it finish?', text: "The ETA/End column replays the scheduler's own allocation each time a job should finish, so when one queue ends, the next one's forecast moves earlier.", commands: [ETA],
       done: (e) => ran(e, /monitor_pool_eta/), reaction: '<code>pool_eta_sec</code> counts capacity other queues will free; <code>allocation_eta_sec</code> keeps today\'s worker count.' },
     { target: '#about', side: 'below', title: "That's the tour", text: 'Keep typing, or open <b>Commands</b> for more. The real thing lives at <a href="https://github.com/NikVetr/rota">github.com/NikVetr/rota</a>, and the <a href="https://youtu.be/NRnLCDgYsQw">video</a> explains how it decides who runs.' },

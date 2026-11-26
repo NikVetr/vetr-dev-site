@@ -281,12 +281,16 @@ function endJob(sim, q, j, t) {
   const host = hostById(sim, j.host);
   j.state = 'ended';
   j.endedAt = t;
-  if (host.cableOutSince !== null) {
+  if (j.fails) {
+    // A non-zero exit is job_failed whether or not the share is there: the worker only
+    // attempts the done marker after exit 0.
+    j.outcome = 'job_failed';
+  } else if (host.cableOutSince !== null) {
     // Exit 0, but done/job_ID.done cannot be written while the share is gone: claim retained.
     j.outcome = 'infrastructure_failed';
   } else {
-    j.outcome = j.fails ? 'job_failed' : 'succeeded';
-    if (j.outcome === 'succeeded') j.doneMarker = true;
+    j.outcome = 'succeeded';
+    j.doneMarker = true;
   }
   j.reported = host.reachable;
   if (j.reported) report(sim, q, j, t);
@@ -303,7 +307,8 @@ function report(sim, q, j, t) {
   } else if (j.outcome === 'job_failed') {
     const f = sim.failures[j.host][q.id] ?? (sim.failures[j.host][q.id] = { count: 0 });
     f.count = j.endedAt - j.start <= 30 ? f.count + 1 : 0;
-    if (f.count >= 3) sim.holds[j.host][q.id] = 'rapid_job_failures';
+    // Like the host daemon, keep an existing hold reason rather than overwriting it.
+    if (f.count >= 3 && !sim.holds[j.host][q.id]) sim.holds[j.host][q.id] = 'rapid_job_failures';
   } else if (sim.failures[j.host][q.id]) {
     sim.failures[j.host][q.id].count = 0;
   }
