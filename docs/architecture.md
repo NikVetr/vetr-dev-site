@@ -10,6 +10,8 @@ The landing page and Wanderwart use the same `shared/light-switch.js` and styles
 
 Seating exposes two explicit computation paths through `runRequest`: the existing static `submit` and the nominal-category `planRounds` scheduler. The worker, browser API and CLI share that dispatcher. Round results retain assignments, objective terms and raw/weighted travel diagnostics; the UI, selected-round SVG and all-round CSV use those stored assignments. See [the request and objective contracts](../seating/api.md).
 
+Photomosaic's matching (`photomosaic/core/`, run in a worker) never sees the drawing. After it, `core/adjust.js` moves each drawn photo towards its cell in OKLab; the page keeps each canvas's photos as drawn and redraws the adjustment and tint from them as sliders move, on the GPU through `adjust-gl.js` (per-tile shifts from the core, the per-pixel step in a WebGL2 shader) or, without WebGL2, with the core's `applyAdjust`. The PNG export and the CLI's `composeMosaic` use the core a tile at a time.
+
 The Figure Editor reads controls into a project snapshot before calling its DOM-free code generator. autoCHAIR can calculate intervals and render an agenda from an explicit state and timestamp independently of browser persistence. Wanderwart's studio and sheet API share the defaults, loader-backed sheet context and layout solver, and b64's JSON adapter calls the same transform as its editor worker. Each tool's CLI accepts the browser request format.
 
 For workspace layout, navigation, preview behavior and adding a tool, see [Building a vetr.dev tool](shared-app-design.md).

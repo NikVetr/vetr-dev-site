@@ -1,6 +1,6 @@
 # Photomosaic API
 
-Photomosaic arranges a set of photos into a grid so that, from a distance, the grid reproduces a target picture. It has a single entry point, `submit(request) → result`. The request carries the target's pixels and each photo's average colour; the result is the photo for each cell, its cost, and the target averaged over each cell. Drawing the mosaic is left to the caller: the web page draws it on a canvas, and the command line can write it as a PNG. The web page, `window.Photomosaic` and the command line all call this same function, and the same request (seed included) always gives the same result.
+Photomosaic arranges a set of photos into a grid so that, from a distance, the grid reproduces a target picture. It has a single entry point, `submit(request) → result`. The request carries the target's pixels and each photo's average colour; the result is the photo for each cell, its cost, and the target averaged over each cell. Drawing the mosaic is left to the caller: the web page draws it on a canvas, and the command line can write it as a PNG; both can then adjust each photo's colours towards its cell (see [Adjusting](#adjusting)), which leaves the assignment as it is. The web page, `window.Photomosaic` and the command line all call this same function, and the same request (seed included) always gives the same result.
 
 It is a port of Nik Vetr's R script `imgdir2grid.R` (2024, after a 2023 grid of photos), which reads the photos and the target with ImageMagick (the magick package), matches them in HSL with `plotwidgets::rgb2hsl()` and assigns them with `clue::solve_LSAP()`. This computes what the script computes, including ImageMagick's scaling arithmetic: on the parity fixture (36 PNG photos, two targets) the photo summaries agree with R to 5 × 10⁻¹⁶, the cells exactly, every cost to 7 × 10⁻¹⁴ and the assignments cell for cell. On the bundled example, the page in Chromium gives R's total cost to 15 digits; the command line decodes JPEGs with a different decoder (see [Parity with R](#parity-with-r)). Two steps follow the script's evident intent rather than its letter: the target is scaled to exactly columns × rows (the script asks ImageMagick to fit it within that box, which for some shapes comes out a pixel short and stops the script), and each photo is drawn in the cell it was assigned (the script refills the cells by row, which scrambles every grid that is not square).
 
@@ -12,12 +12,13 @@ It is a port of Nik Vetr's R script `imgdir2grid.R` (2024, after a 2023 grid of 
 # from images: a target and a folder of photos (its .png, .jpg and .jpeg files, by name)
 node photomosaic/cli.mjs --target target.png --photos photos/ > result.json
 node photomosaic/cli.mjs --target target.png --photos photos/ --png mosaic.png --tile-width 200 --fit keep --tint 0
+node photomosaic/cli.mjs --target target.png --photos photos/ --png mosaic.png --adjust 0.8,0.6,0.6 --adjust-detail 0
 node photomosaic/cli.mjs --target target.png --photos photos/ --request-out request.json
 # from a request as JSON (the page's "Request JSON" download, for example); "-" or nothing reads stdin
 node photomosaic/cli.mjs request.json --metric lab
 ```
 
-`--columns`, `--max-uses`, `--metric` and `--seed` set those request fields in either mode. `--png` draws the mosaic (images only): `--tile-width` pixels per column (default 200, the script's), `--fit keep` (each photo's own shape, as the script draws it) or `crop` (its centred square), and `--tint` from 0 to 1 (default 0). PNG files are read with `shared/decode-png.mjs` and JPEG files with jpeg-js's decoder (`vendor/`, Apache 2.0 and BSD licences in `vendor/LICENSES.md`); other formats the script read (HEIC, GIF, TIFF, BMP) are refused with a list, to be converted first. Like R, the command line does not apply a JPEG's EXIF orientation. It prints the result JSON on stdout and exits 0. On failure it writes `{"error": {...}}` (see [Errors](#errors)) to stderr and exits with 1 for an invalid request or invalid JSON, or 2 for a usage problem or an unreadable file.
+`--columns`, `--max-uses`, `--metric` and `--seed` set those request fields in either mode. `--png` draws the mosaic (images only): `--tile-width` pixels per column (default 200, the script's), `--fit keep` (each photo's own shape, as the script draws it) or `crop` (its centred square), `--tint` from 0 to 1 (default 0), and the [adjustment](#adjusting): `--adjust L,a,b`, three strengths from 0 to 1 (or one for all three), and `--adjust-detail` from 0 to 1 (both default 0, which draws exactly what it drew before). A bad drawing option is a usage problem (exit 2). PNG files are read with `shared/decode-png.mjs` and JPEG files with jpeg-js's decoder (`vendor/`, Apache 2.0 and BSD licences in `vendor/LICENSES.md`); other formats the script read (HEIC, GIF, TIFF, BMP) are refused with a list, to be converted first. Like R, the command line does not apply a JPEG's EXIF orientation. It prints the result JSON on stdout and exits 0. On failure it writes `{"error": {...}}` (see [Errors](#errors)) to stderr and exits with 1 for an invalid request or invalid JSON, or 2 for a usage problem or an unreadable file.
 
 **ES module.** The core has no DOM access and runs in Node 22 and in browsers:
 
@@ -27,9 +28,10 @@ const mean = summarisePhoto({ width, height, data });   // a photo's [r, g, b, a
 const result = submit(request, { onProgress: ({ rowsDone, rows }) => {} });
 const layout = layoutMosaic(result.grid, result.assignment, sizes, { tileWidth: 200, fit: 'keep' });
 const rgba = composeMosaic(layout, (photo) => pixelsOf(photo), result.cells, 0);   // what --png draws
+const adjusted = composeMosaic(layout, (photo) => pixelsOf(photo), result.cells, 0, { adjust: { L: 0.8, a: 0.6, b: 0.6 }, target });
 ```
 
-`onProgress` is called after each cell is placed. `scaleImage(image, columns, rows)` is the port of ImageMagick 6's ScaleImage (Q16) that both summaries use. `gridFor({count, width, height, columns, maxUses})` gives the grid a request would get, or throws its error.
+`onProgress` is called after each cell is placed. `composeMosaic`'s last argument takes the adjustment, `{L, a, b, detail}` (missing ones 0), and `target`, the request's target as `{width, height, data}` RGBA, which only `detail` needs. The adjustment itself is `readAdjust(adjust)` (checks it, as below), `prepareAdjust(rgba, width, tiles, cellColours)` then `applyAdjust(prepared, adjust, out)` (repeatable as the strengths change; `addDetail(prepared, targetRgba)` adds the target's pixels for `detail`), and `tileDeltas` and `adjustTerms`, from which the page's WebGL drawing takes its per-tile shifts. `scaleImage(image, columns, rows)` is the port of ImageMagick 6's ScaleImage (Q16) that both summaries use. `gridFor({count, width, height, columns, maxUses})` gives the grid a request would get, or throws its error.
 
 **In the page** (https://vetr.dev/photomosaic/). The page runs `submit` in a Web Worker, so `submit` returns a promise:
 
@@ -40,10 +42,12 @@ const rgba = composeMosaic(layout, (photo) => pixelsOf(photo), result.cells, 0);
 | `getRequest()` | Returns the request the page's photos, target and settings describe. |
 | `getResult()` | Returns the result on view, or `null`. |
 | `undo()`, `redo()` | Restore the previous or next page checkpoint and return whether one was available. Pending rendering/loading is invalidated; saved results are restored without recomputation. |
-| `exportPngBlob({tileWidth, fit, tint})` | Resolves with the mosaic as a PNG `Blob`; each option defaults to the page's setting. Photos are drawn from their files when the tile is wider than their thumbnails. |
+| `exportPngBlob({tileWidth, fit, tint, adjust})` | Resolves with the mosaic as a PNG `Blob`, adjusted and tinted; each option defaults to the page's setting (an `adjust` given replaces the page's, its missing channels 0, and an invalid one rejects with a `PhotomosaicError`). Photos are drawn from their files when the tile is wider than their thumbnails. |
 | `stop()` | Stops a running assignment (the pending promise rejects with an `Error`). |
 
 The page reads photos with the browser, so it takes whatever the browser decodes, with EXIF orientation applied. It halves a photo until it is at most 400 pixels wide before summarising it, and a target until neither side is over 1600 pixels; halving keeps the average colour to within a fraction of a level.
+
+The page's **Adjust photos towards their cells** sliders (L, a, b and target detail, 0 to 100%, all 0 by default) redraw the mosaic and the close up as they move, without matching again: on the GPU with WebGL2 where the browser has it (the core's per-tile shifts, the per-pixel step in a shader), otherwise with `applyAdjust` on the CPU. The PNG export always uses the core, a tile at a time. Changing uses per photo (or any matching setting) instead marks the mosaic out of date until Generate; the page checks it as it is typed and warns when the assignment is large enough to take a minute or more.
 
 The page keeps up to 20 history checkpoints in memory, sharing decoded assets and completed results between them. Cmd/Ctrl+Z and Cmd/Ctrl+Shift+Z navigate this history outside text/numeric editors and dialogs; those controls keep their native editing shortcuts. New changes after Undo discard the redo branch.
 
@@ -54,7 +58,7 @@ The page keeps up to 20 history checkpoints in memory, sharing decoded assets an
 | `target` | yes | `{width, height, data}`: the target's size in pixels (whole numbers ≥ 1) and its RGBA bytes, row by row, as a base64 string of exactly width × height × 4 bytes. |
 | `photos` | yes | Non-empty array of `{mean, name}`. `mean` is `[red, green, blue, alpha]`, each from 0 to 255: the photo's average as `summarisePhoto` computes it (the photo scaled to 200 pixels wide, then the mean of each channel). `name` is an optional string, echoed in the result. |
 | `columns` | no | `null` (default): the script's grid, below. A whole number ≥ 1: that many columns, and round(columns × height / width) rows (at least 1). |
-| `maxUses` | no | How many cells one photo may fill; default `1`, as in R. The script's grid rule then counts photos × maxUses. |
+| `maxUses` | no | How many cells one photo may fill, a whole number ≥ 1; default `1`, as in R. It bounds the assignment itself (each photo stands for maxUses interchangeable places), so the photos are not copied afterwards. The script's grid rule then counts photos × maxUses, so with `columns: null` more uses also make more cells; give `columns` to allow repeats in a grid of the same size. The assignment's time grows with about cells² × photos × maxUses. |
 | `metric` | no | `"hsl-r"` (default, the script's) or `"lab"`. See [Method](#method). |
 | `seed` | no | Seed of R's random number generator for the shuffle the script makes before matching, 0 to 2,147,483,647; default `1`. It decides only between equal costs. |
 
@@ -82,7 +86,29 @@ Unknown fields are rejected at every level.
 5. **Features (`lab`).** An option, not the script's: CIELAB L\*, a\*, b\* of the sRGB colour (D65 white) and alpha × 100 / 255, with the same squared-difference cost, so lightness and colour count as they are seen.
 6. **Shuffle.** As the script does `sample(imgs)` before matching, the photos are put in the order R's `set.seed(seed); sample(n)` gives; equal costs go to the earlier photo in that order.
 7. **Assignment.** Each cell gets its own photo (with maxUses k, each photo stands for k interchangeable slots) so that the total cost is least: the linear sum assignment problem. The script solves it with `clue::solve_LSAP()`, a covering Hungarian method on the matrix padded to square; this uses the Hungarian method in its shortest-augmenting-path form with row and column potentials, on the rectangular matrix, in O(cells² × slots). Both are exact; where several assignments tie, they can pick different ones. On the example (425 cells, 442 photos) `solve_LSAP` takes 6.6 s and this 0.1 s; 2,000 × 2,000 takes about 2 s.
-8. **Drawing** (`layoutMosaic`). `keep`, the script's: each photo scaled to the tile width with its shape kept, each row as tall as its tallest photo, photos at the top of their row and the rest white (as `image_append` does). `crop`: each photo's centred square. The tint blends each tile towards its cell's colour, (1 − tint) × photo + tint × cell. Neither crop nor tint is in the script.
+8. **Drawing** (`layoutMosaic`). `keep`, the script's: each photo scaled to the tile width with its shape kept, each row as tall as its tallest photo, photos at the top of their row and the rest white (as `image_append` does). `crop`: each photo's centred square. The tint blends each tile towards its cell's colour, (1 − tint) × photo + tint × cell, after any adjustment. Neither crop, adjustment nor tint is in the script.
+
+## Adjusting
+
+After matching, each drawn photo can be moved towards its cell's colour, channel by channel, in [OKLab](https://bottosson.github.io/posts/oklab/), a perceptually uniform colour space whose lightness L and opponent axes a (green–red) and b (blue–yellow) are a linear map from the cube roots of the eye's cone responses. OKLab rather than the CIELAB of `metric: "lab"` because shifts in it keep hue steadier (CIELAB turns blues purple as they change), and a and b rather than chroma and hue because a shift along them is linear, defined for greys, and moves the mean exactly where it is asked. For a tile with pixels p, mean M (the mean of its pixels' OKLab, over the tile as drawn, white under any transparency), its cell's colour C and, where the target is used, the target's own colour T(x) at each pixel, its cell's part of the target stretched over the tile:
+
+  p′ = p + s ⊙ [(1 − d)(C − M) + d (T(x) − p)]
+
+with s = (L, a, b) the three strengths and d the detail, all from 0 to 1. With d = 0 every pixel of the tile moves by the same amount, so the photo keeps its texture and its mean moves the fraction s of the way to C in each channel independently; s = 1 puts it on C. With d = 1 each pixel moves the fraction s towards the target's pixel there, replacing the photo's texture as s rises. Colours outside sRGB are clipped per channel. No strength above 0 draws exactly the unadjusted mosaic. The tint, a flat blend towards C that also flattens the texture, is applied afterwards; the two can be combined.
+
+`adjust` is checked as a request is: an object with any of `L`, `a`, `b` and `detail`, numbers from 0 to 1; a problem throws a `PhotomosaicError` (`invalid_request`, issues at `adjust.L` and so on, `unknown_field` for anything else). A tile of two greys, `[60, 60, 60]` and `[180, 180, 180]` (OKLab mean 0.563, 0, 0), towards a muted red cell `[180, 80, 70]` (0.557, 0.117, 0.062):
+
+```js
+import { applyAdjust, prepareAdjust } from './photomosaic/core/index.js';
+const pixels = new Uint8ClampedArray([60, 60, 60, 255, 180, 180, 180, 255]);
+const prepared = prepareAdjust(pixels, 2, [{ x: 0, y: 0, width: 2, height: 1 }], [[180, 80, 70, 255]]);
+applyAdjust(prepared, { L: 0, a: 1, b: 1, detail: 0 }, new Uint8ClampedArray(pixels));
+// → [114, 15, 13, 255, 253, 146, 132, 255]: mean 0.563, 0.116, 0.062, the cell's a and b; its own lightness
+applyAdjust(prepared, { L: 0.5, a: 0, b: 0, detail: 0 }, new Uint8ClampedArray(pixels));
+// → [59, 59, 59, 255, 179, 179, 179, 255]: lightness halfway to the cell's, still grey
+```
+
+On the bundled example, `node photomosaic/cli.mjs --target photomosaic/examples/red-fuji.png --photos photomosaic/examples/photos --png mosaic.png --tile-width 32 --adjust 0.8,0.6,0.6` prints the same result as without `--adjust` and draws each photo closer to the print's colours; `--adjust 1 --adjust-detail 0.5` also brings in the print's own lines.
 
 ## Parity with R
 

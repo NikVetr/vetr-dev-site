@@ -379,7 +379,7 @@ function showGridNote() {
       if (cells * cells * slots > LARGE_ASSIGNMENT) {
         el.gridNote.append(' ', Object.assign(document.createElement('span'), {
           className: 'large',
-          textContent: `⚠ A large assignment (${cells.toLocaleString('en-US')} cells, ${slots.toLocaleString('en-US')} photo places): its time grows with the cube of the size, so matching may take a minute or more.`,
+          textContent: `⚠ A large assignment (${cells.toLocaleString('en-US')} cells, ${slots.toLocaleString('en-US')} photo places): matching time grows with the cube of its size and may take a minute or more.`,
         }));
       }
     } catch (error) {
