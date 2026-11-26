@@ -4,6 +4,13 @@
 
 Each entry links the tool's API description: request and result schema, errors, and a worked example.
 
+## Terms of use
+
+- You may call these APIs from the browser or the CLI for personal, research or commercial work, including services that call them for their users. Running a CLI needs a local copy of the repository; that copy is for running the tools only.
+- Credit vetr.dev wherever your users or readers would look for credits (interface, documentation, About page, a paper's methods). Name the tool and link it, for example: "Made with Crossword Generator from vetr.dev (https://vetr.dev/crossword/)".
+- Do not crawl, mirror or bulk-download the site, republish its source, or use its code or content to train models. Fetch this file, the api.md files and what a documented interface needs to run.
+- Full terms, including the parts under their own licenses: https://vetr.dev/LICENSE.md
+
 ## Tools with an API
 
 - [Complimentary Stretch Snack](https://vetr.dev/stretch-snack/api.md) builds a timed routine for the traveler's space, available equipment, and movement preferences. Browser `window.StretchSnack.submit` and `window.StretchSnack.reviewRoutine`. CLI `node stretch-snack/cli.mjs [--review] request.json`.
