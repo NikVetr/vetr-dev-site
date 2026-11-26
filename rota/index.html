@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Try ROTA, a job scheduler for a few Mac and Linux machines that share a drive, in a simulated two-host pool: type real rota commands and watch its tmux dashboard.">
+  <title>ROTA — Job Scheduler Demo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Cpath d='M7 11h18M7 16h12M7 21h15' stroke='%234fb6d8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row tool-header-row">
+      <div class="title-block">
+        <div class="title-line"><a class="directory-back" href="../" aria-label="Back to vetr.dev" title="Back to vetr.dev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></a>
+        <h1>ROTA — Job Scheduler Demo</h1></div>
+        <p class="tagline" id="tagline">ROTA runs queues of independent jobs on a few Mac and Linux machines that share a drive. This page simulates a two-machine pool in your browser: type the real <code>rota</code> commands and watch the real dashboard's format respond.</p>
+      </div>
+      <div class="tool-header-actions">
+        <button id="tour-button" type="button" class="chip" aria-controls="guide">Tour</button>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="sim-bar container" aria-label="Simulation controls">
+      <p class="sim-badge"><span aria-hidden="true">◇</span> Simulation: nothing here runs on a real cluster. <a href="#about">What is simulated</a></p>
+      <div class="sim-controls">
+        <span class="clock" id="clock" aria-live="off">Simulated time</span>
+        <button type="button" id="clock-toggle" aria-pressed="false" title="Stop or start the simulated clock">❚❚ Stop clock</button>
+        <span class="speed" role="group" aria-label="Simulation speed">
+          <button type="button" data-speed="1" aria-pressed="false" title="Real time">1×</button>
+          <button type="button" data-speed="10" aria-pressed="true" title="Ten times real time">10×</button>
+          <button type="button" data-speed="60" aria-pressed="false" title="Sixty times real time">60×</button>
+        </span>
+        <label class="text-size">Text <input type="range" id="text-size" min="9" max="16" step="0.5" value="12.5" aria-label="Terminal text size"> <output id="text-size-value" for="text-size">12.5 px</output></label>
+        <button type="button" id="palette-button" aria-haspopup="dialog" title="Commands to try (Ctrl+K)">⌘ Commands</button>
+        <button type="button" id="reset-button" title="Start again from an idle pool">↺ Reset</button>
+      </div>
+    </section>
+
+    <section class="desk" id="desk" aria-label="Simulated terminals">
+      <div class="tabs" role="tablist" aria-label="Windows">
+        <button type="button" role="tab" id="tab-storage" aria-controls="win-storage" aria-selected="true">storage</button>
+        <button type="button" role="tab" id="tab-monitor" aria-controls="win-monitor" aria-selected="false">dashboard</button>
+        <button type="button" role="tab" id="tab-worker" aria-controls="win-worker" aria-selected="false">worker</button>
+        <button type="button" role="tab" id="tab-pool" aria-controls="win-pool" aria-selected="false">pool view</button>
+      </div>
+
+      <section class="term term-shell" id="win-storage" aria-labelledby="win-storage-title" role="tabpanel">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><h2 id="win-storage-title">storage — bash</h2><span class="term-note">coordinator, with the shared drive attached</span></div>
+        <div class="term-body" data-shell="storage"></div>
+      </section>
+
+      <section class="term term-monitor" id="win-monitor" aria-labelledby="win-monitor-title" role="tabpanel">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><h2 id="win-monitor-title">storage — rota monitor</h2><span class="term-note">tmux dashboard</span></div>
+        <div class="term-body tty-screen" id="dashboard" tabindex="0" aria-describedby="dashboard-summary"></div>
+        <p class="visually-hidden" id="dashboard-summary" aria-live="off"></p>
+      </section>
+
+      <section class="term term-shell" id="win-worker" aria-labelledby="win-worker-title" role="tabpanel">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><h2 id="win-worker-title">worker — bash</h2>
+          <button type="button" class="cable" id="cable-button" aria-pressed="false" title="Pull or reconnect the worker's network cable (simulation)"><span class="cable-icon" aria-hidden="true">⏚</span> <span class="cable-label">Pull the network cable</span></button>
+        </div>
+        <div class="term-body" data-shell="worker"></div>
+      </section>
+
+      <section class="panel pool-view" id="win-pool" aria-labelledby="win-pool-title" role="tabpanel">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><h2 id="win-pool-title">Pool view</h2><span class="term-note">a diagram, not a ROTA screen</span></div>
+        <div class="pool-body" id="pool-view"></div>
+      </section>
+    </section>
+
+    <section class="about container" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">What's real here</h2>
+      <div class="about-grid">
+        <div>
+          <h3>Simulated</h3>
+          <p>Nothing runs on a cluster: a model of ROTA's coordinator runs in this page, one tick per simulated second, ten times faster than real time by default. It is a JavaScript port of the scheduler's allocation and start pacing, the same port that drives the <a href="https://youtu.be/NRnLCDgYsQw">explainer video</a>, so priorities, per-host budgets, round-robin turns and paced starts behave as they do in the real coordinator. Leases, dependencies, pauses, failure holds and share interruptions follow the scheduler's rules.</p>
+          <p>Simplified: plans reach hosts at once; there is no shared-I/O admission (the example pool turns it off); live capacity equals each host's budget; memory is charged at the declared amount. Job runtimes are made up, the files are read-only, and a few real commands (setup, <code>rota kill</code>, <code>rota control</code>, memory calibration) answer with a note instead.</p>
+          <p>Faithful: the command output uses the real scripts' messages and <code>key=value</code> records, and the dashboard is a port of ROTA's own pane renderers, checked against them. The hosts and paths are those of the public example inventory, <code>examples/cluster.json</code>.</p>
+        </div>
+        <div>
+          <h3>ROTA's real limits</h3>
+          <ul>
+            <li>macOS and Linux only.</li>
+            <li>A shared drive, mounted at the same path on every host, plus passwordless SSH from the coordinator.</li>
+            <li>Each job runs on one host: no MPI and no multi-node jobs. For many users, isolation or dozens of hosts, Slurm, Flux or HTCondor fit better.</li>
+            <li>Priority never preempts: a higher priority only gets the next free slots.</li>
+            <li>An expired lease never kills a job, and nothing is re-run automatically. You audit, then retry.</li>
+            <li>Backfill, GPU units and holding work while a machine's owner is at the keyboard are opt-in and off by default.</li>
+          </ul>
+          <p class="links"><a href="https://github.com/NikVetr/rota">ROTA on GitHub</a> · <a href="https://youtu.be/NRnLCDgYsQw">How the ROTA scheduler works (17 min video)</a></p>
+        </div>
+      </div>
+      <h3>Using this page</h3>
+      <p>Type into the <code>storage</code> and <code>worker</code> windows as you would in a terminal: Tab completes commands, options and paths, ↑ and ↓ recall history, and Ctrl+L clears. <strong>Commands</strong> (Ctrl+K) lists commands to try with this pool's paths filled in. On a phone, the windows become tabs, and picking a command puts it in the shell for you to run. Scripts can drive the page through <code>window.RotaDemo</code> (see the folder's README).</p>
+    </section>
+  </main>
+
+  <dialog id="palette" aria-labelledby="palette-title">
+    <div class="dialog-head">
+      <h2 id="palette-title">Commands to try</h2>
+      <button type="button" class="dialog-close" data-close aria-label="Close">×</button>
+    </div>
+    <div class="dialog-body">
+      <input type="search" id="palette-search" placeholder="Filter commands" aria-label="Filter commands" autocomplete="off">
+      <div id="palette-list" class="palette-list"></div>
+    </div>
+  </dialog>
+
+  <div id="guide" class="guide" hidden></div>
+</body>
+</html>

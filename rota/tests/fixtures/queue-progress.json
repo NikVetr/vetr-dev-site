@@ -1,0 +1,1678 @@
+{
+ "two@120": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-6 P50",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "1-1 P90 CPU",
+    "done": 0,
+    "total": 24,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "COMPLETED",
+    "label": "pilot [b00001]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 2,
+    "total": 2,
+    "elapsed": 7,
+    "eta": -1,
+    "pct": 100,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 120,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission |Start|Progress          |Complete   |Elaps~|ETA/End|State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A             |my-analysis|2-6    |50 (#2) |Ready     |14:05|[#---------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)   |10m   |25m    |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|1-1    |90 (#1) |CPU wait  |14:05|[----------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 24)   |10m   |       |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |3-7    |        |          |     |                  |10 workers |      |       |[2 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "pilot         |my-analysis|0-0    |50      |No pending|14:05|[##########",
+     "done"
+    ],
+    [
+     "100.0%",
+     "fade"
+    ],
+    [
+     "]|(2 / 2)    |7s    |14:05  |[COMPLETED] ",
+     "done"
+    ]
+   ]
+  ]
+ },
+ "two@132": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-6 P50",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "1-1 P90 CPU",
+    "done": 0,
+    "total": 24,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "COMPLETED",
+    "label": "pilot [b00001]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 2,
+    "total": 2,
+    "elapsed": 7,
+    "eta": -1,
+    "pct": 100,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 132,
+  "lines": [
+   [
+    [
+     "Queue       |Project    |Workers|Priority|Admission |Start      |Progress         |Complete      |Elapsed |ETA/End    |State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A           |my-analysis|2-6    |50 (#2) |Ready     |11/25 14:05|[#--------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)      |10m     |25m        |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B           |my-analysis|1-1    |90 (#1) |CPU wait  |11/25 14:05|[---------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 24)      |10m     |           |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE|           |3-7    |        |          |           |                 |10 workers    |        |           |[2 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "pilot       |my-analysis|0-0    |50      |No pending|11/25 14:05|[#########",
+     "done"
+    ],
+    [
+     "100.0%",
+     "fade"
+    ],
+    [
+     "]|(2 / 2)       |7s      |11/25 14:05|[COMPLETED] ",
+     "done"
+    ]
+   ]
+  ]
+ },
+ "two@157": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-6 P50",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "1-1 P90 CPU",
+    "done": 0,
+    "total": 24,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "COMPLETED",
+    "label": "pilot [b00001]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 2,
+    "total": 2,
+    "elapsed": 7,
+    "eta": -1,
+    "pct": 100,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 157,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission |Start      |Progress                                |Complete      |Elapsed |ETA/End    |State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A             |my-analysis|2-6    |50 (#2) |Ready     |11/25 14:05|[###-----------------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)      |10m     |25m        |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|1-1    |90 (#1) |CPU wait  |11/25 14:05|[--------------------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 24)      |10m     |           |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |3-7    |        |          |           |                                        |10 workers    |        |           |[2 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "pilot         |my-analysis|0-0    |50      |No pending|11/25 14:05|[################################",
+     "done"
+    ],
+    [
+     "100.0%",
+     "fade"
+    ],
+    [
+     "]|(2 / 2)       |7s      |11/25 14:05|[COMPLETED] ",
+     "done"
+    ]
+   ]
+  ]
+ },
+ "two@190": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-6 P50",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "1-1 P90 CPU",
+    "done": 0,
+    "total": 24,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "COMPLETED",
+    "label": "pilot [b00001]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 2,
+    "total": 2,
+    "elapsed": 7,
+    "eta": -1,
+    "pct": 100,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 190,
+  "lines": [
+   [
+    [
+     "Queue           |  Project      |  Workers  |  Priority  |  Admission   |  Start        |  Progress                           |  Complete        |  Elapsed   |  ETA/End      |  State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A               |  my-analysis  |  2-6      |  50 (#2)   |  Ready       |  11/25 14:05  |  [###----------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "]   |  (4 / 40)        |  10m       |  25m          |  [RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B               |  my-analysis  |  1-1      |  90 (#1)   |  CPU wait    |  11/25 14:05  |  [-------------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]    |  (0 / 24)        |  10m       |               |  [RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE    |               |  3-7      |            |              |               |                                     |  10 workers      |            |               |  [2 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "pilot           |  my-analysis  |  0-0      |  50        |  No pending  |  11/25 14:05  |  [#########################",
+     "done"
+    ],
+    [
+     "100.0%",
+     "fade"
+    ],
+    [
+     "]  |  (2 / 2)         |  7s        |  11/25 14:05  |  [COMPLETED] ",
+     "done"
+    ]
+   ]
+  ]
+ },
+ "holds@120": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-3 P50 FAIL",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 2,
+    "failedWhen": "14:20",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "B [b00002]",
+    "workers": "0-0 P90 PAUSED",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 DEP",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "FINISHED_INCOMPLETE",
+    "label": "D [b00004]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 5,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 83.3,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 1,
+    "failedWhen": "13:00",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 120,
+  "lines": [
+   [
+    [
+     "Queue       |Project|Workers|Priority|Admission   |Start|Progress  |Complete               |Elaps~|ETA/End|State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A           |my-ana~|2-3    |50 (#2) |Failure hold|14:05|[--",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40) ",
+     "run"
+    ],
+    [
+     "2 failed 14:20",
+     "failed"
+    ],
+    [
+     "|10m   |25m    |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B           |my-ana~|0-0    |90 (#1) |Paused      |14:05|[--",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)               |10m   |25m    |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C           |my-ana~|0-0    |50 (#2) |Dependency  |14:05|[--",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)                |10m   |       |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE|       |2-3    |        |            |     |",
+     "summary"
+    ],
+    [
+     "2 jobs fa~",
+     "failed"
+    ],
+    [
+     "|5 workers              |      |       |[3 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "D           |my-ana~|0-0    |50      |No pending  |14:05|[##",
+     "killed"
+    ],
+    [
+     "83.3%",
+     "fade"
+    ],
+    [
+     "] |(5 / 6) ",
+     "killed"
+    ],
+    [
+     "1 failed 13:00",
+     "failed"
+    ],
+    [
+     " |10m   |14:05  |[INCOMPLETE]",
+     "killed"
+    ]
+   ]
+  ]
+ },
+ "holds@132": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-3 P50 FAIL",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 2,
+    "failedWhen": "14:20",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "B [b00002]",
+    "workers": "0-0 P90 PAUSED",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 DEP",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "FINISHED_INCOMPLETE",
+    "label": "D [b00004]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 5,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 83.3,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 1,
+    "failedWhen": "13:00",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 132,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission   |Start|Progress        |Complete               |Elaps~|ETA/End|State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A             |my-analysis|2-3    |50 (#2) |Failure hold|14:05|[#-------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40) ",
+     "run"
+    ],
+    [
+     "2 failed 14:20",
+     "failed"
+    ],
+    [
+     "|10m   |25m    |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|0-0    |90 (#1) |Paused      |14:05|[#-------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)               |10m   |25m    |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C             |my-analysis|0-0    |50 (#2) |Dependency  |14:05|[--------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)                |10m   |       |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |2-3    |        |            |     |",
+     "summary"
+    ],
+    [
+     "2 jobs failed",
+     "failed"
+    ],
+    [
+     "   |5 workers              |      |       |[3 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "D             |my-analysis|0-0    |50      |No pending  |14:05|[#######-",
+     "killed"
+    ],
+    [
+     "83.3%",
+     "fade"
+    ],
+    [
+     "] |(5 / 6) ",
+     "killed"
+    ],
+    [
+     "1 failed 13:00",
+     "failed"
+    ],
+    [
+     " |10m   |14:05  |[INCOMPLETE]",
+     "killed"
+    ]
+   ]
+  ]
+ },
+ "holds@157": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-3 P50 FAIL",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 2,
+    "failedWhen": "14:20",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "B [b00002]",
+    "workers": "0-0 P90 PAUSED",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 DEP",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "FINISHED_INCOMPLETE",
+    "label": "D [b00004]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 5,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 83.3,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 1,
+    "failedWhen": "13:00",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 157,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission   |Start      |Progress                     |Complete               |Elapsed |ETA/End    |State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A             |my-analysis|2-3    |50 (#2) |Failure hold|11/25 14:05|[##-------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40) ",
+     "run"
+    ],
+    [
+     "2 failed 14:20",
+     "failed"
+    ],
+    [
+     "|10m     |25m        |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|0-0    |90 (#1) |Paused      |11/25 14:05|[##-------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "] |(4 / 40)               |10m     |25m        |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C             |my-analysis|0-0    |50 (#2) |Dependency  |11/25 14:05|[---------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)                |10m     |           |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |2-3    |        |            |           |",
+     "summary"
+    ],
+    [
+     "2 jobs failed",
+     "failed"
+    ],
+    [
+     "                |5 workers              |        |           |[3 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "D             |my-analysis|0-0    |50      |No pending  |11/25 14:05|[#################----",
+     "killed"
+    ],
+    [
+     "83.3%",
+     "fade"
+    ],
+    [
+     "] |(5 / 6) ",
+     "killed"
+    ],
+    [
+     "1 failed 13:00",
+     "failed"
+    ],
+    [
+     " |10m     |11/25 14:05|[INCOMPLETE]",
+     "killed"
+    ]
+   ]
+  ]
+ },
+ "holds@190": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "A [b00001]",
+    "workers": "2-3 P50 FAIL",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 2,
+    "failedWhen": "14:20",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "B [b00002]",
+    "workers": "0-0 P90 PAUSED",
+    "done": 4,
+    "total": 40,
+    "elapsed": 600,
+    "eta": 1500,
+    "pct": 10,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 DEP",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 1,
+    "state": "FINISHED_INCOMPLETE",
+    "label": "D [b00004]",
+    "workers": "0-0 P50 EMPTY",
+    "done": 5,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 83.3,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "2026/11/25 | 14:05",
+    "project": "my-analysis",
+    "failed": 1,
+    "failedWhen": "13:00",
+    "rerun": 0,
+    "etaWarning": "-"
+   }
+  ],
+  "cols": 190,
+  "lines": [
+   [
+    [
+     "Queue          | Project     | Workers | Priority | Admission    | Start       | Progress                                 | Complete                | Elapsed  | ETA/End     | State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "A              | my-analysis | 2-3     | 50 (#2)  | Failure hold | 11/25 14:05 | [###-----------------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "]  | (4 / 40) ",
+     "run"
+    ],
+    [
+     "2 failed 14:20",
+     "failed"
+    ],
+    [
+     " | 10m      | 25m         | [RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "B              | my-analysis | 0-0     | 90 (#1)  | Paused       | 11/25 14:05 | [###-----------------------------",
+     "run"
+    ],
+    [
+     "10.0%",
+     "fade"
+    ],
+    [
+     "]  | (4 / 40)                | 10m      | 25m         | [PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C              | my-analysis | 0-0     | 50 (#2)  | Dependency   | 11/25 14:05 | [--------------------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]   | (0 / 6)                 | 10m      |             | [PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE   |             | 2-3     |          |              |             | ",
+     "summary"
+    ],
+    [
+     "2 jobs failed",
+     "failed"
+    ],
+    [
+     "                            | 5 workers               |          |             | [3 queues]  ",
+     "summary"
+    ]
+   ],
+   [],
+   [
+    [
+     "-- LAST 24 HOURS --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "D              | my-analysis | 0-0     | 50       | No pending   | 11/25 14:05 | [###########################-----",
+     "killed"
+    ],
+    [
+     "83.3%",
+     "fade"
+    ],
+    [
+     "]  | (5 / 6) ",
+     "killed"
+    ],
+    [
+     "1 failed 13:00",
+     "failed"
+    ],
+    [
+     "  | 10m      | 11/25 14:05 | [INCOMPLETE]",
+     "killed"
+    ]
+   ]
+  ]
+ },
+ "verify@120": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 VERIFY",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "4-8 P90*",
+    "done": 12,
+    "total": 24,
+    "elapsed": 600,
+    "eta": 300,
+    "pct": 50,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "recent_slower"
+   }
+  ],
+  "cols": 120,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission  |Start|Progress         |Complete   |Elaps~|ETA/End|State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|4-8    |90* (#1)|Ready      |14:05|[#####----",
+     "run"
+    ],
+    [
+     "50.0%",
+     "fade"
+    ],
+    [
+     "] |(12 / 24)  |10m   |5m?    |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C             |my-analysis|0-0    |50 (#2) |Verify deps|14:05|[---------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)    |10m   |       |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |4-8    |        |           |     |                 |12 workers |      |       |[2 queues]  ",
+     "summary"
+    ]
+   ]
+  ]
+ },
+ "verify@132": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 VERIFY",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "4-8 P90*",
+    "done": 12,
+    "total": 24,
+    "elapsed": 600,
+    "eta": 300,
+    "pct": 50,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "recent_slower"
+   }
+  ],
+  "cols": 132,
+  "lines": [
+   [
+    [
+     "Queue       |Project   |Workers|Priority|Admission  |Start      |Progress         |Complete      |Elapsed |ETA/End    |State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "-----------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "B           |my-analys~|4-8    |90* (#1)|Ready      |11/25 14:05|[#####----",
+     "run"
+    ],
+    [
+     "50.0%",
+     "fade"
+    ],
+    [
+     "] |(12 / 24)     |10m     |5m?        |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C           |my-analys~|0-0    |50 (#2) |Verify deps|11/25 14:05|[---------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)       |10m     |           |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE|          |4-8    |        |           |           |                 |12 workers    |        |           |[2 queues]  ",
+     "summary"
+    ]
+   ]
+  ]
+ },
+ "verify@157": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 VERIFY",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "4-8 P90*",
+    "done": 12,
+    "total": 24,
+    "elapsed": 600,
+    "eta": 300,
+    "pct": 50,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "recent_slower"
+   }
+  ],
+  "cols": 157,
+  "lines": [
+   [
+    [
+     "Queue         |Project    |Workers|Priority|Admission  |Start      |Progress                               |Complete      |Elapsed |ETA/End    |State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "B             |my-analysis|4-8    |90* (#1)|Ready      |11/25 14:05|[################---------------",
+     "run"
+    ],
+    [
+     "50.0%",
+     "fade"
+    ],
+    [
+     "] |(12 / 24)     |10m     |5m?        |[RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C             |my-analysis|0-0    |50 (#2) |Verify deps|11/25 14:05|[-------------------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]  |(0 / 6)       |10m     |           |[PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE  |           |4-8    |        |           |           |                                       |12 workers    |        |           |[2 queues]  ",
+     "summary"
+    ]
+   ]
+  ]
+ },
+ "verify@190": {
+  "rows": [
+   {
+    "group": 0,
+    "state": "PENDING",
+    "label": "C [b00003]",
+    "workers": "0-0 P50 VERIFY",
+    "done": 0,
+    "total": 6,
+    "elapsed": 600,
+    "eta": -1,
+    "pct": 0,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "-"
+   },
+   {
+    "group": 0,
+    "state": "RUNNING",
+    "label": "B [b00002]",
+    "workers": "4-8 P90*",
+    "done": 12,
+    "total": 24,
+    "elapsed": 600,
+    "eta": 300,
+    "pct": 50,
+    "startTxt": "2026/11/25 | 14:05",
+    "endTxt": "",
+    "project": "my-analysis",
+    "failed": 0,
+    "failedWhen": "",
+    "rerun": 0,
+    "etaWarning": "recent_slower"
+   }
+  ],
+  "cols": 190,
+  "lines": [
+   [
+    [
+     "Queue           |  Project      |  Workers  |  Priority  |  Admission    |  Start        |  Progress                          |  Complete        |  Elapsed   |  ETA/End      |  State       ",
+     ""
+    ]
+   ],
+   [
+    [
+     "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+     ""
+    ]
+   ],
+   [
+    [
+     "-- ACTIVE --",
+     "fade"
+    ]
+   ],
+   [
+    [
+     "B               |  my-analysis  |  4-8      |  90* (#1)  |  Ready        |  11/25 14:05  |  [############------------",
+     "run"
+    ],
+    [
+     "50.0%",
+     "fade"
+    ],
+    [
+     "]   |  (12 / 24)       |  10m       |  5m?          |  [RUNNING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "C               |  my-analysis  |  0-0      |  50 (#2)   |  Verify deps  |  11/25 14:05  |  [------------------------",
+     "run"
+    ],
+    [
+     "0.0%",
+     "fade"
+    ],
+    [
+     "]    |  (0 / 6)         |  10m       |               |  [PENDING]   ",
+     "run"
+    ]
+   ],
+   [
+    [
+     "TOTAL ACTIVE    |               |  4-8      |            |               |               |                                    |  12 workers      |            |               |  [2 queues]  ",
+     "summary"
+    ]
+   ]
+  ]
+ }
+}
