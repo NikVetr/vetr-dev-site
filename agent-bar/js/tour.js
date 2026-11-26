@@ -32,7 +32,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     { target: () => q('.tracker-bar-chats'), text: 'This is a pretend Ubuntu desktop with Agent Bar in its top bar. <b>✳ 3 / 5</b> means three of the five open Claude chats need review; ⌘ is Codex. Click the counts to open the dropdown.',
       done: (k, d) => k === 'open' && d.view === 'conversations', already: () => ui.open === 'menu' && ui.view === 'conversations',
       cheer: 'That is every open chat, by project and window.' },
-    { target: () => shortcut('tune') || q('.tracker-quick [data-act="shortcut"]'), text: 'Buttons after the clock are chats that need you, the longest waiting first. Click <b>✳ sampler-study</b>.',
+    { target: () => shortcut('tune') || q('.tracker-quick [data-act="shortcut"]'), text: 'These review buttons are chats that need you, one button per project, the longest waiting first. Click <b>✳ sampler-study</b>.',
       done: (k, d) => k === 'focused' && d.mode === 'focus', cheer: 'Its window came forward, maximized, with that exact chat showing, even though three chats share that window.' },
     { target: () => q('.tracker-bar-chats'), text: 'Now open the dropdown and click that same chat’s row again (it says “click to return”). Its window goes back where it was.',
       done: (k) => k === 'returned', cheer: 'Back where it was. One click there, one click back.' },

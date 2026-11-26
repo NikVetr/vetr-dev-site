@@ -550,4 +550,9 @@ function summary() {
 
 layout();
 startTimer();
-if (new URLSearchParams(location.search).has('tour')) tour.start();
+// The tour starts by itself on a first visit (not under automation, which draws the directory card), or with ?tour.
+const params = new URLSearchParams(location.search);
+let toured = false;
+try { toured = localStorage.getItem('agent-bar-demo:toured') === '1'; } catch { /* storage may be unavailable */ }
+tour.onChange((active) => { if (active) try { localStorage.setItem('agent-bar-demo:toured', '1'); } catch { /* the tour still runs */ } });
+if (params.has('tour') || (!toured && !navigator.webdriver && !params.has('notour'))) tour.start();
