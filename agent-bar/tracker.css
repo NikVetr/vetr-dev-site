@@ -1,0 +1,284 @@
+[hidden] { display: none !important; }
+/* St sizes are content boxes, as CSS's default is. */
+.screen .tracker-quick-bubble, .screen .tracker-chat-state, .screen .tracker-chip, .screen .tracker-popup, .screen .tracker-nav-menu,
+.screen .tracker-progress, .screen .tracker-picker-list { box-sizing: content-box; }
+/* Agent Bar's own look, ported from its GNOME Shell stylesheet (agent_bar/data/gnome-extension/stylesheet.css):
+   the same class names, colours, sizes and spacing. St's `spacing` becomes `gap`. GNOME's shell is dark, so these
+   colours do not follow the page theme. */
+
+.agent-bar { display: flex; align-items: center; gap: 2px; height: 100%; font-variant-numeric: tabular-nums; }
+.agent-bar-part { display: flex; align-items: center; height: 100%; padding: 0 9px; border-radius: 99px; border: 0;
+  background: transparent; color: inherit; font: inherit; cursor: default; min-height: 0; }
+.agent-bar-part:hover { background-color: rgba(242, 242, 242, 0.15); }
+.agent-bar-part-open { background-color: rgba(242, 242, 242, 0.2); }
+.agent-bar-part-open:hover { background-color: rgba(242, 242, 242, 0.25); }
+.agent-bar-part:focus-visible, .tracker-menu :focus-visible, .tracker-quick-button:focus-visible, .tracker-nav-arrow:focus-visible {
+  outline: 2px solid #78aeed; outline-offset: -2px; }
+.tracker-bar-chats { gap: 12px; }
+.tracker-bar-states { gap: 10px; }
+.tracker-provider-ratio { display: flex; gap: 5px; align-items: center; }
+.tracker-bar-divider { color: #555c67; padding: 0 0; }
+.tracker-quota-bar { gap: 8px; }
+.tracker-quota-part { display: flex; gap: 3px; }
+.tracker-quota-muted { color: #c3cad4; }
+.tracker-quota-attention { color: #f4c36a; font-weight: bold; }
+.tracker-quota-failed { color: #f28b82; font-weight: bold; }
+.tracker-quota-stale { color: #7d8693; }
+.tracker-mail { display: flex; gap: 3px; align-items: center; }
+.tracker-glyph { display: block; flex: none; }
+
+.tracker-quick { display: flex; align-items: center; gap: 6px; margin-left: 4px; min-width: 0; }
+.tracker-quick-button { display: inline-flex; align-items: center; padding: 1px 9px; border-radius: 10px; font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.08); border: 0; font: inherit; font-weight: bold; color: inherit; white-space: nowrap;
+  line-height: 18px; min-height: 0; cursor: default; }
+button.tracker-quick-button:hover, .tracker-quick-group:hover { background-color: rgba(255, 255, 255, 0.18); }
+.tracker-quick-more { color: #c3cad4; font-weight: normal; }
+.tracker-quick-group { padding: 1px 3px 1px 9px; gap: 4px; }
+.tracker-quick-group-name { font: inherit; font-weight: bold; color: #e9edf2; background: none; border: 0; padding: 0; min-height: 0; cursor: default; }
+.tracker-quick-bubble { min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; font-size: 11px; font-weight: bold;
+  color: #1d2025; text-align: center; border: 0; line-height: 16px; min-height: 0; font-family: inherit; cursor: default; }
+.tracker-quick-bubble:hover { color: #000000; }
+.tracker-quick-bubble-claude { background-color: #e6a187; }
+.tracker-quick-bubble-codex { background-color: #79cfbf; }
+.tracker-quick-bubble-copilot { background-color: #e892d0; }
+.tracker-quick-bubble-antigravity { background-color: #9fb4ff; }
+
+.tracker-detail { font-size: 12px; color: #a6afbd; }
+.tracker-claude { color: #e6a187; }
+.tracker-codex { color: #79cfbf; }
+.tracker-copilot { color: #e892d0; }
+.tracker-antigravity { color: #9fb4ff; }
+.tracker-working { color: #83bafa; }
+.tracker-waiting { color: #c4a7f2; }
+.tracker-attention { color: #f4c36a; }
+.tracker-failed { color: #f28b82; }
+.tracker-muted, .tracker-quiet { color: #9ca3ad; }
+.tracker-finished { color: #a7d797; }
+.tracker-help-bright { color: #f1f3f5; font-weight: bold; }
+.tracker-bright { color: #f1f3f5; font-weight: bold; }
+
+/* The dropdown: a GNOME popup menu (#303030 with a 12 px radius) holding the tracker box, 680 px wide. */
+.tracker-popup { position: absolute; z-index: 40; background: #303030; border: 1px solid #3c3c3c; border-radius: 12px; padding: 5px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5); color: #e9edf2; font-size: 14.667px; line-height: 1.2; }
+.tracker-menu { width: 680px; display: flex; flex-direction: column; }
+.tracker-item { padding: 9px 6px; display: flex; align-items: center; gap: 12px; }
+.tracker-item > * { flex: 1; min-width: 0; }
+.tracker-heading { padding: 12px 20px 10px; display: flex; gap: 18px; align-items: flex-start; }
+.tracker-heading-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tracker-heading-title { font-size: 18px; font-weight: bold; color: #f2f4f7; padding-bottom: 4px; }
+.tracker-summary { display: flex; flex-direction: column; gap: 2px; padding-left: 18px; }
+.tracker-summary-value { font-size: 20px; font-weight: bold; }
+.tracker-header-actions { display: flex; gap: 2px; align-items: flex-start; }
+.tracker-gear { padding: 6px; border-radius: 6px; color: #b4bbc5; background: transparent; border: 0; min-height: 0; line-height: 0; font: inherit; }
+.tracker-gear:hover, .tracker-gear[aria-pressed="true"] { background-color: #404957; color: #f3f5f8; }
+.tracker-help-mark { display: inline-block; width: 16px; height: 16px; font-size: 15px; line-height: 16px; font-weight: bold; text-align: center; }
+.tracker-back { font-size: 13px; padding: 6px 9px; line-height: 16px; }
+.tracker-filters { display: flex; gap: 7px; padding: 0 14px; flex-wrap: wrap; }
+.tracker-tabs { gap: 2px; }
+.tracker-filter { padding: 7px 11px; border-radius: 6px; color: #b4bbc5; background-color: transparent; border: 0; font: inherit;
+  line-height: 17.5px; min-height: 0; cursor: default; }
+.tracker-tabs .tracker-filter { padding: 7px 8px; }
+.tracker-filter:hover { background-color: #343a44; }
+.tracker-filter[aria-selected="true"], .tracker-filter[aria-pressed="true"] { background-color: #404957; color: #f3f5f8; }
+.tracker-search { margin: 2px 14px 3px; padding: 9px 12px; border: 1px solid #505761; border-radius: 7px; background-color: #24282e;
+  color: #edf0f4; font: inherit; width: calc(100% - 28px); box-sizing: border-box; min-height: 0; }
+.tracker-search::placeholder { color: #9aa1aa; }
+.tracker-search:focus { outline: none; border-color: #78aeed; box-shadow: inset 0 0 0 1px #78aeed; }
+.tracker-toolbar { display: flex; gap: 6px; padding: 0 14px; align-items: center; flex-wrap: wrap; }
+.tracker-toolbar-fill { flex: 1; }
+.tracker-picker { padding: 4px 10px; border-radius: 6px; font-size: 12px; color: #c3cad4; background-color: #2c3139; border: 0;
+  font-family: inherit; font-weight: normal; min-height: 0; line-height: 14.5px; cursor: default; }
+.tracker-picker:hover, .tracker-picker[aria-expanded="true"] { background-color: #404957; color: #f3f5f8; }
+.tracker-picker-caption { color: #9ca3ad; }
+.tracker-picker-value { color: #f3f5f8; font-weight: bold; }
+.tracker-picker-active { background-color: rgba(76, 134, 202, 0.28); }
+.tracker-picker-active .tracker-picker-value { color: #a9cdfb; }
+.tracker-picker-list { position: absolute; z-index: 5; min-width: 150px; padding: 4px; display: flex; flex-direction: column; gap: 1px;
+  border: 1px solid #555d69; border-radius: 8px; background-color: #262a31; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55); }
+.tracker-picker-option { padding: 5px 10px; border-radius: 5px; font-size: 12px; color: #dfe4ea; background: none; border: 0; text-align: left;
+  font-family: inherit; white-space: pre; min-height: 0; cursor: default; }
+.tracker-picker-option:hover, .tracker-picker-option:focus-visible { background-color: #3b424e; }
+.tracker-picker-current { font-weight: bold; color: #f3f5f8; }
+.tracker-sort-note { color: #a5adb9; font-size: 11px; }
+.tracker-bulk { padding: 5px; border-radius: 5px; color: #c3cad4; background: none; border: 0; min-height: 0; line-height: 0; }
+.tracker-bulk:hover { background-color: #343a44; color: #f3f5f8; }
+.tracker-bulk-toggle { padding: 4px 10px; font-size: 12px; }
+.tracker-body { position: relative; }
+.tracker-scroll { padding: 0 12px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #6e6e6e transparent; }
+.tracker-separator { height: 1px; background: #444444; margin: 6px 6px 0; }
+.tracker-footer { color: #a5adb9; font-size: 10px; padding: 12px 24px 9px; }
+.tracker-warning { font-size: 11px; color: #f4c36a; padding: 6px 8px; }
+.tracker-empty { padding: 24px; color: #b5bdc9; }
+
+.tracker-project { border: 1px solid #474e58; border-radius: 8px; background-color: #25292f; margin-bottom: 12px; }
+.tracker-project-header-item { display: flex; align-items: center; background-color: #30353d; border-radius: 7px 7px 0 0; }
+.tracker-project-header { flex: 1; min-width: 0; display: block; text-align: left; padding: 10px 12px; border-radius: 7px 0 0 0;
+  background: none; border: 0; color: inherit; font: inherit; min-height: 0; cursor: default; }
+.tracker-project-header:hover { background-color: #3b424e; }
+.tracker-project-header-stacked { margin: 3px 3px 0 3px; padding: 7px 9px; border-radius: 6px; width: calc(100% - 6px); box-sizing: border-box; }
+.tracker-project.collapsed .tracker-project-header-item { border-radius: 7px; }
+.tracker-project-heading { display: flex; gap: 10px; align-items: baseline; }
+.tracker-project-heading > .tracker-muted { width: 1em; text-align: center; }
+.tracker-project-name { flex: 1; min-width: 0; font-size: 14px; font-weight: bold; color: #edf0f5; overflow-wrap: break-word; }
+.tracker-project-context { font-size: 11px; color: #a3acb9; }
+.tracker-project-total { font-size: 11px; color: #bac2cd; margin-left: 6px; }
+.tracker-project-total.tracker-attention { color: #f4c36a; }
+.tracker-window-heading { color: #a3acb9; font-size: 11px; flex: 1; }
+.tracker-window-row { display: flex; align-items: center; padding: 6px 12px 4px; border-top: 1px solid #3b414a; }
+.tracker-conversation { display: flex; gap: 10px; align-items: center; padding: 10px 11px; border-top: 1px solid #3b414a;
+  border-left: 2px solid transparent; }
+.tracker-conversation[role="button"]:hover, .tracker-conversation[role="button"]:focus-visible { background-color: #2f343c; }
+.tracker-conversation:active { background-color: #3b424c; }
+.tracker-unread { background-color: rgba(192, 134, 35, 0.10); }
+.tracker-row-provider { width: 78px; flex: none; display: flex; gap: 5px; align-items: center; }
+.tracker-provider-symbol { font-size: 20px; line-height: 1; }
+.tracker-provider-name { font-size: 12px; }
+.tracker-row { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.tracker-row-title { display: flex; gap: 10px; align-items: baseline; }
+.tracker-row-heading { display: flex; gap: 6px; align-items: flex-start; }
+.tracker-row-actions { display: flex; gap: 6px; align-items: center; flex: none; }
+.tracker-title { font-size: 14px; color: #edf0f5; overflow-wrap: break-word; min-width: 0; }
+.tracker-title-full { flex: 1; }
+.tracker-reason { font-size: 12px; }
+.tracker-chip { padding: 4px 8px; border-radius: 11px; font-size: 11px; white-space: nowrap; }
+.tracker-chip-attention { color: #f4c36a; background-color: rgba(210, 147, 45, 0.15); }
+.tracker-chip-waiting { color: #c4a7f2; background-color: rgba(150, 112, 214, 0.15); }
+.tracker-chip-working { color: #83bafa; background-color: rgba(76, 134, 202, 0.15); }
+.tracker-chip-finished { color: #a7d797; background-color: rgba(98, 157, 95, 0.13); }
+.tracker-chip-failed { color: #f28b82; background-color: rgba(186, 72, 67, 0.15); }
+.tracker-chip-muted { color: #a6afbd; background-color: rgba(146, 156, 174, 0.10); }
+.tracker-chip-open { color: #f1f3f5; background-color: rgba(241, 243, 245, 0.12); }
+.tracker-chat-state { width: 8.5em; text-align: center; box-sizing: border-box; }
+.tracker-window-controls { display: flex; gap: 4px; padding-right: 8px; align-items: center; }
+.tracker-window-control { padding: 5px; border-radius: 5px; color: #eef2f7; background: none; border: 0; line-height: 0; min-height: 0; }
+.tracker-window-control:hover { background-color: #455061; }
+.tracker-copy { padding: 3px 9px; border-radius: 6px; font-size: 12px; color: #c3cad4; background-color: #2c3139; border: 0; font-family: inherit;
+  display: inline-flex; gap: 5px; align-items: center; min-height: 0; line-height: 16px; cursor: default; }
+.tracker-copy:hover { background-color: #404957; color: #f3f5f8; }
+.tracker-copy-compact { padding: 3px 5px; }
+.tracker-copy[aria-pressed="true"] { background-color: #3a6aa8; color: #ffffff; }
+.tracker-copied { color: #a7d797; }
+
+.tracker-queue-row { padding: 10px 12px; border-top: 1px solid #3b414a; display: flex; flex-direction: column; gap: 4px; }
+.tracker-queue-head { display: flex; align-items: center; gap: 10px; }
+.tracker-queue-number { color: #9ca3ad; width: 1.2em; }
+.tracker-queue-priority { height: 16px; padding: 0 5px; border-radius: 4px; background-color: #373e48; color: #d0d8e2; font-size: 11px; line-height: 16px; }
+.tracker-control-toggle { padding: 3px 10px; font-size: 12px; }
+.tracker-progress-line { display: flex; gap: 12px; align-items: center; }
+.tracker-progress { width: 180px; height: 8px; border-radius: 4px; background-color: #3a404a; flex: none; overflow: hidden; }
+.tracker-progress-fill { height: 8px; border-radius: 4px; background-color: #a6afbd; }
+.tracker-progress-working { background-color: #83bafa; }
+.tracker-progress-finished { background-color: #a7d797; }
+.tracker-progress-failed { background-color: #f28b82; }
+.tracker-progress-attention { background-color: #f4c36a; }
+.tracker-quota-track { flex: 1; min-width: 160px; width: auto; }
+.tracker-quota-figure { font-size: 12px; }
+.tracker-quota-note { padding: 8px 12px 0; }
+.tracker-quota-small { font-size: 11px; }
+.tracker-quota-day { font-size: 10px; color: #a6afbd; text-align: center; flex: 1; }
+.tracker-quota-days { display: flex; }
+.tracker-quota-legend { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.tracker-quota-chart { margin-top: 4px; display: block; width: 100%; height: 64px; }
+.tracker-control-panel { margin: 2px 12px 10px 24px; display: flex; flex-direction: column; gap: 10px; padding: 12px 14px;
+  border: 1px solid #3b414a; border-radius: 8px; background-color: #1d2126; }
+.tracker-control-fact { font-size: 11px; color: #b9c1cc; background-color: rgba(146, 156, 174, 0.12); padding: 3px 9px; border-radius: 10px; }
+.tracker-control-facts { display: flex; gap: 6px; flex-wrap: wrap; }
+.tracker-control-label { font-size: 13px; color: #dfe4ea; }
+.tracker-control-sub { font-size: 11px; color: #a6afbd; }
+
+.tracker-cluster-section { font-size: 12px; font-weight: bold; color: #a3acb9; padding: 4px 0 6px 4px; }
+.tracker-cluster-card { display: flex; flex-direction: column; gap: 7px; padding: 10px 12px; border-radius: 9px; border: 1px solid #3a414b;
+  background-color: #23272e; margin-bottom: 10px; }
+.tracker-cluster-grid { display: grid; grid-template-columns: 12px max-content minmax(0, 1fr) max-content; gap: 6px 10px; align-items: center; }
+.tracker-cluster-measure-row { display: contents; }
+.tracker-cluster-dot { width: 11px; height: 11px; border-radius: 50%; background: #a7d797; }
+.tracker-cluster-host { font-weight: bold; color: #a9cff9; text-align: right; }
+.tracker-cluster-value { font-weight: bold; text-align: right; }
+.tracker-cluster-strip { display: block; width: 100%; height: 22px; }
+.tracker-cluster-line { display: block; width: 100%; height: 8px; }
+
+.tracker-thread-agents { display: flex; flex-wrap: wrap; gap: 5px; padding: 5px 10px 8px 26px; align-items: center; }
+.tracker-thread-agent { padding: 2px 8px; border-radius: 9px; font-size: 12px; font-weight: bold; background-color: rgba(255, 255, 255, 0.07);
+  border: 0; font-family: inherit; display: inline-flex; gap: 6px; align-items: center; min-height: 0; line-height: 16px; cursor: default; }
+.tracker-thread-agent:hover { background-color: rgba(255, 255, 255, 0.16); }
+.tracker-message-button { flex: 1; min-width: 0; text-align: left; border-radius: 6px; background: none; border: 0; color: inherit; font: inherit;
+  padding: 0; min-height: 0; cursor: default; }
+.tracker-message-button:hover { background-color: rgba(255, 255, 255, 0.05); }
+.tracker-help-text { font-size: 12px; color: #c9d0d9; overflow-wrap: break-word; }
+.tracker-sending-list { display: flex; flex-direction: column; gap: 6px; padding: 8px 12px 10px; }
+
+.tracker-ticket-bar { display: flex; gap: 12px; align-items: center; padding: 4px 14px 10px; }
+.tracker-control-primary { padding: 5px 12px; border-radius: 6px; font-size: 12px; background-color: #3a6aa8; color: #ffffff; border: 0;
+  font-family: inherit; min-height: 0; line-height: 16px; cursor: default; }
+.tracker-control-primary:hover { background-color: #4a7cc0; }
+.tracker-control-action { padding: 5px 12px; border-radius: 6px; font-size: 12px; background-color: #343a44; color: #eef2f7; border: 0;
+  font-family: inherit; min-height: 0; line-height: 16px; cursor: default; }
+.tracker-control-action:hover { background-color: #404957; }
+.tracker-ticket-row { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.tracker-ticket-body { font-size: 14px; color: #edf0f5; overflow-wrap: break-word; }
+.tracker-ticket-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tracker-ticket-wait { font-size: 12px; color: #c4a7f2; }
+.tracker-ticket-actions { display: flex; gap: 6px; padding-top: 2px; justify-content: flex-end; flex-wrap: wrap; }
+.tracker-ticket-card { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; border: 1px solid #474e58; border-radius: 8px;
+  background-color: #25292f; margin: 0 0 12px; }
+.tracker-ticket-caption { font-size: 11px; font-weight: bold; color: #8f98a6; padding-top: 6px; }
+.tracker-ticket-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.tracker-ticket-chip { padding: 4px 11px; border-radius: 12px; font-size: 12px; color: #c3cad4; background-color: #30353d; border: 0; font-family: inherit;
+  min-height: 0; line-height: 16px; cursor: default; }
+.tracker-ticket-chip:hover { background-color: #3b414b; color: #f3f5f8; }
+.tracker-ticket-chip[aria-pressed="true"] { background-color: #3a6aa8; color: #ffffff; }
+.tracker-ticket-entry { min-height: 52px; resize: vertical; background: #24282e; color: #edf0f4; border: 1px solid #505761; border-radius: 7px;
+  padding: 8px 10px; font: inherit; font-size: 13px; }
+
+.tracker-history-hit { font-size: 12px; color: #a6afbd; overflow-wrap: break-word; }
+.tracker-history-hit b { color: #c9d0d9; text-decoration: underline; }
+.tracker-history-nav { display: flex; gap: 10px; align-items: center; justify-content: flex-end; font-size: 12px; color: #c3cad4; }
+.tracker-round { width: 26px; height: 26px; border-radius: 13px; background-color: #2c3139; color: #dfe4ea; border: 0; padding: 0; min-height: 0;
+  font: inherit; line-height: 26px; cursor: default; }
+.tracker-round:hover { background-color: #404957; }
+.tracker-round:disabled { color: #5f6670; background-color: #2a2e34; }
+.tracker-context { display: flex; flex-direction: column; gap: 4px; }
+.tracker-context .tracker-help-text { color: #b4bbc5; }
+.tracker-context b { color: #dfe4ea; text-decoration: underline; }
+.tracker-context-current { color: #dfe4ea !important; }
+
+.tracker-info-section { font-size: 12px; font-weight: bold; color: #a3acb9; padding: 8px 0 8px 24px; }
+.tracker-info-row { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-top: 1px solid #3b414a; font-size: 13px; color: #c9d0d9; }
+.tracker-info-row:first-child { border-top: 0; }
+.tracker-info-detail { padding: 0 14px 10px 36px; font-size: 12px; color: #a6afbd; display: flex; flex-direction: column; gap: 3px; }
+.tracker-expander { background: none; border: 0; color: inherit; font: inherit; padding: 0; text-align: left; flex: 1; min-height: 0; cursor: default; }
+.tracker-file-chip { padding: 2px 10px; border-radius: 10px; background: #30353d; font-size: 11px; font-weight: bold; color: #c3cad4; letter-spacing: .02em; }
+.tracker-check { color: #a7d797; }
+
+.tracker-tooltip { position: absolute; z-index: 60; font-size: 12px; color: #eef2f7; background-color: #121519; border: 1px solid #4a515c;
+  border-radius: 6px; padding: 6px 9px; max-width: 360px; white-space: pre-line; pointer-events: none; }
+.tracker-setting { display: flex; gap: 16px; padding: 10px 14px; border-top: 1px solid #3b414a; align-items: center; }
+.tracker-setting:first-child { border-top: 0; }
+.tracker-setting-label { font-size: 13px; color: #edf0f5; padding-bottom: 2px; }
+.tracker-settings-section { font-size: 12px; font-weight: bold; color: #a3acb9; padding: 8px 4px 6px; }
+.tracker-settings-card { border: 1px solid #474e58; border-radius: 8px; background-color: #25292f; margin-bottom: 6px; }
+.tracker-segments { display: flex; padding: 2px; border-radius: 7px; background-color: #1d2025; flex: none; }
+.tracker-segment { padding: 4px 11px; border-radius: 5px; font-size: 12px; color: #b4bbc5; background: none; border: 0; font-family: inherit;
+  min-height: 0; line-height: 16px; cursor: default; }
+.tracker-segment:hover { color: #f3f5f8; }
+.tracker-segment[aria-pressed="true"] { background-color: #4a5566; color: #ffffff; }
+.tracker-help-text-block { padding: 6px 14px 10px; font-size: 12px; color: #c9d0d9; display: flex; flex-direction: column; gap: 6px; }
+
+/* The ▾ window list. */
+.tracker-nav-menu { position: absolute; z-index: 40; width: 340px; background: #303030; border: 1px solid #3c3c3c; border-radius: 12px; padding: 6px 0;
+  color: #e9edf2; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5); }
+.tracker-nav-item { display: flex; gap: 10px; align-items: center; padding: 6px 16px; width: 100%; box-sizing: border-box; background: none; border: 0;
+  color: inherit; font: inherit; text-align: left; min-height: 0; cursor: default; }
+.tracker-nav-item:hover, .tracker-nav-item:focus-visible { background: rgba(255, 255, 255, 0.1); outline: none; }
+.tracker-nav-item .grow { flex: 1; min-width: 0; overflow-wrap: break-word; }
+.tracker-nav-sep { height: 1px; background: #444; margin: 6px 12px; }
+
+/* Okabe-Ito colours for states (Settings › Appearance › State colors). */
+.tracker-colorblind .tracker-attention, .tracker-colorblind .tracker-chip-attention { color: #e69f00; }
+.tracker-colorblind .tracker-working, .tracker-colorblind .tracker-chip-working { color: #56b4e9; }
+.tracker-colorblind .tracker-waiting, .tracker-colorblind .tracker-chip-waiting { color: #cc79a7; }
+.tracker-colorblind .tracker-failed, .tracker-colorblind .tracker-chip-failed { color: #d55e00; }
+.tracker-colorblind .tracker-finished, .tracker-colorblind .tracker-chip-finished { color: #009e73; }
+.tracker-colorblind .tracker-progress-working { background-color: #56b4e9; }
+.tracker-colorblind .tracker-progress-finished { background-color: #009e73; }
+.tracker-colorblind .tracker-progress-failed { background-color: #d55e00; }

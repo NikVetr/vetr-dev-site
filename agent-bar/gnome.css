@@ -1,0 +1,230 @@
+/* The simulated Ubuntu 22.04 desktop: GNOME Shell's top bar and dock, Yaru-dark window frames, and the
+   apps' window contents. It keeps GNOME's own dark look in both page themes; only the wallpaper dims. */
+
+.screen { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; background: #fff;
+  font-family: "DejaVu Sans", Cantarell, Ubuntu, "Noto Sans", "Segoe UI", system-ui, sans-serif; font-size: 14.667px; line-height: 1.2;
+  color: #f2f2f2; user-select: none; -webkit-user-select: none; contain: strict; }
+/* Undo the site's button look inside the simulated desktop (classes below set their own). */
+:where(.screen) button { font: inherit; font-weight: inherit; color: inherit; background: none; border: 0; border-radius: 0; padding: 0; min-height: 0; cursor: default; }
+:where(.screen) input, :where(.screen) textarea { font: inherit; color: inherit; min-height: 0; }
+/* The site's 44 px touch height does not fit a 32 px top bar; the phone layout sets its own targets. */
+.screen:not(.phone) :is(button, input, textarea) { min-height: 0 !important; }
+.wallpaper { position: absolute; inset: 32px 0 0 0; background: #fff url("../assets/pets_footer_2000.webp") no-repeat center bottom / 100% auto; }
+@media (max-width: 1100px) { .wallpaper { background-image: url("../assets/pets_footer_1000.webp"); } }
+:root[data-theme="dark"] .wallpaper { filter: brightness(0.74) saturate(0.9); }
+
+/* Top bar */
+.gnome-panel { position: absolute; left: 0; top: 0; right: 0; height: 32px; background: #000; display: grid;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(0, 1fr); align-items: stretch; font-weight: bold; z-index: 30; white-space: nowrap; }
+/* GNOME centres the clock; here a crowded left half pushes it right instead of overlapping it. */
+.panel-left, .panel-right, .panel-center { display: flex; align-items: stretch; min-width: 0; }
+.panel-right { justify-content: space-between; }
+.panel-button { display: flex; align-items: center; padding: 0 12px; margin: 3px 0; border-radius: 99px; border: 0; background: transparent;
+  color: #f2f2f2; font: inherit; min-height: 0; cursor: default; }
+.panel-button:hover, .panel-button[aria-expanded="true"] { background: rgba(242, 242, 242, 0.15); }
+.panel-button:focus-visible { outline: 2px solid #78aeed; outline-offset: -2px; }
+.panel-agent { margin: 3px 0; }
+.panel-clock { padding: 0 12px; white-space: pre; }
+.panel-system { gap: 14px; padding: 0 14px; margin-right: 4px; }
+.panel-system svg { display: block; }
+.tracker-nav-arrow { color: #c3cad4; padding: 0 9px; }
+
+/* Dock: Ubuntu's, on the left, from the top bar to the bottom. */
+.dock { position: absolute; left: 0; top: 32px; bottom: 0; width: 64px; background: rgba(28, 28, 28, 0.92); z-index: 20;
+  display: flex; flex-direction: column; align-items: center; padding: 6px 0; gap: 4px; box-sizing: border-box; }
+.dock-item { position: relative; width: 56px; height: 52px; display: grid; place-items: center; border-radius: 10px; border: 0;
+  background: transparent; padding: 0; min-height: 0; cursor: default; }
+.dock-item:hover, .dock-item:focus-visible { background: rgba(255, 255, 255, 0.12); outline: none; }
+.dock-item.focused { background: rgba(255, 255, 255, 0.08); }
+.dock-item .dots { position: absolute; left: 2px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 3px; }
+.dock-item .dots i { width: 4px; height: 4px; border-radius: 50%; background: #e95420; display: block; }
+.dock-apps { margin-top: auto; }
+.dock-label { position: absolute; left: 64px; white-space: nowrap; background: rgba(20, 20, 20, 0.95); color: #fff; font-size: 12px;
+  font-weight: normal; padding: 5px 9px; border-radius: 6px; pointer-events: none; z-index: 50; }
+
+/* Windows */
+.desktop { position: absolute; left: 64px; top: 32px; right: 0; bottom: 0; }
+.window[hidden] { display: none; }
+.window { position: absolute; display: flex; flex-direction: column; border-radius: 10px 10px 0 0; overflow: hidden; background: #242424;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 8px 26px rgba(0, 0, 0, 0.45); color: #fff; font-weight: normal; }
+.window.maximized { border-radius: 0; box-shadow: none; }
+.window.focused { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 12px 40px rgba(0, 0, 0, 0.6); }
+.window:not(.focused) .titlebar { color: #b8b8b8; }
+.titlebar { flex: none; height: 38px; display: flex; align-items: center; background: #303030; padding: 0 6px 0 10px; gap: 8px;
+  border-bottom: 1px solid #1e1e1e; cursor: default; touch-action: none; }
+.window:not(.focused) .titlebar { background: #262626; }
+.titlebar .title { flex: 1; text-align: center; font-weight: bold; font-size: 13.5px; min-width: 0; overflow-wrap: break-word;
+  white-space: normal; line-height: 1.15; }
+.titlebar .lead { display: flex; gap: 4px; min-width: 64px; }
+.wm-buttons { display: flex; gap: 6px; }
+.wm-button { width: 24px; height: 24px; border-radius: 12px; border: 0; padding: 0; display: grid; place-items: center; background: rgba(255, 255, 255, 0.08);
+  color: #e8e8e8; min-height: 0; cursor: default; }
+.wm-button:hover { background: rgba(255, 255, 255, 0.18); }
+.wm-button.close:hover { background: #e95420; color: #fff; }
+.wm-button:focus-visible { outline: 2px solid #78aeed; }
+.window-body { flex: 1; min-height: 0; display: flex; position: relative; }
+
+/* VS Code (its own title bar and dark theme) */
+.vscode .titlebar { background: #1f1f1f; height: 32px; border-bottom: 1px solid #2b2b2b; font-size: 12px; }
+.window.vscode:not(.focused) .titlebar { background: #181818; }
+.vscode .titlebar .title { font-weight: normal; font-size: 12.5px; color: #cccccc; }
+.vscode .titlebar .menu { display: flex; gap: 10px; color: #cccccc; font-size: 12px; font-weight: normal; }
+.vscode .wm-button { width: 22px; height: 22px; background: none; }
+.vscode .wm-button:hover { background: rgba(255, 255, 255, 0.12); }
+.code-activity { width: 42px; flex: none; background: #181818; border-right: 1px solid #2b2b2b; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 10px; }
+.code-activity i { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #868686; display: block; box-sizing: border-box; }
+.code-activity i.on { border-color: #d7d7d7; }
+.code-main { flex: 1; min-width: 0; display: flex; flex-direction: column; background: #1f1f1f; }
+.code-tabs { flex: none; display: flex; background: #181818; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid #2b2b2b; }
+.code-tab { display: flex; align-items: center; gap: 6px; padding: 0 12px; height: 34px; font-size: 12.5px; color: #9d9d9d; background: #181818;
+  border: 0; border-right: 1px solid #2b2b2b; border-top: 1px solid transparent; white-space: nowrap; min-height: 0; flex: none; max-width: 230px;
+  font-family: inherit; cursor: default; }
+.code-tab.active { background: #1f1f1f; color: #fff; border-top-color: #0078d4; }
+.code-tab:focus-visible { outline: 1px solid #0078d4; outline-offset: -1px; }
+.code-tab .tab-label { min-width: 0; overflow-wrap: break-word; white-space: normal; text-align: left; line-height: 1.1; }
+.code-editor { flex: 1; min-height: 0; overflow: hidden; padding: 8px 0; font: 12.5px/1.55 "DejaVu Sans Mono", "Ubuntu Mono", ui-monospace, monospace; color: #cccccc; }
+.code-editor .ln { display: inline-block; width: 3.2em; text-align: right; padding-right: 1.4em; color: #6e7681; }
+.code-editor .kw { color: #569cd6; } .code-editor .fn { color: #dcdcaa; } .code-editor .str { color: #ce9178; } .code-editor .cm { color: #6a9955; } .code-editor .num { color: #b5cea8; }
+.code-status { flex: none; height: 22px; display: flex; align-items: center; gap: 14px; padding: 0 10px; background: #181818; border-top: 1px solid #2b2b2b;
+  color: #9d9d9d; font-size: 11.5px; white-space: nowrap; overflow: hidden; }
+.code-status .remote { background: #0078d4; color: #fff; margin-left: -10px; padding: 0 9px; height: 100%; display: flex; align-items: center; }
+.code-side { width: 36%; max-width: 320px; min-width: 200px; flex: none; border-left: 1px solid #2b2b2b; background: #181818; display: flex; flex-direction: column; min-height: 0; }
+.code-side-head { flex: none; padding: 8px 12px; font-size: 11px; letter-spacing: .06em; color: #cccccc; text-transform: uppercase; display: flex; gap: 8px; align-items: center; }
+
+/* A chat panel: VS Code's Claude Code tab and Codex sidebar, the Antigravity agent and the Codex app. */
+.chat { flex: 1; min-height: 0; display: flex; flex-direction: column; font-size: 13px; }
+.chat-log { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; scrollbar-width: thin;
+  scrollbar-color: #555 transparent; user-select: text; -webkit-user-select: text; }
+.chat-title { font-weight: bold; font-size: 12.5px; color: #e6e6e6; padding: 8px 14px 0; display: flex; gap: 6px; align-items: baseline; }
+.msg { line-height: 1.45; overflow-wrap: break-word; }
+.msg-you { align-self: flex-end; max-width: 86%; background: #2d2d30; border: 1px solid #3c3c3c; border-radius: 10px; padding: 6px 10px; color: #f0f0f0; }
+.msg-agent { color: #dcdcdc; }
+.msg-tool, .msg-output { font: 11.5px/1.45 "DejaVu Sans Mono", "Ubuntu Mono", ui-monospace, monospace; color: #9cdcfe; background: #141414;
+  border-radius: 6px; padding: 5px 8px; white-space: pre-wrap; }
+.msg-output { color: #b5b5b5; }
+.msg-note, .msg-wake { font-size: 11.5px; color: #f4c36a; border-left: 2px solid #dba647; padding: 3px 8px; background: rgba(192, 134, 35, 0.10); }
+.msg-question, .msg-approval { border: 1px solid #5a4a2a; background: #2b2619; border-radius: 8px; padding: 8px 10px; color: #f3e3c0; }
+.msg-approval code { color: #ffd78a; }
+.msg-answer { align-self: flex-end; color: #a7d797; font-size: 12px; }
+.chat-status { flex: none; font-size: 11.5px; padding: 3px 14px; color: #9d9d9d; display: flex; gap: 6px; align-items: center; }
+.chat-status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chat-input { flex: none; margin: 0 10px 10px; border: 1px solid #3c3c3c; border-radius: 8px; background: #252526; display: flex; flex-direction: column; }
+.chat-input textarea { resize: none; border: 0; background: transparent; color: #f0f0f0; font: inherit; font-size: 16px; padding: 8px 10px;
+  min-height: 2.4em; outline: none; user-select: text; -webkit-user-select: text; }
+.chat-input:focus-within { border-color: #0078d4; }
+.chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 8px 8px; align-items: center; }
+.chat-suggest .hint { color: #8a8a8a; font-size: 11px; margin-right: auto; }
+.suggest { border: 1px solid #4a4a4a; background: #2f2f2f; color: #e8e8e8; border-radius: 12px; font-size: 12px; padding: 3px 10px; min-height: 0;
+  line-height: 16px; cursor: default; text-align: left; }
+.suggest:hover, .suggest:focus-visible { background: #3a3a3a; border-color: #0078d4; outline: none; }
+.suggest.send { background: #0078d4; border-color: #0078d4; color: #fff; }
+
+/* GNOME Terminal (Ubuntu's aubergine profile) */
+.terminal .window-body { background: #300a24; }
+.term { flex: 1; min-height: 0; display: flex; flex-direction: column; font: 13px/1.4 "Ubuntu Mono", "DejaVu Sans Mono", ui-monospace, monospace; color: #ffffff; }
+.term .chat-log { gap: 4px; padding: 8px 10px; scrollbar-color: #6b3b5c transparent; }
+.term .msg { white-space: pre-wrap; }
+.term .msg-you { align-self: stretch; max-width: none; background: none; border: 0; border-radius: 0; padding: 0; color: #fff; }
+.term .msg-you::before { content: "› "; color: #8ae234; font-weight: bold; }
+.term .msg-agent::before { content: "• "; color: #e6a187; }
+.term .codex .msg-agent::before { color: #79cfbf; }
+.term .copilot .msg-agent::before { color: #e892d0; }
+.term .msg-tool, .term .msg-output { background: none; padding: 0; font: inherit; }
+.term .msg-tool { color: #8ae234; }
+.term .msg-tool::before { content: "$ "; color: #8ae234; }
+.term .msg-output { color: #d3d7cf; padding-left: 2ch; }
+.term .msg-question, .term .msg-approval { background: none; border: 1px solid #a07a3a; border-radius: 0; color: #fce94f; }
+.term .msg-note { background: none; }
+.term .msg-answer { align-self: stretch; color: #8ae234; }
+.term-prompt { flex: none; display: flex; align-items: center; gap: 0; padding: 0 10px 2px; }
+.term-prompt label { color: #8ae234; font-weight: bold; }
+.term-prompt input { flex: 1; background: transparent; border: 0; color: #fff; font: inherit; font-size: 16px; outline: none; min-height: 0; padding: 2px 4px;
+  user-select: text; -webkit-user-select: text; caret-color: #fff; }
+.term .chat-suggest { padding: 2px 10px 8px; }
+.term .suggest { background: #4a1d3c; border-color: #7a4a6c; font-family: inherit; border-radius: 3px; }
+.term .suggest:hover, .term .suggest:focus-visible { background: #5e2a4d; border-color: #fce94f; }
+.term .chat-status { color: #d3d7cf; padding: 2px 10px; }
+.term .chat-suggest .hint { color: #b7a1b0; }
+
+/* Antigravity IDE and the Codex app: generic dark app frames. */
+.ide .window-body { background: #16181d; }
+.ide-side { width: 38%; min-width: 180px; flex: none; background: #1b1e24; border-right: 1px solid #2a2e36; padding: 10px; font-size: 12px; color: #a8afba;
+  font-family: "DejaVu Sans Mono", ui-monospace, monospace; line-height: 1.7; }
+.app .window-body { background: #1d1d1f; }
+.app-side { width: 34%; min-width: 150px; flex: none; background: #151517; border-right: 1px solid #2c2c2e; padding: 10px 8px; font-size: 12px; display: flex; flex-direction: column; gap: 2px; }
+.app-side .thread { padding: 5px 8px; border-radius: 6px; color: #c7c7cc; }
+.app-side .thread.on { background: #2c2c2e; color: #fff; }
+
+/* Notifications: a GNOME banner under the top bar. */
+.banners { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); z-index: 45; display: flex; flex-direction: column; gap: 8px; }
+.banner { width: 460px; display: flex; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 14px; background: #3f3f3f;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45); color: #fff; border: 0; text-align: left; font: inherit; min-height: 0; cursor: default; }
+.banner:hover { background: #4a4a4a; }
+.banner:focus-visible { outline: 2px solid #78aeed; }
+.banner .text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.banner strong { font-size: 14px; }
+.banner span { font-size: 13.5px; color: #e0e0e0; font-weight: normal; overflow-wrap: break-word; }
+
+/* Phone and narrow screens: a stacked view. The top bar wraps into rows of touch-sized parts, the dropdown opens
+   full width under it, the window in front fills the screen below, and a strip of window buttons replaces the dock. */
+.screen.phone { position: relative; transform: none !important; width: 100% !important; height: auto !important; contain: none; overflow: hidden;
+  display: flex; flex-direction: column; background: #000; }
+.phone .wallpaper { display: none; }
+.phone .gnome-panel { position: relative; order: 1; height: auto; display: flex; flex-wrap: wrap; align-items: center; padding: 2px 4px 6px; gap: 0 2px; }
+/* The parts flow as one wrapping row, so each line fills before the next starts. */
+.phone .panel-left, .phone .agent-bar { display: contents; }
+.phone .panel-right { flex: 1 1 100%; flex-wrap: wrap; align-items: center; }
+.phone .panel-center, .phone [data-act="activities"], .phone .panel-system, .phone .tracker-bar-divider { display: none; }
+.phone .agent-bar-part, .phone .panel-button { height: 40px; margin: 0; padding: 0 8px; }
+.phone .tracker-quick { flex-wrap: wrap; gap: 6px; margin: 2px 0 0; padding: 0 4px; }
+.phone .tracker-quick-button { min-height: 36px; padding: 0 12px; border-radius: 18px; }
+.phone .tracker-quick-group { padding: 0 4px 0 12px; }
+.phone .tracker-quick-group-name { min-height: 36px !important; }
+.phone .tracker-quick-bubble { min-width: 28px; height: 28px; line-height: 28px; border-radius: 14px; font-size: 13px; padding: 0 4px; min-height: 28px !important; }
+.phone .menus { order: 2; position: relative; }
+.phone .desktop { order: 3; position: relative; left: 0; top: 0; height: var(--phone-desk, 70vh); background: #fff url("../assets/pets_footer_1000.webp") no-repeat 22% bottom / auto 44%; }
+:root[data-theme="dark"] .phone .desktop { background-color: #bdbdbd; }
+.phone .dock { order: 4; position: relative; top: 0; width: auto; height: auto; flex-direction: row; overflow-x: auto; padding: 6px; gap: 6px;
+  justify-content: flex-start; background: #1c1c1c; scrollbar-width: thin; }
+.phone .dock-item { flex: none; width: auto; height: 48px; padding: 0 10px 0 6px; display: flex; gap: 6px; align-items: center; color: #eee; font-size: 12px;
+  font-weight: normal; background: rgba(255, 255, 255, 0.05); }
+.phone .dock-item.focused { background: rgba(255, 255, 255, 0.18); box-shadow: inset 0 -3px 0 #e95420; }
+.phone .dock-item svg { width: 28px; height: 28px; }
+.phone .window { inset: 0 !important; width: auto !important; height: auto !important; border-radius: 0; }
+.phone .window.restored { inset: 16px 12px 16px 12px !important; border-radius: 10px 10px 0 0; }
+.phone .window:not(.front) { display: none; }
+.phone .titlebar { height: auto; min-height: 44px; }
+.phone .wm-button { width: 36px; height: 36px; border-radius: 18px; }
+.phone .code-activity, .phone .vscode .menu, .phone .ide-side, .phone .app-side { display: none; }
+.phone .code-side { width: 100%; max-width: none; min-width: 0; border-left: 0; }
+.phone .code-main.hidden { display: none; }
+.phone .code-tab { height: 40px; }
+.phone .banners { position: fixed; top: auto; bottom: 12px; left: 8px; right: 8px; transform: none; }
+.phone .banner { width: auto; }
+.phone .chat-input textarea, .phone .term-prompt input, .phone .tracker-search, .phone .tracker-ticket-entry { font-size: 16px; }
+.phone .suggest { min-height: 36px; padding: 6px 12px; }
+
+/* The dropdown on a phone: full width, its rows wrapping. */
+.phone .tracker-popup.main, .phone .tracker-popup.side { position: relative; left: 0 !important; top: 0 !important; border-radius: 0 0 12px 12px; box-shadow: none; }
+.phone .tracker-popup.side { margin-top: 6px; border-radius: 12px; }
+.phone .tracker-menu, .phone .tracker-side { width: auto; }
+.phone .tracker-heading { flex-wrap: wrap; padding: 10px 10px 6px; gap: 8px 14px; }
+.phone .tracker-heading-main { flex: 1 1 calc(100% - 90px); }
+.phone .tracker-header-actions { order: 1; }
+.phone .tracker-summary { order: 2; flex: 1 1 26%; padding-left: 0; }
+.phone .tracker-filters { padding: 0 6px; }
+.phone .tracker-tabs .tracker-filter { padding: 8px 9px; }
+.phone .tracker-search { margin: 2px 6px 3px; width: calc(100% - 12px); }
+.phone .tracker-toolbar { padding: 0 6px; }
+.phone .tracker-scroll { padding: 0 4px; }
+.phone .tracker-project-heading { flex-wrap: wrap; row-gap: 2px; }
+.phone .tracker-conversation { padding: 10px 8px; align-items: flex-start; }
+.phone .tracker-row-provider { width: 52px; flex-direction: column; align-items: flex-start; gap: 2px; }
+.phone .tracker-row-heading { flex-wrap: wrap; }
+.phone .tracker-row-actions { flex-wrap: wrap; }
+.phone .tracker-progress-line { flex-wrap: wrap; }
+.phone .tracker-cluster-grid { grid-template-columns: 12px max-content minmax(0, 1fr); }
+.phone .tracker-cluster-value { grid-column: 2 / -1; text-align: left; }
+.phone .tracker-info-row { flex-wrap: wrap; }
+.phone .tracker-nav-menu { position: relative; left: 0 !important; top: 0 !important; width: auto !important; border-radius: 0 0 12px 12px; }
+.phone .tracker-setting { flex-wrap: wrap; }

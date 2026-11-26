@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Try Agent Bar, a GNOME top-bar app that tracks AI coding chats, in a simulated Ubuntu desktop with made-up chats.">
+  <title>Agent Bar — AI Coding Chats in the GNOME Top Bar (Demo)</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23e6a187'%3E%E2%9C%B3%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/tool-nav.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="gnome.css">
+  <link rel="stylesheet" href="tracker.css">
+  <script src="../shared/theme.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="site-header demo-header">
+    <div class="container header-row tool-header-row">
+      <div class="demo-title">
+        <a class="directory-back" href="../" aria-label="Back to vetr.dev" title="Back to vetr.dev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></a>
+        <h1>Agent Bar <span class="demo-kind">demo</span></h1>
+        <p class="demo-notice" id="sim-notice"><strong>A simulation</strong> with made-up chats: nothing here reads your computer.</p>
+      </div>
+      <div class="tool-header-actions">
+        <button type="button" id="tour-button" class="chip" aria-controls="tour" title="Start the guided tour (T)">Tour</button>
+        <a class="chip about-link" href="#about">About</a>
+        <button id="theme-toggle" type="button" class="chip" aria-pressed="false"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="stage" class="stage" aria-label="A simulated Ubuntu 22.04 desktop running Agent Bar">
+      <div id="screen" class="screen" data-screen>
+        <div class="wallpaper" aria-hidden="true"></div>
+        <div id="panel" class="gnome-panel" role="toolbar" aria-label="Top bar"></div>
+        <nav id="dock" class="dock" aria-label="Dock"></nav>
+        <div id="desktop" class="desktop"></div>
+        <div id="menus" class="menus"></div>
+        <div id="banners" class="banners" aria-live="polite"></div>
+      </div>
+      <div id="tour" class="tour" hidden></div>
+    </section>
+
+    <section id="about" class="about container" aria-labelledby="about-title">
+      <h2 id="about-title">What you are looking at</h2>
+      <p class="lede">Agent Bar shows what your AI coding agents (Claude Code, Codex, GitHub Copilot CLI and Antigravity) are doing, in the GNOME top bar. If several chats share a window, which one just finished? The top bar says, and one click takes you to that exact chat.</p>
+      <p><strong>This page is a simulation.</strong> The desktop, the chats, the windows and every number in them are made up and run in your browser: the projects belong to an imaginary user, Alex, and the agents reply from a script. The top bar and its dropdown copy Agent Bar's real layout, colours and wording, so you can try what clicking does. The real Agent Bar is a GNOME Shell extension with a background service; it is not a web page. <a href="https://github.com/NikVetr/agent-bar">Agent Bar on GitHub</a> · <a href="https://youtu.be/BdPWFaHbW_k">8-minute video tour</a></p>
+
+      <div class="about-grid">
+        <div>
+          <h3>Where it runs</h3>
+          <p>Today: <strong>GNOME Shell 42 on X11</strong>, as in Ubuntu 22.04. GNOME 43 and later, macOS (in the menu bar) and Windows (in the system tray) are planned.</p>
+          <h3>What each agent gets</h3>
+          <div class="table-scroll">
+            <table class="support">
+              <thead><tr><th scope="col"></th><th scope="col">Claude Code</th><th scope="col">Codex</th><th scope="col">Copilot CLI</th><th scope="col">Antigravity</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Status and review</th><td>✓ yes</td><td>✓ yes</td><td>✓ yes</td><td>✓ yes</td></tr>
+                <tr><th scope="row">Usage limits and cost</th><td>✓ yes</td><td>✓ yes</td><td>– no</td><td>– no</td></tr>
+                <tr><th scope="row">Messages between chats</th><td>✓ yes; waking idle chats is opt-in</td><td>✓ yes; waking chats open in VS Code is opt-in</td><td>– no</td><td>– no</td></tr>
+                <tr><th scope="row">History search, resume and export</th><td>✓ yes</td><td>✓ yes</td><td>– no</td><td>– no</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted">Claude Code runs in VS Code or a terminal; Codex in VS Code, a terminal or the ChatGPT desktop app; Copilot CLI in a terminal; Antigravity as its IDE, desktop app or CLI.</p>
+        </div>
+        <div>
+          <h3>Costs are estimates</h3>
+          <p>Dollar figures are what the recorded tokens would cost at API prices, including cache reads and writes. Subscription billing is separate.</p>
+          <h3>Privacy</h3>
+          <ul>
+            <li>History indexes only the words people and agents wrote: no tool calls, tool results or reasoning.</li>
+            <li>Hooks record turn events (starts, finishes, questions, approvals and failures), not message text.</li>
+            <li>Only two optional settings reach the network: <strong>Read Claude limits</strong> asks api.anthropic.com every 10 minutes, and <strong>Pull requests</strong> asks GitHub through your signed-in <code>gh</code>.</li>
+          </ul>
+          <h3>Optional extras</h3>
+          <p>The Queues and Cluster tabs follow the ROTA job scheduler. Without it, Agent Bar hides them.</p>
+        </div>
+      </div>
+
+      <h3>Using this demo</h3>
+      <ul class="keys">
+        <li><strong>Tour</strong> (or <kbd>T</kbd>) starts a short guided tour; <kbd>Esc</kbd> ends it, and <kbd>←</kbd> <kbd>→</kbd> step through it.</li>
+        <li>Each top-bar part is a button: <kbd>Tab</kbd> to it and press <kbd>Enter</kbd>. <kbd>Esc</kbd> closes the dropdown.</li>
+        <li>On a phone, the top bar wraps into rows and the window in front fills the screen; the strip under it switches windows.</li>
+        <li>Scripts and tests can drive the simulation through <code>window.AgentBarDemo</code> (see the site's README).</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
