@@ -39,7 +39,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     { target: () => q('.tracker-quick-group') || q('.tracker-quick'), text: 'Several chats in one project share a button: its name opens the longest-waiting one, and each <b>numbered bubble</b> opens one chat. Try a bubble.',
       done: (k, d) => k === 'focused' && d.mode === 'focus', cheer: 'Each bubble is one chat in that project.' },
     { target: () => q('.window.front .chat-suggest .suggest') || q('.window.front .chat-input, .window.front .term-prompt'), text: 'Answer the chat: pick a suggestion (or type and press Enter). Its turn starts, ● in the top bar counts it, and it comes back for review when it is done.',
-      done: (k) => k === 'prompt', cheer: 'Working now. Opening, answering or messaging a chat clears its review.' },
+      done: (k) => k === 'prompt', cheer: 'Working now. Opening a chat from Agent Bar, or writing to it, clears its review.' },
     { target: () => q('[data-part="queues"]'), text: 'Each part of the top bar opens its own tab. Click <b>Q 0 / 3</b>, the finished job queues, for Queues, then look through the other tabs.',
       done: (k, d) => k === 'open' && d.view === 'queues', cheer: 'Queues and Cluster follow the optional ROTA job scheduler.' },
     { target: () => q('.tracker-popup [data-view="history"]') || q('.tracker-bar-chats'), before: () => { if (ui.open !== 'menu') openMenu('queues'); },

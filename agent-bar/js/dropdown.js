@@ -397,9 +397,10 @@ function gitBody(sim, m) {
 // ------------------------------------------------------------------ Messages
 function messagesBody(sim, m, snap) {
   const q = m.otherQuery.toLowerCase();
-  const title = (key) => sim.byKey(key)?.title ?? key;
-  const projectOf = (key) => sim.byKey(key)?.project ?? '?';
-  const all = sim.state.messages.filter((msg) => `${msg.body} ${title(msg.sender)} ${title(msg.recipient)} ${projectOf(msg.sender)} ${projectOf(msg.recipient)}`.toLowerCase().includes(q)
+  // A scheduled message comes from the user, not from a chat.
+  const title = (key) => (key === 'user' ? 'You (scheduled)' : sim.byKey(key)?.title ?? key);
+  const projectOf = (key, other = '') => (key === 'user' ? sim.byKey(other)?.project ?? '?' : sim.byKey(key)?.project ?? '?');
+  const all = sim.state.messages.filter((msg) => `${msg.body} ${title(msg.sender)} ${title(msg.recipient)} ${projectOf(msg.sender, msg.recipient)} ${projectOf(msg.recipient)}`.toLowerCase().includes(q)
     && (m.messageFilter !== 'unread' || !msg.readAt));
   const threads = new Map();
   for (const msg of all) {
@@ -410,7 +411,7 @@ function messagesBody(sim, m, snap) {
   const list = [...threads.values()].map((items) => items.sort((a, b) => a.at - b.at)).sort((a, b) => b.at(-1).at - a.at(-1).at);
   const t = snap.now;
   // The loop guard's limits, per sending chat this hour.
-  const hour = sim.state.messages.filter((msg) => msg.at > t - 3600);
+  const hour = sim.state.messages.filter((msg) => msg.at > t - 3600 && msg.sender !== 'user');
   const senders = [...new Set(hour.map((msg) => msg.sender))].map((key) => [key, hour.filter((msg) => msg.sender === key).length]).sort((a, b) => b[1] - a[1]);
   let html = '';
   if (senders.length) {
@@ -430,9 +431,10 @@ function messagesBody(sim, m, snap) {
       const stranded = waiting > 0 && snap.stranded.includes(key);
       const mail = !sent.length ? '' : waiting ? `, ${waiting} unread${stranded ? ' until you start a turn there' : ''}` : ', read its messages';
       const envelope = sent.length ? `<span class="tracker-${stranded ? 'attention' : waiting ? 'help-bright' : 'muted'}">${waiting ? icon.mail(14) : icon.mailOpen(14)}</span>` : '';
+      if (key === 'user') return `${i ? '<span class="tracker-muted" aria-hidden="true">⇄</span>' : ''}<span class="tracker-thread-agent tracker-bright">You (scheduled)</span>`;
       return `${i ? '<span class="tracker-muted" aria-hidden="true">⇄</span>' : ''}<button type="button" class="tracker-thread-agent tracker-${key.split(':')[0]}" data-act="row" data-key="${esc(key)}" data-win="${esc(row?.window ?? '')}" data-fid="thread-${esc(key)}-${esc(first.id)}" aria-label="${esc(`Open ${title(key)}${mail}`)}"><span>${symbolOf(key)} ${esc(title(key))}</span>${envelope}</button>`;
     }).join('')}</div>`;
-    const [from, to] = pair.map(projectOf);
+    const [from, to] = [projectOf(pair[0], pair[1]), projectOf(pair[1], pair[0])];
     const body = items.map((msg) => {
       const open = m.openMessages.get(msg.id) ?? (!msg.readAt || msg === items.at(-1));
       return `<div class="tracker-conversation${msg.readAt ? '' : ' tracker-unread'}"><button type="button" class="tracker-message-button" data-act="fold-message" data-id="${msg.id}" data-fid="msg-${msg.id}" aria-expanded="${open}" aria-label="Expand or collapse message from ${esc(title(msg.sender))}"><span class="tracker-row"><span class="tracker-detail">${esc(`${symbolOf(msg.sender)} ${title(msg.sender)} → ${symbolOf(msg.recipient)} ${title(msg.recipient)} · ${age(msg.at, t)}`)}</span><span class="tracker-help-text">${esc(open ? msg.body : `${msg.body.split('\n')[0].slice(0, 90)}${msg.body.length > 90 ? '…' : ''}`)}</span></span></button><span class="tracker-chip tracker-chip-${msg.readAt ? 'muted' : 'attention'}">${msg.readAt ? 'Read' : 'Unread'}</span></div>`;
