@@ -189,7 +189,7 @@ function openMenu(view, { focus = false } = {}) {
   render();
   const scroll = menus.querySelector('[data-region="body"]');
   if (scroll && (!wasOpen || true)) scroll.scrollTop = 0;
-  if (focus) /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="tab-${view}"]`))?.focus();
+  if (focus) /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="tab-${view}"]`))?.focus({ preventScroll: true });
   told('open', { view });
 }
 function closeMenus({ restore = true } = {}) {
@@ -207,7 +207,7 @@ function toggleSmall(kind, anchor) {
   ui.returnFocus = anchor;
   ui.open = kind;
   render();
-  /** @type {HTMLElement|null} */ (menus.querySelector(`[data-menu="${kind}"] button`))?.focus();
+  /** @type {HTMLElement|null} */ (menus.querySelector(`[data-menu="${kind}"] button`))?.focus({ preventScroll: true });
 }
 
 /** Clicking a chat: a review shortcut always brings it forward; a dropdown row returns a window it borrowed. */
@@ -235,9 +235,9 @@ const actions = {
   'nav-window': (el) => { const id = el.dataset.win; closeMenus({ restore: false }); sim.activate({ key: null, window: id }, 'place'); },
   'nav-new': () => { closeMenus(); notifyLocal('Visual Studio Code', 'In Agent Bar this opens a new VS Code window, maximized. The demo has no more windows to open.'); },
   'nav-saved': () => { ui.open = null; openMenu('history'); },
-  tab: (el) => { openMenu(el.dataset.view); /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="tab-${el.dataset.view}"]`))?.focus(); },
+  tab: (el) => { openMenu(el.dataset.view); /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="tab-${el.dataset.view}"]`))?.focus({ preventScroll: true }); },
   page: (el) => { const target = el.dataset.page; m.page = m.page === target ? null : target; m.picker = null; m.side = null; render(); told('page', { page: m.page }); },
-  picker: (el) => { m.picker = m.picker === el.dataset.picker ? null : el.dataset.picker; render(); /** @type {HTMLElement|null} */ (menus.querySelector('.tracker-picker-list [aria-selected="true"]'))?.focus(); },
+  picker: (el) => { m.picker = m.picker === el.dataset.picker ? null : el.dataset.picker; render(); /** @type {HTMLElement|null} */ (menus.querySelector('.tracker-picker-list [aria-selected="true"]'))?.focus({ preventScroll: true }); },
   pick: (el) => {
     const [, , options] = pickerOptions(sim, m, m.picker);
     const value = options.find(([v]) => String(v) === el.dataset.value)[0];
@@ -245,7 +245,7 @@ const actions = {
     choosePicker(m, name, value);
     m.picker = null;
     render();
-    /** @type {HTMLElement|null} */ (menus.querySelector(`[data-picker="${name}"]`))?.focus();
+    /** @type {HTMLElement|null} */ (menus.querySelector(`[data-picker="${name}"]`))?.focus({ preventScroll: true });
   },
   collapse: (el) => { const key = el.dataset.section; m.collapsed.has(key) ? m.collapsed.delete(key) : m.collapsed.add(key); render(); },
   bulk: () => { if (m.collapsedAny) for (const k of m.keys) m.collapsed.delete(k); else for (const k of m.keys) m.collapsed.add(k); render(); },
@@ -269,7 +269,7 @@ const actions = {
   context: (el) => {
     m.context = m.context?.key === el.dataset.key ? null : { key: el.dataset.key, index: 0 };
     render();
-    /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="ctx-${CSS.escape(el.dataset.key)}"]`))?.focus();
+    /** @type {HTMLElement|null} */ (menus.querySelector(`[data-fid="ctx-${CSS.escape(el.dataset.key)}"]`))?.focus({ preventScroll: true });
     if (m.context) told('context', { key: el.dataset.key });
   },
   hit: (el) => { m.context.index = Math.max(0, m.context.index + Number(el.dataset.step)); render(); told('hit', { index: m.context.index }); },
@@ -282,7 +282,7 @@ const actions = {
     const result = sim.ticket(Number(el.dataset.ticket), el.dataset.do);
     if (el.dataset.do === 'start') { closeMenus({ restore: false }); ui.drafts[result.key] = sim.byKey(result.key).draft; render(); told('ticket-start', result); }
   },
-  'new-ticket': () => { m.ticketDraft = { body: '', project: sim.state.rows[0].project, when: 'now' }; render(); /** @type {HTMLElement|null} */ (menus.querySelector('[data-fid="ticket-body"]'))?.focus(); },
+  'new-ticket': () => { m.ticketDraft = { body: '', project: sim.state.rows[0].project, when: 'now' }; render(); /** @type {HTMLElement|null} */ (menus.querySelector('[data-fid="ticket-body"]'))?.focus({ preventScroll: true }); },
   draft: (el) => { m.ticketDraft[el.dataset.field] = el.dataset.value; render(); },
   'cancel-ticket': () => { m.ticketDraft = null; render(); },
   'add-ticket': () => { sim.addTicket(m.ticketDraft); m.ticketDraft = null; render(); },
@@ -369,7 +369,7 @@ screen.addEventListener('keydown', (event) => {
   const target = /** @type {HTMLElement} */ (event.target);
   if (event.key === 'Escape' && ui.open) {
     event.preventDefault();
-    if (m.picker) { const name = m.picker; m.picker = null; render(); /** @type {HTMLElement|null} */ (menus.querySelector(`[data-picker="${name}"]`))?.focus(); return; }
+    if (m.picker) { const name = m.picker; m.picker = null; render(); /** @type {HTMLElement|null} */ (menus.querySelector(`[data-picker="${name}"]`))?.focus({ preventScroll: true }); return; }
     if (m.side) { m.side = null; render(); return; }
     closeMenus();
     return;
@@ -395,7 +395,7 @@ screen.addEventListener('keydown', (event) => {
     event.preventDefault();
     const items = /** @type {HTMLElement[]} */ ([...target.closest('[role="menu"], [role="listbox"]').querySelectorAll('button')]);
     const i = items.indexOf(target);
-    items[(i + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus();
+    items[(i + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus({ preventScroll: true });
   }
 });
 
@@ -493,6 +493,8 @@ function startTimer() {
   clearInterval(timer);
   if (ui.running && !document.hidden) timer = window.setInterval(() => sim.tick(), TICK_MS);
 }
+// Keyboard focus can scroll an overflow-hidden box to show its target; the desktop itself never scrolls.
+for (const box of [stage, screen, desktop]) box.addEventListener('scroll', () => { box.scrollTop = 0; box.scrollLeft = 0; });
 document.addEventListener('visibilitychange', startTimer);
 document.addEventListener('themechange', () => render());
 new ResizeObserver(() => layout()).observe(stage);

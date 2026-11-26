@@ -8,7 +8,6 @@ body { margin: 0; }
 .demo-title h1 { font-size: 1.15rem; margin: 0; white-space: nowrap; }
 .demo-kind { font-weight: 500; color: var(--muted); font-size: 0.95rem; }
 .demo-notice { margin: 0; color: var(--muted); font-size: 0.88rem; }
-}
 .demo-notice strong { color: var(--warn); }
 .about-link { text-decoration: none; display: inline-flex; align-items: center; }
 #tour-button[aria-pressed="true"] { background: var(--primary-soft); }
@@ -19,6 +18,7 @@ body { margin: 0; }
   .demo-notice { order: 3; flex-basis: 100%; font-size: 0.8rem; }
   .tool-header-actions { gap: 0.3rem; }
   .about-link { display: none; }
+}
 
 .stage { position: relative; margin: 0 auto; overflow: hidden; background: #000; touch-action: manipulation; }
 .stage.phone { overflow: visible; background: #000; }
@@ -41,7 +41,7 @@ body { margin: 0; }
    who runs to the next thing to try and says what it does. The run is the feature, so it is the one motion here;
    with reduced motion it appears beside its target instead. */
 .tour { position: absolute; inset: 0; pointer-events: none; z-index: 70; }
-.tour-guide { position: absolute; left: 0; top: 0; width: 84px; height: 84px; pointer-events: auto; will-change: transform; }
+.tour-guide { position: absolute; left: 0; top: 0; width: 96px; height: 96px; pointer-events: auto; will-change: transform; }
 .tour-guide svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45)); }
 .tour-guide.flip svg { transform: scaleX(-1); }
 .tour-guide.cheer svg { animation: tour-hop 0.5s ease-out 2; }

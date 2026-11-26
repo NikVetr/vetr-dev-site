@@ -30,7 +30,8 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
   /** Each step: where Biscuit goes, what it says, what counts as having tried it, and what it says then. */
   const steps = [
     { target: () => q('.tracker-bar-chats'), text: 'This is a pretend Ubuntu desktop with Agent Bar in its top bar. <b>✳ 3 / 5</b> means three of the five open Claude chats need review; ⌘ is Codex. Click the counts to open the dropdown.',
-      done: (k, d) => k === 'open' && d.view === 'conversations', cheer: 'That is every open chat, by project and window.' },
+      done: (k, d) => k === 'open' && d.view === 'conversations', already: () => ui.open === 'menu' && ui.view === 'conversations',
+      cheer: 'That is every open chat, by project and window.' },
     { target: () => shortcut('tune') || q('.tracker-quick [data-act="shortcut"]'), text: 'Buttons after the clock are chats that need you, the longest waiting first. Click <b>✳ sampler-study</b>.',
       done: (k, d) => k === 'focused' && d.mode === 'focus', cheer: 'Its window came forward, maximized, with that exact chat showing, even though three chats share that window.' },
     { target: () => q('.tracker-bar-chats'), text: 'Now open the dropdown and click that same chat’s row again (it says “click to return”). Its window goes back where it was.',
@@ -45,7 +46,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
       text: 'In <b>History</b>, search for words you or an agent wrote. Open History and type <b>warmup step</b> in the search box.',
       done: (k, d) => k === 'search' && d.view === 'history' && /\S+\s+\S+/.test(d.query), cheer: 'Every word has to start a word in the same message.' },
     { target: () => q('.tracker-popup [data-act="context"]'), text: 'Click <b>Show context</b> to read the conversation around a match.',
-      done: (k) => k === 'context', cheer: '' },
+      done: (k) => k === 'context', already: () => !!q('.tracker-popup .tracker-context'), cheer: '' },
     { target: () => q('.tracker-popup [data-act="hit"][data-step="1"]'), text: 'Use <b>›</b> to step to the next match, newest message first.',
       done: (k) => k === 'hit', cheer: 'That is how you find which chat it was in.' },
     { target: () => q(`[data-win="${CSS.escape(winOf('retry') ?? '')}"] .suggest.send`) || shortcut('retry') || q(`[data-win="${CSS.escape(winOf('retry') ?? '')}"]`),
@@ -86,12 +87,12 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
       ring.hidden = true;
       const x = 24, y = 60;
       jump(x, y, move);
-      layoutBubble(x, y, false);
+      layoutBubble(x, y, null);
       return;
     }
     ring.hidden = false;
     Object.assign(ring.style, { left: `${r.left - s.left - 4}px`, top: `${r.top - s.top - 4}px`, width: `${r.width + 8}px`, height: `${r.height + 8}px` });
-    const size = guide.offsetWidth || 84;
+    const size = guide.offsetWidth || 96;
     // Beside the target, nose towards it: below it when there is room, and left of it near the right edge.
     const flip = r.left - s.left > s.width * 0.6;
     let x = flip ? r.left - s.left - size + 6 : r.right - s.left - 6;
@@ -101,7 +102,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     y = Math.max(0, Math.min(Math.max(0, s.height - size), y));
     guide.classList.toggle('flip', flip);
     jump(x, y, move);
-    layoutBubble(x, y, flip);
+    layoutBubble(x, y, r);
   }
   function jump(x, y, move) {
     const to = `translate(${x}px, ${y}px)`;
@@ -117,15 +118,18 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     guide.style.transform = to;
     guideAt = [x, y];
   }
-  function layoutBubble(x, y, flip) {
+  // The bubble hangs under Biscuit (or above, near the bottom), and moves beside it when that would cover the target.
+  function layoutBubble(x, y, target) {
     const s = stage.getBoundingClientRect();
     const w = bubble.offsetWidth || 320, h = bubble.offsetHeight || 160;
-    const size = guide.offsetWidth || 84;
-    let left = flip ? x - w - 6 : x + size + 6;
-    if (left < 8 || left + w > s.width - 8) left = Math.max(8, Math.min(s.width - w - 8, x - w / 2 + size / 2));
-    let top = y + size / 2 - h / 2;
-    if (left < x + size && left + w > x) top = y + size + 6 > s.height - h ? y - h - 6 : y + size + 6;
-    top = Math.max(8, Math.min(s.height - h - 8, top));
+    const size = guide.offsetWidth || 96;
+    const clampX = (v) => Math.max(8, Math.min(s.width - w - 8, v)), clampY = (v) => Math.max(8, Math.min(s.height - h - 8, v));
+    const t = target && [target.left - s.left, target.top - s.top, target.right - s.left, target.bottom - s.top];
+    const covers = (l, tp) => t && l < t[2] && l + w > t[0] && tp < t[3] && tp + h > t[1];
+    const below = y + size + 2 + h <= s.height - 8 ? y + size + 2 : y - h - 2;
+    const options = [[clampX(x + size / 2 - w / 2), clampY(below)], [clampX(x + size + 6), clampY(y)], [clampX(x - w - 6), clampY(y)],
+      [clampX(t ? t[0] - w - 12 : 8), clampY(t ? t[1] : y)], [clampX(t ? t[2] + 12 : 8), clampY(t ? t[1] : y)]];
+    const [left, top] = options.find(([l, tp]) => !covers(l, tp)) ?? options[0];
     Object.assign(bubble.style, { left: `${left}px`, top: `${top}px` });
   }
 
@@ -133,6 +137,12 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     index = Math.max(0, Math.min(steps.length - 1, next));
     cheered = false;
     steps[index].before?.();
+    // A step the visitor has already done counts as done.
+    if (steps[index].already?.()) {
+      cheered = true;
+      const step = steps[index];
+      setTimeout(() => { if (steps[index] === step && cheered) go(index + 1); }, step.cheer ? 2600 : 500);
+    }
     // The step's target may appear only after the page has drawn what `before` changed.
     requestAnimationFrame(() => requestAnimationFrame(show));
     for (const fn of changes) fn(true);
@@ -171,8 +181,8 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
         guide.classList.add('cheer');
       }
       show();
-      // A step without its own remark goes straight on.
-      if (!step.cheer) setTimeout(() => { if (steps[index] === step) go(index + 1); }, 400);
+      // Then on to the next thing to try, after a moment to read the remark.
+      setTimeout(() => { if (steps[index] === step && cheered) go(index + 1); }, step.cheer ? 2600 : 500);
     } else if (!cheered && ['open', 'close', 'focused', 'returned'].includes(kind)) requestAnimationFrame(() => place(step.target(), false));
   });
   // Targets move as the desktop changes: keep Biscuit and the ring on them, twice a second while the tour runs.
