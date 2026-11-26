@@ -1,4 +1,4 @@
-# Complimentary Stretch Snack planner
+# Stretch Snack planner
 
 The page, `window.StretchSnack.submit(request)`, and the Node CLI use the same synchronous planner. To import it directly, use `submit` from `core/plan.js`. The catalog, movement descriptions, sources, supported option IDs and labels are named exports in `core/catalog.js`. All calculation is local and deterministic.
 

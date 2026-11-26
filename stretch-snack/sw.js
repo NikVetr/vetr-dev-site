@@ -1,6 +1,6 @@
 // Cache one complete, versioned shell. An updated worker waits until tabs using
 // the previous version close, keeping UI and catalog versions together.
-const version = 'stretch-snack-17';
+const version = 'stretch-snack-18';
 const shell = [
   './index.html',
   './style.css',

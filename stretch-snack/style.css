@@ -834,9 +834,6 @@ body:has(dialog[open]) {
   .topbar, .topbar .brand { gap: .3rem; }
   .brand h1 { white-space: nowrap; }
 }
-@media (max-width: 475px) {
-  .brand-prefix { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-}
 @media (max-width: 550px) {
   .topbar .camera-trigger span { display: none; }
 }
