@@ -37,7 +37,7 @@ export function createPoolView(el, world) {
       const status = h.away ? ['away', 'warn', 'set away: nothing new starts']
         : !h.reachable ? (truth.lease.expired ? ['lease expired', 'bad', 'unreachable: starts nothing new; running jobs continue']
           : [`lease ${truth.leftSeconds} s left`, 'warn', 'unreachable: no new plans'])
-          : ['lease 20 s', 'good', h.id === 'storage' ? 'coordinator · shared drive attached' : 'worker · mounts the shared drive'];
+          : ['lease 20 s', 'good', h.id === 'storage' ? 'coordinator · shared drive attached' : 'runs jobs · mounts /srv/cluster'];
       const leaseFrac = h.reachable ? 1 : truth.leftSeconds / LEASE_SECONDS;
       const memSegs = [];
       for (const q of sim.queues) {

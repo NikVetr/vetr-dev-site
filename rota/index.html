@@ -18,7 +18,7 @@
       <div class="title-block">
         <div class="title-line"><a class="directory-back" href="../" aria-label="Back to vetr.dev" title="Back to vetr.dev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></a>
         <h1>ROTA — Job Scheduler Demo</h1></div>
-        <p class="tagline" id="tagline">ROTA runs queues of independent jobs on a few Mac and Linux machines that share a drive. This page simulates a two-machine pool in your browser: type the real <code>rota</code> commands and watch the real dashboard's format respond.</p>
+        <p class="tagline" id="tagline">ROTA runs queues of independent jobs on a few Mac and Linux machines that share a drive. This page simulates a two-machine pool in your browser, so you can type real <code>rota</code> commands and watch a port of its tmux dashboard respond.</p>
       </div>
       <div class="tool-header-actions">
         <button id="tour-button" type="button" class="chip" aria-controls="guide">Tour</button>
@@ -29,7 +29,7 @@
 
   <main>
     <section class="sim-bar container" aria-label="Simulation controls">
-      <p class="sim-badge"><span aria-hidden="true">◇</span> Simulation: nothing here runs on a real cluster. <a href="#about">What is simulated</a></p>
+      <p class="sim-badge"><span aria-hidden="true">◇</span> A simulation: nothing on this page touches a real cluster. <a href="#about">What's simulated, and what isn't</a></p>
       <div class="sim-controls">
         <span class="clock" id="clock" aria-live="off">Simulated time</span>
         <button type="button" id="clock-toggle" aria-pressed="false" title="Stop or start the simulated clock">❚❚ Stop clock</button>
@@ -81,25 +81,25 @@
       <div class="about-grid">
         <div>
           <h3>Simulated</h3>
-          <p>Nothing runs on a cluster: a model of ROTA's coordinator runs in this page, one tick per simulated second, ten times faster than real time by default. It is a JavaScript port of the scheduler's allocation and start pacing, the same port that drives the <a href="https://youtu.be/NRnLCDgYsQw">explainer video</a>, so priorities, per-host budgets, round-robin turns and paced starts behave as they do in the real coordinator. Leases, dependencies, pauses, failure holds and share interruptions follow the scheduler's rules.</p>
-          <p>Simplified: plans reach hosts at once; there is no shared-I/O admission (the example pool turns it off); live capacity equals each host's budget; memory is charged at the declared amount. Job runtimes are made up, the files are read-only, and a few real commands (setup, <code>rota kill</code>, <code>rota control</code>, memory calibration) answer with a note instead.</p>
-          <p>Faithful: the command output uses the real scripts' messages and <code>key=value</code> records, and the dashboard is a port of ROTA's own pane renderers, checked against them. The hosts and paths are those of the public example inventory, <code>examples/cluster.json</code>.</p>
+          <p>Nothing here runs on a cluster. What runs instead is a model of ROTA's coordinator, ticking once per simulated second (ten times faster than real time, unless you change the speed). The model is a JavaScript port of the scheduler's allocation and start pacing, the same port that drives the <a href="https://youtu.be/NRnLCDgYsQw">explainer video</a>, so priorities, per-host budgets, round-robin turns and paced starts behave as they do in the real coordinator. Leases, dependencies, pauses, failure holds and share interruptions follow the scheduler's rules too.</p>
+          <p>Some corners are cut. Plans reach hosts at once, rather than waiting for each daemon to acknowledge them; there is no shared-I/O admission (the example pool turns it off anyway); live capacity always equals each host's budget; and memory is charged at the declared amount (the real coordinator charges the larger of declared and observed use). Job runtimes are made up, the files are read-only, and a few real commands (setup, <code>rota kill</code>, <code>rota control</code>, memory calibration) answer with a note instead of pretending.</p>
+          <p>Other corners are copied closely. Command output uses the real scripts' messages and <code>key=value</code> records, and the dashboard is a port of ROTA's own pane renderers, checked line by line against them on the same input. The hosts and paths come from the public example inventory, <code>examples/cluster.json</code>.</p>
         </div>
         <div>
           <h3>ROTA's real limits</h3>
           <ul>
             <li>macOS and Linux only.</li>
             <li>A shared drive, mounted at the same path on every host, plus passwordless SSH from the coordinator.</li>
-            <li>Each job runs on one host: no MPI and no multi-node jobs. For many users, isolation or dozens of hosts, Slurm, Flux or HTCondor fit better.</li>
-            <li>Priority never preempts: a higher priority only gets the next free slots.</li>
-            <li>An expired lease never kills a job, and nothing is re-run automatically. You audit, then retry.</li>
+            <li>Each job runs on one host: no MPI, no multi-node jobs. If you need many users kept apart, or dozens of hosts, Slurm, Flux or HTCondor will suit you better.</li>
+            <li>Priority never preempts. A higher priority gets first pick of slots as they free up; it never stops a running job.</li>
+            <li>An expired lease never kills a job, and nothing is re-run automatically. You audit first, then retry.</li>
             <li>Backfill, GPU units and holding work while a machine's owner is at the keyboard are opt-in and off by default.</li>
           </ul>
           <p class="links"><a href="https://github.com/NikVetr/rota">ROTA on GitHub</a> · <a href="https://youtu.be/NRnLCDgYsQw">How the ROTA scheduler works (17 min video)</a></p>
         </div>
       </div>
       <h3>Using this page</h3>
-      <p>Type into the <code>storage</code> and <code>worker</code> windows as you would in a terminal: Tab completes commands, options and paths, ↑ and ↓ recall history, and Ctrl+L clears. <strong>Commands</strong> (Ctrl+K) lists commands to try with this pool's paths filled in. On a phone, the windows become tabs, and picking a command puts it in the shell for you to run. Scripts can drive the page through <code>window.RotaDemo</code> (see the folder's README).</p>
+      <p>Type into the <code>storage</code> and <code>worker</code> windows as you would into any terminal: Tab completes commands, options and paths, ↑ and ↓ recall history, and Ctrl+L clears the screen. <strong>Commands</strong> (Ctrl+K) lists things worth trying, with this pool's paths already filled in. On a phone the windows turn into tabs, and choosing a command puts it at the prompt for you to run, which beats typing batch paths on glass. Scripts can drive the page through <code>window.RotaDemo</code> (described in the folder's README).</p>
     </section>
   </main>
 
