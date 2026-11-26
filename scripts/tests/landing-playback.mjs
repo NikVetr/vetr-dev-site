@@ -311,7 +311,8 @@ test('desktop sticky switches are keyboard operable and retain theme and motion 
 });
 
 test('Rating Prediction fills a wide card and interpolates its forecasts across the loop seam', async () => {
-  const browser = await openPage('#media-ratings-title', { engine, width: 1440, height: 900 });
+  // Nine columns give Rating Prediction a 3x2 tile, its picture beside its description.
+  const browser = await openPage('#media-ratings-title', { engine, width: 1920, height: 1080 });
   const { page } = browser;
   try {
     const art = page.locator('[data-art="media-ratings"]');
@@ -327,7 +328,8 @@ test('Rating Prediction fills a wide card and interpolates its forecasts across 
     assert.ok(Math.abs(first - await heightAt(12000)) < 0.1);
     const picture = await art.boundingBox();
     const title = await page.locator('#media-ratings-title').boundingBox();
-    assert.ok(picture.width > 500 && title.x >= picture.x + picture.width);
+    const card = await page.locator('a[href="/rating-prediction/"]').boundingBox();
+    assert.ok(picture.width > 0.55 * card.width && title.x >= picture.x + picture.width);
     for (const width of [320, 390]) {
       await page.setViewportSize({ width, height: 844 });
       const film = await art.locator('.film').boundingBox(), stars = await art.locator('.stars').boundingBox();

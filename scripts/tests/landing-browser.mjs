@@ -139,10 +139,10 @@ try {
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
   assert.equal(await page.locator('h1').textContent(), 'vetr.dev');
   assert.equal(await page.locator('.project-card').count(), 24);
-  for (const app of ['stretch-snack', 'travel-prompt', 'rating-prediction', 'sankey', 'agent-bar', 'rota']) {
+  for (const app of ['stretch-snack', 'travel-prompt', 'rating-prediction', 'sankey']) {
     assert.equal(await page.locator(`[data-category="everyday"] a[href="/${app}/"]`).count(), 1);
   }
-  for (const app of ['color-optimization', 'layout-gui', 'intuitions', 'stan2r']) {
+  for (const app of ['color-optimization', 'layout-gui', 'intuitions', 'stan2r', 'agent-bar', 'rota']) {
     const card = page.locator(`[data-category="academic"] a[href="/${app}/"]`);
     assert.equal(await card.count(), 1);
     assert.match(await card.getAttribute('aria-describedby'), /\bcategory-academic\b/);

@@ -6,23 +6,25 @@ Start with [Building a vetr.dev tool](docs/shared-app-design.md) when adding a t
 
 ## The landing page
 
-A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Academic tools**, and **Art**. Everyday tools includes Stretch Snack, Travel Prompt, Rating Prediction and Sankey Diagrams. Academic tools includes Palette Town and Multipanel Figure Editor. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add one, follow [Add it to the directory](docs/shared-app-design.md#add-it-to-the-directory).
+A compact introduction leads to one packed wall of tools, with irregular coloured boundaries for **Everyday tools**, **Academic tools**, and **Art**. Everyday tools includes Stretch Snack, Travel Prompt, Rating Prediction and Sankey Diagrams. Academic tools includes Palette Town, the Multipanel Figure Editor and the Agent Bar and ROTA demos. The boundaries follow the cards after placement; they do not reserve rectangular sections. Text labels and each card's accessible description identify its category as well as colour. Each listed tool has one tile, with a picture, a short description and its source date. To add one, follow [Add it to the directory](docs/shared-app-design.md#add-it-to-the-directory).
 
 Short, wide desktop tiles place the preview beside the description. Rating Prediction arranges its input and two charts side by side or stacks them as the picture well changes shape. Its titles shrink a little or wrap to stay inside their panes; `scripts/landing-art/tests/media-ratings-fit.browser.mjs` checks every text box across the directory's wells and the whole loop. The bars interpolate between fitted forecasts. Matrix Rain fits its opening to the card. An early portrait fades before the first drops reach it. Streams advance one character row at a time before the camera closes in on the title’s final letters.
 
 ### Tile sizes
 
-A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. The curated layout can adapt individual spans to fill each breakpoint, including a wider Photomosaic tile where needed. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
+A tile's shape is the `data-size` of its `<li>` in `index.html`: columns by rows, where a row is 0.68 of a column. Each shape's picture well has the shape of the pictures drawn for it, so a picture changing shape is drawn again on the shape's canvas (`scripts/landing-art/svg.mjs`):
 
 | Shape | Picture | Canvas |
 | --- | --- | --- |
-| `3x3` | landscape, 16:9 | 320 × 180 |
+| `3x3` | landscape, 16:9 or wider | 320 × 180 |
+| `3x2` | beside the description, about 3:2; a 16:9 picture fits | 320 × 180 |
 | `2x3` | about 6:5 | 264 × 220 (`WIDE`) |
-| `2x2` | landscape, 16:9 or wider | 320 × 180 |
-| `1x3` | portrait, 2:3 | 200 × 300 (`TALL`) |
-| `1x2` | about 4:3, a 16:9 picture fits | 320 × 180 |
+| `2x4` | about 8:7, or the portrait Seating room (2:3) | 320 × 280; 200 × 300 (`TALL`) |
+| `2x2` | a wide strip, about 3:1; Photomosaic's 4:3 crop beside the description | 360 × 125 |
 
-The size comes from a project's size in code: the hand-written lines of the tool itself (JavaScript, HTML and CSS, without vendored code, tests or data) plus the lines of the R code it reproduces, for the ports that match an R original. That is 10,000 lines or more for the largest tiles (3x3), 2,500 or more for the middle (2x3 or 2x2), less for the smallest (1x3 or 1x2). Within a size, the shape follows the picture. Where code size under-represents how much there is to see, the size is moved up, and the reason is in the last column.
+The size comes from a project's size in code: the hand-written lines of the tool itself (JavaScript, HTML and CSS, without vendored code, tests or data) plus the lines of the R code it reproduces, for the ports that match an R original. Code size picks one of three areas, kept close so that no tile covers more than 2¼ times the cells of another: 10,000 lines or more take nine cells (`3x3`, or `2x4` for a tall picture), 2,500 or more take six (`3x2` or `2x3`), fewer take four (`2x2`). Within an area, the shape follows the picture. Where the picture needs another area, the tile moves one step, and the reason is in the last column.
+
+A tile spans at most two of four or six columns, three of five to nine and four of ten (no more than 43% of a desktop row), so at four and six columns every tile is two columns wide and the largest take `2x3` (`2x4` stays `2x4`). At two columns every tile spans the row, two rows tall or three for a tall picture, and Seating sits beside its description. No tile is one column wide. To complete an arrangement's rectangle, a few tiles take the neighbouring area at one column count; `assets/landing-order.js` holds every span.
 
 | Tool | Web lines | R lines reproduced | Total | Shape | Adjusted |
 | --- | ---: | ---: | ---: | --- | --- |
@@ -30,29 +32,37 @@ The size comes from a project's size in code: the hand-written lines of the tool
 | Color Palette Extender | 20,611 | | 20,611 | 3x3 | |
 | Sankey Diagrams | 8,786 | 11,499 (polylines) | 20,285 | 3x3 | |
 | Statistical Intuitions (15 entries) | 20,297 | | 20,297 | 3x3 | 13 teaching entries, Hypercube and Forecast Calibration; six computed views in the preview |
-| autoCHAIR | 13,944 | | 13,944 | 2x2 | down: one agenda and timeline, much of its code is styling |
-| Multipanel Layout GUI | 6,943 | | 6,943 | 2x2 | |
-| Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2x2 | |
-| Agent Bar (demo) | 3,113 | | 3,113 | 2x2 | |
-| ROTA (demo) | 3,848 | | 3,848 | 2x2 | |
-| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 1x3 | down to a tall one-column tile: its room is portrait |
-| Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 2x2 | |
-| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | | no tile of its own: an entry in the Statistical Intuitions gallery, whose tile turns it on hover (as a `1x2` tile, give it back its card) |
-| Signature Correction | 2,952 | 491 | 3,443 | 2x2 | |
-| Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2x3 | up: a whole grid of answers to read |
-| Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 2x3 | wider to show the rotated messages |
-| Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2x3 | up: the text in the picture needs room to be read |
-| Photomosaic | 1,785 | 110 | 1,895 | 2x2 | up: the individual photos need room to be seen |
+| autoCHAIR | 13,944 | | 13,944 | 3x3 | |
+| Stretch Snack | 13,494 | | 13,494 | 3x3 | |
+| Nonprofit Salary Benchmark | 10,163 | | 10,163 | 2x4 | |
+| Alphabet & Logo Editors | 9,986 | | 9,986 | 3x2 | |
+| Rating Prediction | 9,754 | | 9,754 | 3x2 | |
+| Multipanel Layout GUI | 6,943 | | 6,943 | 3x2 | |
+| Stan Studio | 2,897 | 3,407 (stan2r, run in webR) | 6,304 | 3x2 | |
+| Name Tags | 3,403 | 2,427 (keychain-lasercutter) | 5,830 | 2x2 | down: its tray of tags is a wide strip |
+| Table Seating | 2,995 | 1,397 (table-seating) | 4,392 | 2x4 | up: its 50-table room is portrait and needs the height |
+| ROTA (demo) | 3,848 | | 3,848 | 3x2 | |
+| Raster to Vector | 2,294 | 1,440 (raster-to-vector) | 3,734 | 3x2 | |
+| Hypercube Rotation | 1,700 | 1,927 (shape_rotation) | 3,627 | | no tile of its own: an entry in the Statistical Intuitions gallery, whose tile turns it on hover (as a six-cell tile, give it back its card) |
+| Signature Correction | 2,952 | 491 | 3,443 | 2x2 | down: one signature is a wide strip |
+| Crossword Generator | 2,308 | 982 (crossword) | 3,290 | 2x3 | |
+| Message Collage | 2,151 | 1,037 (message-collage) | 3,188 | 2x3 | |
+| Agent Bar (demo) | 3,113 | | 3,113 | 3x2 | |
+| Text in Image | 1,790 | 973 (text-in-image) | 2,763 | 2x3 | |
+| Travel Prompt | 2,544 | | 2,544 | 3x2 | |
+| Photomosaic | 1,785 | 110 | 1,895 | 2x2 | |
 | Helix and Braid | 1,373 | 441 | 1,814 | | available through Name Tags and its standalone editor |
 | Forecast Calibration | 1,474 | 39 | 1,513 | | listed inside Statistical Intuitions; its existing URL and API remain available |
+| Matrix Rain | 887 | | 887 | 2x2 | |
+| b64 | 640 | | 640 | 2x2 | |
 
-Counted on 2026-11-05 as non-blank lines, R comment lines left out. The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
+Counted on 2026-11-05 as non-blank lines, R comment lines left out; Stretch Snack, the salary benchmark, the alphabet editors, Rating Prediction, Stan Studio, Travel Prompt, Matrix Rain and b64 were counted the same way on 2026-11-26, leaving out generated data and pages (the benchmark's `app-data.js` and position pages, Mattlab's `edited-glyphs.js`). The R lines are those of the R repository named in brackets, or for the others the R script in minor_scripts that the tool was ported from (interpolate_signature_frequency_series.R, imgdir2grid.R, draw_DNA.R with braided_lines.R, playingPreds.R).
 
-The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px; the spans adapt at two or four columns to preserve legible preview heights. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated sizes and orders for each column count keep all three categories connected across desktop widths, and the shared dense packer fills a rectangle with a flush lower edge. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
+The column count steps with the width, from one on a phone to ten on an ultrawide screen (`style.css`), with seven at 1366–1440 px. The compact masthead and smaller grid units make several complete cards visible at normal browser zoom. Curated sizes and orders for each column count keep all three categories connected across desktop widths, and the shared dense packer fills a rectangle with a flush lower edge. There is no runtime search. One column follows the thematic HTML order; narrow and landscape layouts can split a category, with a label on each connected component.
 
-Section interiors use a subtle light or dark tint of their outline colour. Preview composition follows the available space: Photomosaic crops its 4:3 artwork around the subject to fill the available well, with the description beside it in compact cards; the Figure Editor puts its description beside the landscape preview where the tile is wide enough. Taller cards keep the image above their text, and the portrait Seating preview sits beside its description on phones.
+Section interiors use a subtle light or dark tint of their outline colour. Preview composition follows the available space: Photomosaic crops its 4:3 artwork around the subject to fill the available well, with the description beside it in compact cards; the Figure Editor puts its description beside the landscape preview where the tile is wide enough. Taller cards keep the image above their text, and the portrait Seating preview sits beside its description on phones and at two columns.
 
-`shared/mosaic.js` places cards in the curated order, pins their grid cells and puts the list in visual reading order whenever its column count changes: Tab and screen readers meet the cards as they appear. `assets/landing-clusters.js` then draws boundaries from the placed cells and positions their labels in the gutters. Boundaries redraw when actual track sizes change, including text reflow. Without JavaScript, CSS packs the thematic HTML order and links remain usable; decorative outlines are absent. On a phone, and on a phone held sideways, rows follow their content: each picture keeps its own shape, and one-column tiles sit beside their text. Descriptions wrap in full; cards never truncate them to meet a height target. See [site architecture](docs/architecture.md) for the layout flow.
+`shared/mosaic.js` places cards in the curated order, pins their grid cells and puts the list in visual reading order whenever its column count changes: Tab and screen readers meet the cards as they appear. `assets/landing-clusters.js` then draws boundaries from the placed cells and positions their labels in the gutters. Boundaries redraw when actual track sizes change, including text reflow. Without JavaScript, CSS packs the thematic HTML order and links remain usable; decorative outlines are absent. On a phone, and on a phone held sideways, rows follow their content: each picture keeps its own shape, and Seating's room sits beside its text. Descriptions wrap in full; cards never truncate them to meet a height target. See [site architecture](docs/architecture.md) for the layout flow.
 
 The pictures are drawn from the tools themselves, from their default or explicitly selected examples: `scripts/landing-art/cards/<name>.mjs` runs the tool's core (or, for the tools without one, its page in headless Chromium through `scripts/landing-art/browser.mjs`) and writes `assets/cards/<name>.svg`.
 
@@ -66,7 +76,7 @@ Sankey traces a distributed selection of real patient paths, then fades the full
 
 The image previews use examples available in their applications: Raster to Vector's fishcake swirl advances through raster, simplified colours, traced boundaries and smooth curves, revealed by a thin scanning line; Text in Image keeps the original Alice image static while heavier whole-word text fills and zooms out on navy, with a stronger glow; and Photomosaic uses its 1,200-cell Sunflower preset (three uses per photo and 45% display tint). The swirl example explicitly selects three colours and mb4 wavelet smoothing at multiplier 8; the core defaults stay unchanged. The original photo-matching example stays available. The collage preview fills its available well with independently generated portrait, compact and wide compositions. An offline search screens 1,024 independent starts across those shapes, then finishes and reranks the best three per shape alongside a first-start baseline. Selection balances sampled glyph-box whitespace, the largest empty rectangle and aspect-ratio fit; no letters are stretched or cropped. Saved winners and provenance live in `scripts/landing-art/fixtures/collage-layouts.json`. Message Collage exposes a rotation limit and uses denser, gently angled messages; its SVG, PNG and PDF exports share the same geometry. Optional Local warp moves neighbouring regions together with bounded letter deformation. Its strength defaults to zero in the app; the landing preview explicitly uses one (see the [Collage API](message-collage/api.md)). Crossword opens a saved 94-entry heart computed by its existing optimizer, so the page starts immediately; regenerate it with `node crossword/examples/build.mjs`. Its landing preview starts from that heart and warps the faint target into a diamond, a spade, a club and back to a heart by interpolating the shapes' signed distance fields. After each morph, recorded MCMC states show the existing optimizer refining the current grid toward the new suit, as the page's Refine does. One log-scaled penalty trace shows each rise and recovery, with a suit marker where each target is reached; glyphs stay centred with offset shadows. When the loop repeats, the grid steps from its final heart back to the saved one: a new refinement cannot land exactly on an earlier grid, though these two share 43 of 94 entries. Regenerate the sequence with `node crossword/examples/build-suits.mjs` (about 25 minutes), then `node scripts/landing-art/build.mjs crossword`. Load/Clear actions offer Undo.
 
-The directory also lists **b64 (Base64 Link Decoder)** (`2x2`) under Everyday tools and **Nonprofit Salary Benchmark** (`2x3`, taller on tablets) under Everyday tools. b64's picture shows one real decoding layer at a time in large type. The benchmark picture uses the app's actual equal-weight and automatically weighted histograms plus a scatterplot, in a 320×280 frame, with input values below the plot.
+The directory also lists **b64 (Base64 Link Decoder)** (`2x2`) under Everyday tools and **Nonprofit Salary Benchmark** (`2x4`) under Everyday tools. b64's picture shows one real decoding layer at a time in large type. The benchmark picture uses the app's actual equal-weight and automatically weighted histograms plus a scatterplot, in a 320×280 frame, with input values below the plot.
 
 ```sh
 node scripts/landing-art/build.mjs            # every picture
