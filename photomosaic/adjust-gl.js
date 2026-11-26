@@ -107,7 +107,7 @@ export function createGpuAdjuster() {
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
   gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
   gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
-  /** @param {number} unit @param {ImageData | OffscreenCanvas} image */
+  /** @param {number} unit @param {ImageData | HTMLCanvasElement | OffscreenCanvas} image */
   const upload = (unit, image) => {
     gl.activeTexture(gl.TEXTURE0 + unit);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, image.width, image.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, image);
@@ -119,7 +119,7 @@ export function createGpuAdjuster() {
     /** Whether the GPU has dropped this context (then the page draws on the CPU). */
     lost: () => gl.isContextLost(),
     /**
-     * @param {ImageData} photos the picture as drawn, before adjustment
+     * @param {ImageData | HTMLCanvasElement} photos the picture as drawn, before adjustment
      * @param {{ x: number, y: number, width: number, height: number }[]} tiles inside it
      */
     load(photos, tiles) {

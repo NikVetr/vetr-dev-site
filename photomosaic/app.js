@@ -626,13 +626,13 @@ function drawTargetCell(ctx, source, grid, tile, dx, dy) {
 }
 
 /**
- * A canvas's photos as drawn, before adjustment and tint, kept so that both can be redrawn as
- * their sliders move without drawing the photos again; `after` draws what goes over them.
- * rects are the tiles on this canvas and colors their cells'. delta (for the GPU) or prepared
- * (for the CPU) is the adjustment's precomputation, made when first needed.
- * @typedef {{ role: 'mosaic' | 'detail', ctx: CanvasRenderingContext2D, tiles: Tile[], dx: number, dy: number,
- *   result: Result, request: any, rects: Rect[], colors: number[][], base: ImageData, fresh: boolean, after: () => void,
- *   delta: Float64Array | null, prepared: import('./core/adjust.js').Prepared | null, out: ImageData | null }} Paint
+ * A canvas's photos and what is needed to redraw their adjustment and tint as the sliders move.
+ * rects are the tiles on this canvas and colors their cells'; key names the tiles' size and
+ * shape. fresh says the canvas holds only the photos. base (the photos read back), prepared and
+ * out are the CPU path's; `after` draws what goes over the photos.
+ * @typedef {{ role: 'mosaic' | 'detail', ctx: CanvasRenderingContext2D, tiles: Tile[], dx: number, dy: number, key: string,
+ *   result: Result, request: any, rects: Rect[], colors: number[][], base: ImageData | null, fresh: boolean, after: () => void,
+ *   prepared: import('./core/adjust.js').Prepared | null, out: ImageData | null }} Paint
  * @typedef {import('./core/adjust.js').Rect} Rect
  */
 /** @type {Paint | null} */
@@ -641,42 +641,58 @@ let mosaicPaint = null;
 let detailPaint = null;
 
 /**
- * Draws the photos of `tiles` (from their thumbnails), keeps them, and adds the adjustment and tint.
+ * Draws the photos of `tiles` (from their thumbnails), then the adjustment and tint.
  * @param {Paint['role']} role @param {CanvasRenderingContext2D} ctx @param {Tile[]} tiles
- * @param {number} dx @param {number} dy @param {() => void} [after] @returns {Paint}
+ * @param {number} dx @param {number} dy @param {string} key the tile width and fit
+ * @param {() => void} [after] @returns {Paint}
  */
-function paintTiles(role, ctx, tiles, dx, dy, after = () => {}) {
+function paintTiles(role, ctx, tiles, dx, dy, key, after = () => {}) {
   const painted = /** @type {Result} */ (result);
-  for (const tile of tiles) drawPhoto(ctx, tile, resultPhotos[tile.photo].thumb, resultPhotos, dx, dy);
   /** @type {Paint} */
   const paint = {
-    role, ctx, tiles, dx, dy, result: painted, request: resultRequest,
+    role, ctx, tiles, dx, dy, key, result: painted, request: resultRequest,
     rects: tiles.map((t) => ({ x: t.x - dx, y: t.y - dy, width: t.width, height: t.height })),
     colors: tiles.map((t) => painted.cells[t.cell]),
-    base: ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height), fresh: true, after, delta: null, prepared: null, out: null,
+    base: null, fresh: true, after, prepared: null, out: null,
   };
+  drawPhotos(paint);
   finishPaint(paint);
   return paint;
+}
+
+/** Draws a paint's photos alone, on white. @param {Paint} paint */
+function drawPhotos(paint) {
+  const { ctx, dx, dy } = paint;
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  for (const tile of paint.tiles) drawPhoto(ctx, tile, resultPhotos[tile.photo].thumb, resultPhotos, dx, dy);
+}
+
+/** Puts a paint's photos alone back on its canvas, from the copy read for the CPU if there is one. @param {Paint} paint */
+function restorePhotos(paint) {
+  if (paint.base) paint.ctx.putImageData(paint.base, 0, 0);
+  else drawPhotos(paint);
+  paint.fresh = true;
 }
 
 /** Puts a paint's photos back, adjusted as the sliders say, with the tint over them. @param {Paint} paint */
 function finishPaint(paint) {
   const { tint, adjust } = drawOptions();
   if (isAdjusting(adjust)) drawAdjusted(paint, adjust);
-  else if (!paint.fresh) paint.ctx.putImageData(paint.base, 0, 0);
+  else if (!paint.fresh) restorePhotos(paint);
   paint.fresh = false;
   if (tint > 0) for (const tile of paint.tiles) drawCell(paint.ctx, tile, paint.result.cells[tile.cell], tint, paint.dx, paint.dy);
   paint.after();
 }
 
 /**
- * The GPU renderers of the mosaic and the close up, each with the paint it holds; made when
- * first needed, null where WebGL2 is missing or fails.
+ * The GPU renderers of the mosaic and the close up, each with the paint whose photos it holds;
+ * made when first needed, null where WebGL2 is missing or fails.
  * @type {Partial<Record<Paint['role'], { gpu: NonNullable<ReturnType<typeof createGpuAdjuster>>, paint: Paint | null, detail: boolean } | null>>}
  */
 const gpus = {};
 
-/** A paint's GPU renderer, loaded with its photos, or null to draw on the CPU. @param {Paint} paint */
+/** A paint's GPU renderer, or null to draw on the CPU. @param {Paint} paint */
 function gpuFor(paint) {
   if (!(paint.role in gpus)) {
     try {
@@ -688,31 +704,64 @@ function gpuFor(paint) {
     }
   }
   const held = gpus[paint.role];
-  if (!held || held.gpu.lost()) return null;
+  return held && !held.gpu.lost() ? held : null;
+}
+
+/**
+ * Each canvas's tiles' C - M (the core's tileDeltas) by cell, for the result and tile size they
+ * were measured at: a tile of the same cell, size and shape is the same pixels, so moving the
+ * close up measures only the tiles it brings in.
+ * @type {Partial<Record<Paint['role'], { result: Result, key: string, byCell: Map<number, number[]> }>>}
+ */
+const deltaCaches = {};
+/** @param {Paint} paint */
+function deltaCache(paint) {
+  let cache = deltaCaches[paint.role];
+  if (!cache || cache.result !== paint.result || cache.key !== paint.key) {
+    cache = deltaCaches[paint.role] = { result: paint.result, key: paint.key, byCell: new Map() };
+  }
+  return cache;
+}
+
+/**
+ * Makes what a paint's adjustment needs, from its photos alone (put back on the canvas first if
+ * it holds more): on the GPU, the photos as a texture and each tile's C - M, reading back only
+ * the part of the canvas with tiles not yet measured; on the CPU, the core's precomputation
+ * from all its pixels; and, once detail is asked for, the target's cells. Returns the GPU
+ * renderer, or null for the CPU.
+ * @param {Paint} paint @param {Adjust} adjust
+ */
+function readyAdjust(paint, adjust) {
+  const held = gpuFor(paint);
+  const { ctx, tiles, rects, colors } = paint;
+  const { byCell } = deltaCache(paint);
+  const missing = held ? tiles.flatMap((tile, i) => (byCell.has(tile.cell) ? [] : [i])) : [];
+  if (!paint.fresh && (held ? held.paint !== paint || missing.length : !paint.prepared)) restorePhotos(paint);
+  if (!held) {
+    paint.base ??= ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    paint.prepared ??= prepareAdjust(paint.base.data, paint.base.width, rects, colors);
+    if (adjust.detail > 0 && !paint.prepared.detail) {
+      const target = /** @type {OffscreenCanvasRenderingContext2D} */ (targetCells(paint, true).getContext('2d'));
+      addDetail(paint.prepared, target.getImageData(0, 0, paint.base.width, paint.base.height).data);
+    }
+    return null;
+  }
   if (held.paint !== paint) {
-    held.gpu.load(paint.base, paint.rects);
+    held.gpu.load(ctx.canvas, rects);
     held.paint = paint;
     held.detail = false;
   }
-  return held;
-}
-
-/** Makes what a paint's adjustment needs before its first frame (with detail once asked for). @param {Paint} paint @param {Adjust} adjust */
-function readyAdjust(paint, adjust) {
-  const held = gpuFor(paint);
-  const { base, rects, colors } = paint;
-  if (held) {
-    paint.delta ??= tileDeltas(base.data, base.width, rects, colors);
-    if (adjust.detail > 0 && !held.detail) {
-      held.gpu.loadDetail(targetCells(paint, false));
-      held.detail = true;
-    }
-  } else {
-    paint.prepared ??= prepareAdjust(base.data, base.width, rects, colors);
-    if (adjust.detail > 0 && !paint.prepared.detail) {
-      const canvas = targetCells(paint, true);
-      addDetail(paint.prepared, /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d')).getImageData(0, 0, base.width, base.height).data);
-    }
+  if (missing.length) {
+    const x0 = Math.min(...missing.map((i) => rects[i].x));
+    const y0 = Math.min(...missing.map((i) => rects[i].y));
+    const part = ctx.getImageData(x0, y0, Math.max(...missing.map((i) => rects[i].x + rects[i].width)) - x0,
+      Math.max(...missing.map((i) => rects[i].y + rects[i].height)) - y0);
+    const found = tileDeltas(part.data, part.width, missing.map((i) => ({ ...rects[i], x: rects[i].x - x0, y: rects[i].y - y0 })), missing.map((i) => colors[i]));
+    missing.forEach((i, k) => byCell.set(tiles[i].cell, Array.from(found.subarray(3 * k, 3 * k + 3))));
+  }
+  if (adjust.detail > 0 && !held.detail) {
+    held.gpu.loadDetail(targetCells(paint, false));
+    held.detail = true;
   }
   return held;
 }
@@ -721,10 +770,12 @@ function readyAdjust(paint, adjust) {
 function drawAdjusted(paint, adjust) {
   const held = readyAdjust(paint, adjust);
   if (held) {
-    paint.ctx.drawImage(held.gpu.render(/** @type {Float64Array} */ (paint.delta), adjust), 0, 0);
+    const { byCell } = deltaCache(paint);
+    const deltas = Float64Array.from(paint.tiles.flatMap((tile) => /** @type {number[]} */ (byCell.get(tile.cell))));
+    paint.ctx.drawImage(held.gpu.render(deltas, adjust), 0, 0);
     return;
   }
-  const { base } = paint;
+  const base = /** @type {ImageData} */ (paint.base);
   paint.out ??= new ImageData(new Uint8ClampedArray(base.data), base.width, base.height);
   applyAdjust(/** @type {import('./core/adjust.js').Prepared} */ (paint.prepared), adjust, paint.out.data);
   paint.ctx.putImageData(paint.out, 0, 0);
@@ -736,8 +787,8 @@ function drawAdjusted(paint, adjust) {
  * @param {Paint} paint @param {boolean} readBack
  */
 function targetCells(paint, readBack) {
-  const { base, tiles, dx, dy } = paint;
-  const canvas = new OffscreenCanvas(base.width, base.height);
+  const { tiles, dx, dy } = paint;
+  const canvas = new OffscreenCanvas(paint.ctx.canvas.width, paint.ctx.canvas.height);
   const ctx = /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d', { willReadFrequently: readBack }));
   ctx.imageSmoothingQuality = 'high';
   const source = targetCanvas(paint.request.target);
@@ -782,7 +833,7 @@ function drawMosaic() {
   const cells = view() === 'cells';
   mosaicPaint = null;
   if (cells) for (const tile of layout.tiles) drawCell(ctx, tile, result.cells[tile.cell], 1);
-  else mosaicPaint = paintTiles('mosaic', ctx, layout.tiles, 0, 0);
+  else mosaicPaint = paintTiles('mosaic', ctx, layout.tiles, 0, 0, `${tileWidth} ${fit}`);
   mosaicLayout = layout;
   el.mosaic.setAttribute('aria-label', `${cells ? 'The target at one colour per cell' : 'The mosaic'}: ${result.grid.columns} columns by ${result.grid.rows} rows`);
   placeMarker();
@@ -840,7 +891,7 @@ function drawDetail() {
     for (const t of near) drawCell(ctx, t, result.cells[t.cell], 1, c0 * tileWidth, top);
     drawRing();
   } else {
-    detailPaint = paintTiles('detail', ctx, near, c0 * tileWidth, top, drawRing);
+    detailPaint = paintTiles('detail', ctx, near, c0 * tileWidth, top, `${tileWidth} ${fit}`, drawRing);
   }
 
   const photo = resultPhotos[result.assignment[selected]];
@@ -962,7 +1013,15 @@ for (const input of [el.tint, ...Object.values(ADJUST_INPUTS)]) {
     repaint();
   });
 }
-const prewarm = () => { for (const paint of [mosaicPaint, detailPaint]) if (paint) readyAdjust(paint, NO_ADJUST); };
+// Preparing on hover or focus, before the first input, puts the photos alone back on the canvas,
+// so the paint is finished again afterwards.
+const prewarm = () => {
+  for (const paint of [mosaicPaint, detailPaint]) {
+    if (!paint) continue;
+    readyAdjust(paint, NO_ADJUST);
+    if (paint.fresh) finishPaint(paint);
+  }
+};
 el.adjust.addEventListener('pointerover', prewarm);
 el.adjust.addEventListener('focusin', prewarm);
 el.detailSize.addEventListener('change', drawDetail);
