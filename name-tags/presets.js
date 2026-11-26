@@ -12,6 +12,18 @@ export const BALANCED_STYLE = Object.freeze({
   }),
 });
 
+// The angled-corners design's proportions: the R drawer's "rethink_priorities" group
+// settings, which keep the top line about three quarters of the bottom row's width so
+// the corner can turn down beside it.
+export const CORNERS_STYLE = Object.freeze({
+  degree_name_overlap: DEFAULT_STYLE.degree_name_overlap,
+  optimizer: Object.freeze({
+    ratio_mean_b2b3_w: 0.5, ratio_sd_b2b3_w: 0.5,
+    ratio_mean_b1_b2b3_w: 0.75, ratio_sd_b1_b2b3_w: DEFAULT_STYLE.optimizer.ratio_sd_b1_b2b3_w,
+    sd_ntwists: DEFAULT_STYLE.optimizer.sd_ntwists,
+  }),
+});
+
 /** @type {Record<string, {degree_name_overlap: number, optimizer: Record<string, number>}>} */
 export const LAYOUT_PRESETS = {
   balanced: BALANCED_STYLE,
@@ -19,4 +31,5 @@ export const LAYOUT_PRESETS = {
     degree_name_overlap: DEFAULT_STYLE.degree_name_overlap,
     optimizer: Object.fromEntries(Object.keys(BALANCED_STYLE.optimizer).map(key => [key, DEFAULT_STYLE.optimizer[/** @type {keyof typeof BALANCED_STYLE.optimizer} */ (key)]])),
   },
+  corners: CORNERS_STYLE,
 };

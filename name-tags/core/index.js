@@ -5,10 +5,11 @@
 //   2. split names into lines, capitals rule (names.js)
 //   3. measure lines and place glyph outlines (layout.js, font.js)
 //   4. fit each two-line tag around its decoration (layout.js, boxes.js)
-//   5. decorations: helix (helix.js), Hershey + EKG (hershey.js), logos (logo.js)
+//   5. decorations: helix (helix.js), angled corners (corners.js), Hershey + EKG (hershey.js), logos (logo.js)
 //   6. one SVG per tray-full (svg.js)
 
 import { tagHersheyEkg } from './hershey.js';
+import { tagCorners } from './corners.js';
 import { tagHelix } from './helix.js';
 import { layoutDnaTag, layoutPlainTag, measureTags } from './layout.js';
 import { logoDrawing, readLogo } from './logo.js';
@@ -20,7 +21,7 @@ import { assignCells } from './tray.js';
 import { missingChars } from './font.js';
 import { customDecoration, fitCustomDecoration } from './decoration.js';
 
-export { DEFAULTS, DEFAULT_HERSHEY_EKG, DEFAULT_STYLE, FONTS, NameTagsError, logoType } from './request.js';
+export { DEFAULTS, DEFAULT_CORNERS, DEFAULT_HERSHEY_EKG, DEFAULT_STYLE, FONTS, NameTagsError, logoType } from './request.js';
 export { TRAY_PRESETS } from './tray.js';
 export { parseNamesCsv, parseNamesText, splitNameLines } from './names.js';
 
@@ -81,7 +82,8 @@ export function submit(request, { onProgress, onFitTrace } = {}) {
       const centers = placements.map((p) => tray.centers[p.cell - 1]);
       const { measured, meanIar2f } = measureTags(linesList, centers, family, tray.cell_in, tray.page_in, style);
       tags = measured.map((m, i) => {
-        const dna = s.decoration === 'dna' && m.metrics.length === 2; // one-line names carry no helix
+        // the helix and the angled corners share the DNA layout; one-line names carry neither
+        const dna = (s.decoration === 'dna' || s.decoration === 'corners') && m.metrics.length === 2;
         const tag = dna
           ? layoutDnaTag(m, centers[i], tray.cell_in, style, meanIar2f, rng.unif, (w) => warnings.push(w), onFitTrace ? trace=>onFitTrace(i,trace) : undefined)
           : layoutPlainTag(m, centers[i], tray.cell_in, style);
@@ -89,10 +91,11 @@ export function submit(request, { onProgress, onFitTrace } = {}) {
         const layers = tag.lines.map((l) => ({ kind: 'glyphs', polygons: l.glyphs, dx: adj[0], dy: adj[1] + l.lowerQ }));
         const custom = dna && decorationDesign ? fitCustomDecoration(tag, adj, decorationDesign) : null;
         if (custom) layers.push({ kind: 'shape', polygons: custom.polygons, dx: 0, dy: 0 }, { kind: 'helix', polygons: custom.underline, dx: 0, dy: 0 });
+        else if (dna && s.decoration === 'corners') layers.push({ kind: 'shape', polygons: tagCorners(tag, adj, s.corners), dx: 0, dy: 0 });
         else if (dna) layers.push({ kind: 'helix', polygons: tagHelix(tag, adj).polygons, dx: 0, dy: 0 });
         drawings.push({ origin: origin(i), layers });
         progress(i);
-        return { name: s.names[i].name, lines: tag.text, sheet: placements[i].sheet, cell: placements[i].cell, decoration: dna ? 'dna' : 'none', fit: tag.fit, ...(custom ? { decoration_fit: custom.fit } : {}) };
+        return { name: s.names[i].name, lines: tag.text, sheet: placements[i].sheet, cell: placements[i].cell, decoration: dna ? s.decoration : 'none', fit: tag.fit, ...(custom ? { decoration_fit: custom.fit } : {}) };
       });
     }
   }

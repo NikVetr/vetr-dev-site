@@ -5,7 +5,7 @@
 // The page imports only the light modules; the fonts load in the worker.
 import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
 import { parseNamesCsv, parseNamesText } from './core/names.js';
-import { DEFAULT_STYLE, NameTagsError } from './core/request.js';
+import { DEFAULT_CORNERS, DEFAULT_STYLE, NameTagsError } from './core/request.js';
 import { TRAY_PRESETS } from './core/tray.js';
 import { LAYOUT_PRESETS } from './presets.js';
 import { decorationEditor } from './decoration-editor.js';
@@ -17,7 +17,7 @@ import { decorationEditor } from './decoration-editor.js';
  */
 
 /** Request fields the page's inputs set; any others from a loaded request are kept as they were. */
-const PAGE_FIELDS = ['names', 'tray', 'cells', 'font', 'decoration', 'logo', 'style', 'seed'];
+const PAGE_FIELDS = ['names', 'tray', 'cells', 'font', 'decoration', 'logo', 'corners', 'style', 'seed'];
 
 /** @type {ReturnType<typeof createHistory<any>> | null} */
 let history = null;
@@ -31,6 +31,7 @@ const el = {
   cells: byId('cells'), overlayFile: byId('overlay-file'), overlayStatus: byId('overlay-status'), overlayX: byId('overlay-x'), overlayY: byId('overlay-y'), overlayShow: byId('overlay-show'),
   decoration: byId('decoration'), font: byId('font'), smallcaps: byId('smallcaps'), logoFileField: byId('logo-file-field'), logoFile: byId('logo-file'),
   logoColorsField: byId('logo-colors-field'), logoColors: byId('logo-colors'), logoStatus: byId('logo-status'), restarts: byId('restarts'), seed: byId('seed'),
+  cornersWidthField: byId('corners-width-field'), cornersWidth: byId('corners-width'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
   preview: byId('preview'), downloads: byId('downloads'), undoNote: byId('undo-note'), undoText: byId('undo-text'),
@@ -96,6 +97,7 @@ function currentRequest() {
   if (cells) request.cells = cells;
   if (el.decoration.value === 'logo') request.logo = { ...(extra.logo ?? {}), file: logoUrl, use_file_colors: el.logoColors.checked };
   else if (extra.logo) request.logo = extra.logo;
+  if (el.decoration.value === 'corners') request.corners = { ...(extra.corners ?? {}), line_width: el.cornersWidth.valueAsNumber };
   if (el.decoration.value !== 'dna') delete request.decoration_design;
   return request;
 }
@@ -109,6 +111,8 @@ function loadRequest(request) {
   extraFields.style = { ...styleRest, ...(Object.keys(optRest).length ? { optimizer: optRest } : {}) };
   if (request.font) extraFields.font = Object.fromEntries(Object.entries(request.font).filter(([k]) => k !== 'family'));
   if (request.logo) extraFields.logo = Object.fromEntries(Object.entries(request.logo).filter(([k]) => k !== 'file' && k !== 'use_file_colors'));
+  if (request.corners) extraFields.corners = Object.fromEntries(Object.entries(request.corners).filter(([k]) => k !== 'line_width'));
+  el.cornersWidth.value = String(request.corners?.line_width ?? DEFAULT_CORNERS.line_width);
   el.names.value = request.names.map((/** @type {any} */ n) => (typeof n === 'string' ? n : n.name)).join('\n');
   if (typeof request.tray === 'object') {
     customTray = request.tray;
@@ -151,6 +155,7 @@ function showInputs() {
   el.logoFileField.hidden = !logo;
   el.logoColorsField.hidden = !logo;
   el.logoStatus.hidden = !logo;
+  el.cornersWidthField.hidden = el.decoration.value !== 'corners';
   el.logoStatus.textContent = logoUrl ? `Logo loaded: ${logoName || 'from the request'} (${logoUrl.slice(5, logoUrl.search(/[;,]/))}).` : 'No logo loaded yet.';
   byId('custom-decoration-controls').hidden = el.decoration.value !== 'dna';
   byId('reset-decoration').hidden = !extraFields.decoration_design;
@@ -158,7 +163,7 @@ function showInputs() {
   showStale();
 }
 
-for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.restarts, el.seed]) {
+for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.cornersWidth, el.restarts, el.seed]) {
   input.addEventListener('input', showInputs);
 }
 
@@ -382,6 +387,7 @@ const FIELDS = [
   ['tray', 'Tray', [el.trayChoice, el.trayFile]],
   ['cells', 'Cells', [el.cells]],
   ['decoration', 'Decoration', [el.decoration]],
+  ['corners.line_width', 'Corner line width', [el.cornersWidth]],
   ['font', 'Font', [el.font]],
   ['style.smallcaps_reference_face', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],
   ['style.smallcaps', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],
@@ -605,13 +611,23 @@ async function loadExample() {
   replaceNames(parseNamesText(text).join('\n'), { style: structuredClone(LAYOUT_PRESETS.balanced) }, `Replaced your ${n} name${n === 1 ? '' : 's'} with the example.`);
 }
 byId('load-example').addEventListener('click', loadExample);
-byId('line-layout').addEventListener('change', () => {
-  const preset = LAYOUT_PRESETS[byId('line-layout').value];
+/** Use a named line layout's proportions. @param {string} name */
+function applyLayout(name) {
+  const preset = LAYOUT_PRESETS[name];
   if (!preset) throw new Error('Unknown name layout');
   const previous = extraFields.style ?? {};
   extraFields.style = { ...previous, degree_name_overlap: preset.degree_name_overlap,
     optimizer: { ...previous.optimizer, ...preset.optimizer } };
   showInputs();
+}
+byId('line-layout').addEventListener('change', () => applyLayout(byId('line-layout').value));
+// The angled corners need a top line narrower than the bottom row to turn down beside
+// it: choosing them selects their proportions, and leaving them restores balanced
+// lines, unless the proportions were customized.
+el.decoration.addEventListener('change', () => {
+  const layout = byId('line-layout').value;
+  if (el.decoration.value === 'corners' && (layout === 'balanced' || layout === 'original')) applyLayout('corners');
+  else if (el.decoration.value !== 'corners' && layout === 'corners') applyLayout('balanced');
 });
 byId('clear-names').addEventListener('click', () => {
   const n = parseNamesText(el.names.value).length;

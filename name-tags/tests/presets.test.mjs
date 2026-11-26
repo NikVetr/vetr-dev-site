@@ -45,8 +45,9 @@ test('balanced proportions retain usable fits for short and strongly unequal lin
 });
 
 test('Li Wu rejects a DNA fit with no whole twist and supports an explicit text-only request', () => {
-  for (const [preset, style] of Object.entries(LAYOUT_PRESETS)) {
-    const request = { names: ['Li Wu'], style };
+  // the corner proportions' wider helix space does fit it; the two line layouts do not
+  for (const preset of ['balanced', 'original']) {
+    const request = { names: ['Li Wu'], style: LAYOUT_PRESETS[preset] };
     assert.throws(() => submit(request), (/** @type {any} */ error) => {
       assert.equal(error.code, 'fit_failed', preset);
       assert.match(error.message, /Li Wu/);

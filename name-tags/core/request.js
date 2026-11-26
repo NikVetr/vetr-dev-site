@@ -12,11 +12,12 @@ import { normalizeRequest as normalizeHelixRequest } from '../../helix/core/requ
  * @typedef {{ code: string, path: string, message: string }} Issue
  * @typedef {typeof DEFAULT_STYLE} Style
  * @typedef {typeof DEFAULT_HERSHEY_EKG} HersheyEkg
+ * @typedef {typeof DEFAULT_CORNERS} Corners
  * @typedef {{ name: string, logo: string | null }} NameEntry
  * @typedef {{ file: string | null, margin_div: number, center_adj_prop: readonly number[], use_file_colors: boolean }} LogoOptions
  * @typedef {{ names: NameEntry[], lines: string[][], tray: import('./tray.js').Tray, cells: number[] | null, font: { family: string },
- *   decoration: 'dna' | 'none' | 'hershey_ekg' | 'logo', decoration_design: ReturnType<typeof normalizeHelixRequest> | null,
- *   logo: LogoOptions, style: Style, hershey_ekg: HersheyEkg, seed: number,
+ *   decoration: 'dna' | 'corners' | 'none' | 'hershey_ekg' | 'logo', decoration_design: ReturnType<typeof normalizeHelixRequest> | null,
+ *   logo: LogoOptions, style: Style, hershey_ekg: HersheyEkg, corners: Corners, seed: number,
  *   output: { prefix: string } }} Settings
  */
 
@@ -85,6 +86,14 @@ export const DEFAULT_HERSHEY_EKG = Object.freeze({
   lowercase_bottom_line: true,
 });
 
+// The angled-corners decoration: R's draw_corner_path() arguments for the
+// "rethink_priorities" group (line_width, theta, draw_triangle).
+export const DEFAULT_CORNERS = Object.freeze({
+  line_width: 0.02,            // band width, inches
+  angle: 60,                   // slant of the bands from level, degrees
+  triangle: true,              // a hollow triangle beside each peak
+});
+
 export const DEFAULTS = Object.freeze({
   tray: 'keychain_big',
   cells: null,
@@ -93,13 +102,14 @@ export const DEFAULTS = Object.freeze({
   logo: Object.freeze({ file: null, margin_div: 7, center_adj_prop: Object.freeze([0, -0.005]), use_file_colors: false }),
   style: DEFAULT_STYLE,
   hershey_ekg: DEFAULT_HERSHEY_EKG,
+  corners: DEFAULT_CORNERS,
   seed: 1,
   ncores: 1,
   output: Object.freeze({ prefix: 'nametags' }),
 });
 
-const TOP_FIELDS = ['names', 'names_file', 'tray', 'cells', 'font', 'decoration', 'decoration_design', 'logo', 'style', 'hershey_ekg', 'seed', 'ncores', 'output'];
-const DECORATIONS = ['dna', 'none', 'hershey_ekg', 'logo'];
+const TOP_FIELDS = ['names', 'names_file', 'tray', 'cells', 'font', 'decoration', 'decoration_design', 'logo', 'style', 'hershey_ekg', 'corners', 'seed', 'ncores', 'output'];
+const DECORATIONS = ['dna', 'corners', 'none', 'hershey_ekg', 'logo'];
 const TRAY_FIELDS = ['name', 'page_in', 'cell_in', 'grid', 'spacing_in', 'first_center_in', 'centers_in'];
 const MAX_NAMES = 5000;
 const MAX_CELLS = 5000;
@@ -287,6 +297,7 @@ export function normalizeRequest(request) {
   if (decorationDesign && decoration !== 'dna') issues.push({ code: 'conflicting_fields', path: 'decoration_design', message: 'a custom helix or braid requires decoration "dna"' });
 
   const hershey = section(request.hershey_ekg, DEFAULT_HERSHEY_EKG, HERSHEY_CHECKS, 'hershey_ekg', issues);
+  const corners = section(request.corners, DEFAULT_CORNERS, { line_width: number(0, true, 0.1), angle: number(45, false, 75), triangle: boolean }, 'corners', issues);
   const logo = section(request.logo, DEFAULTS.logo, {
     file: (v) => (v === null || logoType(v) ? null : LOGO_MESSAGE),
     margin_div: number(1, true), center_adj_prop: pair(2), use_file_colors: boolean,
@@ -327,7 +338,7 @@ export function normalizeRequest(request) {
   if (issues.length) throw invalid(issues);
   return {
     names, lines, tray: /** @type {import('./tray.js').Tray} */ (tray), cells, font, decoration: /** @type {Settings['decoration']} */ (decoration),
-    decoration_design: decorationDesign, logo, style, hershey_ekg: hershey, seed: /** @type {number} */ (seed), output: { prefix: output.prefix },
+    decoration_design: decorationDesign, logo, style, hershey_ekg: hershey, corners, seed: /** @type {number} */ (seed), output: { prefix: output.prefix },
   };
 }
 

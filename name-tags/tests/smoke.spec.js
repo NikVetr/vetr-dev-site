@@ -130,6 +130,33 @@ test('Clear and Load example offer the names back', async ({ page }) => {
 });
 
 
+test('angled corners select their proportions, take a line width and undo as one step', async ({ page }) => {
+  await open(page);
+  await page.locator('#names').fill('Marcus Davis\nGrace Hopper');
+  await expect(page.locator('#corners-width-field')).toBeHidden();
+  await page.locator('#decoration').selectOption('corners');
+  await expect(page.locator('#line-layout')).toHaveValue('corners');
+  await expect(page.locator('#corners-width-field')).toBeVisible();
+  await expect(page.locator('#custom-decoration-controls')).toBeHidden();
+  await page.locator('#corners-width').fill('0.03');
+  await page.locator('#generate').click();
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).NameTags.getResult()?.tags.map((/** @type {any} */ t) => t.decoration))).toEqual(['corners', 'corners']);
+  await expect(page.locator('#stale')).toBeHidden();
+  const request = await page.evaluate(() => /** @type {any} */ (window).NameTags.getRequest());
+  expect(request.corners).toEqual({ line_width: 0.03 });
+  expect(request.style.optimizer.ratio_mean_b1_b2b3_w).toBe(0.75);
+  await page.locator('#corners-width').fill('0');
+  await page.locator('#generate').click();
+  await expect(page.locator('#issues li')).toContainText(['Corner line width']);
+  await expect(page.locator('#corners-width')).toHaveAttribute('aria-invalid', 'true');
+  await page.locator('#corners-width').fill('0.02');
+  await page.locator('#decoration').selectOption('dna');
+  await expect(page.locator('#line-layout')).toHaveValue('balanced');
+  await page.locator('#undo-replace').click();
+  await expect(page.locator('#decoration')).toHaveValue('corners');
+  await expect(page.locator('#line-layout')).toHaveValue('corners');
+});
+
 test('balanced default and original proportions round-trip through the request and preset control', async ({ page }) => {
   await open(page);
   await expect(page.locator('#line-layout')).toHaveValue('balanced');

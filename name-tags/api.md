@@ -30,7 +30,7 @@ const result = submit({ names: ['Ada Lovelace', 'Alan Turing'] }, { onProgress: 
 // result.sheets[0].svg is the sheet's SVG text
 ```
 
-`submit` takes optional callbacks in its second argument. `onProgress` is called after each tag with `{ done, total, name }`. `onFitTrace(index, trace)` observes each DNA-box BFGS run: `trace` contains `geometry`, `stage` (1: initial fit, 2: whole-twist refinement), `run`, `steps` (initial parameters and accepted `{ par, value }` iterates), and `result`. The three parameters are `[w1, w2, h2]`; tracing neither changes the optimization nor consumes random draws. The landing preview uses the winning restart and subsequent refinement; other restarts are not animated. These callbacks are not part of the JSON request, so the command line has no equivalent. The core also exports `parseNamesText(text)` and `parseNamesCsv(text)` (the names-file formats), `splitNameLines(name)`, `DEFAULTS`, `DEFAULT_STYLE`, `DEFAULT_HERSHEY_EKG`, `TRAY_PRESETS`, `FONTS` and `NameTagsError`.
+`submit` takes optional callbacks in its second argument. `onProgress` is called after each tag with `{ done, total, name }`. `onFitTrace(index, trace)` observes each DNA-box BFGS run: `trace` contains `geometry`, `stage` (1: initial fit, 2: whole-twist refinement), `run`, `steps` (initial parameters and accepted `{ par, value }` iterates), and `result`. The three parameters are `[w1, w2, h2]`; tracing neither changes the optimization nor consumes random draws. The landing preview uses the winning restart and subsequent refinement; other restarts are not animated. These callbacks are not part of the JSON request, so the command line has no equivalent. The core also exports `parseNamesText(text)` and `parseNamesCsv(text)` (the names-file formats), `splitNameLines(name)`, `DEFAULTS`, `DEFAULT_STYLE`, `DEFAULT_HERSHEY_EKG`, `DEFAULT_CORNERS`, `TRAY_PRESETS`, `FONTS` and `NameTagsError`.
 
 **In the page** (https://vetr.dev/name-tags/). The page runs `submit` in a Web Worker, so these calls return promises:
 
@@ -50,11 +50,12 @@ const result = submit({ names: ['Ada Lovelace', 'Alan Turing'] }, { onProgress: 
 | `tray` | string or object | `"keychain_big"` | A preset name or a tray object (see below). |
 | `cells` | array | in order | One cell number per name. A repeated cell starts a new sheet. |
 | `font` | object | `{family: "Inter"}` | `family`: `"Inter"` or `"Source Serif Pro"`, the two bundled families. |
-| `decoration` | string | `"dna"` | `"dna"`, `"none"`, `"hershey_ekg"` or `"logo"` (see [Decorations](#decorations)). |
+| `decoration` | string | `"dna"` | `"dna"`, `"corners"`, `"none"`, `"hershey_ekg"` or `"logo"` (see [Decorations](#decorations)). |
 | `decoration_design` | object or null | `null` | Optional [Helix/Braid request](../helix/api.md), used with `decoration: "dna"`; uniformly fits its filled geometry in the existing decoration box. |
 | `logo` | object | see below | The logo for `decoration: "logo"`. |
 | `style` | object | see below | Text sizing, small caps, and the optimizer. |
 | `hershey_ekg` | object | see below | Pen widths and placement for the Hershey design. |
+| `corners` | object | see below | Band width, angle and triangles of the angled-corners design. |
 | `seed` | integer | `1` | Seed for every random draw, as R's `set.seed()`; from -2147483647 to 2147483647. |
 | `ncores` | integer | `1` | Must be 1. The R version can run restarts in parallel, which draws different starts. |
 | `output` | object | `{prefix: "nametags"}` | `prefix` names the sheets (`<prefix>_names_grid_<k>.svg`, or `_logos_grid_` for logos). `dir` is where the command line writes them. `pdf` must be `false`. |
@@ -119,6 +120,8 @@ An irregular tray gives `centers_in`, one `[x, y]` per cell in cell order, inste
 
 **Hershey EKG** (`hershey_ekg`; the defaults are R's `default_hershey_ekg()`): `font` (`"HersheyScript"`, the only one bundled), `r_amp` (`0.7`, the heartbeat's R-wave height), `sampling_rate` (`800`), `stroke_points` (`200`, points per smoothed stroke), `smoothing_var_thresh` (`0.9999`), `bottom_line_lwd` and `top_line_lwd` (`0.01`, `0.0075`, pen widths), `lwd_pow`, `tail_pow`, `tail_prop_floor` (`2`, `2`, `0.5`), `top_scale` (`1.85`), `top_raise` (`0.75`) and `lowercase_bottom_line` (`true`). The script font has glyphs for printable ASCII except `@ < > [ ] { } \ ^ _`, and for the ISO-Latin-1 letters, which it draws without their accents, as R does.
 
+**Angled corners** (`corners`; the defaults are the R drawer's `draw_corner_path()` arguments for this design): `line_width` (`0.02`, the bands' width in inches, more than 0 and at most 0.1), `angle` (`60`, their slant from level in degrees, 45 to 75) and `triangle` (`true`, a hollow triangle beside each peak).
+
 ## Result
 
 | Field | Meaning |
@@ -130,7 +133,7 @@ An irregular tray gives `centers_in`, one `[x, y]` per cell in cell order, inste
 | `decoration_design` | Present only for a custom decoration: its fully normalized Helix/Braid request. |
 | `decoration_path` | For a drawn custom design: shared path diagnostics (`length`, `requestedWidth`, actual `width`, `narrowed`, `smoothing`, `minRadius`) before uniform tag fitting. A narrowed band also adds a warning. |
 
-`decoration` is what the tag got: a one-line name under `"dna"` reports `"none"`. `fit` is `null` except for DNA tags, where it holds `objective` (the cost at the solution), `w1`, `w2`, `h2` (the top-line width, helix width and helix height, in inner-box widths), `ar1`, `ar3` (the lines' height / width ratios the fit used), `ntwists` and `restarts` (more than requested if a fit with no whole twist was retried).
+`decoration` is what the tag got: a one-line name under `"dna"` or `"corners"` reports `"none"`. `fit` is `null` except for DNA and angled-corners tags, where it holds `objective` (the cost at the solution), `w1`, `w2`, `h2` (the top-line width, helix width and helix height, in inner-box widths), `ar1`, `ar3` (the lines' height / width ratios the fit used), `ntwists` and `restarts` (more than requested if a fit with no whole twist was retried).
 
 **Sheets.** The page is drawn at 96 units per inch, the unit Inkscape calls px, with `width` and `height` in inches, so every program opens it at true size. Engraving is filled black paths (even-odd fill); the original helix and underline are also outlined at 0.75 px, as the R version draws them. Custom decoration fills use their actual geometry without an added stroke. Each used cell has a 0.75 px grey (`#333333`) outline for registration.
 
@@ -151,6 +154,20 @@ The same field works through the page API and CLI. It accepts the standalone edi
 Custom two-line tags additionally report `decoration_fit`: `box_in` and `bounds_in` as `[left,bottom,right,top]` in cell-local inches including the existing name nudge, plus `scale` and `offset_in` mapping the source drawing coordinates into the tag. Missing or null `decoration_design` retains the original result fields and SVG exactly. A non-null design with another decoration type is rejected. Nested validation and geometry issues use `decoration_design.…` paths.
 
 In the page, **Customize helix or braid** opens the shared editor in a modal. Changes are a draft until **Apply**, which creates one Undo step and marks existing sheets stale; Generate updates them. Cancel, Close and Escape leave the workspace unchanged. **Use original** removes the customization as an undoable edit. Switching to another decoration temporarily omits the design from the current request; switching back retains the applied custom design. The standalone editor remains available for SVG/PNG export and freehand drawing.
+
+### Angled corners
+
+```json
+{
+  "names": ["Marcus Davis", "Grace Hopper"],
+  "decoration": "corners",
+  "style": { "optimizer": { "ratio_mean_b2b3_w": 0.5, "ratio_sd_b2b3_w": 0.5, "ratio_mean_b1_b2b3_w": 0.75 } }
+}
+```
+
+An embellishment inspired by the Rethink Priorities logo's bands cut at 60°, from the R drawer's design for that organisation (its `draw_corner_path()` calls survive; the function did not, so the shapes are drawn from the calls' arguments). The tag is laid out and fitted exactly as for `dna`, with the same optimizer, random draws and `fit`, and the decoration takes the helix's place. In the helix's box a peak rises at `angle` from the box's bottom-left corner to its top and doubles back down; beside it is a hollow triangle pointing down, set off from the peak and from the underline by the gap between the two lines (R's `space_names`). A wide box holds several peak-and-triangle pairs, and what is left over widens the gaps between them, to at most three times the gap. The underline runs on from the first peak's corner to the end of the bottom line, with the helix's gaps where descenders cross it. A bar the same gap above the top line runs from its left end and turns down at `angle` towards the bottom line's top-right corner, stopping level with the bottom line's top, or sooner where it would otherwise come closer to the top line than that gap. Bands are `line_width` wide, mitred to points at their turns, and engraved as filled black paths.
+
+The bar only reaches the bottom line when the top line is narrower than the bottom row; the R design used the optimizer settings above (its "rethink_priorities" group), which the page applies as **Narrow top line** and which `presets.js` exports as `CORNERS_STYLE`. Without them the leg is shorter. A fit with no whole helix twist fails as it does for `dna` (`fit_failed`), since the fit is the same.
 
 ### Original decorations
 
@@ -238,6 +255,6 @@ An invalid request, `{"names": ["Mary|Ann|Evans"], "seed": 1.5}`, exits with sta
 
 ## Browser layout presets
 
-The browser and landing example start with **Balanced lines**, favouring closer top/bottom name widths and greater horizontal overlap. The **Original proportions** choice restores the R layout. These presets use the existing BFGS cost and expose their full settings through `getRequest()`; loading a request preserves explicit overrides.
+The browser and landing example start with **Balanced lines**, favouring closer top/bottom name widths and greater horizontal overlap. The **Original proportions** choice restores the R layout. **Narrow top line** (`CORNERS_STYLE`: `ratio_mean_b2b3_w: 0.5`, `ratio_sd_b2b3_w: 0.5`, `ratio_mean_b1_b2b3_w: 0.75`, the others as the original) is the angled-corners design's; choosing **Angled corners** in the page selects it, and leaving it returns to Balanced lines unless the proportions were customized. These presets use the existing BFGS cost and expose their full settings through `getRequest()`; loading a request preserves explicit overrides.
 
 The balanced style is exported as `BALANCED_STYLE` from `presets.js`: `degree_name_overlap: 0.8`, and optimizer preferences `ratio_mean_b2b3_w: 0.2`, `ratio_sd_b2b3_w: 0.2`, `ratio_mean_b1_b2b3_w: 0.98`, `ratio_sd_b1_b2b3_w: 0.025`, and `sd_ntwists: 0.7`. Pass this as `style` to `submit()` (or include it in CLI JSON) for the same result. Omitting it retains historical core/CLI defaults. On the 12-name example, average top/bottom width ratio decreases from about 1.74 to 1.55 and horizontal overlap rises from about 77% to 92%; equal widths are a preference rather than a constraint.
