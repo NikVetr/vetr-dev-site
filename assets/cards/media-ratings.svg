@@ -2,7 +2,7 @@
 <style>
 [data-art="media-ratings"] .forecast-layout{height:100%;box-sizing:border-box;padding:2.5cqh 3cqw;display:grid;grid-template:"input input" auto "taste forecast" minmax(0,1fr) / minmax(0,1fr) minmax(0,1fr);gap:3cqh 3cqw;color:var(--art-ink);font-family:system-ui,sans-serif}
 [data-art="media-ratings"] .rating-input{grid-area:input;display:flex;align-items:center;justify-content:space-between;gap:2cqw;border-bottom:1px solid var(--art-line);padding-bottom:2cqh}
-[data-art="media-ratings"] .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;white-space:nowrap}
+[data-art="media-ratings"] .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;text-wrap:balance;overflow-wrap:break-word;min-width:0}
 [data-art="media-ratings"] .stars{width:min(40%,73cqh);height:auto;max-height:17cqh}
 [data-art="media-ratings"] .forecast-plot{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqh;min-width:0;min-height:0}
 [data-art="media-ratings"] .forecast-plot svg{width:100%;height:100%;min-height:0}
@@ -12,9 +12,10 @@
 [data-art="media-ratings"] .caption{color:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
 [data-art="media-ratings"] .scale{display:flex;justify-content:space-between}
 @container ratings-preview (min-aspect-ratio:2.45/1){
-  [data-art="media-ratings"] .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.95fr) minmax(0,1fr) minmax(0,1.2fr);padding:5cqh 2cqw;gap:2cqw}
-  [data-art="media-ratings"] .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh}
-  [data-art="media-ratings"] .film{font-size:clamp(15px,4.4cqw,36px)} [data-art="media-ratings"] .stars{width:94%}
+  [data-art="media-ratings"] .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.85fr) minmax(0,1.15fr) minmax(0,1.1fr);padding:5cqh 2cqw;gap:2cqw}
+  [data-art="media-ratings"] .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh;text-align:center}
+  [data-art="media-ratings"] .film{font-size:clamp(13px,4cqw,36px)} [data-art="media-ratings"] .stars{width:94%}
+  [data-art="media-ratings"] .label{font-size:clamp(11px,min(3.6cqw,10cqh),22px)}
 }
 @container ratings-preview (max-aspect-ratio:1.2/1){
   [data-art="media-ratings"] .forecast-layout{grid-template:"input" auto "taste" minmax(0,1fr) "forecast" minmax(0,1fr) / minmax(0,1fr);padding:3cqh 5cqw;gap:2cqh}

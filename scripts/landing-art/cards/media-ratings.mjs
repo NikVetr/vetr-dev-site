@@ -74,9 +74,12 @@ export function build() {
 <div class="forecast-plot distribution"><span class="label">Terminator 2</span>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 81" preserveAspectRatio="none">${bars}<path class="baseline" d="M0 79.5h100" vector-effect="non-scaling-stroke"/></svg>
 <span class="caption scale"><span>½ ★</span><span>5 ★</span></span></div></div></foreignObject>`,
+    // Titles scale with their pane; side by side, the column shares and title sizes keep
+    // "Taste classes" on one line, and the film title wraps in the shortest wells rather than
+    // reaching its divider (scripts/landing-art/tests/media-ratings-fit.browser.mjs).
     css: `& .forecast-layout{height:100%;box-sizing:border-box;padding:2.5cqh 3cqw;display:grid;grid-template:"input input" auto "taste forecast" minmax(0,1fr) / minmax(0,1fr) minmax(0,1fr);gap:3cqh 3cqw;color:var(--art-ink);font-family:system-ui,sans-serif}
 & .rating-input{grid-area:input;display:flex;align-items:center;justify-content:space-between;gap:2cqw;border-bottom:1px solid var(--art-line);padding-bottom:2cqh}
-& .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;white-space:nowrap}
+& .film{font:bold clamp(15px,min(7cqw,15cqh),38px) Georgia,serif;text-wrap:balance;overflow-wrap:break-word;min-width:0}
 & .stars{width:min(40%,73cqh);height:auto;max-height:17cqh}
 & .forecast-plot{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqh;min-width:0;min-height:0}
 & .forecast-plot svg{width:100%;height:100%;min-height:0}
@@ -86,9 +89,10 @@ export function build() {
 & .caption{color:var(--art-muted);font-size:clamp(10px,min(3.6cqw,8cqh),15px)}
 & .scale{display:flex;justify-content:space-between}
 @container ratings-preview (min-aspect-ratio:2.45/1){
-  & .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.95fr) minmax(0,1fr) minmax(0,1.2fr);padding:5cqh 2cqw;gap:2cqw}
-  & .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh}
-  & .film{font-size:clamp(15px,4.4cqw,36px)} & .stars{width:94%}
+  & .forecast-layout{grid-template:"input taste forecast" minmax(0,1fr) / minmax(0,.85fr) minmax(0,1.15fr) minmax(0,1.1fr);padding:5cqh 2cqw;gap:2cqw}
+  & .rating-input{flex-direction:column;justify-content:center;border:0;border-right:1px solid var(--art-line);padding:0 2cqw 0 0;gap:4cqh;text-align:center}
+  & .film{font-size:clamp(13px,4cqw,36px)} & .stars{width:94%}
+  & .label{font-size:clamp(11px,min(3.6cqw,10cqh),22px)}
 }
 @container ratings-preview (max-aspect-ratio:1.2/1){
   & .forecast-layout{grid-template:"input" auto "taste" minmax(0,1fr) "forecast" minmax(0,1fr) / minmax(0,1fr);padding:3cqh 5cqw;gap:2cqh}
