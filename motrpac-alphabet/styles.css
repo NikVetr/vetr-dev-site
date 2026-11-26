@@ -131,7 +131,11 @@ input:focus-visible {
   top: calc(100% + 7px);
   left: 0;
   display: grid;
+  width: max-content;
   min-width: 190px;
+  max-height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
+  overflow-y: auto;
   gap: 4px;
   padding: 8px;
   border: 1px solid var(--line);
@@ -153,6 +157,26 @@ input:focus-visible {
   background: var(--surface-2);
 }
 
+.menu-field {
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 8px 4px 4px;
+  border-top: 1px solid var(--line);
+}
+
+.menu-field span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Wider screens size the menu to the longest history label; narrow phone menus ellipsize it. */
+.menu-field select {
+  width: 100%;
+  padding: 0 8px;
+  text-overflow: ellipsis;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -161,6 +185,12 @@ input:focus-visible {
   overflow-x: auto;
   scrollbar-width: thin;
   flex: 0 1 auto;
+  font-size: 14px;
+}
+
+/* Groups keep their size; narrower headers move or hide groups instead (see the media rules). */
+.header-right > * {
+  flex-shrink: 0;
 }
 
 .global-variants {
@@ -168,7 +198,6 @@ input:focus-visible {
   align-items: center;
   gap: 5px;
   color: var(--muted);
-  font-size: 14px;
   white-space: nowrap;
 }
 
@@ -197,16 +226,13 @@ input:focus-visible {
 
 .layout-section {
   display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: 5px;
+  gap: 2px;
 }
 
 .layout-section-label {
   color: var(--muted);
   font-size: 12px;
   line-height: 1;
-  padding-top: 2px;
 }
 
 .layout-icon-grid {
@@ -234,6 +260,20 @@ input:focus-visible {
 .layout-icon-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.menu-popover .layout-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 8px 4px 4px;
+  border-top: 1px solid var(--line);
+}
+
+.menu-popover .layout-icon-button {
+  width: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
 
 .layout-icon {
@@ -465,7 +505,6 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 4px;
-  min-width: 0;
 }
 
 .history-controls button {
@@ -473,25 +512,11 @@ input:focus-visible {
   padding: 0 7px;
 }
 
-.history-controls select {
-  width: 170px;
-  min-height: 28px;
-  padding: 0 34px 0 8px;
-  appearance: none;
-  background-color: var(--surface);
-  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
-  background-position: calc(100% - 17px) 13px, calc(100% - 11px) 13px;
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
-  text-overflow: ellipsis;
-}
-
 .active-letter {
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 14px;
 }
 
 .active-letter strong {
@@ -943,15 +968,6 @@ input:focus-visible {
     gap: 8px;
   }
 
-  .history-controls select {
-    width: 132px;
-    padding-right: 28px;
-  }
-
-  .history-controls button {
-    padding: 0 7px;
-  }
-
   .layout-actions {
     gap: 4px;
   }
@@ -977,6 +993,35 @@ input:focus-visible {
   }
 }
 
+/* Tablet and small-laptop headers keep one line. The File menu also holds Export, Import and
+   Copy JSON; below 1024 px app.js moves the align tools into the Shape menu. Hidden words
+   stay in the accessible names. */
+@media (min-width: 701px) and (max-width: 1279px) {
+  .header-file-actions {
+    display: none;
+  }
+
+  .active-letter .header-word {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 759px) {
+  .global-variants .header-word {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 700px) {
   .app-shell {
     grid-template-rows: 94px minmax(0, 1fr) 126px;
@@ -993,7 +1038,11 @@ input:focus-visible {
   .header-right {
     width: 100%;
     align-self: stretch;
-    font-size: 14px;
+  }
+
+  /* Phone menus open leftward from their summary, so they keep the narrow width that fits. */
+  .menu-popover {
+    width: auto;
   }
 
   .history-controls {

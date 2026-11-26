@@ -24,6 +24,7 @@
               <button id="export-all-svg">Export All SVGs</button>
               <button id="export-font">Export Font…</button>
               <button id="import-json">Import JSON</button>
+              <button id="copy-letter-json">Copy Letter JSON</button>
               <input id="import-json-file" type="file" accept="application/json,.json" hidden>
               <a href="../">vetr.dev</a>
             </div>
@@ -37,9 +38,11 @@
               <button id="delete-selected">Delete</button>
               <button id="clear-letter">Clear Letter</button>
               <button id="reset-view">Reset View</button>
+              <label class="menu-field"><span>History</span><select id="history-jump"></select></label>
+              <button id="reset-app" type="button">Reset to Defaults</button>
             </div>
           </details>
-          <details class="menu">
+          <details id="shape-menu" class="menu">
             <summary>Shape</summary>
             <div class="menu-popover">
               <button data-add-shape="lollipop-long">Add Long Lollipop</button>
@@ -53,14 +56,14 @@
           </details>
         </div>
         <div class="header-right">
-          <div class="global-variants" aria-label="Global variant selector">
-            <span>Variants:</span>
+          <div class="global-variants" role="group" aria-label="Global variant selector">
+            <span class="header-word">Variants:</span>
             <button type="button" data-global-variant="0">1</button>
             <button type="button" data-global-variant="1">2</button>
             <button type="button" data-global-variant="2">3</button>
           </div>
-          <div class="layout-actions" aria-label="Align and distribute selected shapes">
-            <div class="layout-section" aria-label="Align selected shapes">
+          <div class="layout-actions" role="group" aria-label="Align and distribute selected shapes">
+            <div class="layout-section" role="group" aria-label="Align selected shapes">
               <span class="layout-section-label">Align</span>
               <div class="layout-icon-grid align-grid">
                 <button class="layout-icon-button" type="button" data-align-axis="x" data-align-mode="min" title="Align left">
@@ -83,7 +86,7 @@
                 </button>
               </div>
             </div>
-            <div class="layout-section" aria-label="Distribute selected shapes">
+            <div class="layout-section" role="group" aria-label="Distribute selected shapes">
               <span class="layout-section-label">Distribute</span>
               <div class="layout-icon-grid distribute-grid">
                 <button id="distribute-x" class="layout-icon-button" type="button" title="Distribute selected shapes horizontally">
@@ -95,7 +98,7 @@
               </div>
             </div>
           </div>
-          <div class="header-file-actions" aria-label="File actions">
+          <div class="header-file-actions" role="group" aria-label="File actions">
             <button id="header-export-json" type="button">Export</button>
             <button id="header-import-json" type="button">Import</button>
             <button id="copy-current-json" type="button">Copy JSON</button>
@@ -103,11 +106,9 @@
           <div class="history-controls">
             <button id="undo-action" type="button">Undo</button>
             <button id="redo-action" type="button">Redo</button>
-            <button id="reset-app" type="button">Reset</button>
-            <select id="history-jump" aria-label="History"></select>
           </div>
           <div class="active-letter">
-            <span>Letter</span>
+            <span class="header-word">Letter</span>
             <strong id="active-letter-label">A</strong>
           </div>
         </div>

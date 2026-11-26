@@ -1235,6 +1235,7 @@ function initControls() {
     document.getElementById("import-json-file").click();
   });
   els.copyCurrentJson.addEventListener("click", copyCurrentLetterVariantJson);
+  document.getElementById("copy-letter-json").addEventListener("click", copyCurrentLetterVariantJson);
   document.getElementById("import-json-file").addEventListener("change", importJson);
   document.querySelectorAll("[data-add-shape]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1267,8 +1268,11 @@ function initMenus() {
         }
       });
     });
-    menu.querySelectorAll("button").forEach((button) => {
-      button.addEventListener("click", closeMenus);
+    // Delegated, so the align tools also close the Shape menu when they move into it.
+    menu.addEventListener("click", (event) => {
+      if (/** @type {Element} */ (event.target).closest(".menu-popover button")) {
+        closeMenus();
+      }
     });
   });
 
@@ -1277,6 +1281,24 @@ function initMenus() {
       closeMenus();
     }
   });
+  placeLayoutActions();
+}
+
+// Tablet headers cannot fit the align and distribute buttons, so they move into the Shape menu.
+function placeLayoutActions() {
+  const actions = /** @type {HTMLElement} */ (document.querySelector(".layout-actions"));
+  const headerNext = /** @type {HTMLElement} */ (actions.nextElementSibling);
+  const shapeMenu = /** @type {HTMLElement} */ (document.querySelector("#shape-menu .menu-popover"));
+  const tablet = matchMedia("(min-width: 701px) and (max-width: 1023px)");
+  const place = () => {
+    if (tablet.matches) {
+      shapeMenu.append(actions);
+    } else {
+      headerNext.before(actions);
+    }
+  };
+  tablet.addEventListener("change", place);
+  place();
 }
 
 function closeMenus() {

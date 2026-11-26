@@ -15,6 +15,10 @@ multiple shapes. The existing alignment, stem and polish controls operate on
 selected shapes, or on the whole letter when nothing is selected. Use Undo/Redo
 to step back through edits. Cmd/Ctrl-Z and Cmd/Ctrl-Shift-Z undo and redo editor
 changes; while typing in an input they retain the browser’s text-editing behaviour.
+**Edit → History** jumps to any earlier step, and **Edit → Reset to Defaults**
+restores the starting alphabet (also undoable). The header stays on one line:
+on narrower screens Export, Import and Copy JSON are found in the File menu, and
+below 1,024 px the align and distribute tools move into the Shape menu.
 Export JSON to keep a portable copy of the designs;
 browser storage is not a backup.
 
@@ -36,7 +40,10 @@ formats; a font contains the finished outlines.
 - `npm test`: font structure, metrics, cmap, colour layers, validation and checksums.
 - `npm run check`: type-check the standalone font builder with an installed `tsc`.
 - `npm run test:browser`: export, preview, download, selected variants and phone
-  dialog checks in Chromium. Uses the repository’s existing Playwright install;
+  dialog checks in Chromium, the editor switch, and the header fit (no overlap or
+  hidden overflow from 701 to 2,560 px; every control reachable, including by
+  keyboard and touch). `BROWSER_ENGINE=webkit node tests/header.browser.mjs`
+  repeats the header check in WebKit. Uses the repository’s existing Playwright install;
   install dependencies in another tool folder or set `PLAYWRIGHT` to its package.
 
 Browser artifacts are written to ignored `tmp/output/alphabet-font/` at the
