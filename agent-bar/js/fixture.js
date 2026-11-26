@@ -24,22 +24,25 @@ export const KEY = Object.fromEntries(Object.entries(ID).map(([name, id]) => {
 }));
 
 // Windows: two VS Code windows, three terminals, the Antigravity IDE and the Codex app. `rect` is where each
-// sits on a 1376 × 828 work area (the screen less the top bar and dock), scaled to the screen the page has.
+// sits on a 1376 × 828 work area (the screen less the top bar and dock), scaled to the screen the page has. The
+// desktop opens calm: one VS Code window and one terminal side by side, both waiting for an answer, and the rest
+// minimized to the dock, from where (or from a review shortcut or the dropdown) they come forward.
 export const WINDOWS = [
   { id: 'w-sampler', kind: 'vscode', workspace: 'sampler-study', label: 'Visual Studio Code', file: 'adapt.py',
-    rect: [16, 16, 770, 470] },
+    rect: [40, 36, 790, 520], minimized: true },
   { id: 'w-figures', kind: 'vscode', workspace: 'paper-figures', label: 'Visual Studio Code', file: 'fig3.py',
-    rect: [360, 150, 700, 440] },
-  { id: 'terminal:4410', kind: 'terminal', workspace: 'rnaseq-pipeline', label: 'Terminal', rect: [806, 10, 556, 292] },
-  { id: 'terminal:4417', kind: 'terminal', workspace: 'rnaseq-pipeline', label: 'Terminal', rect: [826, 318, 536, 272] },
-  { id: 'terminal:4242', kind: 'terminal', workspace: 'web-dashboard', label: 'Terminal', rect: [40, 520, 560, 292] },
+    rect: [24, 24, 776, 560] },
+  { id: 'terminal:4410', kind: 'terminal', workspace: 'rnaseq-pipeline', label: 'Terminal', rect: [820, 24, 536, 380] },
+  { id: 'terminal:4417', kind: 'terminal', workspace: 'rnaseq-pipeline', label: 'Terminal', rect: [820, 420, 536, 300], minimized: true },
+  { id: 'terminal:4242', kind: 'terminal', workspace: 'web-dashboard', label: 'Terminal', rect: [64, 500, 560, 292], minimized: true },
   { id: 'ide:5151', kind: 'ide', workspace: 'grant-budget', label: 'Antigravity IDE', rect: [640, 560, 500, 250], minimized: true },
   { id: 'app:6161', kind: 'app', workspace: 'lab-notes', label: 'Codex app', rect: [420, 470, 520, 300], minimized: true },
 ];
 
 // Each chat: where it is, its state and review reasons when the demo starts, its conversation so far, and
 // what it does next. `next` is the turn the visitor can start by sending one of `prompts`; `then` is a
-// turn the simulation runs on its own (a working chat finishing). A step is [ticks, kind, text].
+// turn the simulation runs on its own (a working chat finishing). A step is [ticks, kind, text]. The two
+// working chats finish some seconds apart (about 16 s and 30 s in), so the opening is not a burst of changes.
 export const CHATS = [
   {
     name: 'tune', title: 'Tune the step-size adaptation', project: 'sampler-study', window: 'w-sampler',
@@ -63,11 +66,11 @@ export const CHATS = [
       ['you', 'Profile the warmup loop with the new windows and tell the step-size chat what you find.'],
       ['tool', 'python -m cProfile -o tmp/warmup.prof scripts/warmup.py'],
     ],
-    then: [[3, 'agent', 'The gradient takes 70% of warmup; the adaptation step itself is under 2%.'],
-      [2, 'tool', 'agent-bar send claude:5b1c0f2e… "Warmup profile rerun with the new windows: the adaptation step is under 2% of warmup time. Details in tmp/profile-warmup.md."'],
+    then: [[20, 'agent', 'The gradient takes 70% of warmup; the adaptation step itself is under 2%.'],
+      [4, 'tool', 'agent-bar send claude:5b1c0f2e… "Warmup profile rerun with the new windows: the adaptation step is under 2% of warmup time. Details in tmp/profile-warmup.md."'],
       [1, 'send', 'tune|Warmup profile rerun with the new windows: the adaptation step is under 2% of warmup time. Details in tmp/profile-warmup.md.'],
       [1, 'output', '{"ok": true, "to": "Tune the step-size adaptation", "remaining": 9}'],
-      [2, 'agent', 'Profile written to tmp/profile-warmup.md and sent to the step-size chat. The new windows cost nothing measurable.']],
+      [4, 'agent', 'Profile written to tmp/profile-warmup.md and sent to the step-size chat. The new windows cost nothing measurable.']],
     prompts: ['Profile the sampling phase too'],
     next: [[3, 'tool', 'python -m cProfile -o tmp/sampling.prof scripts/sample.py'], [3, 'agent', 'Sampling spends 81% of its time in the gradient as well; nothing in the sampler loop itself stands out.']],
   },
@@ -135,7 +138,7 @@ export const CHATS = [
       ['you', 'The date picker overflows on narrow screens. Fix it.'],
       ['tool', 'npm test -- date-picker'],
     ],
-    then: [[4, 'output', '12 passing'], [3, 'agent', 'The calendar now wraps to two rows under 420 px, and the input keeps its full width. Tests pass.']],
+    then: [[12, 'output', '12 passing'], [4, 'agent', 'The calendar now wraps to two rows under 420 px, and the input keeps its full width. Tests pass.']],
     prompts: ['Check it in Safari too'],
     next: [[3, 'tool', 'npx playwright test --project=webkit date-picker'], [2, 'agent', 'It renders the same in WebKit; one focus ring was clipped, now fixed.']],
   },
