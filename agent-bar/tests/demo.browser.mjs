@@ -1,7 +1,9 @@
-// Drives the demo page in a real browser: the review shortcut brings its chat's window forward maximized with that
-// chat showing, the same chat's dropdown row sends it back, each top-bar part opens its tab, History's search,
-// Show context and arrows work, a Codex chat's `agent-bar send` reaches the QC chat at its next turn, and the tour
-// starts, follows the visitor and ends. Run with the site served on a port:
+// Drives the demo page in a real browser: the desktop opens calm (one VS Code window and one terminal, the rest in the
+// dock, nothing new for the first seconds), the review shortcut brings its chat's window forward maximized with that
+// chat showing, the same chat's dropdown row sends it back, each top-bar part opens its tab, History's search, Show
+// context and arrows work, a Codex chat's `agent-bar send` reaches the QC chat at its next turn, and the tour starts,
+// follows the visitor and ends; its panel steps with Back and Next, glides, drags aside (mouse, touch, keyboard) and
+// snaps back, and under reduced motion nothing moves. Run with the site served on a port:
 //   PLAYWRIGHT=<path to playwright> node agent-bar/tests/demo.browser.mjs [http://127.0.0.1:8717] [chromium|webkit]
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -27,6 +29,15 @@ const win = (s, id) => s.windows.find((w) => w.id === id);
 try {
   const page = await open({ width: 1440, height: 900 });
   let s = await state(page);
+  // A calm opening: the focused VS Code window and one terminal, side by side; the other windows wait in the dock.
+  assert.deepEqual(s.windows.filter((w) => !w.minimized).map((w) => w.id).sort(), ['terminal:4410', 'w-figures']);
+  assert.equal(s.focus, 'w-figures');
+  const [a, b] = await Promise.all(['w-figures', 'terminal:4410'].map((id) => page.locator(`section[data-win="${id}"]`).boundingBox()));
+  assert.ok(a.x + a.width <= b.x || b.x + b.width <= a.x, 'the two open windows do not overlap');
+  assert.equal(await page.locator('.dock-item[data-kind="terminal"] .dots i').count(), 3, 'the dock still counts every terminal');
+  const quiet = await page.evaluate(() => window.AgentBarDemo.tick(10));
+  assert.equal(quiet.notifications.length, 0, 'nothing new in the first ten seconds');
+  assert.deepEqual(quiet.shortcuts.map((g) => g.project), s.shortcuts.map((g) => g.project));
   assert.deepEqual(s.providers.claude, { open: 5, review: 3 });
   assert.deepEqual(s.shortcuts.map((g) => g.project), ['paper-figures', 'sampler-study', 'rnaseq-pipeline']);
   assert.equal(await page.locator('.tracker-quick-group .tracker-quick-bubble').count(), 2, 'paper-figures has two numbered bubbles');
@@ -48,6 +59,7 @@ try {
   await row.click();
   s = await state(page);
   assert.equal(win(s, 'w-sampler').maximized, false);
+  assert.equal(win(s, 'w-sampler').minimized, true, 'back to the dock, where it was');
   assert.equal(s.dropdown, null);
 
   // A bubble opens one chat of a project with several.
@@ -120,6 +132,75 @@ try {
   assert.equal((await state(page)).tour.active, false);
   await page.close();
 
+  // The tour panel: Back and Next, a glide between steps, dragging by mouse and keyboard, Snap back, and the last step.
+  const tourPage = await open({ width: 1440, height: 900 });
+  const tour = () => tourPage.evaluate(() => window.AgentBarDemo.tour.state());
+  const bubble = tourPage.locator('.tour-bubble');
+  const where = async () => { const r = await bubble.boundingBox(); return [Math.round(r.x), Math.round(r.y)]; };
+  const settle = () => tourPage.waitForFunction(() => !document.querySelector('.tour-bubble').getAnimations().length && !document.querySelector('.tour-guide').getAnimations().length);
+  await tourPage.evaluate(() => window.AgentBarDemo.tour.start());
+  await bubble.waitFor();
+  await settle();
+  assert.equal((await tour()).pose, 'wave', 'Biscuit waves hello');
+  assert.equal(await tourPage.locator('[data-tour="back"]').isDisabled(), true, 'no Back on the first step');
+  const first = await where();
+  await tourPage.locator('[data-tour="next"]').click();
+  await tourPage.waitForFunction(() => document.querySelector('.tour-bubble').getAnimations().length > 0);
+  await settle();
+  assert.equal((await tour()).step, 1);
+  assert.equal((await tour()).pose, 'point', 'a step that waits for the visitor points');
+  assert.notDeepEqual(await where(), first, 'the panel moved to the next step');
+  await tourPage.locator('[data-tour="back"]').click();
+  assert.equal((await tour()).step, 0);
+  await settle();
+  // Dragged by its header, it stays where it was put for the following steps.
+  const head = await tourPage.locator('.tour-panel-head').boundingBox();
+  await tourPage.mouse.move(head.x + head.width / 2, head.y + head.height / 2);
+  await tourPage.mouse.down();
+  await tourPage.mouse.move(head.x + head.width / 2 + 400, head.y + head.height / 2 + 250, { steps: 6 });
+  await tourPage.mouse.up();
+  const dropped = await where();
+  assert.ok(Math.abs(dropped[0] - first[0] - 400) <= 2 && Math.abs(dropped[1] - first[1] - 250) <= 2, `dragged to ${dropped} from ${first}`);
+  assert.equal((await tour()).pinned, true);
+  await tourPage.locator('[data-tour="next"]').click();
+  await settle();
+  assert.equal((await tour()).step, 1);
+  assert.deepEqual(await where(), dropped, 'it stays put on the next step');
+  // The grip's arrow keys move it, and leave the step alone.
+  await tourPage.locator('.tour-grip').focus();
+  await tourPage.keyboard.press('ArrowLeft');
+  await tourPage.keyboard.press('Shift+ArrowUp');
+  assert.deepEqual(await where(), [dropped[0] - 16, dropped[1] - 64]);
+  assert.equal((await tour()).step, 1);
+  // Snap back returns it beside Biscuit.
+  await tourPage.locator('.tour-snap').click();
+  await settle();
+  assert.equal((await tour()).pinned, false);
+  assert.equal(await tourPage.locator('.tour-snap').isHidden(), true);
+  assert.notDeepEqual(await where(), [dropped[0] - 16, dropped[1] - 64]);
+  // The last step: Next is off; Replay and Done take over.
+  for (let i = 0; i < 12; i++) await tourPage.evaluate(() => window.AgentBarDemo.tour.next());
+  await tourPage.waitForFunction(() => window.AgentBarDemo.tour.state().step === 11);
+  await settle();
+  assert.equal(await tourPage.locator('[data-tour="next"]').isDisabled(), true);
+  assert.equal(await tourPage.locator('[data-tour="end"]').innerText(), 'Done');
+  await tourPage.locator('[data-tour="replay"]').click();
+  assert.equal((await tour()).step, 0);
+  await tourPage.locator('[data-tour="end"]').click();
+  await bubble.waitFor({ state: 'hidden' });
+  assert.equal((await tour()).active, false);
+  // Under reduced motion the panel and Biscuit are placed at once.
+  await tourPage.emulateMedia({ reducedMotion: 'reduce' });
+  await tourPage.keyboard.press('t');
+  await bubble.waitFor();
+  await tourPage.keyboard.press('ArrowRight');
+  await tourPage.waitForTimeout(100);
+  assert.equal((await tour()).step, 1);
+  assert.equal(await tourPage.evaluate(() => document.getAnimations().length), 0, 'nothing animates under reduced motion');
+  await tourPage.keyboard.press('Escape');
+  assert.equal(await bubble.isHidden(), true, 'ends at once under reduced motion');
+  await tourPage.close();
+
   // A phone: the stacked view keeps the bar, the front window and the dropdown usable by touch.
   const phone = await open({ width: 390, height: 844 }, { hasTouch: true, isMobile: engine === 'chromium' });
   assert.equal((await state(phone)).phone, true);
@@ -130,6 +211,24 @@ try {
   await phone.locator('section[data-win="w-sampler"]').waitFor({ state: 'visible', timeout: 3000 });
   await phone.locator('[data-part="queues"]').tap();
   assert.equal((await state(phone)).dropdown.view, 'queues');
+  // The tour panel fits the phone and drags by touch.
+  await phone.evaluate(() => { window.AgentBarDemo.open(null); window.AgentBarDemo.tour.start(); });
+  const panel = phone.locator('.tour-bubble');
+  await panel.waitFor();
+  await phone.waitForFunction(() => !document.querySelector('.tour-bubble').getAnimations().length);
+  const panelAt = await panel.boundingBox();
+  assert.ok(panelAt.x >= 0 && panelAt.x + panelAt.width <= 390, 'the panel fits the phone');
+  if (engine === 'chromium') {
+    const grip = await phone.locator('.tour-panel-head').boundingBox();
+    const cdp = await phone.context().newCDPSession(phone);
+    const at = (dy) => [{ x: grip.x + grip.width / 2, y: grip.y + grip.height / 2 + dy }];
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: at(0) });
+    for (const dy of [20, 60, 120]) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: at(dy) });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    const after = await panel.boundingBox();
+    assert.ok(Math.abs(after.y - panelAt.y - 120) <= 2, `a touch drag moved the panel (${panelAt.y} → ${after.y})`);
+    assert.equal((await state(phone)).tour.pinned, true);
+  }
   await phone.close();
   assert.deepEqual(errors, []);
   console.log(`agent-bar demo: ${engine} ok`);

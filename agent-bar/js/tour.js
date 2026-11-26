@@ -1,22 +1,10 @@
-// The guided tour: Biscuit, an original Italian greyhound in a green jumper (after the dogs in the wallpaper
-// photo), runs to the next thing to try, says what it does and cheers when the visitor does it. The run shows
-// where to look, so it is the one deliberate motion on the page; with reduced motion Biscuit appears beside the
-// target instead. Keys: ← → step, Esc ends (when no menu is open), T starts or ends it.
-
-const DOG = `<svg viewBox="0 0 100 100" aria-hidden="true">
-<path d="M40 98 L40 84 M62 98 L62 84" stroke="#e7dccd" stroke-width="7" stroke-linecap="round"/>
-<path d="M26 70c0-14 12-24 28-24s26 10 26 24v14c0 6-4 9-10 9H36c-6 0-10-3-10-9z" fill="#1f6b46"/>
-<path d="M30 74h46M30 80h46M30 86h46" stroke="#18563a" stroke-width="2" stroke-linecap="round"/>
-<path d="M44 48c1-6 16-8 20-2l2 10c-8 5-17 5-24 1z" fill="#2a8a5b"/>
-<path d="M46 50h18M45 54h20" stroke="#217149" stroke-width="2" stroke-linecap="round"/>
-<path d="M47 47c-1-10 3-18 9-23l9 4c-4 6-6 12-6 19z" fill="#e9ddcc"/>
-<path d="M52 15c6-7 19-7 23 0 2 3 2 7 1 9l17 6c3 1 3 6-1 6l-17 2c-7 3-17 1-22-6-3-5-4-13-1-17z" fill="#f1e7d8"/>
-<path d="M76 26l17 5c2 1 2 4-1 5l-14 1" fill="#e3d4c0"/>
-<circle cx="93" cy="33.5" r="3" fill="#2b2220"/>
-<path d="M58 13c-4-7-13-6-16 1 4 0 9 2 13 7z" fill="#b98f6e"/>
-<circle cx="68" cy="21" r="2.7" fill="#2b2220"/><circle cx="68.8" cy="20.2" r=".8" fill="#fff"/>
-<path d="M78 37c3 2 7 2 10 0" stroke="#c9b49a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-</svg>`;
+// The guided tour: Biscuit, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper photo), runs
+// to the next thing to try, says what it does and cheers when the visitor does it. The run shows where to look, and
+// the tour panel glides after it (shared/tour-guide/); with reduced motion both are placed at once. The visitor can
+// drag the panel aside, or move it with the arrow keys on its grip. Keys: ← → step, Esc ends (when no menu is open),
+// T starts or ends it. Biscuit's poses are image files listed in ../guide/manifest.js.
+import { createCharacter, createTourPanel, poseFor } from '../../shared/tour-guide/tour-guide.js';
+import BISCUIT from '../guide/manifest.js';
 
 /** @param {{stage: HTMLElement, screen: HTMLElement, ui: any, sim: any, on: (fn: (kind: string, detail: any) => void) => () => void, openMenu: Function, closeMenus: Function}} deps */
 export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus }) {
@@ -61,22 +49,30 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
       done: () => false, last: true },
   ];
 
-  let index = -1, cheered = false, guideAt = /** @type {[number, number]|null} */ (null);
+  let index = -1, cheered = false, guideAt = /** @type {[number, number]|null} */ (null), running = false;
   const changes = new Set();
-  root.innerHTML = `<div class="tour-ring" hidden></div><div class="tour-guide" hidden role="img" aria-label="Biscuit, the tour guide">${DOG}</div><div class="tour-bubble" hidden role="dialog" aria-label="Tour" aria-live="polite"></div>`;
+  root.innerHTML = `<div class="tour-ring" hidden></div><div class="tour-guide" hidden role="img" aria-label="${BISCUIT.label}"></div><div class="tour-bubble"></div>`;
   const ring = /** @type {HTMLElement} */ (root.querySelector('.tour-ring'));
   const guide = /** @type {HTMLElement} */ (root.querySelector('.tour-guide'));
-  const bubble = /** @type {HTMLElement} */ (root.querySelector('.tour-bubble'));
+  const dog = createCharacter(guide, BISCUIT);
+  const panel = createTourPanel(/** @type {HTMLElement} */ (root.querySelector('.tour-bubble')), {
+    area: () => { const s = stage.getBoundingClientRect(); return { width: s.width, height: s.height }; },
+    onBack: () => go(index - 1), onNext: () => go(index + 1), onEnd: () => stop(), onReplay: () => go(0),
+  });
+  const bubble = panel.panel;
+  /** What Biscuit does between runs: waves at the start and end, points while a step waits, cheers when it is done. */
+  const restPose = () => poseFor({ done: cheered, first: index === 0, last: !!steps[index].last, task: !steps[index].last });
 
   function show() {
+    if (index < 0) return;
     const step = steps[index];
     const target = step.target();
     root.hidden = false;
-    bubble.hidden = false;
     guide.hidden = false;
-    const total = steps.length;
-    bubble.innerHTML = `<p class="tour-step">Step ${index + 1} of ${total}</p><p>${step.text}</p>${cheered && step.cheer ? `<p class="tour-done">✓ ${step.cheer}</p>` : ''}
-<div class="tour-actions"><button type="button" data-tour="back" ${index === 0 ? 'disabled' : ''}>Back</button><span class="grow"></span><button type="button" data-tour="${step.last ? 'replay' : 'next'}" class="${cheered || step.last ? 'primary' : ''}">${step.last ? 'Replay' : cheered ? 'Next' : 'Skip'}</button><button type="button" data-tour="stop">${step.last ? 'Close' : 'End tour'}</button></div>`;
+    panel.update({ index, total: steps.length, ready: cheered });
+    panel.body.innerHTML = `<p>${step.text}</p>${cheered && step.cheer ? `<p class="tour-done">✓ ${step.cheer}</p>` : ''}`;
+    panel.show();
+    if (!running) dog.set(restPose());
     place(target, true);
   }
   /** Biscuit runs to the target (or, with reduced motion, appears there); the ring marks it. */
@@ -100,7 +96,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     if (y + size > s.height) y = r.top - s.top - size;
     x = Math.max(0, Math.min(s.width - size, x));
     y = Math.max(0, Math.min(Math.max(0, s.height - size), y));
-    guide.classList.toggle('flip', flip);
+    guide.classList.toggle('flip', flip && BISCUIT.mirror);
     jump(x, y, move);
     layoutBubble(x, y, r);
   }
@@ -113,12 +109,17 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
         const t = i / 12;
         return { transform: `translate(${x0 + (x - x0) * t}px, ${y0 + (y - y0) * t - lift * 4 * t * (1 - t)}px) rotate(${Math.sin(t * Math.PI) * (x > x0 ? 8 : -8)}deg)` };
       });
-      guide.animate(frames, { duration: Math.min(900, 380 + Math.hypot(x - x0, y - y0) * 0.6), easing: 'ease-in-out' });
+      running = true;
+      dog.set('leap');
+      guide.animate(frames, { duration: Math.min(900, 380 + Math.hypot(x - x0, y - y0) * 0.6), easing: 'ease-in-out' }).finished.then(() => {
+        running = false;
+        if (index >= 0) dog.set(restPose());
+      }, () => {});
     }
     guide.style.transform = to;
     guideAt = [x, y];
   }
-  // The bubble hangs under Biscuit (or above, near the bottom), and moves beside it when that would cover the target.
+  // The panel hangs under Biscuit (or above, near the bottom), and moves beside it when that would cover the target.
   function layoutBubble(x, y, target) {
     const s = stage.getBoundingClientRect();
     const w = bubble.offsetWidth || 320, h = bubble.offsetHeight || 160;
@@ -130,7 +131,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
     const options = [[clampX(x + size / 2 - w / 2), clampY(below)], [clampX(x + size + 6), clampY(y)], [clampX(x - w - 6), clampY(y)],
       [clampX(t ? t[0] - w - 12 : 8), clampY(t ? t[1] : y)], [clampX(t ? t[2] + 12 : 8), clampY(t ? t[1] : y)]];
     const [left, top] = options.find(([l, tp]) => !covers(l, tp)) ?? options[0];
-    Object.assign(bubble.style, { left: `${left}px`, top: `${top}px` });
+    panel.place(left, top);
   }
 
   function go(next) {
@@ -158,18 +159,13 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
   }
   function stop() {
     index = -1;
-    root.hidden = true;
+    ring.hidden = true;
+    guide.hidden = true;
     clearInterval(follow);
     for (const fn of changes) fn(false);
+    panel.hide().then(() => { if (index < 0) root.hidden = true; });
   }
 
-  bubble.addEventListener('click', (event) => {
-    const action = /** @type {HTMLElement} */ (event.target).closest('[data-tour]')?.getAttribute('data-tour');
-    if (action === 'next') go(index + 1);
-    else if (action === 'back') go(index - 1);
-    else if (action === 'replay') go(0);
-    else if (action === 'stop') stop();
-  });
   on((kind, detail) => {
     if (index < 0) return;
     const step = steps[index];
@@ -197,7 +193,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
 
   return {
     start, stop, next: () => go(index + 1), active: () => index >= 0,
-    state: () => ({ active: index >= 0, step: index, tried: cheered }),
+    state: () => ({ active: index >= 0, step: index, tried: cheered, pose: dog.pose, pinned: panel.pinned }),
     onChange: (fn) => changes.add(fn),
   };
 }

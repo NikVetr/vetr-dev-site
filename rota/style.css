@@ -20,8 +20,6 @@
   --warn-c: #f2c14e;
   --bad: #ff6b6b;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-  --guide-fur: #e9a35b;
-  --guide-stripe: #b86b2a;
 }
 
 .tool-header-row { align-items: center; }
@@ -229,31 +227,21 @@
 
 /* ---------- The guide ---------- */
 
-.guide { position: absolute; left: 0; top: 0; z-index: 20; width: 72px; height: 72px; pointer-events: none; }
-.guide[hidden] { display: none; }
-.guide .pip, .guide .bubble { pointer-events: auto; }
-.pip { display: block; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35)); }
-.pip .fur, .pip .tail { fill: var(--guide-fur); }
-.pip .stripe { fill: none; stroke: var(--guide-stripe); stroke-width: 2; stroke-linecap: round; }
-.pip .white, .pip .belly { fill: #fff4e6; }
-.pip .ear, .pip .nose { fill: #f29bb0; }
-.pip .eye { fill: #1d2430; }
-.pip .glint { fill: #fff; }
-.pip .lid { fill: none; stroke: #1d2430; stroke-width: 1.8; stroke-linecap: round; }
-.pip .whisker { stroke: #6b4a2e; stroke-width: 1; }
-.pip .collar { fill: none; stroke: var(--q-a); stroke-width: 3; stroke-linecap: round; }
-.pip .tag { fill: var(--q-b); }
-.pip .eyes-happy, .pip .paw-up { display: none; }
-.guide.happy .eyes-open { display: none; }
-.guide.happy .eyes-happy { display: inline; }
-.guide.pointing .paw-up { display: inline; }
-.guide.flying .bubble, .guide.folded .bubble { visibility: hidden; }
-.pip { cursor: pointer; border-radius: 50%; }
+/* Pip sits in the page, on the window the tour is about; the panel (shared/tour-guide/tour-guide.css) is fixed in the
+   viewport, so it stays in view as the page scrolls and where the visitor drags it. */
+.guide { position: absolute; left: 0; top: 0; z-index: 20; width: 0; height: 0; pointer-events: none; }
+.guide[hidden], .guide-seat[hidden] { display: none; }
+.guide-seat { position: absolute; left: 0; top: 0; width: 72px; height: 72px; }
+.pip { display: block; width: 72px; height: 72px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; pointer-events: auto; }
+.pip:hover { background: none; }
+/* A light rim keeps the black fur clear of the dark window bars it sits on, in both themes. */
+.pip .tour-pose { filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.7)) drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35)); }
 .pip:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.bubble-min { position: absolute; top: 6px; right: 6px; padding: 0 0.5rem; line-height: 1.4; color: var(--muted); }
+.guide.folded .bubble { visibility: hidden; }
+.bubble-min { flex: none; padding: 0 0.5rem; line-height: 1.4; color: var(--muted); }
 .bubble {
-  position: absolute;
-  top: 76px;
+  position: fixed;
+  pointer-events: auto;
   padding: 0.7rem 0.85rem 0.75rem;
   background: var(--surface);
   color: var(--text);
@@ -262,8 +250,7 @@
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
   font-size: 0.92rem;
 }
-.bubble:focus-visible { outline: 2px solid var(--primary); }
-.bubble-step { margin: 0; padding-right: 2rem; font-size: 0.75rem; color: var(--muted); }
+.bubble .tour-panel-step { color: var(--muted); opacity: 1; }
 .bubble-title { margin: 0.1rem 0 0.3rem; font-size: 1.02rem; }
 .bubble-text { line-height: 1.45; }
 .bubble-commands { display: grid; gap: 0.35rem; margin-top: 0.55rem; }
@@ -273,8 +260,6 @@
 .suggest.action { color: var(--alert); border-color: var(--alert); }
 .bubble-reaction { margin: 0.55rem 0 0; color: var(--ok); }
 .bubble-reaction:empty { display: none; }
-.bubble-nav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; }
-.bubble-nav [data-skip] { margin-left: auto; color: var(--muted); }
 
 /* ---------- Phones: one window at a time, behind tabs ---------- */
 

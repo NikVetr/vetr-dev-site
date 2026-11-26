@@ -1,31 +1,13 @@
-// The guided tour: Pip, a cat, leaps to the next thing to try, suggests the command, and reacts
-// when it is done. Pip's flight shows where to look next; with reduced motion it simply appears
-// beside the target. The tour can be skipped, replayed and driven from the keyboard.
+// The guided tour: Pip, the black-and-white cat from the site's footer, leaps to the next thing to try, suggests the
+// command, and reacts when it is done. Pip's leap shows where to look next, and the tour panel glides after it
+// (shared/tour-guide/); with reduced motion both are placed at once. The visitor can drag the panel aside, or move it
+// with the arrow keys on its grip. The tour can be skipped, replayed and driven from the keyboard. Pip's poses are
+// image files listed in ../guide/manifest.js.
 import { ANALYSIS } from '../core/scenario.js';
 import { latest, PILOT_SUBMIT, PREPARE, SUBMIT_A, SUBMIT_B, SUBMIT_C, ETA } from './commands.js';
 import { lease } from '../core/sim.js';
-
-const CAT = `<svg class="pip" role="button" tabindex="0" aria-label="Pip, the tour guide: show or fold the tour" viewBox="0 0 72 72" width="72" height="72">
-  <path class="tail" d="M50 56c10 0 14-8 12-16-1-5-6-6-7-2 2 5 1 11-6 12z"/>
-  <ellipse class="fur" cx="34" cy="50" rx="17" ry="15"/>
-  <path class="stripe" d="M24 45q4 2 3 7M44 45q-4 2-3 7"/>
-  <ellipse class="belly" cx="34" cy="54" rx="8" ry="8"/>
-  <g class="paws"><ellipse class="white" cx="27" cy="64" rx="5" ry="3.4"/><ellipse class="white" cx="41" cy="64" rx="5" ry="3.4"/></g>
-  <g class="paw-up"><path class="fur" d="M46 46q9-6 12-16l4 2q-2 12-12 18z"/><ellipse class="white" cx="60" cy="30" rx="3.6" ry="3"/></g>
-  <path class="fur" d="M17 20 19 4l11 9zM51 20 49 4 38 13z"/>
-  <path class="ear" d="M20 16 21 8l5 5zM48 16l-1-8-5 5z"/>
-  <circle class="fur" cx="34" cy="25" r="16"/>
-  <path class="stripe" d="M34 10v6M29 11l1.5 5M39 11l-1.5 5"/>
-  <g class="eyes-open"><ellipse class="eye" cx="27.5" cy="24" rx="3" ry="3.6"/><ellipse class="eye" cx="40.5" cy="24" rx="3" ry="3.6"/>
-    <circle class="glint" cx="28.6" cy="22.8" r="1"/><circle class="glint" cx="41.6" cy="22.8" r="1"/></g>
-  <g class="eyes-happy"><path class="lid" d="M24.5 25q3-4 6 0M37.5 25q3-4 6 0"/></g>
-  <ellipse class="white" cx="34" cy="31" rx="7" ry="5"/>
-  <path class="nose" d="M32 28.5h4l-2 2.4z"/>
-  <path class="lid" d="M34 31v1.2M34 32.2q-2 2-4 .4M34 32.2q2 2 4 .4"/>
-  <path class="whisker" d="M22 30l-9-2M22 32.5l-9 1M46 30l9-2M46 32.5l9 1"/>
-  <path class="collar" d="M22 37q12 7 24 0" />
-  <rect class="tag" x="31" y="38.5" width="6" height="6" rx="1.5"/>
-</svg>`;
+import { createCharacter, createTourPanel, poseFor } from '../../shared/tour-guide/tour-guide.js';
+import PIP from '../guide/manifest.js';
 
 /** The steps, in the brief's order. `done(e, world)` sees each run and simulation event. */
 function steps(app) {
@@ -35,7 +17,7 @@ function steps(app) {
   const submitted = (e, run) => e.type === 'run' && e.result.effects.some((x) => x.type === 'submitted' && w.sim.queues.find((q) => q.id === x.queue)?.runName === run);
   const controlled = (e, action, run) => e.type === 'run' && e.result.effects.some((x) => x.type === 'control' && x.action === action && w.sim.queues.find((q) => q.id === x.queue)?.runName === run);
   return [
-    { target: '#win-storage', side: 'right', title: 'Hello', text: "I'm Pip. This is a simulated ROTA pool: two machines, <b>storage</b> and <b>worker</b>, sharing a drive at /srv/cluster. Whatever you type runs against that simulation, in your browser, so nothing can break. I'll show you around; choose <b>Skip tour</b> if you'd rather poke at it yourself." },
+    { target: '#win-storage', side: 'right', title: 'Hello', text: "I'm Pip. This is a simulated ROTA pool: two machines, <b>storage</b> and <b>worker</b>, sharing a drive at /srv/cluster. Whatever you type runs against that simulation, in your browser, so nothing can break. I'll show you around; choose <b>End tour</b> if you'd rather poke at it yourself." },
     { target: '#win-storage', side: 'right', title: 'An idle pool', text: 'The pool has already been started. Ask the scheduler what it knows about it.', commands: ['rota pool-status'], done: (e) => ran(e, /pool-status/),
       reaction: 'state=ACTIVE, and no queues yet. live_cpu_units=12: storage lends the pool 4 CPU units, worker 8.' },
     { target: '#win-monitor', side: 'below', title: 'The dashboard', text: '<code>rota monitor</code> is this tmux dashboard. Each host has a CPU pane and a MEM pane; CLUSTER I/O shows the pool and the shared drive; QUEUE PROGRESS lists every queue. For now, both hosts are idle.' },
@@ -86,13 +68,17 @@ function steps(app) {
 
 export function createTour(root, app) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  root.innerHTML = `${CAT}<div class="bubble" role="region" aria-label="Tour" tabindex="-1">
-    <p class="bubble-step"></p><h2 class="bubble-title"></h2><div class="bubble-text"></div><div class="bubble-commands"></div>
-    <p class="bubble-reaction" aria-live="polite"></p>
-    <button type="button" class="bubble-min" data-min aria-expanded="true" aria-label="Fold the tour away" title="Fold the tour away">–</button>
-    <div class="bubble-nav"><button type="button" data-back>← Back</button><button type="button" data-next class="primary">Next →</button><button type="button" data-skip>Skip tour</button></div></div>`;
-  const cat = root.querySelector('.pip');
-  const bubble = root.querySelector('.bubble');
+  root.innerHTML = `<div class="guide-seat"><button type="button" class="pip" aria-label="${PIP.label}" aria-expanded="true"></button></div><div class="bubble"></div>`;
+  const seat = /** @type {HTMLElement} */ (root.querySelector('.guide-seat'));
+  const cat = /** @type {HTMLElement} */ (root.querySelector('.pip'));
+  const pip = createCharacter(cat, PIP);
+  const panel = createTourPanel(/** @type {HTMLElement} */ (root.querySelector('.bubble')), {
+    area: () => ({ width: document.documentElement.clientWidth, height: innerHeight }),
+    onBack: () => go(index - 1), onNext: () => go(index + 1), onEnd: () => stop(), onReplay: () => start(0),
+  });
+  const bubble = panel.panel;
+  panel.body.innerHTML = '<h2 class="bubble-title"></h2><div class="bubble-text"></div><div class="bubble-commands"></div><p class="bubble-reaction"></p>';
+  panel.head.insertAdjacentHTML('beforeend', '<button type="button" class="bubble-min" data-min aria-expanded="true" aria-label="Fold the tour away" title="Fold the tour away">–</button>');
   let list = steps(app);
   let index = 0, active = false, solved = new Set(), flight = null, pos = null;
 
@@ -114,48 +100,48 @@ export function createTour(root, app) {
     return { x: x + scrollX, y: y + scrollY };
   }
   /**
-   * The bubble hangs from Pip on the step's side, over the neighbour that matters least to it,
-   * and stays in the viewport. On a phone it sits under the tabs, clear of the prompt.
+   * The panel hangs from Pip on the step's side, over the neighbour that matters least to it, and stays in the
+   * viewport (it is fixed there; Pip scrolls with the page). On a phone it sits under the tabs, clear of the prompt.
    */
-  function placeBubble() {
-    const { x, y } = pos;
-    const vw = window.innerWidth, vh = window.innerHeight;
+  function placeBubble(glide = true) {
+    const x = pos.x - scrollX, y = pos.y - scrollY;
+    const vw = document.documentElement.clientWidth, vh = innerHeight;
     const width = Math.min(phoneView.matches ? vw - 16 : 340, vw - 16);
     bubble.style.width = `${width}px`;
     const side = phoneView.matches ? 'below' : list[index].side ?? 'below';
     const h = bubble.offsetHeight;
-    let left = side === 'right' ? x + 64 : side === 'left' ? x - width + 8 : x + 72 - width;
+    const left = side === 'right' ? x + 64 : side === 'left' ? x - width + 8 : x + 72 - width;
     let top = side === 'below' ? y + 70 : y + 40;
-    // A short target (the phone's dashboard) keeps its view: the bubble goes under it instead.
+    // A short target (the phone's dashboard) keeps its view: the panel goes under it instead.
     const r = targetRect();
-    if (phoneView.matches && r && r.height < vh * 0.55 && r.bottom + h + 8 < vh) top = r.bottom + scrollY + 6;
-    // Clear of the phone's sticky tabs, and inside the viewport.
+    if (phoneView.matches && r && r.height < vh * 0.55 && r.bottom + h + 8 < vh) top = r.bottom + 6;
+    // Clear of the phone's sticky tabs.
     const tabs = document.querySelector('.tabs');
     const floor = phoneView.matches && tabs ? Math.max(8, tabs.getBoundingClientRect().bottom + 4) : 8;
-    left = Math.min(Math.max(scrollX + 8, left), scrollX + vw - width - 8);
-    top = Math.max(scrollY + floor, Math.min(top, scrollY + vh - h - 8));
-    bubble.style.left = `${left - x}px`;
-    bubble.style.top = `${top - y}px`;
+    panel.place(left, Math.max(floor, Math.min(top, vh - h - 8)), { glide });
   }
+  /** Pip's pose between leaps: waves at the start and end, points while a step waits, pleased once it is done. */
+  const restPose = () => poseFor({ done: solved.has(index), first: index === 0, last: index === list.length - 1, task: !!list[index].done });
   function moveTo(next, animate) {
     const from = pos;
     pos = next;
-    root.style.transform = `translate(${next.x}px, ${next.y}px)`;
-    if (!animate || !from || reduced.matches || (from.x === next.x && from.y === next.y)) { placeBubble(); return; }
+    seat.style.transform = `translate(${next.x}px, ${next.y}px)`;
+    placeBubble();
+    if (!animate || !from || reduced.matches || (from.x === next.x && from.y === next.y)) return;
     flight?.cancel();
     const lift = Math.min(from.y, next.y) - 90;
-    root.classList.add('flying');
-    flight = root.animate([
+    pip.set('leap');
+    flight = seat.animate([
       { transform: `translate(${from.x}px, ${from.y}px) rotate(0deg)` },
       { transform: `translate(${(from.x + next.x) / 2}px, ${lift}px) rotate(${next.x < from.x ? 12 : -12}deg)`, offset: 0.5 },
       { transform: `translate(${next.x}px, ${next.y}px) rotate(0deg)` },
     ], { duration: Math.min(900, 380 + Math.hypot(next.x - from.x, next.y - from.y) / 3), easing: 'cubic-bezier(.45,.05,.4,1)' });
-    flight.onfinish = () => { root.classList.remove('flying'); placeBubble(); };
+    flight.finished.then(() => { if (active) pip.set(restPose()); }, () => {});
   }
 
   function render(animate = true) {
     const s = list[index];
-    root.querySelector('.bubble-step').textContent = `Tour ${index + 1} of ${list.length}`;
+    panel.update({ index, total: list.length, ready: !s.done || solved.has(index) });
     root.querySelector('.bubble-title').textContent = s.title;
     root.querySelector('.bubble-text').innerHTML = s.text;
     const box = root.querySelector('.bubble-commands');
@@ -180,78 +166,70 @@ export function createTour(root, app) {
       b.addEventListener('click', () => app.cable(s.action === 'plug'));
       box.append(b);
     }
-    const isSolved = solved.has(index);
     const reaction = root.querySelector('.bubble-reaction');
-    reaction.innerHTML = isSolved && s.reaction ? `<span aria-hidden="true">✓ </span>${typeof s.reaction === 'function' ? s.reaction() : s.reaction}` : '';
-    root.classList.toggle('happy', isSolved);
-    root.classList.toggle('pointing', !isSolved && !!s.done);
-    root.querySelector('[data-back]').disabled = index === 0;
-    const next = root.querySelector('[data-next]');
-    const last = index === list.length - 1;
-    next.textContent = last ? 'Done' : s.done && !isSolved ? 'Skip step →' : 'Next →';
-    next.classList.toggle('primary', !s.done || isSolved);
+    reaction.innerHTML = solved.has(index) && s.reaction ? `<span aria-hidden="true">✓ </span>${typeof s.reaction === 'function' ? s.reaction() : s.reaction}` : '';
+    pip.set(restPose());
     app.show(s.target);
     requestAnimationFrame(() => moveTo(perch(), animate));
   }
 
+  const fold = (folded) => {
+    root.classList.toggle('folded', folded);
+    for (const el of [cat, root.querySelector('[data-min]')]) el.setAttribute('aria-expanded', String(!folded));
+    if (!folded && pos) placeBubble(false);
+  };
   function go(i) {
     index = Math.max(0, Math.min(list.length - 1, i));
-    root.classList.remove('folded');
+    fold(false);
     render();
   }
   function start(at = 0) {
     list = steps(app);
     active = true;
     root.hidden = false;
+    seat.hidden = false;
     pos = null;
     solved = new Set();
     index = at;
+    fold(false);
+    panel.show();
     render(false);
   }
   function stop() {
     active = false;
-    root.hidden = true;
     flight?.cancel();
+    seat.hidden = true;
+    panel.hide().then(() => { if (!active) { root.hidden = true; seat.hidden = false; } });
   }
 
-  root.querySelector('[data-back]').addEventListener('click', () => go(index - 1));
-  root.querySelector('[data-next]').addEventListener('click', () => (index === list.length - 1 ? stop() : go(index + 1)));
-  root.querySelector('[data-skip]').addEventListener('click', stop);
-  const fold = (folded) => {
-    root.classList.toggle('folded', folded);
-    root.querySelector('[data-min]').setAttribute('aria-expanded', String(!folded));
-    if (!folded) placeBubble();
-  };
   root.querySelector('[data-min]').addEventListener('click', () => fold(true));
   cat.addEventListener('click', () => fold(!root.classList.contains('folded')));
-  cat.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fold(!root.classList.contains('folded')); }
-  });
   bubble.addEventListener('keydown', (e) => {
-    if (e.target.closest('input')) return;
+    if (/** @type {HTMLElement} */ (e.target).closest('input')) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); } else if (e.key === 'Escape') { e.preventDefault(); stop(); }
   });
   addEventListener('resize', () => { if (active) moveTo(perch(), false); });
-  // Scrolling (including the scroll that brings a target into view) keeps the bubble on screen.
+  // Scrolling (including the scroll that brings a target into view) moves Pip with the page: the panel follows at once.
   let queued = false;
   addEventListener('scroll', () => {
     if (!active || queued || !pos) return;
     queued = true;
-    requestAnimationFrame(() => { queued = false; if (!root.classList.contains('flying')) placeBubble(); });
+    requestAnimationFrame(() => { queued = false; placeBubble(false); });
   }, { passive: true });
 
   return {
     start, stop, go,
     get active() { return active; }, get index() { return index; }, get length() { return list.length; },
+    get pose() { return pip.pose; }, get pinned() { return panel.pinned; },
     /** Let the current step see an event; react if it completes the step. */
     notify(event) {
       if (!active) return;
       const s = list[index];
       if (!s.done || solved.has(index) || !s.done(event)) return;
       solved.add(index);
-      root.classList.remove('folded');
+      fold(false);
       render(false);
-      if (!reduced.matches) root.animate([{ translate: '0 0' }, { translate: '0 -14px' }, { translate: '0 0' }], { duration: 420, easing: 'ease-out', composite: 'add' });
+      if (!reduced.matches) cat.animate([{ translate: '0 0' }, { translate: '0 -14px' }, { translate: '0 0' }], { duration: 420, easing: 'ease-out', composite: 'add' });
     },
   };
 }

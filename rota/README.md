@@ -34,9 +34,14 @@ flowchart LR
 - `core/scenario.js` holds the sample data: `examples/cluster.json` (hosts `storage` and
   `worker`, root `/srv/cluster`), `examples/first-job`, and the `my-analysis` project with queues
   A, B and C. Job runtimes are invented.
-- `ui/tour.js` is the guided tour. Pip, a cat, moves to each window it talks about; under
-  `prefers-reduced-motion` it appears there without flying. `?tour=1` starts the tour, `?tour=0`
+- `ui/tour.js` is the guided tour. Pip, the black-and-white cat from the site's footer photo,
+  leaps to each window it talks about, and the tour panel from `shared/tour-guide/` glides after
+  it: Back and Next, dragged aside by pointer, touch or the arrow keys on its grip until Snap back.
+  Under `prefers-reduced-motion` both appear there at once. `?tour=1` starts the tour, `?tour=0`
   suppresses it; otherwise it starts on a first visit.
+- `guide/` holds Pip's poses, one SVG each, listed in `guide/manifest.js`. To use new art, replace
+  a file under the same name or point the manifest at another; `shared/tour-guide/POSES.md` gives
+  the poses the tour uses and the canvas they share.
 
 ## Scripting the page
 

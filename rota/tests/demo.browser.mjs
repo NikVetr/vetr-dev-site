@@ -34,17 +34,22 @@ test('keyboard only: type, complete, recall and use the Commands list', async ()
   } finally { await app.close(); }
 });
 
-test('the tour moves to each target, reacts, and steps by keyboard; reduced motion places it without flying', async () => {
+test('the tour moves to each target, reacts, and steps by Back, Next and keyboard; reduced motion places it without flying', async () => {
   const app = await openPage('rota/?tour=1', { engine });
   const { page } = app;
   try {
+    const tour = () => page.evaluate(() => { const t = /** @type {any} */ (window).RotaDemo.tour; return { index: t.index, pose: t.pose, active: t.active }; });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.locator('.bubble').waitFor();
-    await page.locator('[data-next]').click();
+    assert.equal(await page.locator('[data-tour="back"]').isDisabled(), true, 'no Back on the first step');
+    assert.equal((await tour()).pose, 'wave', 'Pip waves hello');
+    await page.locator('[data-tour="next"]').click();
     assert.equal(await page.locator('.bubble-title').textContent(), 'An idle pool');
+    assert.equal((await tour()).pose, 'point', 'a step that waits for the visitor points');
     await page.locator('.bubble .suggest').click();
     await page.keyboard.press('Enter');
     await page.locator('.bubble-reaction', { hasText: 'state=ACTIVE' }).waitFor();
+    assert.equal((await tour()).pose, 'happy');
     assert.equal(await page.evaluate(() => document.getAnimations().length), 0, 'no flight under reduced motion');
     await page.locator('.bubble').focus();
     await page.keyboard.press('ArrowRight');
@@ -55,10 +60,80 @@ test('the tour moves to each target, reacts, and steps by keyboard; reduced moti
       return !!cat && !!target && cat.bottom > target.top - 10 && cat.top < target.top + 60 && cat.right <= target.right + 4;
     });
     assert.ok(near, 'Pip perches on the dashboard window');
+    await page.locator('[data-tour="back"]').click();
+    assert.equal(await page.locator('.bubble-title').textContent(), 'An idle pool');
+    // The last step: Next is off; Replay and Done take over.
+    await page.evaluate(() => /** @type {any} */ (window).RotaDemo.tour.go(99));
+    assert.equal(await page.locator('.bubble-title').textContent(), "That's the tour");
+    assert.equal(await page.locator('[data-tour="next"]').isDisabled(), true);
+    assert.equal(await page.locator('[data-tour="end"]').textContent(), 'Done');
+    await page.locator('[data-tour="replay"]').click();
+    assert.equal(await page.locator('.bubble-title').textContent(), 'Hello');
+    await page.locator('.bubble').focus();
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#guide').isHidden(), true);
     await page.locator('#tour-button').click();
     assert.equal(await page.locator('.bubble-title').textContent(), 'Hello');
+    assert.deepEqual(app.errors, []);
+  } finally { await app.close(); }
+});
+
+test('the tour panel glides between steps, drags aside by mouse, touch and keyboard, and snaps back', async () => {
+  const app = await openPage('rota/?tour=1', { engine, touch: engine === 'chromium' });
+  const { page } = app;
+  try {
+    const bubble = page.locator('.bubble');
+    const where = async () => { const r = await bubble.boundingBox(); return [Math.round(r.x), Math.round(r.y)]; };
+    const settle = () => page.waitForFunction(() => !document.querySelector('.bubble').getAnimations().length && !document.querySelector('.guide-seat').getAnimations().length);
+    await bubble.waitFor();
+    await settle();
+    await page.locator('[data-tour="next"]').click();
+    await settle();
+    const before = await where();
+    // To the dashboard: Pip leaps and the panel glides.
+    await page.locator('[data-tour="next"]').click();
+    await page.waitForFunction(() => document.querySelector('.bubble').getAnimations().length > 0);
+    assert.equal(await page.evaluate(() => /** @type {any} */ (window).RotaDemo.tour.pose), 'leap', 'Pip is mid-leap');
+    await settle();
+    const home = await where();
+    assert.notDeepEqual(home, before, 'the panel moved to the next step');
+    // Dragged by its header, it stays where it was put for the following steps.
+    const head = await page.locator('.tour-panel-head').boundingBox();
+    await page.mouse.move(head.x + 40, head.y + head.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(head.x + 40 - 300, head.y + head.height / 2 + 200, { steps: 6 });
+    await page.mouse.up();
+    const dropped = await where();
+    assert.ok(Math.abs(dropped[0] - home[0] + 300) <= 2 && Math.abs(dropped[1] - home[1] - 200) <= 2, `dragged to ${dropped} from ${home}`);
+    await page.locator('[data-tour="next"]').click();
+    await settle();
+    assert.equal(await page.locator('.bubble-title').textContent(), 'A first project');
+    assert.deepEqual(await where(), dropped, 'it stays put on the next step');
+    // The grip's arrow keys move it, and leave the step alone.
+    await page.locator('.tour-grip').focus();
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowDown');
+    assert.deepEqual(await where(), [dropped[0] + 16, dropped[1] + 16]);
+    assert.equal(await page.locator('.bubble-title').textContent(), 'A first project');
+    // A touch drag moves it too (Chromium's touch events; WebKit here has no touch input to drive).
+    if (engine === 'chromium') {
+      const grip = await page.locator('.tour-panel-head').boundingBox();
+      const cdp = await page.context().newCDPSession(page);
+      const at = (dx) => [{ x: grip.x + 40 + dx, y: grip.y + grip.height / 2 }];
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: at(0) });
+      for (const dx of [20, 60, 100]) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: at(dx) });
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      assert.deepEqual(await where(), [dropped[0] + 116, dropped[1] + 16]);
+    }
+    // Snap back returns it beside Pip.
+    assert.equal(await page.evaluate(() => /** @type {any} */ (window).RotaDemo.tour.pinned), true);
+    await page.locator('.tour-snap').click();
+    await settle();
+    assert.equal(await page.evaluate(() => /** @type {any} */ (window).RotaDemo.tour.pinned), false);
+    assert.notDeepEqual(await where(), [dropped[0] + 16, dropped[1] + 16]);
+    // Ending eases the panel out before the guide hides.
+    await page.locator('[data-tour="end"]').click();
+    await page.locator('#guide').waitFor({ state: 'hidden' });
     assert.deepEqual(app.errors, []);
   } finally { await app.close(); }
 });

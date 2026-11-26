@@ -245,6 +245,9 @@ resume();
       })),
     };
   },
-  tour: { start: (i) => app.tour.start(i ?? 0), stop: () => app.tour.stop(), go: (i) => app.tour.go(i), get index() { return app.tour.index; }, get active() { return app.tour.active; } },
+  tour: {
+    start: (i) => app.tour.start(i ?? 0), stop: () => app.tour.stop(), go: (i) => app.tour.go(i),
+    get index() { return app.tour.index; }, get active() { return app.tour.active; }, get pose() { return app.tour.pose; }, get pinned() { return app.tour.pinned; },
+  },
   get world() { return app.world; },
 };

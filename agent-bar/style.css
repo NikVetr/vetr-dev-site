@@ -37,28 +37,28 @@ body { margin: 0; }
 .keys kbd { font: 0.85em ui-monospace, monospace; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 0.35em; background: var(--surface-2); }
 .muted { color: var(--muted); }
 
-/* The tour guide: Biscuit, an original Italian greyhound in a green jumper (after the dogs in the wallpaper),
-   who runs to the next thing to try and says what it does. The run is the feature, so it is the one motion here;
-   with reduced motion it appears beside its target instead. */
+/* The tour guide: Biscuit, an Italian greyhound in a green turtleneck (after the dogs in the wallpaper), who runs to
+   the next thing to try and says what it does, and the tour panel (shared/tour-guide/tour-guide.css), which glides
+   after it. That motion shows where to look, so it is the one motion here; with reduced motion both are placed at
+   once. */
 .tour { position: absolute; inset: 0; pointer-events: none; z-index: 70; }
 .tour-guide { position: absolute; left: 0; top: 0; width: 96px; height: 96px; pointer-events: auto; will-change: transform; }
-.tour-guide svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45)); }
-.tour-guide.flip svg { transform: scaleX(-1); }
-.tour-guide.cheer svg { animation: tour-hop 0.5s ease-out 2; }
+.tour-guide .tour-pose { filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45)); }
+.tour-guide.flip .tour-pose { transform: scaleX(-1); }
+.tour-guide.cheer .tour-pose { animation: tour-hop 0.5s ease-out 2; }
 @keyframes tour-hop { 50% { translate: 0 -14px; } }
-.tour-bubble { position: absolute; pointer-events: auto; width: min(320px, calc(100vw - 32px)); box-sizing: border-box; background: #fffdf6; color: #1d1f23;
+.tour-bubble { width: min(320px, calc(100vw - 32px)); background: #fffdf6; color: #1d1f23;
   border: 2px solid #1f5a3a; border-radius: 14px; padding: 12px 14px 10px; font: 14px/1.45 system-ui, sans-serif; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); }
 :root[data-theme="dark"] .tour-bubble { background: #1d2a22; color: #eef3ef; border-color: #6fbf8f; }
 .tour-bubble p { margin: 0 0 8px; }
+.tour-bubble .tour-panel-step { margin: 0; color: #5f6368; }
+:root[data-theme="dark"] .tour-bubble .tour-panel-step { color: #a8b3ab; }
 .tour-bubble .tour-done { color: #1f6b3a; font-weight: 600; }
 :root[data-theme="dark"] .tour-bubble .tour-done { color: #8fe0ad; }
-.tour-bubble .tour-step { color: #5f6368; font-size: 12px; }
-:root[data-theme="dark"] .tour-bubble .tour-step { color: #a8b3ab; }
-.tour-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.tour-actions .grow { flex: 1; }
-.tour-actions button { font-size: 13px; padding: 4px 10px; min-height: 32px; }
+.tour-bubble .tour-panel-nav { margin-top: 2px; }
+.tour-bubble .tour-panel-nav button { font-size: 13px; padding: 4px 10px; min-height: 32px; }
 .tour-ring { position: absolute; border: 3px solid #f4c36a; border-radius: 10px; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35), 0 0 16px rgba(244, 195, 106, 0.8);
   pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
-  .tour-guide.cheer svg { animation: none; }
+  .tour-guide.cheer .tour-pose { animation: none; }
 }
