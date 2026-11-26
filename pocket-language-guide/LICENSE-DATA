@@ -1,28 +1,25 @@
 Corpus and content license
 ==========================
 
-The original Wanderwart content under `data/` -- the concept bank, the per-language realizations, the
-respelling layers and the registries -- is licensed under
-Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+Wanderwart's code and its original content under `data/` -- the concept bank, the
+per-language realizations, the respelling layers and the registries -- are covered by
+the site's license, `LICENSE.md` at the repository root: all rights reserved, with use
+of the tools and credited use of the documented API permitted.
+
+The respelling rule tables (`data/respell/rules/`) are the exception. They are
+licensed under Creative Commons Attribution-ShareAlike 4.0 International
+(CC BY-SA 4.0), because several adapt tables published under CC BY-SA, such as
+Wikipedia's respelling keys, and that license requires adaptations to keep it.
 
     https://creativecommons.org/licenses/by-sa/4.0/
 
-You may copy, adapt and redistribute it, including commercially, provided you
-give attribution and license your adaptations under the same terms. The intent
-is that translations contributed here stay available to everyone, including the
-speakers of the languages they describe.
-
-The application code is MIT-licensed (see the repository root).
-
-The respelling rule tables (`data/respell/rules/`) are our own expression of
-published pronunciation conventions, and each file's `derives_from` names the
-standards it was written against. **Only conventions are taken -- which letter for
-which sound -- never anyone's text or entry data**; `content/RESPELL-SYSTEMS.md`
-carries the per-source licensing table and the reasoning, and several sources
-(TDK's dictionary, the Akademiai Kiado volumes behind the Hungarian table, Osiris's
-OH., Zanichelli's Italian dictionaries, Bhargava, the commercial Swahili
-dictionaries) are readable but not redistributable. The tables here are CC BY-SA 4.0
-like the rest of `data/`; the standards they describe are not ours to relicense.
+Each rule file's `derives_from` names the standards it was written against.
+**Only conventions are taken -- which letter for which sound -- never anyone's text or
+entry data**; `content/RESPELL-SYSTEMS.md` carries the per-source licensing table and
+the reasoning, and several sources (TDK's dictionary, the Akademiai Kiado volumes
+behind the Hungarian table, Osiris's OH., Zanichelli's Italian dictionaries, Bhargava,
+the commercial Swahili dictionaries) are readable but not redistributable. The
+standards the tables describe are not ours to relicense.
 
 Bundled third-party assets keep their own licenses:
 

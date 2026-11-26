@@ -31,13 +31,4 @@ The tools, interfaces and content are provided "as is", without warranty of any 
 
 - **Third-party code, fonts and assets** keep their own licenses, recorded beside them: `shared/vendor/LICENSES.md`, `crossword/vendor/LICENSES.md`, `name-tags/vendor/LICENSES.md`, `photomosaic/vendor/LICENSES.md`, `message-collage/fonts/LICENSES.md`, `stan2r/vendor/` (including `elk/LICENSE.md` and `katex/LICENSE`), `stretch-snack/form-motion/CREDITS.md`, `pocket-language-guide/data/flags/LICENSE.txt`, and any other license or credits file inside a tool's folder.
 - **Third-party data** keeps its source's terms, as documented with each dataset (for example MovieLens, Book-Crossing and the other sources described in `media-ratings/README.md` and the files it links).
-- **Wanderwart content** under `pocket-language-guide/data/` is licensed under CC BY-SA 4.0, as described in `pocket-language-guide/LICENSE-DATA`.
-- **autoCHAIR (`agendamatic/`) and the Wanderwart application code (`pocket-language-guide/`, apart from its data)** are licensed under the MIT License:
-
-  > Copyright © 2026 Nik Vetr
-  >
-  > Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-  >
-  > The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-  >
-  > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+- **Wanderwart's respelling rule tables** (`pocket-language-guide/data/respell/rules/`) stay under CC BY-SA 4.0. Several adapt tables published under CC BY-SA, such as Wikipedia's respelling keys, and that license requires adaptations to keep it. `pocket-language-guide/LICENSE-DATA` lists Wanderwart's other third-party assets.

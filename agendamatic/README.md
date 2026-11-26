@@ -177,4 +177,4 @@ Works in all modern browsers that support:
 
 ## License
 
-MIT
+All rights reserved, with use of the tool and credited use of its API permitted. See the site's [LICENSE.md](../LICENSE.md).
