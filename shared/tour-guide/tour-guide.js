@@ -30,11 +30,8 @@ export function createTourPanel(panel, { area, label = 'Tour', onBack, onNext, o
 </div>
 <div class="tour-panel-body" aria-live="polite"></div>
 <div class="tour-panel-nav">
-  <button type="button" data-tour="back">← Back</button>
-  <button type="button" data-tour="next">Next →</button>
-  <span class="tour-panel-gap"></span>
-  <button type="button" data-tour="replay" hidden>↺ Replay</button>
-  <button type="button" data-tour="end">End tour</button>
+  <span class="tour-panel-pair"><button type="button" data-tour="back">← Back</button><button type="button" data-tour="next">Next →</button></span>
+  <span class="tour-panel-pair tour-panel-ends"><button type="button" data-tour="replay" hidden>↺ Replay</button><button type="button" data-tour="end">End tour</button></span>
 </div>`;
   const $ = (/** @type {string} */ s) => /** @type {HTMLElement} */ (panel.querySelector(s));
   const head = $('.tour-panel-head'), grip = $('.tour-grip'), snap = $('.tour-snap'), stepLabel = $('.tour-panel-step');

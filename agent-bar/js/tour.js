@@ -122,7 +122,7 @@ export function createTour({ stage, screen, ui, sim, on, openMenu, closeMenus })
   // The panel hangs under Biscuit (or above, near the bottom), and moves beside it when that would cover the target.
   function layoutBubble(x, y, target) {
     const s = stage.getBoundingClientRect();
-    const w = bubble.offsetWidth || 320, h = bubble.offsetHeight || 160;
+    const w = bubble.offsetWidth || 340, h = bubble.offsetHeight || 160;
     const size = guide.offsetWidth || 96;
     const clampX = (v) => Math.max(8, Math.min(s.width - w - 8, v)), clampY = (v) => Math.max(8, Math.min(s.height - h - 8, v));
     const t = target && [target.left - s.left, target.top - s.top, target.right - s.left, target.bottom - s.top];

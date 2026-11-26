@@ -47,7 +47,7 @@ body { margin: 0; }
 .tour-guide.flip .tour-pose { transform: scaleX(-1); }
 .tour-guide.cheer .tour-pose { animation: tour-hop 0.5s ease-out 2; }
 @keyframes tour-hop { 50% { translate: 0 -14px; } }
-.tour-bubble { width: min(320px, calc(100vw - 32px)); background: #fffdf6; color: #1d1f23;
+.tour-bubble { width: min(340px, calc(100vw - 32px)); background: #fffdf6; color: #1d1f23;
   border: 2px solid #1f5a3a; border-radius: 14px; padding: 12px 14px 10px; font: 14px/1.45 system-ui, sans-serif; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); }
 :root[data-theme="dark"] .tour-bubble { background: #1d2a22; color: #eef3ef; border-color: #6fbf8f; }
 .tour-bubble p { margin: 0 0 8px; }
@@ -56,7 +56,7 @@ body { margin: 0; }
 .tour-bubble .tour-done { color: #1f6b3a; font-weight: 600; }
 :root[data-theme="dark"] .tour-bubble .tour-done { color: #8fe0ad; }
 .tour-bubble .tour-panel-nav { margin-top: 2px; }
-.tour-bubble .tour-panel-nav button { font-size: 13px; padding: 4px 10px; min-height: 32px; }
+.tour-bubble .tour-panel-nav button { font-size: 13px; padding: 4px 8px; min-height: 32px; }
 .tour-ring { position: absolute; border: 3px solid #f4c36a; border-radius: 10px; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35), 0 0 16px rgba(244, 195, 106, 0.8);
   pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {

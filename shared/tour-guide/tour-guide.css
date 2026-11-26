@@ -19,8 +19,10 @@
 .tour-panel-step { flex: 1; margin: 0; font-size: 12px; opacity: 0.8; }
 .tour-snap { flex: none; font-size: 12px; padding: 2px 8px; min-height: 28px; }
 
+/* Back and Next on the left, Replay and End on the right; a pair wraps whole when the row is short of room. */
 .tour-panel-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
-.tour-panel-gap { flex: 1; }
+.tour-panel-pair { display: flex; gap: 6px; }
+.tour-panel-ends { margin-left: auto; }
 
 /* The character: one image per pose, the same square canvas for every pose. */
 .tour-pose { display: block; width: 100%; height: 100%; pointer-events: none; user-select: none; -webkit-user-select: none; }
