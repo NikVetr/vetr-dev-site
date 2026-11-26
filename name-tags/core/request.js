@@ -87,9 +87,10 @@ export const DEFAULT_HERSHEY_EKG = Object.freeze({
 });
 
 // The angled-corners decoration: R's draw_corner_path() arguments for the
-// "rethink_priorities" group (line_width, theta, draw_triangle).
+// "rethink_priorities" group (line_width, theta, draw_triangle), and its style.
 export const DEFAULT_CORNERS = Object.freeze({
-  line_width: 0.02,            // band width, inches
+  style: /** @type {'lines' | 'triangles' | 'rails'} */ ('lines'), // R's thin bands; or solid triangles, alone or between rails
+  line_width: 0.02,            // band (or rail) width, inches
   angle: 60,                   // slant of the bands from level, degrees
   triangle: true,              // a hollow triangle beside each peak
 });
@@ -297,7 +298,7 @@ export function normalizeRequest(request) {
   if (decorationDesign && decoration !== 'dna') issues.push({ code: 'conflicting_fields', path: 'decoration_design', message: 'a custom helix or braid requires decoration "dna"' });
 
   const hershey = section(request.hershey_ekg, DEFAULT_HERSHEY_EKG, HERSHEY_CHECKS, 'hershey_ekg', issues);
-  const corners = section(request.corners, DEFAULT_CORNERS, { line_width: number(0, true, 0.1), angle: number(45, false, 75), triangle: boolean }, 'corners', issues);
+  const corners = section(request.corners, DEFAULT_CORNERS, { style: (v) => (v === 'lines' || v === 'triangles' || v === 'rails' ? null : 'must be "lines", "triangles" or "rails"'), line_width: number(0.01, false, 0.1), angle: number(45, false, 75), triangle: boolean }, 'corners', issues);
   const logo = section(request.logo, DEFAULTS.logo, {
     file: (v) => (v === null || logoType(v) ? null : LOGO_MESSAGE),
     margin_div: number(1, true), center_adj_prop: pair(2), use_file_colors: boolean,

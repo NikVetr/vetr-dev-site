@@ -5,16 +5,19 @@
 // beside it, inset by the gap between the lines) that runs on under the bottom line
 // as the helix's straight end does, and a top-right path over the top line that
 // turns down at the angle towards the bottom line's top-right corner. The function
-// itself did not survive, so the shapes here are drawn from those calls: bands
-// `line_width` wide, mitred to points at their turns. The tag is laid out and fitted
-// exactly as for the DNA helix; the decoration fills the same box.
+// itself did not survive, so the `lines` style draws those calls: bands
+// `line_width` wide, mitred to points at their turns. The `triangles` and `rails`
+// styles follow the logo's cutter files instead: solid pieces on a 60-degree grid
+// (equilateral triangles a gap apart) and the wordmark's rails above and below its
+// letters, without the mark itself. The tag is laid out and fitted exactly as for the
+// DNA helix; each style fills the same box, leaving gaps of at least MIN_GAP.
 
 import { difference, union } from '../../shared/polygon.js';
 import { findGaps } from './helix.js';
 
 /**
  * @typedef {import('./geometry.js').Polygon} Polygon
- * @typedef {{ line_width: number, angle: number, triangle: boolean }} CornersOptions
+ * @typedef {{ style: 'lines' | 'triangles' | 'rails', line_width: number, angle: number, triangle: boolean }} CornersOptions
  * @typedef {number[]} Point
  */
 
@@ -67,19 +70,20 @@ function band(pts, w, closed = false) {
   return closed ? union([ring(left), ring(right)], 'evenodd') : union([ring([...left, ...right.reverse()])], 'nonzero');
 }
 
+/** The narrowest gap left between bands and letters, inches (0.25 mm): wider than a laser's kerf. */
+export const MIN_GAP = 0.01;
+
 /**
  * The decoration of a laid-out two-line tag, as filled polygons in the tag's frame
- * shifted by `adj` inches.
+ * shifted by `adj` inches. `o.style` picks the design: `lines` (thin bands, a peak and
+ * a hollow triangle, a bar turning down over the top line), `triangles` (solid
+ * triangles in the helix's space over a rail) or `rails` (those triangles framed by
+ * rails under the bottom line and over the top line).
  * @param {import('./layout.js').Tag} tag @param {number[]} adj @param {CornersOptions} o
  * @returns {Polygon[]}
  */
 export function tagCorners(tag, adj, o) {
   const dec = /** @type {import('./layout.js').DnaDecoration} */ (tag.decoration);
-  const lw = o.line_width;
-  const th = o.angle / 180 * Math.PI;
-  const cot = 1 / Math.tan(th);
-  const across = lw / 2 / Math.sin(th); // half a slanted band's width, measured level
-  const tip = lw / 2 / Math.tan(th / 2); // how far a band's point reaches past its centreline's corner, level
   const lineBounds = (/** @type {number} */ j) => {
     /** @type {number[]} */
     const xs = [];
@@ -91,13 +95,43 @@ export function tagCorners(tag, adj, o) {
     }
     return { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys), xs, ys };
   };
-  const top = lineBounds(0);
-  const bottom = lineBounds(1);
-  const [bx0, by0, bx1, by1] = dec.bbox.map((v, i) => v + adj[i % 2]);
-  const space = Math.max(top.y0 - bottom.y1, lw); // R's space_names: the gap between the lines
+  const [bx0, by0, bx1, box1] = dec.bbox.map((v, i) => v + adj[i % 2]);
+  // the box stops short of any top-line letter that hangs into it (a lowered Q's tail)
+  let by1 = box1;
+  const lowerQ = tag.lines[0].lowerQ;
+  for (const g of tag.lines[0].glyphs) for (const r of g) for (let k = 0; k < r.length; k += 2) {
+    const x = r[k] + adj[0];
+    if (x > bx0 - MIN_GAP && x < bx1 + MIN_GAP) by1 = Math.min(by1, r[k + 1] + adj[1] + lowerQ - MIN_GAP);
+  }
+  const [, margin, , innerTop] = tag.inner_box;
+  /** @type {Frame} */
+  const f = { top: lineBounds(0), bottom: lineBounds(1), box: [bx0, by0, bx1, by1], cellTop: innerTop + margin, margin };
+  const polygons = o.style === 'lines' ? linesDesign(f, o) : solidDesign(f, o, o.style === 'rails');
+  return union(polygons.flat(), 'nonzero');
+}
+
+/**
+ * @typedef {{ x0: number, y0: number, x1: number, y1: number, xs: number[], ys: number[] }} LineBox
+ * @typedef {{ top: LineBox, bottom: LineBox, box: number[], cellTop: number, margin: number }} Frame
+ *   the lines' bounds, the helix's box, the tag's top and its margin, all in the tag's frame
+ */
+
+/**
+ * The original angled corners, from the R calls: thin bands mitred to points.
+ * @param {Frame} f @param {CornersOptions} o
+ * @returns {Polygon[]}
+ */
+function linesDesign(f, o) {
+  const { top, bottom } = f;
+  const [bx0, by0, bx1, by1] = f.box;
+  const lw = o.line_width;
+  const th = o.angle / 180 * Math.PI;
+  const cot = 1 / Math.tan(th);
+  const across = lw / 2 / Math.sin(th); // half a slanted band's width, measured level
+  const tip = lw / 2 / Math.tan(th / 2); // how far a band's point reaches past its centreline's corner, level
+  const space = Math.max(top.y0 - bottom.y1, lw, MIN_GAP); // R's space_names: the gap between the lines
   /** @type {Polygon[]} */
   const shapes = [];
-
   // Bottom left: a peak rising from the box's bottom-left corner and doubling back,
   // the underline running on from that corner; with a hollow triangle beside each
   // peak, as many peak-and-triangle pairs as the box holds.
@@ -124,7 +158,9 @@ export function tagCorners(tag, adj, o) {
   const peaks = rise > 2 * lw ? Math.max(count, 1) : 0; // no room for a peak under very wide bands
   const right = bottom.x1; // the underline ends where the bottom line does, as the helix's
   // the underline, with gaps where the bottom line's descenders cross it
-  const cuts = bottom.ys.some((y) => y < by0) ? findGaps(bottom.xs, bottom.ys, by0, 0.02) : [];
+  // (a descender reaching within MIN_GAP of the band is cut around, as the helix's are)
+  const clearY = by0 + lw / 2 + MIN_GAP;
+  const cuts = bottom.ys.some((y) => y < clearY) ? findGaps(bottom.xs, bottom.ys, clearY, 0.02) : [];
   /** @type {number[][]} */
   let runs = [[start, right]];
   for (const [a, b] of cuts) runs = runs.flatMap(([u, v]) => (b <= u || a >= v ? [[u, v]] : [[u, a], [b, v]].filter(([p, q]) => q - p > lw)));
@@ -142,11 +178,14 @@ export function tagCorners(tag, adj, o) {
 
   // Top right: a bar over the top line from its left end, turning down at the angle
   // towards the bottom line's top-right corner, clear of the top line.
-  const barY = top.y1 + space + lw / 2;
-  const endX = bottom.x1 + lw / 2 + across; // where it would meet the bottom line's top, just clear of it
+  // (kept the margin's half clear of the tag's edge when the lines stand far apart)
+  const barY = Math.min(top.y1 + space + lw / 2, Math.max(top.y1 + MIN_GAP + lw / 2, f.cellTop - f.margin / 2 - lw / 2));
+  const endX = bottom.x1 + Math.max(lw / 2, MIN_GAP / Math.sin(th)) + across; // where it would meet the bottom line's top, MIN_GAP clear of it
   const clear = top.x1 + space + across - (barY - top.y1) * cot; // a corner that keeps the leg clear of the top line
   const cornerX = Math.max(endX - (barY - bottom.y1) * cot, clear);
-  if (endX - cornerX > lw) {
+  if (barY + lw / 2 > f.cellTop - MIN_GAP) {
+    // a top line reaching the tag's edge leaves no room for the bar
+  } else if (endX - cornerX > lw) {
     const endY = Math.max(bottom.y1, barY - (endX - cornerX) / cot);
     const legX = cornerX + (barY - endY) * cot;
     // run the leg on past where it stops, then cut it level there
@@ -157,5 +196,59 @@ export function tagCorners(tag, adj, o) {
   } else {
     shapes.push(...band([[top.x0, barY], [cornerX, barY]], lw));
   }
-  return union(shapes.flat(), 'nonzero');
+  return shapes;
+}
+
+/**
+ * Bands cut on the logo's grid: a rail under the bottom line, from the helix's box to
+ * the line's end, with ends slanted at the angle, and solid triangles, alternately up
+ * and down, filling the box above it, a gap apart; with `framed`, a second rail over
+ * the top line, its ends in line with the first's.
+ * @param {Frame} f @param {CornersOptions} o @param {boolean} framed
+ * @returns {Polygon[]}
+ */
+function solidDesign(f, o, framed) {
+  const { top, bottom } = f;
+  const [bx0, by0, bx1, by1] = f.box;
+  const u = o.line_width;
+  const th = o.angle / 180 * Math.PI;
+  const tan = Math.tan(th);
+  const gap = Math.max(u, MIN_GAP);
+  const lean = u / 2 / tan; // a slanted end leans this far over half a rail's width
+  const right = framed ? Math.max(bottom.x1, top.x1) : bottom.x1;
+  /** @type {Polygon[]} */
+  const shapes = [];
+  /** A rail centred on y from xa to xb, slanted ends, square where `cuts` interrupt it. @param {number} xa @param {number} xb @param {number} y @param {number[][]} cuts */
+  const rail = (xa, xb, y, cuts) => {
+    let runs = [[xa, xb]];
+    for (const [a, b] of cuts) runs = runs.flatMap(([p, q]) => (b <= p || a >= q ? [[p, q]] : [[p, a], [b, q]].filter(([m, n]) => n - m > 2 * u)));
+    runs.forEach(([p, q], i) => {
+      const l = i === 0 ? lean : 0;
+      const r = i === runs.length - 1 ? lean : 0;
+      shapes.push([ring([[p - l, y - u / 2], [q - r, y - u / 2], [q + r, y + u / 2], [p + l, y + u / 2]])]);
+    });
+  };
+  // the underline stops a gap short of any descender that would reach into it
+  const clearY = by0 + u / 2 + MIN_GAP;
+  rail(bx0 + lean, right, by0, bottom.ys.some((y) => y < clearY) ? findGaps(bottom.xs, bottom.ys, clearY, 0.02) : []);
+  const railY = top.y1 + Math.min(Math.max(top.y0 - bottom.y1, gap), 2 * gap) + u / 2;
+  if (framed && railY + u / 2 <= f.cellTop - MIN_GAP) rail(top.x0 + lean, right, railY, []); // unless the top line reaches the tag's edge
+
+  // the triangles, up first; what the box leaves over widens the gaps, to at most three times
+  const y0 = by0 + u / 2 + gap;
+  const width = bx1 - bx0;
+  let height = by1 - y0;
+  if (2 * height / tan > width) height = width * tan / 2; // a narrow box takes one smaller triangle
+  if (height <= 3 * gap) return shapes;
+  const side = 2 * height / tan;
+  const slant = Math.sin(th);
+  const n = Math.max(1, Math.floor((width - side) / (side / 2 + gap / slant)) + 1);
+  const g = n > 1 ? Math.min(3 * gap, ((width - side) / (n - 1) - side / 2) * slant) : gap;
+  const step = side / 2 + g / slant;
+  const y1 = y0 + height;
+  for (let i = 0; i < n; i++) {
+    const x = bx0 + i * step;
+    shapes.push([ring(i % 2 === 0 ? [[x, y0], [x + side, y0], [x + side / 2, y1]] : [[x, y1], [x + side / 2, y0], [x + side, y1]])]);
+  }
+  return shapes;
 }

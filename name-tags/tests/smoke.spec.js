@@ -134,7 +134,10 @@ test('angled corners select their proportions, take a line width and undo as one
   await open(page);
   await page.locator('#names').fill('Marcus Davis\nGrace Hopper');
   await expect(page.locator('#corners-width-field')).toBeHidden();
+  await expect(page.locator('#corners-style-field')).toBeHidden();
   await page.locator('#decoration').selectOption('corners');
+  await expect(page.locator('#corners-style')).toHaveValue('lines');
+  await page.locator('#corners-style').selectOption('triangles');
   await expect(page.locator('#line-layout')).toHaveValue('corners');
   await expect(page.locator('#corners-width-field')).toBeVisible();
   await expect(page.locator('#custom-decoration-controls')).toBeHidden();
@@ -143,7 +146,7 @@ test('angled corners select their proportions, take a line width and undo as one
   await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).NameTags.getResult()?.tags.map((/** @type {any} */ t) => t.decoration))).toEqual(['corners', 'corners']);
   await expect(page.locator('#stale')).toBeHidden();
   const request = await page.evaluate(() => /** @type {any} */ (window).NameTags.getRequest());
-  expect(request.corners).toEqual({ line_width: 0.03 });
+  expect(request.corners).toEqual({ style: 'triangles', line_width: 0.03 });
   expect(request.style.optimizer.ratio_mean_b1_b2b3_w).toBe(0.75);
   await page.locator('#corners-width').fill('0');
   await page.locator('#generate').click();

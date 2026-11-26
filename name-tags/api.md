@@ -55,7 +55,7 @@ const result = submit({ names: ['Ada Lovelace', 'Alan Turing'] }, { onProgress: 
 | `logo` | object | see below | The logo for `decoration: "logo"`. |
 | `style` | object | see below | Text sizing, small caps, and the optimizer. |
 | `hershey_ekg` | object | see below | Pen widths and placement for the Hershey design. |
-| `corners` | object | see below | Band width, angle and triangles of the angled-corners design. |
+| `corners` | object | see below | Style, band width, angle and triangles of the angled-corners design. |
 | `seed` | integer | `1` | Seed for every random draw, as R's `set.seed()`; from -2147483647 to 2147483647. |
 | `ncores` | integer | `1` | Must be 1. The R version can run restarts in parallel, which draws different starts. |
 | `output` | object | `{prefix: "nametags"}` | `prefix` names the sheets (`<prefix>_names_grid_<k>.svg`, or `_logos_grid_` for logos). `dir` is where the command line writes them. `pdf` must be `false`. |
@@ -120,7 +120,7 @@ An irregular tray gives `centers_in`, one `[x, y]` per cell in cell order, inste
 
 **Hershey EKG** (`hershey_ekg`; the defaults are R's `default_hershey_ekg()`): `font` (`"HersheyScript"`, the only one bundled), `r_amp` (`0.7`, the heartbeat's R-wave height), `sampling_rate` (`800`), `stroke_points` (`200`, points per smoothed stroke), `smoothing_var_thresh` (`0.9999`), `bottom_line_lwd` and `top_line_lwd` (`0.01`, `0.0075`, pen widths), `lwd_pow`, `tail_pow`, `tail_prop_floor` (`2`, `2`, `0.5`), `top_scale` (`1.85`), `top_raise` (`0.75`) and `lowercase_bottom_line` (`true`). The script font has glyphs for printable ASCII except `@ < > [ ] { } \ ^ _`, and for the ISO-Latin-1 letters, which it draws without their accents, as R does.
 
-**Angled corners** (`corners`; the defaults are the R drawer's `draw_corner_path()` arguments for this design): `line_width` (`0.02`, the bands' width in inches, more than 0 and at most 0.1), `angle` (`60`, their slant from level in degrees, 45 to 75) and `triangle` (`true`, a hollow triangle beside each peak).
+**Angled corners** (`corners`; the defaults are the R drawer's `draw_corner_path()` arguments for this design): `style` (`"lines"`, or `"triangles"` or `"rails"`; see [Angled corners](#angled-corners)), `line_width` (`0.02`, the bands' or rails' width in inches, 0.01 to 0.1), `angle` (`60`, their slant from level in degrees, 45 to 75) and `triangle` (`true`, a hollow triangle beside each peak; `lines` only).
 
 ## Result
 
@@ -166,6 +166,13 @@ In the page, **Customize helix or braid** opens the shared editor in a modal. Ch
 ```
 
 An embellishment inspired by the Rethink Priorities logo's bands cut at 60°, from the R drawer's design for that organisation (its `draw_corner_path()` calls survive; the function did not, so the shapes are drawn from the calls' arguments). The tag is laid out and fitted exactly as for `dna`, with the same optimizer, random draws and `fit`, and the decoration takes the helix's place. In the helix's box a peak rises at `angle` from the box's bottom-left corner to its top and doubles back down; beside it is a hollow triangle pointing down, set off from the peak and from the underline by the gap between the two lines (R's `space_names`). A wide box holds several peak-and-triangle pairs, and what is left over widens the gaps between them, to at most three times the gap. The underline runs on from the first peak's corner to the end of the bottom line, with the helix's gaps where descenders cross it. A bar the same gap above the top line runs from its left end and turns down at `angle` towards the bottom line's top-right corner, stopping level with the bottom line's top, or sooner where it would otherwise come closer to the top line than that gap. Bands are `line_width` wide, mitred to points at their turns, and engraved as filled black paths.
+
+Two further styles follow the logo's cutter files rather than the R calls: solid pieces on its 60° grid, and the wordmark's rails running above and below its letters. Neither draws the mark or the wordmark itself.
+
+- `triangles`: solid triangles, alternately pointing up and down, fill the helix's box over a rail. The triangles are equilateral at 60° and sit a gap apart, `line_width` or 0.01 in, whichever is wider; spare width widens the gaps to at most three times. The rail is `line_width` thick, runs from the box's left to the end of the bottom line, and has ends slanted at `angle`.
+- `rails`: those triangles plus a second rail over the top line. Its ends line up with the bottom rail's, so both lines sit in a slanted frame open at the sides.
+
+Every style keeps its pieces at least 0.01 in (0.25 mm, wider than a laser's kerf) apart, from the letters and from the tag's edge. A rail or bar that would come closer to the edge than that is left out (for a top line that fills the tag). The box also stops 0.01 in short of a top-line letter that hangs into it, such as a lowered Q's tail, and the underline is cut around any descender that comes within 0.01 in of it. These rules moved the `lines` style's leg 0.0015 in further from the bottom line and widened some of its descender cuts. They also dropped the bar where it reached the tag's edge.
 
 The bar only reaches the bottom line when the top line is narrower than the bottom row; the R design used the optimizer settings above (its "rethink_priorities" group), which the page applies as **Narrow top line** and which `presets.js` exports as `CORNERS_STYLE`. Without them the leg is shorter. A fit with no whole helix twist fails as it does for `dna` (`fit_failed`), since the fit is the same.
 

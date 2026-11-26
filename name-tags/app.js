@@ -31,7 +31,7 @@ const el = {
   cells: byId('cells'), overlayFile: byId('overlay-file'), overlayStatus: byId('overlay-status'), overlayX: byId('overlay-x'), overlayY: byId('overlay-y'), overlayShow: byId('overlay-show'),
   decoration: byId('decoration'), font: byId('font'), smallcaps: byId('smallcaps'), logoFileField: byId('logo-file-field'), logoFile: byId('logo-file'),
   logoColorsField: byId('logo-colors-field'), logoColors: byId('logo-colors'), logoStatus: byId('logo-status'), restarts: byId('restarts'), seed: byId('seed'),
-  cornersWidthField: byId('corners-width-field'), cornersWidth: byId('corners-width'),
+  cornersWidthField: byId('corners-width-field'), cornersWidth: byId('corners-width'), cornersStyleField: byId('corners-style-field'), cornersStyle: byId('corners-style'),
   generate: byId('generate'), stop: byId('stop'), status: byId('status'), issues: byId('issues'), warnings: byId('warnings'),
   noResult: byId('no-result'), result: byId('result'), stale: byId('stale'), sheetChoice: byId('sheet-choice'), sheetOptions: byId('sheet-options'),
   preview: byId('preview'), downloads: byId('downloads'), undoNote: byId('undo-note'), undoText: byId('undo-text'),
@@ -97,7 +97,7 @@ function currentRequest() {
   if (cells) request.cells = cells;
   if (el.decoration.value === 'logo') request.logo = { ...(extra.logo ?? {}), file: logoUrl, use_file_colors: el.logoColors.checked };
   else if (extra.logo) request.logo = extra.logo;
-  if (el.decoration.value === 'corners') request.corners = { ...(extra.corners ?? {}), line_width: el.cornersWidth.valueAsNumber };
+  if (el.decoration.value === 'corners') request.corners = { ...(extra.corners ?? {}), style: el.cornersStyle.value, line_width: el.cornersWidth.valueAsNumber };
   if (el.decoration.value !== 'dna') delete request.decoration_design;
   return request;
 }
@@ -111,8 +111,9 @@ function loadRequest(request) {
   extraFields.style = { ...styleRest, ...(Object.keys(optRest).length ? { optimizer: optRest } : {}) };
   if (request.font) extraFields.font = Object.fromEntries(Object.entries(request.font).filter(([k]) => k !== 'family'));
   if (request.logo) extraFields.logo = Object.fromEntries(Object.entries(request.logo).filter(([k]) => k !== 'file' && k !== 'use_file_colors'));
-  if (request.corners) extraFields.corners = Object.fromEntries(Object.entries(request.corners).filter(([k]) => k !== 'line_width'));
+  if (request.corners) extraFields.corners = Object.fromEntries(Object.entries(request.corners).filter(([k]) => k !== 'line_width' && k !== 'style'));
   el.cornersWidth.value = String(request.corners?.line_width ?? DEFAULT_CORNERS.line_width);
+  el.cornersStyle.value = request.corners?.style ?? DEFAULT_CORNERS.style;
   el.names.value = request.names.map((/** @type {any} */ n) => (typeof n === 'string' ? n : n.name)).join('\n');
   if (typeof request.tray === 'object') {
     customTray = request.tray;
@@ -156,6 +157,7 @@ function showInputs() {
   el.logoColorsField.hidden = !logo;
   el.logoStatus.hidden = !logo;
   el.cornersWidthField.hidden = el.decoration.value !== 'corners';
+  el.cornersStyleField.hidden = el.decoration.value !== 'corners';
   el.logoStatus.textContent = logoUrl ? `Logo loaded: ${logoName || 'from the request'} (${logoUrl.slice(5, logoUrl.search(/[;,]/))}).` : 'No logo loaded yet.';
   byId('custom-decoration-controls').hidden = el.decoration.value !== 'dna';
   byId('reset-decoration').hidden = !extraFields.decoration_design;
@@ -163,7 +165,7 @@ function showInputs() {
   showStale();
 }
 
-for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.cornersWidth, el.restarts, el.seed]) {
+for (const input of [el.names, el.trayChoice, el.cells, el.decoration, el.font, el.smallcaps, el.logoColors, el.cornersStyle, el.cornersWidth, el.restarts, el.seed]) {
   input.addEventListener('input', showInputs);
 }
 
@@ -388,6 +390,7 @@ const FIELDS = [
   ['cells', 'Cells', [el.cells]],
   ['decoration', 'Decoration', [el.decoration]],
   ['corners.line_width', 'Corner line width', [el.cornersWidth]],
+  ['corners.style', 'Corner style', [el.cornersStyle]],
   ['font', 'Font', [el.font]],
   ['style.smallcaps_reference_face', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],
   ['style.smallcaps', 'Names with descenders (y q p g j) on the top line', [el.smallcaps]],

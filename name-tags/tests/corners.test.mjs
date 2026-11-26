@@ -11,9 +11,10 @@ import { fileURLToPath } from 'node:url';
 import { NameTagsError, submit } from '../core/index.js';
 import { normalizeRequest } from '../core/request.js';
 import { layoutDnaTag, measureTags } from '../core/layout.js';
-import { tagCorners } from '../core/corners.js';
+import { MIN_GAP, tagCorners } from '../core/corners.js';
+import { polygonDistance } from '../core/geometry.js';
 import { tagHelix } from '../core/helix.js';
-import { polygonArea, union } from '../../shared/polygon.js';
+import { polygonArea } from '../../shared/polygon.js';
 import { rMersenneTwister } from '../../shared/rng.js';
 import { CORNERS_STYLE } from '../presets.js';
 
@@ -29,7 +30,6 @@ function laidOut(name, style = CORNERS_STYLE) {
   const adj = s.style.name_center_adj_prop.map((v, i) => v * s.tray.cell_in[i]);
   return { s, tag, adj };
 }
-const area = (/** @type {number[][][]} */ polygons) => polygons.reduce((a, p) => a + polygonArea(p), 0);
 
 test('the corners use the DNA layout and fit unchanged, and keep every glyph', () => {
   for (const style of [undefined, CORNERS_STYLE]) {
@@ -43,19 +43,36 @@ test('the corners use the DNA layout and fit unchanged, and keep every glyph', (
   }
 });
 
-test('the corner bands stay clear of the letters and inside the tag', () => {
-  for (const name of names) {
+test('every style cuts cleanly: pieces and letters a gap apart, inside the tag, no slivers or spikes', () => {
+  for (const name of [...names, 'Qian Xuesen', 'Émilie du Châtelet', 'Li Wu']) {
     for (const style of [CORNERS_STYLE, undefined]) {
-      const { s, tag, adj } = laidOut(name, style);
-      const o = s.corners;
-      const polys = tagCorners(tag, adj, o);
-      assert.ok(polys.length, `${name}: drew something`);
+      let laid;
+      try { laid = laidOut(name, style); } catch (e) { if (/** @type {any} */ (e).code === 'fit_failed') continue; throw e; }
+      const { s, tag, adj } = laid;
       const glyphs = tag.lines.flatMap((l) => l.glyphs.map((g) => g.map((r) => r.map((v, k) => v + adj[k % 2] + (k % 2 ? l.lowerQ : 0)))));
-      const both = area(union([...glyphs.flat(), ...polys.flat()], 'nonzero'));
-      const apart = area(union(glyphs.flat(), 'nonzero')) + area(polys);
-      assert.ok(Math.abs(both - apart) < 1e-6, `${name}: the bands overlap the letters by ${apart - both} sq in`);
-      for (const p of polys) for (const r of p) for (let k = 0; k < r.length; k += 2) {
-        assert.ok(r[k] > 0 && r[k] < s.tray.cell_in[0] && r[k + 1] > 0 && r[k + 1] < s.tray.cell_in[1], `${name}: outside the tag`);
+      for (const design of ['lines', 'triangles', 'rails']) {
+        const what = `${name} ${design}`;
+        const polys = tagCorners(tag, adj, { ...s.corners, style: /** @type {any} */ (design) });
+        assert.ok(polys.length, `${what}: drew something`);
+        polys.forEach((p, i) => {
+          assert.ok(polygonArea(p) > 1e-4, `${what}: a sliver of ${polygonArea(p)} sq in`);
+          for (let j = i + 1; j < polys.length; j++) assert.ok(polygonDistance(p, polys[j]) >= MIN_GAP - 1e-6, `${what}: pieces ${polygonDistance(p, polys[j])} in apart`);
+          for (const g of glyphs) assert.ok(polygonDistance(p, g) >= MIN_GAP - 1e-6, `${what}: ${polygonDistance(p, g)} in from a letter`);
+          for (const r of p) {
+            const m = r.length / 2 - 1;
+            const pt = (/** @type {number} */ k) => [r[2 * ((k + m) % m)], r[2 * ((k + m) % m) + 1]];
+            for (let k = 0; k < m; k++) {
+              const [a, b, d] = [pt(k - 1), pt(k), pt(k + 1)];
+              const l1 = Math.hypot(b[0] - a[0], b[1] - a[1]);
+              const l2 = Math.hypot(d[0] - b[0], d[1] - b[1]);
+              if (l1 < 1e-6 || l2 < 1e-6) continue;
+              assert.ok(((b[0] - a[0]) * (d[0] - b[0]) + (b[1] - a[1]) * (d[1] - b[1])) / (l1 * l2) > -0.95, `${what}: the outline doubles back`);
+            }
+            for (let k = 0; k < r.length; k += 2) {
+              assert.ok(r[k] > MIN_GAP && r[k] < s.tray.cell_in[0] - MIN_GAP && r[k + 1] > MIN_GAP && r[k + 1] < s.tray.cell_in[1] - MIN_GAP, `${what}: at the tag's edge`);
+            }
+          }
+        });
       }
     }
   }
@@ -87,12 +104,16 @@ test('the underline keeps the descender gaps the helix leaves', () => {
 });
 
 test('corner options are validated and only belong to the corners decoration', () => {
-  assert.throws(() => submit({ names, decoration: 'corners', corners: { line_width: 0, angle: 90, extra: 1 } }), (/** @type {any} */ e) => {
+  assert.throws(() => submit({ names, decoration: 'corners', corners: { style: 'logo', line_width: 0.005, angle: 90, extra: 1 } }), (/** @type {any} */ e) => {
     assert.ok(e instanceof NameTagsError);
-    assert.deepEqual(e.issues.map((/** @type {any} */ i) => `${i.code} ${i.path}`), ['invalid_value corners.line_width', 'invalid_value corners.angle', 'unknown_field corners.extra']);
+    assert.deepEqual(e.issues.map((/** @type {any} */ i) => `${i.code} ${i.path}`), ['invalid_value corners.style', 'invalid_value corners.line_width', 'invalid_value corners.angle', 'unknown_field corners.extra']);
     return true;
   });
   assert.throws(() => submit({ names, decoration: 'corners', decoration_design: { mode: 'braid' } }), /requires decoration "dna"/);
+  const base = submit({ names, decoration: 'corners', style: CORNERS_STYLE });
+  assert.deepEqual(submit({ names, decoration: 'corners', style: CORNERS_STYLE, corners: { style: 'lines' } }), base, 'lines is the default style');
+  const svgs = new Set(['triangles', 'rails'].map((design) => submit({ names, decoration: 'corners', style: CORNERS_STYLE, corners: { style: design } }).sheets[0].svg));
+  assert.equal(new Set([...svgs, base.sheets[0].svg]).size, 3, 'each style draws its own design');
   const plain = submit({ names, decoration: 'corners', style: CORNERS_STYLE, corners: { triangle: false, line_width: 0.03 } });
   assert.notEqual(plain.sheets[0].svg, submit({ names, decoration: 'corners', style: CORNERS_STYLE }).sheets[0].svg);
 });

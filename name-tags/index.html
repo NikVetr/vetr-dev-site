@@ -116,8 +116,15 @@
             <option value="off">As typed</option>
           </select>
         </label>
+        <label id="corners-style-field" hidden>Corner style
+          <select id="corners-style">
+            <option value="lines">Lines</option>
+            <option value="triangles">Triangles</option>
+            <option value="rails">Rails</option>
+          </select>
+        </label>
         <label id="corners-width-field" hidden>Corner line width (in)
-          <input id="corners-width" type="number" min="0.005" max="0.2" step="0.005" value="0.02">
+          <input id="corners-width" type="number" min="0.01" max="0.1" step="0.005" value="0.02">
         </label>
         <label id="logo-colors-field" class="check wide-setting" hidden><input id="logo-colors" type="checkbox"> Keep the SVG's colours</label>
         <label>Optimizer restarts per tag
@@ -190,7 +197,7 @@
         <p>For the DNA decoration, the top line, the helix and the bottom line are three boxes inside the tag. A small optimizer chooses their sizes: BFGS from several starting points (the first fixed, the rest random) minimises a cost that penalises boxes overflowing the tag and favours set proportions between them and a whole number of helix twists. The helix's straight end underlines the bottom line, with gaps where its letters' descenders cross it.</p>
         <p>Some short names, such as Li Wu, do not fit the DNA proportions. Choose Decoration → None to fit the text without a helix; extra restarts may not help.</p>
         <p>Customize the helix or use a braid in the same reserved space. The drawing is scaled uniformly and engraved in black; the name proportions and the underline's descender gaps stay the same. One-line names have no decoration. The <a href="../helix/">standalone Helix and Braid editor</a> also draws along freehand paths and exports SVG or PNG.</p>
-        <p>Angled corners is inspired by the Rethink Priorities logo's bands, cut at 60°. It uses the DNA layout: a peak rises from the bottom-left corner of the helix's space and doubles back, with a hollow triangle beside it and the underline running on from that corner; a bar over the top line turns down at the same angle towards the bottom line's top-right corner.</p>
+        <p>Angled corners is inspired by the Rethink Priorities logo's bands, cut at 60°. It uses the DNA layout: a peak rises from the bottom-left corner of the helix's space and doubles back, with a hollow triangle beside it and the underline running on from that corner; a bar over the top line turns down at the same angle towards the bottom line's top-right corner. Triangles fills that space with solid triangles a gap apart over a rail, and Rails adds a second rail over the top line, as the wordmark's rails run above and below its letters. Every style keeps its pieces at least 0.01 in apart and clear of the letters.</p>
         <p>The Hershey design writes the name in single-stroke Hershey script with a heartbeat trace running into the bottom line and out of the top line. The logo decoration draws one logo per cell instead, for example for the backs of the tags; give it the same names and cells as the front.</p>
         <p>The seed makes the optimizer's random starts repeatable. The <a href="api.md">API</a> provides the same layout inputs and exports.</p>
       </details>
