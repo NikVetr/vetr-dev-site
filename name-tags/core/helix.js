@@ -1,6 +1,7 @@
 // The tags' DNA helix (R's draw_DNA with take_union, in polylines_vendored.R): the
-// helix geometry of shared/helix.js drawn with rot = 90, its pieces merged into one
-// filled outline, with gaps where the bottom line's descenders cross its straight end.
+// helix geometry of shared/helix.js drawn with rot = 90, its pieces and the corner
+// fills where a base pair hangs from a strand's end merged into one filled outline,
+// with gaps where the bottom line's descenders cross its straight end.
 
 import { dnaShape, ribbon } from '../../shared/helix.js';
 import { polygonArea, union } from '../../shared/polygon.js';
@@ -12,12 +13,13 @@ import { polygonArea, union } from '../../shared/polygon.js';
 
 /**
  * The helix as filled polygons: each piece's ribbon made valid (even-odd, as
- * GEOS's make-valid), all merged, slivers under 1e-12 square units dropped.
- * @param {Piece[]} pieces @param {number} xyr
+ * GEOS's make-valid), all merged with any extra rings (corner fills), slivers
+ * under 1e-12 square units dropped.
+ * @param {Piece[]} pieces @param {number} xyr @param {number[][]} [extra] closed rings
  * @returns {Polygon[]}
  */
-export function helixOutline(pieces, xyr) {
-  const valid = pieces.flatMap((p) => union([ribbon(p.x, p.y, p.lwd, xyr)], 'evenodd'));
+export function helixOutline(pieces, xyr, extra = []) {
+  const valid = [...pieces.map((p) => ribbon(p.x, p.y, p.lwd, xyr)), ...extra].flatMap((ring) => union([ring], 'evenodd'));
   return union(valid.flat(), 'nonzero').filter((poly) => polygonArea(poly) > 1e-12);
 }
 
@@ -76,5 +78,5 @@ export function tagHelixPieces(tag, adj) {
 /** @param {import('./layout.js').Tag} tag @param {number[]} adj */
 export function tagHelix(tag, adj) {
   const { shape, gaps } = tagHelixPieces(tag, adj);
-  return { polygons: helixOutline(shape.pieces, 1), gaps };
+  return { polygons: helixOutline(shape.pieces, 1, shape.corners), gaps };
 }

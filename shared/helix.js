@@ -49,14 +49,33 @@ function runsOf(flag) {
 }
 
 /**
+ * A line without its repeated points: each point that lies exactly where the one
+ * before it does is left out, with its width.
+ * @param {number[]} x @param {number[]} y @param {number[]} lwd
+ */
+export function withoutRepeats(x, y, lwd) {
+  const keep = x.map((_, i) => i).filter((i) => i === 0 || x[i] !== x[i - 1] || y[i] !== y[i - 1]);
+  return { x: keep.map((i) => x[i]), y: keep.map((i) => y[i]), lwd: keep.map((i) => lwd[i]) };
+}
+
+/**
  * polylines(x, y, lwd, complex = TRUE, draw = FALSE): the outline of a
  * variable-width line as one (possibly self-intersecting) closed ring, `lwd`
  * wide across the line at each point. `xyr` is the plot's x/y aspect
  * correction (1 in true units).
- * @param {number[]} x0 @param {number[]} y0 @param {number[]} lwd @param {number} xyr
+ *
+ * One departure: polylines() keeps a repeated point, nudging it 1e-9 along both
+ * axes, so the line there turns 45 degrees for an instant and its outline takes a
+ * small triangular bite or hook. draw_DNA repeats points where a strand runs on
+ * straight (the helix's last point starts the extension) and at the end of the
+ * strand that stops (its last point, once per extension point). Repeated points
+ * are left out here, so those ends are square and the junction is smooth, as on
+ * Nik's 2025 name-tag sheets.
+ * @param {number[]} xs @param {number[]} ys @param {number[]} widths @param {number} xyr
  * @returns {number[]} closed ring
  */
-export function ribbon(x0, y0, lwd, xyr) {
+export function ribbon(xs, ys, widths, xyr) {
+  const { x: x0, y: y0, lwd } = withoutRepeats(xs, ys, widths);
   const eps = 1e-9;
   const nudge = (/** @type {number[]} */ v) => {
     const d = v.slice(1).map((vi, i) => vi - v[i]).map((di) => (di === 0 ? eps : di));
@@ -101,7 +120,9 @@ export function ribbon(x0, y0, lwd, xyr) {
 /**
  * draw_DNA's geometry, with R's argument defaults where an option is left out:
  * the strands' visible pieces (s1, s2), the base pairs (bp, with bpIndex the
- * strand point each starts from) and all pieces in R's drawing order.
+ * strand point each starts from), all pieces in R's drawing order, and the corner
+ * fills of cornerFill() where a base pair starts at the end of strand 1 (rings,
+ * for drawers that merge the pieces into one outline).
  *
  * Two departures from R, neither of which changes a helix whose strands are half
  * a turn apart (R's phase_shift = pi, which name-tags uses): a base pair runs from
@@ -109,7 +130,7 @@ export function ribbon(x0, y0, lwd, xyr) {
  * chooses between the straight extension keeping the strand's end width (draw_DNA.R,
  * 2024) and narrowing to its thinnest (polylines since 2025).
  * @param {DnaOptions} o
- * @returns {{ s1: Piece[], s2: Piece[], bp: Piece[], bpIndex: number[], pieces: Piece[] }}
+ * @returns {{ s1: Piece[], s2: Piece[], bp: Piece[], bpIndex: number[], pieces: Piece[], corners: number[][] }}
  */
 export function dnaShape(o) {
   const nStrand = o.points ?? 1000;
@@ -279,8 +300,9 @@ export function dnaShape(o) {
   const sets2 = runsOf(seen2);
   const piece = (/** @type {number[]} */ ii, /** @type {number[]} */ xs, /** @type {number[]} */ ys, /** @type {number[]} */ ls) =>
     ({ x: ii.map((i) => xs[i]), y: ii.map((i) => ys[i]), lwd: ii.map((i) => ls[i]) });
+  const runs1 = sets1.flatMap((ss) => splitAtGaps(ss, x1));
   const strandPieces = [
-    ...sets1.flatMap((ss) => splitAtGaps(ss, x1).map((ii) => piece(ii, x1, y1, lwd1))),
+    ...runs1.map((ii) => piece(ii, x1, y1, lwd1)),
     ...sets2.flatMap((ss) => splitAtGaps(ss, x2).map((ii) => piece(ii, x2, y2, lwd2))),
   ];
   const nbp = nStrand / bp.length;
@@ -289,11 +311,89 @@ export function dnaShape(o) {
     const [lo, hi] = range(lw);
     return { x: seqLength(b.x0, b.x1, nbp), y: seqLength(b.y0, b.y1, nbp), lwd: rescale01(lw).map((v) => (v * v * (hi - lo) + lo) * bpThickness) };
   });
+
+  // corner fills where a base pair hangs from one of strand 1's free ends (its first
+  // point, and its last unless it runs on straight)
+  const freeEnds = [0, ext === 1 || ext === 'b' ? N - 1 : nStrand - 1];
+  /** @type {number[][]} */
+  const corners = [];
+  const filled = new Set();
+  // (a strand that stops repeats its last point to the end of the arrays)
+  const at = (/** @type {number} */ i, /** @type {number} */ k) => x1[i] === x1[k] && y1[i] === y1[k];
+  bp.forEach((b, j) => {
+    const k = b.k;
+    if (!freeEnds.includes(k) || filled.has(k) || b.x0 !== x1[k] || b.y0 !== y1[k]) return; // displaced base pairs do not meet the end
+    const run = runs1.find((ii) => ii[0] === k || (ii.includes(k) && at(ii[ii.length - 1], k)));
+    if (!run) return; // hidden or cut away at a gap
+    const ring = cornerFill(piece(run, x1, y1, lwd1), run[0] === k, bpPieces[j], o.xyr);
+    if (ring) corners.push(ring);
+    filled.add(k);
+  });
   return {
     s1: sets1.map((ss) => piece(ss, x1, y1, lwd1)),
     s2: sets2.map((ss) => piece(ss, x2, y2, lwd2)),
     bp: bpPieces,
     bpIndex: bp.map((b) => b.k),
     pieces: [...strandPieces, ...bpPieces],
+    corners,
   };
+}
+
+/**
+ * The notch at a strand's square end where a base pair starts from it: the two
+ * square caps meet at the end point and leave a small wedge on the outer side. Nik's
+ * R drawer filled it by extending the two nearby outer edges, the strand's past its
+ * end and the base pair's back past its start, to where they meet. This is that
+ * fill as a closed ring: along both ribbons' outer edges (their last segments, so the
+ * merged outline has no seam) to the meeting point, closed through a point inside
+ * both ribbons. Null when the two are too nearly parallel to make a corner.
+ * @param {Piece} line the strand, ending (or starting) at the base pair's first point
+ * @param {boolean} atStart whether the base pair hangs from the strand's first point
+ * @param {Piece} bp @param {number} xyr
+ * @returns {number[] | null}
+ */
+export function cornerFill(line, atStart, bp, xyr) {
+  const strand = withoutRepeats(line.x, line.y, line.lwd);
+  const n = strand.x.length;
+  const m = bp.x.length;
+  const sr = ribbon(strand.x, strand.y, strand.lwd, xyr);
+  const br = ribbon(bp.x, bp.y, bp.lwd, xyr);
+  // a ribbon ring is the left edge, then the right edge backwards
+  const vertex = (/** @type {number[]} */ ring, /** @type {number} */ count, /** @type {number} */ i, /** @type {number} */ side) => {
+    const p = side ? 2 * count - 1 - i : i;
+    return [ring[2 * p], ring[2 * p + 1]];
+  };
+  const unit = (/** @type {number} */ x, /** @type {number} */ y) => {
+    const l = Math.hypot(x, y);
+    return [x / l, y / l];
+  };
+  const i0 = atStart ? 0 : n - 1;
+  const i1 = atStart ? 1 : n - 2;
+  const [ex, ey] = [strand.x[i0], strand.y[i0]];
+  const [tx, ty] = unit(ex - strand.x[i1], ey - strand.y[i1]); // out of the strand's end
+  const [dx, dy] = unit(bp.x[m - 1] - bp.x[0], bp.y[m - 1] - bp.y[0]); // along the base pair
+  // the strand's outer edge is the one away from the base pair; the base pair's
+  // outer edge the one on the side the strand ends towards
+  const [s0, s1] = [0, 1].map((side) => [vertex(sr, n, i0, side), vertex(sr, n, i1, side)])
+    .sort((a, b) => ((a[0][0] - ex) * dx + (a[0][1] - ey) * dy) - ((b[0][0] - ex) * dx + (b[0][1] - ey) * dy))[0];
+  const [b0, b1] = [0, 1].map((side) => [vertex(br, m, 0, side), vertex(br, m, 1, side)])
+    .sort((a, b) => ((b[0][0] - ex) * tx + (b[0][1] - ey) * ty) - ((a[0][0] - ex) * tx + (a[0][1] - ey) * ty))[0];
+  const [ux, uy] = unit(s0[0] - s1[0], s0[1] - s1[1]); // strand edge, outwards
+  const [vx, vy] = unit(b0[0] - b1[0], b0[1] - b1[1]); // base pair edge, backwards
+  const det = vx * uy - ux * vy;
+  if (Math.abs(det) < 0.1) return null;
+  // s0 + a u = b0 + c v
+  const rx = b0[0] - s0[0];
+  const ry = b0[1] - s0[1];
+  const a = (vx * ry - vy * rx) / det;
+  const c = (ux * ry - uy * rx) / det;
+  const hs = Math.hypot(s0[0] - ex, s0[1] - ey);
+  const hb = Math.hypot(b0[0] - ex, b0[1] - ey);
+  const reach = 3 * Math.max(hs, hb);
+  if (!(a >= 0 && c >= 0 && a <= reach && c <= reach)) return null;
+  const inside = Math.min(hs, hb) / 2;
+  return [
+    ...s1, ...s0, s0[0] + a * ux, s0[1] + a * uy, ...b0, ...b1,
+    ex - tx * inside + dx * inside, ey - ty * inside + dy * inside, ...s1,
+  ];
 }
