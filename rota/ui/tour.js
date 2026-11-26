@@ -103,8 +103,11 @@ export function createTour(root, app) {
     const r = targetRect();
     if (!r) return { x: 16, y: 16 };
     const size = 72;
+    // Beside a small target, such as the cable button, so as not to hide it.
+    if (r.height < 60) return { x: Math.max(8, r.left - size - 2) + scrollX, y: Math.max(8, r.top - 20) + scrollY };
     const x = Math.min(window.innerWidth - size - 8, Math.max(8, r.right - size - 12));
-    const y = Math.max(8, r.top - size + 22);
+    // On a phone Pip sits on the window bar, clear of the tabs above it.
+    const y = Math.max(8, phoneView.matches ? r.top - size + 40 : r.top - size + 22);
     return { x: x + scrollX, y: y + scrollY };
   }
   /**
@@ -120,6 +123,9 @@ export function createTour(root, app) {
     const h = bubble.offsetHeight;
     let left = side === 'right' ? x + 64 : side === 'left' ? x - width + 8 : x + 72 - width;
     let top = side === 'below' ? y + 70 : y + 40;
+    // A short target (the phone's dashboard) keeps its view: the bubble goes under it instead.
+    const r = targetRect();
+    if (phoneView.matches && r && r.height < vh * 0.55 && r.bottom + h + 8 < vh) top = r.bottom + scrollY + 6;
     // Clear of the phone's sticky tabs, and inside the viewport.
     const tabs = document.querySelector('.tabs');
     const floor = phoneView.matches && tabs ? Math.max(8, tabs.getBoundingClientRect().bottom + 4) : 8;

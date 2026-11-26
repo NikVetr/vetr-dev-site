@@ -75,6 +75,7 @@
 }
 
 .tabs { display: none; }
+.narrow-only { display: none; }
 
 .term, .panel {
   display: flex;
@@ -104,6 +105,8 @@
 .term-note { color: var(--win-faint); font-size: 0.8rem; }
 
 .term-body {
+  position: relative;
+  min-width: 0;
   flex: 1 1 0;
   min-height: 16rem;
   overflow: auto;
@@ -287,6 +290,7 @@
   .term-body { min-height: 0; }
   .pool-body { grid-template-columns: minmax(0, 1fr); overflow: auto; }
   .term-note { flex-basis: 100%; }
+  .narrow-only { display: inline; }
 }
 @media (pointer: coarse) {
   .run-button { display: inline-block; }
