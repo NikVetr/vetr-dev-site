@@ -41,7 +41,7 @@ function hslR(r, g, b, a, out, o) {
 }
 
 /** @param {number} c 0-255 sRGB */
-const linear = (c) => {
+export const linear = (c) => {
   const v = c / 255;
   return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
 };

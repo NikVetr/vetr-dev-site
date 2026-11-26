@@ -2,8 +2,11 @@
 // runs in a Web Worker (worker.js), and the mosaic drawn on a canvas from its result.
 // window.Photomosaic exposes the same submit() to scripts and agents running in the page.
 
-import { PhotomosaicError, SUMMARY_WIDTH, gridFor, layoutMosaic, summarisePhoto } from './core/index.js';
+import {
+  NO_ADJUST, PhotomosaicError, SUMMARY_WIDTH, addDetail, applyAdjust, gridFor, isAdjusting, layoutMosaic, prepareAdjust, readAdjust, summarisePhoto, tileDeltas,
+} from './core/index.js';
 import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, restoreForm } from '../shared/history.js';
+import { createGpuAdjuster } from './adjust-gl.js';
 
 /**
  * @typedef {import('./core/index.js').Result} Result
@@ -13,7 +16,8 @@ import { createHistory, bindHistoryShortcuts, bindFormHistory, captureForm, rest
  * @typedef {import('./core/request.js').Issue} Issue
  * @typedef {{ name: string, file: Blob, width: number, height: number, mean: number[], thumb: ImageBitmap }} Photo
  * @typedef {{ name: string, width: number, height: number, data: string }} Target
- * @typedef {{ tileWidth?: number, fit?: Fit, tint?: number }} DrawOptions
+ * @typedef {import('./core/adjust.js').Adjust} Adjust
+ * @typedef {{ tileWidth?: number, fit?: Fit, tint?: number, adjust?: Partial<Adjust> }} DrawOptions
  */
 
 /** Photos are halved in the browser until no wider than this, then summarised as in R. */
@@ -38,7 +42,12 @@ const el = {
   swatchCell: byId('swatch-cell'), swatchPhoto: byId('swatch-photo'), cellRgb: byId('cell-rgb'), photoRgb: byId('photo-rgb'),
   summary: byId('summary'), tileWidth: byId('tile-width'), exportSize: byId('export-size'),
   gridRule: byId('grid-rule'), columns: byId('columns'), maxUses: byId('max-uses'), metric: byId('metric'), seed: byId('seed'), gridNote: byId('grid-note'),
+  adjust: byId('adjust'), adjustState: byId('adjust-state'),
 };
+/** The adjustment's sliders (percentages) by channel. @type {Record<keyof Adjust, HTMLInputElement>} */
+const ADJUST_INPUTS = { L: byId('adjust-l'), a: byId('adjust-a'), b: byId('adjust-b'), detail: byId('adjust-detail') };
+/** Matching above about this many cells² × photo slots can take a minute or more. */
+const LARGE_ASSIGNMENT = 4e9;
 
 /** @type {Photo[]} */
 let photos = [];
@@ -286,6 +295,7 @@ byId('sunflower-example').addEventListener('click', async () => {
     el.seed.value = '1';
     el.fit.value = 'keep';
     el.tint.value = '45';
+    for (const input of Object.values(ADJUST_INPUTS)) input.value = '0';
     el.tint.dispatchEvent(new Event('input'));
     showGridNote();
     showStale();
@@ -340,33 +350,46 @@ function showStale() {
   drawContactSheet();
 }
 
-/** The grid the settings give, or why there is none, under the settings. */
+/** Problems with the matching settings found as they are typed, marked at their fields. @type {Issue[]} */
+let settingIssues = [];
+
+/** The grid the settings give, or why there is none, under the settings; problems are also marked at their fields. */
 function showGridNote() {
   el.columns.disabled = el.gridRule.value === 'auto';
   const s = settings();
+  const count = photos.length;
+  settingIssues = [];
+  if (!Number.isInteger(s.maxUses) || s.maxUses < 1) settingIssues.push({ code: 'out_of_range', path: 'maxUses', message: 'uses per photo must be a whole number from 1' });
+  if (s.columns !== null && (!Number.isInteger(s.columns) || s.columns < 1)) settingIssues.push({ code: 'out_of_range', path: 'columns', message: 'columns must be a whole number from 1' });
   el.gridNote.classList.remove('problem');
-  if (!target || !photos.length) {
+  if (settingIssues.length) {
+    el.gridNote.textContent = settingIssues.map((issue) => issue.message.replace(/^./, (c) => c.toUpperCase())).join('. ') + '.';
+    el.gridNote.classList.add('problem');
+  } else if (!target || !count) {
     el.gridNote.textContent = 'Choose photos and a target to see the grid.';
-    return;
+  } else {
+    try {
+      const grid = gridFor({ count, width: target.width, height: target.height, columns: s.columns, maxUses: s.maxUses });
+      const cells = grid.rows * grid.columns;
+      const slots = count * s.maxUses;
+      const rest = s.maxUses === 1
+        ? `${(slots - cells).toLocaleString('en-US')} left out`
+        : `each used at most ${s.maxUses} times`;
+      el.gridNote.textContent = `${grid.columns} columns × ${grid.rows} rows = ${cells.toLocaleString('en-US')} cells for ${count.toLocaleString('en-US')} photos (${rest}).`;
+      if (cells * cells * slots > LARGE_ASSIGNMENT) {
+        el.gridNote.append(' ', Object.assign(document.createElement('span'), {
+          className: 'large',
+          textContent: `⚠ A large assignment (${cells.toLocaleString('en-US')} cells, ${slots.toLocaleString('en-US')} photo places): its time grows with the cube of the size, so matching may take a minute or more.`,
+        }));
+      }
+    } catch (error) {
+      if (!(error instanceof PhotomosaicError)) throw error;
+      settingIssues.push(error.issues[0]);
+      el.gridNote.textContent = error.issues[0].message.replace(/^./, (c) => c.toUpperCase());
+      el.gridNote.classList.add('problem');
+    }
   }
-  if (!Number.isInteger(s.maxUses) || s.maxUses < 1 || (s.columns !== null && (!Number.isInteger(s.columns) || s.columns < 1))) {
-    el.gridNote.textContent = 'Columns and uses per photo are whole numbers from 1.';
-    el.gridNote.classList.add('problem');
-    return;
-  }
-  try {
-    const grid = gridFor({ count: photos.length, width: target.width, height: target.height, columns: s.columns, maxUses: s.maxUses });
-    const cells = grid.rows * grid.columns;
-    const left = photos.length * s.maxUses - cells;
-    const rest = s.maxUses === 1
-      ? `${left.toLocaleString('en-US')} left out`
-      : `each used at most ${s.maxUses} times`;
-    el.gridNote.textContent = `${grid.columns} columns × ${grid.rows} rows = ${cells.toLocaleString('en-US')} cells for ${photos.length.toLocaleString('en-US')} photos (${rest}).`;
-  } catch (error) {
-    if (!(error instanceof PhotomosaicError)) throw error;
-    el.gridNote.textContent = error.issues[0].message.replace(/^./, (c) => c.toUpperCase());
-    el.gridNote.classList.add('problem');
-  }
+  markFields(activeIssues);
 }
 
 byId('settings-card').addEventListener('input', () => {
@@ -494,10 +517,10 @@ function showIssues(error) {
   el.runIssues.hidden = false;
 }
 
-/** @param {Issue[]} issues */
+/** Marks the fields that the last run's issues, or the settings as typed, name. @param {Issue[]} issues */
 function markFields(issues) {
   for (const [path, field] of Object.entries(FIELDS)) {
-    if (issues.some((issue) => issue.path === path)) field.setAttribute('aria-invalid', 'true');
+    if ([...issues, ...settingIssues].some((issue) => issue.path === path)) field.setAttribute('aria-invalid', 'true');
     else field.removeAttribute('aria-invalid');
   }
 }
@@ -540,36 +563,206 @@ function showSummary() {
   }));
 }
 
-/** The drawing options on the page. @returns {{ fit: Fit, tint: number }} */
-const drawOptions = () => ({ fit: el.fit.value, tint: el.tint.valueAsNumber / 100 });
+/** The drawing options on the page. @returns {{ fit: Fit, tint: number, adjust: Adjust }} */
+const drawOptions = () => ({
+  fit: el.fit.value,
+  tint: el.tint.valueAsNumber / 100,
+  adjust: {
+    L: ADJUST_INPUTS.L.valueAsNumber / 100, a: ADJUST_INPUTS.a.valueAsNumber / 100,
+    b: ADJUST_INPUTS.b.valueAsNumber / 100, detail: ADJUST_INPUTS.detail.valueAsNumber / 100,
+  },
+});
 const view = () => /** @type {HTMLInputElement} */ (document.querySelector('input[name="view"]:checked')).value;
 /** @param {ArrayLike<number>} c */
 const rgb = (c) => `rgb(${Math.round(c[0])}, ${Math.round(c[1])}, ${Math.round(c[2])})`;
 
 /**
- * Draws one tile at (tile.x - dx, tile.y - dy): its photo, then the tint; or, in the cells
- * view, the cell's colour.
+ * Draws one tile's photo at (tile.x - dx, tile.y - dy).
  * @param {CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D} ctx @param {Tile} tile
  * @param {CanvasImageSource & { width: number }} image the photo, or a smaller copy of it
- * @param {{ tint: number, cells?: boolean, result?: Result|null, photos?: Photo[] }} options @param {number} [dx] @param {number} [dy]
+ * @param {Photo[]} assets the photos the layout refers to @param {number} [dx] @param {number} [dy]
  */
-function drawTile(ctx, tile, image, { tint, cells = false, result: painted = result, photos: assets = resultPhotos }, dx = 0, dy = 0) {
-  const r = /** @type {Result} */ (painted);
-  const cell = r.cells[tile.cell];
-  if (cells) {
-    ctx.fillStyle = rgb(cell);
-    ctx.fillRect(tile.x - dx, tile.y - dy, tile.width, tile.height);
-    return;
-  }
+function drawPhoto(ctx, tile, image, assets, dx = 0, dy = 0) {
   const k = image.width / assets[tile.photo].width;
   const [sx, sy, sw, sh] = tile.source;
   ctx.drawImage(image, sx * k, sy * k, sw * k, sh * k, tile.x - dx, tile.y - dy, tile.width, tile.height);
-  if (tint > 0) {
-    ctx.globalAlpha = tint;
-    ctx.fillStyle = rgb(cell);
-    ctx.fillRect(tile.x - dx, tile.y - dy, tile.width, tile.height);
-    ctx.globalAlpha = 1;
+}
+
+/**
+ * Covers one tile with its cell's colour, at opacity `alpha` (the tint, or 1 for the cells view).
+ * @param {CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D} ctx @param {Tile} tile
+ * @param {ArrayLike<number>} cell @param {number} alpha @param {number} [dx] @param {number} [dy]
+ */
+function drawCell(ctx, tile, cell, alpha, dx = 0, dy = 0) {
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = rgb(cell);
+  ctx.fillRect(tile.x - dx, tile.y - dy, tile.width, tile.height);
+  ctx.globalAlpha = 1;
+}
+
+/** Each request's target on a canvas, its transparency ignored, for the detail term. @type {WeakMap<object, OffscreenCanvas>} */
+const targetCanvases = new WeakMap();
+/** @param {{ width: number, height: number, data: string }} t a request's target */
+function targetCanvas(t) {
+  let canvas = targetCanvases.get(t);
+  if (!canvas) {
+    const bytes = Uint8ClampedArray.from(atob(t.data), (character, i) => (i % 4 === 3 ? 255 : character.charCodeAt(0)));
+    canvas = new OffscreenCanvas(t.width, t.height);
+    /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d')).putImageData(new ImageData(bytes, t.width, t.height), 0, 0);
+    targetCanvases.set(t, canvas);
   }
+  return canvas;
+}
+
+/**
+ * Draws a tile's cell of the target, stretched over the tile at (tile.x - dx, tile.y - dy).
+ * @param {OffscreenCanvasRenderingContext2D} ctx @param {OffscreenCanvas} source the target
+ * @param {Result['grid']} grid @param {Tile} tile @param {number} dx @param {number} dy
+ */
+function drawTargetCell(ctx, source, grid, tile, dx, dy) {
+  const w = source.width / grid.columns;
+  const h = source.height / grid.rows;
+  ctx.drawImage(source, (tile.cell % grid.columns) * w, Math.floor(tile.cell / grid.columns) * h, w, h, tile.x - dx, tile.y - dy, tile.width, tile.height);
+}
+
+/**
+ * A canvas's photos as drawn, before adjustment and tint, kept so that both can be redrawn as
+ * their sliders move without drawing the photos again; `after` draws what goes over them.
+ * rects are the tiles on this canvas and colors their cells'. delta (for the GPU) or prepared
+ * (for the CPU) is the adjustment's precomputation, made when first needed.
+ * @typedef {{ role: 'mosaic' | 'detail', ctx: CanvasRenderingContext2D, tiles: Tile[], dx: number, dy: number,
+ *   result: Result, request: any, rects: Rect[], colors: number[][], base: ImageData, fresh: boolean, after: () => void,
+ *   delta: Float64Array | null, prepared: import('./core/adjust.js').Prepared | null, out: ImageData | null }} Paint
+ * @typedef {import('./core/adjust.js').Rect} Rect
+ */
+/** @type {Paint | null} */
+let mosaicPaint = null;
+/** @type {Paint | null} */
+let detailPaint = null;
+
+/**
+ * Draws the photos of `tiles` (from their thumbnails), keeps them, and adds the adjustment and tint.
+ * @param {Paint['role']} role @param {CanvasRenderingContext2D} ctx @param {Tile[]} tiles
+ * @param {number} dx @param {number} dy @param {() => void} [after] @returns {Paint}
+ */
+function paintTiles(role, ctx, tiles, dx, dy, after = () => {}) {
+  const painted = /** @type {Result} */ (result);
+  for (const tile of tiles) drawPhoto(ctx, tile, resultPhotos[tile.photo].thumb, resultPhotos, dx, dy);
+  /** @type {Paint} */
+  const paint = {
+    role, ctx, tiles, dx, dy, result: painted, request: resultRequest,
+    rects: tiles.map((t) => ({ x: t.x - dx, y: t.y - dy, width: t.width, height: t.height })),
+    colors: tiles.map((t) => painted.cells[t.cell]),
+    base: ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height), fresh: true, after, delta: null, prepared: null, out: null,
+  };
+  finishPaint(paint);
+  return paint;
+}
+
+/** Puts a paint's photos back, adjusted as the sliders say, with the tint over them. @param {Paint} paint */
+function finishPaint(paint) {
+  const { tint, adjust } = drawOptions();
+  if (isAdjusting(adjust)) drawAdjusted(paint, adjust);
+  else if (!paint.fresh) paint.ctx.putImageData(paint.base, 0, 0);
+  paint.fresh = false;
+  if (tint > 0) for (const tile of paint.tiles) drawCell(paint.ctx, tile, paint.result.cells[tile.cell], tint, paint.dx, paint.dy);
+  paint.after();
+}
+
+/**
+ * The GPU renderers of the mosaic and the close up, each with the paint it holds; made when
+ * first needed, null where WebGL2 is missing or fails.
+ * @type {Partial<Record<Paint['role'], { gpu: NonNullable<ReturnType<typeof createGpuAdjuster>>, paint: Paint | null, detail: boolean } | null>>}
+ */
+const gpus = {};
+
+/** A paint's GPU renderer, loaded with its photos, or null to draw on the CPU. @param {Paint} paint */
+function gpuFor(paint) {
+  if (!(paint.role in gpus)) {
+    try {
+      const gpu = createGpuAdjuster();
+      gpus[paint.role] = gpu && { gpu, paint: null, detail: false };
+    } catch (error) {
+      console.error('Photomosaic: the adjustment is drawn on the CPU, as WebGL failed:', error);
+      gpus[paint.role] = null;
+    }
+  }
+  const held = gpus[paint.role];
+  if (!held || held.gpu.lost()) return null;
+  if (held.paint !== paint) {
+    held.gpu.load(paint.base, paint.rects);
+    held.paint = paint;
+    held.detail = false;
+  }
+  return held;
+}
+
+/** Makes what a paint's adjustment needs before its first frame (with detail once asked for). @param {Paint} paint @param {Adjust} adjust */
+function readyAdjust(paint, adjust) {
+  const held = gpuFor(paint);
+  const { base, rects, colors } = paint;
+  if (held) {
+    paint.delta ??= tileDeltas(base.data, base.width, rects, colors);
+    if (adjust.detail > 0 && !held.detail) {
+      held.gpu.loadDetail(targetCells(paint, false));
+      held.detail = true;
+    }
+  } else {
+    paint.prepared ??= prepareAdjust(base.data, base.width, rects, colors);
+    if (adjust.detail > 0 && !paint.prepared.detail) {
+      const canvas = targetCells(paint, true);
+      addDetail(paint.prepared, /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d')).getImageData(0, 0, base.width, base.height).data);
+    }
+  }
+  return held;
+}
+
+/** Draws a paint's photos adjusted: on the GPU where it can, else with the core on the CPU. @param {Paint} paint @param {Adjust} adjust */
+function drawAdjusted(paint, adjust) {
+  const held = readyAdjust(paint, adjust);
+  if (held) {
+    paint.ctx.drawImage(held.gpu.render(/** @type {Float64Array} */ (paint.delta), adjust), 0, 0);
+    return;
+  }
+  const { base } = paint;
+  paint.out ??= new ImageData(new Uint8ClampedArray(base.data), base.width, base.height);
+  applyAdjust(/** @type {import('./core/adjust.js').Prepared} */ (paint.prepared), adjust, paint.out.data);
+  paint.ctx.putImageData(paint.out, 0, 0);
+}
+
+/**
+ * The target's cells stretched over a paint's tiles, for the detail term, on a canvas that is
+ * read back (for the CPU) or not (for the GPU, which takes the canvas as it is).
+ * @param {Paint} paint @param {boolean} readBack
+ */
+function targetCells(paint, readBack) {
+  const { base, tiles, dx, dy } = paint;
+  const canvas = new OffscreenCanvas(base.width, base.height);
+  const ctx = /** @type {OffscreenCanvasRenderingContext2D} */ (canvas.getContext('2d', { willReadFrequently: readBack }));
+  ctx.imageSmoothingQuality = 'high';
+  const source = targetCanvas(paint.request.target);
+  for (const tile of tiles) drawTargetCell(ctx, source, paint.result.grid, tile, dx, dy);
+  return canvas;
+}
+
+let paintFrame = 0;
+/** Redraws the adjustment and tint on the mosaic and the close up, once per frame however many inputs arrive. */
+function repaint() {
+  if (paintFrame) return;
+  paintFrame = requestAnimationFrame(() => {
+    paintFrame = 0;
+    if (mosaicPaint) finishPaint(mosaicPaint);
+    if (detailPaint) finishPaint(detailPaint);
+  });
+}
+
+/** The sliders' values, and whether the adjustment is on, in words as well as by colour. */
+function showDrawValues() {
+  el.tintValue.textContent = `${el.tint.value}%`;
+  for (const input of Object.values(ADJUST_INPUTS)) byId(`${input.id}-value`).textContent = `${input.value}%`;
+  const on = isAdjusting(drawOptions().adjust);
+  el.adjustState.textContent = on ? 'on' : 'off';
+  el.adjust.toggleAttribute('data-on', on);
 }
 
 function drawMosaic() {
@@ -577,7 +770,7 @@ function drawMosaic() {
   const dpr = window.devicePixelRatio || 1;
   const width = el.mosaic.parentElement.clientWidth;
   const tileWidth = Math.max(1, Math.floor((width * dpr) / result.grid.columns));
-  const { fit, tint } = drawOptions();
+  const { fit } = drawOptions();
   const layout = layoutMosaic(result.grid, result.assignment, resultPhotos, { tileWidth, fit });
   el.mosaic.width = layout.width;
   el.mosaic.height = layout.height;
@@ -587,7 +780,9 @@ function drawMosaic() {
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, layout.width, layout.height);
   const cells = view() === 'cells';
-  for (const tile of layout.tiles) drawTile(ctx, tile, resultPhotos[tile.photo].thumb, { tint, cells });
+  mosaicPaint = null;
+  if (cells) for (const tile of layout.tiles) drawCell(ctx, tile, result.cells[tile.cell], 1);
+  else mosaicPaint = paintTiles('mosaic', ctx, layout.tiles, 0, 0);
   mosaicLayout = layout;
   el.mosaic.setAttribute('aria-label', `${cells ? 'The target at one colour per cell' : 'The mosaic'}: ${result.grid.columns} columns by ${result.grid.rows} rows`);
   placeMarker();
@@ -616,7 +811,7 @@ function drawDetail() {
   const c1 = Math.min(columns, c0 + k);
   const dpr = window.devicePixelRatio || 1;
   const tileWidth = Math.max(1, Math.floor(((el.detail.clientWidth || 320) * dpr) / (c1 - c0)));
-  const { fit, tint } = drawOptions();
+  const { fit } = drawOptions();
   const layout = layoutMosaic(result.grid, result.assignment, resultPhotos, { tileWidth, fit });
   const top = layout.rowTops[r0];
   el.detail.width = tileWidth * (c1 - c0);
@@ -625,19 +820,28 @@ function drawDetail() {
   ctx.imageSmoothingQuality = 'high';
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, el.detail.width, el.detail.height);
-  const cells = view() === 'cells';
-  for (const tile of layout.tiles) {
+  const near = layout.tiles.filter((tile) => {
     const r = Math.floor(tile.cell / columns);
     const c = tile.cell % columns;
-    if (r >= r0 && r < r1 && c >= c0 && c < c1) drawTile(ctx, tile, resultPhotos[tile.photo].thumb, { tint, cells }, c0 * tileWidth, top);
-  }
+    return r >= r0 && r < r1 && c >= c0 && c < c1;
+  });
+  // the selected cell: a white ring inside a black one, drawn again over each repaint
   const tile = layout.tiles[selected];
   const ring = Math.max(2, Math.round(dpr * 2));
-  ctx.lineWidth = ring;
-  ctx.strokeStyle = '#000000';
-  ctx.strokeRect(tile.x - c0 * tileWidth + ring / 2, tile.y - top + ring / 2, tile.width - ring, tile.height - ring);
-  ctx.strokeStyle = '#ffffff';
-  ctx.strokeRect(tile.x - c0 * tileWidth + 1.5 * ring, tile.y - top + 1.5 * ring, tile.width - 3 * ring, tile.height - 3 * ring);
+  const drawRing = () => {
+    ctx.lineWidth = ring;
+    ctx.strokeStyle = '#000000';
+    ctx.strokeRect(tile.x - c0 * tileWidth + ring / 2, tile.y - top + ring / 2, tile.width - ring, tile.height - ring);
+    ctx.strokeStyle = '#ffffff';
+    ctx.strokeRect(tile.x - c0 * tileWidth + 1.5 * ring, tile.y - top + 1.5 * ring, tile.width - 3 * ring, tile.height - 3 * ring);
+  };
+  detailPaint = null;
+  if (view() === 'cells') {
+    for (const t of near) drawCell(ctx, t, result.cells[t.cell], 1, c0 * tileWidth, top);
+    drawRing();
+  } else {
+    detailPaint = paintTiles('detail', ctx, near, c0 * tileWidth, top, drawRing);
+  }
 
   const photo = resultPhotos[result.assignment[selected]];
   const cell = result.cells[selected];
@@ -750,12 +954,17 @@ el.mosaic.addEventListener('keydown', (/** @type {KeyboardEvent} */ e) => {
 });
 
 el.fit.addEventListener('change', drawAll);
-el.tint.addEventListener('input', () => {
-  const v = el.tint.valueAsNumber;
-  el.tintValue.textContent = `${v}%`;
-  drawMosaic();
-  drawDetail();
-});
+// The tint and the adjustment redraw from the kept photos as their sliders move. Preparing the
+// adjustment (each pixel's OKLab and each tile's mean) waits until a slider is first touched.
+for (const input of [el.tint, ...Object.values(ADJUST_INPUTS)]) {
+  input.addEventListener('input', () => {
+    showDrawValues();
+    repaint();
+  });
+}
+const prewarm = () => { for (const paint of [mosaicPaint, detailPaint]) if (paint) readyAdjust(paint, NO_ADJUST); };
+el.adjust.addEventListener('pointerover', prewarm);
+el.adjust.addEventListener('focusin', prewarm);
 el.detailSize.addEventListener('change', drawDetail);
 el.photoPreview.addEventListener('toggle', drawContactSheet);
 for (const input of document.querySelectorAll('input[name="view"]')) input.addEventListener('change', drawAll);
@@ -773,15 +982,17 @@ window.addEventListener('resize', () => {
 
 /**
  * The mosaic as a PNG: each photo drawn from its file at the tile width (from its thumbnail
- * when that is large enough), as the page draws it.
- * @param {DrawOptions} [options] the page's settings by default
+ * when that is large enough), adjusted and tinted as the page draws it.
+ * @param {DrawOptions} [options] the page's settings by default; adjust's missing channels are 0
  * @returns {Promise<Blob>}
  */
-async function exportPngBlob({ tileWidth = el.tileWidth.valueAsNumber, fit = drawOptions().fit, tint = drawOptions().tint } = {}) {
+async function exportPngBlob({ tileWidth = el.tileWidth.valueAsNumber, fit = drawOptions().fit, tint = drawOptions().tint, adjust } = {}) {
   if (!result) throw new Error('there is no mosaic yet');
   const version = revision;
   const painted = result;
+  const request = /** @type {any} */ (resultRequest);
   const assets = resultPhotos;
+  const adjustment = adjust === undefined ? drawOptions().adjust : readAdjust(adjust);
   if (!Number.isInteger(tileWidth) || tileWidth < 1) throw new Error('the tile width must be a whole number of pixels from 1');
   const layout = layoutMosaic(painted.grid, painted.assignment, assets, { tileWidth, fit });
   if (layout.width > 16384 || layout.height > 16384 || layout.width * layout.height > 120e6) {
@@ -792,16 +1003,36 @@ async function exportPngBlob({ tileWidth = el.tileWidth.valueAsNumber, fit = dra
   ctx.imageSmoothingQuality = 'high';
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, layout.width, layout.height);
+  // adjusted tiles are drawn one at a time on a small canvas, so memory stays that of one tile
+  const adjusting = isAdjusting(adjustment);
+  const scratch = new OffscreenCanvas(1, 1);
+  const source = adjusting && adjustment.detail > 0 ? targetCanvas(request.target) : null;
   let done = 0;
   for (const tile of layout.tiles) {
     const photo = assets[tile.photo];
-    if (tile.width <= photo.thumb.width) {
-      drawTile(ctx, tile, photo.thumb, { tint, result: painted, photos: assets });
+    const full = tile.width <= photo.thumb.width ? null : await createImageBitmap(photo.file, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
+    const image = full ?? photo.thumb;
+    if (!adjusting) {
+      drawPhoto(ctx, tile, image, assets);
     } else {
-      const full = await createImageBitmap(photo.file, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
-      drawTile(ctx, tile, full, { tint, result: painted, photos: assets });
-      full.close();
+      scratch.width = tile.width;
+      scratch.height = tile.height;
+      const sctx = /** @type {OffscreenCanvasRenderingContext2D} */ (scratch.getContext('2d', { willReadFrequently: true }));
+      sctx.imageSmoothingQuality = 'high';
+      sctx.fillStyle = '#ffffff';
+      sctx.fillRect(0, 0, tile.width, tile.height);
+      drawPhoto(sctx, tile, image, assets, tile.x, tile.y);
+      const pixels = sctx.getImageData(0, 0, tile.width, tile.height);
+      const prepared = prepareAdjust(pixels.data, tile.width, [{ x: 0, y: 0, width: tile.width, height: tile.height }], [painted.cells[tile.cell]]);
+      if (source) {
+        drawTargetCell(sctx, source, painted.grid, tile, tile.x, tile.y);
+        addDetail(prepared, sctx.getImageData(0, 0, tile.width, tile.height).data);
+      }
+      applyAdjust(prepared, adjustment, pixels.data);
+      ctx.putImageData(pixels, tile.x, tile.y);
     }
+    full?.close();
+    if (tint > 0) drawCell(ctx, tile, painted.cells[tile.cell], tint);
     if (++done % 25 === 0 && version === revision) el.status.textContent = `Drawing the PNG: ${done} of ${layout.tiles.length} tiles`;
   }
   if (version === revision) el.status.textContent = 'PNG drawn';
@@ -847,7 +1078,7 @@ function restoreWork(saved) {
   restoreForm(form, saved.form);
   for (const input of [el.photoFiles, el.photoFolder, el.targetFile]) input.value = '';
   el.photoPreview.open = saved.photoPreview;
-  el.tintValue.textContent = `${el.tint.value}%`;
+  showDrawValues();
   el.photoProgress.hidden = true;
   el.photoStatus.textContent = saved.photoStatus;
   el.targetStatus.textContent = saved.targetStatus;
@@ -905,6 +1136,7 @@ bindFormHistory(history, { root: form, filter: () => historyReady && !historyBat
 };
 
 showGridNote();
+showDrawValues();
 await Promise.all([examplePhotos(), exampleTarget()]);
 await generate().catch(() => {});
 historyReady = true;

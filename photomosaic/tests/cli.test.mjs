@@ -32,6 +32,26 @@ test('the command line builds the request from images, draws the mosaic and reru
   }
 });
 
+test('the command line adjusts the PNG towards the cells without changing the match', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'photomosaic-'));
+  try {
+    const args = ['--target', join(FIXTURES, 'target-wide.png'), '--photos', join(FIXTURES, 'photos'), '--tile-width', '10', '--png'];
+    const plain = cli([...args, join(dir, 'plain.png')]);
+    const zero = cli([...args, join(dir, 'zero.png'), '--adjust', '0,0,0', '--adjust-detail', '0.5']);
+    const adjusted = cli([...args, join(dir, 'adjusted.png'), '--adjust', '1,0.5,0.5', '--adjust-detail', '0.25']);
+    for (const run of [plain, zero, adjusted]) assert.equal(run.status, 0, run.stderr);
+    assert.deepEqual(JSON.parse(adjusted.stdout).assignment, JSON.parse(plain.stdout).assignment);
+    const png = (/** @type {string} */ name) => readFileSync(join(dir, name));
+    assert.deepEqual(png('zero.png'), png('plain.png'));
+    assert.notDeepEqual(png('adjusted.png'), png('plain.png'));
+    const bad = cli([...args, join(dir, 'bad.png'), '--adjust', '1.5,0,x']);
+    assert.equal(bad.status, 2);
+    assert.match(JSON.parse(bad.stderr).error.message, /--adjust L must be a number from 0 to 1; --adjust b must be/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('the command line reports problems as JSON with its exit codes', () => {
   const bad = cli(['-'], JSON.stringify({ target: { width: 1, height: 1, data: 'AAAAAA==' }, photos: [{ mean: [0, 0, 0] }] }));
   assert.equal(bad.status, 1);

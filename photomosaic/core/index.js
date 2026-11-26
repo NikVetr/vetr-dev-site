@@ -12,6 +12,9 @@ export { METRICS } from './color.js';
 export { SUMMARY_WIDTH, autoGrid, cropImage, scaleImage, scaledHeight, summarisePhoto } from './image.js';
 export { FITS, composeMosaic, layoutMosaic } from './layout.js';
 export { solveAssignment } from './assign.js';
+export {
+  ADJUST_FIELDS, FROM_LMS, NO_ADJUST, TO_LMS, addDetail, adjustTerms, applyAdjust, isAdjusting, oklab, prepareAdjust, readAdjust, tileDeltas,
+} from './adjust.js';
 
 /**
  * @typedef {{ rowsDone: number, rows: number }} Progress

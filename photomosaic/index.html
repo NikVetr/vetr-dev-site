@@ -105,11 +105,42 @@
             </label>
             <label>Tint towards the target
               <span class="input-row">
-                <input id="tint" type="range" min="0" max="100" step="1" value="0" aria-describedby="tint-value">
+                <input id="tint" type="range" min="0" max="100" step="1" value="0" aria-describedby="tint-value tint-note">
                 <output id="tint-value" for="tint">0%</output>
               </span>
             </label>
           </div>
+          <p id="tint-note" class="muted hint">The tint lays each cell's flat colour over its photo, after any adjustment below.</p>
+          <fieldset id="adjust" class="adjust" aria-describedby="adjust-note">
+            <legend>Adjust photos towards their cells <span id="adjust-state" class="adjust-state">off</span></legend>
+            <div class="settings adjust-sliders">
+              <label>Lightness (L)
+                <span class="input-row">
+                  <input id="adjust-l" type="range" min="0" max="100" step="1" value="0" aria-describedby="adjust-l-value adjust-note">
+                  <output id="adjust-l-value" for="adjust-l">0%</output>
+                </span>
+              </label>
+              <label>Green–red (a)
+                <span class="input-row">
+                  <input id="adjust-a" type="range" min="0" max="100" step="1" value="0" aria-describedby="adjust-a-value adjust-note">
+                  <output id="adjust-a-value" for="adjust-a">0%</output>
+                </span>
+              </label>
+              <label>Blue–yellow (b)
+                <span class="input-row">
+                  <input id="adjust-b" type="range" min="0" max="100" step="1" value="0" aria-describedby="adjust-b-value adjust-note">
+                  <output id="adjust-b-value" for="adjust-b">0%</output>
+                </span>
+              </label>
+              <label>Target detail
+                <span class="input-row">
+                  <input id="adjust-detail" type="range" min="0" max="100" step="1" value="0" aria-describedby="adjust-detail-value adjust-note">
+                  <output id="adjust-detail-value" for="adjust-detail">0%</output>
+                </span>
+              </label>
+            </div>
+            <p id="adjust-note" class="muted hint">Each slider moves every photo's average colour that far towards its cell's colour in one OKLab channel, keeping the photo's own texture; 100% puts the average on the cell's colour. Target detail moves each pixel towards the target's own pixel there instead, replacing the photo's texture as it rises. The matching is unchanged.</p>
+          </fieldset>
 
           <h3>Close up</h3>
           <div class="detail-row stale-dim">
@@ -164,7 +195,7 @@
           <input id="columns" type="number" min="1" max="1000" step="1" value="40" disabled>
         </label>
         <label>Uses per photo
-          <input id="max-uses" type="number" min="1" max="1000" step="1" value="1">
+          <input id="max-uses" type="number" min="1" max="1000" step="1" value="1" aria-describedby="uses-note">
         </label>
         <label>Colour match
           <select id="metric">
@@ -176,20 +207,22 @@
           <input id="seed" type="number" min="0" max="2147483647" step="1" value="1">
         </label>
       </div>
-      <p id="grid-note" class="grid-note"></p>
+      <p id="grid-note" class="grid-note" aria-live="polite"></p>
+      <p id="uses-note" class="muted hint">Uses per photo is how many cells one photo may fill (1: no repeats). It is a limit the matching works within, not copies made afterwards, so changing it needs Generate. With the automatic grid, more uses also make more cells; set the columns to allow repeats in a grid of the same size.</p>
     </section>
 
     <section class="card method-card">
       <details id="tool-help">
         <summary><h2>How this works</h2></summary>
-        <p>The mosaic matches each grid cell to a photo in six steps:</p>
+        <p>The mosaic matches each grid cell to a photo in six steps, and can then adjust the photos:</p>
         <ul>
           <li><strong>Grid.</strong> With <em>n</em> photos and a target of shape <em>a</em> (height ÷ width), the grid has ⌊√(<em>n</em>/<em>a</em>)·<em>a</em>⌋ rows and ⌊√(<em>n</em>/<em>a</em>)⌋ columns, so it never has more cells than photos. Extra photos are left out.</li>
           <li><strong>Cells.</strong> The target is scaled to one pixel per cell, each pixel the average of the area it covers.</li>
           <li><strong>Photos.</strong> Each photo is scaled to 200 pixels wide and summarised by its average colour.</li>
           <li><strong>Cost.</strong> Both are turned into hue, saturation, lightness and opacity, and a cell's cost for a photo is the sum of the squared differences. Hue is in degrees and lightness is scaled down by 255, so the match is mostly by hue, then saturation. The CIELAB option compares perceived lightness and colour instead.</li>
-          <li><strong>Assignment.</strong> Each cell gets its own photo, so that the total cost over all cells is as small as possible: the linear assignment problem, solved exactly by the Hungarian algorithm. Photos are first shuffled with the seed, which matters only between equal costs.</li>
-          <li><strong>Drawing.</strong> Each photo is drawn at the tile width with its own shape, rows as tall as their tallest photo. Cropping to squares and tinting towards the target are options here, off by default.</li>
+          <li><strong>Assignment.</strong> Each cell gets its own photo, so that the total cost over all cells is as small as possible: the linear assignment problem, solved exactly by the Hungarian algorithm. With more than one use per photo, each photo stands for that many interchangeable places. Photos are first shuffled with the seed, which matters only between equal costs.</li>
+          <li><strong>Drawing.</strong> Each photo is drawn at the tile width with its own shape, rows as tall as their tallest photo. Cropping to squares, adjusting and tinting towards the target are options here, off by default.</li>
+          <li><strong>Adjusting</strong> (after matching, without changing it). In OKLab, a perceptually uniform colour space, each photo's pixels are shifted by the slider's fraction of the difference between its cell's colour and the photo's mean colour, separately for lightness (L), green–red (a) and blue–yellow (b), so the photo keeps its own texture. With target detail <em>d</em>, the fraction (1 − <em>d</em>) goes to that shift and <em>d</em> to moving each pixel towards the target's own pixel there. Colours outside sRGB are clipped.</li>
         </ul>
         <p>The same photos, settings and seed reproduce the same assignment. JPEG colours can vary slightly between browser decoders. Photos larger than 400 pixels wide, and targets larger than 1600 pixels, are first halved in the browser.</p>
         <p>The mosaic is also available to scripts and agents: see the <a href="api.md">API description</a>. The example is Hokusai's <cite>Red Fuji</cite> and CC0 photographs from Wikimedia Commons (<a href="examples/SOURCE.md">sources</a>).</p>

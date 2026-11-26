@@ -3,8 +3,8 @@
 //   node cli.mjs --target target.png --photos folder/ [options]   the request built from images
 //   node cli.mjs request.json [options]                           or a request as JSON ("-" or none: stdin)
 // Prints the result JSON on stdout. Options --columns, --max-uses, --metric and --seed set those
-// request fields. With images, --png file also draws the mosaic (--tile-width, --fit, --tint)
-// and --request-out file writes the request built. Photos are the folder's .png, .jpg and .jpeg
+// request fields. With images, --png file also draws the mosaic (--tile-width, --fit, --tint,
+// --adjust, --adjust-detail) and --request-out file writes the request built. Photos are the folder's .png, .jpg and .jpeg
 // files, by name; PNG reads with shared/decode-png.mjs, JPEG with the vendored jpeg-js decoder.
 // Errors go to stderr as {"error": {...}} JSON: exit 1 for an invalid request or JSON, 2 for
 // a usage problem or an unreadable file. See api.md.
@@ -13,10 +13,10 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
 import { crc32, deflateSync } from 'node:zlib';
 import { decodePng } from '../shared/decode-png.mjs';
-import { FITS, PhotomosaicError, composeMosaic, layoutMosaic, submit, summarisePhoto } from './core/index.js';
+import { FITS, PhotomosaicError, composeMosaic, layoutMosaic, readAdjust, submit, summarisePhoto } from './core/index.js';
 import decodeJpeg from './vendor/jpeg-js-decoder.cjs';
 
-const USAGE = 'usage: node cli.mjs (--target image --photos folder | request.json | -) [--columns n] [--max-uses k] [--metric hsl-r|lab] [--seed n] [--png out.png [--tile-width px] [--fit keep|crop] [--tint 0-1]] [--request-out file]';
+const USAGE = 'usage: node cli.mjs (--target image --photos folder | request.json | -) [--columns n] [--max-uses k] [--metric hsl-r|lab] [--seed n] [--png out.png [--tile-width px] [--fit keep|crop] [--tint 0-1] [--adjust L,a,b | --adjust s] [--adjust-detail 0-1]] [--request-out file]';
 /** The extensions the R script reads (it passes them to ImageMagick); this reads the first three. */
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.heic', '.gif', '.tiff', '.bmp'];
 
@@ -33,7 +33,7 @@ if (args.includes('--help') || args.includes('-h')) {
 }
 /** @type {Record<string, string>} */
 const flags = {};
-const VALUE_FLAGS = ['--target', '--photos', '--columns', '--max-uses', '--metric', '--seed', '--png', '--tile-width', '--fit', '--tint', '--request-out'];
+const VALUE_FLAGS = ['--target', '--photos', '--columns', '--max-uses', '--metric', '--seed', '--png', '--tile-width', '--fit', '--tint', '--adjust', '--adjust-detail', '--request-out'];
 /** @type {string[]} */
 const positional = [];
 for (let i = 0; i < args.length; i++) {
@@ -57,10 +57,23 @@ const numberOr = (text) => (text.trim() !== '' && Number.isFinite(Number(text)) 
 const tileWidth = Number(flags['--tile-width'] ?? '200');
 const fit = /** @type {import('./core/layout.js').Fit} */ (flags['--fit'] ?? 'keep');
 const tint = Number(flags['--tint'] ?? '0');
-if (['--tile-width', '--fit', '--tint'].some((f) => f in flags) && !flags['--png']) fail('usage', `--tile-width, --fit and --tint go with --png; ${USAGE}`, 2);
+if (['--tile-width', '--fit', '--tint', '--adjust', '--adjust-detail'].some((f) => f in flags) && !flags['--png']) fail('usage', `--tile-width, --fit, --tint, --adjust and --adjust-detail go with --png; ${USAGE}`, 2);
 if (!Number.isInteger(tileWidth) || tileWidth < 1) fail('usage', '--tile-width must be a whole number of pixels >= 1', 2);
 if (!FITS.includes(fit)) fail('usage', `--fit must be one of ${FITS.join(', ')}`, 2);
 if (!(tint >= 0 && tint <= 1)) fail('usage', '--tint must be a number from 0 to 1', 2);
+/** The adjustment (see api.md): --adjust gives L, a and b, or one strength for all three; --adjust-detail the detail. */
+const adjust = (() => {
+  const strengths = (flags['--adjust'] ?? '0').split(',').map(numberOr);
+  if (strengths.length !== 1 && strengths.length !== 3) fail('usage', '--adjust takes L,a,b (three numbers from 0 to 1) or one number for all three', 2);
+  const [L, a = L, b = L] = strengths;
+  try {
+    return readAdjust({ L, a, b, detail: numberOr(flags['--adjust-detail'] ?? '0') });
+  } catch (error) {
+    if (!(error instanceof PhotomosaicError)) throw error;
+    const flag = (/** @type {string} */ path) => (path === 'adjust.detail' ? '--adjust-detail' : `--adjust ${path.slice('adjust.'.length)}`);
+    fail('usage', error.issues.map((issue) => `${flag(issue.path)} ${issue.message}`).join('; '), 2);
+  }
+})();
 
 /** @param {string} path */
 function readImage(path) {
@@ -129,12 +142,14 @@ function encodePng(width, height, rgba) {
 
 /** @type {Record<string, any>} */
 let request;
+/** @type {import('./core/image.js').Rgba | undefined} */
+let target;
 /** @type {string[]} */
 let files = [];
 /** @type {{ width: number, height: number }[]} */
 const sizes = [];
 if (fromImages) {
-  const target = readImage(flags['--target']);
+  target = readImage(flags['--target']);
   files = photoFiles(flags['--photos']);
   request = {
     target: { width: target.width, height: target.height, data: Buffer.from(target.data).toString('base64') },
@@ -174,7 +189,7 @@ try {
 if (flags['--request-out']) writeFileSync(flags['--request-out'], `${JSON.stringify(request)}\n`);
 if (flags['--png']) {
   const layout = layoutMosaic(result.grid, result.assignment, sizes, { tileWidth, fit });
-  const pixels = composeMosaic(layout, (photo) => readImage(files[photo]), result.cells, tint);
+  const pixels = composeMosaic(layout, (photo) => readImage(files[photo]), result.cells, tint, { adjust, target });
   writeFileSync(flags['--png'], encodePng(layout.width, layout.height, pixels));
 }
 process.stdout.write(`${JSON.stringify(result)}\n`);
