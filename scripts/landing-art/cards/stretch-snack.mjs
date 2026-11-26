@@ -73,6 +73,8 @@ export async function build() {
   & .time {flex-direction:column;align-items:end;white-space:nowrap}
 }
 @container stretch-card (max-width:420px) {& .end {display:none}}
+/* Where End session shows, the bar's type follows the width too, so both fit one line. */
+@container stretch-card (min-width:421px) {& .bar {font-size:clamp(10px,min(2.6cqw,6cqh),16px)}}
 @container stretch-card (max-height:150px) {& .controls,& .end {display:none}}
 @container stretch-card (max-height:100px) {
   & .next {display:none}
