@@ -2,8 +2,11 @@
 // the tool's text fill of it on navy, through the tool's whole-word fitter,
 // on the wide (2 x 3) tile's canvas. The page's default text is the whole of chapter 1
 // (11,224 characters, including preserved line breaks), which at tile size would be letters a pixel tall; this uses its opening
-// ten paragraphs. The longer excerpt and twelve fitting rounds let whole words reach both
-// narrow legs instead of ending at the skirt. Each letter is
+// fifteen paragraphs, through the "DRINK ME" label the picture shows. Twelve fitting rounds let
+// whole words reach both narrow legs instead of ending at the skirt. Lines are broken greedily
+// and justified, so a line holding only a few words spreads the width of a long word that did
+// not fit over its spaces; fifteen paragraphs give the head's lines enough words to fill without
+// holes. Each letter is
 // drawn where the core places it, in the colour it takes from the picture.
 // The loop starts close to Alice’s head, reveals actual whole words from left to right,
 // then zooms out during the fill. A small SVG player follows the single CSS camera clock.
@@ -18,10 +21,16 @@ import { WIDE, art, esc, num } from '../svg.mjs';
 
 const BACKGROUND = '#14253d';   // selected landing background
 const PERIOD = 18;
-const ZOOM = 8;
+const ZOOM = 10;   // the opening words about 16 px tall on a desktop card
 const PICTURE_PX = 2;   // the picture embedded at this many pixels per display unit
-const PARAGRAPHS = 10;   // of the default text
+const PARAGRAPHS = 15;   // of the default text
 const { width: W, height: H } = WIDE;
+
+/** The chapter's opening paragraphs as one passage. */
+export function excerpt() {
+  const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
+  return chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
+}
 
 /** Fit the chapter excerpt at the resolution of the printed illustration.
  * @param {ReturnType<typeof decodePng>} image @param {string} text
@@ -63,8 +72,7 @@ export function fitIllustration(image, text, background, glow) {
 export async function build({ background = BACKGROUND, glow = 3 } = {}) {
   const file = new URL('../../../text-in-image/examples/alice-drink-me.png', import.meta.url);
   const image = decodePng(readFileSync(file));
-  const chapter = readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt', import.meta.url), 'utf8');
-  const text = chapter.trim().split(/\n\s*\n/).slice(0, PARAGRAPHS).join(' ');
+  const text = excerpt();
   const result = fitIllustration(image, text, background, glow);
   if (!result.complete) throw new Error('text-in-image: the opening paragraphs did not fit');
   if (result.settings.layout.rotation !== 0) throw new Error('text-in-image: a rotated layout, which this drawing does not expect');
@@ -93,19 +101,20 @@ export async function build({ background = BACKGROUND, glow = 3 } = {}) {
 
   // Preserve the core's reading order, then order disconnected runs on a row by x.
   // Each word is revealed as one group, without changing any glyph position or colour.
+  // A word's glyphs share its line's baseline, which the group carries.
   const size = result.font_size_px;
   const baseline = (measureChars(['M']).height * size) / 3;
   const words = wordRuns(result.glyphs);
   const glyphDefs = new Map();
   const body = words.map((word, i) => {
+    const y = fy + (((1 + m - /** @type {number} */ (word.glyphs[0].y)) / span) * CH + baseline - box.y) * k;
     const glyphs = word.glyphs.map(g => {
       const id = `text-in-image-glyph-${g.char.codePointAt(0)}`;
       if (!glyphDefs.has(id)) glyphDefs.set(id, `<path id="${id}" d="${glyphPath(g.char, size * k)}"/>`);
       const x = fx + (((/** @type {number} */ (g.x) + m) / span) * CW + 7.2 - box.x) * k;
-      const y = fy + (((1 + m - /** @type {number} */ (g.y)) / span) * CH + baseline - box.y) * k;
-      return `<use href="#${id}" x="${num(x, 3)}" y="${num(y, 3)}" fill="${adjustedContrastColour(/** @type {string} */ (g.col), background)}"/>`;
+      return `<use href="#${id}" x="${num(x, 3)}" fill="${adjustedContrastColour(/** @type {string} */ (g.col), background)}"/>`;
     }).join('');
-    return `<g class="word" data-word="${i}" data-line="${word.line}" data-left="${num(word.left, 6)}" data-text="${esc(word.text)}" data-reveal="${num(revealTime(i, words.length), 1)}">${glyphs}</g>`;
+    return `<g class="word" transform="translate(0 ${num(y, 3)})" data-text="${esc(word.text)}" data-reveal="${num(revealTime(i, words.length), 1)}">${glyphs}</g>`;
   }).join('\n');
 
   // The picture, scaled by the browser to twice its size here and embedded as WebP.

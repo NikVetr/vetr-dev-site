@@ -3,16 +3,16 @@ import test from 'node:test';
 import {readFileSync} from 'node:fs';
 import {decodePng} from '../../../shared/decode-png.mjs';
 import {measureChars} from '../../../text-in-image/core/font.js';
-import {fitIllustration,wordRuns,revealTime} from '../cards/text-in-image.mjs';
+import {excerpt,fitIllustration,wordRuns,revealTime} from '../cards/text-in-image.mjs';
 import {visibleWords} from '../../../assets/players/text-in-image.js';
 
-const text=readFileSync(new URL('../../../text-in-image/examples/alice-chapter-1.txt',import.meta.url),'utf8').trim().split(/\n\s*\n/).slice(0,10).join(' ');
+const text=excerpt();
 const image=decodePng(readFileSync(new URL('../../../text-in-image/examples/alice-drink-me.png',import.meta.url)));
 const result=fitIllustration(image,text,'#14253d',3);
 
 test('Alice reveals every fitted glyph in whole words, left to right on each actual line',()=>{
  const words=wordRuns(result.glyphs);
- assert.equal(words.length,950);
+ assert.equal(words.length,1441);
  assert.equal(words.map(w=>w.text).join(' '),text.replace(/\s+/g,' '));
  assert.deepEqual(words.flatMap(w=>w.glyphs),result.glyphs.filter(g=>g.char.trim()));
  for(let i=1;i<words.length;i++){assert.ok(words[i].line>=words[i-1].line);if(words[i].line===words[i-1].line)assert.ok(words[i].left>words[i-1].left);}
@@ -45,9 +45,20 @@ test('the text covers continuous parts of the source drawing and reaches both sh
       assert.ok(gap < width / 10, 'empty strip across the source at row ' + y);
     }
   }
+  // Justified lines across the head (above the chin, row 100) hold enough words that
+  // stretched spaces open no holes: ten paragraphs left gaps of six letter heights on the forehead.
+  const letter = em * measureChars(['M']).height;
+  for (const [y, ink] of lines) {
+    if (y > 100) continue;
+    let gap = 0;
+    for (let x = ink.indexOf(1); x <= ink.lastIndexOf(1); x++) {
+      gap = !ink[x] && data[4 * (y * width + x) + 3] > 160 ? gap + 1 : 0;
+      assert.ok(gap < 2.5 * letter, 'a wide gap between words across the head at row ' + y);
+    }
+  }
   // Each separate stocking and shoe should receive a word at least once per
   // line pitch, even if another word already occupied the other leg.
-  const pitch = em * measureChars(['M']).height * result.settings.layout.line_height;
+  const pitch = letter * result.settings.layout.line_height;
   for (let y = Math.ceil(height * 0.80); y < height - 12; y++) {
     const nearby = [...lines].filter(([row]) => Math.abs(row - y) <= pitch);
     for (let x = 0; x < width;) {

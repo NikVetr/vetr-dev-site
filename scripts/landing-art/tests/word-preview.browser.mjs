@@ -10,7 +10,7 @@ test(`Alice uses word order and a readable head close-up; pause/reduced motion w
  const b=await openPage('',{engine});const p=b.page;
  try{
   const art=p.locator('[data-art="text-in-image"]'),card=p.locator('.project-card').filter({has:art});
-  await art.scrollIntoViewIfNeeded();await art.locator('svg').waitFor();assert.equal(await art.locator('.word').count(),950);
+  await art.scrollIntoViewIfNeeded();await art.locator('svg').waitFor();assert.equal(await art.locator('.word').count(),1441);
   assert.equal(await art.locator('.word').first().getAttribute('data-text'),'Alice');
   await card.hover();await p.waitForFunction(()=>document.querySelector('[data-art="text-in-image"]')?.hasAttribute('data-playing'));
   await p.waitForFunction(()=>document.querySelector('[data-art="text-in-image"] .word:last-child')?.getAttribute('style')?.includes('hidden'));

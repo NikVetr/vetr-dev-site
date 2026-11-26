@@ -1,5 +1,5 @@
 // Reveal actual word groups on the same retained CSS clock as the SVG camera.
-// No canvas, re-layout or per-word animation is needed for the950-word example.
+// No canvas, re-layout or per-word animation is needed for the 1,441-word example.
 export function prepare() { return null; }
 
 /** Number of whole words whose authored reveal time has arrived.
